@@ -42,3 +42,7 @@
 ---
 ## Utils
 Git Fork : <https://git-fork.com/>
+
+<style type="text/css">
+    ol { list-style-type: decimal; }
+</style>
