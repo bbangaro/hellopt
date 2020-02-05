@@ -30,7 +30,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("index");
+		registry.addViewController("/signupform").setViewName("signupForm");
 	}
 
 	@Bean
@@ -55,6 +55,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 	  SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 	  factoryBean.setDataSource(dataSource);
+	  factoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
 	  return factoryBean.getObject();
 	}
 }

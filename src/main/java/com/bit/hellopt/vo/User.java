@@ -1,42 +1,55 @@
 package com.bit.hellopt.vo;
 
 public class User {
-	private String id;
-	private String password;
+	private String userId;
+	private String userPw;
 	private String name;
 	private String role;
 	
 	public User() {}
 	
-	public User(String id, String password, String name, String role) {
-		this.id = id;
-		this.password = password;
+	public User(String userId, String userPw, String name, String role) {
+		this.userId = userId;
+		this.userPw = userPw;
 		this.name = name;
 		this.role = role;
 	}
-	public String getId() {
-		return id;
+
+	public String getUserId() {
+		return userId;
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getPassword() {
-		return password;
+
+	public String getUserPw() {
+		return userPw;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userPw=" + userPw + ", name=" + name + ", role=" + role + "]";
 	}
 	
 }
