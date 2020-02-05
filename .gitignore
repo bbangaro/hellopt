@@ -3,3 +3,5 @@ target
 .classpath
 .project
 .springBeans
+src/main/java/com/bit/hellopt/config/RootConfig.java
+

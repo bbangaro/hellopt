@@ -40,5 +40,11 @@
     1. 후기 게시판(별점 기능)
     2. 마이페이지
 ---
+
 ## Utils
 Git Fork : <https://git-fork.com/>
+
+---
+## Best Practice
+- JSP
+    1. <https://www.oracle.com/technical-resources/articles/javase/servlets-jsp.html>
