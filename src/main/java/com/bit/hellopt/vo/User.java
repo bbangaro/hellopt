@@ -1,8 +1,17 @@
 package com.bit.hellopt.vo;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class User {
+	@NotBlank
+	@Size(min = 3, max = 10)
 	private String userId;
+	@NotBlank
+	@Size(min = 5, max = 15)
 	private String userPw;
+	@NotBlank
 	private String name;
 	private String role;
 	

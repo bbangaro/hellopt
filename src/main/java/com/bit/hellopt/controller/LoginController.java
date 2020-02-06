@@ -43,7 +43,7 @@ public class LoginController {
 		status.setComplete();
 		return new RedirectView("/hellopt");
 	}
-	
+		
 	@ModelAttribute("user")
 	public User setUser() {
 		return new User();
