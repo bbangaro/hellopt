@@ -30,7 +30,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/signupform").setViewName("signupForm");
+		//registry.addViewController("/signupform").setViewName("signupForm");
 	}
 
 	@Bean

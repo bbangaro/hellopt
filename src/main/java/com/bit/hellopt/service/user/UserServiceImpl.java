@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService{
 		return userMapper.getUser(userId, userPw);
 	}
 
+	@Override
+	public int existUser(User user) {
+		return userMapper.existUser(user);
+	}
+	
 }
