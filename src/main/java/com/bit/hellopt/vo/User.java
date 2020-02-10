@@ -1,7 +1,6 @@
 package com.bit.hellopt.vo;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class User {

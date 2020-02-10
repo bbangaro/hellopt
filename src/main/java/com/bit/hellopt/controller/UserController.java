@@ -1,7 +1,5 @@
 package com.bit.hellopt.controller;
 
-import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -37,9 +35,10 @@ public class UserController {
 			logger.info("signupform user validation error");
 			return "signupForm";
 		} else {
+			//임시 디폴트 role 설정
 			user.setRole("trainee");
-			//service.save(user);
-			logger.info("register user" );
+			service.save(user);
+			logger.info("register user");
 			return "redirect:/";
 		}
 		
@@ -55,9 +54,4 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/signupform")
-	public String signUpFrom(Model model) {
-		model.addAttribute("user", new User());
-		return "signupForm";
-	}
 }

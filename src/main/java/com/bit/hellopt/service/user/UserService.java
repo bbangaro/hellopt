@@ -8,5 +8,6 @@ public interface UserService {
 	List<User> findAll();
 	User findById(String userId);
 	User findByIdAndPw(String userId, String userPw);
+	int existUser(User user);
 	void save(User user);
 }
