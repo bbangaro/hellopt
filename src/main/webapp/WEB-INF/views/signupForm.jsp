@@ -29,6 +29,10 @@
 				<td><form:errors path="name"></form:errors></td>
 			</tr>
 			<tr>
+				<td><form:label path="email">이메일</form:label></td>
+				<td><form:input path="email"/></td>
+				<td><form:errors path="email"></form:errors>
+			<tr>
 				<td><input type="submit" value="회원가입"></td>
 			</tr>
 		</table>
