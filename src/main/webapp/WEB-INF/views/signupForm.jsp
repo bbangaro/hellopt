@@ -24,9 +24,9 @@
 				<td><form:errors path="userPw"></form:errors></td>
 			</tr>
 			<tr>
-				<td><form:label path="name">이름</form:label></td>
-				<td><form:input path="name" /></td>
-				<td><form:errors path="name"></form:errors></td>
+				<td><form:label path="userName">이름</form:label></td>
+				<td><form:input path="userName" /></td>
+				<td><form:errors path="userName"></form:errors></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="회원가입"></td>

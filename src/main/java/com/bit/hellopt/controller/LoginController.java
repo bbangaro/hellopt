@@ -34,13 +34,13 @@ public class LoginController {
 			logger.info("로그인: 일치하는 아이디, 패스워드 없음");
 		} else {
 			logger.info(
-					"addSessionAttributes :" + service.findByIdAndPw(_user.getUserId(), _user.getUserPw()).getName());
+					"addSessionAttributes :" + service.findByIdAndPw(_user.getUserId(), _user.getUserPw()).getUserName());
 			/*
 			 * attributes.addFlashAttribute("isUser",
 			 * service.findByIdAndPw(_user.getUserId(), _user.getUserPw()).getName());
 			 */
 			HttpSession session = request.getSession();
-			session.setAttribute("isUser", service.findByIdAndPw(_user.getUserId(), _user.getUserPw()).getName());
+			session.setAttribute("isUser", service.findByIdAndPw(_user.getUserId(), _user.getUserPw()).getUserName());
 		}
 		return "redirect:/";
 	}

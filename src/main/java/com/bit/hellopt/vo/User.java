@@ -11,16 +11,18 @@ public class User {
 	@Size(min = 5, max = 15)
 	private String userPw;
 	@NotBlank
-	private String name;
-	private String role;
+	private String userName;
+	private String userRole;
 	
 	public User() {}
-	
-	public User(String userId, String userPw, String name, String role) {
+
+	public User(@NotBlank @Size(min = 3, max = 10) String userId, @NotBlank @Size(min = 5, max = 15) String userPw,
+			@NotBlank String userName, String userRole) {
+		super();
 		this.userId = userId;
 		this.userPw = userPw;
-		this.name = name;
-		this.role = role;
+		this.userName = userName;
+		this.userRole = userRole;
 	}
 
 	public String getUserId() {
@@ -39,25 +41,28 @@ public class User {
 		this.userPw = userPw;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getRole() {
-		return role;
+	public String getUserRole() {
+		return userRole;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userPw=" + userPw + ", name=" + name + ", role=" + role + "]";
+		return "User [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userRole=" + userRole
+				+ "]";
 	}
+	
+
 	
 }
