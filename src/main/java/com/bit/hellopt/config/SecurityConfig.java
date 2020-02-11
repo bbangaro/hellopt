@@ -11,11 +11,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
+		auth
+			.inMemoryAuthentication()
 			.withUser("user1").password(passwordEncoder().encode("user1Pass")).roles("user")
 			.and()
 			.withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("user")
@@ -25,26 +26,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-		.authorizeRequests()
-		.antMatchers("/admin/**").hasRole("admin")
-		.antMatchers("/anonymous*").anonymous()
-		.antMatchers("/login*").permitAll()
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login.html")
-		.loginProcessingUrl("/perform_login")
-		.defaultSuccessUrl("/homepage.html", true)
-		.and()
-		.logout()
-		.logoutUrl("/perform_logout")
-		.deleteCookies("JSESSIONID");
+		http
+			.csrf().disable()
+			.authorizeRequests()
+			.antMatchers("/admin/**").hasRole("ADMIN")
+			.anyRequest().authenticated()
+			.and()
+			.formLogin()
+			.loginPage("/loginform")
+			.loginProcessingUrl("/login")
+			.defaultSuccessUrl("/", true)
+			.failureUrl("/");
 	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 }
