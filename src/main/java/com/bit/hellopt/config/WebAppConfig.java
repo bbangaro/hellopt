@@ -17,20 +17,22 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.bit.hellopt"})
+@ComponentScan(basePackages = { "com.bit.hellopt" })
 @MapperScan("com.bit.hellopt.data")
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
-	
+
 	DataSource dataSource;
-	
+
 	public WebAppConfig(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/loginform").setViewName("loginForm");
+		registry.addViewController("/home").setViewName("home");
+		registry.addViewController("/hello").setViewName("hello");
+		registry.addViewController("/login").setViewName("login");
 	}
 
 	@Bean
@@ -43,19 +45,17 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 		return bean;
 	}
-	
+
 	@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-            .addResourceHandler("/resources/**")
-            .addResourceLocations("/resources/");
-    }
-	
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
-	  SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-	  factoryBean.setDataSource(dataSource);
-	  factoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
-	  return factoryBean.getObject();
+		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+		factoryBean.setDataSource(dataSource);
+		factoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
+		return factoryBean.getObject();
 	}
 }
