@@ -10,10 +10,10 @@ public class IndexController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String home() {
 		logger.info("home controller get mapping");
-		return "home";
+		return "index";
 	}
 	
 }
