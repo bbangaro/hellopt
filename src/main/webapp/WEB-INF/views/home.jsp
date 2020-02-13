@@ -25,5 +25,6 @@
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</c:otherwise>
 	</c:choose>
+	<a href="${pageContext.request.contextPath}/reviewBoard">리뷰게시판</a>
 </body>
 </html>

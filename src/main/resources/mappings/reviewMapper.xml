@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bit.hellopt.data.RBoardMapper2">
+<resultMap type="com.bit.hellopt.vo.reviewboard.ReviewBoardVO" id="rBoardMap">
+	<result property="revIdx" column="REV_IDX"/>
+	<result property="user" column="FK_USER_ID"/>
+	<result property="revContent" column="REV_CONTENT"/>
+	<result property="revREGDATE" column="REV_REGDATE"/>
+	<result property="revHit" column="REV_HIT"/>
+	<result property="revStar" column="REV_STAR"/>
+	<result property="revCategory" column="REV_CATEGORY"/>
+	<result property="revFile" column="REV_FILE"/>
+	<collection property="user" resultMap="userMap"></collection>
+</resultMap>
+<resultMap type="com.bit.hellopt.vo.User" id="userMap">
+	<result property="userId" column="USER_ID"/>
+	<result property="userName" column="USER_NAME"/>
+</resultMap>
+	<select id="join" parameterType="ReviewBoardVO" resultMap="rBoardMap">
+		SELECT USER_ID, USER_NAME, REV_IDX, FK_USER_ID, 
+				REV_CONTENT, REV_REGDATE, REV_HIT, REV_STAR, REV_CATEGORY, REV_FILE
+		FROM REVIEW_BOARD_TB RBT, USERS_TB UT
+		WHERE RBT.FK_USER_ID = UT.USER_ID AND UT.USER_NAME = #{userName}
+	</select>
+</mapper>
