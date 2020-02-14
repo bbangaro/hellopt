@@ -7,7 +7,7 @@
 	</settings>
 	
 	<typeAliases>
-	
+		<typeAlias alias="exerciseInformation" type="com.bit.hellopt.vo.exercise.ExerciseInformationVO" />
 	</typeAliases>
 
 </configuration>

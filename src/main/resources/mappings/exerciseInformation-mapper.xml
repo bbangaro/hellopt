@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bit.hellopt.data.exercise.ExerciseMapper">
+
+	<select id="getExerciseInformationList" parameterType="exerciseInformation"
+		resultType="exerciseInformation">
+		SELECT * FROM EXERCISE_INFORMATION_TB
+		WHERE 1=1
+		<if test="searchCondition == 'EXERCISE_NAME' ">
+			AND EXERCISE_NAME LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchCondition == 'EXERCISE_PARTS' ">
+			AND EXERCISE_PARTS LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+	</select>
+	
+	<select id="getExerciseInformation" parameterType="exerciseInformation"
+		resultType="exerciseInformation">
+		SELECT * FROM EXERCISE_INFORMATION_TB WHERE EXERCISE_IDX = #{exerciseIdx}
+	</select>
+	
+	<insert id="insertExerciseInformation" parameterType="exerciseInformation">
+		INSERT INTO EXERCISE_INFORMATION_TB (EXERCISE_IDX, EXERCISE_NAME, EXERCISE_PARTS,
+		EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
+		VALUES ((SELECT NVL(MAX(EXERCISE_IDX), 0) + 1 FROM EXERCISE_INFORMATION_TB),
+				#{exerciseName}, #{exerciseParts}, #{exercisePictures}, #{exerciseVideo},
+				#{caution}, #{repetition}, #{setCount}, #{restTime})
+	</insert>
+  	
+	<update id="updateExerciseInformation" parameterType="exerciseInformation">
+		UPDATE EXERCISE_INFORMATION_TB SET EXERCISE_NAME = #{exerciseName}, EXERCISE_PARTS = #{exerciseParts} WHERE EXERCISE_IDX = #{exerciseIdx}
+	</update>
+	
+	<delete id="deleteExerciseInformation" parameterType="exerciseInformation">
+		DELETE FROM EXERCISE_INFORMATION_TB WHERE EXERCISE_IDX = #{exerciseIdx}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
