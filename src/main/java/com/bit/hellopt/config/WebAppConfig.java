@@ -40,6 +40,9 @@ public class WebAppConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/signupform").setViewName("signupForm");
 		registry.addViewController("/test").setViewName("test");
+		registry.addViewController("/openClassForm").setViewName("openClassForm");
+		//registry.addViewController("/classList").setViewName("classList");
+		registry.addViewController("/classDetail").setViewName("classDetail");
 	}
 
 	//컨트롤러 받아주는 거..(위치 확인 , 확장자 확인)
