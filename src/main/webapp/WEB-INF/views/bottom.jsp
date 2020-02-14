@@ -15,18 +15,16 @@
 
 <title>Home</title>
 
-<script src="https://code.jquery.com/jquery-3.2.1.main.js"></script>
-<script src="resources/js/jQuery-3.2.1.main.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/swiper.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/font.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/xeicon.min.css">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/content.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources//css/main/responsive.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/responsive.css">
 
 <script>
 // ìë°ì¤í¬ë¦½í¸ìì ì¬ì©íë ì ì­ë³ì ì ì¸
@@ -40,16 +38,16 @@ var g5_sca       = "";
 var g5_editor    = "";
 var g5_cookie_domain = "";
 </script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/main/moment.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/main/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/main/jquery-ui.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/main/jquery.menu.js"></script>
-<script src="${pageContext.request.contextPath}/js/main/common.js"></script>
-<script src="${pageContext.request.contextPath}/js/main/wrest.js"></script>
-<script src="${pageContext.request.contextPath}/js/main/placeholders.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/main/moment.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/main/jquery-ui.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main/common.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main/wrest.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main/placeholders.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/js/main/script.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/font-awesome.min.css">
+<script src="${pageContext.request.contextPath}/resources/js/main/script.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/font-awesome.min.css">
 
 </head>
 <body>
@@ -126,6 +124,7 @@ $(function() {
     $("#hd").css("z-index", 1000);
 });
 </script>
+
 <!-- } íìë ì´ì´ ë -->
     <script>
     $(function(){
@@ -194,7 +193,7 @@ $(function(){
               <div class="scroll-cta" style="display: none;">
                 <div class="arrow">
                   <span>
-                    <img src="./HelloPT/scroll_arrow.png" alt="ë§ì°ì¤í  ìë´">
+                    <img src="${pageContext.request.contextPath}/resources/images/main/scroll_arrow.png" alt="ë§ì°ì¤í  ìë´">
                   </span>
                 </div>
                 <span>scroll to discover</span>
@@ -203,7 +202,7 @@ $(function(){
                 <div class="content_wrap">
                   <div class="content_bg">  
                     <!--<img src="/img/slide01.png" alt="KOZ">-->
-                    <img src="./HelloPT/1.jpg" title="">
+                    <img src="${pageContext.request.contextPath}/resources/images/main/1.jpg" title="">
                   </div>
                   <div class="content_text">
                     <h4>ë©ë´1</h4>
@@ -220,7 +219,7 @@ $(function(){
                 <div class="content_wrap">
                   <div class="content_bg">
                     <!--<img src="/img/slide02.png" alt="ì§ì½">-->
-                    <img src="./HelloPT/2.jpg" title="">
+                    <img src="${pageContext.request.contextPath}/resources/images/main/2.jpg" title="">
                   </div>
                   <div class="content_text">
                     <h4>ë©ë´2</h4>
@@ -237,7 +236,7 @@ $(function(){
                 <div class="content_wrap">
                   <div class="content_bg">
                     <!--<img src="/img/dvwn_main.png" alt="ë¤ì´">-->
-                    <img src="./HelloPT/3.jpg" title="">
+                    <img src="${pageContext.request.contextPath}/resources/images/main/3.jpg" title="">
                   </div>
                   <div class="content_text">
                     <h4>ë©ë´3</h4>
@@ -254,7 +253,7 @@ $(function(){
                 <div class="content_wrap">
                   <div class="content_bg">
                     <!--<img src="/img/slide03.png" alt="SHOW ME WHAT YOU GOT">-->
-                    <img src="./HelloPT/4.jpg" title="">
+                    <img src="${pageContext.request.contextPath}/resources/images/main/4.jpg" title="">
                   </div>
                   <div class="content_text">
                     <h4>ë©ë´4</h4>
@@ -271,8 +270,8 @@ $(function(){
       <!-- <div class="swiper-scrollbar"></div> -->
   <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
 </div>
-<script type="text/javascript" src="./HelloPT/swiper.min.js"></script>
-<script type="text/javascript" src="./HelloPT/mainslider.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/main/swiper.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/main/mainslider.js"></script>
 
 
 </div>
