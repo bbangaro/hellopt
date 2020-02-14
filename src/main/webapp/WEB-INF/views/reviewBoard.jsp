@@ -33,10 +33,12 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td colspan="2">내용 :${rBoard.revContent}</td>
+			<td colspan="2">내용 :${rBoard.revContent}
+			<img src= "">
+			</td>
 		</tr>
 		<tr>
-			<td colspan="2">첨부사진:${rBoard.revFile}</td>
+			<td colspan="2">첨부사진:${rBoard.fileupload}</td>
 		</tr>
 		<tr>
 			<td colspan="2">날짜 :${rBoard.revRegdate }</td>

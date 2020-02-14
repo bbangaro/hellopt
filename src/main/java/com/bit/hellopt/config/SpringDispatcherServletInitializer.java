@@ -1,8 +1,17 @@
 package com.bit.hellopt.config;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class SpringDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+	
+	@Autowired
+	MultipartConfigElement multipartConfigElement;
+	
+	
 	@Override
     protected Class <?> [] getRootConfigClasses() {
         return new Class[] {
@@ -23,4 +32,11 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
             "/"
         };
     }
+
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setMultipartConfig(multipartConfigElement);
+	}
+    
+    
 }

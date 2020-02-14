@@ -29,7 +29,8 @@
 </head>
 <body>
 <div>
-<form action="${pageContext.request.contextPath}/insertRBoard" method="get" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/insertRBoard" method="post" 
+		enctype="multipart/form-data">
 <%-- <select>
 	<c:forEach var = "class" items="${classMap }">
 	<option>수강한 클래스 선택</option>
@@ -54,10 +55,12 @@
 		</tr>
 		<tr>
 			<td>글쓰기</td>
-			<td><textarea name="revContent" rows="10" cols="40"></textarea><td>
+			<td><textarea name="revContent" rows="20" cols="100"></textarea><td>
 		</tr>
+		<tr>
 			<td>파일첨부하기</td>
-			<td><input type="file" name="revFile"></td>
+			<td><input type="file" name="fileupload"></td>
+		</tr>	
 		</tbody>	
 		<tfoot>
 			<tr>

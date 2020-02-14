@@ -5,22 +5,24 @@
 <mapper namespace="com.bit.hellopt.data.RBoardMapper2">
 <resultMap type="com.bit.hellopt.vo.reviewboard.ReviewBoardVO" id="rBoardMap">
 	<result property="revIdx" column="REV_IDX"/>
-	<result property="user" column="FK_USER_ID"/>
 	<result property="revContent" column="REV_CONTENT"/>
 	<result property="revREGDATE" column="REV_REGDATE"/>
 	<result property="revHit" column="REV_HIT"/>
 	<result property="revStar" column="REV_STAR"/>
 	<result property="revCategory" column="REV_CATEGORY"/>
-	<result property="revFile" column="REV_FILE"/>
-	<collection property="user" resultMap="userMap"></collection>
+	<result property="revFileOrigin" column="REV_FILE_Origin"/>
+	<result property="revFileSave" column="REV_FILE_Save"/>
 </resultMap>
-<resultMap type="com.bit.hellopt.vo.User" id="userMap">
+<resultMap type="User" id="userMap">
 	<result property="userId" column="USER_ID"/>
 	<result property="userName" column="USER_NAME"/>
+	<result property="userPw" column="USER_PW"/>
+	<result property="userRole" column="USER_ROLE"/>
 </resultMap>
-	<select id="join" parameterType="ReviewBoardVO" resultMap="rBoardMap">
+	<select id="join" parameterType="com.bit.hellopt.vo.User" resultMap="rBoardMap">
 		SELECT USER_ID, USER_NAME, REV_IDX, FK_USER_ID, 
-				REV_CONTENT, REV_REGDATE, REV_HIT, REV_STAR, REV_CATEGORY, REV_FILE
+				REV_CONTENT, REV_REGDATE, REV_HIT, REV_STAR, REV_CATEGORY, 
+				REV_FILE_SAVE, REV_FILE_ORIGIN,
 		FROM REVIEW_BOARD_TB RBT, USERS_TB UT
 		WHERE RBT.FK_USER_ID = UT.USER_ID AND UT.USER_NAME = #{userName}
 	</select>

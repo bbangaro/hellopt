@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bit.hellopt.data.RBoardMapper1;
 import com.bit.hellopt.data.RBoardMapper2;
+import com.bit.hellopt.vo.User;
 import com.bit.hellopt.vo.reviewboard.ReviewBoardVO;
 
 
@@ -22,6 +23,11 @@ public class RBoardServiceImpl implements RBoardService {
 	@Override
 	public void insertBoard(ReviewBoardVO vo) {
 		mapper.insertRBoard(vo);
+	}
+	@Override
+	public void insertRBoardUploadFile(ReviewBoardVO vo) {
+		mapper.insertRBoardUploadFile(vo);
+		
 	}
 
 	@Override
@@ -42,9 +48,10 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public List<ReviewBoardVO> selectUser() {
-		return mapper2.join();
+	public List<ReviewBoardVO> selectUser(User vo) {
+		return mapper2.join(vo);
 		
 	}
+
 
 }

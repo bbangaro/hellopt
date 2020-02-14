@@ -1,5 +1,8 @@
 package com.bit.hellopt.config;
 
+import java.io.File;
+
+import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -65,4 +71,21 @@ public class WebAppConfig implements WebMvcConfigurer {
 	  factoryBean.setMapperLocations(applicationContext.getResources("classpath:mappings/**.xml"));
 	  return factoryBean.getObject();
 	}
+	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		//multipartResolver.setMaxUploadSize(100000000);
+		return multipartResolver;
+	}
+	
+	@Bean
+	public MultipartConfigElement multipartConfigElement() {
+		int maxUploadSize = 1024 * 1024;
+		File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
+		MultipartConfigElement configElement 
+			= new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSize, maxUploadSize * 2, maxUploadSize / 2);
+		return configElement;
+	}
+	 
 }

@@ -41,20 +41,34 @@ public class rBoardController {
 		return "reviewBoard";
 	}
 	
-	@GetMapping("/insertRBoard")
+	@PostMapping("/insertRBoard")
 	public String insertRBoard(ReviewBoardVO vo) throws IllegalStateException, IOException {
 					
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		
-		/*MultipartFile uploadFile = vo.getRevFile();
+		/* *** 파일 업로드 처리 ********
+		 * MultipartFile 인터페이스 주요 메소드 
+		 * String getOriginalFilename() : 업로드한 파일명 찾기
+		 * void transferTo(File destFile) : 업로드한 파일을 destFile에 저장
+		 * boolean isEmpty() : 업로드한 파일의 존재여부(없으면 true 리턴)
+		 */
+		MultipartFile uploadFile = vo.getFileupload();
 		System.out.println("uploadFile: " + uploadFile);
 		
 		if(!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File("c:/MyStuyd/temp/" + fileName));
-		}*/
+			String originFileName = uploadFile.getOriginalFilename();
+			vo.setRevFileOrigin(originFileName);
+			String saveFileName = "2020";
+			vo.setRevFileSave(saveFileName);
+			System.out.println("savefilename:" + saveFileName);
+			uploadFile.transferTo(new File("c:/mystudy/temp/" + originFileName));
+			
+			rService.insertRBoardUploadFile(vo);
+		}else {
+			rService.insertBoard(vo);
+			
+		}
 		
-		rService.insertBoard(vo);
 		
 		return "redirect:/reviewBoard";
 		
