@@ -1,20 +1,34 @@
-package com.bit.hellopt.vo;
+package com.bit.hellopt.vo.user;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SuppressWarnings("serial")
 public class CustomUserDetail implements UserDetails{
 	
-	private String id;
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	// userId
+	private String username;
 	private String password;
 	private String auth;
+	// temporary
 	private boolean enable;
+	// real name
 	private String name;
+	
+	public CustomUserDetail(User user) {
+		username = user.getUserId();
+		password = passwordEncoder.encode(user.getUserPw());
+		auth = user.getRole();
+		name = user.getName();
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -30,7 +44,7 @@ public class CustomUserDetail implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return id;
+		return username;
 	}
 
 	@Override
@@ -50,7 +64,7 @@ public class CustomUserDetail implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		return enable;
+		return true;
 	}
 
 	public String getName() {
@@ -60,5 +74,6 @@ public class CustomUserDetail implements UserDetails{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	
 }

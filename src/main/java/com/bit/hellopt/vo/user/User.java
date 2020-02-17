@@ -1,4 +1,4 @@
-package com.bit.hellopt.vo;
+package com.bit.hellopt.vo.user;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
