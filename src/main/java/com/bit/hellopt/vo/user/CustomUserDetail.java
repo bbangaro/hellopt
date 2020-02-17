@@ -25,9 +25,9 @@ public class CustomUserDetail implements UserDetails{
 	
 	public CustomUserDetail(User user) {
 		username = user.getUserId();
-		password = passwordEncoder.encode(user.getUserPw());
-		auth = user.getRole();
-		name = user.getName();
+		password = user.getUserPw();
+		auth = user.getUserRole();
+		name = user.getUserName();
 	}
 
 	@Override

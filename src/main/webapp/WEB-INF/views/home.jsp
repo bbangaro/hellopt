@@ -9,5 +9,6 @@
 <body>
 	<h1>HelloPT!</h1>
 	<p>Click <a href="/hellopt/hello">here</a> to see a greeting.</p>
+	<p>Register <a href="/hellopt/user/registrationform">here</a></p>
 </body>
 </html>

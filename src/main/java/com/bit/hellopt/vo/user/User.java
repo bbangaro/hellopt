@@ -13,24 +13,22 @@ public class User {
 	@Size(min = 5, max = 15)
 	private String userPw;
 	@NotBlank
-	private String name;
-	private String role;
+	private String userName;
+	private String userRole;
 	@ValidEmail
-	private String email;
+	private String userEmail;
 	
 	public User() {}
-	
-	
+
 	public User(@NotBlank @Size(min = 3, max = 10) String userId, @NotBlank @Size(min = 5, max = 15) String userPw,
-			@NotBlank String name, String role, String email) {
+			@NotBlank String userName, String userRole, String userRmail) {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
-		this.name = name;
-		this.role = role;
-		this.email = email;
+		this.userName = userName;
+		this.userRole = userRole;
+		this.userEmail = userRmail;
 	}
-
 
 	public String getUserId() {
 		return userId;
@@ -48,36 +46,34 @@ public class User {
 		this.userPw = userPw;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getRole() {
-		return role;
+	public String getUserRole() {
+		return userRole;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-	public String getEmail() {
-		return email;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
-
-	public void setEmail(String email) {
-		this.email = email;
+	public String getUserRmail() {
+		return userEmail;
 	}
 
+	public void setUserRmail(String userRmail) {
+		this.userEmail = userRmail;
+	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userPw=" + userPw + ", name=" + name + ", role=" + role + ", email="
-				+ email + "]";
+		return "User [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userRole=" + userRole
+				+ ", userRmail=" + userEmail + "]";
 	}
-
+	
 }

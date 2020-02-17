@@ -33,7 +33,6 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/home").setViewName("home");
 		registry.addViewController("/hello").setViewName("hello");
 		registry.addViewController("/login").setViewName("login");
-		registry.addViewController("/user/registerationform").setViewName("login");
 	}
 
 	@Bean
