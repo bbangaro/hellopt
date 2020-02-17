@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,17 +58,22 @@ public class rBoardController {
 		
 		if(!uploadFile.isEmpty()) {
 			String originFileName = uploadFile.getOriginalFilename();
+			String originFileExtension = originFileName.substring(originFileName.lastIndexOf("."));
 			vo.setRevFileOrigin(originFileName);
-			String saveFileName = "2020";
+			String saveFileName = UUID.randomUUID().toString().replaceAll("-","") + originFileExtension;
 			vo.setRevFileSave(saveFileName);
-			System.out.println("savefilename:" + saveFileName);
 			uploadFile.transferTo(new File("c:/mystudy/temp/" + originFileName));
+			
+			System.out.println(originFileName + "은 업로드한 파일이다.");
+			System.out.println(saveFileName + "라는 이름으로 업로드 됐다.");
 			
 			rService.insertRBoardUploadFile(vo);
 		}else {
 			rService.insertBoard(vo);
 			
 		}
+		
+		
 		
 		
 		return "redirect:/reviewBoard";
