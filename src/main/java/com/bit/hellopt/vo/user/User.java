@@ -1,7 +1,9 @@
-package com.bit.hellopt.vo;
+package com.bit.hellopt.vo.user;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.bit.hellopt.annotation.ValidEmail;
 
 public class User {
 	@NotBlank
@@ -13,16 +15,19 @@ public class User {
 	@NotBlank
 	private String userName;
 	private String userRole;
+	@ValidEmail
+	private String userEmail;
 	
 	public User() {}
 
 	public User(@NotBlank @Size(min = 3, max = 10) String userId, @NotBlank @Size(min = 5, max = 15) String userPw,
-			@NotBlank String userName, String userRole) {
+			@NotBlank String userName, String userRole, String userRmail) {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
 		this.userRole = userRole;
+		this.userEmail = userRmail;
 	}
 
 	public String getUserId() {
@@ -57,12 +62,18 @@ public class User {
 		this.userRole = userRole;
 	}
 
+	public String getUserRmail() {
+		return userEmail;
+	}
+
+	public void setUserRmail(String userRmail) {
+		this.userEmail = userRmail;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userRole=" + userRole
-				+ "]";
+				+ ", userRmail=" + userEmail + "]";
 	}
-	
-
 	
 }

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h2>회원가입</h2>
-	<form:form action="user" method="POST" modelAttribute="user">
+	<form:form action="${pageContext.request.contextPath}/user" method="POST" modelAttribute="user">
 		<table>
 			<tr>
 				<td><form:label path="userId">아이디</form:label></td>
