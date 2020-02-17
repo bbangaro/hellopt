@@ -21,13 +21,13 @@ public class User {
 	public User() {}
 
 	public User(@NotBlank @Size(min = 3, max = 10) String userId, @NotBlank @Size(min = 5, max = 15) String userPw,
-			@NotBlank String userName, String userRole, String userRmail) {
+			@NotBlank String userName, String userRole, String userEmail) {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
 		this.userRole = userRole;
-		this.userEmail = userRmail;
+		this.userEmail = userEmail;
 	}
 
 	public String getUserId() {
@@ -62,18 +62,17 @@ public class User {
 		this.userRole = userRole;
 	}
 
-	public String getUserRmail() {
+	public String getUserEmail() {
 		return userEmail;
 	}
 
-	public void setUserRmail(String userRmail) {
-		this.userEmail = userRmail;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userRole=" + userRole
-				+ ", userRmail=" + userEmail + "]";
+				+ ", userEmail=" + userEmail + "]";
 	}
-	
 }
