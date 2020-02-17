@@ -11,10 +11,13 @@ import com.bit.hellopt.vo.user.User;
 
 @Controller
 public class UserController {
-	UserService userService;
-
-	public UserController(UserService userService) {
-		this.userService = userService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
+	UserService service;
+	
+	public UserController(UserService service) {
+		this.service = service;
 	}
 	
 	@PostMapping("user")

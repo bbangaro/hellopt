@@ -5,9 +5,12 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -23,7 +26,9 @@ import org.springframework.web.servlet.view.JstlView;
 public class WebAppConfig implements WebMvcConfigurer {
 
 	DataSource dataSource;
-
+	@Autowired
+	ApplicationContext applicationContext;
+	
 	public WebAppConfig(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
@@ -53,9 +58,10 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
-		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-		factoryBean.setDataSource(dataSource);
-		factoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
-		return factoryBean.getObject();
+	  SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+	  factoryBean.setDataSource(dataSource);
+	  factoryBean.setConfigLocation(applicationContext.getResource("classpath:MyBatis-Config.xml"));
+	  factoryBean.setMapperLocations(applicationContext.getResources("classpath:mappings/**.xml"));
+	  return factoryBean.getObject();
 	}
 }
