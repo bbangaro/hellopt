@@ -11,7 +11,7 @@
 	<h1>HelloPT!</h1>
 	<c:choose>
 		<c:when test="${empty isUser}">
-			<a href="${pageContext.request.contextPath}/signupform">회원가입</a>
+			<a href="login.do">회원가입</a>
 			<div>
 				<form action="login" method="POST">
 					<label for="userId">아이디</label> <input type="text" name="userId">
