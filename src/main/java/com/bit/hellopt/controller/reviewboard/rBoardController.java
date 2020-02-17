@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +31,7 @@ public class rBoardController {
 	}
 	
 	
-	@GetMapping("/reviewBoard")
+	@RequestMapping("/reviewBoard")
 	public String getRBoardList(ReviewBoardVO vo, Model model) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 		
