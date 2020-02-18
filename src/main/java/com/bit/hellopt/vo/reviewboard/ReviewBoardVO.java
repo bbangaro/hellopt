@@ -22,7 +22,7 @@ public class ReviewBoardVO {
 	private String revFileOrigin;
 	private String revFileSave;
 	
-	private MultipartFile fileupload;
+	private MultipartFile file_0;
 
 	public int getRevIdx() {
 		return revIdx;
@@ -96,19 +96,19 @@ public class ReviewBoardVO {
 		this.revFileSave = revFileSave;
 	}
 
-	public MultipartFile getFileupload() {
-		return fileupload;
+	public MultipartFile getFile_0() {
+		return file_0;
 	}
 
-	public void setFileupload(MultipartFile fileupload) {
-		this.fileupload = fileupload;
+	public void setFile_0(MultipartFile file_0) {
+		this.file_0 = file_0;
 	}
 
 	@Override
 	public String toString() {
 		return "ReviewBoardVO [revIdx=" + revIdx + ", user=" + user + ", revContent=" + revContent + ", revRegdate="
 				+ revRegdate + ", revHit=" + revHit + ", revStar=" + revStar + ", revCategory=" + revCategory
-				+ ", revFileOrigin=" + revFileOrigin + ", revFileSave=" + revFileSave + ", fileupload=" + fileupload
+				+ ", revFileOrigin=" + revFileOrigin + ", revFileSave=" + revFileSave + ", file_0=" + file_0
 				+ "]";
 	}
 	

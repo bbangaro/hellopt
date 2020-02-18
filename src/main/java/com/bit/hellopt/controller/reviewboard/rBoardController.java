@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.vo.reviewboard.ReviewBoardVO;
@@ -44,8 +49,10 @@ public class rBoardController {
 	}
 	
 	@PostMapping("/insertRBoard")
-	public String insertRBoard(ReviewBoardVO vo) throws IllegalStateException, IOException {
-					
+	public String insertRBoard(ReviewBoardVO vo, MultipartHttpServletRequest mpRequest) 
+					throws IllegalStateException, IOException {
+		
+		
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		
 		/* *** 파일 업로드 처리 ********
@@ -54,7 +61,7 @@ public class rBoardController {
 		 * void transferTo(File destFile) : 업로드한 파일을 destFile에 저장
 		 * boolean isEmpty() : 업로드한 파일의 존재여부(없으면 true 리턴)
 		 */
-		MultipartFile uploadFile = vo.getFileupload();
+		MultipartFile uploadFile = vo.getFile_0();
 		System.out.println("uploadFile: " + uploadFile);
 		
 		if(!uploadFile.isEmpty()) {
@@ -68,7 +75,7 @@ public class rBoardController {
 			System.out.println(originFileName + "은 업로드한 파일이다.");
 			System.out.println(saveFileName + "라는 이름으로 업로드 됐다.");
 			
-			rService.insertRBoardUploadFile(vo);
+			rService.insertRBoardUploadFile(vo, mpRequest);
 		}else {
 			rService.insertBoard(vo);
 			

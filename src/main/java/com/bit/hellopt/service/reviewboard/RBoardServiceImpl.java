@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.data.RBoardMapper1;
 import com.bit.hellopt.data.RBoardMapper2;
@@ -25,7 +27,7 @@ public class RBoardServiceImpl implements RBoardService {
 		mapper.insertRBoard(vo);
 	}
 	@Override
-	public void insertRBoardUploadFile(ReviewBoardVO vo) {
+	public void insertRBoardUploadFile(ReviewBoardVO vo, MultipartHttpServletRequest mpRequest) {
 		mapper.insertRBoardUploadFile(vo);
 		
 	}

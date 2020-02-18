@@ -47,33 +47,35 @@
 		<tr>
 			 <td>별점</td>
 			<td class="starRev">
-				<span class="star on" value="1">별1</span>
-				<span class="star" value="2">별2</span>
-				<span class="star" value="3">별3</span>
-				<span class="star" value="4">별4</span>
-				<span class="star" value="5">별5</span>
+				<span class="star on" >1</span>
+				<span class="star" >2</span>
+				<span class="star"  >3</span>
+				<span class="star"  >4</span>
+				<span class="star" id="star"  >5</span>
+				<input id="revStar1" type="hidden" name="revStar" value="">
 			<td> 
 		</tr>
 		<tr>
-			<td scope = "">내용</td>
+			<td scope = "row">내용</td>
 			<td><textarea name="revContent" rows="20" cols="100" title="내용"></textarea><td>
 		</tr>
 		</tbody>	
 	</table>
 	<div id = "fileDiv">
 		<p>
-			<input type="file" name="fileupload" />
-			<a href="#this" name="delete" class="btn">삭제하기</a>
+			<input type="file" multiple="multiple" id="file" name="file_0" />
+			<a href="#this" class="btn" id ="delete" name="delete" >삭제하기</a>
 		</p>
 	</div>
 	
 	
 	
-	<a href="#this" id="add" class="btn">파일 추가하기</a>
+	<a href="#this" id="addFile" class="btn">파일 추가하기</a>
 	<a href="#this" id="list" class="btn">목록으로</a>
 	<a href="#this" id="write" class="btn">작성완료</a>
 </form>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
+
 <script type="text/javascript">
 	var g_count = 1; 
  	$(document).ready(function(){
@@ -85,11 +87,11 @@
  			e.preventDefault();
  			fn_writeBoard();
  		})
- 		$("a[name='delete']").on("click", function(e){
+ 		$("a[name='delete']").on("click", function(e){//파일삭제버튼
  			e.preventDefault();
  			fn_fileDelete($(this));
  		})
- 		$("#add").on("click", function(e){
+ 		$("#addFile").on("click", function(e){//파일추가버튼
  			e.preventDefault();
  			fn_fileAdd();
  		}) 
@@ -111,8 +113,7 @@
  		obj.parent().remove();
  	}
  	function fn_fileAdd(){
- 		var str = "<p><input type='file' name='fileupload_"
- 				+(g_count++)+"'/><a href='#this' name='delete' class='btn'>삭제하기</a></p>";
+ 		var str = "<p><input type='file' name='file_"+(g_count++)+"'><a href='#this' name='delete' class='btn'>삭제하기</a></p>";
  				$("#fileDiv").append(str);
  				$("a[name='delete']").on("click", function(e){
  					e.preventDefault();
@@ -120,10 +121,13 @@
  				})
  	} 
 </script>
+
 <script>
 	$('.starRev span').click(function(){
 		$(this).parent().children('span').removeClass('on');
 		  $(this).addClass('on').prevAll('span').addClass('on');
+		  var star = $(this).text(); 
+		$('#revStar1').attr('value',star);  
 		  return false;
 		});
 </script>

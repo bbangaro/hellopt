@@ -12,26 +12,27 @@ import com.bit.hellopt.vo.reviewboard.ReviewBoardVO;
 public interface RBoardMapper1 {
 
 	//전체 후기 조회
-	@Select("SELECT * FROM REVIEW_BOARD_TB")
+	
+	@Select("SELECT * FROM REVIEW_BOARD_TB ORDER BY REV_IDX DESC")
 	public List<ReviewBoardVO> getRBoardList();
 	
 	@Select("SELECT USER_ID, USER_ROLE, USER_NAME, USER_GENDER, USER_ADDRESS,"
 			+ " USER_JOB, USER_BIRTH, USER_ROOT, USER_HEIGHT, USER_WEIGHT, "
 			+ "USER_PROFILE FROM REVIEW_BOARD_TB RBT, USERS_TB UT"
-			+ "WHERE RBT.FK_USER_ID = UT.USER_ID")
+			+ "WHERE RBT.FK_USER_ID = UT.USER_ID ORDER BY REV_IDX DESC")
+	
 	public void selectUser(); 
 	
-	@Insert("INSERT INTO REVIEW_BOARD_TB "
-			+ "(REV_IDX,REV_STAR, REV_CONTENT, REV_REGDATE)\r\n" + 
-			"VALUES((SELECT NVL(MAX(REV_IDX)+1, 0) FROM REVIEW_BOARD_TB),\r\n" + 
-			"		#{revStar}, #{revContent}, SYSDATE)")
+	@Insert("INSERT INTO REVIEW_BOARD_TB (REV_IDX, REV_STAR, REV_CONTENT)\r\n" + 
+			"		VALUES ((SELECT NVL(MAX(REV_IDX), 0) + 1 FROM REVIEW_BOARD_TB), \r\n" + 
+			"		       #{revStar}, #{revContent})")
 	public void insertRBoard(ReviewBoardVO vo);
 	
 	
 	@Insert("INSERT INTO REVIEW_BOARD_TB "
-			+ "(REV_IDX,REV_STAR, REV_CONTENT, REV_REGDATE, REV_FILE_ORIGIN, REV_FILE_SAVE)\r\n" + 
+			+ "(REV_IDX,REV_STAR, REV_CONTENT, REV_FILE_ORIGIN, REV_FILE_SAVE)\r\n" + 
 			"VALUES((SELECT NVL(MAX(REV_IDX)+1, 0) FROM REVIEW_BOARD_TB),\r\n" + 
-			"		#{revStar}, #{revContent}, SYSDATE, #{revFileOrigin}, #{revFileSave})")
+			"		#{revStar}, #{revContent}, #{revFileOrigin}, #{revFileSave})")
 	public void insertRBoardUploadFile(ReviewBoardVO vo);
 	
 	@Update("UPDATE REVIEW_BOARD_TB\r\n" + 
