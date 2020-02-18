@@ -28,8 +28,10 @@
 <script src="${pageContext.request.contextPath}/resources/js/main/script.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/main/swiper.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/main/wrest.js"></script>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/content.css">
+<!-- 
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/content.css">
+ -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/body.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/font-awesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/font.css">
@@ -39,26 +41,24 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/swiper.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/xeicon.min.css">
 
-<sitemesh:write property="header" />
+
 
 </head>
 
 <body>
-
-	<div class="container">
 	
+	<div class="container">
+		<sitemesh:write property="header" />
 		<div class="header">
 			<c:import url="/WEB-INF/views/header.jsp" />
 		</div>
 		
-		<div class="content">
-			<sitemesh:write property="body" />
+		<div class="content"><sitemesh:write property="body" />
 		</div>
-		
+		 
 		<div class="footer">
 			<c:import url="/WEB-INF/views/footer.jsp" />
 		</div>
-		
 	</div>
 	
 </body>

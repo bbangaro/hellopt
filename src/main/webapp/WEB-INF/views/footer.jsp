@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <script>
-// ìë°ì¤í¬ë¦½í¸ìì ì¬ì©íë ì ì­ë³ì ì ì¸
 var g5_url       = "#";
 var g5_bbs_url   = "#";
 var g5_is_member = "";

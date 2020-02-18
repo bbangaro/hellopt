@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 
-
 	<h1>HelloPT!</h1>
 
 	<form action="login" method="POST">

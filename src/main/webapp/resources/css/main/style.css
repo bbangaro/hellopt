@@ -356,6 +356,8 @@ transition:0.3s;
   opacity: 1 !important;
 }
 
+<!-- 
+
 .slider_content {
   position: relative;
   display: table;
@@ -366,6 +368,7 @@ transition:0.3s;
   transform: scale(0.7);
   transition: all 0.72s;
 }
+-->
 .scroll-cta {
   position: absolute;
   left: -14px;
@@ -448,6 +451,7 @@ transition:0.3s;
   vertical-align: middle;
 }
 .slider_content .content_wrap {
+	
 	position: relative;
 	padding: 44px 43px;
 }

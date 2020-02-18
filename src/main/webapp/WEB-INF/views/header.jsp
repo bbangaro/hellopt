@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 	
 <script>
-// ìë°ì¤í¬ë¦½í¸ìì ì¬ì©íë ì ì­ë³ì ì ì¸
 var g5_url       = "#";
 var g5_bbs_url   = "#";
 var g5_is_member = "";
@@ -15,7 +14,6 @@ var g5_cookie_domain = "";
 </script>	
 
 
-<!-- ìë¨ ìì { -->
 <header id="hd" class="ease" style="z-index: 1000;">
   <h1>
     <a href="#"><span class="ss">HelloPT Training</span></a>
@@ -24,11 +22,6 @@ var g5_cookie_domain = "";
 </header>
 <!-- ìë¨ ë } -->
 
-<!-- ë¤ë¹ê²ì´ì ìì { -->
-
-<!-- ë¤ë¹ê²ì´ì ë } -->
-    
-<!-- íìë ì´ì´ ìì { -->
 <div id="hd_pop">
     <h2>íìë ì´ì´ ìë¦¼</h2>
 
@@ -51,7 +44,6 @@ $(function() {
 });
 </script>
 
-<!-- } íìë ì´ì´ ë -->
     <script>
     $(function(){
         $(".gnb_menu_btn").click(function(){
@@ -70,9 +62,7 @@ $(function() {
 
 
 
-<!-- ì½íì¸  ìì { -->
 <div id="wrapper">
-<!--ì¸í¸ë¡ ë¹ëì¤ ì¶ê°-->
 <div class="intro_video" style="display: none;">
   <div class="table-cell-wr">
     <!--ëª¨ë°ì¼ ì¼ëë§, video ìì±ê°ì mutedì¶ê° -->
@@ -86,6 +76,7 @@ $(function() {
     <img src="${pageContext.request.contextPath}/resources/images/main/next_right.png">
   </h2>
 </div>
+</div>
 
 <script type="text/javascript">
 
@@ -93,7 +84,6 @@ $(function() {
 
 <script>
 $(function() {
-    // í°í¸ ë¦¬ì¬ì´ì¦ ì¿ í¤ìì¼ë©´ ì¤í
     font_resize("container", get_cookie("ck_font_resize_rmv_class"), get_cookie("ck_font_resize_add_class"));
 });
 </script>
