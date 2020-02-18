@@ -17,18 +17,16 @@ public class User {
 	private String userRole;
 	@ValidEmail
 	private String userEmail;
+	private String userGender;
+	private String userAddress;
+	private String userJob;
+	private String userBirth;
+	private String userRoot;
+	private int userHeight;
+	private int userWeight;
+	private String userProfile;
 	
 	public User() {}
-
-	public User(@NotBlank @Size(min = 3, max = 10) String userId, @NotBlank @Size(min = 5, max = 15) String userPw,
-			@NotBlank String userName, String userRole, String userEmail) {
-		super();
-		this.userId = userId;
-		this.userPw = userPw;
-		this.userName = userName;
-		this.userRole = userRole;
-		this.userEmail = userEmail;
-	}
 
 	public String getUserId() {
 		return userId;
@@ -70,9 +68,68 @@ public class User {
 		this.userEmail = userEmail;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userRole=" + userRole
-				+ ", userEmail=" + userEmail + "]";
+	public String getUserGender() {
+		return userGender;
 	}
+
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
+	}
+
+	public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public String getUserJob() {
+		return userJob;
+	}
+
+	public void setUserJob(String userJob) {
+		this.userJob = userJob;
+	}
+
+	public String getUserBirth() {
+		return userBirth;
+	}
+
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
+	}
+
+	public String getUserRoot() {
+		return userRoot;
+	}
+
+	public void setUserRoot(String userRoot) {
+		this.userRoot = userRoot;
+	}
+
+	public int getUserHeight() {
+		return userHeight;
+	}
+
+	public void setUserHeight(int userHeight) {
+		this.userHeight = userHeight;
+	}
+
+	public int getUserWeight() {
+		return userWeight;
+	}
+
+	public void setUserWeight(int userWeight) {
+		this.userWeight = userWeight;
+	}
+
+	public String getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(String userProfile) {
+		this.userProfile = userProfile;
+	}
+	
 }
