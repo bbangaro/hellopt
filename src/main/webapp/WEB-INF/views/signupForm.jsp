@@ -12,7 +12,7 @@
 <body>
 	<h2>회원가입</h2>
 	<form:form action="${pageContext.request.contextPath}/user"
-		method="POST" modelAttribute="user">
+		method="POST" modelAttribute="user" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td><form:label path="userId">아이디</form:label></td>
@@ -65,7 +65,8 @@
 				<td><form:input path="userWeight"/></td>
 			</tr>
 			<tr>
-				<td><form:label path="userProfile"></form:label>
+				<td><label for="file">프로필 사진</label></td>
+				<td><input type="file" name="file"/></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="회원가입"></td>
