@@ -33,8 +33,8 @@
                     <li><a href="#">review</a></li>
                 </ul>
                 <ul class="user_case">
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Join</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
                 </ul>           
             </div>
         </div>
