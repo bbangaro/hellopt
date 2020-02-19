@@ -25,12 +25,15 @@ import org.springframework.web.servlet.view.JstlView;
 //MyBatis 사용을 위한 Mapper 인터페이스 찾기
 @MapperScan("com.bit.hellopt.data")
 @Configuration
+							//웹설정 가능한 인터페이스 상속받아서... 뷰 리졸버같은거..쓴다.. 
+							//디슾패셔써블릿 설정들..
 public class WebAppConfig implements WebMvcConfigurer {
 
 	DataSource dataSource;
 	@Autowired
 	ApplicationContext applicationContext;
 	
+	//rootConfig에 있는거 의존성 주입한거
 	public WebAppConfig(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
@@ -38,11 +41,15 @@ public class WebAppConfig implements WebMvcConfigurer {
 	//바로 URL과 VIEW를 바로 매핑시켜줌
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/home").setViewName("home");
+		registry.addViewController("/signupform").setViewName("signupForm");
+		registry.addViewController("/openClassForm").setViewName("openClassForm");
+		registry.addViewController("/classDetail").setViewName("classDetail");
+		registry.addViewController("/chat").setViewName("chat");
+		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/hello").setViewName("hello");
 		registry.addViewController("/login").setViewName("login");
 	}
-	
+
 	//Controller에서 View 리턴 시 View 위치와 확장자를 설정
 	@Bean
 	public ViewResolver viewResolver() {
