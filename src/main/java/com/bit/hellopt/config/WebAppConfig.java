@@ -18,14 +18,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.bit.hellopt"})
+@ComponentScan(basePackages = { "com.bit.hellopt" })
 @MapperScan("com.bit.hellopt.data")
 @Configuration
 							//웹설정 가능한 인터페이스 상속받아서... 뷰 리졸버같은거..쓴다.. 
 							//디슾패셔써블릿 설정들..
 public class WebAppConfig implements WebMvcConfigurer {
-	
+
 	DataSource dataSource;
 	@Autowired
 	ApplicationContext applicationContext;
@@ -37,8 +38,9 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/signupform").setViewName("signupForm");
-		registry.addViewController("/test").setViewName("test");
+		registry.addViewController("/home").setViewName("home");
+		registry.addViewController("/hello").setViewName("hello");
+		registry.addViewController("/login").setViewName("login");
 	}
 
 	//컨트롤러 받아주는 거..(위치 확인 , 확장자 확인)
@@ -52,17 +54,12 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 		return bean;
 	}
-	
-	//보류
+
 	@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-            .addResourceHandler("/resources/**")
-            .addResourceLocations("/resources/");
-    }
-	
-	//마이바티스 설정
-	// applicationContext.xml에서 했던 dataSource 설정을 여기서 해준거임
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 	  SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();

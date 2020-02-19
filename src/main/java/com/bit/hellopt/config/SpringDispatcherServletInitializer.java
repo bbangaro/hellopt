@@ -11,7 +11,8 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
 	@Override
     protected Class <?> [] getRootConfigClasses() {
         return new Class[] {
-        	RootConfig.class
+        	RootConfig.class,
+        	SecurityConfig.class
         };
     }
 
