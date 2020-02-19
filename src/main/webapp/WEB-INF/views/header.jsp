@@ -3,7 +3,7 @@
 
 <head>
 	<script src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/main.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/main.css">
 </head>
 
 <body>
@@ -33,8 +33,8 @@
                     <li><a href="#">review</a></li>
                 </ul>
                 <ul class="user_case">
-                    <li><a href="${pageContext.request.contextPath}/loginpage">Login</a></li>
-                    <li><a href="${pageContext.request.contextPath}/signupform">Join</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Join</a></li>
                 </ul>           
             </div>
         </div>

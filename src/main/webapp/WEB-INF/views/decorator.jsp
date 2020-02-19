@@ -20,7 +20,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	
 	<!-- decorator에 있어야 함 -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/default.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/default.css">
 	
 
 	<!-- 오류 없는지 지켜보기 -->
