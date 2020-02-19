@@ -38,6 +38,10 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/signupform").setViewName("signupForm");
+		registry.addViewController("/openClassForm").setViewName("openClassForm");
+		registry.addViewController("/classDetail").setViewName("classDetail");
+		registry.addViewController("/chat").setViewName("chat");
 		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/hello").setViewName("hello");
 		registry.addViewController("/login").setViewName("login");
