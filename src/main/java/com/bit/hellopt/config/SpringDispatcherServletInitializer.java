@@ -1,9 +1,6 @@
 package com.bit.hellopt.config;
 
-import javax.servlet.Filter;
 
-import org.sitemesh.builder.SiteMeshFilterBuilder;
-import org.sitemesh.webapp.SiteMeshFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class SpringDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

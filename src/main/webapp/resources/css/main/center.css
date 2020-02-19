@@ -1,6 +1,6 @@
 @charset "utf-8";
-
-.login {
+/*
+.content {
   position:absolute;
   top:50%;
   left:50%;
@@ -8,7 +8,11 @@
   margin:-50px 0 0 -50px;
   line-height: 20px;
 }
+*/
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 
-.loginBtn {
-  margin-top: 10px;
 }

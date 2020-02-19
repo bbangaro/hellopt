@@ -41,13 +41,11 @@ public class WebAppConfig implements WebMvcConfigurer {
 	//바로 URL과 VIEW를 바로 매핑시켜줌
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/signupform").setViewName("signupForm");
 		registry.addViewController("/openClassForm").setViewName("openClassForm");
 		registry.addViewController("/classDetail").setViewName("classDetail");
 		registry.addViewController("/chat").setViewName("chat");
 		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/hello").setViewName("hello");
-		registry.addViewController("/login").setViewName("login");
 	}
 
 	//Controller에서 View 리턴 시 View 위치와 확장자를 설정

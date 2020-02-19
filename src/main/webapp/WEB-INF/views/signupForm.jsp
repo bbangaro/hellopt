@@ -14,6 +14,7 @@
 	font-style: italic;
 }
 </style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/center.css">
 </head>
 <body>
 	<h2>회원가입</h2>
