@@ -14,4 +14,7 @@ public interface UserMapper {
 			+ "VALUES (#{userId}, #{userPw}, #{userRole}, #{userName}, #{userGender}"
 			+ ", #{userAddress}, TO_DATE(#{userBirth}, 'YYYY-MM-DD'), #{userJob}, #{userRoot}, #{userHeight}, #{userWeight}, #{userProfile})")
 	public void insertUser(User user);
+	
+	@Select("SELECT count(*) FROM users_tb WHERE user_id = #{userId}")
+	public int isUser(String userId);
 }

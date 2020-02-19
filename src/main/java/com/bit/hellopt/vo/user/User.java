@@ -3,8 +3,6 @@ package com.bit.hellopt.vo.user;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.bit.hellopt.annotation.ValidEmail;
-
 public class User {
 	@NotBlank
 	@Size(min = 3, max = 10)
@@ -15,11 +13,13 @@ public class User {
 	@NotBlank
 	private String userName;
 	private String userRole;
-	@ValidEmail
 	private String userEmail;
 	private String userGender;
+	@Size(max = 100)
 	private String userAddress;
+	@Size(max = 20)
 	private String userJob;
+	@Size(max = 10)
 	private String userBirth;
 	private String userRoot;
 	private int userHeight;

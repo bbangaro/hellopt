@@ -21,5 +21,10 @@ public class UserServiceImpl implements UserService{
 		user.setUserPw(passwordEncoder.encode(user.getUserPw()));
 		mapper.insertUser(user);
 	}
+
+	@Override
+	public int isUser(String userId) {
+		return mapper.isUser(userId);
+	}
 	
 }

@@ -6,3 +6,10 @@ target
 src/main/webapp/META-INF/maven/com.bit/hellopt/pom.properties
 RootConfig.java
 
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+

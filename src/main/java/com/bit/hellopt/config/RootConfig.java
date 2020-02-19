@@ -16,8 +16,8 @@ public class RootConfig {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		dataSource.setUsername("mystudy");
-        dataSource.setPassword("mystudy");
+		dataSource.setUsername("mysutdy");
+        dataSource.setPassword("mystudypw");
  
         return dataSource;
 	}
