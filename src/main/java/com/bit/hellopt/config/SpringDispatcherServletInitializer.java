@@ -1,5 +1,9 @@
 package com.bit.hellopt.config;
 
+import javax.servlet.Filter;
+
+import org.sitemesh.builder.SiteMeshFilterBuilder;
+import org.sitemesh.webapp.SiteMeshFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class SpringDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -7,7 +11,8 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
 	@Override
     protected Class <?> [] getRootConfigClasses() {
         return new Class[] {
-        	RootConfig.class
+        	RootConfig.class,
+        	SecurityConfig.class
         };
     }
 
@@ -26,4 +31,7 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
             "/"
         };
     }
+
+    
+    
 }

@@ -4,6 +4,7 @@
 	<!-- 여러가지 기본 옵션을 지정합니다. -->
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	
 	<typeAliases>

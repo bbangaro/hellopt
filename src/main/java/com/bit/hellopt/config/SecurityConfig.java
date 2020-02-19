@@ -33,8 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/user").permitAll()
 				.antMatchers("/user/*").permitAll()
 				.antMatchers("/resources/**").permitAll()
-				// 등록되지 않은 요청 시 로그인 페이지로 이동시킹
-				//.anyRequest().authenticated()
+				.anyRequest().authenticated()
 				
 			.and()
 				.formLogin()

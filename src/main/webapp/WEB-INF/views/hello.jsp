@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-Hello test!
+	<h1 >Hello</h1>
+        <form action="/hellopt/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
 </body>
 </html>
