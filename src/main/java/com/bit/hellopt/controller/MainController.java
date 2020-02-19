@@ -6,14 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class MainController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
-	//@GetMapping("/")
+	
+	@GetMapping("/")
 	public String home() {
-		logger.info("home controller get mapping");
-		return "home";
+		logger.info("main controller get mapping");
+		return "main";
 	}
 	
 }

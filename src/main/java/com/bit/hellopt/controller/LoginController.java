@@ -57,4 +57,9 @@ public class LoginController {
 		model.addAttribute("user", new User());
 		return "signupForm";
 	}
+	
+	@GetMapping("/loginpage")
+	public String loginPage() {
+		return "login";
+	}
 }
