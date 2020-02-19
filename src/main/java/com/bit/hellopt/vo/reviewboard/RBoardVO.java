@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.vo.User;
 
-public class ReviewBoardVO {
+public class RBoardVO {
 	private int revIdx;
 	private User user;
 	private String revContent;

@@ -7,7 +7,7 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.bit.hellopt.vo.reviewboard.ReviewBoardVO" alias="rBoard"/>
+		<typeAlias type="com.bit.hellopt.vo.reviewboard.RBoardVO" alias="rBoard"/>
 		<typeAlias type="com.bit.hellopt.vo.User" alias="User"/>
 	</typeAliases>
 

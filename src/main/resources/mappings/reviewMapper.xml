@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bit.hellopt.data.RBoardMapper2">
-<resultMap type="com.bit.hellopt.vo.reviewboard.ReviewBoardVO" id="rBoardMap">
+<resultMap type="com.bit.hellopt.vo.reviewboard.RBoardVO" id="rBoardMap">
 	<result property="revIdx" column="REV_IDX"/>
 	<result property="revContent" column="REV_CONTENT"/>
 	<result property="revREGDATE" column="REV_REGDATE"/>

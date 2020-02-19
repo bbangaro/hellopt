@@ -23,25 +23,25 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.hellopt.service.reviewboard.RBoardService;
-import com.bit.hellopt.vo.reviewboard.ReviewBoardVO;
+import com.bit.hellopt.vo.reviewboard.RBoardVO;
 
 @Controller
 @SessionAttributes("rBoard")
-public class rBoardController {
+public class RBoardController {
 	@Autowired
 	RBoardService rService;
 
-	public rBoardController(RBoardService rService) {
+	public RBoardController(RBoardService rService) {
 		this.rService = rService;
 	}
 	
 	
 	@RequestMapping("/reviewBoard")
-	public String getRBoardList(ReviewBoardVO vo, Model model) {
+	public String getRBoardList(RBoardVO vo, Model model) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 		
 		
-		List<ReviewBoardVO> rBoardList = rService.getRBoardList();
+		List<RBoardVO> rBoardList = rService.getRBoardList();
 		System.out.println("rBoardList" + rBoardList.toString());
 		
 		model.addAttribute("rBoardList", rBoardList);
@@ -49,7 +49,7 @@ public class rBoardController {
 	}
 	
 	@PostMapping("/insertRBoard")
-	public String insertRBoard(ReviewBoardVO vo, MultipartHttpServletRequest mpRequest) 
+	public String insertRBoard(RBoardVO vo, MultipartHttpServletRequest mpRequest) 
 					throws IllegalStateException, IOException {
 		
 		
@@ -80,12 +80,23 @@ public class rBoardController {
 			rService.insertBoard(vo);
 			
 		}
-		
-		
-		
-		
+
 		return "redirect:/reviewBoard";
 		
 	}
-	
+	@PostMapping("/updateBoard")
+	public String updateBoard(@ModelAttribute("board")RBoardVO vo) {
+		System.out.println(">>> 글 수정 처리 - updateBoard()");
+		System.out.println(">> board vo :" + vo);
+		
+		rService.updateBoard(vo);
+		return "redirect:/reviewBoard";
+	}
+	@PostMapping("/deleteBoard")
+	public String deleteBoard(RBoardVO vo) {
+		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
+		
+		rService.deleteBoard(vo);
+		return "redirect:/reviewBoard";
+	}
 }

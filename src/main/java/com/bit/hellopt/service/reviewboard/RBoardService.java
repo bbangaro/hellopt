@@ -6,15 +6,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.vo.User;
-import com.bit.hellopt.vo.reviewboard.ReviewBoardVO;
+import com.bit.hellopt.vo.reviewboard.RBoardVO;
 
 
 public interface RBoardService {
 	
-	void insertBoard(ReviewBoardVO vo);
-	void insertRBoardUploadFile(ReviewBoardVO vo, MultipartHttpServletRequest mpRequest);
-	void updateBoard(ReviewBoardVO vo);
-	void deleteBoard(ReviewBoardVO vo);
-	List<ReviewBoardVO> getRBoardList();
-	List<ReviewBoardVO> selectUser(User vo);
+	void insertBoard(RBoardVO vo);
+	void insertRBoardUploadFile(RBoardVO vo, MultipartHttpServletRequest mpRequest);
+	void updateBoard(RBoardVO vo);
+	void deleteBoard(RBoardVO vo);
+	List<RBoardVO> getRBoardList();
+	List<RBoardVO> selectUser(User vo);
 }

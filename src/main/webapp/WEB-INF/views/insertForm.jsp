@@ -125,8 +125,8 @@
 <script>
 	$('.starRev span').click(function(){
 		$(this).parent().children('span').removeClass('on');
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		  var star = $(this).text(); 
+		$(this).addClass('on').prevAll('span').addClass('on');
+		var star = $(this).text(); 
 		$('#revStar1').attr('value',star);  
 		  return false;
 		});
