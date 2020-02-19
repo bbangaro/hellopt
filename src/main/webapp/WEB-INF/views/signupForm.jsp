@@ -24,6 +24,8 @@
 				<td><form:label path="userId">아이디</form:label></td>
 				<td><form:input path="userId" /></td>
 				<td><form:errors path="userId" cssClass="error"></form:errors></td>
+				<td><input type="button" onclick="idCheck()" value="아이디 중복 확인"></td>
+				<td><label id="idCheckResult"></label></td>
 			</tr>
 			<tr>
 				<td><form:label path="userPw">비밀번호</form:label></td>
@@ -76,7 +78,7 @@
 				<td><input type="file" name="file" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="회원가입"></td>
+				<td><input type="button" onclick="formCheck()" value="회원가입"></td>
 			</tr>
 		</table>
 	</form:form>
@@ -93,5 +95,6 @@
 		    }).open();
 		}
 </script>
+<script src="${pageContext.request.contextPath}/resources/static/js/idcheck.js"></script>
 </body>
 </html>

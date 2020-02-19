@@ -22,9 +22,7 @@ public class User {
 	@Size(max = 10)
 	private String userBirth;
 	private String userRoot;
-	@Size(max = 300)
 	private int userHeight;
-	@Size(max = 1000)
 	private int userWeight;
 	private String userProfile;
 	
