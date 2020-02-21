@@ -22,7 +22,7 @@ public class CustomUserDetailService implements UserDetailsService {
 		if(user == null) {
 			throw new UsernameNotFoundException(username);
 		}
-		System.out.println("userauth" + user.toString());
+		System.out.println("UserAuth: " + user.toString());
 		return new CustomUserDetail(user);
 	}
 	
