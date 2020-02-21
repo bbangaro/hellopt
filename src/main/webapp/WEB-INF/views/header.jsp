@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
-	<script src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/main.css">
+<script
+	src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/main/main.css">
 </head>
 
 <body>
@@ -38,9 +40,17 @@
                     <li><a href="#">review</a></li>
                 </ul>
                 <ul class="user_case">
-                    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-                    <li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
-                    <li><a href="${pageContext.request.contextPath}/classDetail">Class</a></li>
+                    <sec:authorize access="!isAuthenticated()">
+						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<li><a href="${pageContext.request.contextPath}/logout">logout</a></li>
+						<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
+						<sec:authentication property="principal" var="user" />
+						<span>안녕하세요. ${user.username}</span>
+					</sec:authorize>
+					<li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
+					<li><a href="${pageContext.request.contextPath}/classDetail">Class</a></li>
                 </ul>           
             </div>
         </div>
@@ -48,7 +58,7 @@
     </aside>
     <!-- 네비게이션 끝 } -->
 
-    <script>
+	<script>
         // 자바스크립트에서 사용하는 전역변수 선언
         var g5_url = "#";
         var g5_bbs_url = "#";
