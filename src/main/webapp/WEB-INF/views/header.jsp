@@ -35,6 +35,7 @@
                 <ul class="user_case">
                     <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
                     <li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
+                    <li><a href="${pageContext.request.contextPath}/classDetail">Class</a></li>
                 </ul>           
             </div>
         </div>
