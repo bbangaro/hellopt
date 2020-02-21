@@ -7,17 +7,15 @@
 <title>강의 상세정보</title>
 <meta charset="utf-8">
 
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/skin/board/tour/style.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/content.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/default.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/style.css">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/content.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/classdetail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
 
 </head>
 <body>
 	<!-- 콘텐츠 시작 { -->
 	<div id="wrapper">
-		<div id="tour">
+		<div id="live">
 			<div class="con-wr">
 				<div class="con-inner sub-sub">
 
@@ -27,7 +25,7 @@
 
 					<div class="sub-content">
 						<!-- 썸네일 -->
-						<div class="tour_img_area">
+						<div class="live_img_area">
 							<iframe width="560" height="315"
 								src="https://www.youtube.com/embed/azxahQi6vFo" frameborder="0"
 								allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -39,7 +37,7 @@
 						<div id="bo_list" style="width: 100%">
 
 							<div class="tbl_head01 tbl_wrap">
-								<ul class="tour_list">
+								<ul class="live_list">
 									<li>
 										<div class="date">수업 이름</div>
 										<div class="title">

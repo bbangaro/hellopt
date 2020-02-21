@@ -7,11 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>스트리밍 강의 리스트</title>
 <meta charset="utf-8">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/content.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/skin/board/artist02-3-video/style.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/default.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/style.css">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/content.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/classlist.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
 </head>
 <body>
 	<!-- 콘텐츠 시작 { -->

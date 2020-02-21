@@ -6,13 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
-<title>강의 개설</title>
-
-<!-- css 폴더에 css파일 추가 -->
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/default.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/style.css">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/content.css">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
 <title>스트리밍 강의 개설</title>
 
 </head>
@@ -28,7 +23,7 @@
 		
 			<div class="sub-content">
 			  <div class="basic-table">
-			    <form class="contact-from" action="openclass" method="post">
+			    <form class="open" action="openclass" method="post">
 			        <ul>
 			          <li>
 			            <label for="className" class="sound_only">수업 이름</label>
