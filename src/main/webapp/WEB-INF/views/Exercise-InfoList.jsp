@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -9,11 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>운동정보 게시판~!</title>
+
 <style>
-	#container {
-		width: 700px;
-		margin: 0 auto;
-	}
+	
 	h1, h3, p { text-align: center; }
 	table { border-collapse: collapse; }
 	table, th, td {
@@ -24,6 +21,7 @@
 	.center { text-align: center; }
 	.border-none, .border-none td { border: none; }
 </style>
+
 </head>
 <body>
 
@@ -32,7 +30,7 @@
 	<h3>연문님 환영합니다~!!!</h3>
 
 	<!-- 검색을 위한 폼 -->
-	<form action="getExerciseInformation" method="post">
+	<form action="Exercise-InfoList" method="post">
 	<table class="border-none">
 		<tr>
 			<td>
@@ -56,6 +54,7 @@
 			<th width="80">운동번호</th>
 			<th width="80">운동이름</th>
 			<th width="80">운동부위</th>
+			<th width="80">운동방법</th>
 			<th width="80">운동사진</th>
 			<th width="100">운동동영상</th>
 			<th width="80">주의사항</th>
@@ -68,12 +67,13 @@
 		<tr>
 			<td class="center">${exerciseInformation.exerciseIdx }</td>
 			<td>
-				<a href="getExerciseInformation?exerciseIdx=${exerciseInformation.exerciseIdx }">
+				<a href="Exercise-Info?exerciseIdx=${exerciseInformation.exerciseIdx }">
 					${exerciseInformation.exerciseName }
 				</a>
 			</td>
 			<td>${exerciseInformation.exerciseParts }</td>
-			<td>${exerciseInformation.exercisePictures }</td>
+			<td>${exerciseInformation.howtoExercise }</td>
+			<td>${exerciseInformation.exercisePicturesName }</td>
 			<td>${exerciseInformation.exerciseVideo }</td>
 			<td>${exerciseInformation.caution }</td>
 			<td>${exerciseInformation.repetition }</td>

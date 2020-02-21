@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>운동정보등록</title>
+<title>운동정보팁등록</title>
 <style>
 	#container {
 		width: 700px;
@@ -30,67 +30,43 @@
 </c:if>
 
 <div id="container">
-	<h1>운동정보등록</h1>
+	<h1>운동정보팁등록</h1>
 
 	<hr>
-	<form:form method="post" action="${pageContext.request.contextPath}/insertExerciseInformation"
+	<form:form method="post" action="${pageContext.request.contextPath}/insertExerciseInformationTip"
 			enctype="multipart/form-data">
 	<table>
 		<tr>
-			<th>운동이름</th>
+			<th>팁 제목</th>
 			<td>
-				<input type="text" name="exerciseName" size="100">
+				<input type="text" name="tipTitle">
 			</td>
 		</tr>
 		<tr>
-			<th>운동부위</th>
+			<th>팁 내용</th>
 			<td>
-				<input type="text" name="exerciseParts">
+				<input type="text" name="tipContent">
 			</td>
 		</tr>
 		<tr>
-			<th>운동방법</th>
+			<th>팁 작성자</th>
 			<td>
-				<input type="text" name="howtoExercise">
+				<input type="text" name="tipWriter">
 			</td>
 		</tr>
 		<tr>
-			<th>운동사진</th>
+			<th>팁 사진</th>
 			<td>
-				<input multiple="multiple" type="file" name="exercisePictures">
+				<input type="file" name="tipPictures">
 				<!-- name="file" -->
 			</td>
 		</tr>
-		<tr>
-			<th>운동동영상</th>
-			<td>
-				<input type="text" name="exerciseVideo">
-			</td>
-		</tr>
-		<tr>
-			<th>주의사항</th>
-			<td>
-				<input type="text" name="caution">
-			</td>
-		</tr>
-		<tr>
-			<th>세트당횟수</th>
-			<td>
-				<input type="text" name="repetition">
-			</td>
-		</tr>
-		<tr>
-			<th>세트횟수</th>
-			<td>
-				<input type="text" name="setCount">
-			</td>
-		</tr>
-		<tr>
-			<th>휴식시간</th>
-			<td>
-				<input type="text" name="restTime">
-			</td>
-		</tr>
+<!-- 		<tr> -->
+<!-- 			<th>작성일자</th> -->
+<!-- 			<td> -->
+<!-- 				<input type="text" name="regdate"> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
 		<tr>
 			<td colspan="2" class="center">
 				<input type="submit" value="운동정보 등록">

@@ -8,6 +8,9 @@
 	
 	<typeAliases>
 		<typeAlias alias="exerciseInformation" type="com.bit.hellopt.vo.exercise.ExerciseInformationVO" />
+		<typeAlias alias="exerciseInformationTip" type="com.bit.hellopt.vo.exercisetip.ExerciseInformationTipVO" />
+		<typeAlias alias="ExerciseMapper" type="com.bit.hellopt.data.exercise.ExerciseMapper" />
+		<typeAlias alias="ExerciseTipMapper" type="com.bit.hellopt.data.exercisetip.ExerciseTipMapper" />
 	</typeAliases>
 
 </configuration>

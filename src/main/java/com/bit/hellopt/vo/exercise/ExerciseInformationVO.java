@@ -1,9 +1,6 @@
 package com.bit.hellopt.vo.exercise;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
+import java.io.File;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,7 +40,8 @@ public class ExerciseInformationVO {
 	private int exerciseIdx;
 	private String exerciseName;
 	private String exerciseParts;
-	private String exercisePictures;
+	private String howtoExercise;
+	private String exercisePicturesName;
 	private String exerciseVideo;
 	private String caution;
 	private int repetition;
@@ -84,13 +82,21 @@ public class ExerciseInformationVO {
 	public void setExerciseParts(String exerciseParts) {
 		this.exerciseParts = exerciseParts;
 	}
-
-	public String getExercisePictures() {
-		return exercisePictures;
+	
+	public String getHowtoExercise() {
+		return howtoExercise;
 	}
 
-	public void setExercisePictures(String exercisePictures) {
-		this.exercisePictures = exercisePictures;
+	public void setHowtoExercise(String howtoExercise) {
+		this.howtoExercise = howtoExercise;
+	}
+
+	public String getExercisePicturesName() {
+		return exercisePicturesName;
+	}
+
+	public void setExercisePicturesName(String exercisePicturesName) {
+		this.exercisePicturesName = exercisePicturesName;
 	}
 
 	public String getExerciseVideo() {

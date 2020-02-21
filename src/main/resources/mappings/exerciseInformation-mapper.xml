@@ -23,10 +23,10 @@
 	
 	<insert id="insertExerciseInformation" parameterType="exerciseInformation">
 		INSERT INTO EXERCISE_INFORMATION_TB (EXERCISE_IDX, EXERCISE_NAME, EXERCISE_PARTS,
-		EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
+		HOWTO_EXERCISE, EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
 		VALUES ((SELECT NVL(MAX(EXERCISE_IDX), 0) + 1 FROM EXERCISE_INFORMATION_TB),
-				#{exerciseName}, #{exerciseParts}, #{exercisePictures}, #{exerciseVideo},
-				#{caution}, #{repetition}, #{setCount}, #{restTime})
+				#{exerciseName}, #{exerciseParts}, #{howtoExercise}, #{exercisePicturesName},
+				#{exerciseVideo}, #{caution}, #{repetition}, #{setCount}, #{restTime})
 	</insert>
   	
 	<update id="updateExerciseInformation" parameterType="exerciseInformation">

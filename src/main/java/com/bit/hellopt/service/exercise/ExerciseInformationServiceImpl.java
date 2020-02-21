@@ -9,7 +9,7 @@ import com.bit.hellopt.data.exercise.ExerciseMapper;
 import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 
 
-//@Service : @Component 상속바아 만든
+//@Service : @Component 상속받아 만든
 //비즈니스 로직 처리 서비스 영역에 사용
 @Service("exerciseInformationService")
 public class ExerciseInformationServiceImpl implements ExerciseInformationService {

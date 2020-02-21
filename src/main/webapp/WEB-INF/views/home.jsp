@@ -25,6 +25,8 @@
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 		</c:otherwise>
 	</c:choose>
-	<a href="${pageContext.request.contextPath}/getExerciseInformationList">운동목록</a>
+	<a href="${pageContext.request.contextPath}/Exercise-InfoList">운동목록</a>
+	<br><br>
+	<a href="${pageContext.request.contextPath}/Exercise-InfoTipList">운동팁목록</a>
 </body>
 </html>
