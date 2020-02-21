@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <head>
-	<script src="${pageContext.request.contextPath}/resources/js/main/script.js"></script>
+	
 	<script src="${pageContext.request.contextPath}/resources/js/main/wrest.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/swiper.min.css">

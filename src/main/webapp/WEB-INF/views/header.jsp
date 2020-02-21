@@ -10,7 +10,7 @@
     <!-- 상단 시작 { -->
     <header id="hd" class="ease" style="z-index: 1000;">
         <h1>
-            <a href="#"><span class="text_split">HelloPT Training</span></a>
+            <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
         <button type="button" role="togglebutton" class="nav_button"><span></span></button>
     </header>
