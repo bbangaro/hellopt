@@ -12,13 +12,12 @@
 	margin: auto;
 	*/
 }
-/*
-body {
-    min-height: 100%;
-}
-*/
+
+
 
 /* footer 하단 고정 */
+
+
 .footer {
   position: fixed;
   bottom: 10px;
@@ -294,8 +293,8 @@ transition: 0.3s;
 
 #navigation .nav_wrap ul.artist_depth02 {
     position: absolute;
-    bottom: -119px;
-    font-size: 18px;
+    bottom: -160px;
+    font-size: 15px;
     left: 50%;
     transform: translateX(-50%);
 	transition: 0.3s;
@@ -307,7 +306,7 @@ transition: 0.3s;
 	height:auto;
 }
 #navigation .nav_wrap ul.artist_depth02 li a {
-    font-size: 32px;
+    font-size: 25px;
     line-height: 1.7;
 	opacity:0.6;
 }
@@ -1201,4 +1200,13 @@ transition:0.3s;
   }
   .ani-adj .sub-content{
     margin-top: 137px;
+  }
+
+  .userName {
+  	float:right;
+  	color: #b3b3b3;
+  	font-size: 13px;
+  	font: 400 13.3333px Arial;
+  	margin-right: 48px;
+  	padding-top: 25px;
   }

@@ -7,6 +7,10 @@
 </head>
 
 <body>
+	<div class="userName">
+		김서나회원님 반갑습니다
+	</div>
+    
     <!-- 상단 시작 { -->
     <header id="hd" class="ease" style="z-index: 1000;">
         <h1>
@@ -27,6 +31,7 @@
                         <ul class="artist_depth02">
                             <li><a href="#">1:1</a></li>
                             <li><a href="#">1:4</a></li>
+                            <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Meeting</a></li>
