@@ -1,49 +1,30 @@
 package com.bit.hellopt.service.user;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bit.hellopt.data.UserMapper;
-import com.bit.hellopt.data.UserMapper2;
-import com.bit.hellopt.vo.User;
+import com.bit.hellopt.vo.user.User;
 
 @Service
 public class UserServiceImpl implements UserService{
 	
-	UserMapper userMapper;
 	@Autowired
-	UserMapper2 userMapper2;
+	UserMapper mapper;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
-	public UserServiceImpl(UserMapper userMapper) {
-		this.userMapper = userMapper;
+	@Override
+	public void regiserUser(User user) {
+		user.setUserRole("ROLE_USER");
+		user.setUserPw(passwordEncoder.encode(user.getUserPw()));
+		mapper.insertUser(user);
 	}
 
 	@Override
-	public List<User> findAll() {
-		return userMapper.getAllUser();
-	}
-
-	@Override
-	public User findById(String userId) {
-		return userMapper.getUserById(userId);
-	}
-
-	@Override
-	public void save(User user) {
-		//userMapper.insertUser(user);
-		userMapper2.insertUser(user);
-	}
-
-	@Override
-	public User findByIdAndPw(String userId, String userPw) {
-		return userMapper.getUser(userId, userPw);
-	}
-
-	@Override
-	public int existUser(User user) {
-		return userMapper.existUser(user);
+	public int isUser(String userId) {
+		return mapper.isUser(userId);
 	}
 	
 }
