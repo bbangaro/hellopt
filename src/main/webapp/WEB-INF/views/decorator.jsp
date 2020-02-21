@@ -56,11 +56,11 @@
 		<sitemesh:write property="body" />
 	</div>
 
-
-	<!-- 하단 Footer 고정 -->
+	<!--  
 	<div class="footer">
 		<c:import url="/WEB-INF/views/footer.jsp" />
 	</div>
+	-->
 
 </body>
 
