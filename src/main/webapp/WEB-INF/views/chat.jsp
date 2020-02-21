@@ -46,7 +46,7 @@
 	  	</div><!-- //tit-wr -->
 	
 		<div class="sub-content">
-			<div class="inner">
+			<div class="chat_inner">
 				<div class="stream-cont clfix">
 				    <!-- 동영상 나중에 스트리밍 화면으로 대체 -->
 				    <div id="video">
