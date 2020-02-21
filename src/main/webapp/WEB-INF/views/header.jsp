@@ -9,34 +9,38 @@
 </head>
 
 <body>
-	<!-- 상단 시작 { -->
-	<header id="hd" class="ease" style="z-index: 1000;">
-		<h1>
-			<a href="#"><span class="text_split">HelloPT Training</span></a>
-		</h1>
-		<button type="button" role="togglebutton" class="nav_button">
-			<span></span>
-		</button>
-	</header>
-	<!-- 상단 끝 } -->
+	<div class="userName">
+		김서나회원님 반갑습니다
+	</div>
+    
+    <!-- 상단 시작 { -->
+    <header id="hd" class="ease" style="z-index: 1000;">
+        <h1>
+            <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
+        </h1>
+        <button type="button" role="togglebutton" class="nav_button"><span></span></button>
+    </header>
+    <!-- 상단 끝 } -->
 
-	<!-- 네비게이션 시작 { -->
-	<aside id="navigation" class="close">
-		<div class="navigation_inner">
-			<div class="nav_wrap">
-				<ul class="category">
-					<li><a href="#">Trainer introduce</a></li>
-					<li><a href="#">How to Workout</a></li>
-					<li><a href="#" class="artist_open">Home training</a>
-						<ul class="artist_depth02">
-							<li><a href="#">1:1</a></li>
-							<li><a href="#">1:4</a></li>
-						</ul></li>
-					<li><a href="#">Meeting</a></li>
-					<li><a href="#">review</a></li>
-				</ul>
-				<ul class="user_case">
-					<sec:authorize access="!isAuthenticated()">
+    <!-- 네비게이션 시작 { -->
+    <aside id="navigation" class="close">
+        <div class="navigation_inner">
+            <div class="nav_wrap">
+                <ul class="category">
+                    <li><a href="#">Trainer introduce</a></li>
+                    <li><a href="#">How to Workout</a></li>
+                    <li><a href="#" class="artist_open">Home training</a>
+                        <ul class="artist_depth02">
+                            <li><a href="#">1:1</a></li>
+                            <li><a href="#">1:4</a></li>
+                            <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Meeting</a></li>
+                    <li><a href="#">review</a></li>
+                </ul>
+                <ul class="user_case">
+                    <sec:authorize access="!isAuthenticated()">
 						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
@@ -47,12 +51,12 @@
 					</sec:authorize>
 					<li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
 					<li><a href="${pageContext.request.contextPath}/classDetail">Class</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="dim_bg"></div>
-	</aside>
-	<!-- 네비게이션 끝 } -->
+                </ul>           
+            </div>
+        </div>
+        <div class="dim_bg"></div>
+    </aside>
+    <!-- 네비게이션 끝 } -->
 
 	<script>
         // 자바스크립트에서 사용하는 전역변수 선언
