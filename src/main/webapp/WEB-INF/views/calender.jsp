@@ -12,13 +12,18 @@
 
 	<div class="hello_body">
 	    <div class="cal_top">
-	        <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">&lt;</span></a>
+	        <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">
+	        	<img src="${pageContext.request.contextPath}/resources/images/calender/leftrun.png">
+	        </span></a>
 	        <span id="cal_top_year"></span>
 	        <span id="cal_top_month"></span>
-	        <a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit">&gt;</span></a>
+	        <a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit">
+	        	<img src="${pageContext.request.contextPath}/resources/images/calender/rightrun.png">
+	        </span></a>
 	    </div>
 	    <div id="cal_tab" class="cal">
 	    </div>
+	<h2 class="homet">어쩌구저쩌구</h2>
 	</div>
 
 </body>

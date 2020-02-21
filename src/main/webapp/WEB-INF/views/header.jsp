@@ -10,10 +10,14 @@
 
 <body>
 	<div class="userName">
-		김서나회원님 반갑습니다
+		<sec:authorize access="isAuthenticated()">
+			<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
+			<sec:authentication property="principal" var="user" />
+			<span>${user.username}님 안녕하세요</span>
+		</sec:authorize>
 	</div>
-    
-    <!-- 상단 시작 { -->
+
+	<!-- 상단 시작 { -->
     <header id="hd" class="ease" style="z-index: 1000;">
         <h1>
             <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>

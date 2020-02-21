@@ -2,8 +2,13 @@
     text-align: center;
     font-size: 50px;
 }
-.cal{
+.cal {
     text-align: center; 
+}
+h2 {
+    text-align: center; 
+    font-size: 20px;
+    font-family: 'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
 }
 table.calendar{
     border: 1px solid white;

@@ -1,4 +1,4 @@
-   var today = null;
+    var today = null;
     var year = null;
     var month = null;
     var firstDay = null;
@@ -24,8 +24,8 @@
             setTableHTML+='<tr height="100">';
             for(var j=0;j<7;j++){
                 setTableHTML+='<td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
-                setTableHTML+='    <div class="cal-day"></div>';
-                setTableHTML+='    <div class="cal-schedule"></div>';
+                setTableHTML+='    <div class="cal-day"></div>';   //여기에 입력하면 빈 날짜에 들어감
+                setTableHTML+='    <div class="cal-schedule"></div>'; //여기에 입력하면 전부 들어감
                 setTableHTML+='</td>';
             }
             setTableHTML+='</tr>';
@@ -51,14 +51,19 @@
     function drawDays(){
         $("#cal_top_year").text(year);
         $("#cal_top_month").text(month);
+        console.log(today.getDate());
+        
         for(var i=firstDay.getDay();i<firstDay.getDay()+lastDay.getDate();i++){
-            $tdDay.eq(i).text(++dayCount);
+        	if(today.getDate() ==  today ){
+        		$tdDay.eq(i).text(++dayCount+"힝");
+        	}
+            	$tdDay.eq(i).text(++dayCount);
         }
         for(var i=0;i<42;i+=7){
             $tdDay.eq(i).css("color","red");
         }
         for(var i=6;i<42;i+=7){
-            $tdDay.eq(i).css("color","blue");
+            $tdDay.eq(i).css("color","skyblue");
         }
     }
     
