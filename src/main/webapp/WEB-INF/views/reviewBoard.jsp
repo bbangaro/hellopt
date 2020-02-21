@@ -32,7 +32,7 @@
 <div>
 <form>
 	<p><a href="${pageContext.request.contextPath}/insertform">후기쓰러가기</a></p>	
-<c:forEach var="rBoard" items="${rBoardList }"> 
+<c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
 <table border>
 	<thead>
 		<tr>
@@ -66,7 +66,9 @@
 		<tr>
 			<td colspan="2">
 			<p>내용 :${rBoard.revContent}</p>
-			첨부사진:<img src="<c:url value='/c:/MyStudy/temp/${rBoard.revFileSave}'/>">
+			
+			 첨부사진:<img src="<c:url value='/resources/revimage/${rBoard.revFileSname} }'/>"> 
+			 
 			</td>
 		</tr>
 		<tr>

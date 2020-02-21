@@ -16,11 +16,8 @@ public class RBoardVO {
 	private User user;
 	private String revContent;
 	private Date revRegdate;
-	private int revHit;
-	private int revStar;
+	private String revStar;
 	private String revCategory;
-	private String revFileOrigin;
-	private String revFileSave;
 	
 	private MultipartFile file_0;
 
@@ -56,19 +53,11 @@ public class RBoardVO {
 		this.revRegdate = revRegdate;
 	}
 
-	public int getRevHit() {
-		return revHit;
-	}
-
-	public void setRevHit(int revHit) {
-		this.revHit = revHit;
-	}
-
-	public int getRevStar() {
+	public String getRevStar() {
 		return revStar;
 	}
 
-	public void setRevStar(int revStar) {
+	public void setRevStar(String revStar) {
 		this.revStar = revStar;
 	}
 
@@ -78,22 +67,6 @@ public class RBoardVO {
 
 	public void setRevCategory(String revCategory) {
 		this.revCategory = revCategory;
-	}
-
-	public String getRevFileOrigin() {
-		return revFileOrigin;
-	}
-
-	public void setRevFileOrigin(String revFileOrigin) {
-		this.revFileOrigin = revFileOrigin;
-	}
-
-	public String getRevFileSave() {
-		return revFileSave;
-	}
-
-	public void setRevFileSave(String revFileSave) {
-		this.revFileSave = revFileSave;
 	}
 
 	public MultipartFile getFile_0() {
@@ -106,10 +79,8 @@ public class RBoardVO {
 
 	@Override
 	public String toString() {
-		return "ReviewBoardVO [revIdx=" + revIdx + ", user=" + user + ", revContent=" + revContent + ", revRegdate="
-				+ revRegdate + ", revHit=" + revHit + ", revStar=" + revStar + ", revCategory=" + revCategory
-				+ ", revFileOrigin=" + revFileOrigin + ", revFileSave=" + revFileSave + ", file_0=" + file_0
-				+ "]";
+		return "RBoardVO [revIdx=" + revIdx + ", user=" + user + ", revContent=" + revContent + ", revRegdate="
+				+ revRegdate + ", revStar=" + revStar + ", revCategory=" + revCategory + ", file_0=" + file_0 + "]";
 	}
 	
 	
