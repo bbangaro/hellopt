@@ -87,8 +87,8 @@
 										</div>
 									</li>
 									<li>
-										<button style="color:white">강의정보수정</button> 
-										<button style="color:white" onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의삭제</button>
+										<button class="detail-btn">강의정보수정</button> 
+										<button class="detail-btn" onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의삭제</button>
 									</li>
 								</ul>
 							</div>
