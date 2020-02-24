@@ -5,11 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/slick.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/audition.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/board/audition.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/board/slick.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/slick.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/audition.css">
 </head>
 <body>
 
@@ -82,11 +82,11 @@
             </div>
             <div class="tabbox">
                 <ul id="tab">
-                    <li id="tab01">주요 업무</li>
-                    <li id="tab02">트레이너 혜택</li>
-                    <li id="tab03">자격 요건</li>
-                    <li id="tab04">선발 과정</li>
-                    <li id="tab05">지원 하기</li>
+                    <li id="tab01" class="tab_li">주요 업무</li>
+                    <li id="tab02" class="tab_li">트레이너 혜택</li>
+                    <li id="tab03" class="tab_li">자격 요건</li>
+                    <li id="tab04" class="tab_li">선발 과정</li>
+                    <li id="tab05" class="tab_li">지원 하기</li>
                 </ul>
             </div>
             <div class="viewbox">
@@ -195,11 +195,11 @@
                     </div>
                     <div class="view04_inner1">
                         <div class="dotbox">
-                            <span class="dot">01 지원서 접수</span>
-                            <span class="dot">02 1차 인터뷰</span>
-                            <span class="dot">03 2차 인터뷰</span>
-                            <span class="dot">04 합격자 발표</span>
-                            <span class="dot">05 교육 진행</span>
+                            <span class="dot">01. 지원서 접수</span>
+                            <span class="dot">02. 1차 인터뷰</span>
+                            <span class="dot">03. 2차 인터뷰</span>
+                            <span class="dot">04. 합격자 발표</span>
+                            <span class="dot">05. 교육 진행</span>
                         </div>
                     </div>
                 </div>
