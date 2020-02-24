@@ -1,18 +1,24 @@
 package com.bit.hellopt.config;
 
-import javax.servlet.Filter;
+import java.io.File;
 
-import org.sitemesh.builder.SiteMeshFilterBuilder;
-import org.sitemesh.webapp.SiteMeshFilter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class SpringDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-	//공통적으로 사용하는 설정들
+public class SpringDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer { // extend 뒤에 Servlet Dispatcher 하는것
+	
+	@Autowired
+	MultipartConfigElement multipartConfig;
+    
 	@Override
     protected Class <?> [] getRootConfigClasses() {
         return new Class[] {
-        	RootConfig.class,
-        	SecurityConfig.class
+        	RootConfig.class,//기본설정 ->
+            SecurityConfig.class
+
         };
     }
 
@@ -20,7 +26,7 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
     @Override
     protected Class <?> [] getServletConfigClasses() {
         return new Class[] {
-            WebAppConfig.class
+            WebAppConfig.class //웹사이트 설정
         };
     }
 
@@ -28,10 +34,14 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
     @Override
     protected String[] getServletMappings() {
         return new String[] {
-            "/"
+            "/" //웹사이트 주소
         };
     }
 
-    
+    @Override
+    protected void customizeRegistration(Dynamic registration) {
+        registration.setMultipartConfig(multipartConfig);
+    }
+
     
 }

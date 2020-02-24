@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <head>
-	<script src="${pageContext.request.contextPath}/resources/js/main/script.js"></script>
+	
 	<script src="${pageContext.request.contextPath}/resources/js/main/wrest.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/swiper.min.css">
@@ -29,7 +29,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide01.png" alt="KOZ">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/1.png" title="">
+                  <img src="${pageContext.request.contextPath}/resources/images/main/sportsHistory.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>History</h4>
@@ -46,7 +46,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide02.png" alt="지코">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/2.jpg" title="">
+                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer1.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>Trainer 응준</h4>
@@ -63,7 +63,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/dvwn_main.png" alt="다운">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/3.jpg" title="">
+                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer3.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>Trainer 연문</h4>
@@ -80,7 +80,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide03.png" alt="SHOW ME WHAT YOU GOT">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/4.jpg" title="">
+                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer4.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>Trainer 관이</h4>

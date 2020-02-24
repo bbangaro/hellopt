@@ -1,16 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
 	<script src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/main.css">
+	
 </head>
 
+
 <body>
-    <!-- 상단 시작 { -->
-    <header id="hd" class="ease" style="z-index: 1000;">
+	<div class="userName">
+		<sec:authorize access="isAuthenticated()">
+			<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
+			<sec:authentication property="principal" var="user" />
+			<span>${user.username}님 안녕하세요</span>
+		</sec:authorize>
+	</div>
+
+	<!-- 상단 시작 { -->
+    <header id="hd" class="ease" style="z-index: 9999;">
         <h1>
-            <a href="#"><span class="text_split">HelloPT Training</span></a>
+            <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
         <button type="button" role="togglebutton" class="nav_button"><span></span></button>
     </header>
@@ -21,20 +30,36 @@
         <div class="navigation_inner">
             <div class="nav_wrap">
                 <ul class="category">
-                    <li><a href="#">Trainer introduce</a></li>
-                    <li><a href="#">How to Workout</a></li>
+                  
+                    <li><a href="#" class="artist_open">Trainer introduce</a></li>
+                    <li><a href="#" class="artist_open">How to Workout</a>
+                    	 <ul class="artist_depth02">
+                            <li><a href="${pageContext.request.contextPath}/exercise-Info">Exercise-Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exercise-TipInfo">Exercise-TipInfo</a></li>
+                       </ul>
+                    </li>
                     <li><a href="classlist" class="artist_open">Home training</a>
                         <ul class="artist_depth02">
                             <li><a href="#">1:1</a></li>
                             <li><a href="#">1:4</a></li>
+                            <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Meeting</a></li>
-                    <li><a href="#">review</a></li>
+                    <li class="artist_open"><a href="${pageContext.request.contextPath}/meeting">Meeting</a></li>
+                    <li class="artist_open"><a href="#">review</a></li>
                 </ul>
                 <ul class="user_case">
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Join</a></li>
+                    <sec:authorize access="!isAuthenticated()">
+						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<li><a href="${pageContext.request.contextPath}/logout">logout</a></li>
+						<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
+						<sec:authentication property="principal" var="user" />
+						<span>안녕하세요. ${user.username}</span>
+					</sec:authorize>
+					<li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
+					<li><a href="${pageContext.request.contextPath}/classDetail">Class</a></li>
                 </ul>           
             </div>
         </div>
@@ -42,7 +67,7 @@
     </aside>
     <!-- 네비게이션 끝 } -->
 
-    <script>
+	<script>
         // 자바스크립트에서 사용하는 전역변수 선언
         var g5_url = "#";
         var g5_bbs_url = "#";

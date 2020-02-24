@@ -1,8 +1,0 @@
-.settings
-target
-.classpath
-.project
-.springBeans
-src/main/java/com/bit/hellopt/config/RootConfig.java
-src/main/webapp/META-INF/maven/com.bit/hellopt/pom.properties
-src/main/java/com/bit/hellopt/config/RootConfig.java
