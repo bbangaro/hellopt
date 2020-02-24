@@ -45,10 +45,14 @@ public class SecurityController {
 
 ## @AuthenticationPrincipal
 Spring Security에서 유저 인증 시 필요한 정보를 UserDetail에 저장
-별도로 필요한 부분이 있는 경우 UserDeails를 상속한 객체를 사용
-HelloPT에서는 com.bit.hellopt.vo.CustomUserDetail이 UserDetail을 상속함
+
+유저 ID, PW외에 필요한 부분이 있는 경우 UserDeails를 상속한 객체를 구현
+
+HelloPT에서는 com.bit.hellopt.vo.CustomUserDetail이 UserDetail을 상속하여 구현함
+
 - 데이터베이스에서 데이터를 받아와 com.bit.hellopt.vo.User 객체에 저장
-- 받아온 User를 사용해 인증에 필요한 객체인 CustomUserDetail을 초기화하므로 필요한 정보가 있으면 CustomUserDetail에 필드 선언 한 후 생성자에서 값 초기화 할 것
+- 받아온 User를 사용해 인증시 사용하는 객체인 CustomUserDetail을 초기화
+- 키, 나이 등 필요한 정보가 있으면 CustomUserDetail에 필드 선언 한 후 생성자에서 값 초기화 할 것
 
 <pre>
 <code>
