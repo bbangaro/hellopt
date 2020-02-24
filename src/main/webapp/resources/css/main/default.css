@@ -2,21 +2,54 @@
 
 /* 초기화 */
 html {overflow-y:auto;}
-body {margin:0;padding:0;font-size:12px;font-family:'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;background:#1e1e1e;}
+body {margin:0;padding:0;font-size:12px;
+    /*
+	font-family:'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
+    */
+    font-family:  'Jeju Gothic', serif;
+	background:#1e1e1e;
+	}
 html, h1, h2, h3, h4, h5, h6, form, fieldset, img {margin:0;padding:0;border:0}
-h1, h2, h3, h4, h5, h6 {font-size:1em;font-family:'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif}
+h1, h2, h3, h4, h5, h6 {
+	font-size:1em;
+	/*
+	font-family:'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif
+	*/
+	font-family:  'Jeju Gothic', serif;
+	}
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block}
 
 ul, dl,dt,dd {margin:0;padding:0;list-style:none;}
 
 legend {position:absolute;margin:0;padding:0;font-size:0;line-height:0;text-indent:-9999em;overflow:hidden}
 label, input, button, select, img {vertical-align:middle;font-size:1em}
-input, button {margin:0;padding:0;font-family:'Malgun Gothic', dotum, sans-serif;font-size:1em}
+input, button {
+	margin:0;
+	padding:0;
+	/*
+	font-family:'Malgun Gothic', dotum, sans-serif;font-size:1em
+	*/
+	font-family:  'Jeju Gothic', serif;
+	}
 input[type="submit"]{cursor:pointer}
-button {cursor:pointer; background: transparent; border: 0; font-family: 'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;}
+button {
+	cursor:pointer; 
+	background: transparent; 
+	border: 0; 
+	/*
+	font-family: 'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
+	*/
+	font-family:  'Jeju Gothic', serif;
+	}
 button:focus {outline: none;}
 
-textarea, select {font-family:'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;font-size:1em}
+textarea, select {
+	/*
+	font-family:'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
+	*/
+	font-family:  'Jeju Gothic', serif;
+	font-size:1em
+	}
 select {height: 43px; padding: 0 22px 0 10px; font-size: 16px; color: #fff; border: 0; background: url('/assets/img/select.png') #1e1e1e right center no-repeat; -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; appearance: none; }
 select::-ms-expand {display: none;} /* ie issues */
 p {margin:0;padding:0;word-break:break-all}

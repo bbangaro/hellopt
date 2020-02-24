@@ -107,3 +107,17 @@ function menu_rearrange(el)
         }
     }
 }
+
+$(function(){
+    $(".gnb_menu_btn").click(function(){
+        $("#gnb_all").show();
+    });
+    $(".gnb_close_btn").click(function(){
+        $("#gnb_all").hide();
+    });
+
+	$(".artist_open").on("click",function(){
+		$('.artist_depth02').toggleClass('on');
+		$('.user_case').toggleClass('on');
+	});
+});
