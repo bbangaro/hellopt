@@ -38,8 +38,9 @@
                             <li><a href="${pageContext.request.contextPath}/exercise-TipInfo">Exercise-TipInfo</a></li>
                        </ul>
                     </li>
-                    <li><a href="classlist" class="artist_open">Home training</a>
+                    <li><a href="#" class="artist_open">Home training</a>
                         <ul class="artist_depth02">
+                            <li><a href="classlist">streaming</a></li>
                             <li><a href="#">1:1</a></li>
                             <li><a href="#">1:4</a></li>
                             <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
