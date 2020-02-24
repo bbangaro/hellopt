@@ -1,5 +1,8 @@
 package com.bit.hellopt.config;
 
+import java.io.File;
+
+import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,6 +13,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -84,11 +89,21 @@ public class WebAppConfig implements WebMvcConfigurer {
 	  return factoryBean.getObject();
 	}
 	
-	// 파일 업로드를 위한 설정
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		multipartResolver.setMaxUploadSize(100000000);
+		//multipartResolver.setMaxUploadSize(1000000);
 		return multipartResolver;
 	}
+	
+	@Bean
+	public MultipartConfigElement multipartConfigElement() {
+		int maxUploadSizeInMb = 1024 * 1024;
+		//File uploadDirectory 수정할것~!~!~!~!~!~!
+		File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
+		MultipartConfigElement multipartConfigElement 
+			= new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
+		return multipartConfigElement;
+	}
+	
 }
