@@ -51,7 +51,6 @@ public class RBoardController {
 		
 		for(RBoardVO rVO :rBoardList) {
 			rVO.setFileList(rService.getFileList(rVO.getRevIdx()));
-			
 		}
 		System.out.println(rBoardList);
 

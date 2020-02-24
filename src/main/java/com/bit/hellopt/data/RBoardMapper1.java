@@ -52,6 +52,4 @@ public interface RBoardMapper1 {
 			+ " #{revFileOname}, #{revFileSname}, #{revFileSize}, (SELECT NVL(MAX(REV_IDX), 0) FROM REVIEW_BOARD_TB) )")
 	public void uploadFile(HashMap<String, Object> hm);
 	
-	@Select("SELECT REV_FILE_SNAME FROM REVIEW_FILE_TB ORDER BY REV_FILE_IDX DESC")
-	public List<RFileVO> getPic();
 }
