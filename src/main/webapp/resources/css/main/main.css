@@ -125,9 +125,11 @@ transition: 0.3s;
 #hd {
   position: fixed;
   top: 0;
+  margin-top : -10px;
   width: 100%;
-  z-index: 999;
+  z-index: 9999;
 }
+
 #hd h1 {
   position: absolute;
   left: 46px;
@@ -293,7 +295,7 @@ transition: 0.3s;
 
 #navigation .nav_wrap ul.artist_depth02 {
     position: absolute;
-    bottom: -160px;
+   /* bottom: -160px; */
     font-size: 15px;
     left: 50%;
     transform: translateX(-50%);
@@ -442,7 +444,10 @@ transition:0.3s;
   right: 58px;
   bottom: 43px;
   font-size: 20px;
+  /*
   font-family: 'Myriad Pro', sans-serif;
+  */
+  font-family:  'Jeju Gothic', serif;
   color: #686868;
 }
 .swiper-pagination-fraction .swiper-pagination-current {
@@ -625,7 +630,10 @@ transition:0.3s;
   font-size: 18px;
   animation: fadeIn 0.3s 3.5s ease-in alternate;
   animation-fill-mode: forwards;
+  /*
   font-family: 'Noto Sans KR', sans-serif;
+  */
+  font-family:  'Jeju Gothic', serif;
 }
 #about .focusing_content {
   /* position: absolute;
@@ -1210,3 +1218,14 @@ transition:0.3s;
   	margin-right: 48px;
   	padding-top: 25px;
   }
+  
+/* body 가운데 정렬 */
+.center {
+    width: 1024px;
+	min-height: 500px;
+    margin:-0 auto;
+}
+
+#hd {
+	
+}

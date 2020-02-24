@@ -2,11 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
-<script
-	src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/main/main.css">
+	<script src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
+	
 </head>
+
 
 <body>
 	<div class="userName">
@@ -18,7 +17,7 @@
 	</div>
 
 	<!-- 상단 시작 { -->
-    <header id="hd" class="ease" style="z-index: 1000;">
+    <header id="hd" class="ease" style="z-index: 9999;">
         <h1>
             <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
@@ -31,8 +30,13 @@
         <div class="navigation_inner">
             <div class="nav_wrap">
                 <ul class="category">
-                    <li><a href="#">Trainer introduce</a></li>
-                    <li><a href="#">How to Workout</a></li>
+                    <li><a href="#" class="artist_open">Trainer introduce</a></li>
+                    <li><a href="#" class="artist_open">How to Workout</a>
+                    	 <ul class="artist_depth02">
+                            <li><a href="${pageContext.request.contextPath}/exercise-Info">Exercise-Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exercise-TipInfo">Exercise-TipInfo</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#" class="artist_open">Home training</a>
                         <ul class="artist_depth02">
                             <li><a href="#">1:1</a></li>
@@ -40,8 +44,8 @@
                             <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Meeting</a></li>
-                    <li><a href="#">review</a></li>
+                    <li class="artist_open"><a href="${pageContext.request.contextPath}/meeting">Meeting</a></li>
+                    <li class="artist_open"><a href="#">review</a></li>
                 </ul>
                 <ul class="user_case">
                     <sec:authorize access="!isAuthenticated()">

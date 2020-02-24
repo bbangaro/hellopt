@@ -28,9 +28,11 @@
 	
 	
 	<!-- decorator에 있어야 함 -->
-	<script src="${pageContext.request.contextPath}/resources/js/main/script.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/style.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/main.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main/default.css">
 	
+	<script src="${pageContext.request.contextPath}/resources/js/main/script.js"></script>
 
 	<!-- 오류 없는지 지켜보기 -->
 	<%-- <script src="${pageContext.request.contextPath}/resources/js/main/common.js"></script> --%>
@@ -43,7 +45,6 @@
 	<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/font.css"> --%>
 	<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/responsive.css"> --%>
 	<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/xeicon.min.css"> --%>
-	<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/style.css"> --%>
 
 	
 	
