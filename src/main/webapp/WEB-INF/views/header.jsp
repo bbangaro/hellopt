@@ -23,7 +23,7 @@
                 <ul class="category">
                     <li><a href="#">Trainer introduce</a></li>
                     <li><a href="#">How to Workout</a></li>
-                    <li><a href="#" class="artist_open">Home training</a>
+                    <li><a href="classlist" class="artist_open">Home training</a>
                         <ul class="artist_depth02">
                             <li><a href="#">1:1</a></li>
                             <li><a href="#">1:4</a></li>
