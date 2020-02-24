@@ -1984,18 +1984,75 @@ h2 {
     width: 1000px;
 }
 
-.meeting-table {
-	margin: auto;
-	margin-top: 35px;
-	margin-bottom: 35px;
-	display: relative;
-	border: 0.1px solid gray;
+
+
+
+/* 미팅 개설 페이지 */
+.textarea {
+	background: white;
+}
+.meeting-title {
+	margin-left: 10px;
+}
+.meeting-title {
+    margin: 15px;
+    font-size: 20px;
+}
+.meeting-content {
+	display: inline-block;
+	margin-left: 15px;
+}
+.profile-detail{
+	display: inline-block;
+}
+.meeting-profile{
+	display: inline-block;
+	position: relative;
+}
+.username {
+	margin-top: -70px;
+}
+.meeting-calender{
+	margin-bottom: -90px;
+}
+.meeting-map{
+	display: inline-block;
+}
+.datepicker {
+	margin-top: 92px;
+	width: 130px;
+}
+.money {
+	margin-top: 92px;
+	width: 130px;
+}
+.meeting-comment{
+	background-color : white;
+	color : black;
+	margin-top: -30px;
+}
+.meeting-include{
+	background-color : white;
+	color : black;
+	width: 860px;
+	margin-left: 94px;
+	margin-top: -30px;
+}
+.meeting-textarea {
+	background-color : white;
+	color : black;
+	width: 860px;
+	margin-left: 94px;
+	margin-top: -25px;
+}
+.meeting-sub {
+	width: 860px;
 }
 
-.meeting-table td {
-	border: 0.1px solid gray;
-	width: 160px;
-    height: 105px;
+/* 
+.meeting-profile{
+	float: left;
+	width: 130px;
 }
-
+*/
 

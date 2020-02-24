@@ -19,11 +19,69 @@
 				
 				<h3 class="meeting-main">모임 개설 신청하기</h3>
 				<hr class="meeting-line">
+				<!-- 내용물 넣기 -->
+				
+					<div class="meeting-title">개설자
+						<div class="meeting-content">
+							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/profile.png"></p>
+							<div class="profile-detail">
+								<input class="username" type="text" value="밀가루">
+								<textarea class="meeting-comment" rows="2" cols="50" placeholder="숨쉬기 운동 마스터 입니다. 함께 하실분 : )"></textarea>
+							</div>
+						</div>
+					</div>
+					
+					<div class="meeting-title">모임일자
+						<div class="meeting-content">
+							<p class="meeting-calender"><img src="${pageContext.request.contextPath}/resources/images/meeting/calendar.png"></p>
+							<input class="datepicker" type="text" placeholder="2020/04/03">						
+						</div>
+					</div>
+					
+					<div class="meeting-title">모임제목
+						<div class="meeting-content">
+							<input class="meeting-sub" type="text" placeholder="제목">						
+						</div>
+					</div>
+					
+					<div class="meeting-title">한줄소개
+						<div class="meeting-content">
+							<input class="meeting-sub" type="text" placeholder="8시간 소요, 자차 이동, 최대 8명">						
+						</div>
+					</div>
+					
+					<div class="meeting-title">상세정보
+						<div class="meeting-content2">
+							<textarea class="meeting-textarea" rows="12" cols="100" placeholder="모임소개  &#13;&#10; 1. 최소인원 : &#13;&#10; 2. 출발시간 : &#13;&#10; 3. 도착시간 : &#13;&#10; 4. 점       심 : &#13;&#10; 5. 준  비  물 : "></textarea>
+						</div>
+					</div>
+					
+					<div class="meeting-title">포함사항
+						<div class="meeting-content2">
+							<textarea class="meeting-include" rows="2" cols="50" placeholder="점심식사, 간식"></textarea>						
+						</div>
+					</div>
+					
+					<div class="meeting-title">모임위치
+						<div class="meeting-content">
+							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/map.png"></p>
+							<div class="meeting-map">
+								<textarea class="meeting-comment" rows="2" cols="50" placeholder="AK백화점 정문쪽 입니다"></textarea>
+							</div>
+						</div>
+					</div>
+					
+					<div class="meeting-title">회비
+						<div class="meeting-content">
+							<input class="money" type="text" placeholder="30,000원">						
+						</div>
+					</div>
+				
+				
 				
 				
 					
-				</table>
-				
+				<!-- 내용물 넣기 -->				
 				<hr class="meeting-line">
 				
 				<a class="button" href="#" role="button">
