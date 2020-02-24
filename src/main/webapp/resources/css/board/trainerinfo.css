@@ -32,6 +32,10 @@ body {
     border-top: 2px solid #fff;
     border-bottom: 1px solid #424242;
     padding: 20px 0px 20px 0px;
+    font-size: 2em;
+}
+.h3_font{
+	font-size: 2em;
 }
 
 .nick {
@@ -56,7 +60,8 @@ body {
 
 .trainer_media_txt {
     border-bottom: 1px solid #424242;
-    padding-bottom: 20px;
+    padding-bottom: 8px;
+    font-size: 2em;
 }
 
 .trainer_media_box {
@@ -73,12 +78,13 @@ body {
 .trainer_reply_box {
     height: 24px;
     border-bottom: 1px solid #424242;
-    padding-bottom: 20px;
+    padding-bottom: 35px;
 }
 
 .reply_left {
     float: left;
     width: 300px;
+    font-size: 2em;
 }
 
 .reply_right {
@@ -87,6 +93,7 @@ body {
     padding: 0 10px;
     border-radius: 5px;
     font-size: 12px;
+    background-color: white;
 }
 
 .replybox {
@@ -130,7 +137,7 @@ body {
 }
 
 .bannertxt {
-    padding: 60px 40px;
+    padding: 65px 40px 40px 40px;
 }
 
 .bannertxt_big {
