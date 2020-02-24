@@ -10,14 +10,18 @@
 </head>
 <body>
     <div id="wrap">
+        <header id="">
 
+        </header>
         <div class="trainerbox_banner">
-            <img src="${pageContext.request.contextPath}/resources/images/trainer/banner.png" alt="banner" class="bannerimg">
+        <div class="${pageContext.request.contextPath}/resources/images/trainer/banner.png">
+
             <div class="bannertxtbox">
                 <p class="bannertxt"><span class="bannertxt_big">헬로피티 트레이너</span><br>
             철저하게 검증된 트레이너 선생님들에 의한 수준 높은 트레이닝을 받아보세요!<br>
             연예인 트레이너, 보디빌더 출신 등 버핏서울만의 특별한 트레이너를 소개합니다.</p>
             </div>
+        </div>
         </div>
         <div class="trainerbox">
            
