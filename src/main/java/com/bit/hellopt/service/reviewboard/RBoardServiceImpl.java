@@ -67,5 +67,10 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper2.join2(fvo);
 	}
 
+	@Override
+	public List<RFileVO> getFileList(int revIdx) {
+		return mapper.getFileList(revIdx);
+	}
+
 
 }

@@ -19,4 +19,6 @@ public interface RBoardService {
 	List<RBoardVO> selectUser(User vo);
 	List<RBoardVO> selectFile(RFileVO fvo);
 	void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx);
+	List<RFileVO> getFileList(int revIdx);
+	
 }

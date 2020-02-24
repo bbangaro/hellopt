@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
+import com.bit.hellopt.vo.reviewboard.RFileVO;
 
 @Controller
 @SessionAttributes("rBoard")
@@ -47,8 +48,14 @@ public class RBoardController {
 		
 		
 		List<RBoardVO> rBoardList = rService.getRBoardList();
-		System.out.println("rBoardList" + rBoardList.toString());
 		
+		for(RBoardVO rVO :rBoardList) {
+			rVO.setFileList(rService.getFileList(rVO.getRevIdx()));
+			
+		}
+		System.out.println(rBoardList);
+
+		System.out.println("rBoardList: " + rBoardList.toString());
 		model.addAttribute("rBoardList", rBoardList);
 		return "reviewBoard";
 	}
@@ -60,7 +67,8 @@ public class RBoardController {
 		System.out.println("글 vo " +vo);
 		rService.insertBoard(vo);
 		
-		String path = servletContext.getRealPath("resources/revimage/");
+		String path = "C:/hellopt_file/";
+	
 		
 		int revIdx = vo.getRevIdx();
 		System.out.println("revIdx: " + revIdx);
@@ -126,6 +134,22 @@ public class RBoardController {
 
 		
 	}
+//	@RequestMapping("/getPic")
+//	public String getPic(RFileVO fvo, HttpServletRequest request, Model model) {
+//		
+//		List<RFileVO> getPicList = rService.getPic(fvo);
+//
+//		System.out.println("getPicList: " + getPicList.toString());
+//		model.addAttribute("getPicList", getPicList);
+//		/*List<RBoardVO> rBoardList = rService.getRBoardList();
+//		System.out.println("rBoardList: " + rBoardList.toString());
+//		model.addAttribute("rBoardList", rBoardList);
+//		return "reviewBoard";*/
+//		
+//		return null;
+//	}
+	
+	
 	@PostMapping("/updateBoard")
 	public String updateBoard(@ModelAttribute("board")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");

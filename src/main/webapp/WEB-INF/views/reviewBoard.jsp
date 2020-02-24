@@ -10,6 +10,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
 <meta charset="UTF-8">
 <title>후기게시판</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
@@ -67,8 +69,9 @@
 			<td colspan="2">
 			<p>내용 :${rBoard.revContent}</p>
 			
-			 첨부사진:<img src="<c:url value='/resources/revimage/${rBoard.revFileSname} }'/>"> 
-			 
+			<c:forEach var="file" items="${rBoard.fileList }">
+			 첨부사진:<img src="/hellopt/img/${file.revFileSname } "> 
+			</c:forEach>
 			</td>
 		</tr>
 		<tr>

@@ -1,6 +1,7 @@
 package com.bit.hellopt.vo.reviewboard;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,6 +19,8 @@ public class RBoardVO {
 	private Date revRegdate;
 	private String revStar;
 	private String revCategory;
+	private List<RFileVO> fileList;
+	
 	
 	private MultipartFile file_0;
 
@@ -76,11 +79,21 @@ public class RBoardVO {
 	public void setFile_0(MultipartFile file_0) {
 		this.file_0 = file_0;
 	}
+	
+	//파일업로드를 위한 생성자
+	public List<RFileVO> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(List<RFileVO> fileList) {
+		this.fileList = fileList;
+	}
 
 	@Override
 	public String toString() {
 		return "RBoardVO [revIdx=" + revIdx + ", user=" + user + ", revContent=" + revContent + ", revRegdate="
-				+ revRegdate + ", revStar=" + revStar + ", revCategory=" + revCategory + ", file_0=" + file_0 + "]";
+				+ revRegdate + ", revStar=" + revStar + ", revCategory=" + revCategory + ", fileList=" + fileList
+				+ ", file_0=" + file_0 + "]";
 	}
 	
 	

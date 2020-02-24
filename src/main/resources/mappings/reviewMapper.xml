@@ -29,9 +29,9 @@
 		AND UT.USER_NAME = #{userName}
 	</select>
 	<select id="join2" parameterType="com.bit.hellopt.vo.reviewboard.RFileVO" resultMap="rFileMap">
-		SELECT *
+		SELECT REV_FILE_SNAME
 		FROM REVIEW_BOARD_TB RBT, USERS_TB UT, REVIEW_FILE_TB RFT
 		WHERE RBT.FK_USER_ID = UT.USER_ID AND RBT.REV_IDX = RFT.REV_IDX 
-		AND RFT.REV_FILE_SNAME = #{revFileSname}
+		AND RFT.REV_IDX = #{revIdx}
 	</select>
 </mapper>
