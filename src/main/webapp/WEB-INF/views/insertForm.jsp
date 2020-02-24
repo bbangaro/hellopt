@@ -46,11 +46,11 @@
 		<tr>
 			<td>별점</td>
 			<td class="starRev">
-				<span class="star on" value="1">별1</span>
-				<span class="star" value="2">별2</span>
-				<span class="star" value="3">별3</span>
-				<span class="star" value="4">별4</span>
-				<span class="star" value="5">별5</span>
+				<span class="star on" >별1</span>
+				<span class="star" >별2</span>
+				<span class="star" >별3</span>
+				<span class="star" >별4</span>
+				<span class="star" >별5</span>
 			<td>
 		</tr>
 		<tr>
