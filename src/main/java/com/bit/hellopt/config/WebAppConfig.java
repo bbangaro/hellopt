@@ -93,6 +93,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		//multipartResolver.setMaxUploadSize(1000000);
+		multipartResolver.setDefaultEncoding("UTF-8");
+		multipartResolver.setMaxUploadSize(52428800);
 		return multipartResolver;
 	}
 	
@@ -100,9 +102,10 @@ public class WebAppConfig implements WebMvcConfigurer {
 	public MultipartConfigElement multipartConfigElement() {
 		int maxUploadSizeInMb = 1024 * 1024;
 		//File uploadDirectory 수정할것~!~!~!~!~!~!
-		File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
-		MultipartConfigElement multipartConfigElement 
-			= new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
+//		File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
+//		MultipartConfigElement multipartConfigElement;
+		File uploadDirectory = new File("classpath:resources/images");
+		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
 		return multipartConfigElement;
 	}
 	

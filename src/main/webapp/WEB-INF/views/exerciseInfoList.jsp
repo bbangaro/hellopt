@@ -30,7 +30,7 @@
 	<h3>연문님 환영합니다~!!!</h3>
 
 	<!-- 검색을 위한 폼 -->
-	<form action="Exercise-InfoList" method="post">
+	<form action="exerciseInfoList" method="post">
 	<table class="border-none">
 		<tr>
 			<td>
@@ -67,7 +67,7 @@
 		<tr>
 			<td class="center">${exerciseInformation.exerciseIdx }</td>
 			<td>
-				<a href="Exercise-Info?exerciseIdx=${exerciseInformation.exerciseIdx }">
+				<a href="exerciseInfo?exerciseIdx=${exerciseInformation.exerciseIdx }">
 					${exerciseInformation.exerciseName }
 				</a>
 			</td>

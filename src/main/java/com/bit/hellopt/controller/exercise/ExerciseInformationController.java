@@ -52,7 +52,7 @@ public class ExerciseInformationController {
 
 	//리턴타입 ModelAndView -> String 변경해서 리턴타입 통일
 	//전달할 데이터 저장타입  ModelAndView -> Model
-	@RequestMapping("/Exercise-InfoList")
+	@RequestMapping("/exerciseInfoList")
 	public String getExerciseInformationList(ExerciseInformationVO vo, Model model) {
 		System.out.println(">>> 글 전체 목록 조회 처리-getExerciseInformationList()");
 		System.out.println("condition : " + vo.getSearchCondition());
@@ -73,12 +73,12 @@ public class ExerciseInformationController {
 		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationList(vo);
 		model.addAttribute("exerciseInformationList", exerciseInformationList);
 		
-		return "Exercise-InfoList";
+		return "exerciseInfoList";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//전달할 데이타 저장타입 : ModleAndView -> Model
-	@RequestMapping("Exercise-Info")
+	@RequestMapping("exerciseInfo")
 	public String getExerciseInformation(ExerciseInformationVO vo, Model model) {
 		System.out.println(">>> 글 상세 조회 처리 - getExerciseInformation()");
 		
@@ -87,7 +87,7 @@ public class ExerciseInformationController {
 		model.addAttribute("exerciseInformation", exerciseInformation); //데이터 저장
 		System.out.println("> exerciseInformation : " + exerciseInformation);
 		
-		return "Exercise-Info";
+		return "exerciseInfo";
 	}
 	
 	@Value("${file.directory}")
@@ -144,7 +144,7 @@ public class ExerciseInformationController {
 			}
 		vo.setExercisePicturesName(imageList);
 		exerciseInformationService.insertExerciseInformation(vo);
-		return "redirect:/Exercise-InfoList";
+		return "redirect:/exerciseInfoList";
 			
 		}
 		
@@ -168,21 +168,21 @@ public class ExerciseInformationController {
 	
 	//@ModelAttribute("exerciseInformation") : Model에 exerciseInformation 라는 속성명의 객체 있으면 사용
 	//    없으면 exerciseInformation라는 이름으로 새로 생성 
-	@RequestMapping("/updateExercise-Info")
+	@RequestMapping("/updateExerciseInfo")
 	public String updateExerciseInformation(@ModelAttribute("exerciseInformation") ExerciseInformationVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateExerciseInformation()");
 		System.out.println("> exerciseInformation vo : " + vo);
 		
 		exerciseInformationService.updateExerciseInformation(vo);
-		return "Exercise-InfoList";
+		return "exerciseInfoList";
 	}
 	
-	@RequestMapping("/deleteExerciseInformation")
+	@RequestMapping("/deleteExerciseInfo")
 	public String deleteExerciseInformation(ExerciseInformationVO vo) {
 		System.out.println(">>> 글 삭제 처리 - deleteExerciseInformation()"); 
 		
 		exerciseInformationService.deleteExerciseInformation(vo);
-		return "Exercise-InfoList";
+		return "exerciseInfoList";
 	}
 	
 	//---------------------------------

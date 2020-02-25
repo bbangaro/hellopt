@@ -16,7 +16,7 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
 	@Override
     protected Class <?> [] getRootConfigClasses() {
         return new Class[] {
-        	RootConfig.class //기본설정 ->
+        	RootConfig.class, //기본설정 ->
            SecurityConfig.class
 
         };
