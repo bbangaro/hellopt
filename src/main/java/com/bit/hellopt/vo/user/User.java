@@ -1,14 +1,13 @@
 package com.bit.hellopt.vo.user;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class User {
-	@NotBlank
-	@Size(min = 3, max = 10)
+	@Pattern(regexp = "^[0-9a-z-_]{5,20}$", message = "5~20 characters consisting of lowercase letters(a-z), numbers, or special characters (_, -)")
 	private String userId;
-	@NotBlank
-	@Size(min = 5, max = 15)
+	@Pattern(regexp = "^[\\w!@#$%^&*()-_]{5,20}$", message = "8~16 characters consisting of letters(A-Z, a-z), numbers, or special characters(!, @, #, $, %, ^, &, *, (, ), _, -).")
 	private String userPw;
 	@NotBlank
 	private String userName;
