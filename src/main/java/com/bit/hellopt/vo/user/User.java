@@ -97,7 +97,7 @@ public class User {
 	}
 
 	public void setUserBirth(String userBirth) {
-		this.userBirth = userBirth;
+		this.userBirth = userBirth.split(" ")[0];
 	}
 
 	public String getUserRoot() {

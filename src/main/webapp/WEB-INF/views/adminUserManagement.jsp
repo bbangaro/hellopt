@@ -11,6 +11,7 @@
 <title>유저 관리</title>
 </head>
 <body>
+<h2>회원 정보 관리</h2>
 	<table>
 		<thead>
 			<tr>
