@@ -10,30 +10,19 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bit.hellopt.vo.user.User;
-
+import com.bit.hellopt.vo.User;
 
 public class RBoardVO {
 	private int revIdx;
-	private String userId;
-	private String userName;
 	private User user;
 	private String revContent;
 	private Date revRegdate;
 	private String revStar;
 	private String revCategory;
-	private List<RFileVO> filevo;
+	private List<RFileVO> fileList;
 	
 	
 	private MultipartFile file_0;
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public int getRevIdx() {
 		return revIdx;
@@ -41,15 +30,6 @@ public class RBoardVO {
 
 	public void setRevIdx(int revIdx) {
 		this.revIdx = revIdx;
-	}
-	
-	
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public User getUser() {
@@ -101,25 +81,20 @@ public class RBoardVO {
 	}
 	
 	//파일업로드를 위한 생성자
-	public List<RFileVO> getFilevo() {
-		return filevo;
+	public List<RFileVO> getFileList() {
+		return fileList;
 	}
 
-	public void setFilevo(List<RFileVO> filevo) {
-		this.filevo = filevo;
+	public void setFileList(List<RFileVO> fileList) {
+		this.fileList = fileList;
 	}
 
 	@Override
 	public String toString() {
-		return "RBoardVO [revIdx=" + revIdx + ", userId=" + userId + ", userName=" + userName + ", user=" + user
-				+ ", revContent=" + revContent + ", revRegdate=" + revRegdate + ", revStar=" + revStar
-				+ ", revCategory=" + revCategory + ", filevo=" + filevo + ", file_0=" + file_0 + "]";
+		return "RBoardVO [revIdx=" + revIdx + ", user=" + user + ", revContent=" + revContent + ", revRegdate="
+				+ revRegdate + ", revStar=" + revStar + ", revCategory=" + revCategory + ", fileList=" + fileList
+				+ ", file_0=" + file_0 + "]";
 	}
-
-	
-
-
-	
 	
 	
 }

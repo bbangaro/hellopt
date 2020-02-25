@@ -10,9 +10,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.data.RBoardMapper1;
 import com.bit.hellopt.data.RBoardMapper2;
+import com.bit.hellopt.vo.User;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
-import com.bit.hellopt.vo.user.User;
 
 
 @Service
@@ -46,7 +46,11 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper.getRBoardList();
 	}
 
-
+	@Override
+	public List<RBoardVO> selectUser(User vo) {
+		return mapper2.join1(vo);
+		
+	}
 	@Override
 	public void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx) {
 		HashMap<String, Object> hm = new HashMap<>();
@@ -66,17 +70,6 @@ public class RBoardServiceImpl implements RBoardService {
 	@Override
 	public List<RFileVO> getFileList(int revIdx) {
 		return mapper.getFileList(revIdx);
-	}
-
-	@Override
-	public User selectUser() {
-		
-		return mapper.selectUser();
-	}
-	@Override
-	public User selectUserId(String userId) {
-		
-		return mapper.selectUserId(userId);
 	}
 
 

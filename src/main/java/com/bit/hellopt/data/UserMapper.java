@@ -1,20 +1,27 @@
 package com.bit.hellopt.data;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.bit.hellopt.vo.user.User;
+import com.bit.hellopt.vo.User;
 
 public interface UserMapper {
-	@Select("SELECT * FROM users_tb WHERE user_id = #{userId}")
-	public User selectUserById(String userId);
+
+	@Select("SELECT * FROM users")
+	public List<User> getAllUser(); 
 	
-	@Insert("INSERT INTO users_tb (user_id, user_pw, user_role, user_name, user_gender"
-			+ ", user_address, user_birth, user_job, user_root, user_height, user_weight, user_profile) "
-			+ "VALUES (#{userId}, #{userPw}, #{userRole}, #{userName}, #{userGender}"
-			+ ", #{userAddress}, TO_DATE(#{userBirth}, 'YYYY-MM-DD'), #{userJob}, #{userRoot}, #{userHeight}, #{userWeight}, #{userProfile})")
+	@Select("SELECT * FROM users WHERE user_id = #{userId}")
+	public User getUserById(String userId);
+	
+	@Select("SELECT * FROM users WHERE user_id = #{userId} AND user_pw = #{userPw}")
+	public User getUser(@Param("userId") String userId, @Param("userPw")String userPw);
+	
+	@Select("SELECT count(*) FROM users WHERE user_id = #{userId} AND user_pw = #{userPw}")
+	public int existUser(User user);
+	
+	@Insert("INSERT INTO users (user_id, user_pw, name, role) values (#{userId}, #{userPw}, #{name}, #{role})")
 	public void insertUser(User user);
-	
-	@Select("SELECT count(*) FROM users_tb WHERE user_id = #{userId}")
-	public int isUser(String userId);
 }
