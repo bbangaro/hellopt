@@ -21,7 +21,7 @@ a:hover {
 }
 
 .tabbox{
-    margin: 20px auto 50px auto;
+    margin: 20px auto 20px auto;
     width: 100%;
 }
 .tabbox_inner{
@@ -32,13 +32,13 @@ a:hover {
     color: white;
 }
 .tab_qnaover{
-    color: black;
+    color: white;
 }
 .tabbox_inner li{
     width: 30%;
     list-style: none;
     display: inline-block;
-    border: 1px solid #f3f3f3;
+    border: 1px solid #343333;
     padding: 1%;
 }
 .one{
@@ -68,7 +68,7 @@ a:hover {
 .a_qa{
     width: 70%;
     float: left;
-    border-top: 1px solid #f1f1f1;
+    border-top: 1px solid #343333;
     margin:0 auto;
     margin-bottom: 10%;
 
@@ -81,12 +81,12 @@ a:hover {
     cursor: pointer;
     font-family: 'Noto Sans KR', sans-serif;
 }
-.subject:hover{
+/* .subject:hover{
     background: #f3f3f3;
-}
+} */
 
 .accordion li{
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid #343333;
 }
 .accordion .content {
     display:none;
@@ -106,16 +106,7 @@ a:hover {
     font-size: 13px;
     font-weight: 300;
     padding: 25px 25px;
-    border-top: 1px solid #f1f1f1;
-}
-.opinion{
-    margin:0 auto;
-    text-align: center;
-    width: 100%;
-}
-.inner{
-    width: 100%;
-    font-size: 24px;
+    border-top: 1px solid #343333;
 }
 .bnimg{
     width: 100%;
@@ -137,17 +128,18 @@ a:hover {
     margin: 0 auto;
     text-align: center;
     width: 100%;
+    font-size: 20px;
 }
 .center{
     width: 100%;
     margin: 0 auto;
-    padding: 0px;
+    padding: 0px;   
 }
 .mapbox{
     margin: 0 auto 30px auto;
     width: 500px;
     height:300px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #343333;
 }
 .list{
     display: table;
@@ -219,18 +211,16 @@ li_head{
     margin: 0 auto;
 }
 .areabox{
-    width: 362px;
-    height: 65px;
+    width: 310px;
+    height: 50px;
     margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #f2f2f2;
 }
 .areatitle{
     float: left;
     width: 77px;
-    line-height: 66px;
+    line-height: 52px;
 }
 .areainfo{
     float: left;
-    width: 285px;
+    width: 190px;
 }

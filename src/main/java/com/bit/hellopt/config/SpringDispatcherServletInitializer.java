@@ -16,8 +16,8 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
 	@Override
     protected Class <?> [] getRootConfigClasses() {
         return new Class[] {
-        	RootConfig.class, //기본설정 ->
-           SecurityConfig.class
+        	RootConfig.class,//기본설정 ->
+            SecurityConfig.class
 
         };
     }
@@ -37,11 +37,12 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
             "/" //웹사이트 주소
         };
     }
-
+  
     @Override
     protected void customizeRegistration(Dynamic registration) {
         registration.setMultipartConfig(multipartConfig);
     }
+
 
     
 }

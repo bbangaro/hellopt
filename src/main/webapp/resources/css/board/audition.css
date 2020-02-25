@@ -54,6 +54,9 @@ a:hover {
     height: 50px;
     line-height: 50px;
 }
+.tab_li{
+	color: black;
+}
 /*view 공통*/
 .view{
     padding: 50px;
@@ -95,7 +98,7 @@ a:hover {
 /*view01*/
 #view01{
     background-color: #000;
-    height: 1720px;
+    height: 1885px;
 }
 #view01 p{
     color: #fff;
@@ -154,7 +157,7 @@ a:hover {
 }
 /*view02*/
 #view02{
-    height: 900px;
+    height: 1020px;
 }
 .view02_inner1{
     max-width: 1140px;

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bit.hellopt.data.RBoardMapper2">
+<resultMap type="com.bit.hellopt.vo.reviewboard.RFileVO" id="rFileMap">
+	<result property="revFileOname" column="REV_FILE_ONAME"/>
+	<result property="revFileSname" column="REV_FILE_SNAME"/>
+	<result property="revFileSize" column="REV_FILE_SIZE"/>
+	<result property="revIdx" column="REV_IDX"/>
+</resultMap>
+<resultMap type="com.bit.hellopt.vo.reviewboard.RBoardVO" id="rBoardMap">
+	<result property="revIdx" column="REV_IDX"/>
+	<result property="revContent" column="REV_CONTENT"/>
+	<result property="revREGDATE" column="REV_REGDATE"/>
+	<result property="revStar" column="REV_STAR"/>
+	<result property="revCategory" column="REV_CATEGORY"/>
+</resultMap>
+<resultMap type="User" id="userMap">
+	<result property="userId" column="USER_ID"/>
+	<result property="userName" column="USER_NAME"/>
+	<result property="userPw" column="USER_PW"/>
+	<result property="userRole" column="USER_ROLE"/>
+</resultMap>
+	<select id="join1" parameterType="com.bit.hellopt.vo.user.User" resultMap="rBoardMap">
+		SELECT *
+		FROM REVIEW_BOARD_TB RBT, USERS_TB UT, REVIEW_FILE_TB RFT
+		WHERE RBT.FK_USER_ID = UT.USER_ID AND RBT.REV_IDX = RFT.REV_IDX 
+		AND UT.USER_NAME = #{userName}
+	</select>
+	<select id="join2" parameterType="com.bit.hellopt.vo.reviewboard.RFileVO" resultMap="rFileMap">
+		SELECT REV_FILE_SNAME
+		FROM REVIEW_BOARD_TB RBT, USERS_TB UT, REVIEW_FILE_TB RFT
+		WHERE RBT.FK_USER_ID = UT.USER_ID AND RBT.REV_IDX = RFT.REV_IDX 
+		AND RFT.REV_IDX = #{revIdx}
+	</select>
+</mapper>

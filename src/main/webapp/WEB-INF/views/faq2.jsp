@@ -27,9 +27,9 @@
             </ul>
         </div>
         <div class="opinion">
-            <div class="inner">
-                헬로피티는 전문 상담요원이 상주하여 인터넷, 전화로 접수된<br> 컴플레인에 대해 권한을 가지고 회원정책 기준에 따라 신속하고 공정하게<br> 처리해드리기 위해 노력하고 있습니다.
-            </div>
+                헬로피티는 전문 상담요원이 상주하여 인터넷, 전화로 접수된<br> 
+                컴플레인에 대해 권한을 가지고 회원정책 기준에 따라 신속하고 공정하게<br> 
+                처리해드리기 위해 노력하고 있습니다. 
         </div>
         <div class="areabox">
             <div class="areatitle">헬로피티</div>
@@ -62,7 +62,7 @@
                 // 마커가 지도 위에 표시되도록 설정합니다
                 marker.setMap(map);
 
-                var iwContent = '<div style="padding:5px;">HelloPT 본사! <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">백암빌딩</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">6~7층</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                var iwContent = '<div style="padding:5px; color: black;">HelloPT 본사! <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">백암빌딩</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">6~7층</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                     iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 
                 // 인포윈도우를 생성합니다
