@@ -21,7 +21,7 @@
 				<hr class="meeting-line">
 				<!-- 내용물 넣기 -->
 				
-					<div class="meeting-title">개설자
+					<div class="meeting-title">개 설 자
 						<div class="meeting-content">
 							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/profile.png"></p>
 							<div class="profile-detail">
@@ -65,15 +65,15 @@
 					<div class="meeting-title">모임위치
 						<div class="meeting-content">
 							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/map.png"></p>
-							<div class="meeting-map">
-								<textarea class="meeting-comment" rows="2" cols="50" placeholder="AK백화점 정문쪽 입니다"></textarea>
+							<div class="meeting-content2">
+								<textarea class="meeting-mcomment" rows="2" cols="50" placeholder="AK백화점 정문쪽 입니다"></textarea>
 							</div>
 						</div>
 					</div>
 					
-					<div class="meeting-title">회비
+					<div class="meeting-title">회　　비
 						<div class="meeting-content">
-							<input class="money" type="text" placeholder="30,000원">						
+							<input class="meeting-sub" type="text" placeholder="30,000원">						
 						</div>
 					</div>
 				

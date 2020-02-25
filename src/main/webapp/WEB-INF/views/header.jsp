@@ -33,8 +33,8 @@
                   
                     <li><a href="#" class="artist_open">Trainer</a>
                     	<ul class="artist_depth02">
-                            <li><a href="${pageContext.request.contextPath}/faq1">Trainer Info</a></li>
-                            <li><a href="${pageContext.request.contextPath}/faq2">Apply for Trainer</a></li>
+                            <li><a href="${pageContext.request.contextPath}/trainer">Trainer Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/audition">Apply for Trainer</a></li>
                        </ul>
                     </li>
                     <li><a href="#" class="artist_open">Workout&Plan</a>
@@ -54,7 +54,7 @@
                         </ul>
                     </li>
                     <li class="artist_open"><a href="#">review</a></li>
-                    <li class="artist_open"><a href="#">FAQ</a></li>
+                    <li class="artist_open"><a href="${pageContext.request.contextPath}/faq1">FAQ</a></li>
                 </ul>
                 <ul class="user_case">
                     <sec:authorize access="!isAuthenticated()">

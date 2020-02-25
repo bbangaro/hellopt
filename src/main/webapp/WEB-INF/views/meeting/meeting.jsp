@@ -46,7 +46,7 @@
 			    </div>
 			    <div class="service-white service-text">
 			      <a>실내 스포츠 </a><a>진행중인 모임</a>
-			      <p>[HelloPT]직장인 2040</p>
+			      <p><a href="${pageContext.request.contextPath}/meetingOne">[HelloPT]직장인 2040</a></p>
 			      <a href="#">경기도</a><a>회비 15,000원</a>
 			    </div>
 			  </div>

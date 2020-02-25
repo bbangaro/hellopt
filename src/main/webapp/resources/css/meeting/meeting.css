@@ -645,9 +645,11 @@ a.file {
     text-align: center;
     margin-bottom: 30px;
   }
+  /*
   .open  li {
     margin-bottom: 20px;
   }
+  */
   .open input{
   }
   .open input, textarea{
@@ -2030,6 +2032,12 @@ h2 {
 	background-color : white;
 	color : black;
 	margin-top: -30px;
+}
+.meeting-mcomment{
+	background-color : white;
+	color : black;
+	margin-top: -30px;
+	margin-left: 40px;
 }
 .meeting-include{
 	background-color : white;

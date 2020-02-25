@@ -1,4 +1,4 @@
-package com.bit.hellopt.controller;
+package com.bit.hellopt.controller.calender;
 
 import java.security.Principal;
 
@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CalenderController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CalenderController.class);
 	
 	
 	@GetMapping("/calender")
 	public String calender(Principal principal) {
-		logger.info("calender controller get mapping");
-		return "calender";
+		return "calender/calender";
 	}
 	
 }
