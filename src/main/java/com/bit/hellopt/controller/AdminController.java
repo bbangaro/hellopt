@@ -36,7 +36,12 @@ public class AdminController {
 	public String adminUserManagementDetail(@PathVariable("userId")String userId, Model model) {
 		User user = userService.findUserById(userId);
 		ProfileVO profile =  profileService.selectProfile(userId);
-		user.setUserProfile(profile.getStoredFileName());
+		if(profile == null) {
+			user.setUserProfile("");
+		} else {
+			user.setUserProfile(profile.getStoredFileName());
+		}
+		
 		model.addAttribute("user", user);
 		return "adminUserManagementDetail";
 	}

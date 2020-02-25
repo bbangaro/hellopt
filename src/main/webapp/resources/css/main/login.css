@@ -56,4 +56,5 @@ input[type='button'],  input[type='submit']{
 .content img {
 	height: 100px;
 	width: auto;
+	margin-bottom: 10px;
 }

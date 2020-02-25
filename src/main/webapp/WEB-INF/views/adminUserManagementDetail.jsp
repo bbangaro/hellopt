@@ -17,7 +17,10 @@
 		action="${pageContext.request.contextPath}/admin/user/update"
 		method="POST" modelAttribute="user" enctype="multipart/form-data">
 		<ul>
-			<li><img src="${pageContext.request.contextPath}/file/${user.userProfile}" alt="profile">
+			<c:if test="${ user.userProfile ne ''}">
+				<li><img src="${pageContext.request.contextPath}/file/${ user.userProfile }" alt="profile"></li>
+			</c:if>
+			
 			<li><form:label path="userId">아이디</form:label> <form:input
 					path="userId" readonly="true" /> <label class="error">아이디는
 					변경 불가능합니다.</label></li>

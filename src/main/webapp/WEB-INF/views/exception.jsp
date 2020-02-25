@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Exception</title>
+<style>
+.content h4, .content p {
+color: white;
+}
+</style>
 </head>
 <body>
 <h4>${err.getCause()}</h4>
