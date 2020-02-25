@@ -9,7 +9,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.bit.hellopt.vo.reviewboard.RBoardVO" alias="rBoard"/>
-		<typeAlias type="com.bit.hellopt.vo.User" alias="User"/>
+		<typeAlias type="com.bit.hellopt.vo.user.User" alias="User"/>
 		<typeAlias alias="exerciseInformation" type="com.bit.hellopt.vo.exercise.ExerciseInformationVO" />
 		<typeAlias alias="exerciseInformationTip" type="com.bit.hellopt.vo.exercisetip.ExerciseInformationTipVO" />
 		<typeAlias alias="ExerciseMapper" type="com.bit.hellopt.data.exercise.ExerciseMapper" />

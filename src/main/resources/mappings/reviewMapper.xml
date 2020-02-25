@@ -22,7 +22,7 @@
 	<result property="userPw" column="USER_PW"/>
 	<result property="userRole" column="USER_ROLE"/>
 </resultMap>
-	<select id="join1" parameterType="com.bit.hellopt.vo.User" resultMap="rBoardMap">
+	<select id="join1" parameterType="com.bit.hellopt.vo.user.User" resultMap="rBoardMap">
 		SELECT *
 		FROM REVIEW_BOARD_TB RBT, USERS_TB UT, REVIEW_FILE_TB RFT
 		WHERE RBT.FK_USER_ID = UT.USER_ID AND RBT.REV_IDX = RFT.REV_IDX 
