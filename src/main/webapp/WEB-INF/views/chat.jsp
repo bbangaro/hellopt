@@ -39,6 +39,7 @@
 		});
 	
 	</script>	
+	
 	<!-- 콘텐츠 시작 { -->
 	<div id="wrapper">
 		<div class="tit-wr tit-wr-ani">
@@ -50,8 +51,9 @@
 				<div class="stream-cont clfix">
 				    <!-- 동영상 나중에 스트리밍 화면으로 대체 -->
 				    <div id="video">
-						<iframe src="https://www.youtube.com/embed/azxahQi6vFo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+						<video autoplay playsinline></video>
 					</div>
+					<button id="showVideo">Open camera</button>
 					
 					<!-- 채팅박스 -->
 					<div id="chat_box" class="chat">
@@ -66,5 +68,8 @@
 			</div><!-- //inner -->	
 		</div><!-- // sub-content -->
 	</div><!-- // wrapper -->
+
+	<script src="${pageContext.request.contextPath}/resources/js/live/live.js"></script>
+
 </body>
 </html>
