@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
 <title>Home</title>
@@ -26,5 +25,10 @@
 		</c:otherwise>
 	</c:choose>
 	<a href="${pageContext.request.contextPath}/reviewBoard">리뷰게시판</a>
+	<a href="${pageContext.request.contextPath}/Exercise-InfoList">운동목록</a>
+	<br><br>
+	<a href="${pageContext.request.contextPath}/Exercise-InfoTipList">운동팁목록</a>
+	<p>Click <a href="/hellopt/hello">here</a> to see a greeting.</p>
+	<p>Register <a href="/hellopt/user/registrationform">here</a></p>
 </body>
 </html>
