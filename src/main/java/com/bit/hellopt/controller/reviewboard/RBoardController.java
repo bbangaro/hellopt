@@ -12,8 +12,10 @@ import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,14 +28,18 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.hellopt.service.reviewboard.RBoardService;
+import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
+import com.bit.hellopt.vo.user.CustomUserDetail;
+import com.bit.hellopt.vo.user.User;
 
 @Controller
 @SessionAttributes("rBoard")
 public class RBoardController {
 	@Autowired
 	RBoardService rService;
+	
 	@Autowired
 	ServletContext servletContext;
 	
@@ -42,10 +48,14 @@ public class RBoardController {
 	}
 	
 	
-	@RequestMapping("/reviewBoard")
-	public String getRBoardList(RBoardVO vo, Model model) {
+	@RequestMapping("/review")
+	public String getRBoardList(RBoardVO vo, Model model,
+			@AuthenticationPrincipal CustomUserDetail customUser) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 		
+		String username = customUser.getName();
+		vo.setUserName(username);
+		System.out.println("username:"+ username);
 		
 		List<RBoardVO> rBoardList = rService.getRBoardList();
 		
@@ -58,9 +68,16 @@ public class RBoardController {
 		return "reviewBoard";
 	}
 	
-	@PostMapping("/insertRBoard")
-	public String insertRBoard(RBoardVO vo, MultipartHttpServletRequest multi) 
+	@PostMapping("/insertrboard")
+	public String insertRBoard(RBoardVO vo, MultipartHttpServletRequest multi,
+			@AuthenticationPrincipal CustomUserDetail customUser) 
 					throws IllegalStateException, IOException {
+		
+		String userId = customUser.getUsername();
+		vo.setUserId(userId);
+		System.out.println("userId:"+userId);
+		
+		
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		System.out.println("글 vo " +vo);
 		rService.insertBoard(vo);
@@ -87,6 +104,7 @@ public class RBoardController {
 				//파일명  중복되지 않게 처리 한 저장될 이름
 				String saveFileName 
 						= UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
+				
 				String savePath = path + saveFileName; //저장될 파일 경로
 				System.out.println("실제 파일 이름 : " + revFileOname);
 				System.out.println("저장된 파일 이름 : " + saveFileName);
@@ -103,7 +121,7 @@ public class RBoardController {
 
 			}
 		}
-		return "redirect:/reviewBoard";
+		return "redirect:/review";
 		/* *** 파일 업로드 처리 ********
 		 * MultipartFile 인터페이스 주요 메소드 
 		 * String getOriginalFilename() : 업로드한 파일명 찾기
@@ -148,19 +166,19 @@ public class RBoardController {
 //	}
 	
 	
-	@PostMapping("/updateBoard")
+	@PostMapping("/updateboard")
 	public String updateBoard(@ModelAttribute("board")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		System.out.println(">> board vo :" + vo);
 		
 		rService.updateBoard(vo);
-		return "redirect:/reviewBoard";
+		return "redirect:/review";
 	}
-	@PostMapping("/deleteBoard")
+	@PostMapping("/deleteboard")
 	public String deleteBoard(RBoardVO vo) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
 		rService.deleteBoard(vo);
-		return "redirect:/reviewBoard";
+		return "redirect:/review";
 	}
 }

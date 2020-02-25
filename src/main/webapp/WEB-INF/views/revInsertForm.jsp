@@ -106,14 +106,15 @@
  	
  	function fn_writeBoard(){
  		var comSubmit = new ComSubmit("frm");
- 		comSubmit.setUrl("<c:url value='/insertRBoard'/>");
+ 		comSubmit.setUrl("<c:url value='/insertrboard'/>");
  		comSubmit.submit();
  	}
  	function fn_fileDelete(obj){
  		obj.parent().remove();
  	}
  	function fn_fileAdd(){
- 		var str = "<p><input type='file' name='file_"+(g_count++)+"'><a href='#this' name='delete' class='btn'>삭제하기</a></p>";
+ 		var str 
+ 			= "<p><input type='file' name='file_"+(g_count++)+"'><a href='#this' name='delete' class='btn'>삭제하기</a></p>";
  				$("#fileDiv").append(str);
  				$("a[name='delete']").on("click", function(e){
  					e.preventDefault();
