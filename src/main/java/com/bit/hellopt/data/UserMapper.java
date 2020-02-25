@@ -1,5 +1,7 @@
 package com.bit.hellopt.data;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -17,4 +19,7 @@ public interface UserMapper {
 	
 	@Select("SELECT count(*) FROM users_tb WHERE user_id = #{userId}")
 	public int isUser(String userId);
+	
+	@Select("SELECT * FROM users_tb")
+	public List<User> getUserList();
 }
