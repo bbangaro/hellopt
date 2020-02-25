@@ -50,6 +50,7 @@
                 <ul class="user_case">
                     <sec:authorize access="!isAuthenticated()">
 						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 						<li><a href="${pageContext.request.contextPath}/logout">logout</a></li>
@@ -57,10 +58,9 @@
 						<sec:authentication property="principal" var="user" />
 						<span>안녕하세요. ${user.username}</span>
 					</sec:authorize>
-					<li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
 					<li><a href="${pageContext.request.contextPath}/classDetail">Class</a></li>
 					<sec:authorize access="hasRole('ADMIN')">
-					<li><a href="${pageContext.request.contextPath}/admin/user">AdminPage</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/user">Admin Page</a></li>
 					</sec:authorize>
                 </ul>           
             </div>

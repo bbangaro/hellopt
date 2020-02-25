@@ -12,13 +12,14 @@
 <title>유저 관리</title>
 </head>
 <body>
-<h2>회원 정보 관리</h2>
-	<form:form action="${pageContext.request.contextPath}/admin/user/update" method="POST"
-		modelAttribute="user" enctype="multipart/form-data">
+	<h2>회원 정보 관리</h2>
+	<form:form
+		action="${pageContext.request.contextPath}/admin/user/update"
+		method="POST" modelAttribute="user" enctype="multipart/form-data">
 		<ul>
 			<li><form:label path="userId">아이디</form:label> <form:input
-					path="userId" readonly="true" />
-					<label class="error">아이디는 변경 불가능합니다.</label></li>
+					path="userId" readonly="true" /> <label class="error">아이디는
+					변경 불가능합니다.</label></li>
 			<li><form:label path="userName">이름</form:label> <form:input
 					path="userName" placeholder="NAME" /> <form:errors path="userName"
 					cssClass="error"></form:errors></li>
@@ -28,32 +29,37 @@
 			<li><form:label path="userAddress">주소</form:label> <input
 				type="button" onclick="getAddress()" value="우편번호 찾기"> <form:input
 					path="userAddress" id="roadAddr" placeholder="ADDRESS" /></li>
-			<li><form:label path="userBirth">생년월일</form:label> <form:input type="date"
-					path="userBirth" value="${ user.userBirth }"/></li>
+			<li><form:label path="userBirth">생년월일</form:label> <form:input
+					type="date" path="userBirth" value="${ user.userBirth }" /></li>
 			<li><form:label path="userJob">직업</form:label> <form:input
 					path="userJob" placeholder="JOB" /></li>
-			<li>
-			<form:label path="userRole">회원 등급</form:label>
-			<select
+			<li><form:label path="userRole">회원 등급</form:label> <select
 				name="userRole">
 					<c:choose>
-						<c:when test="${user.userRole eq 'ROLE_USER' }">
-							<option value="ROLE_USER" selected="selected">일반 회원</option>
+						<c:when test="${user.userRole eq 'ROLE_ADMIN'}">
+							<option value="ROLE_ADMIN" selected="selected">관리자</option>
 						</c:when>
 						<c:otherwise>
-							<option value="ROLE_USER">일반 회원</option>
+							<c:choose>
+								<c:when test="${user.userRole eq 'ROLE_USER' }">
+									<option value="ROLE_USER" selected="selected">일반 회원</option>
+								</c:when>
+								<c:otherwise>
+									<option value="ROLE_USER">일반 회원</option>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${user.userRole eq 'ROLE_TRAINER' }">
+									<option value="ROLE_TRAINER" selected="selected">트레이너</option>
+								</c:when>
+								<c:otherwise>
+									<option value="ROLE_TRAINER">트레이너</option>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
-					<c:choose>
-						<c:when test="${user.userRole eq 'ROLE_TRAINER' }">
-							<option value="ROLE_TRAINER" selected="selected">트레이너</option>
-						</c:when>
-						<c:otherwise>
-							<option value="ROLE_TRAINER">트레이너</option>
-						</c:otherwise>
-					</c:choose>
-			</select>
-			</li>
+
+			</select></li>
 			<li><form:label path="userRoot">알게된 경로</form:label> <select
 				name="userRoot">
 					<c:choose>
@@ -85,8 +91,7 @@
 					path="userHeight" placeholder="170" /></li>
 			<li><form:label path="userWeight">몸무게</form:label> <form:input
 					path="userWeight" placeholder="80" /></li>
-			<li><label for="file">프로필 사진</label> 
-				<input type="file"
+			<li><label for="file">프로필 사진</label> <input type="file"
 				name="file" /></li>
 
 		</ul>
@@ -98,21 +103,21 @@
 	<script>
 		function getAddress() {
 			new daum.Postcode({
-		        oncomplete: function(data) {
-		     		let roadAddr = data.roadAddress;
-		            document.getElementById('roadAddr').value = roadAddr;
-		        }
-		    }).open();
+				oncomplete : function(data) {
+					let roadAddr = data.roadAddress;
+					document.getElementById('roadAddr').value = roadAddr;
+				}
+			}).open();
 		}
-</script>
+	</script>
 	<script>
-	function deleteUser() {
-		let result = confirm("정말로 유저를 삭제하시겠습니까?");
-		if(result) {
-			location.replace("${pageContext.request.contextPath}/admin/user/delete?userId=${user.userId}");
+		function deleteUser() {
+			let result = confirm("정말로 유저를 삭제하시겠습니까?");
+			if (result) {
+				location
+						.replace("${pageContext.request.contextPath}/admin/user/delete?userId=${user.userId}");
+			}
 		}
-	}
-	
 	</script>
 </body>
 </html>

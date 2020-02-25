@@ -14,7 +14,7 @@
 	margin-bottom: 42px;
 }
 
-form, ul {
+.content form, .content ul {
 	display: inline-block;
 }
 
@@ -26,7 +26,7 @@ form input {
 	color: #fff;
 }
 
-li {
+.content li {
 	border-bottom: 1px solid #7d7d7d;
 	margin-bottom: 20px;
 }
