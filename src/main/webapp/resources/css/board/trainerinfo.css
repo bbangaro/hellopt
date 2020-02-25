@@ -52,6 +52,7 @@ body {
 .trainertxt {
     font-size: 14px;
     padding: 20px 0px;
+    font-weight: lighter
 }
 
 .trainer_media {
