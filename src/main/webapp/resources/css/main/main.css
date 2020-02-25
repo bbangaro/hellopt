@@ -281,7 +281,7 @@ transition: 0.3s;
 }
 #navigation .nav_wrap .category a {
   /* text-transform: uppercase; */
-  padding: 0 27px;
+  margin : 50px;
   font-size: 30px;
   -webkit-transition: all 0.14s;
   -moz-transition: all 0.14s;
@@ -294,6 +294,9 @@ transition: 0.3s;
 }
 
 #navigation .nav_wrap ul.artist_depth02 {
+	margin-top: 10px;
+	width: 400px;
+    display: grid;
     position: absolute;
    /* bottom: -160px; */
     font-size: 15px;
@@ -304,12 +307,11 @@ transition: 0.3s;
 	overflow:hidden;
 }
 #navigation .nav_wrap ul.artist_depth02.on {
-    display:block;
 	height:auto;
 }
 #navigation .nav_wrap ul.artist_depth02 li a {
-    font-size: 25px;
-    line-height: 1.7;
+    font-size: 20px;
+    line-height: 1.5;
 	opacity:0.6;
 }
 
@@ -325,7 +327,8 @@ transition:0.3s;
     margin-bottom: 0px;*/
 }
 #navigation .nav_wrap .user_case.on {
-    margin-top: 170px;
+    margin-top: 222px;
+    margin-bottom: -50px;
 }
 #navigation .nav_wrap .user_case a {
   text-transform: uppercase;

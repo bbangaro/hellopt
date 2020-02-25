@@ -31,23 +31,30 @@
             <div class="nav_wrap">
                 <ul class="category">
                   
-                    <li><a href="#" class="artist_open">Trainer introduce</a></li>
-                    <li><a href="#" class="artist_open">How to Workout</a>
+                    <li><a href="#" class="artist_open">Trainer</a>
+                    	<ul class="artist_depth02">
+                            <li><a href="${pageContext.request.contextPath}/faq1">Trainer Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/faq2">Apply for Trainer</a></li>
+                       </ul>
+                    </li>
+                    <li><a href="#" class="artist_open">Workout&Plan</a>
                     	 <ul class="artist_depth02">
+                       	    <li><a href="#">Plan</a></li>
                             <li><a href="${pageContext.request.contextPath}/exercise-Info">Exercise-Info</a></li>
                             <li><a href="${pageContext.request.contextPath}/exercise-TipInfo">Exercise-TipInfo</a></li>
                        </ul>
                     </li>
-                    <li><a href="#" class="artist_open">Home training</a>
+                    <li><a href="#" class="artist_open">Training</a>
                         <ul class="artist_depth02">
                             <li><a href="classlist">streaming</a></li>
                             <li><a href="#">1:1</a></li>
                             <li><a href="#">1:4</a></li>
+                            <li><a href="${pageContext.request.contextPath}/meeting">Offline Meeting</a></li>
                             <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
                         </ul>
                     </li>
-                    <li class="artist_open"><a href="${pageContext.request.contextPath}/meeting">Meeting</a></li>
                     <li class="artist_open"><a href="#">review</a></li>
+                    <li class="artist_open"><a href="#">FAQ</a></li>
                 </ul>
                 <ul class="user_case">
                     <sec:authorize access="!isAuthenticated()">
@@ -60,7 +67,6 @@
 						<span>안녕하세요. ${user.username}</span>
 					</sec:authorize>
 					<li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
-					<li><a href="${pageContext.request.contextPath}/classDetail">Class</a></li>
                 </ul>           
             </div>
         </div>
