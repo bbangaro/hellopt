@@ -10,7 +10,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bit.hellopt.vo.User;
+import com.bit.hellopt.vo.user.User;
+
 
 public class RBoardVO {
 	private int revIdx;

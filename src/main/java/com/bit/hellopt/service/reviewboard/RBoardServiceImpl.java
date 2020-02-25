@@ -10,9 +10,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.data.RBoardMapper1;
 import com.bit.hellopt.data.RBoardMapper2;
-import com.bit.hellopt.vo.User;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
+import com.bit.hellopt.vo.user.User;
 
 
 @Service
