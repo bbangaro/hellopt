@@ -13,11 +13,12 @@
 </head>
 <body>
 <h2>회원 정보 관리</h2>
-	<form:form action="${pageContext.request.contextPath}/#" method="POST"
+	<form:form action="${pageContext.request.contextPath}/admin/user/update" method="POST"
 		modelAttribute="user" enctype="multipart/form-data">
 		<ul>
 			<li><form:label path="userId">아이디</form:label> <form:input
-					path="userId" disabled="true" /></li>
+					path="userId" readonly="true" />
+					<label class="error">아이디는 변경 불가능합니다.</label></li>
 			<li><form:label path="userName">이름</form:label> <form:input
 					path="userName" placeholder="NAME" /> <form:errors path="userName"
 					cssClass="error"></form:errors></li>
@@ -44,7 +45,7 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${user.userRoot eq 'ROLE_TRAINER' }">
+						<c:when test="${user.userRole eq 'ROLE_TRAINER' }">
 							<option value="ROLE_TRAINER" selected="selected">트레이너</option>
 						</c:when>
 						<c:otherwise>
@@ -89,8 +90,29 @@
 				name="file" /></li>
 
 		</ul>
-		<input type="button" onclick="formCheck()" value="회원 정보 수정">
-		<input type="button" onclick="" value="회원 삭제">
+		<input type="submit" value="회원 정보 수정">
+		<input type="button" onclick="deleteUser()" value="회원 삭제">
 	</form:form>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+		function getAddress() {
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		     		let roadAddr = data.roadAddress;
+		            document.getElementById('roadAddr').value = roadAddr;
+		        }
+		    }).open();
+		}
+</script>
+	<script>
+	function deleteUser() {
+		let result = confirm("정말로 유저를 삭제하시겠습니까?");
+		if(result) {
+			location.replace("${pageContext.request.contextPath}/admin/user/delete?userId=${user.userId}");
+		}
+	}
+	
+	</script>
 </body>
 </html>

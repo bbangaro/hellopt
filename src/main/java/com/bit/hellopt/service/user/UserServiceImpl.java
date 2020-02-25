@@ -38,6 +38,16 @@ public class UserServiceImpl implements UserService{
 	public User findUserById(String userId) {
 		return mapper.selectUserById(userId);
 	}
+
+	@Override
+	public void updateUser(User user) {
+		mapper.updateUser(user);
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		mapper.deleteUser(user);
+	}
 	
 	
 }

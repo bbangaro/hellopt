@@ -39,7 +39,7 @@ input[type='radio'] {
 	display: inline;
 }
 
-input[type='button'] {
+input[type='button'],  input[type='submit']{
 	width: 100%;
 	padding: 5px 0 7px;
 	margin: 0 auto;

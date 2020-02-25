@@ -59,6 +59,9 @@
 					</sec:authorize>
 					<li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
 					<li><a href="${pageContext.request.contextPath}/classDetail">Class</a></li>
+					<sec:authorize access="hasRole('ADMIN')">
+					<li><a href="${pageContext.request.contextPath}/admin/user">AdminPage</a></li>
+					</sec:authorize>
                 </ul>           
             </div>
         </div>
