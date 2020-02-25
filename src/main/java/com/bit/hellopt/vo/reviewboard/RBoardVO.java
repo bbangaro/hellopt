@@ -1,6 +1,7 @@
 package com.bit.hellopt.vo.reviewboard;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,18 +12,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.vo.User;
 
-public class ReviewBoardVO {
+public class RBoardVO {
 	private int revIdx;
 	private User user;
 	private String revContent;
 	private Date revRegdate;
-	private int revHit;
-	private int revStar;
+	private String revStar;
 	private String revCategory;
-	private String revFileOrigin;
-	private String revFileSave;
+	private List<RFileVO> fileList;
 	
-	private MultipartFile fileupload;
+	
+	private MultipartFile file_0;
 
 	public int getRevIdx() {
 		return revIdx;
@@ -56,19 +56,11 @@ public class ReviewBoardVO {
 		this.revRegdate = revRegdate;
 	}
 
-	public int getRevHit() {
-		return revHit;
-	}
-
-	public void setRevHit(int revHit) {
-		this.revHit = revHit;
-	}
-
-	public int getRevStar() {
+	public String getRevStar() {
 		return revStar;
 	}
 
-	public void setRevStar(int revStar) {
+	public void setRevStar(String revStar) {
 		this.revStar = revStar;
 	}
 
@@ -80,36 +72,28 @@ public class ReviewBoardVO {
 		this.revCategory = revCategory;
 	}
 
-	public String getRevFileOrigin() {
-		return revFileOrigin;
+	public MultipartFile getFile_0() {
+		return file_0;
 	}
 
-	public void setRevFileOrigin(String revFileOrigin) {
-		this.revFileOrigin = revFileOrigin;
+	public void setFile_0(MultipartFile file_0) {
+		this.file_0 = file_0;
+	}
+	
+	//파일업로드를 위한 생성자
+	public List<RFileVO> getFileList() {
+		return fileList;
 	}
 
-	public String getRevFileSave() {
-		return revFileSave;
-	}
-
-	public void setRevFileSave(String revFileSave) {
-		this.revFileSave = revFileSave;
-	}
-
-	public MultipartFile getFileupload() {
-		return fileupload;
-	}
-
-	public void setFileupload(MultipartFile fileupload) {
-		this.fileupload = fileupload;
+	public void setFileList(List<RFileVO> fileList) {
+		this.fileList = fileList;
 	}
 
 	@Override
 	public String toString() {
-		return "ReviewBoardVO [revIdx=" + revIdx + ", user=" + user + ", revContent=" + revContent + ", revRegdate="
-				+ revRegdate + ", revHit=" + revHit + ", revStar=" + revStar + ", revCategory=" + revCategory
-				+ ", revFileOrigin=" + revFileOrigin + ", revFileSave=" + revFileSave + ", fileupload=" + fileupload
-				+ "]";
+		return "RBoardVO [revIdx=" + revIdx + ", user=" + user + ", revContent=" + revContent + ", revRegdate="
+				+ revRegdate + ", revStar=" + revStar + ", revCategory=" + revCategory + ", fileList=" + fileList
+				+ ", file_0=" + file_0 + "]";
 	}
 	
 	
