@@ -69,8 +69,8 @@
 			<td colspan="2">
 			<p>내용 :${rBoard.revContent}</p>
 			
-			<c:forEach var="file" items="${rBoard.fileList }">
-			 첨부사진:<img src="/hellopt/img/${file.revFileSname } "> 
+			<c:forEach var="file" items="${rBoard.filevo }">
+				<p><img width="500" src="/hellopt/img/${file.revFileSname } "><p>
 			</c:forEach>
 			</td>
 		</tr>

@@ -49,10 +49,9 @@ public class RBoardController {
 		
 		List<RBoardVO> rBoardList = rService.getRBoardList();
 		
-		for(RBoardVO rVO :rBoardList) {
-			rVO.setFileList(rService.getFileList(rVO.getRevIdx()));
+		for(RBoardVO rvo :rBoardList) {
+			rvo.setFilevo(rService.getFileList(rvo.getRevIdx()));
 		}
-		System.out.println(rBoardList);
 
 		System.out.println("rBoardList: " + rBoardList.toString());
 		model.addAttribute("rBoardList", rBoardList);

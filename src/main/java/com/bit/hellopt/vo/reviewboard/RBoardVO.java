@@ -19,7 +19,7 @@ public class RBoardVO {
 	private Date revRegdate;
 	private String revStar;
 	private String revCategory;
-	private List<RFileVO> fileList;
+	private List<RFileVO> filevo;
 	
 	
 	private MultipartFile file_0;
@@ -81,18 +81,18 @@ public class RBoardVO {
 	}
 	
 	//파일업로드를 위한 생성자
-	public List<RFileVO> getFileList() {
-		return fileList;
+	public List<RFileVO> getFilevo() {
+		return filevo;
 	}
 
-	public void setFileList(List<RFileVO> fileList) {
-		this.fileList = fileList;
+	public void setFilevo(List<RFileVO> filevo) {
+		this.filevo = filevo;
 	}
 
 	@Override
 	public String toString() {
 		return "RBoardVO [revIdx=" + revIdx + ", user=" + user + ", revContent=" + revContent + ", revRegdate="
-				+ revRegdate + ", revStar=" + revStar + ", revCategory=" + revCategory + ", fileList=" + fileList
+				+ revRegdate + ", revStar=" + revStar + ", revCategory=" + revCategory + ", filevo=" + filevo
 				+ ", file_0=" + file_0 + "]";
 	}
 	
