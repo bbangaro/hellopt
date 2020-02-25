@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
+import com.bit.hellopt.vo.user.User;
 
 public interface RBoardMapper1 {
 
@@ -25,16 +26,19 @@ public interface RBoardMapper1 {
 			+ " USER_JOB, USER_BIRTH, USER_ROOT, USER_HEIGHT, USER_WEIGHT, "
 			+ "USER_PROFILE FROM REVIEW_BOARD_TB RBT, USERS_TB UT"
 			+ "WHERE RBT.FK_USER_ID = UT.USER_ID ORDER BY REV_IDX DESC")
-	public void selectUser(); 
+	public User selectUser(); 
+	
+	@Select("SELECT * FROM USERS_TB WHERE USER_ID = #{userId}")
+	public User selectUserId(String userId); 
 	
 	@Select("SELECT REV_FILE_SNAME FROM REVIEW_FILE_TB"
 			+ "WHERE RBT.REV_IDX = RFT.REV_IDX AND RFT.REV_IDX =#{revIdx} ORDER BY REV_FILE_IDX DESC")
 	public List<RFileVO> selectFile(); 
 	
 	
-	@Insert("INSERT INTO REVIEW_BOARD_TB (REV_IDX, REV_STAR, REV_CONTENT)\r\n" + 
+	@Insert("INSERT INTO REVIEW_BOARD_TB (REV_IDX,USER_ID, REV_STAR, REV_CONTENT)\r\n" + 
 			"		VALUES ((SELECT NVL(MAX(REV_IDX), 0) + 1 FROM REVIEW_BOARD_TB), \r\n" + 
-			"		       #{revStar}, #{revContent})")
+			"		       #{userId}, #{revStar}, #{revContent})")
 	public void insertRBoard(RBoardVO vo);
 	
 	@Update("UPDATE REVIEW_BOARD_TB\r\n" + 
@@ -52,4 +56,6 @@ public interface RBoardMapper1 {
 			+ " #{revFileOname}, #{revFileSname}, #{revFileSize}, (SELECT NVL(MAX(REV_IDX), 0) FROM REVIEW_BOARD_TB) )")
 	public void uploadFile(HashMap<String, Object> hm);
 	
+	@Delete("DELETE FROM REVIEW_FILE_TB WHERE REV_IDX = #{revIdx}")
+	public void uploadFileDel(RBoardVO vo);
 }
