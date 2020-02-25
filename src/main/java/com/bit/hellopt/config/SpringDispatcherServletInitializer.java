@@ -37,11 +37,12 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
             "/" //웹사이트 주소
         };
     }
-
+  
     @Override
     protected void customizeRegistration(Dynamic registration) {
         registration.setMultipartConfig(multipartConfig);
     }
+
 
     
 }

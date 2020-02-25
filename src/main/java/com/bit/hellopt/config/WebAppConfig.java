@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -46,6 +48,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 	//바로 URL과 VIEW를 바로 매핑시켜줌
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		//registry.addViewController("/signupform").setViewName("signupForm");
+		registry.addViewController("/review/insertform").setViewName("insertForm");
 		registry.addViewController("/openClassForm").setViewName("openClassForm");
 		registry.addViewController("/classDetail").setViewName("classDetail");
 		registry.addViewController("/chat").setViewName("chat");
@@ -105,5 +109,5 @@ public class WebAppConfig implements WebMvcConfigurer {
 			= new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
 		return multipartConfigElement;
 	}
-	
+
 }
