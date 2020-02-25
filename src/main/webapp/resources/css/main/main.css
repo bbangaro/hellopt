@@ -125,9 +125,10 @@ transition: 0.3s;
 #hd {
   position: fixed;
   top: 0;
-  margin-top : -10px;
   width: 100%;
   z-index: 9999;
+  height:100px;
+  transition:all 0.3s ease-in-out;
 }
 
 #hd h1 {

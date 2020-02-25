@@ -3,7 +3,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
 	<script src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
-	
 </head>
 
 
@@ -24,7 +23,21 @@
         <button type="button" role="togglebutton" class="nav_button"><span></span></button>
     </header>
     <!-- 상단 끝 } -->
-
+    <script>
+	    $("#hd").each(function(){
+	    	var header = $(this);
+	    	var headerOffset = header.offset().top;
+	     
+	    	$(window).scroll(function(){
+	    		var wScroll = $(window).scrollTop();
+	    		if( wScroll > headerOffset){
+	    		  header.css('background','rgba(0,0,0,0.7)');
+	    		} else {
+	    			header.css('background','none');
+	    		}
+	    	});
+	    });
+	</script>
     <!-- 네비게이션 시작 { -->
     <aside id="navigation" class="close">
         <div class="navigation_inner">
