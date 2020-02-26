@@ -17,6 +17,15 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 
 <style>
+ 	.content {
+	box-sizing: border-box;
+	width: 800px;
+	margin: 0 auto 150px;
+	padding-top: 10%;
+	text-align: center;
+}
+	a{color: white}
+
 	td .star{
 		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 		  background-size: auto 100%;
@@ -33,34 +42,35 @@
 
 <div>
 <form>
-	<p><a href="${pageContext.request.contextPath}/insertform">후기쓰러가기</a></p>	
-<c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
+	<p><a href="${pageContext.request.contextPath}/insertform">후기쓰러가기</a></p>
+<c:forEach var="rBoard" items="${rBoardList }" varStatus="status">
 <table border>
 	<thead>
 		<tr>
-			<td rowspan="3"><img class="profile" src="">사진</td>
-			<td>글쓴이 : ${rBoard.user }</td>
+			<td rowspan="3"><img class="profile" src="/hellopt/img/${user.userProfile}"></td>
+
+			<td>글쓴이 : ${rBoard.userName }</td>
 		</tr>
 		<tr>
 			<td>수업이름</td>
 		</tr>
 		<tr>
-		
-		<td class="starRev"> 
+
+		<td class="starRev">
 <%-- 	if문 써서	<c:forEach var="i" begin="1" end="5" step="1" >
 				<c:if test="${i  > rBoard.revStar }">
 					<span class="star"></span>
-				</c:if>	
+				</c:if>
 				<c:if test="${i  <= rBoard.revStar }">
 					<span class="star on"></span>
-				</c:if>	
+				</c:if>
 			</c:forEach> --%>
 			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
 				<span class="star on">i</span>
-			</c:forEach> 
+			</c:forEach>
 			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
 				<span class="star">i</span>
-			</c:forEach>   
+			</c:forEach>
 			</td>
 		</tr>
 	</thead>
@@ -68,9 +78,9 @@
 		<tr>
 			<td colspan="2">
 			<p>내용 :${rBoard.revContent}</p>
-			
+			<!--이미지 사진 업로드한부분 나오는곳  -->
 			<c:forEach var="file" items="${rBoard.filevo }">
-				<p><img width="500" src="/hellopt/img/${file.revFileSname } "><p>
+				<p><img width="500px" src="/hellopt/img/${file.revFileSname } "><p>
 			</c:forEach>
 			</td>
 		</tr>
@@ -88,7 +98,7 @@
 </table>
 </c:forEach>
 </form>
-</div>	
+</div>
 
 </body>
 </html>

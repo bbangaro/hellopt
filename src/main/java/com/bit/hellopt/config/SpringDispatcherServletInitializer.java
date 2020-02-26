@@ -1,48 +1,42 @@
 package com.bit.hellopt.config;
 
-import java.io.File;
-
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class SpringDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer { // extend 뒤에 Servlet Dispatcher 하는것
+public class SpringDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 	
 	@Autowired
-	MultipartConfigElement multipartConfig;
-    
+	MultipartConfigElement multipartConfigElement;
+	
+	
 	@Override
     protected Class <?> [] getRootConfigClasses() {
         return new Class[] {
-        	RootConfig.class,//기본설정 ->
-            SecurityConfig.class
-
+        	RootConfig.class
         };
     }
 
-	//웹싸이트마다 사용하는 설정들
     @Override
     protected Class <?> [] getServletConfigClasses() {
         return new Class[] {
-            WebAppConfig.class //웹사이트 설정
+            WebAppConfig.class
         };
     }
 
-    
     @Override
     protected String[] getServletMappings() {
         return new String[] {
-            "/" //웹사이트 주소
+            "/"
         };
     }
-  
-    @Override
-    protected void customizeRegistration(Dynamic registration) {
-        registration.setMultipartConfig(multipartConfig);
-    }
 
-
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setMultipartConfig(multipartConfigElement);
+	}
+    
     
 }

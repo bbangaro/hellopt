@@ -11,7 +11,7 @@ import com.bit.hellopt.vo.user.User;
 
 
 public interface RBoardService {
-	
+
 	void insertBoard(RBoardVO vo);
 	void updateBoard(RBoardVO vo);
 	void deleteBoard(RBoardVO vo);
@@ -20,5 +20,7 @@ public interface RBoardService {
 	List<RBoardVO> selectFile(RFileVO fvo);
 	void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx);
 	List<RFileVO> getFileList(int revIdx);
-	
+	List<User> selectUserId(String userId);
+	User selectUser();
+
 }

@@ -26,7 +26,7 @@
 
 <form id="frm" method="post" 
 		enctype="multipart/form-data">
-<select>
+<%-- <select>
 	<c:forEach var = "class" items="${classMap }">
 	<option>수강한 클래스 선택</option>
 	</c:forEach>
@@ -35,7 +35,7 @@
 	<c:forEach var = "trainer" items="${trainerMap }">
 	<option>트레이너 선생님 선택</option>
 	</c:forEach>
-</select> 
+</select> --%>
 
 	<table class="board_view">
 		<colgroup>
@@ -47,11 +47,11 @@
 		<tr>
 			 <td>별점</td>
 			<td class="starRev">
-				<span class="star on">1</span>
-				<span class="star">2</span>
-				<span class="star">3</span>
-				<span class="star">4</span>
-				<span class="star" id="star">5</span>
+				<span class="star on" >1</span>
+				<span class="star" >2</span>
+				<span class="star"  >3</span>
+				<span class="star"  >4</span>
+				<span class="star" id="star"  >5</span>
 				<input id="revStar1" type="hidden" name="revStar" value="">
 			<td> 
 		</tr>

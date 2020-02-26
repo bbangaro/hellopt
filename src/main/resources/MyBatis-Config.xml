@@ -4,9 +4,8 @@
 	<!-- 여러가지 기본 옵션을 지정합니다. -->
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
-		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
-	
+
 	<typeAliases>
 		<typeAlias type="com.bit.hellopt.vo.reviewboard.RBoardVO" alias="rBoard"/>
 		<typeAlias type="com.bit.hellopt.vo.user.User" alias="User"/>
