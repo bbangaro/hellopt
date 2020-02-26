@@ -8,4 +8,7 @@ public interface UserService {
 	public void regiserUser(User user);
 	public int isUser(String userId);
 	public List<User> getUserList();
+	public User findUserById(String userId);
+	public void updateUser(User user);
+	public void deleteUser(User user);
 }

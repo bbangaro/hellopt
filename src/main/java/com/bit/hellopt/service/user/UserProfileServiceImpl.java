@@ -31,7 +31,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		profile.setFkUserId(user.getUserId());
 		profile.setOriginalFileName(file.getOriginalFilename());
 		
-		String rpath = servletContext.getRealPath("resources/images/profile/");
+		String rpath = "C:/hellopt_file/";
 		
 		Calendar calendar = Calendar.getInstance(); 
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmmss");
