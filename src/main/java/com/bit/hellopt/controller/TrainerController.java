@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,7 +26,7 @@ public class TrainerController {
 	
 	@RequestMapping("/trainer")
 	public String getTrainer(Model model) {
-		List<TrainerVO> trainerList = service.getTrainer();
+		List<TrainerVO> trainerList = service.getTrainerList();
 		System.out.println("리스트 정보 가져오기 성공!");
 		model.addAttribute("trainerList", trainerList);
 		return "trainer/trainer";

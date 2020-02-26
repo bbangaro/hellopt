@@ -20,7 +20,7 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
-	public List<TrainerVO> getTrainer() {
+	public List<TrainerVO> getTrainerList() {
 		return trainerMapper.getTrainer();
 	}
 	

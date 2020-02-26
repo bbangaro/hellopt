@@ -38,35 +38,8 @@
                         </div>
                     </a>
                 </div>
+        
             </c:forEach>
-                <div class="trainer">
-                    <a href="#">
-                        <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
-                        <div class="trainer_caption">
-                            <p class="captiontitle">쫑코치 김종석</p>
-                            <p class="captiontxt">
-                            압구정 팀에스 소속<br>
-                            Netflix [ultimate beastmaster]<br>한국대표팀<br>
-                            제시, 사유리, 서인국 담당트레이너<br>
-                            인스타그램 @jjong_team_s<br>
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="trainer">
-                    <a href="#">
-                        <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
-                        <div class="trainer_caption">
-                            <p class="captiontitle">쫑코치 김종석</p>
-                            <p class="captiontxt">
-                            압구정 팀에스 소속<br>
-                            Netflix [ultimate beastmaster]<br>한국대표팀<br>
-                            제시, 사유리, 서인국 담당트레이너<br>
-                            인스타그램 @jjong_team_s<br>
-                            </p>
-                        </div>
-                    </a>
-                </div>
             </div>
             
         </div>

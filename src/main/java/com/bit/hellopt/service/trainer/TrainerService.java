@@ -15,7 +15,7 @@ public interface TrainerService {
 	void deleteTrainer(int trainerIdx);
 	
 	//4-1. 전체조회
-	List<TrainerVO> getTrainer();
+	List<TrainerVO> getTrainerList();
 	
 	//4-2. 하나만 조회
 	TrainerVO getTrainerDetail(int trainerIdx);
