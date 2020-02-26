@@ -78,6 +78,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/file/**").addResourceLocations("file:///C:/hellopt_file/");
 	}
 
 	// MyBatis 연동을 위한 설정

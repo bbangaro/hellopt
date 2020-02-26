@@ -15,10 +15,11 @@ import com.bit.hellopt.vo.user.User;
 public interface RBoardMapper1 {
 
 	//전체 후기 조회
-	
 	@Select("SELECT * FROM REVIEW_BOARD_TB ORDER BY REV_IDX DESC")
 	public List<RBoardVO> getRBoardList();
 	
+	
+	//파일저장명 찾아오는 셀렉트문구
 	@Select("SELECT * FROM REVIEW_FILE_TB WHERE REV_IDX= #{revIdx}")
 	public List<RFileVO> getFileList(int revIdx);
 	
@@ -35,18 +36,17 @@ public interface RBoardMapper1 {
 			+ "WHERE RBT.REV_IDX = RFT.REV_IDX AND RFT.REV_IDX =#{revIdx} ORDER BY REV_FILE_IDX DESC")
 	public List<RFileVO> selectFile(); 
 	
-	
 	@Insert("INSERT INTO REVIEW_BOARD_TB (REV_IDX,USER_ID,USER_NAME, REV_STAR, REV_CONTENT)\r\n" + 
 			"		VALUES ((SELECT NVL(MAX(REV_IDX), 0) + 1 FROM REVIEW_BOARD_TB), \r\n" + 
 			"		       #{userId},#{userName}, #{revStar}, #{revContent})")
 	public void insertRBoard(RBoardVO vo);
-	
+	//후기수정
 	@Update("UPDATE REVIEW_BOARD_TB\r\n" + 
 			"			SET REV_STAR = #{revStar},\r\n" + 
 			"				REV_CONTENT = #{revContent},\r\n" + 
 			"		WHERE REV_IDX = #{revIdx}")
 	public void updateRBoard(RBoardVO vo);
-	
+	//후기삭제
 	@Delete("DELETE FROM REVIEW_BOARD_TB WHERE REV_IDX = #{revIdx}")
 	public void deleteRBoard(RBoardVO vo);
 
