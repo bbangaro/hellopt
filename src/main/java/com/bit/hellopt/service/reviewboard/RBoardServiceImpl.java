@@ -46,11 +46,7 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper.getRBoardList();
 	}
 
-	@Override
-	public List<RBoardVO> selectUser(User vo) {
-		return mapper2.join1(vo);
-		
-	}
+
 	@Override
 	public void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx) {
 		HashMap<String, Object> hm = new HashMap<>();
@@ -70,6 +66,17 @@ public class RBoardServiceImpl implements RBoardService {
 	@Override
 	public List<RFileVO> getFileList(int revIdx) {
 		return mapper.getFileList(revIdx);
+	}
+
+	@Override
+	public User selectUser() {
+		
+		return mapper.selectUser();
+	}
+	@Override
+	public List<User> selectUserId(String userId) {
+		
+		return mapper.selectUserId(userId);
 	}
 
 
