@@ -15,7 +15,7 @@
 	
 		<h2>나에게 꼭 맞는 모임을 찾아 참여하세요</h2>
 		
-			<div class="border-line">
+			<div class="boarder-line">
 			
 				<div class="meeting-category">
 					<p class="meeting-main">함께 하는 즐거움과 시너지를 통해 운동하는</p>

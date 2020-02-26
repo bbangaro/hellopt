@@ -1552,13 +1552,20 @@ section#faq_con img {
   text-align: center;
 }
 
-
-
-.border-line {
-	border: 1px solid white;
-	width: 100%; height: 1700px;
+.boarder-line {
+	border: 1px solid black;
+	width: 100%; height: auto;
 	margin-top: 200px;
 	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.boarder-oline {
+	border: 1px solid black;
+	width: 70%; height: auto;
+	margin-top: 200px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	float: left;
 }
 
 .hello_top {
@@ -1589,6 +1596,7 @@ body {
   margin-left:auto;
   margin-right:auto;
   margin-top:1%;
+  margin-bottom: 50px;
 }
 
 h1 {
@@ -1892,7 +1900,7 @@ h2 {
   margin: auto;
   color: #fff;
   position: relative;
-  top: 30px;
+  top: 7px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -1983,7 +1991,7 @@ h2 {
     background-color: gray;
     height: 0.1px;
     display: block;
-    width: 1000px;
+    width: 100%;
 }
 
 
@@ -2008,6 +2016,10 @@ h2 {
 	display: inline-block;
 }
 .meeting-profile{
+	display: inline-block;
+	position: relative;
+}
+.m-select{
 	display: inline-block;
 	position: relative;
 }
@@ -2057,10 +2069,232 @@ h2 {
 	width: 860px;
 }
 
-/* 
-.meeting-profile{
-	float: left;
-	width: 130px;
+/*미팅 상세 페이지*/
+
+.meeting-detail {
+	font-size: 25px;
+    margin-left: 10px;
+    margin-bottom: -1px;
+}
+
+.meeting-one {
+	margin-left: 20px;
+	
+	-webkit-flex : 1;
+	flex : 1;
+}
+
+/*오른쪽 사이드 테스트중*/
+.right-side {
+	border: 1px solid black;
+	height: auto;
+	margin-top: 200px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	width : 30%;
+	float: right;
+	
+}
+
+.one-font {
+	font-size: 15px;
+	width: 700px;
+    height: 22px;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+
+
+
+
+/*상세 페이지 슬라이드*/
+
+
+
+@keyframes shrink {
+    0% {
+        color: green;
+        transform: scale(2);
+    }
+
+    100% {
+        transform: scale(1);
+        color: grey;
+    }
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(1);
+        color: grey;
+    }
+
+    100% {
+        transform: scale(2);
+        color: green;
+    }
+}
+
+
+/* $. Classes
+\*----------------------------------------------------------------*/
+
+.animate {
+    transform: translate3d(0,0,0);
+    perspective: 1000;
+    filter: blur(0);
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    transform-origin: center left;
+  
+}
+
+.animate--shrink {
+    animation-duration: 1s;
+    animation-name: shrink;
+    animation-timing-function: 'linear';
+}
+
+.animate--grow {
+    animation-duration: 1s;
+    animation-timing-function: 'linear';
+    animation-name: grow;
+}
+
+
+/* Slider */
+
+
+.slider-holder {
+     width: 400px;
+     margin-left: 37px;
+     overflow: hidden;
+  }
+  
+.image-holder {
+     width: 2100px;
+     height: 165px;
+     clear: both;
+     position: relative;
+     
+     -webkit-transition: left 2s;
+     -moz-transition: left 2s;
+     -o-transition: left 2s;
+     transition: left 2s;
+  }
+  
+.slider-image {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    height: 400px;
+    width: 400px;
+  }
+  
+#slider-image-1:target ~ .image-holder {
+    left: 0px;
+  }
+  
+#slider-image-2:target ~ .image-holder {
+    left: -400px;
+  }
+  
+#slider-image-3:target ~ .image-holder {
+     left: -800px;
+  }
+
+.button-holder {
+    margin-top: 3px;
+}
+/*
+.slider-change
+{
+  display: inline-block;
+  height: 97px;
+  width: 97px;
 }
 */
+.slider-image-1 {
+  display: inline-block;
+  height: 133px;
+  width: 133px;
+}
+.slider-image-2 {
+  display: inline-block;
+  height: 133px;
+  width: 133px;
+}
+.slider-image-3 {
+  display: inline-block;
+  height: 133px;
+  width: 133px;
+}
+.slider-change-image
+{
+  height: 133px;
+  width: 133px;
+}
 
+/*많이 본 모임*/
+
+.m-profile {
+  width: 195px;
+  height: 260px;
+  background: #FDFEFF;
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  margin-top: 2.2em;
+  position: relative;
+}   
+.profile-thumbnail {
+    width: 124px;
+    height: 124px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em;
+    border-radius: 100%;
+    box-shadow: $shadow;
+}
+.mname {
+    color: black;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.mtitle {
+    color: black;
+    font-size: .75em;
+    font-weight: 300;
+    text-align: center;
+    padding-top: .5em;
+    padding-bottom: .7em;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+/* 슬라이드테스트 */
+
+.slidebody {
+      position: relative;
+      height: 100%;
+    }
+.slidebody {
+  background: #000;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color:#000;
+  margin: 0;
+  padding: 0;
+}
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide {
+  overflow: hidden;
+}

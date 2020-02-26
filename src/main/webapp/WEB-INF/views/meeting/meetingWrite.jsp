@@ -15,7 +15,7 @@
 	
 		<h2>Meeting</h2>
 		
-			<div class="border-line">
+			<div class="boarder-line">
 				
 				<h3 class="meeting-main">모임 개설 신청하기</h3>
 				<hr class="meeting-line">
@@ -28,7 +28,21 @@
 								<input class="username" type="text" value="밀가루">
 								<textarea class="meeting-comment" rows="2" cols="50" placeholder="숨쉬기 운동 마스터 입니다. 함께 하실분 : )"></textarea>
 							</div>
+							<div class="profile-detail">
+								<select class="m-select">
+									<option>바다</option>
+									<option>산</option>
+									<option>실내스포츠</option>
+								</select>
+							</div>
 						</div>
+							<div class="profile-detail">
+								<select class="m-select">
+									<option>서울</option>
+									<option>경기</option>
+									<option>강원</option>
+								</select>	
+							</div>
 					</div>
 					
 					<div class="meeting-title">모임일자
