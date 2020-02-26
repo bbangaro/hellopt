@@ -29,16 +29,16 @@ public interface RBoardMapper1 {
 	public User selectUser(); 
 	
 	@Select("SELECT * FROM USERS_TB WHERE USER_ID = #{userId}")
-	public User selectUserId(String userId); 
+	public List<User> selectUserId(String userId); 
 	
 	@Select("SELECT REV_FILE_SNAME FROM REVIEW_FILE_TB"
 			+ "WHERE RBT.REV_IDX = RFT.REV_IDX AND RFT.REV_IDX =#{revIdx} ORDER BY REV_FILE_IDX DESC")
 	public List<RFileVO> selectFile(); 
 	
 	
-	@Insert("INSERT INTO REVIEW_BOARD_TB (REV_IDX,USER_ID, REV_STAR, REV_CONTENT)\r\n" + 
+	@Insert("INSERT INTO REVIEW_BOARD_TB (REV_IDX,USER_ID,USER_NAME, REV_STAR, REV_CONTENT)\r\n" + 
 			"		VALUES ((SELECT NVL(MAX(REV_IDX), 0) + 1 FROM REVIEW_BOARD_TB), \r\n" + 
-			"		       #{userId}, #{revStar}, #{revContent})")
+			"		       #{userId},#{userName}, #{revStar}, #{revContent})")
 	public void insertRBoard(RBoardVO vo);
 	
 	@Update("UPDATE REVIEW_BOARD_TB\r\n" + 

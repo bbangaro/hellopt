@@ -74,7 +74,7 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper.selectUser();
 	}
 	@Override
-	public User selectUserId(String userId) {
+	public List<User> selectUserId(String userId) {
 		
 		return mapper.selectUserId(userId);
 	}

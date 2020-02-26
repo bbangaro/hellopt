@@ -17,12 +17,12 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 
 <style>
-	.content {
+ 	.content {
 	box-sizing: border-box;
 	width: 800px;
 	margin: 0 auto 150px;
 	padding-top: 10%;
-	text-align: center;
+	text-align: center; 
 }
 	a{color: white}
 	
@@ -47,7 +47,7 @@
 <table class="tbl_wrap">
 	<thead class="tbl_head01">
 		<tr>
-			<td rowspan="3"><img class="profile" src="">사진</td>
+			<td rowspan="3"><img class="profile" src="/hellopt/img/${user.userProfile}"></td>
 			
 			<td>글쓴이 : ${rBoard.userName }</td>  
 		</tr>
@@ -78,7 +78,7 @@
 		<tr>
 			<td colspan="2">
 			<p>내용 :${rBoard.revContent}</p>
-			
+			<!--이미지 사진 업로드한부분 나오는곳  -->
 			<c:forEach var="file" items="${rBoard.filevo }">
 				<p><img width="500px" src="/hellopt/img/${file.revFileSname } "><p>
 			</c:forEach>

@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.hellopt.service.reviewboard.RBoardService;
+import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
@@ -39,6 +40,8 @@ import com.bit.hellopt.vo.user.User;
 public class RBoardController {
 	@Autowired
 	RBoardService rService;
+	@Autowired
+	UserProfileService profileService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -53,18 +56,22 @@ public class RBoardController {
 			@AuthenticationPrincipal CustomUserDetail customUser) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 		
-		String username = customUser.getName();
-		vo.setUserName(username);
-		System.out.println("username:"+ username);
-		
 		List<RBoardVO> rBoardList = rService.getRBoardList();
-		
+
 		for(RBoardVO rvo :rBoardList) {
 			rvo.setFilevo(rService.getFileList(rvo.getRevIdx()));
 		}
 
+		User user = new User();
+		String profile = profileService.selectProfile(customUser.getUsername()).getStoredFileName();
+		user.setUserProfile(profile);
+		
+		
 		System.out.println("rBoardList: " + rBoardList.toString());
+
 		model.addAttribute("rBoardList", rBoardList);
+		model.addAttribute("user", user);
+		
 		return "reviewBoard";
 	}
 	
@@ -74,9 +81,10 @@ public class RBoardController {
 					throws IllegalStateException, IOException {
 		
 		String userId = customUser.getUsername();
+		String name = customUser.getName();
 		vo.setUserId(userId);
-		System.out.println("userId:"+userId);
-		
+		vo.setUserName(name);
+		vo.setUser(rService.selectUserId(userId));
 		
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		System.out.println("글 vo " +vo);
@@ -84,7 +92,6 @@ public class RBoardController {
 		
 		String path = "C:/hellopt_file/";
 	
-		
 		int revIdx = vo.getRevIdx();
 		System.out.println("revIdx: " + revIdx);
 		File dir = new File(path);
@@ -122,48 +129,7 @@ public class RBoardController {
 			}
 		}
 		return "redirect:/review";
-		/* *** 파일 업로드 처리 ********
-		 * MultipartFile 인터페이스 주요 메소드 
-		 * String getOriginalFilename() : 업로드한 파일명 찾기
-		 * void transferTo(File destFile) : 업로드한 파일을 destFile에 저장
-		 * boolean isEmpty() : 업로드한 파일의 존재여부(없으면 true 리턴)
-		 */
-		/*MultipartFile uploadFile = vo.getFile_0();
-		System.out.println("uploadFile: " + uploadFile);
-		
-		if(!uploadFile.isEmpty()) {
-			String originFileName = uploadFile.getOriginalFilename();
-			String originFileExtension = originFileName.substring(originFileName.lastIndexOf("."));
-			vo.setRevFileOrigin(originFileName);
-			String saveFileName = UUID.randomUUID().toString().replaceAll("-","") + originFileExtension;
-			vo.setRevFileSave(saveFileName);
-			uploadFile.transferTo(new File("c:/mystudy/temp/" + originFileName));
-			
-			System.out.println(originFileName + "은 업로드한 파일이다.");
-			System.out.println(saveFileName + "라는 이름으로 업로드 됐다.");
-			
-			rService.insertRBoardUploadFile(vo, mpRequest);
-		}else {
-			rService.insertBoard(vo);
-			
-		}*/
-
-		
 	}
-//	@RequestMapping("/getPic")
-//	public String getPic(RFileVO fvo, HttpServletRequest request, Model model) {
-//		
-//		List<RFileVO> getPicList = rService.getPic(fvo);
-//
-//		System.out.println("getPicList: " + getPicList.toString());
-//		model.addAttribute("getPicList", getPicList);
-//		/*List<RBoardVO> rBoardList = rService.getRBoardList();
-//		System.out.println("rBoardList: " + rBoardList.toString());
-//		model.addAttribute("rBoardList", rBoardList);
-//		return "reviewBoard";*/
-//		
-//		return null;
-//	}
 	
 	
 	@PostMapping("/updateboard")
