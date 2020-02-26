@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
@@ -37,21 +38,24 @@
 	
 				
 			<div class="container">
+			
+			<c:forEach var="meeting" items="${meetingList}">
 			  <div class="service-details">
 			    <img src="${pageContext.request.contextPath}/resources/images/meeting/sample3.jpg" alt="realm">
 			    <div class="service-hover-text">
-			      <h3>직장인 2040</h3>
-			      <h4>경기도</h4>
+			      <h3>${meeting.mSubject}</h3>
+			      <h4>${meeting.fkLocalNo }</h4>
 			      <p>30일 남음 </p>
 			    </div>
 			    <div class="service-white service-text">
-			      <a>실내 스포츠 </a><a>진행중인 모임</a>
-			      <p><a href="${pageContext.request.contextPath}/meetingOne">[HelloPT]직장인 2040</a></p>
-			      <a href="#">경기도</a><a>회비 15,000원</a>
+			      <a>${meeting.mCategory}</a><a>${meeting.progressSt}</a>
+			      <p><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
+			      <a href="#">${meeting.local }</a><a>회비 ${meeting.mPrice }원</a>
 			    </div>
 			  </div>
 			  
 			  <br>
+			</c:forEach>
 			  
 			   <div class="service-details">
 			    <img src="${pageContext.request.contextPath}/resources/images/meeting/sample4.jpg" alt="realm">
