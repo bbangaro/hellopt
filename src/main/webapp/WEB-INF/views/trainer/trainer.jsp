@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>트레이너 리스트</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/trainerinfo.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
@@ -27,20 +28,17 @@
            
             
             <div class="trainer_inner">
+            <c:forEach var="trainer" items="${trainerList }">
                 <div class="trainer">
-                    <a href="trainerinfo">
+                    <a href="trainerdetail?trainerIdx=${trainer.trainerIdx }">
                         <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
                         <div class="trainer_caption">
-                            <p class="captiontitle">쫑코치 김종석</p>
-                            <p class="captiontxt">
-                            압구정 팀에스 소속<br>
-                            Netflix [ultimate beastmaster]<br>한국대표팀<br>
-                            제시, 사유리, 서인국 담당트레이너<br>
-                            인스타그램 @jjong_team_s<br>
-                            </p>
+                            <p class="captiontitle">${trainer.trainerNickname } ${trainer.trainerName }</p>
+                            <p class="captiontxt">${trainer.trainerCareer }</p>
                         </div>
                     </a>
                 </div>
+            </c:forEach>
                 <div class="trainer">
                     <a href="#">
                         <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
