@@ -10,20 +10,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.data.RBoardMapper1;
 import com.bit.hellopt.data.RBoardMapper2;
+import com.bit.hellopt.vo.User;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
-import com.bit.hellopt.vo.user.User;
 
 
 @Service
 public class RBoardServiceImpl implements RBoardService {
-	
+
 	@Autowired
 	RBoardMapper1 mapper;
 	RBoardMapper2 mapper2;
-	
-	
-	
+
+
+
 	@Override
 	public void insertBoard(RBoardVO vo) {
 		mapper.insertRBoard(vo);
@@ -32,13 +32,13 @@ public class RBoardServiceImpl implements RBoardService {
 	@Override
 	public void updateBoard(RBoardVO vo) {
 		mapper.updateRBoard(vo);
-		
+
 	}
 
 	@Override
 	public void deleteBoard(RBoardVO vo) {
 		mapper.deleteRBoard(vo);
-		
+
 	}
 
 	@Override
@@ -46,7 +46,11 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper.getRBoardList();
 	}
 
+	@Override
+	public List<RBoardVO> selectUser(User vo) {
+		return mapper2.join1(vo);
 
+	}
 	@Override
 	public void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx) {
 		HashMap<String, Object> hm = new HashMap<>();
@@ -70,12 +74,12 @@ public class RBoardServiceImpl implements RBoardService {
 
 	@Override
 	public User selectUser() {
-		
+
 		return mapper.selectUser();
 	}
 	@Override
 	public List<User> selectUserId(String userId) {
-		
+
 		return mapper.selectUserId(userId);
 	}
 

@@ -11,7 +11,7 @@
 <html>
 <head>
 
-<%-- <link rel ="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board/reviewBoard.css"> --%>
+
 <meta charset="UTF-8">
 <title>후기게시판</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
@@ -22,10 +22,10 @@
 	width: 800px;
 	margin: 0 auto 150px;
 	padding-top: 10%;
-	text-align: center; 
+	text-align: center;
 }
 	a{color: white}
-	
+
 	td .star{
 		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 		  background-size: auto 100%;
@@ -40,37 +40,37 @@
 </head>
 <body>
 
-<div id = "container">
+<div>
 <form>
-	<p><a href="${pageContext.request.contextPath}/review/insertform">후기쓰러가기</a></p>	
-<c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
-<table class="tbl_wrap">
-	<thead class="tbl_head01">
+	<p><a href="${pageContext.request.contextPath}/insertform">후기쓰러가기</a></p>
+<c:forEach var="rBoard" items="${rBoardList }" varStatus="status">
+<table border>
+	<thead>
 		<tr>
 			<td rowspan="3"><img class="profile" src="/hellopt/img/${user.userProfile}"></td>
-			
-			<td>글쓴이 : ${rBoard.userName }</td>  
+
+			<td>글쓴이 : ${rBoard.userName }</td>
 		</tr>
 		<tr>
 			<td>수업이름</td>
 		</tr>
 		<tr>
-		
-		<td class="starRev"> 
+
+		<td class="starRev">
 <%-- 	if문 써서	<c:forEach var="i" begin="1" end="5" step="1" >
 				<c:if test="${i  > rBoard.revStar }">
 					<span class="star"></span>
-				</c:if>	
+				</c:if>
 				<c:if test="${i  <= rBoard.revStar }">
 					<span class="star on"></span>
-				</c:if>	
+				</c:if>
 			</c:forEach> --%>
 			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
 				<span class="star on">i</span>
-			</c:forEach> 
+			</c:forEach>
 			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
 				<span class="star">i</span>
-			</c:forEach>   
+			</c:forEach>
 			</td>
 		</tr>
 	</thead>
@@ -98,7 +98,7 @@
 </table>
 </c:forEach>
 </form>
-</div>	
+</div>
 
 </body>
 </html>

@@ -3,11 +3,9 @@ package com.bit.hellopt.config;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-@ComponentScan(basePackages = { "com.bit.hellopt" })
 @Configuration
 public class RootConfig {
 
@@ -17,7 +15,8 @@ public class RootConfig {
 		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		dataSource.setUrl("jdbc:oracle:thin:@oracle-database-1.corysvhuak3l.ap-northeast-2.rds.amazonaws.com:1521:ORCL");
 		dataSource.setUsername("admin");
-    dataSource.setPassword("danhobak");
+        dataSource.setPassword("danhobak");
+ 
         return dataSource;
 	}
 }
