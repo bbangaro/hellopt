@@ -1,7 +1,7 @@
 package com.bit.hellopt.vo.trainer;
 
 public class TrainerVO {
-	private String trainerName, trainerNickname, trainerCareer, traninerTalk, trainerMedia, fkUserId;
+	private String trainerName, trainerNickname, trainerCareer, trainerTalk, trainerMedia, fkUserId;
 	private int trainerIdx;
 	
 	public TrainerVO() {}
@@ -30,12 +30,12 @@ public class TrainerVO {
 		this.trainerCareer = trainerCareer;
 	}
 
-	public String getTraninerTalk() {
-		return traninerTalk;
+	public String gettrainerTalk() {
+		return trainerTalk;
 	}
 
-	public void setTraninerTalk(String traninerTalk) {
-		this.traninerTalk = traninerTalk;
+	public void settrainerTalk(String trainerTalk) {
+		this.trainerTalk = trainerTalk;
 	}
 
 	public String getTrainerMedia() {
@@ -65,7 +65,7 @@ public class TrainerVO {
 	@Override
 	public String toString() {
 		return "TrainerVO [trainerName=" + trainerName + ", trainerNickname=" + trainerNickname + ", trainerCareer="
-				+ trainerCareer + ", traninerTalk=" + traninerTalk + ", trainerMedia=" + trainerMedia + ", fkUserId="
+				+ trainerCareer + ", trainerTalk=" + trainerTalk + ", trainerMedia=" + trainerMedia + ", fkUserId="
 				+ fkUserId + ", trainerIdx=" + trainerIdx + "]";
 	}
 }

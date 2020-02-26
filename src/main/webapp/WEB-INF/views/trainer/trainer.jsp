@@ -25,20 +25,18 @@
         </div>
         </div>
         <div class="trainerbox">
-           
-            
+
             <div class="trainer_inner">
             <c:forEach var="trainer" items="${trainerList }">
                 <div class="trainer">
-                    <a href="trainerdetail?trainerIdx=${trainer.trainerIdx }">
+                    <a href="trainerinfo?trainerIdx=${trainer.trainerIdx }">
                         <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
                         <div class="trainer_caption">
                             <p class="captiontitle">${trainer.trainerNickname } ${trainer.trainerName }</p>
-                            <p class="captiontxt">${trainer.trainerCareer }</p>
+                            <pre class="captiontxt">${trainer.trainerCareer }</pre>
                         </div>
                     </a>
                 </div>
-        
             </c:forEach>
             </div>
             

@@ -17,11 +17,11 @@ public class TrainerController {
 	@Autowired
 	TrainerService service;
 	
-	@PostMapping("/inserttrainer")
+	@PostMapping("/trainerinsert")
 	public String insertTrainer(TrainerVO info) {
 		service.insertTrainer(info);
 		System.out.println("트레이너 입력 성공!");
-		return "redirect:/trainer/trainer";
+		return "redirect:/trainer/trainerinsert";
 	}
 	
 	@RequestMapping("/trainer")
@@ -34,9 +34,9 @@ public class TrainerController {
 	
 	@RequestMapping("/trainerinfo")
 	public String getTrainerDetail(int trainerIdx, Model model) {
-		TrainerVO trainerDetail = service.getTrainerDetail(trainerIdx);
+		TrainerVO trainerinfo = service.getTrainerDetail(trainerIdx);
 		System.out.println("트레이너 상세정보 가져오기 성공!");
-		model.addAttribute("trainerDetail", trainerDetail);
+		model.addAttribute("trainerinfo", trainerinfo);
 		return "trainer/trainerinfo";
 	}
 	
