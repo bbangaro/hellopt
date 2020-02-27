@@ -6,11 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bit.hellopt.service.meeting.MeetingService;
-import com.bit.hellopt.vo.LiveClass;
+import com.bit.hellopt.vo.meeting.CategoryCodeVO;
+import com.bit.hellopt.vo.meeting.LocalVO;
 import com.bit.hellopt.vo.meeting.MeetingVO;
 
 @Controller
@@ -43,9 +44,21 @@ public class MeetingController {
 		return "meeting/meetingOne";
 	}
 
-	@GetMapping("/meetingWrite")
-	public String meetingWrite(Principal principal) {
+	@RequestMapping("/meetingWrite")
+	public String meetingWrite(Principal principal,  Model model) {
+		List<LocalVO> localList = service.getLocalVO();
+		List<CategoryCodeVO> categoryList = service.getCategoryCodeVO();
+		System.out.println("getMeetingWrite 성공");
+		
+		model.addAttribute("localList", localList);
+		model.addAttribute("categoryList", categoryList);
 		return "meeting/meetingWrite";
 	}
 	
+	@PostMapping("/meetingWriteOk")
+	public String meetingWriteOk(Principal principal, MeetingVO meetingVO) {
+		service.insertMeeting(meetingVO);
+		System.out.println("getMeetingWriteOk 성공");
+		return "redirect:/meeting";
+	}
 }
