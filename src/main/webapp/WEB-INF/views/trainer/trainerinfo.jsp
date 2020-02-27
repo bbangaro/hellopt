@@ -29,11 +29,11 @@
                 </div>
                 <div class="trainer_media">
                     <h3 class="trainer_media_txt">트레이너 영상</h3>
-                    <div class="trainer_media_box"><%-- ${trainerinfo.trainerMedia } --%>
+                    <div class="trainer_media_box">
                     <iframe width="792" height="300"
-									src="https://www.youtube.com/embed/${trainerinfo.trainerMedia }" frameborder="0"
-									allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-									allowfullscreen></iframe>
+							src="https://www.youtube.com/embed/${trainerinfo.trainerMedia }" frameborder="0"
+							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="trainer_reply">

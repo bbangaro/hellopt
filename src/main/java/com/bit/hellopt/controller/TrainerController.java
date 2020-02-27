@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,11 +18,16 @@ public class TrainerController {
 	@Autowired
 	TrainerService service;
 	
-	@PostMapping("/trainerinsert")
+	@PostMapping("/inserttrainer" )
 	public String insertTrainer(TrainerVO info) {
 		service.insertTrainer(info);
 		System.out.println("트레이너 입력 성공!");
-		return "redirect:/trainer/trainerinsert";
+		return "redirect:/trainer";
+	}
+	
+	@GetMapping("/trainerinsert")
+	public String trainerinsert() {
+		return "trainer/trainerinsert";
 	}
 	
 	@RequestMapping("/trainer")
