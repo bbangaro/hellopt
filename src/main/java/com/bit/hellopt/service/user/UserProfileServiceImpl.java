@@ -25,7 +25,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 	ServletContext servletContext;
 
 	@Override
-	public void insertProfile(User user, MultipartFile file) {
+	public String insertProfile(User user, MultipartFile file) {
 		
 		ProfileVO profile = new ProfileVO();
 		profile.setFkUserId(user.getUserId());
@@ -47,6 +47,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return storedName;
 	}
 
 	@Override

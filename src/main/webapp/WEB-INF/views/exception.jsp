@@ -14,6 +14,6 @@ color: white;
 <body>
 <h4>${err.getCause()}</h4>
 <p>${err.getMessage()}</p>
-
+<p>${ err.printStackTrace() }</p>
 </body>
 </html>

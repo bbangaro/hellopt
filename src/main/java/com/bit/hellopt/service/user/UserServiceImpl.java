@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bit.hellopt.data.UserMapper;
+import com.bit.hellopt.data.UserXMLMapper;
 import com.bit.hellopt.vo.user.User;
 
 @Service
@@ -14,6 +15,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserMapper mapper;
+	@Autowired
+	UserXMLMapper xmlMapper;
+	
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -37,6 +41,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User findUserById(String userId) {
 		return mapper.selectUserById(userId);
+		//return xmlMapper.selectUser(userId);
 	}
 
 	@Override

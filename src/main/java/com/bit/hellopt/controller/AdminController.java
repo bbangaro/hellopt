@@ -33,15 +33,14 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/user/{userId}")
-	public String adminUserManagementDetail(@PathVariable("userId")String userId, Model model) {
+	public String adminUserManagementDetail(@PathVariable("userId") String userId, Model model) {
 		User user = userService.findUserById(userId);
-		ProfileVO profile =  profileService.selectProfile(userId);
-		if(profile == null) {
-			user.setUserProfile("");
-		} else {
+
+		ProfileVO profile = profileService.selectProfile(userId);
+		if (profile != null) {
 			user.setUserProfile(profile.getStoredFileName());
 		}
-		
+
 		model.addAttribute("user", user);
 		return "adminUserManagementDetail";
 	}

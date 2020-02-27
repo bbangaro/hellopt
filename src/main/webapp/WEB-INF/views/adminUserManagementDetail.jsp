@@ -17,7 +17,7 @@
 		action="${pageContext.request.contextPath}/admin/user/update"
 		method="POST" modelAttribute="user" enctype="multipart/form-data">
 		<ul>
-			<c:if test="${ user.userProfile ne ''}">
+			<c:if test="${ not empty user.userProfile }">
 				<li><img src="${pageContext.request.contextPath}/file/${ user.userProfile }" alt="profile"></li>
 			</c:if>
 			
