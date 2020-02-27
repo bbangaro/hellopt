@@ -98,7 +98,7 @@
 		</tr>
 	</table>		
 	</form:form>
-	<p><a href="exerciseInfoList">운동 정보 목록 가기</a></p>
+	<p><a href="exerciseinfolist">운동 정보 목록 가기</a></p>
 </div>
 
 

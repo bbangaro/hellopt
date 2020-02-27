@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.hellopt.data.exercise.ExerciseMapper;
+import com.bit.hellopt.vo.exercise.ExerciseInformationFileVO;
 import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 
 
@@ -48,6 +49,21 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 	@Override
 	public List<ExerciseInformationVO> getExerciseInformationList(ExerciseInformationVO vo) {
 		return mapper.getExerciseInformationList(vo);
+	}
+	@Override
+	public List<ExerciseInformationVO> selectFile(ExerciseInformationFileVO evo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void uploadFile(String exerciseInformationFileOname, String saveFileName, long fileSize, int exerciseIdx) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public List<ExerciseInformationFileVO> getFileList(int exerciseIdx) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

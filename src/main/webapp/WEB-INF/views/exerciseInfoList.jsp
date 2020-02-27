@@ -27,10 +27,10 @@
 
 <div id="container">
 	<h1>운동정보 목록</h1>
-	<h3>연문님 환영합니다~!!!</h3>
+	<h3>${isUser}님 환영합니다~!!!</h3>
 
 	<!-- 검색을 위한 폼 -->
-	<form action="exerciseInfoList" method="post">
+	<form action="exerciseinfolist" method="post">
 	<table class="border-none">
 		<tr>
 			<td>
@@ -67,7 +67,7 @@
 		<tr>
 			<td class="center">${exerciseInformation.exerciseIdx }</td>
 			<td>
-				<a href="exerciseInfo?exerciseIdx=${exerciseInformation.exerciseIdx }">
+				<a href="exerciseinfo?exerciseIdx=${exerciseInformation.exerciseIdx }">
 					${exerciseInformation.exerciseName }
 				</a>
 			</td>

@@ -28,7 +28,7 @@ import com.bit.hellopt.vo.exercisetip.ExerciseInformationTipListVO;
 import com.bit.hellopt.vo.exercisetip.ExerciseInformationTipVO;
 
 @Controller
-@SessionAttributes("exerciseInformationTip") //exerciseInformation 라는 이름의 Model이 있으면 session에 저장
+@SessionAttributes("exerciseinformationtip") //exerciseInformation 라는 이름의 Model이 있으면 session에 저장
 public class ExerciseInformationTipController {
 	@Autowired
 	private ExerciseInformationTipService exerciseInformationTipService;
@@ -51,7 +51,7 @@ public class ExerciseInformationTipController {
 
 	//리턴타입 ModelAndView -> String 변경해서 리턴타입 통일
 	//전달할 데이터 저장타입  ModelAndView -> Model
-	@RequestMapping("/exerciseInfoTipList")
+	@RequestMapping("/exerciseinfotiplist")
 	//post인지 getMapping인지 써줘야함
 	public String getExerciseInformationTipList(ExerciseInformationTipVO vo, Model model) {
 		System.out.println(">>> 글 전체 목록 조회 처리-getExerciseInformationTipList()");
@@ -77,7 +77,7 @@ public class ExerciseInformationTipController {
 	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//전달할 데이타 저장타입 : ModleAndView -> Model
-	@RequestMapping("Exercise-InfoTip")
+	@RequestMapping("exerciseinfotip")
 	public String getExerciseInformationTip(ExerciseInformationTipVO vo, Model model) {
 		System.out.println(">>> 글 상세 조회 처리 - getExerciseInformationTip()");
 		
@@ -97,12 +97,12 @@ public class ExerciseInformationTipController {
 		return "insertExerciseInformationTip";
 	}
 	
-	@GetMapping("insertExerciseInformationTipform")
+	@GetMapping("insertexerciseinformationtipform")
 	public String form() {
 		return "insertExerciseInformationTipform";
 	}
 	
-	@RequestMapping("insertExerciseInformationTip")
+	@RequestMapping("insertexerciseinformationtip")
 	public String insertExerciseInformationTip(ExerciseInformationTipVO vo, @RequestParam("tipPictures") MultipartFile file, HttpServletRequest request,
 			Model model) throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertExerciseInformationTip()");
@@ -156,7 +156,7 @@ public class ExerciseInformationTipController {
 	
 	//@ModelAttribute("exerciseInformation") : Model에 exerciseInformation 라는 속성명의 객체 있으면 사용
 	//    없으면 exerciseInformation라는 이름으로 새로 생성 
-	@RequestMapping("/updateExercise-InfoTip")
+	@RequestMapping("/updateexerciseinfotip")
 	public String updateExerciseInformationTip(@ModelAttribute("exerciseInformationTip") ExerciseInformationTipVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateExerciseInformationTip()");
 		System.out.println("> exerciseInformationTip vo : " + vo);
@@ -165,7 +165,7 @@ public class ExerciseInformationTipController {
 		return "exerciseInfoTipList";
 	}
 	
-	@RequestMapping("/deleteExerciseInformationTip")
+	@RequestMapping("/deleteexerciseinformationtip")
 	public String deleteExerciseInformationTip(ExerciseInformationTipVO vo) {
 		System.out.println(">>> 글 삭제 처리 - deleteExerciseInformationTip()"); 
 		
@@ -174,7 +174,7 @@ public class ExerciseInformationTipController {
 	}
 	
 	//---------------------------------
-	@RequestMapping("/dataTransform/tipform")
+	@RequestMapping("/datatransform/tipform")
 	@ResponseBody //응답객체의 몸체 담아서 전달
 	public ExerciseInformationTipListVO dataTransform(ExerciseInformationTipVO vo) {
 		System.out.println(">>> dataTransform() 실행(XML)");

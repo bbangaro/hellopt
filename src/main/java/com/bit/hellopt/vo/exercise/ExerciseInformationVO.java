@@ -1,6 +1,6 @@
 package com.bit.hellopt.vo.exercise;
 
-import java.io.File;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,6 +47,7 @@ public class ExerciseInformationVO {
 	private int repetition;
 	private int setCount;
 	private int restTime;
+	private List<ExerciseInformationFileVO> filevo;
 	
 	//검색조건용 필드 추가
 	private String searchCondition;
@@ -164,6 +165,25 @@ public class ExerciseInformationVO {
 
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
+	}
+
+	//파일업로드를 위한 생성자
+	public List<ExerciseInformationFileVO> getFilevo() {
+		return filevo;
+	}
+
+	public void setFilevo(List<ExerciseInformationFileVO> filevo) {
+		this.filevo = filevo;
+	}
+
+	@Override
+	public String toString() {
+		return "ExerciseInformationVO [exerciseIdx=" + exerciseIdx + ", exerciseName=" + exerciseName
+				+ ", exerciseParts=" + exerciseParts + ", howtoExercise=" + howtoExercise + ", exercisePicturesName="
+				+ exercisePicturesName + ", exerciseVideo=" + exerciseVideo + ", caution=" + caution + ", repetition="
+				+ repetition + ", setCount=" + setCount + ", restTime=" + restTime + ", filevo=" + filevo
+				+ ", searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + ", uploadFile="
+				+ uploadFile + "]";
 	}
 	
 }
