@@ -18,6 +18,8 @@ public interface RBoardMapper1 {
 	@Select("SELECT * FROM REVIEW_BOARD_TB ORDER BY REV_IDX DESC")
 	public List<RBoardVO> getRBoardList();
 	
+//	@Select("SELECT * FROM REVIEW_BOARD_TB ORDER BY REV_IDX DESC")
+//	public List<RBoardVO> getRBoardList(RBoardVO vo);
 	
 	//파일저장명 찾아오는 셀렉트문구
 	@Select("SELECT * FROM REVIEW_FILE_TB WHERE REV_IDX= #{revIdx}")

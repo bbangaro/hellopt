@@ -20,6 +20,7 @@ public class RBoardServiceImpl implements RBoardService {
 	
 	@Autowired
 	RBoardMapper1 mapper;
+	@Autowired
 	RBoardMapper2 mapper2;
 	
 	
@@ -46,7 +47,6 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper.getRBoardList();
 	}
 
-
 	@Override
 	public void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx) {
 		HashMap<String, Object> hm = new HashMap<>();
@@ -58,10 +58,6 @@ public class RBoardServiceImpl implements RBoardService {
 		mapper.uploadFile(hm);
 	}
 
-	@Override
-	public List<RBoardVO> selectFile(RFileVO fvo) {
-		return mapper2.join2(fvo);
-	}
 
 	@Override
 	public List<RFileVO> getFileList(int revIdx) {
@@ -78,6 +74,18 @@ public class RBoardServiceImpl implements RBoardService {
 		
 		return mapper.selectUserId(userId);
 	}
+
+	@Override
+	public List<RBoardVO> getProfilePic() {
+		
+		return mapper2.getProfilePic();
+	}
+
+	@Override
+	public List<RBoardVO> Join2() {
+		return mapper2.join2();
+	}
+
 
 
 }

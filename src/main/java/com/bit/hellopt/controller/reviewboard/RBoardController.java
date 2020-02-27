@@ -33,6 +33,7 @@ import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
+import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 
 @Controller
@@ -52,25 +53,21 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review")
-	public String getRBoardList(RBoardVO vo, Model model,
+	public String getRBoardList(RBoardVO vo, Model model, User uvo, 
 			@AuthenticationPrincipal CustomUserDetail customUser) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 		
-		List<RBoardVO> rBoardList = rService.getRBoardList();
-
-		for(RBoardVO rvo :rBoardList) {
+//		List<RBoardVO> rBoardList = rService.getRBoardList(vo);
+		List<RBoardVO> userjoin = rService.Join2();
+		
+		for(RBoardVO rvo :userjoin) {
 			rvo.setFilevo(rService.getFileList(rvo.getRevIdx()));
 		}
+		System.out.println("rBoardList: " + userjoin.toString());
+//		System.out.println("userjoin: " + userjoin.toString());
 
-		User user = new User();
-		String profile = profileService.selectProfile(customUser.getUsername()).getStoredFileName();
-		user.setUserProfile(profile);
-		
-		
-		System.out.println("rBoardList: " + rBoardList.toString());
-
-		model.addAttribute("rBoardList", rBoardList);
-		model.addAttribute("user", user);
+		model.addAttribute("rBoardList", userjoin);
+//		model.addAttribute("userjoin", userjoin);
 		
 		return "reviewBoard";
 	}
@@ -84,7 +81,7 @@ public class RBoardController {
 		String name = customUser.getName();
 		vo.setUserId(userId);
 		vo.setUserName(name);
-		vo.setUser(rService.selectUserId(userId));
+		
 		
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		System.out.println("글 vo " +vo);
@@ -131,16 +128,23 @@ public class RBoardController {
 		return "redirect:/review";
 	}
 	
-	
-	@PostMapping("/updateboard")
-	public String updateBoard(@ModelAttribute("board")RBoardVO vo) {
+	@PostMapping("/review/updateform")
+	public String updateBoardForm(@ModelAttribute("rBoardList")RBoardVO vo) {
+		System.out.println(">>> 글 수정 처리 - updateBoard()");
+		System.out.println(">> board vo :" + vo);
+		
+		rService.updateBoard(vo);
+		return "insertRBoard";
+	}
+	@PostMapping("/review/updateboard")
+	public String updateBoard(@ModelAttribute("rBoardList")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		System.out.println(">> board vo :" + vo);
 		
 		rService.updateBoard(vo);
 		return "redirect:/review";
 	}
-	@PostMapping("/deleteboard")
+	@PostMapping("/review/deleteboard")
 	public String deleteBoard(RBoardVO vo) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
