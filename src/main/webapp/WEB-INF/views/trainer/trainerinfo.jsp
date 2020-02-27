@@ -21,15 +21,20 @@
                 <h2 class="trainertitle">${trainerinfo.trainerName }<span class="nick">${trainerinfo.trainerNickname }</span></h2>
                 <div class="career">
                     <h3 class="h3_font">경력</h3>
-                    <p class="trainertxt">${trainerinfo.trainerCareer }</p>
+                    <pre class="trainertxt">${trainerinfo.trainerCareer }</pre>
                 </div>
                 <div class="word">
                     <h3 class="h3_font">트레이너 한마디</h3>
-                    <p class="trainertxt">${trainerinfo.trainerTalk }</p>
+                    <pre class="trainertxt">${trainerinfo.trainerTalk }</pre>
                 </div>
                 <div class="trainer_media">
                     <h3 class="trainer_media_txt">트레이너 영상</h3>
-                    <div class="trainer_media_box">${trainerinfo.trainerMedia }</div>
+                    <div class="trainer_media_box"><%-- ${trainerinfo.trainerMedia } --%>
+                    <iframe width="792" height="300"
+									src="https://www.youtube.com/embed/${trainerinfo.trainerMedia }" frameborder="0"
+									allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+									allowfullscreen></iframe>
+                    </div>
                 </div>
                 <div class="trainer_reply">
                     <div class="trainer_reply_box">

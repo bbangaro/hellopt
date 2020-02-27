@@ -52,7 +52,9 @@ body {
 .trainertxt {
     font-size: 14px;
     padding: 20px 0px;
-    font-weight: lighter
+    font-weight: lighter;
+    overflow: hidden;
+    color: white;
 }
 
 .trainer_media {
@@ -164,13 +166,13 @@ body {
 
 .trainer_caption {
 	position: absolute;
-    bottom: 0;
+    bottom: 25px;
     left: 0;
-    width: 300px;
-    height: 180px;
+    width: 283px;
+    height: 150px;
     background-color: black;
     opacity: 0.7;
-    padding: 20px;
+    padding: 15px;
 }
 
 .captiontitle {
@@ -181,6 +183,7 @@ body {
 }
 
 .captiontxt {
-    font-size: 14px;
+	font-size: 14px;
     color: white;
+    overflow: hidden;
 }
