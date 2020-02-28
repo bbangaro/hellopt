@@ -57,68 +57,6 @@
 			  <br>
 			</c:forEach>
 			  
-			   <div class="service-details">
-			    <img src="${pageContext.request.contextPath}/resources/images/meeting/sample4.jpg" alt="realm">
-			    <div class="service-hover-text">
-			      <h3>직장인 2040</h3>
-			      <h4>경기도</h4>
-			      <p>30일 남음 </p>
-			    </div>
-			    <div class="service-white service-text">
-			      <a>실내 스포츠 </a><a>진행중인 모임</a>
-			      <p>[HelloPT]직장인 2040</p>
-			      <a href="#">경기도</a><a>회비 15,000원</a>
-			    </div>
-			  </div>
-			  
-			   <br>
-			  
-			   <div class="service-details">
-			     <img src="${pageContext.request.contextPath}/resources/images/meeting/sample5.jpg" alt="realm">
-			    <div class="service-hover-text">
-			      <h3>직장인 2040</h3>
-			      <h4>경기도</h4>
-			      <p>30일 남음 </p>
-			    </div>
-			    <div class="service-white service-text">
-			      <a>실내 스포츠 </a><a>진행중인 모임</a>
-			      <p>[HelloPT]직장인 2040</p>
-			      <a href="#">경기도</a><a>회비 15,000원</a>
-			    </div>
-			  </div>
-			  
-			  <br>
-			  
-			   <div class="service-details">
-			     <img src="${pageContext.request.contextPath}/resources/images/meeting/sample.jpg" alt="realm">
-			    <div class="service-hover-text">
-			      <h3>직장인 2040</h3>
-			      <h4>경기도</h4>
-			      <p>30일 남음 </p>
-			    </div>
-			    <div class="service-white service-text">
-			      <a>실내 스포츠 </a><a>진행중인 모임</a>
-			      <p>[HelloPT]직장인 2040</p>
-			      <a href="#">경기도</a><a>회비 15,000원</a>
-			    </div>
-			  </div>
-			  
-			  <br>
-			  
-			   <div class="service-details">
-			     <img src="${pageContext.request.contextPath}/resources/images/meeting/sample2.jpg" alt="realm">
-			    <div class="service-hover-text">
-			      <h3>직장인 2040</h3>
-			      <h4>경기도</h4>
-			      <p>30일 남음 </p>
-			    </div>
-			    <div class="service-white service-text">
-			      <a>실내 스포츠 </a><a>진행중인 모임</a>
-			      <p>[HelloPT]직장인 2040</p>
-			      <a href="#">경기도</a><a>회비 15,000원</a>
-			    </div>
-			  </div>
-			  
 			</div>
 	
 	    	<a class="button" href="#" role="button">

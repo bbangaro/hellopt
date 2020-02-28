@@ -46,6 +46,7 @@ public class MeetingController {
 
 	@RequestMapping("/meetingWrite")
 	public String meetingWrite(Principal principal,  Model model) {
+		
 		List<LocalVO> localList = service.getLocalVO();
 		List<CategoryCodeVO> categoryList = service.getCategoryCodeVO();
 		System.out.println("getMeetingWrite 성공");
@@ -58,7 +59,38 @@ public class MeetingController {
 	@PostMapping("/meetingWriteOk")
 	public String meetingWriteOk(Principal principal, MeetingVO meetingVO) {
 		service.insertMeeting(meetingVO);
-		System.out.println("getMeetingWriteOk 성공");
+		System.out.println("getMeetingOk 성공");
 		return "redirect:/meeting";
+	}
+	
+	@RequestMapping("/meetingUpdate")
+	public String meetingUpdate(Principal principal, Model model, int meetingIdx) {
+	MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+	System.out.println("getMeetingUpdate 성공");
+
+	List<LocalVO> localList = service.getLocalVO();
+	List<CategoryCodeVO> categoryList = service.getCategoryCodeVO();
+	
+	model.addAttribute("localList", localList);
+	model.addAttribute("categoryList", categoryList);
+	model.addAttribute("meetingOne", meetingOne);
+	
+	
+	return "meeting/meetingUpdate";
+	}
+	
+	@PostMapping("/meetingUpdateOk")
+	public String meetingUpdateOk(Principal principal, MeetingVO meetingVO) {
+		service.updateMeetingOk(meetingVO);
+		System.out.println("getmeetingUpdateOk 성공");
+		return "redirect:/meeting";
+	}
+	
+	@RequestMapping("/meetingDelete")
+	public String meetingDelete(int meetingIdx) {
+		service.deleteMeeting(meetingIdx);
+		System.out.println("getMeetingDelete 성공");
+	
+	return "meeting/meeting";
 	}
 }

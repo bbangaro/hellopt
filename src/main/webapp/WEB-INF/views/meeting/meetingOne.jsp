@@ -22,7 +22,8 @@
 	<div class="hello_body center">
 	
 		<h2>Meeting</h2>
-		
+			<a class="button" href="${pageContext.request.contextPath}/meetingUpdate?meetingIdx=${meetingOne.meetingIdx }" role="button">수정</a>
+			<a class="button" href="${pageContext.request.contextPath}/meetingDelete?meetingIdx=${meetingOne.meetingIdx }" role="button">삭제</a>
 			<div class="boarder-oline">
 				
 				<p class="meeting-detail">${meetingOne.mSubject } </p>

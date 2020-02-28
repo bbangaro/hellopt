@@ -43,6 +43,8 @@ public class MeetingVO {
     
     private String userName;
     
+    private String userId;
+    
     // getter / setter
 	public int getMeetingIdx() {
 		return meetingIdx;
@@ -147,6 +149,12 @@ public class MeetingVO {
 	
 	
 	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -172,7 +180,7 @@ public class MeetingVO {
 				+ mSubject + ", mMemo=" + mMemo + ", details=" + details + ", include=" + include + ", mLocation="
 				+ mLocation + ", mLocationC=" + mLocationC + ", mPrice=" + mPrice + ", progressSt=" + progressSt
 				+ ", mCnt=" + mCnt + ", insDt=" + insDt + ", mCategory=" + mCategory + ", local=" + local
-				+ ", userName=" + userName + "]";
+				+ ", userName=" + userName + ", userId=" + userId + "]";
 	}
     
 

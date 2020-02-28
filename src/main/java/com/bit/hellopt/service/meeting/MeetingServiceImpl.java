@@ -45,7 +45,20 @@ public class MeetingServiceImpl implements MeetingService {
 	@Override
 	public void insertMeeting(MeetingVO meetingVO) {
 		meetingMapper.insertMeeting(meetingVO);
+		
+	}
 
+	// 모임 수정 
+	@Override
+	public void updateMeetingOk(MeetingVO meetingVO) {
+		meetingMapper.updateMeeting(meetingVO);
+		
+	}
+	
+	// 모임 삭제
+	@Override
+	public void deleteMeeting(int meetingIdx) {
+		meetingMapper.deleteMeeting(meetingIdx);
 		
 	}
 

@@ -17,9 +17,8 @@
 	
 		<h2>Meeting</h2>
 		
-		<form  action="meetingWriteOk" method="post">
+		<form  action="meetingUpdateOk" method="post">
 			<div class="boarder-line">
-				
 				<h3 class="meeting-main">모임 개설 신청하기</h3>
 				<hr class="meeting-line">
 				<!-- 내용물 넣기 -->
@@ -30,10 +29,10 @@
 								
 							<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="user" />
-								<input class="username" name="fkUserId" type="text" value="${user.username}" disabled>
+								<input class="username" name="fkUserId" type="text" value="${user.username} " disabled>
 							</sec:authorize>
 								
-								<input class="meeting-comment" name="mComment" placeholder="숨쉬기 운동 마스터 입니다. 함께 하실분 : )">
+								<input class="meeting-comment" name="mComment" value=${meetingOne.mComment }>
 							</div>
 							
 							
@@ -60,31 +59,31 @@
 					<div class="meeting-title">모임일자
 						<div class="meeting-content">
 							<p class="meeting-calender"><img src="${pageContext.request.contextPath}/resources/images/meeting/calendar.png"></p>
-							<input class="datepicker" name="mDate" type="text" placeholder="2020/04/03">						
+							<input class="datepicker" name="mDate" type="text" value=${meetingOne.mDate}>						
 						</div>
 					</div>
 					
 					<div class="meeting-title">모임제목
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mSubject" type="text" placeholder="제목">						
+							<input class="meeting-sub" name="mSubject" type="text" value=${meetingOne.mSubject }>						
 						</div>
 					</div>
 					
 					<div class="meeting-title">한줄소개
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mMemo" type="text" placeholder="8시간 소요, 자차 이동, 최대 8명">						
+							<input class="meeting-sub" name="mMemo" type="text" value=${meetingOne.mMemo }>						
 						</div>
 					</div>
 					
 					<div class="meeting-title">상세정보
 						<div class="meeting-content2">
-							<input class="meeting-textarea" name="details"  placeholder="모임소개  &#13;&#10; 1. 최소인원 : &#13;&#10; 2. 출발시간 : &#13;&#10; 3. 도착시간 : &#13;&#10; 4. 점       심 : &#13;&#10; 5. 준  비  물 : ">
+							<input class="meeting-textarea" name="details"  value=${meetingOne.details }>
 						</div>
 					</div>
 					
 					<div class="meeting-title">포함사항
 						<div class="meeting-content2">
-							<input class="meeting-include" name="include" placeholder="점심식사, 간식">					
+							<input class="meeting-include" name="include" value=${meetingOne.include }>					
 						</div>
 					</div>
 					
@@ -92,17 +91,19 @@
 						<div class="meeting-content">
 							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/map.png"></p>
 							<div class="meeting-content2">
-								<input class="meeting-mcomment" name="mLocation" placeholder="AK백화점 정문">
-								<input class="meeting-mcomment" name="mLocationC" placeholder="AK백화점 정문쪽 입니다">
+								<input class="meeting-mcomment" name="mLocation" value=${meetingOne.mLocation }>
+								<input class="meeting-mcomment" name="mLocationC" value=${meetingOne.mLocationC }>
 							</div>
 						</div>
 					</div>
 					
 					<div class="meeting-title">회　　비
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mPrice" type="text" placeholder="30,000원">						
+							<input class="meeting-sub" name="mPrice" type="text" value=${meetingOne.mPrice }>						
 						</div>
 					</div>
+					
+					<input name="meetingIdx" type="hidden" value=${meetingOne.meetingIdx }>
 				
 				
 				

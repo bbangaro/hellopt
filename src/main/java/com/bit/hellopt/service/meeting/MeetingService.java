@@ -24,5 +24,12 @@ public interface MeetingService {
 	// 게시글 입력
 	void insertMeeting(MeetingVO meetingVO);
 	
+	// 게시글 수정
+	void updateMeetingOk(MeetingVO meetingVO);
+	
+	// 게시글 삭제
+	void deleteMeeting(int meetingIdx);
+	
+	
 
 }
