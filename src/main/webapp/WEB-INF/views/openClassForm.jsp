@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,6 +61,10 @@
 			            <input type="text" name="price" id="price" required value="" placeholder="가격">
 			          </li>
 			        </ul>
+			        <sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal" var="user" />
+						<input type="hidden" value="${user.username }" name="fkUserId">
+					</sec:authorize>
 			        <input type="submit" name="" value="Send" class="send-btn">
 			    </form>
 			  </div>

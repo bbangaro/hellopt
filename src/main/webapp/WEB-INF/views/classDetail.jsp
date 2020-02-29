@@ -53,7 +53,7 @@
 									<li>
 										<div class="date">수업 기간</div>
 										<div class="title">
-											<h3>${classDetail.classType }</h3>
+											<h3>${classDetail.classLength }</h3>
 										</div>
 									</li>
 									<li>
@@ -87,8 +87,8 @@
 										</div>
 									</li>
 									<li>
-										<button class="detail-btn">강의정보수정</button> 
-										<button class="detail-btn" onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의삭제</button>
+										<button class="detail-btn" onclick="location.href='regclass?fkClassIdx=${classDetail.classIdx}'">강의 신청</button> 
+										<button style="float:right" class="detail-btn" onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의삭제</button>
 									</li>
 								</ul>
 							</div>
