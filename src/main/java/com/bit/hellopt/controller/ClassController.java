@@ -25,7 +25,7 @@ public class ClassController {
 	public String insertClass(LiveClass info) {
 		service.insertClass(info);
 		System.out.println("라이브 클래스 생성 성공!!");
-		return "redirect:/classlist";
+		return "redirect:/class/classlist";
 	}
 	
 	@RequestMapping("/classlist")
@@ -33,7 +33,7 @@ public class ClassController {
 		List<LiveClass> liveClassList = service.getLiveClass();
 		System.out.println("라이브 클래스 정보 가져오기 성공!!");
 		model.addAttribute("liveClassList", liveClassList);
-		return "classList";
+		return "class/classList";
 	}
 	
 	@RequestMapping("/classdetail")
@@ -41,14 +41,14 @@ public class ClassController {
 		LiveClass classDetail = service.getClassDetail(classIdx);
 		System.out.println("라이브 클래스 상세정보 가져오기 성공!!");
 		model.addAttribute("classDetail", classDetail);
-		return "classDetail";
+		return "class/classDetail";
 	}
 	
 	@RequestMapping("/deleteclass")
 	public String deleteClass(int classIdx) {
 		service.deleteClass(classIdx);
 		System.out.println("라이브 클래스 삭제 성공!!");
-		return "redirect:/classlist";
+		return "redirect:/class/classlist";
 	}
 	
 	
@@ -67,7 +67,7 @@ public class ClassController {
 		System.out.println("강의 신청 성공!!");
 		
 		//리턴할 곳 수정(강의 신청 완료하면 보여줄 페이지)
-		return "classList";
+		return "class/classList";
 	}
 	
 	// *마이페이지에서 강의 신청 취소(delete or update)와 신청한 강의 보기(select) 가능하게 만들기
