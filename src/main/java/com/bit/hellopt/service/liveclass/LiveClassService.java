@@ -2,7 +2,7 @@ package com.bit.hellopt.service.liveclass;
 
 import java.util.List;
 
-import com.bit.hellopt.vo.LiveClass;
+import com.bit.hellopt.vo.live.LiveClass;
 
 public interface LiveClassService {
 	//1. 입력 - 파라미터명 수정하기!!

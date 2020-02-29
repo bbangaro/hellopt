@@ -1,4 +1,4 @@
-package com.bit.hellopt.vo;
+package com.bit.hellopt.vo.live;
 
 import java.util.Date;
 
