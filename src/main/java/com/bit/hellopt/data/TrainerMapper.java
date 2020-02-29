@@ -28,7 +28,7 @@ public interface TrainerMapper {
 	public void deleteTrainer(int trainerIdx);
 	
 	@Update("UPDATE FROM INTRODUCE_TRAINER_TB WHERE TRAINER_IDX = #{trainerIdx}")
-	public void updateTrainer(int trainerIdx);
+	public TrainerVO updateTrainer(int trainerIdx);
 }
 
 
