@@ -3,15 +3,13 @@
 (function () {
   var removeSuccess;
 
-  removeSuccess = function () {
-    return $('.button').removeClass('success');
-  };
+//  removeSuccess = function () {
+//    return $('.button').removeClass('success');
+//  };
 
   $(document).ready(function () {
-    return $('.button').click(function () {
+    return $('.send-btn').click(function () {
  
-//      $(this).addClass('success');
-//      return setTimeout(removeSuccess, 3000);
     	location.href="/hellopt/meetingWrite";
       
     });

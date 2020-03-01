@@ -34,26 +34,27 @@
 								
 								<input class="meeting-comment" name="mComment" value=${meetingOne.mComment }>
 							</div>
-							
-							
-							<div class="profile-detail">
-								<select class="m-select" name="fkMCategoryNo">
+						</div>
+					</div>
+					
+					<div class="meeting-title">모임유형
+						<div class="profile-detail">
+							<select class="m-select" name="fkMCategoryNo">
 							<c:forEach var="category" items="${categoryList}">
 									<option value="${category.mCategoryNo }">${category.mCategory}</option>
 							</c:forEach>
-								</select>
-							</div>
+							</select>
 						</div>
-							<div class="profile-detail">
-								<select class="m-select" name="fkLocalNo">
-								<c:forEach var="local" items="${localList}">
-									<option value="${local.localNo }">${local.local }</option>
-								</c:forEach>	
-								</select>	
-							</div>
-							
-							
-							
+					</div>
+					
+					<div class="meeting-title">모임지역
+						<div class="profile-detail">
+							<select class="m-select" name="fkLocalNo">
+							<c:forEach var="local" items="${localList}">
+								<option value="${local.localNo }">${local.local }</option>
+							</c:forEach>	
+							</select>	
+						</div>
 					</div>
 					
 					<div class="meeting-title">모임일자
@@ -111,15 +112,8 @@
 					
 				<!-- 내용물 넣기 -->				
 				<hr class="meeting-line">
-				 <input type="submit" name="" value="개설 신청하기" class="meeting-button">
+				 <input type="submit" name="" value="수정하기" class="send-btn2">
 				
-				<a class="button" href="#" role="button">
-				    <div class="icon">
-				        <i class="fa fa-remove">
-				        		 <img src="${pageContext.request.contextPath}/resources/images/meeting/meeting_write.png"/>
-				        </i>
-				    </div>
-				</a>
 			</div>	
 	    </form>
 			

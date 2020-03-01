@@ -22,9 +22,8 @@
 	<div class="hello_body center">
 	
 		<h2>Meeting</h2>
-			<a class="button" href="${pageContext.request.contextPath}/meetingUpdate?meetingIdx=${meetingOne.meetingIdx }" role="button">수정</a>
-			<a class="button" href="${pageContext.request.contextPath}/meetingDelete?meetingIdx=${meetingOne.meetingIdx }" role="button">삭제</a>
 			<div class="boarder-oline">
+			
 				
 				<p class="meeting-detail">${meetingOne.mSubject } </p>
 				<hr class="meeting-line">
@@ -110,14 +109,11 @@
 			
 				    
 				<!-- 버튼 부분 -->
-				<a class="button" href="#" role="button">
-				    <span class="meeting-button">돌아가기</span>
-				    <div class="icon">
-				        <i class="fa fa-remove">
-				        	<img class="thumbnail" src="${pageContext.request.contextPath}/resources/images/meeting/meeting_write.png"/>
-				        </i>
-				    </div>
-				</a>
+				<input type="submit" name="" value="목록으로" class="send-btn2">
+				
+				<!-- 여기는 작성자만 보인다 -->
+				<a class="send-btn3" href="${pageContext.request.contextPath}/meetingUpdate?meetingIdx=${meetingOne.meetingIdx }" role="button">수정</a>
+				<a class="send-btn3" href="${pageContext.request.contextPath}/meetingDelete?meetingIdx=${meetingOne.meetingIdx }" role="button">삭제</a>
 				
 			</div> <!-- border-line의 끝 -->
 			
@@ -127,14 +123,8 @@
 				<p class="datepicker">${meetingOne.mDate }</p>
 				<p class="area"> ${meetingOne.local } </p>	
 				
-				<a class="button" href="#" role="button">
-				    <span class="meeting-button">예약하기</span>
-				    <div class="icon">
-				        <i class="fa fa-remove">
-				        		 <img src="${pageContext.request.contextPath}/resources/images/meeting/meeting_write.png"/>
-				        </i>
-				    </div>
-				</a>
+				
+				<input type="submit" name="" value="예약하기" class="send-btn2">
 				
 				<p class="m-condition"> 신청현황 : 2/16명 </p>	
 				

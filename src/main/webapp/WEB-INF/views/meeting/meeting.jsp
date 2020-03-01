@@ -44,13 +44,15 @@
 			    <img src="${pageContext.request.contextPath}/resources/images/meeting/sample3.jpg" alt="realm">
 			    <div class="service-hover-text">
 			      <h3>${meeting.mSubject}</h3>
-			      <h4>${meeting.fkLocalNo }</h4>
+			      <h4 class="mlocal">${meeting.fkLocalNo }</h4>
 			      <p>30일 남음 </p>
 			    </div>
 			    <div class="service-white service-text">
-			      <a>${meeting.mCategory}</a><a>${meeting.progressSt}</a>
-			      <p><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
-			      <a href="#">${meeting.local }</a><a>회비 ${meeting.mPrice }원</a>
+			      <a class="mcategory">${meeting.mCategory}</a><a class="mpro">${meeting.progressSt}</a>
+			      <div class="minner">
+			      <p class="msub"><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
+			      <a class="mcategory">${meeting.local }</a><a class="mprice">회비 ${meeting.mPrice }원</a>
+			      </div>
 			    </div>
 			  </div>
 			  
@@ -59,19 +61,18 @@
 			  
 			</div>
 	
+			 <input type="submit" name="" value="모임 개설하기" class="send-btn">
+	
+	<%--  버튼 디자인 변경
 	    	<a class="button" href="#" role="button">
 			    <span class="meeting-button">모임 개설하기</span>
 			    <div class="icon">
 			        <i class="fa fa-remove">
 			        		 <img src="${pageContext.request.contextPath}/resources/images/meeting/meeting_write.png"/>
-                        <!-- 
-			        	<a href="${pageContext.request.contextPath}/calender">
-			        	</a>
-                         -->
 			        </i>
 			    </div>
 			</a>
-	    
+	 --%>    
 		</div>
 	    
 	</div>

@@ -5,7 +5,9 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
-	<script src="${pageContext.request.contextPath}/resources/js/meeting/meetingWrite.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=***&libraries=services,clusterer,drawing"></script>
+	
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 
@@ -35,26 +37,27 @@
 								
 								<input class="meeting-comment" name="mComment" placeholder="숨쉬기 운동 마스터 입니다. 함께 하실분 : )">
 							</div>
-							
-							
-							<div class="profile-detail">
-								<select class="m-select" name="fkMCategoryNo">
-							<c:forEach var="category" items="${categoryList}">
-									<option value="${category.mCategoryNo }">${category.mCategory}</option>
-							</c:forEach>
-								</select>
-							</div>
 						</div>
-							<div class="profile-detail">
-								<select class="m-select" name="fkLocalNo">
-								<c:forEach var="local" items="${localList}">
-									<option value="${local.localNo }">${local.local }</option>
-								</c:forEach>	
-								</select>	
-							</div>
-							
-							
-							
+					</div>
+					
+					<div class="meeting-title">모임유형
+						<div class="profile-detail2">
+							<select class="m-select" name="fkMCategoryNo">
+							<c:forEach var="category" items="${categoryList}">
+								<option value="${category.mCategoryNo }">${category.mCategory}</option>
+							</c:forEach>
+							</select>
+						</div>
+					</div>
+					
+					<div class="meeting-title">모임지역
+						<div class="profile-detail2">
+							<select class="m-select" name="fkLocalNo">
+							<c:forEach var="local" items="${localList}">
+								<option value="${local.localNo }">${local.local }</option>
+							</c:forEach>	
+							</select>	
+						</div>
 					</div>
 					
 					<div class="meeting-title">모임일자
@@ -90,9 +93,18 @@
 					
 					<div class="meeting-title">모임위치
 						<div class="meeting-content">
-							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/map.png"></p>
+							
+							<!-- 지도 api 부분 입니다  시작-->
+							<input type="button" class="address-btn" onclick="getAddress()" value="우편번호 찾기"> 
+												
+							<div id="map" style="width:300px;height:300px;"></div>
+							<div>
+								<input type="hidden" id="search_name" disabled />
+							</div>
+							<!-- 지도 api 부분 입니다 끝 -->
+							
 							<div class="meeting-content2">
-								<input class="meeting-mcomment" name="mLocation" placeholder="AK백화점 정문">
+								<input type="hidden" class="meeting-mcomment" id="mLocation" name="mLocation" placeholder="AK백화점 정문">
 								<input class="meeting-mcomment" name="mLocationC" placeholder="AK백화점 정문쪽 입니다">
 							</div>
 						</div>
@@ -103,28 +115,19 @@
 							<input class="meeting-sub" name="mPrice" type="text" placeholder="30,000원">						
 						</div>
 					</div>
-				
-				
-				
-				
 					
 				<!-- 내용물 넣기 -->				
 				<hr class="meeting-line">
-				 <input type="submit" name="" value="개설 신청하기" class="meeting-button">
+				<input type="submit" name="" value="개설 신청하기" class="send-btn2">
 				
-				<a class="button" href="#" role="button">
-				    <div class="icon">
-				        <i class="fa fa-remove">
-				        		 <img src="${pageContext.request.contextPath}/resources/images/meeting/meeting_write.png"/>
-				        </i>
-				    </div>
-				</a>
 			</div>	
 	    </form>
+			
 			
 	</div>
 </div>
 	
 	<!-- js에서 태그들을 찾고 있어서 여기다가 위치 시켜야 함 -->
+	<script src="${pageContext.request.contextPath}/resources/js/meeting/meetingWrite.js"></script>
 	
 </body>

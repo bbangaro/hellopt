@@ -12,15 +12,12 @@
 
 
 //이동 
- (function () {
+ 
+(function () {
 	  var removeSuccess;
 
-	  removeSuccess = function () {
-	    return $('.button').removeClass('success');
-  };
-
-  $(document).ready(function () {
-    return $('.button').click(function () {
+	  $(document).ready(function () {
+	    return $('.send-btn2').click(function () {
  
     	location.href="/hellopt/meeting";
       
@@ -28,3 +25,5 @@
   });
 
 }).call(this);
+
+ 
