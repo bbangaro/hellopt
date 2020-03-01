@@ -32,7 +32,7 @@
 								
 							<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="user" />
-								<input class="username" name="fkUserId" type="text" value="${user.username}" disabled>
+								<input class="username" name="fkUserId" type="text" value="${user.username}" readonly>
 							</sec:authorize>
 								
 								<input class="meeting-comment" name="mComment" placeholder="숨쉬기 운동 마스터 입니다. 함께 하실분 : )">
@@ -104,8 +104,8 @@
 							<!-- 지도 api 부분 입니다 끝 -->
 							
 							<div class="meeting-content2">
-								<input type="hidden" class="meeting-mcomment" id="mLocation" name="mLocation" placeholder="AK백화점 정문">
-								<input class="meeting-mcomment" name="mLocationC" placeholder="AK백화점 정문쪽 입니다">
+								<input type="hidden" class="meeting-mcomment" id="mLocation" name="mLocation" placeholder="위치">
+								<input class="meeting-mcomment" name="mLocationC" placeholder="위치 상세설명">
 							</div>
 						</div>
 					</div>

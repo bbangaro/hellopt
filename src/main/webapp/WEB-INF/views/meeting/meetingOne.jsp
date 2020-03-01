@@ -10,7 +10,9 @@
 	<!-- Link Swiper's CSS -->
 	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
 	
-
+	<!-- 카카오 map -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=***&libraries=services,clusterer,drawing"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 </head>
 
@@ -26,6 +28,13 @@
 			
 				
 				<p class="meeting-detail">${meetingOne.mSubject } </p>
+				
+				<!-- 여기는 작성자만 보인다 -->
+				<div class="mUD">
+				<a class="send-btn3" href="${pageContext.request.contextPath}/meetingUpdate?meetingIdx=${meetingOne.meetingIdx }" role="button">수정</a>
+				<a class="send-btn3" href="${pageContext.request.contextPath}/meetingDelete?meetingIdx=${meetingOne.meetingIdx }" role="button">삭제</a>
+				</div>
+				
 				<hr class="meeting-line">
 				<!-- 내용물 넣기 -->
 				
@@ -79,7 +88,10 @@
 					<hr class="meeting-line">
 					
 					<p class="meeting-detail"> 만나는 장소 </p>
-					<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/map.png"></p>
+					
+					<div id="map" style="width:300px;height:300px;"></div>
+					<input type="hidden" id="mLocation" value="${meetingOne.mLocation }">
+					<input type="hidden" id="search_name" disabled />
 					<p class="one-font"> ${meetingOne.mLocationC }</p>
 
 					<hr class="meeting-line">
@@ -110,10 +122,6 @@
 				    
 				<!-- 버튼 부분 -->
 				<input type="submit" name="" value="목록으로" class="send-btn2">
-				
-				<!-- 여기는 작성자만 보인다 -->
-				<a class="send-btn3" href="${pageContext.request.contextPath}/meetingUpdate?meetingIdx=${meetingOne.meetingIdx }" role="button">수정</a>
-				<a class="send-btn3" href="${pageContext.request.contextPath}/meetingDelete?meetingIdx=${meetingOne.meetingIdx }" role="button">삭제</a>
 				
 			</div> <!-- border-line의 끝 -->
 			

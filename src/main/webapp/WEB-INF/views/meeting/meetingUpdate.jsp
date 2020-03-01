@@ -6,6 +6,11 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
 	<script src="${pageContext.request.contextPath}/resources/js/meeting/meetingWrite.js"></script>
+	
+	<!-- 카카오 map -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=***&libraries=services,clusterer,drawing"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 </head>
 
 
@@ -90,9 +95,18 @@
 					
 					<div class="meeting-title">모임위치
 						<div class="meeting-content">
-							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/map.png"></p>
+						
+							<!-- 지도 api 부분 입니다  시작-->
+							<input type="button" class="address-btn" onclick="getAddress()" value="우편번호 찾기"> 
+												
+							<div id="map" style="width:300px;height:300px;"></div>
+							<div>
+								<input type="hidden" id="search_name" disabled />
+							</div>
+							<!-- 지도 api 부분 입니다 끝 -->
+							
 							<div class="meeting-content2">
-								<input class="meeting-mcomment" name="mLocation" value=${meetingOne.mLocation }>
+								<input type="hidden" class="meeting-mcomment" id="mLocation" name="mLocation" value="${meetingOne.mLocation }">
 								<input class="meeting-mcomment" name="mLocationC" value=${meetingOne.mLocationC }>
 							</div>
 						</div>
@@ -121,5 +135,6 @@
 </div>
 	
 	<!-- js에서 태그들을 찾고 있어서 여기다가 위치 시켜야 함 -->
+	<script src="${pageContext.request.contextPath}/resources/js/meeting/meetingUpdate.js"></script>
 	
 </body>
