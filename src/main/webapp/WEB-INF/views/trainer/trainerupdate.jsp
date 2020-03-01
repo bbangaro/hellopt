@@ -25,7 +25,7 @@
 			<div class="sub-content">
 			  <div class="basic-table">
 			    <form class="open" action="updatetrainer" method="post">
-				<%-- <input type="hidden" value="${trainer.trainerIdx }" > --%>
+				<input type="hidden" value="${trainer.trainerIdx }" >
 			        <ul>
 			          <li>
 			            <label for="className" class="sound_only">트레이너 이름</label>

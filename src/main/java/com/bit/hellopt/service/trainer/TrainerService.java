@@ -9,7 +9,7 @@ public interface TrainerService {
 	void insertTrainer(TrainerVO trainerVO);
 	
 	//2. 수정
-	TrainerVO updateTrainer(int trainerIdx);
+	void updateTrainer(TrainerVO trainerVO);
 	
 	//3. 삭제
 	void deleteTrainer(int trainerIdx);

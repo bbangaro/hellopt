@@ -18,6 +18,7 @@ public class TrainerController {
 	@Autowired
 	TrainerService service;
 
+	//트레이너 목록 가져오기
 	@RequestMapping("/trainer")
 	public String getTrainer(Model model) {
 		List<TrainerVO> trainerList = service.getTrainerList();
@@ -26,6 +27,7 @@ public class TrainerController {
 		return "trainer/trainer";
 	}
 	
+	//트레이너 상세정보 가져오기
 	@RequestMapping("/trainerinfo")
 	public String getTrainerDetail(int trainerIdx, Model model) {
 		TrainerVO trainerinfo = service.getTrainerDetail(trainerIdx);
@@ -35,7 +37,7 @@ public class TrainerController {
 	}
 	
 	//관리자 페이지에서 입력, 수정, 삭제
-	
+	//트레이너 정보 입력
 	@PostMapping("/inserttrainer" )
 	public String insertTrainer(TrainerVO info) {
 		service.insertTrainer(info);
@@ -48,6 +50,7 @@ public class TrainerController {
 		return "trainer/trainerinsert";
 	}
 	
+	//트레이너 정보 삭제
 	@RequestMapping("/deletetrainer")
 	public String deleteTrainer(int trainerIdx) {
 		service.deleteTrainer(trainerIdx);
@@ -55,17 +58,18 @@ public class TrainerController {
 		return "redirect:/traineradmin";
 	}
 	
-	@GetMapping("/trainerupdate")
-	public String trainerupdate() {
-		return "trainer/trainerupdate";
-	}
-	
+	//트레이너 정보 수정
 	@RequestMapping("/updatetrainer")
 	public String updateTrainer(int trainerIdx, Model model) {
 		TrainerVO trainerinfo = service.getTrainerDetail(trainerIdx);
 		System.out.println("트레이너 관리자 디테일 성공!");
 		model.addAttribute("trainerinfo", trainerinfo);
 		return "redirect:/traineradmin";
+	}
+	
+	@GetMapping("/trainerupdate")
+	public String trainerupdate() {
+		return "trainer/trainerupdate";
 	}
 	
 /*	@RequestMapping("/trainerinfo")
@@ -76,6 +80,7 @@ public class TrainerController {
 		return "trainer/trainerinfo";
 	}*/
 	
+	//관리자 페이지에서 트레이너 목록 수정,삭제 컨트롤 할 수 있는 화면
 	@RequestMapping("/traineradmin")
 	public String getAdminTrainer(Model model) {
 		List<TrainerVO> trainerList = service.getTrainerList();
@@ -84,14 +89,5 @@ public class TrainerController {
 		return "trainer/traineradmin";
 	}
 	
-/*	@GetMapping("/trainer")
-	public String trainer() {
-		return "trainer/trainer";
-	}
-	
-	@GetMapping("/trainerinfo")
-	public String trainerinfo() {
-		return "trainer/trainerinfo";
-	}*/
 	
 }
