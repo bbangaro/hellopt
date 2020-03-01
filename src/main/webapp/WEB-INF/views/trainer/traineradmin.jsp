@@ -31,7 +31,7 @@
                         </div>
                     </a>
                     <div class="trainer_btnbox">
-	                    <a class="trainer_adminbtn" href="${pageContext.request.contextPath}/updatetrainer?trainerIdx=${trainer.trainerIdx }">수정</a>
+	                    <a class="trainer_adminbtn" href="${pageContext.request.contextPath}/trainerupdate?trainerIdx=${trainer.trainerIdx }">수정</a>
 	                    <span><a class="trainer_adminbtn" href="${pageContext.request.contextPath}/deletetrainer?trainerIdx=${trainer.trainerIdx }">삭제</a></span>
                     </div>
                 </div>
