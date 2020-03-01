@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="navigation_inner">
+<div class="navigation_inner footer">
 	<ul class="sns_list">
 		<li><a class="sns_00" href="#" target="_blank">twitter</a></li>
 		<li><a class="sns_01" href="#" target="_blank">facebook</a></li>
