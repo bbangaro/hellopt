@@ -222,6 +222,57 @@
     font-size: 15px;
   }
   
+   .r-btn{
+     border: 1px solid black;
+    width: 220px;
+    margin-top: 6px;
+    padding: 5px 0 7px;
+    
+    background: #b4000f;
+    color: white;
+    font-size: 15px;
+    /*
+    font-family: 'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
+    */
+    font-family:  'Jeju Gothic', serif;
+  }
+  
+ .m-condition {
+    font-size: 15px;
+    text-align: center;
+
+    border: 0.5px solid white;
+    background-color: white;
+    color: darkslategray;
+
+	width: 220px;
+	height: 33px;
+    padding: 5px;
+    margin-top: -40px;
+    margin-left: -4px;
+}
+ .drop-rv {
+  position: relative;
+  display: inline-block;
+  }
+ .dropdown-content {
+
+  display: none;
+  position: absolute;
+  min-width: 220px;
+  padding: 5px 5px;
+  z-index: 1;
+  
+} 
+ .drop-rv:hover .dropdown-content {
+ 	display: block;
+ }
+ 
+  .drop-rv:hover .dropdown-content .r-btn {
+    background-color: red;
+ }
+  
+  
   .mUD{
     display: flow-root;  	
   }
@@ -230,7 +281,13 @@
     margin: auto;
   }
   
-
+  
+.area{
+	font-size: 15px;
+	margin-bottom: 10px;
+    margin-left: 141px;
+}
+	
 .boarder-line {
 	border: 1px solid black;
 	width: 100%; height: auto;
@@ -701,7 +758,7 @@ h2 {
 }
 .meeting-content {
 	display: inline-block;
-	margin-left: 15px;
+	margin-left: 19px;
 	
 	
 }
@@ -742,15 +799,6 @@ h2 {
 }
 .meeting-map{
 	display: inline-block;
-}
-.datepicker {
-	margin-top: 92px;
-	width: 130px;
-	background-color: black;
-    color: white;
-    border: 0px;
-    border-bottom: 1px solid #7d7d7d;
-	
 }
 .money {
 	margin-top: 92px;
@@ -797,6 +845,19 @@ h2 {
     color: white;
     border: 0px;
     border-bottom: 1px solid #7d7d7d;
+}
+
+.max-count{
+	display: inline-block;
+	margin-left: 10px;
+}
+.max-detail{
+	border: 1px solid white;
+	margin-left: 9px;
+	width: 50px;
+    height: 35px;
+    border-radius: 4px;
+    text-align: center;
 }
 
 /*미팅 상세 페이지*/
@@ -904,7 +965,5 @@ h2 {
 }
 
 
-.auto{
-	autocomplete="off"
-}
+
 

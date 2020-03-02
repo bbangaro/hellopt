@@ -42,6 +42,12 @@ public interface MeetingMapper {
 			"  #{mDate}, #{mSubject}, #{mMemo}, #{details}, #{include} , #{mLocation}, #{mLocationC}, #{mPrice}, '진행중', 0, SYSDATE ) " ) 
 	public void insertMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	
+	@Insert("INSERT INTO MEETING_APPLY_TB " + 
+			"  (FK_MEETING_IDX, FK_USER_ID, MAX_COUNT) " + 
+			"VALUES " + 
+			"  ( (SELECT MAX(MEETING_IDX) FROM MEETING_TB WHERE FK_USER_ID = #{fkUserId} ) , #{fkUserId}, #{maxCount} ) " ) 
+	public void insertMaxMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
+	
 	@Update("UPDATE MEETING_TB SET " + 
 			"  M_COMMENT = #{mComment} , FK_M_CATEGORY_NO = #{fkMCategoryNo}, FK_LOCAL_NO = #{fkLocalNo} , " +
 			"  M_DATE= #{mDate} , M_SUBJECT = #{mSubject}, M_MEMO = #{mMemo}, DETAILS = #{details}, INCLUDE = #{include}, " +

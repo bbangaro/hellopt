@@ -59,6 +59,7 @@ public class MeetingController {
 	@PostMapping("/meetingWriteOk")
 	public String meetingWriteOk(Principal principal, MeetingVO meetingVO) {
 		service.insertMeeting(meetingVO);
+		service.insertMaxMeeting(meetingVO);
 		System.out.println("getMeetingOk 성공");
 		return "redirect:/meeting";
 	}

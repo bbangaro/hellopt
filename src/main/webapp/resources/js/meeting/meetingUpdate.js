@@ -86,3 +86,12 @@ function getAddress() {
 	}).open();
 	
 }	
+
+//데이트 피커 적용하기
+$('#datePicker').datepicker({
+	format : "yyyy-mm-dd", //날짜 형식
+	todayHighlight: true ,
+	todayBtn: 'linked' ,
+	clearBtn : true
+	//languge : "kr"  
+});

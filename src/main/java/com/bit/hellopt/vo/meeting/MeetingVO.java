@@ -40,10 +40,12 @@ public class MeetingVO {
     private String mCategory;
     // 지역코드 
     private String local;
-    
+    // 유저이름
     private String userName;
-    
+    // 유저아이디
     private String userId;
+    // 모임최대인원
+    private int maxCount;
     
     // getter / setter
 	public int getMeetingIdx() {
@@ -149,6 +151,12 @@ public class MeetingVO {
 	
 	
 	
+	public int getMaxCount() {
+		return maxCount;
+	}
+	public void setMaxCount(int maxCount) {
+		this.maxCount = maxCount;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -180,7 +188,7 @@ public class MeetingVO {
 				+ mSubject + ", mMemo=" + mMemo + ", details=" + details + ", include=" + include + ", mLocation="
 				+ mLocation + ", mLocationC=" + mLocationC + ", mPrice=" + mPrice + ", progressSt=" + progressSt
 				+ ", mCnt=" + mCnt + ", insDt=" + insDt + ", mCategory=" + mCategory + ", local=" + local
-				+ ", userName=" + userName + ", userId=" + userId + "]";
+				+ ", userName=" + userName + ", userId=" + userId + ", maxCount=" + maxCount + "]";
 	}
     
 

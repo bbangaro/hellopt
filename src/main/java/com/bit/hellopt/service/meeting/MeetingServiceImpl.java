@@ -45,8 +45,14 @@ public class MeetingServiceImpl implements MeetingService {
 	@Override
 	public void insertMeeting(MeetingVO meetingVO) {
 		meetingMapper.insertMeeting(meetingVO);
+	}
+	// 모임 최대 인원수
+	@Override
+	public void insertMaxMeeting(MeetingVO meetingVO) {
+		meetingMapper.insertMaxMeeting(meetingVO);
 		
 	}
+
 
 	// 모임 수정 
 	@Override
@@ -61,5 +67,6 @@ public class MeetingServiceImpl implements MeetingService {
 		meetingMapper.deleteMeeting(meetingIdx);
 		
 	}
+
 
 }
