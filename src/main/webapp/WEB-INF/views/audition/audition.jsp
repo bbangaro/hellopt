@@ -78,6 +78,7 @@
                             player.stopVideo();
                         }
                     </script>
+                    </div>
                 </div>
             </div>
             <div class="tabbox">
