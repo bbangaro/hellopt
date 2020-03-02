@@ -31,8 +31,14 @@ a:hover {
 .tab_qna{
     color: white;
 }
+.tab_qna:hover{
+	color:#dc3545;
+}
 .tab_qnaover{
     color: white;
+}
+.tab_qnaover:hover{
+	color:#dc3545;
 }
 .tabbox_inner li{
     width: 30%;
