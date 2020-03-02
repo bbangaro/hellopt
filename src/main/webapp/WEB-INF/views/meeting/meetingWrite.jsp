@@ -5,9 +5,23 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
+	<!-- 지도  -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=***&libraries=services,clusterer,drawing"></script>
 	
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<!-- 데이트피커 사용하기 -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/bootstrap-datepicker3.css">
+	
+	<!-- css파일 가져오는어 성공하면 지우기
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+	 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<!-- 한글 사용시 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
+	-->
+	
 </head>
 
 
@@ -19,7 +33,7 @@
 	
 		<h2>Meeting</h2>
 		
-		<form  action="meetingWriteOk" method="post">
+		<form class="auto" action="meetingWriteOk" method="post" autocomplete="off">
 			<div class="boarder-line">
 				
 				<h3 class="meeting-main">모임 개설 신청하기</h3>
@@ -62,8 +76,10 @@
 					
 					<div class="meeting-title">모임일자
 						<div class="meeting-content">
-							<p class="meeting-calender"><img src="${pageContext.request.contextPath}/resources/images/meeting/calendar.png"></p>
+							<input class="form-control" type="text" id="datePicker" name="mDate" placeholder="click" >
+							<!-- 피커 완성되면 지우기
 							<input class="datepicker" name="mDate" type="text" placeholder="2020/04/03">						
+							 -->
 						</div>
 					</div>
 					
@@ -129,5 +145,8 @@
 	
 	<!-- js에서 태그들을 찾고 있어서 여기다가 위치 시켜야 함 -->
 	<script src="${pageContext.request.contextPath}/resources/js/meeting/meetingWrite.js"></script>
+	
+	
+	
 	
 </body>
