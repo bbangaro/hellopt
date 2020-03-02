@@ -124,8 +124,9 @@ box-shadow: inset 0 2px 5px  rgba(255,255,255,0.3);}
   width: 25%;
 } */
 .live_list li .date {
-  padding-top: 29px;
-  width: 25%;
+  padding-left: 10px;
+  padding-top: 16px;
+  width: 30%;
   font-size: 18px;
 }
 .live_list li .date .month_day {
@@ -137,7 +138,8 @@ box-shadow: inset 0 2px 5px  rgba(255,255,255,0.3);}
 }
 .live_list li .title {
   padding-top: 16px;
-  width: 60%;
+  width: 50%;
+  font-size: 18px;
 }
 /* .live_list li .title h3 {
   font-size: 30px;
@@ -212,7 +214,7 @@ box-shadow: inset 0 2px 5px  rgba(255,255,255,0.3);}
 }
 
 .detail-btn {
-	width: 40%;
+	width: 49%;
     padding: 5px 0 7px;
     /* border: 1px solid #7d7d7d; */
     margin: 0 auto;

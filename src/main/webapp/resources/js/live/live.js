@@ -42,9 +42,9 @@ function errorMsg(msg, error) {
   }
 }
 
-async function init(e) {
+function init(e) {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    const stream = navigator.mediaDevices.getUserMedia(constraints);
     handleSuccess(stream);
     e.target.disabled = true;
   } catch (e) {

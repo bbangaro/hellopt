@@ -162,6 +162,7 @@ cursor: pointer;
   text-align: center;
 }
 #live .live_img_area{
+  margin: 50px auto;
   width: 100%;
   text-align: center;
 }

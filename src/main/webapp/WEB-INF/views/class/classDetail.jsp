@@ -17,90 +17,91 @@
 	<div id="wrapper">
 		<div id="live">
 			<div class="con-wr">
-				<div class="con-inner sub-sub">
-
+				<div class="con-inner sub-sub ani-adj">
 					<div class="tit-wr tit-wr-ani">
-						<h2>강의상세정보</h2>
+						<h2>강의 상세정보</h2>
 					</div>
-
 					<div class="sub-content">
-						<!-- 썸네일 -->
-						<div class="live_img_area">
-							<iframe width="560" height="315"
-								src="https://www.youtube.com/embed/azxahQi6vFo" frameborder="0"
-								allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-								allowfullscreen></iframe>
-						</div>
-						<!--//썸네일-->
 
-						<!-- 게시판 목록 시작 { -->
-						<div id="bo_list" style="width: 100%">
-
-							<div class="tbl_head01 tbl_wrap">
-								<ul class="live_list">
-									<li>
-										<div class="date">수업 이름</div>
-										<div class="title">
-											<h3>${classDetail.className }</h3>
-										</div>
-									</li>
-									<li>
-										<div class="date">수업 유형</div>
-										<div class="title">
-											<h3>${classDetail.classType }</h3>
-										</div>
-									</li>
-									<li>
-										<div class="date">수업 기간</div>
-										<div class="title">
-											<h3>${classDetail.classLength }</h3>
-										</div>
-									</li>
-									<li>
-										<div class="date">수업 시작일</div>
-										<div class="title">
-											<h3>${classDetail.classStartDate }</h3>
-										</div>
-									</li>
-									<li>
-										<div class="date">수업 요일</div>
-										<div class="title">
-											<h3>${classDetail.classDay }</h3>
-										</div>
-									</li>
-									<li>
-										<div class="date">수업 시간</div>
-										<div class="title">
-											<h3>${classDetail.classTime }</h3>
-										</div>
-									</li>
-									<li>
-										<div class="date">수업 인원</div>
-										<div class="title">
-											<h3>${classDetail.totalMembers }</h3>
-										</div>
-									</li>
-									<li>
-										<div class="date">가격</div>
-										<div class="title">
-											<h3>${classDetail.price }</h3>
-										</div>
-									</li>
-									<li>
-										<button class="detail-btn" onclick="location.href='regclass?fkClassIdx=${classDetail.classIdx}'">강의 신청</button> 
-										<button style="float:right" class="detail-btn" onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의삭제</button>
-									</li>
-								</ul>
+						<div class="content-area clearfix">
+							<!-- 썸네일 -->
+							<div class="live_img_area">
+								<iframe width="560" height="315"
+									src="https://www.youtube.com/embed/azxahQi6vFo" frameborder="0"
+									allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+									allowfullscreen></iframe>
 							</div>
+							<!--//썸네일-->
 						</div>
-						<!--bo_list-->
-						<!--게시판 끝-->
+
+						<div class="basic-table">
+							<table>
+								<colgroup>
+									<col width="22.5%;">
+									<col width="*">
+								</colgroup>
+
+								<tr>
+									<th>수업 이름</th>
+									<td>${classDetail.className }</td>
+								</tr>
+								<tr>
+									<th>수업 유형</th>
+									<td>${classDetail.classType }</td>
+								</tr>
+								<tr>
+									<th>수업 기간</th>
+									<td>${classDetail.classLength }</td>
+								</tr>
+								<tr>
+									<th>수업 시작일</th>
+									<td>${classDetail.classStartDate }</td>
+								</tr>
+								<tr>
+									<th>수업 요일</th>
+									<td>${classDetail.classDay }</td>
+								</tr>
+								<tr>
+									<th>수업 시간</th>
+									<td>${classDetail.classTime }</td>
+								</tr>
+								<tr>
+									<th>수업 인원</th>
+									<td>${classDetail.totalMembers }</td>
+								</tr>
+								<tr>
+									<th>가격</th>
+									<td>${classDetail.price }</td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="basic-caption">
+							<p>※ 강의 신청과 관련한 주의사항을 적어봅시다.</p>
+							<p>※ =================================</p>
+							<p>※ ==================</p>
+						</div>
+
+						<button class="detail-btn"
+							onclick="location.href='regclass?fkClassIdx=${classDetail.classIdx}'">강의
+							신청</button>
+						<button style="float: right" class="detail-btn"
+							onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의삭제</button>
+
 					</div>
-					<!--con-inner-->
+					<!--sub-content-->
+
+					<!--top버튼-->
+					<a href="#" class="top-btn"> <i class="xi-angle-up-thin"></i>
+						<div>top</div>
+					</a>
+
 				</div>
+				<!--con-inner-->
 			</div>
+			<!--con-wr-->
 		</div>
-		<!-- } 게시판 목록 끝 -->
+		<!-- live -->
 	</div>
 	<!-- } 하단 끝 -->
 </body>

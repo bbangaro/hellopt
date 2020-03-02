@@ -48,19 +48,16 @@
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
 										<div class="thum_hover">
-											<div>${liveClass.className }</div>
+											<div>${liveClass.className } ${liveClass.classTime } ${liveClass.liveStatus }</div>
 										</div>
 										<div class="gall_con">
 											<div class="gall_img">
-												<button style="color: white">방송시작</button>
-												<iframe src="https://www.youtube.com/embed/azxahQi6vFo"
-													frameborder="0"
-													allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-													allowfullscreen></iframe>
+												<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
 										</div>
+									<button style="color: white; float:left;">방송시작</button>
+									<a href="classdetail?classIdx=${liveClass.classIdx }" style="color: white; float:right;">${liveClass.className }</a>
 									</div>
-									<a href="classdetail?classIdx=${liveClass.classIdx }" style="color: white">${liveClass.className }</a>
 								</li>
 							</c:forEach>
 						</ul>
