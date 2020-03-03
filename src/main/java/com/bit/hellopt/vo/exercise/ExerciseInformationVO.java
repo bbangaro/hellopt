@@ -1,7 +1,5 @@
 package com.bit.hellopt.vo.exercise;
 
-import java.io.File;
-
 import org.springframework.web.multipart.MultipartFile;
 
 

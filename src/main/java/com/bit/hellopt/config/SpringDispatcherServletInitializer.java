@@ -1,7 +1,5 @@
 package com.bit.hellopt.config;
 
-import java.io.File;
-
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
