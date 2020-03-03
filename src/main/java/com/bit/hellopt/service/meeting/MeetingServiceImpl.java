@@ -52,13 +52,15 @@ public class MeetingServiceImpl implements MeetingService {
 		meetingMapper.insertMaxMeeting(meetingVO);
 		
 	}
-
-
 	// 모임 수정 
 	@Override
 	public void updateMeetingOk(MeetingVO meetingVO) {
 		meetingMapper.updateMeeting(meetingVO);
-		
+	}
+	// 모임 최대 인원수
+	@Override
+	public void updateMaxMeeting(MeetingVO meetingVO) {
+		meetingMapper.updateMaxMeeting(meetingVO);
 	}
 	
 	// 모임 삭제
@@ -67,6 +69,7 @@ public class MeetingServiceImpl implements MeetingService {
 		meetingMapper.deleteMeeting(meetingIdx);
 		
 	}
+
 
 
 }

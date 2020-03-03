@@ -12,6 +12,12 @@
 		<typeAlias alias="exerciseInformationTip" type="com.bit.hellopt.vo.exercisetip.ExerciseInformationTipVO" />
 		<typeAlias alias="ExerciseMapper" type="com.bit.hellopt.data.exercise.ExerciseMapper" />
 		<typeAlias alias="ExerciseTipMapper" type="com.bit.hellopt.data.exercisetip.ExerciseTipMapper" />
+		
+		<!-- 모임개설 관련 -->
+		<typeAlias alias="CategoryCodeVO" type="com.bit.hellopt.vo.meeting.CategoryCodeVO" />
+		<typeAlias alias="LocalVO" type="com.bit.hellopt.vo.meeting.LocalVO" />
+		<typeAlias alias="MeetingVO" type="com.bit.hellopt.vo.meeting.MeetingVO" />
+		<typeAlias alias="MeetingMapper" type="com.bit.hellopt.data.MeetingMapper" />
 	</typeAliases>
 
 </configuration>

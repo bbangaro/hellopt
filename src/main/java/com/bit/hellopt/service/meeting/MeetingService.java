@@ -23,12 +23,14 @@ public interface MeetingService {
 	
 	// 게시글 입력
 	void insertMeeting(MeetingVO meetingVO);
-	
 	// 게시글 입력 > 최대인원수
 	void insertMaxMeeting(MeetingVO meetingVO);
 	
 	// 게시글 수정
 	void updateMeetingOk(MeetingVO meetingVO);
+	// 게시글 수정 > 최대인원수
+	void updateMaxMeeting(MeetingVO meetingVO);
+	
 	
 	// 게시글 삭제
 	void deleteMeeting(int meetingIdx);

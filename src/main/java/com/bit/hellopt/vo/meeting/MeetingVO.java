@@ -1,8 +1,12 @@
 package com.bit.hellopt.vo.meeting;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 public class MeetingVO {
 	
-
     // 게시글_시퀀스 
     private int meetingIdx;
     // 유저아이디 

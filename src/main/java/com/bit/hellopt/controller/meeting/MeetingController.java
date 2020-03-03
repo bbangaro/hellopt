@@ -59,6 +59,10 @@ public class MeetingController {
 	@PostMapping("/meetingWriteOk")
 	public String meetingWriteOk(Principal principal, MeetingVO meetingVO) {
 		service.insertMeeting(meetingVO);
+//		int meetingIdx = meetingVO.getMeetingIdx();
+//		System.out.println(meetingIdx);
+		meetingVO.setMeetingIdx(meetingVO.getMeetingIdx());
+		
 		service.insertMaxMeeting(meetingVO);
 		System.out.println("getMeetingOk 성공");
 		return "redirect:/meeting";
@@ -83,6 +87,7 @@ public class MeetingController {
 	@PostMapping("/meetingUpdateOk")
 	public String meetingUpdateOk(Principal principal, MeetingVO meetingVO) {
 		service.updateMeetingOk(meetingVO);
+		service.updateMaxMeeting(meetingVO);
 		System.out.println("getmeetingUpdateOk 성공");
 		return "redirect:/meeting";
 	}
