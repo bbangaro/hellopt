@@ -26,8 +26,8 @@ public interface TrainerMapper {
 	@Delete("DELETE FROM INTRODUCE_TRAINER_TB WHERE TRAINER_IDX = #{trainerIdx}")
 	public void deleteTrainer(int trainerIdx);
 	
-	@Update("UPDATE FROM INTRODUCE_TRAINER_TB WHERE TRAINER_IDX = #{trainerIdx}")
-	public void updateTrainer(com.bit.hellopt.vo.trainer.TrainerVO trainerVO);
+	@Select("SELECT * FROM INTRODUCE_TRAINER_TB WHERE TRAINER_IDX = #{trainerIdx}")
+	public TrainerVO getTrainerUpdate(int trainerIdx);
 }
 
 

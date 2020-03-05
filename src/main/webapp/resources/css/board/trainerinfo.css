@@ -196,8 +196,13 @@ body {
 	margin: 10px 10px 0px 10px;
 }
 .trainer_adminbtn{
-	padding: 5px 15px;
-    font-size: 13px;
+	padding: 10px 20px;
+    font-size: 15px;
     color: #fff;
     border: 1px solid #7d7d7d;
+}
+
+.trainer_adminbtn:hover{
+	color: #dc3545;
+	text-decoration: none; 
 }

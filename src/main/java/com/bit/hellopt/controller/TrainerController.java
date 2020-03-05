@@ -59,18 +59,23 @@ public class TrainerController {
 	}
 	
 	//트레이너 정보 수정
-	@RequestMapping("/updatetrainer")
-	public String updateTrainer(int trainerIdx, Model model) {
+	@RequestMapping("/trainerupdate")
+	public String getTrainerUpdate(int trainerIdx, Model model) {
 		TrainerVO trainerinfo = service.getTrainerDetail(trainerIdx);
-		System.out.println("트레이너 관리자 디테일 성공!");
+		System.out.println("트레이너 업데이트정보 가져오기 성공!");
 		model.addAttribute("trainerinfo", trainerinfo);
-		return "redirect:/traineradmin";
-	}
-	
-	@GetMapping("/trainerupdate")
-	public String trainerupdate() {
 		return "trainer/trainerupdate";
 	}
+	
+/*	@GetMapping("/trainerupdate")
+	public String trainerupdate() {
+		return "trainer/trainerupdate";
+	}*/
+	
+/*	@GetMapping("/trainerupdate")
+	public String trainerupdate() {
+		return "trainer/trainerupdate";
+	}*/
 	
 /*	@RequestMapping("/trainerinfo")
 	public String getTrainerDetail(int trainerIdx, Model model) {

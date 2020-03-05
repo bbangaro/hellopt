@@ -35,8 +35,8 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
-	public void updateTrainer(TrainerVO trainerVO) {
-		trainerMapper.updateTrainer(trainerVO);
+	public TrainerVO getTrainerUpdate(int trainerIdx) {
+		return trainerMapper.getTrainerUpdate(trainerIdx);
 	}
 }
 

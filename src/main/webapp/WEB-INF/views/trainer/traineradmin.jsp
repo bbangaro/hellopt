@@ -21,7 +21,7 @@
             <div class="trainer_inner">
             <c:forEach var="trainer" items="${trainerList }">
                 <div class="trainer trainerAdmin">
-                    <a href="trainerinfo?trainerIdx=${trainer.trainerIdx }">
+                    <a href="trainerupdate?trainerIdx=${trainer.trainerIdx }">
                         <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
                         <div class="trainer_caption">
                             <p class="captiontitle">
@@ -30,10 +30,10 @@
                             <pre class="captiontxt">${trainer.trainerCareer }</pre>
                         </div>
                     </a>
-                    <div class="trainer_btnbox">
+                    <%-- <div class="trainer_btnbox">
 	                    <a class="trainer_adminbtn" href="${pageContext.request.contextPath}/trainerupdate?trainerIdx=${trainer.trainerIdx }">수정</a>
 	                    <span><a class="trainer_adminbtn" href="${pageContext.request.contextPath}/deletetrainer?trainerIdx=${trainer.trainerIdx }">삭제</a></span>
-                    </div>
+                    </div> --%>
                 </div>
             </c:forEach>
             </div>
