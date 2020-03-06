@@ -50,8 +50,13 @@ public class MeetingServiceImpl implements MeetingService {
 	@Override
 	public void insertMaxMeeting(MeetingVO meetingVO) {
 		meetingMapper.insertMaxMeeting(meetingVO);
-		
 	}
+	// 모임 승낙 테이블
+	@Override
+	public void insertConsentYn(MeetingVO meetingVO) {
+		meetingMapper.insertConsentYn(meetingVO);
+	}
+
 	// 모임 수정 
 	@Override
 	public void updateMeetingOk(MeetingVO meetingVO) {
@@ -70,6 +75,7 @@ public class MeetingServiceImpl implements MeetingService {
 		
 	}
 
+	
 
 
 }

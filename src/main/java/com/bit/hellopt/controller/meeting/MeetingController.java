@@ -37,9 +37,10 @@ public class MeetingController {
 	
 	@RequestMapping("/meetingOne")
 	public String meetingOne(Principal principal, Model model, int meetingIdx) {
-		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
 		
-		System.out.println("getMeetingOne 성공");
+		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+		System.out.println(meetingIdx);
+		System.out.println("getMeetingOne 성공"+ meetingOne.toString());
 		model.addAttribute("meetingOne", meetingOne);
 		return "meeting/meetingOne";
 	}
@@ -64,6 +65,7 @@ public class MeetingController {
 		meetingVO.setMeetingIdx(meetingVO.getMeetingIdx());
 		
 		service.insertMaxMeeting(meetingVO);
+		service.insertConsentYn(meetingVO);
 		System.out.println("getMeetingOk 성공");
 		return "redirect:/meeting";
 	}
@@ -97,6 +99,6 @@ public class MeetingController {
 		service.deleteMeeting(meetingIdx);
 		System.out.println("getMeetingDelete 성공");
 	
-	return "meeting/meeting";
+	return "redirect:/meeting";
 	}
 }

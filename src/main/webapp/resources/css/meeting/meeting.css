@@ -352,20 +352,19 @@ h2 {
 }
 
 .service-details {
-	width: 1440px;
-	height: 250px;	
+	width: 1538px;
+	height: 193px;	
 	overflow: hidden;
 	position: relative;
 	filter:grayscale(50%);
 }
 
 .service-details img {
-	position: absolute;
 	top: 0;
 	left: 0;
 	height: inherit;
-	width: 250px;
-	height: 250px;
+	width: 200px;
+	height: 200px;
 	float: left;
 	transition: all 0.8s;
 	-moz-transition: all 0.8s;
@@ -377,10 +376,11 @@ h2 {
 }
 
 .service-details .service-hover-text h3 {
-	padding: 0px;
-	margin: 0px;
-	font-size: 25px;
-  font-weight:300;
+	padding: 11px;
+	margin-left: -17px;
+	font-size: 18px;
+	text-align: center;
+  	font-weight:300;
   /*
 	font-family: "Open Sans";
   */
@@ -403,9 +403,10 @@ h2 {
 }
 
 .service-details .service-hover-text p {
-	padding-top: 13px;
+	padding: 11px;
+	margin-left: -16px;
 	font-size: 14px;
-	line-height: 20px;
+	text-align: center;
 	/*
 	font-family: "Open Sans";
 	*/
@@ -414,12 +415,12 @@ h2 {
 
 /*호버 움직이는 영역*/
 .service-details .service-hover-text{
-	width: 17.4%;
-	height: 100%;
+	width: 15.4%;
+	height: 200px;
 	position: absolute;
 	top: 0%;
-	left: 50%;
-	padding: 3% 4%;
+	left: 30%;
+	padding: 2% 3% 2% 2%;
 	background: #D90E0E;
 	color: rgba(255,255,255,1);
 /*	display: none;*/
@@ -438,13 +439,13 @@ h2 {
 
 .service-details .service-text {
 	width: 50%;
-	height: inherit;
+	height: 200px;
 	background: #000;
 	position: absolute;
 }
 
 .service-details .service-text p {
-	padding:100px 0px 0px 20px;
+	padding:74px 0px 35px 15px;
 	font-size: 24px;
 	/*
 	font-family: "Open Sans";
@@ -468,36 +469,55 @@ h2 {
  
 }
 .mcategory{
+    margin-top: 10px;
+    margin-left: 15px;
+    float: left;
+    font-size: 18px;
+}
+.lcategory{
+	padding: 17px 20px 20px 15px;
+
 	font-size: 18px;
 	color: black;
+}
+.categoryimg{
+	all: unset;
+	width: 25px !important;
+	height: 25px !important;
+}
+.localimg{
+	all: unset;
+	width: 25px !important;
+	height: 25px !important;
 }
 .mpro{
-	font-size: 18px;
-	margin-left: 575px;
-	color: black;
-}
-.mlocal{
+	margin-top: 10px;
+	margin-right: 15px;
+    float: right;
+    
 	font-size: 18px;
 	color: black;
 }
 .mprice{
+	margin-right: 15px;
+    float: right;
+    
 	font-size: 18px;
-	margin-left: 507px;
 	color: black;
 }
 .minner{
 	border: 0.1px solid black;
-	width: 698px;
+	width: 734px;
     height: 174px;
     margin: auto;
     position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -52%);
 }
 .service-details .service-text {
 	float: left;
-	left: 250px;
+	left: 200px;
 } 
 
 .service-white {

@@ -49,7 +49,11 @@
 		INSERT INTO MEETING_APPLY_TB (FK_MEETING_IDX, FK_USER_ID, MAX_COUNT) 
 		VALUES ( (#{meetingIdx})+1 , #{fkUserId}, #{maxCount} )
 	</insert>
-	
+	<insert id="insertConsentYn" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
+		INSERT INTO CONSENT_YN_TB (FK_MEETING_IDX, CONSENT_YN, CONSENT_CHK_YN) 
+		VALUES ( (#{meetingIdx})+1 , 'N' , 'N' )
+	</insert>
+
 	<update id="updateMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 		UPDATE MEETING_TB SET  
 			   M_COMMENT = #{mComment} , FK_M_CATEGORY_NO = #{fkMCategoryNo}, FK_LOCAL_NO = #{fkLocalNo} , 
@@ -57,6 +61,7 @@
 			   M_LOCATION = #{mLocation}, M_LOCATION_C = #{mLocationC}, M_PRICE = #{mPrice}, INS_DT = SYSDATE 
 	    WHERE  MEETING_IDX = #{meetingIdx}
 	</update>
+	
 	<update id="updateMaxMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 		UPDATE MEETING_APPLY_TB 
 		   SET MAX_COUNT = #{maxCount} 

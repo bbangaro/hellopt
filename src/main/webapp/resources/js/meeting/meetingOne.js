@@ -10,19 +10,19 @@
     });
 
 //이동 
- 
-(function () {
-	  var removeSuccess;
+ var idx = document.getElementById('meeting-idx').value; 
 
-	  $(document).ready(function () {
-	    return $('.send-btn2').click(function () {
- 
-    	location.href="/hellopt/meeting";
-      
-    });
-  });
+$('.send-btn2').click(function () {
+	location.href="/hellopt/meeting";
+});
 
-}).call(this);
+$('.send-u').click(function () {
+	location.href="/hellopt/meetingUpdate?meetingIdx="+idx;
+});
+
+$('.send-d').click(function () {
+	location.href="/hellopt/meetingDelete?meetingIdx="+idx;
+});
 
 /* 지도 api 설정하기 */
 var yx = document.getElementById('mLocation').value;

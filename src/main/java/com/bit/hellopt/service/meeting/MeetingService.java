@@ -25,6 +25,8 @@ public interface MeetingService {
 	void insertMeeting(MeetingVO meetingVO);
 	// 게시글 입력 > 최대인원수
 	void insertMaxMeeting(MeetingVO meetingVO);
+	// 게시글 입력 > 승인 테이블
+	void insertConsentYn(MeetingVO meetingVO);
 	
 	// 게시글 수정
 	void updateMeetingOk(MeetingVO meetingVO);
