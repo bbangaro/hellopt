@@ -10,7 +10,7 @@ public interface TrainerService {
 	
 	//2. 수정
 	//void updateTrainer(TrainerVO trainerVO);
-	TrainerVO getTrainerUpdate(int trainerIdx);
+	void updateTrainer(TrainerVO trainerVO);
 	
 	
 	//3. 삭제

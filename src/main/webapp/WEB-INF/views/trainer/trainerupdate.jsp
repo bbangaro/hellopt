@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,14 +14,15 @@
         <header id="">
 
         </header>
-        <input type="hidden" value="${trainer.trainerIdx }" >
+        <form action="updateTrainer" method="post">
+        <input name="trainerIdx" type="hidden" value=${trainerinfo.trainerIdx }>
         <div class="trainerbox">
             <div class="trainerImg">
                 <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
             </div>
             
             <div class="trainerinfo">
-                <h2 class="trainertitle">${trainerinfo.trainerName }<span class="nick">${trainerinfo.trainerNickname }</span></h2>
+                <h2 class="trainertitle"><input type="text" name="trainerName" value=${trainerinfo.trainerName }><span class="nick">${trainerinfo.trainerNickname }</span></h2>
                 <div class="career">
                     <h3 class="h3_font">경력</h3>
                     <pre class="trainertxt">${trainerinfo.trainerCareer }</pre>
@@ -39,12 +41,13 @@
                     </div>
                 </div>
                 <div class="trainer_btnbox">
-	        	<a class="trainer_adminbtn" href="${pageContext.request.contextPath}/trainerupdate?trainerIdx=${trainer.trainerIdx }">수정</a>
-	            <span><a class="trainer_adminbtn" href="${pageContext.request.contextPath}/deletetrainer?trainerIdx=${trainer.trainerIdx }">삭제</a></span>
+	        	<a class="trainer_adminbtn" href="${pageContext.request.contextPath}/trainerupdate?trainerIdx=${trainerinfo.trainerIdx }">수정</a>
+	            <span><a class="trainer_adminbtn" href="${pageContext.request.contextPath}/deletetrainer?trainerIdx=${trainerinfo.trainerIdx }">삭제</a></span>
                 </div>
             </div>
 
         </div>
+        </form>
     </div>
 
 </body>

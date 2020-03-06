@@ -38,7 +38,7 @@ public class TrainerController {
 	
 	//관리자 페이지에서 입력, 수정, 삭제
 	//트레이너 정보 입력
-	@PostMapping("/inserttrainer" )
+	@PostMapping("/inserttrainer")
 	public String insertTrainer(TrainerVO info) {
 		service.insertTrainer(info);
 		System.out.println("트레이너 입력 성공!");
@@ -65,6 +65,13 @@ public class TrainerController {
 		System.out.println("트레이너 업데이트정보 가져오기 성공!");
 		model.addAttribute("trainerinfo", trainerinfo);
 		return "trainer/trainerupdate";
+	}
+	
+	@PostMapping("/updatetrainer")
+	public String updateTrainer(TrainerVO trainerVO) {
+		service.updateTrainer(trainerVO);
+		System.out.println("트레이너정보수정완료!");
+		return "redirect:/traineradmin";
 	}
 	
 /*	@GetMapping("/trainerupdate")
