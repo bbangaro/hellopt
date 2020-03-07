@@ -70,7 +70,7 @@ public class TrainerController {
 	@PostMapping("/updatetrainer")
 	public String updateTrainer(TrainerVO trainerVO) {
 		service.updateTrainer(trainerVO);
-		System.out.println("트레이너정보수정완료!");
+		System.out.println("트레이너정보수정성공!");
 		return "redirect:/traineradmin";
 	}
 	
