@@ -139,7 +139,8 @@ function getAddress() {
 		format : "yyyy-mm-dd", //날짜 형식
 		todayHighlight: true ,
 		todayBtn: 'linked' ,
-		clearBtn : true
+		clearBtn : true ,
+		minDate: 0 // 이거 적용이 안된다 
 		//languge : "kr"  
 	});
 	

@@ -274,7 +274,9 @@
   
   
   .mUD{
-    display: flow-root;  	
+    float: right;
+    margin-top: -38px;
+}	
   }
   
   .send-margin{
@@ -285,7 +287,7 @@
 .area{
 	font-size: 15px;
 	margin-bottom: 10px;
-    margin-left: 141px;
+    margin-left: 158px;
 }
 	
 .boarder-line {
@@ -297,8 +299,10 @@
 }
 .boarder-oline {
 	border: 1px solid black;
-	width: 70%; height: auto;
+    width: 60%;
+	height: auto;
 	margin-top: 200px;
+    margin-left: 97px;
 	padding-top: 30px;
 	padding-bottom: 30px;
 	float: left;
@@ -357,6 +361,8 @@ h2 {
 	overflow: hidden;
 	position: relative;
 	filter:grayscale(50%);
+	margin-bottom: 8px;
+    border-radius: 10px;
 }
 
 .service-details img {
@@ -475,8 +481,6 @@ h2 {
     font-size: 18px;
 }
 .lcategory{
-	padding: 17px 20px 20px 15px;
-
 	font-size: 18px;
 	color: black;
 }
@@ -489,6 +493,7 @@ h2 {
 	all: unset;
 	width: 25px !important;
 	height: 25px !important;
+	margin-left: 12px;
 }
 .mpro{
 	margin-top: 10px;
@@ -518,6 +523,8 @@ h2 {
 .service-details .service-text {
 	float: left;
 	left: 200px;
+	border-top-right-radius: 10px;
+    border-bottom-right-radius: 29px 15px;
 } 
 
 .service-white {
@@ -762,7 +769,12 @@ h2 {
     display: block;
     width: 100%;
 }
-
+.one-border{
+	font-size : 15px;
+	margin-left : 27px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 
 
 
@@ -777,7 +789,7 @@ h2 {
     
 }
 .meeting-content {
-	display: inline-block;
+	display: inline-grid;
 	margin-left: 19px;
 	
 	
@@ -810,9 +822,9 @@ h2 {
 	background-color: black;
     color: white;
     border: 0px;
-    border-bottom: 1px solid #7d7d7d;
-    margin-top: -65px;
     display: inline-block;
+    margin-top: 8px;
+    margin-left: 20px;
 }
 .meeting-calender{
 	margin-bottom: -90px;
@@ -820,24 +832,36 @@ h2 {
 .meeting-map{
 	display: inline-block;
 }
+.map{
+	margin-top: 13px;
+    margin-bottom: 13px;
+    width:300px;
+    height:300px;
+}
 .money {
 	margin-top: 92px;
 	width: 130px;
 }
 .meeting-comment{
-    margin-top: -30px;
 	background-color: black;
     color: white;
-    border: 0px;
-    border-bottom: 1px solid #7d7d7d;
+    border: 1px solid #7d7d7d;
+    border-radius : 10px;
     display: block;
+    margin-left: 10px;
+    
 }
-.meeting-mcomment{
-	margin-top: 10px;
-	background-color: black;
+.onemeeting-comment{
+	font-size: 15px;
+	width: 588px;
     color: white;
     border: 0px;
-    border-bottom: 1px solid #7d7d7d;
+	background-color: black;
+	
+	margin-left: 27px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
 }
 .meeting-include{
 	width: 860px;
@@ -846,8 +870,19 @@ h2 {
 	
 	background-color: black;
     color: white;
+    border: 1px solid #7d7d7d;
+    border-radius: 10px;
+}
+.onemeeting-include{
+	font-size: 15px;
+	width: 588px;
+    color: white;
     border: 0px;
-    border-bottom: 1px solid #7d7d7d;
+	background-color: black;
+	
+	margin-left: 27px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .meeting-textarea {
 	width: 860px;
@@ -856,8 +891,19 @@ h2 {
 	
 	background-color: black;
     color: white;
+    border: 1px solid #7d7d7d;
+    border-radius: 10px;
+}
+.onemeeting-textarea {
+    font-size: 15px;
+    background-color: black;
+	
+	width: 588px;
     border: 0px;
-    border-bottom: 1px solid #7d7d7d;
+    color: white;
+    margin-left: 27px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .meeting-sub {
 	width: 860px;
@@ -866,7 +912,10 @@ h2 {
     border: 0px;
     border-bottom: 1px solid #7d7d7d;
 }
-
+.meeting-mcomment{
+	margin-top: 5px;
+    width: 300px;
+}
 .max-count{
 	display: inline-block;
 	margin-left: 10px;
@@ -882,10 +931,15 @@ h2 {
 
 /*미팅 상세 페이지*/
 
+.meeting-detailsb {
+	font-size: 25px;
+    margin-bottom: -1px;
+}
 .meeting-detail {
 	font-size: 25px;
-    margin-left: 10px;
     margin-bottom: -1px;
+    padding-left: 10px;
+    border-left: 3px solid #b4000f;
 }
 
 .meeting-one {
@@ -912,12 +966,10 @@ h2 {
 	width: 700px;
     height: 22px;
     display: inline-block;
-    word-wrap: break-word;
 }
-
-
-
-
+.m-select {
+	margin-left: 20px
+}
 
 
 
@@ -925,12 +977,13 @@ h2 {
 /*많이 본 모임*/
 
 .m-profile {
-  width: 195px;
-  height: 260px;
+  width: 176px;
+  height: 231px;
   background: #FDFEFF;
   border-radius: 10px;
-  padding: 20px 20px 20px 20px;
-  margin-top: 2.2em;
+  padding: 18px 10px 0 10px;
+  margin-top: 12px;
+  margin-left: 10px;
   position: relative;
 }   
 .profile-thumbnail {
@@ -945,36 +998,39 @@ h2 {
 }
 .mname {
     color: black;
-    font-size: 24px;
+    font-size: 15px;
     font-weight: 600;
     text-align: center;
 }
-
+.mtitleimg {
+	margin-left: 45px;
+    margin-bottom: -20px;
+}
 .mtitle {
     color: black;
-    font-size: .75em;
+    font-size: 15px;
     font-weight: 300;
     text-align: center;
     padding-top: .5em;
     padding-bottom: .7em;
     letter-spacing: 1.5px;
-    text-transform: uppercase;
+    float: right;
+    margin-right: 60px;
 }
 
 
 /* 슬라이드테스트 */
 
 .slidebody {
-      position: relative;
-      height: 100%;
     }
 .slidebody {
+  margin-bottom: 16px;
+  position: relative;
+  height: 100%;
   background: #000;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color:#000;
-  margin: 0;
-  padding: 0;
 }
 .swiper-container {
   width: 100%;

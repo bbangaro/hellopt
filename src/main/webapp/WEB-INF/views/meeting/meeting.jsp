@@ -67,7 +67,7 @@
 			      <div class="minner">
 				      <a class="mcategory">
 					      <img class="categoryimg" src="${pageContext.request.contextPath}/resources/images/meeting/localtag.png" >
-					      ${meeting.mCategory}
+					         ${meeting.mCategory}
 				      </a>
 				      <a class="mpro">${meeting.progressSt}</a>
 				      <p class="msub"><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
@@ -84,20 +84,9 @@
 			  
 			</div>
 	
-			 <input type="submit" name="" value="모임 개설하기" class="send-btn">
-	
-	<%--  버튼 디자인 변경
-	    	<a class="button" href="#" role="button">
-			    <span class="meeting-button">모임 개설하기</span>
-			    <div class="icon">
-			        <i class="fa fa-remove">
-			        		 <img src="${pageContext.request.contextPath}/resources/images/meeting/meeting_write.png"/>
-			        </i>
-			    </div>
-			</a>
-	 --%>    
+			<input type="submit" name="" value="모임 개설하기" class="send-btn">
+		
 		</div>
-	    
 	</div>
 </div>
 	
