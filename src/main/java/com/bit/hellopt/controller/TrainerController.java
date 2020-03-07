@@ -42,7 +42,7 @@ public class TrainerController {
 	public String insertTrainer(TrainerVO info) {
 		service.insertTrainer(info);
 		System.out.println("트레이너 입력 성공!");
-		return "redirect:/trainer";
+		return "redirect:/traineradmin";
 	}
 	
 	@GetMapping("/trainerinsert")
@@ -62,21 +62,43 @@ public class TrainerController {
 	@RequestMapping("/trainerupdate")
 	public String getTrainerUpdate(int trainerIdx, Model model) {
 		TrainerVO trainerinfo = service.getTrainerDetail(trainerIdx);
-		System.out.println("트레이너 업데이트정보 가져오기 성공!");
+		System.out.println("업데이트할 트레이너 상세정보 가져오기 성공!");
 		model.addAttribute("trainerinfo", trainerinfo);
 		return "trainer/trainerupdate";
 	}
 	
-	@PostMapping("/updatetrainer")
+	@RequestMapping("/trainerupdatepage")
+	public String getTrainerUpdate1(int trainerIdx, Model model) {
+		TrainerVO trainerinfo = service.getTrainerDetail(trainerIdx);
+		System.out.println("트레이너 수정페이지 불러오기 성공!");
+		model.addAttribute("trainerinfo", trainerinfo);
+		return "trainer/trainerupdatepage";
+	}
+	
+	@PostMapping("/trainerupdatepage1")
 	public String updateTrainer(TrainerVO trainerVO) {
 		service.updateTrainer(trainerVO);
 		System.out.println("트레이너정보수정성공!");
 		return "redirect:/traineradmin";
 	}
 	
-/*	@GetMapping("/trainerupdate")
-	public String trainerupdate() {
-		return "trainer/trainerupdate";
+/*	@GetMapping("/trainerupdatepage")
+	public String trainerupdatepage() {
+		return "trainer/trainerupdatepage";
+	}
+	
+	@PostMapping("/trainerupdatepage1")
+	public String updateTrainer(TrainerVO trainerVO) {
+		service.updateTrainer(trainerVO);
+		System.out.println("트레이너정보수정성공!");
+		return "redirect:/traineradmin";
+	}*/
+	
+/*	@PostMapping("/updatetrainer")
+	public String updateTrainer(TrainerVO trainerVO) {
+		service.updateTrainer(trainerVO);
+		System.out.println("트레이너정보수정성공!");
+		return "redirect:/traineradmin";
 	}*/
 	
 /*	@GetMapping("/trainerupdate")
@@ -84,13 +106,6 @@ public class TrainerController {
 		return "trainer/trainerupdate";
 	}*/
 	
-/*	@RequestMapping("/trainerinfo")
-	public String getTrainerDetail(int trainerIdx, Model model) {
-		TrainerVO trainerinfo = service.getTrainerDetail(trainerIdx);
-		System.out.println("트레이너 상세정보 가져오기 성공!");
-		model.addAttribute("trainerinfo", trainerinfo);
-		return "trainer/trainerinfo";
-	}*/
 	
 	//관리자 페이지에서 트레이너 목록 수정,삭제 컨트롤 할 수 있는 화면
 	@RequestMapping("/traineradmin")
