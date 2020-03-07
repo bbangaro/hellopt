@@ -1,9 +1,11 @@
 package com.bit.hellopt.data;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bit.hellopt.vo.meeting.CategoryCodeVO;
 import com.bit.hellopt.vo.meeting.LocalVO;
+import com.bit.hellopt.vo.meeting.MeetingFileVO;
 import com.bit.hellopt.vo.meeting.MeetingVO;
 
 public interface MeetingMapper {
@@ -14,10 +16,12 @@ public interface MeetingMapper {
 	public List<CategoryCodeVO> getCategoryCodeVO();
 
 	public MeetingVO getMeetingOne(int meetingIdx);
-
+	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);
+	
 	public void insertMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void insertMaxMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void insertConsentYn(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
+	public void insertMeetingFiles(HashMap<String, Object> HashMap);
 	
 	public void updateMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void updateMaxMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);

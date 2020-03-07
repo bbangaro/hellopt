@@ -30,6 +30,12 @@
 		   AND M.MEETING_IDX = A.FK_MEETING_IDX 
 		   AND MEETING_IDX = #{meetingIdx}
 	</select>
+	<select id="getMeetingOneFiles" parameterType="int" resultType="com.bit.hellopt.vo.meeting.MeetingFileVO">
+		SELECT FILE_IDX, FK_MEETING_IDX, FILE_PATH, M_ORI_IMG, M_SYS_IMG
+	      FROM MEETING_TB M, MEETING_FILE_TB F 
+		 WHERE M.MEETING_IDX = F.FK_MEETING_IDX 
+		   AND FK_MEETING_IDX = #{meetingIdx}
+	</select>
 	
 	<!-- 뽑힌 시퀀스 번호가 디비에는 =1되어서 들어간다.. 이유가 뭘까...  -->
 	 <insert id="insertMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
@@ -52,6 +58,10 @@
 	<insert id="insertConsentYn" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 		INSERT INTO CONSENT_YN_TB (FK_MEETING_IDX, CONSENT_YN, CONSENT_CHK_YN) 
 		VALUES ( (#{meetingIdx})+1 , 'N' , 'N' )
+	</insert>
+	<insert id="insertMeetingFiles" parameterType="HashMap">
+		INSERT INTO MEETING_FILE_TB (FILE_IDX, FK_MEETING_IDX, FILE_PATH, M_ORI_IMG, M_SYS_IMG) 
+		VALUES ( MEETING_FILE_TB_SEQ.NEXTVAL , (#{fkMeetingIdx})+1  , #{filePath}, #{mOriImg}, #{mSysImg} )
 	</insert>
 
 	<update id="updateMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">

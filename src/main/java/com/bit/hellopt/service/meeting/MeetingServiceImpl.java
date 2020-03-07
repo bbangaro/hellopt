@@ -1,5 +1,6 @@
 package com.bit.hellopt.service.meeting;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bit.hellopt.data.MeetingMapper;
 import com.bit.hellopt.vo.meeting.CategoryCodeVO;
 import com.bit.hellopt.vo.meeting.LocalVO;
+import com.bit.hellopt.vo.meeting.MeetingFileVO;
 import com.bit.hellopt.vo.meeting.MeetingVO;
 
 @Service
@@ -40,6 +42,13 @@ public class MeetingServiceImpl implements MeetingService {
 	public MeetingVO getMeetingOne(int meetingIdx) {
 		return meetingMapper.getMeetingOne(meetingIdx);
 	}
+	// 미팅 상세리스트 파일 조회
+	@Override
+	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx) {
+		return meetingMapper.getMeetingOneFiles(meetingIdx);
+	}
+
+
 
 	// 모임 개설 인서트
 	@Override
@@ -55,6 +64,17 @@ public class MeetingServiceImpl implements MeetingService {
 	@Override
 	public void insertConsentYn(MeetingVO meetingVO) {
 		meetingMapper.insertConsentYn(meetingVO);
+	}
+	// 파일 업로드
+	@Override
+	public void insertMeetingFiles(int fkMeetingIdx, String mOriImg, String mSysImg, String filePath) {
+		HashMap<String, Object> hm = new HashMap<>();
+		hm.put("fkMeetingIdx", fkMeetingIdx);
+		hm.put("mOriImg", mOriImg);
+		hm.put("mSysImg", mSysImg);
+		hm.put("filePath", filePath);
+		
+		meetingMapper.insertMeetingFiles(hm);
 	}
 
 	// 모임 수정 

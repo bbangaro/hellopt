@@ -1,4 +1,5 @@
- var swiper = new Swiper('.swiper-container', {
+/* 너무 깔끔한 슬라이드 보류
+var swiper = new Swiper('.swiper-container', {
       zoom: true,
       pagination: {
         el: '.swiper-pagination',
@@ -8,6 +9,25 @@
         prevEl: '.swiper-button-prev',
       },
     });
+*/
+
+//3d 슬라이드 다시 적용하기
+var swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows : true,
+    },
+      pagination: {
+      el: '.swiper-pagination',
+    },
+});
 
 //이동 
  var idx = document.getElementById('meeting-idx').value; 

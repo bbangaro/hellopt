@@ -11,6 +11,18 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=***&libraries=services,clusterer,drawing"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
+	<!-- 데이트피커 사용하기 -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/bootstrap-datepicker3.css">
+	
+	<!-- css파일 가져오는어 성공하면 지우기
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+	 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<!-- 한글 사용시 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
+	-->
+	
 </head>
 
 
@@ -30,15 +42,15 @@
 					<div class="meeting-title">개 설 자
 						<div class="meeting-content">
 							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/profile.png"></p>
-							<div class="profile-detail">
 								
 							<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="user" />
 								<input class="username" name="fkUserId" type="text" value="${user.username} " disabled>
 							</sec:authorize>
-								
-								<input class="meeting-comment" name="mComment" value=${meetingOne.mComment }>
+							<div class="profile-detail">
+								<textarea  cols="50" rows="5" class="meeting-comment" name="mComment" >${meetingOne.mComment }</textarea>
 							</div>
+							
 						</div>
 					</div>
 					
@@ -62,34 +74,39 @@
 						</div>
 					</div>
 					
+					<div class="meeting-title">최대인원
+						<div class="max-count">
+						    <input class="max-detail" name="maxCount" type="text" value="${meetingOne.maxCount }" /> 명
+						</div>
+					</div>
+
 					<div class="meeting-title">모임일자
 						<div class="meeting-content">
-							<p class="meeting-calender"><img src="${pageContext.request.contextPath}/resources/images/meeting/calendar.png"></p>
-							<input class="datepicker" name="mDate" type="text" value=${meetingOne.mDate}>						
+							<input class="form-control" type="text" id="datePicker" name="mDate" value="${meetingOne.mDate }" >
 						</div>
 					</div>
 					
 					<div class="meeting-title">모임제목
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mSubject" type="text" value=${meetingOne.mSubject }>						
+							<input class="meeting-sub" name="mSubject" type="text" value="${meetingOne.mSubject }" >						
 						</div>
 					</div>
 					
 					<div class="meeting-title">한줄소개
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mMemo" type="text" value=${meetingOne.mMemo }>						
+							<input class="meeting-sub" name="mMemo" type="text" value="${meetingOne.mMemo}">						
 						</div>
 					</div>
 					
 					<div class="meeting-title">상세정보
 						<div class="meeting-content2">
-							<input class="meeting-textarea" name="details"  value=${meetingOne.details }>
+							<textarea  cols="90" rows="10" class="meeting-textarea" name="details" >${meetingOne.details }</textarea>
 						</div>
 					</div>
 					
 					<div class="meeting-title">포함사항
 						<div class="meeting-content2">
-							<input class="meeting-include" name="include" value=${meetingOne.include }>					
+							<textarea  cols="90" rows="5" class="meeting-include" name="include" >${meetingOne.include }</textarea>					
 						</div>
 					</div>
 					
@@ -107,18 +124,18 @@
 							
 							<div class="meeting-content2">
 								<input type="hidden" class="meeting-mcomment" id="mLocation" name="mLocation" value="${meetingOne.mLocation }">
-								<input class="meeting-mcomment" name="mLocationC" value=${meetingOne.mLocationC }>
+								<input class="meeting-mcomment" name="mLocationC" value="${meetingOne.mLocationC }">
 							</div>
 						</div>
 					</div>
 					
 					<div class="meeting-title">회　　비
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mPrice" type="text" value=${meetingOne.mPrice }>						
+							<input class="meeting-sub" name="mPrice" type="text" value="${meetingOne.mPrice }">						
 						</div>
 					</div>
 					
-					<input name="meetingIdx" type="hidden" value=${meetingOne.meetingIdx }>
+					<input name="meetingIdx" type="hidden" value="${meetingOne.meetingIdx }">
 				
 				
 				

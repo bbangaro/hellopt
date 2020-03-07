@@ -9,11 +9,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<!-- Link Swiper's CSS -->
 	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+	<script src="https://unpkg.com/swiper/js/swiper.js"></script>
 	
 	<!-- 카카오 map -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=***&libraries=services,clusterer,drawing"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
+	<!-- 데이트피커 사용하기 -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/bootstrap-datepicker3.css">
+	
+	<!-- css파일 가져오는어 성공하면 지우기
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+	 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<!-- 한글 사용시 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
+	-->
+	
+
 </head>
 
 
@@ -27,12 +41,12 @@
 			<div class="boarder-oline">
 			
 				
-				<p class="meeting-detail">${meetingOne.mSubject } </p>
+				<p class="meeting-detailsb">${meetingOne.mSubject } </p>
 				
 				<!-- 여기는 작성자만 보인다 -->
 				<div class="mUD">
-				<a class="send-btn3" href="${pageContext.request.contextPath}/meetingUpdate?meetingIdx=${meetingOne.meetingIdx }" role="button">수정</a>
-				<a class="send-btn3" href="${pageContext.request.contextPath}/meetingDelete?meetingIdx=${meetingOne.meetingIdx }" role="button">삭제</a>
+				<input type="button" value="수정" class="send-btn3 send-u">
+				<input type="button" value="삭제" class="send-btn3 send-d">
 				</div>
 				
 				<hr class="meeting-line">
@@ -40,7 +54,7 @@
 				
 			<div class="meeting-one">
 				
-				<!-- 슬라이드 시작 -->
+				<!-- 깔끔한 슬라이드 보류 
 				<div class="slidebody">	
 					<div class="swiper-container">
 					    <div class="swiper-wrapper">
@@ -60,62 +74,72 @@
 					        </div>
 					      </div>
 					    </div>
-					    <!-- Add Pagination -->
+
 					    <div class="swiper-pagination swiper-pagination-white"></div>
-					    <!-- Add Navigation -->
+					    
 					    <div class="swiper-button-prev"></div>
 					  <div class="swiper-button-next"></div>
 				    </div>
 				</div> 
-				<!-- 슬라이드 끝 -->
-				
-				<hr class="meeting-line">
-				
-					<p class="one-font"> ${meetingOne.mMemo } </p>				
-					
-					<hr class="meeting-line">
-					
-					<p class="one-font"> 
-					${meetingOne.details }
-					</p>		
-							
-					<hr class="meeting-line">
-					
-					<p class="one-font"> 
-					${meetingOne.include }
+				 -->
+				 
+				  <!-- Swiper -->
+				  <div class="swiper-container">
+				    <div class="swiper-wrapper">
+				    
+				    <c:forEach var="file" items="${meetingOneFile}">
+				      <div class="swiper-slide" style="background-image:url(${pageContext.request.contextPath}/downloadFile?mSysImg=${file.mSysImg} )"></div>
+					</c:forEach>				   
+				    </div>
+				    
+				    <!-- Add Pagination -->
+				    <div class="swiper-pagination"></div>
+				  </div>
+				  
+					<p class="meeting-detail"> 한줄메모 </p>
+					<p class="one-border">
+					${meetingOne.mMemo } 
 					</p>
 					
-					<hr class="meeting-line">
+					<p class="meeting-detail"> 상세정보 </p>
+					<textarea  cols="90" rows="10" class="onemeeting-textarea">${meetingOne.details }</textarea>
+							
+					<p class="meeting-detail"> 포함사항 </p>
+					<textarea  cols="90" rows="5" class="onemeeting-include">${meetingOne.include }</textarea>
+					
 					
 					<p class="meeting-detail"> 만나는 장소 </p>
 					
-					<div id="map" style="width:300px;height:300px;"></div>
+					<div id="map" class="map"></div>
 					<input type="hidden" id="mLocation" value="${meetingOne.mLocation }">
 					<input type="hidden" id="search_name" disabled />
-					<p class="one-font"> ${meetingOne.mLocationC }</p>
+					<p class="one-border"> ${meetingOne.mLocationC }</p>
 
 					<hr class="meeting-line">
 					
 					<p class="meeting-detail"> 개설자 정보 </p>
 					<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/profile.png"></p>
-					<p class="one-font"> ${meetingOne.userName } </p>
-					
-					
-					<p class="one-font"> 
-					${meetingOne.mComment }
+					<p class="one-border"> 
+					${meetingOne.userName } 
 					</p>
+					
+					<p class="meeting-detail"> 개설자 한마디 </p>
+					<textarea  cols="50" rows="5" class="onemeeting-comment">${meetingOne.mComment }
+					</textarea>
 				
 				<!-- 내용물 넣기 -->				
-				<hr class="meeting-line">
 				
-				<p class="meeting-detail"> 회원들이 많이 본 모임 </p>
+				<p class="meeting-detailsb"> 회원들이 많이 본 모임 </p>
 				
 				    <div class="m-profile">
-				        <img class="profile-thumbnail" src="https://images.unsplash.com/photo-1484186139897-d5fc6b908812?ixlib=rb-0.3.5&s=9358d797b2e1370884aa51b0ab94f706&auto=format&fit=crop&w=200&q=80%20500w" class="thumbnail">
-				        <h3 class="mname">Beverly Little</h3>
-				        <p class="mtitle">Javascript Developer</p>
+				        <img class="profile-thumbnail" src="${pageContext.request.contextPath}/resources/images/meeting/nature-1.jpg" class="thumbnail">
+				        <h3 class="mname">${meetingOne.mSubject }</h3>
+				        <img class="mtitleimg" src="${pageContext.request.contextPath}/resources/images/meeting/location.png" width="20px" height="20px">
+				        <p class="mtitle">
+				        ${meetingOne.local }</p>
 				    </div>
 				
+				<input type="hidden" id="meeting-idx" value=${meetingOne.meetingIdx }>
 				
 			</div> <!-- meeting-one의 끝 -->
 			
@@ -126,15 +150,17 @@
 			</div> <!-- border-line의 끝 -->
 			
 			<div class="right-side">
+				<p class="area"><img  src="${pageContext.request.contextPath}/resources/images/meeting/location.png"> ${meetingOne.local } </p>	
+				<div  id="datePicker" class="">
+					<input type="hidden" id="datePicker" value="${meetingOne.mDate }" disabled >
+				</div>
 				
-				<p class="meeting-calender"><img src="${pageContext.request.contextPath}/resources/images/meeting/calendar.png"></p>
-				<p class="datepicker">${meetingOne.mDate }</p>
-				<p class="area"> ${meetingOne.local } </p>	
-				
-				
-				<input type="submit" name="" value="예약하기" class="send-btn2">
-				
-				<p class="m-condition"> 신청현황 : 2/16명 </p>	
+				<div class="drop-rv">
+				<input type="submit" value="예약하기" class="r-btn">
+					<div class="dropdown-content">
+					<p class="m-condition"> 신청현황 : 2/16명 </p>	
+					</div>
+				</div>
 				
 			</div>	<!-- right-side의 끝 -->
 				
@@ -142,7 +168,6 @@
 </div> <!-- hello_top 의 끝 -->
 				
 	<!-- js에서 태그들을 찾고 있어서 여기다가 위치 시켜야 함 -->
-	<script src="https://unpkg.com/swiper/js/swiper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/meeting/meetingOne.js"></script>
 	
 </body>

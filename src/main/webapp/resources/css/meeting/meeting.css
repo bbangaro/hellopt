@@ -953,9 +953,8 @@ h2 {
 .right-side {
 	border: 1px solid black;
 	height: auto;
-	margin-top: 300px;
+	margin-top: 257px;
     padding-left: 23px;
-	padding-top: 30px;
 	padding-bottom: 30px;
 	width : 30%;
 	float: right;
@@ -1021,6 +1020,8 @@ h2 {
 
 /* 슬라이드테스트 */
 
+/*
+너무 깔끔해서 보류
 .slidebody {
     }
 .slidebody {
@@ -1040,6 +1041,24 @@ h2 {
   overflow: hidden;
 }
 
+*/
+.swiper-container {
+  height: 300px !important;
+  width: 100% ; 
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-bottom: 20px;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px !important;
+  height: 300px !important;
+}
+.swiper-pagination-bullet-active {
+   opacity: 1;
+   background: #b4000f !important;
+}
 
 
 

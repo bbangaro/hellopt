@@ -33,7 +33,7 @@
 	
 		<h2>Meeting</h2>
 		
-		<form class="auto" action="meetingWriteOk" method="post" autocomplete="off">
+		<form class="auto" action="meetingWriteOk" method="post" enctype="multipart/form-data" autocomplete="off">
 			<div class="boarder-line">
 				
 				<h3 class="meeting-main">모임 개설 신청하기</h3>
@@ -42,15 +42,15 @@
 					<div class="meeting-title">개 설 자
 						<div class="meeting-content">
 							<p class="meeting-profile"><img src="${pageContext.request.contextPath}/resources/images/meeting/profile.png"></p>
-							<div class="profile-detail">
-								
+							
 							<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="user" />
 								<input class="username" name="fkUserId" type="text" value="${user.username}" readonly>
 							</sec:authorize>
-								
-								<input class="meeting-comment" name="mComment" placeholder="숨쉬기 운동 마스터 입니다. 함께 하실분 : )">
+							<div class="profile-detail">
+								<textarea  cols="50" rows="5" class="meeting-comment" name="mComment" placeholder="숨쉬기 운동 마스터 입니다. 함께 하실분 : )"></textarea>
 							</div>
+							
 						</div>
 					</div>
 					
@@ -73,13 +73,16 @@
 							</select>	
 						</div>
 					</div>
-					
+
+					<div class="meeting-title">최대인원
+						<div class="max-count">
+						    <input class="max-detail" name="maxCount" type="text" placeholder="00"> 명
+						</div>
+					</div>
+
 					<div class="meeting-title">모임일자
-						<div class="meeting-content">
+						<div class="meeting-content ">
 							<input class="form-control" type="text" id="datePicker" name="mDate" placeholder="click" >
-							<!-- 피커 완성되면 지우기
-							<input class="datepicker" name="mDate" type="text" placeholder="2020/04/03">						
-							 -->
 						</div>
 					</div>
 					
@@ -97,13 +100,13 @@
 					
 					<div class="meeting-title">상세정보
 						<div class="meeting-content2">
-							<input class="meeting-textarea" name="details"  placeholder="모임소개  &#13;&#10; 1. 최소인원 : &#13;&#10; 2. 출발시간 : &#13;&#10; 3. 도착시간 : &#13;&#10; 4. 점       심 : &#13;&#10; 5. 준  비  물 : ">
+							<textarea  cols="90" rows="10" class="meeting-textarea" name="details"  placeholder="모임소개  &#13;&#10; 1. 최소인원 : &#13;&#10; 2. 출발시간 : &#13;&#10; 3. 도착시간 : &#13;&#10; 4. 점       심 : &#13;&#10; 5. 준  비  물 : "></textarea>
 						</div>
 					</div>
 					
 					<div class="meeting-title">포함사항
 						<div class="meeting-content2">
-							<input class="meeting-include" name="include" placeholder="점심식사, 간식">					
+							<textarea  cols="90" rows="5" class="meeting-include" name="include" placeholder="점심식사, 간식"></textarea>					
 						</div>
 					</div>
 					
@@ -121,7 +124,7 @@
 							
 							<div class="meeting-content2">
 								<input type="hidden" class="meeting-mcomment" id="mLocation" name="mLocation" placeholder="위치">
-								<input class="meeting-mcomment" name="mLocationC" placeholder="위치 상세설명">
+								<input class="meeting-mcomment" name="mLocationC" placeholder="위치 ">
 							</div>
 						</div>
 					</div>
@@ -131,6 +134,8 @@
 							<input class="meeting-sub" name="mPrice" type="text" placeholder="30,000원">						
 						</div>
 					</div>
+					
+					<input type="file" name="uploadFile" multiple="multiple">
 					
 				<!-- 내용물 넣기 -->				
 				<hr class="meeting-line">
