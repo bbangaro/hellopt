@@ -45,7 +45,7 @@
 		<caption>후기작성</caption>
 		<tbody>
 		<tr>
-			 <td>별점</td>
+			<td>별점</td>
 			<td class="starRev">
 				<span class="star on">1</span>
 				<span class="star">2</span>
@@ -121,9 +121,8 @@
  					fn_fileDelete($(this));
  				})
  	} 
-</script>
 
-<script>
+ 	//별점 스크립트부분
 	$('.starRev span').click(function(){
 		$(this).parent().children('span').removeClass('on');
 		$(this).addClass('on').prevAll('span').addClass('on');

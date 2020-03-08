@@ -23,8 +23,20 @@ public class RBoardVO {
 	private String revStar;
 	private String revCategory;
 	private List<RFileVO> filevo;
+	private int cmtCnt;
 	
-	
+	public int getCmtCnt() {
+		return cmtCnt;
+	}
+
+
+
+	public void setCmtCnt(int cmtCnt) {
+		this.cmtCnt = cmtCnt;
+	}
+
+
+
 	public String getUserFileName() {
 		return userFileName;
 	}
@@ -135,7 +147,7 @@ public class RBoardVO {
 	public String toString() {
 		return "RBoardVO [revIdx=" + revIdx + ", userId=" + userId + ", userName=" + userName + ", userFileName="
 				+ userFileName + ", revContent=" + revContent + ", revRegdate=" + revRegdate + ", revStar=" + revStar
-				+ ", revCategory=" + revCategory + ", filevo=" + filevo + "]";
+				+ ", revCategory=" + revCategory + ", filevo=" + filevo + ", cmtCnt=" + cmtCnt + "]";
 	}
 
 	

@@ -15,6 +15,7 @@
 <%-- <link rel ="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board/reviewBoard.css"> --%>
 <meta charset="UTF-8">
 <title>후기게시판</title>
+<%@ include file="/WEB-INF/include/include-header.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 
 <style>
@@ -113,23 +114,24 @@
 </c:forEach>
 </form>
 </div>	
+<%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
 	$(document).ready(function(){
 		$("#modify").on("click", function(e){
 			e.preventDefault();
 			fn_BoardModify($(this));
 		})
-		$("#delete").on("click", function(e){
+		$("a[name='delete']").on("click", function(e){
 			e.preventDefault();
 			fn_BoardDelete($(this));
 		})
 	})
-	function fn_BoardModify(){
+	function fn_BoardModify(obj){
 		var comSubmit = new ComSubmit("frm");
-		comSubmi.setUrl("<c:url value='/review/updateboard' />");
+		comSubmi.setUrl("<c:url value='/review/updateform' />");
 		comSubmit.submit();
 	}
-	function fn_BoardDelete(){
+	function fn_BoardDelete(obj){
 		var comSubmit = new ComSubmit("frm");
 		comSubmi.setUrl("<c:url value='/review/deleteboard' />");
 		comSubmit.submit();
