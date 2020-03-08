@@ -53,6 +53,20 @@ public class UserServiceImpl implements UserService{
 	public void deleteUser(User user) {
 		mapper.deleteUser(user);
 	}
+
+	@Override
+	public List<User> pagingUserList(int page) {
+		return xmlMapper.pagingUserList(page);
+	}
+
+	@Override
+	public int getLastPage(int page) {
+		int lastPage = xmlMapper.countUsers() / 10;
+		int _lastPage = page - (page % 10) + 10; 
+		return lastPage > _lastPage ? _lastPage : lastPage;
+	}
+	
+	
 	
 	
 }

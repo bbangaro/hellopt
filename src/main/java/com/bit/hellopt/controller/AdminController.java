@@ -27,8 +27,11 @@ public class AdminController {
 	UserProfileService profileService;
 	
 	@GetMapping("/admin/user")
-	public String adminUserManagement(Model model) {
-		model.addAttribute("userList", userService.getUserList());
+	public String adminUserManagement(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+		//model.addAttribute("userList", userService.getUserList());
+		model.addAttribute("userList", userService.pagingUserList(page));
+		model.addAttribute("lastPage", userService.getLastPage(page));
+		
 		return "adminUserManagement";
 	}
 	
