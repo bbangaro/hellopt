@@ -51,7 +51,7 @@ public class ExerciseInformationTipController {
 
 	//리턴타입 ModelAndView -> String 변경해서 리턴타입 통일
 	//전달할 데이터 저장타입  ModelAndView -> Model
-	@RequestMapping("/Exercise-InfoTipList")
+	@RequestMapping("/exerciseInfoTipList")
 	//post인지 getMapping인지 써줘야함
 	public String getExerciseInformationTipList(ExerciseInformationTipVO vo, Model model) {
 		System.out.println(">>> 글 전체 목록 조회 처리-getExerciseInformationTipList()");
@@ -72,7 +72,7 @@ public class ExerciseInformationTipController {
 		List<ExerciseInformationTipVO> exerciseInformationTipList = exerciseInformationTipService.getExerciseInformationTipList(vo);
 		model.addAttribute("exerciseInformationTipList", exerciseInformationTipList);
 		
-		return "Exercise-InfoTipList";
+		return "exerciseInfoTipList";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
@@ -86,7 +86,7 @@ public class ExerciseInformationTipController {
 		model.addAttribute("exerciseInformationTip", exerciseInformationTip); //데이터 저장
 		System.out.println("> exerciseInformationTip : " + exerciseInformationTip);
 		
-		return "Exercise-InfoTip";
+		return "exerciseInfoTip";
 	}
 	
 	@Value("${file.directory}")
@@ -131,7 +131,7 @@ public class ExerciseInformationTipController {
 			vo.setTipPictures(file.getOriginalFilename());
 			
 			exerciseInformationTipService.insertExerciseInformationTip(vo);
-			return "redirect:/Exercise-InfoTipList";
+			return "redirect:/exerciseInfoTipList";
 
 			//여기서 UTF-8설정을 해줘야 글씨가 안깨짐~!
 		}
@@ -162,7 +162,7 @@ public class ExerciseInformationTipController {
 		System.out.println("> exerciseInformationTip vo : " + vo);
 		
 		exerciseInformationTipService.updateExerciseInformationTip(vo);
-		return "Exercise-InfoTipList";
+		return "exerciseInfoTipList";
 	}
 	
 	@RequestMapping("/deleteExerciseInformationTip")
@@ -170,7 +170,7 @@ public class ExerciseInformationTipController {
 		System.out.println(">>> 글 삭제 처리 - deleteExerciseInformationTip()"); 
 		
 		exerciseInformationTipService.deleteExerciseInformationTip(vo);
-		return "Exercise-InfoTipList";
+		return "exerciseInfoTipList";
 	}
 	
 	//---------------------------------

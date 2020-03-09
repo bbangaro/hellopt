@@ -14,7 +14,7 @@
 	margin-bottom: 42px;
 }
 
-form, ul {
+.content form, .content ul {
 	display: inline-block;
 }
 
@@ -26,7 +26,7 @@ form input {
 	color: #fff;
 }
 
-li {
+.content li {
 	border-bottom: 1px solid #7d7d7d;
 	margin-bottom: 20px;
 }
@@ -39,7 +39,7 @@ input[type='radio'] {
 	display: inline;
 }
 
-input[type='button'] {
+input[type='button'],  input[type='submit']{
 	width: 100%;
 	padding: 5px 0 7px;
 	margin: 0 auto;
@@ -50,5 +50,11 @@ input[type='button'] {
 	font-size: 15px;
 	-webkit-appearance: none;
 	border-radius: 0;
+	margin-bottom: 10px;
+}
+
+.content img {
+	height: 100px;
+	width: auto;
 	margin-bottom: 10px;
 }

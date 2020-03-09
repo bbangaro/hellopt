@@ -12,7 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -44,8 +48,12 @@ public class WebAppConfig implements WebMvcConfigurer {
 	//바로 URL과 VIEW를 바로 매핑시켜줌
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/openClassForm").setViewName("class/openClassForm");
-		registry.addViewController("/chat").setViewName("class/chat");
+
+		//registry.addViewController("/signupform").setViewName("signupForm");
+		registry.addViewController("/review/insertform").setViewName("insertForm");
+		registry.addViewController("/openClassForm").setViewName("openClassForm");
+		registry.addViewController("/classDetail").setViewName("classDetail");
+		registry.addViewController("/chat").setViewName("chat");
 		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/hello").setViewName("hello");
 		registry.addViewController("/login").setViewName("login");
@@ -78,6 +86,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/file/**").addResourceLocations("file:///C:/hellopt_file/");
 	}
 
 	// MyBatis 연동을 위한 설정
@@ -97,6 +106,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		//multipartResolver.setMaxUploadSize(1000000);
+		multipartResolver.setDefaultEncoding("UTF-8");
+		multipartResolver.setMaxUploadSize(52428800);
 		return multipartResolver;
 	}
 	
@@ -104,10 +115,11 @@ public class WebAppConfig implements WebMvcConfigurer {
 	public MultipartConfigElement multipartConfigElement() {
 		int maxUploadSizeInMb = 1024 * 1024;
 		//File uploadDirectory 수정할것~!~!~!~!~!~!
-		File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
-		MultipartConfigElement multipartConfigElement 
-			= new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
+//		File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
+//		MultipartConfigElement multipartConfigElement;
+		File uploadDirectory = new File("classpath:resources/images");
+		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
 		return multipartConfigElement;
 	}
-	
+
 }

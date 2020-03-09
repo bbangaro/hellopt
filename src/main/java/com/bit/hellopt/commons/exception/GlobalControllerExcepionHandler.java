@@ -1,4 +1,4 @@
-package com.bit.hellopt.commns.exception;
+package com.bit.hellopt.commons.exception;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
