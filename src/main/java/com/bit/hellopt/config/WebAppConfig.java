@@ -48,6 +48,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 	//바로 URL과 VIEW를 바로 매핑시켜줌
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+
 		//registry.addViewController("/signupform").setViewName("signupForm");
 		registry.addViewController("/review/insertform").setViewName("insertForm");
 		registry.addViewController("/openClassForm").setViewName("openClassForm");
@@ -59,6 +60,13 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/faq1").setViewName("faq1");
 		registry.addViewController("/faq2").setViewName("faq2");
 		registry.addViewController("/audition").setViewName("audition");
+		registry.addViewController("/trainer").setViewName("trainer");
+		registry.addViewController("/trainerinfo").setViewName("trainerinfo");
+		registry.addViewController("/trainerinsert").setViewName("trainerinsert");
+		registry.addViewController("/traineradmin").setViewName("traineradmin");
+		registry.addViewController("/trainerupdate").setViewName("trainerupdate");
+		registry.addViewController("/trainerupdatepage").setViewName("trainerupdatepage");
+		registry.addViewController("/live").setViewName("class/live");
 	}
 
 	//Controller에서 View 리턴 시 View 위치와 확장자를 설정

@@ -14,6 +14,17 @@
 		<typeAlias alias="exerciseInformationTip" type="com.bit.hellopt.vo.exercisetip.ExerciseInformationTipVO" />
 		<typeAlias alias="ExerciseMapper" type="com.bit.hellopt.data.exercise.ExerciseMapper" />
 		<typeAlias alias="ExerciseTipMapper" type="com.bit.hellopt.data.exercisetip.ExerciseTipMapper" />
+		
+		<!-- 모임개설 관련 -->
+		<typeAlias alias="CategoryCodeVO" type="com.bit.hellopt.vo.meeting.CategoryCodeVO" />
+		<typeAlias alias="LocalVO" type="com.bit.hellopt.vo.meeting.LocalVO" />
+		<typeAlias alias="MeetingVO" type="com.bit.hellopt.vo.meeting.MeetingVO" />
+		<typeAlias alias="MeetingMapper" type="com.bit.hellopt.data.MeetingMapper" />
+
+		<typeAlias alias="CalendarVO" type="com.bit.hellopt.vo.calendar.CalendarVO" />
+		<typeAlias alias="CalendarMapper" type="com.bit.hellopt.data.CalendarMapper" />
+		<!-- 
+		 -->
 	</typeAliases>
 
 </configuration>
