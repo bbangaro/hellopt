@@ -11,4 +11,6 @@ public interface UserService {
 	public User findUserById(String userId);
 	public void updateUser(User user);
 	public void deleteUser(User user);
+	public List<User> pagingUserList(int page);
+	public int getLastPage(int page);
 }

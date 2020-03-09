@@ -27,21 +27,23 @@ public class AdminController {
 	UserProfileService profileService;
 	
 	@GetMapping("/admin/user")
-	public String adminUserManagement(Model model) {
-		model.addAttribute("userList", userService.getUserList());
+	public String adminUserManagement(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+		//model.addAttribute("userList", userService.getUserList());
+		model.addAttribute("userList", userService.pagingUserList(page));
+		model.addAttribute("lastPage", userService.getLastPage(page));
+		
 		return "adminUserManagement";
 	}
 	
 	@GetMapping("/admin/user/{userId}")
-	public String adminUserManagementDetail(@PathVariable("userId")String userId, Model model) {
+	public String adminUserManagementDetail(@PathVariable("userId") String userId, Model model) {
 		User user = userService.findUserById(userId);
-		ProfileVO profile =  profileService.selectProfile(userId);
-		if(profile == null) {
-			user.setUserProfile("");
-		} else {
+
+		ProfileVO profile = profileService.selectProfile(userId);
+		if (profile != null) {
 			user.setUserProfile(profile.getStoredFileName());
 		}
-		
+
 		model.addAttribute("user", user);
 		return "adminUserManagementDetail";
 	}
