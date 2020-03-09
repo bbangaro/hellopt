@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.hellopt.data.LiveClassMapper;
-import com.bit.hellopt.vo.LiveClass;
+import com.bit.hellopt.vo.live.LiveClass;
 
 @Service
 public class LiveClassServiceImpl implements LiveClassService {

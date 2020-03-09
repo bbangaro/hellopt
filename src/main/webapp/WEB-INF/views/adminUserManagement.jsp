@@ -11,6 +11,7 @@
 <title>유저 관리</title>
 </head>
 <body>
+<h2>회원 정보 관리</h2>
 	<table>
 		<thead>
 			<tr>
@@ -24,7 +25,15 @@
 		<tbody>
 			<c:forEach var="user" items="${ userList }" varStatus="idx">
 				<tr>
-					<td>${ idx.count }</td>
+					<c:choose>
+						<c:when test="${not empty param.page}">
+							<td>${ idx.count + (param.page - 1) * 10}</td>
+						</c:when>
+						<c:otherwise>
+							<td>${ idx.count }</td>
+						</c:otherwise>
+					</c:choose>
+					
 					<td>${ user.userId }</td>
 					<td>${ user.userName }</td>
 					<td>
@@ -39,5 +48,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<c:forEach begin="${param.page - (param.page % 10) + 1}" end="${lastPage}" varStatus="idx">
+		<a href="#">${idx.count}</a>
+	</c:forEach>
 </body>
 </html>

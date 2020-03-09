@@ -1,26 +1,26 @@
 $(document).ready(function () {
     $('#tab01').hover(function(){
-        $(this).css({"font-weight":"bold", "color":"#20c997", "border-bottom":"2px solid #20c997","box-sizing": "border-box"});
+        $(this).css({"font-weight":"bold", "color":"#dc3545", "border-bottom":"2px solid #dc3545","box-sizing": "border-box"});
     }, function() {
         $(this).css({"font-weight":"normal", "color":"#000","border-bottom":"none"});
     });
     $('#tab02').hover(function(){
-        $(this).css({"font-weight":"bold", "color":"#20c997", "border-bottom":"2px solid #20c997","box-sizing": "border-box"});
+    	$(this).css({"font-weight":"bold", "color":"#dc3545", "border-bottom":"2px solid #dc3545","box-sizing": "border-box"});
     }, function() {
         $(this).css({"font-weight":"normal", "color":"#000","border-bottom":"none"});
     });
     $('#tab03').hover(function(){
-        $(this).css({"font-weight":"bold", "color":"#20c997", "border-bottom":"2px solid #20c997","box-sizing": "border-box"});
+    	$(this).css({"font-weight":"bold", "color":"#dc3545", "border-bottom":"2px solid #dc3545","box-sizing": "border-box"});
     }, function() {
         $(this).css({"font-weight":"normal", "color":"#000","border-bottom":"none"});
     });
     $('#tab04').hover(function(){
-        $(this).css({"font-weight":"bold", "color":"#20c997", "border-bottom":"2px solid #20c997","box-sizing": "border-box"});
+    	$(this).css({"font-weight":"bold", "color":"#dc3545", "border-bottom":"2px solid #dc3545","box-sizing": "border-box"});
     }, function() {
         $(this).css({"font-weight":"normal", "color":"#000","border-bottom":"none"});
     });
     $('#tab05').hover(function(){
-        $(this).css({"font-weight":"bold", "color":"#20c997", "border-bottom":"2px solid #20c997","box-sizing": "border-box"});
+    	$(this).css({"font-weight":"bold", "color":"#dc3545", "border-bottom":"2px solid #dc3545","box-sizing": "border-box"});
     }, function() {
         $(this).css({"font-weight":"normal", "color":"#000","border-bottom":"none"});
     });

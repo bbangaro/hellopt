@@ -2,11 +2,6 @@
 /*글씨체 관련 임포트*/
 @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
-<style>
-	  #hd {height:100px; background:none !important; transition:all 0.3s ease-in-out;}
-	  #hd.fixed {height:100px; background:rgba(0,0,0,0.8) !important;}
-</style>
-
 
 /* [0] */
 @font-face {

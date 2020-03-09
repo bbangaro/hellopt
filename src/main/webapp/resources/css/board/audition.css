@@ -6,9 +6,13 @@
      width: 100%;
      margin: 0 auto;
 }
+body{
+	text-align: center;
+}
 ul li {
      list-style: none;
- }
+}
+
 a {
     text-decoration: none;
 }
@@ -54,9 +58,11 @@ a:hover {
     height: 50px;
     line-height: 50px;
 }
+
 .tab_li{
 	color: black;
 }
+
 /*view 공통*/
 .view{
     padding: 50px;
