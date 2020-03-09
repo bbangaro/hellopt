@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bit.hellopt.service.liveclass.ClassMemberService;
 import com.bit.hellopt.service.liveclass.LiveClassService;
+import com.bit.hellopt.service.liveclass.LiveService;
 import com.bit.hellopt.vo.live.ClassMember;
 import com.bit.hellopt.vo.live.LiveClass;
 
@@ -29,10 +30,25 @@ public class ClassController {
 	}
 	
 	@RequestMapping("/classlist")
-	public String getLiveClass(Model model) {
+	public String getLiveClass(Model model, ClassMember info, Principal principal) {
 		List<LiveClass> liveClassList = service.getLiveClass();
 		System.out.println("라이브 클래스 정보 가져오기 성공!!");
 		model.addAttribute("liveClassList", liveClassList);
+		
+		info.setFkUserId(principal.getName());
+		
+		List<ClassMember> classMember = service2.getClassMem(info);
+		System.out.println("클래스 멤버 정보 가져오기 성공!!");
+		System.out.println("classMember : " + classMember);
+		model.addAttribute("classMember", classMember);
+		
+		for(int i=0; i<classMember.size(); i++) {
+			int classMemberIdx = classMember.get(i).getClassMemberIdx();
+			System.out.println(classMemberIdx);
+		}
+		//ClassMember member = service2.getClassM(classMemberIdx);
+		//model.addAttribute("member", member);
+		
 		return "class/classList";
 	}
 	
@@ -71,5 +87,37 @@ public class ClassController {
 	}
 	
 	// *마이페이지에서 강의 신청 취소(delete or update)와 신청한 강의 보기(select) 가능하게 만들기
+
 	
+	//------------- 강의 제목 가져오기 ---------------
+	
+	@Autowired
+	LiveService service3;
+	
+	@RequestMapping("/broadcaster")
+	public String getClassName(int classIdx, Model model) {
+		String className = service3.getClassName(classIdx);
+		System.out.println("강의 제목 가져오기 성공^^");
+		
+		model.addAttribute("className", className);
+		return "class/broadcaster";
+	}
+
+/*	@RequestMapping("/viewer")
+	public String getClassName2(int classIdx, Model model) {
+		String className = service3.getClassName(classIdx);
+		System.out.println("강의 제목 가져오기 성공^^");
+		
+		model.addAttribute("className", className);
+		return "class/viewer";
+	}*/
+	
+	@RequestMapping("/live_test")
+	public String getClassName2(int classIdx, Model model) {
+		String className = service3.getClassName(classIdx);
+		System.out.println("강의 제목 가져오기 성공^^");
+		
+		model.addAttribute("className", className);
+		return "class/live_test";
+	}
 }
