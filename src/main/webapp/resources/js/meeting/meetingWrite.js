@@ -1,16 +1,74 @@
 /* 모임 작성 버튼 */
 
-(function () {
-
-  $(document).ready(function () {
-    return $('."meeting-button2"').click(function () {
- 
-    	location.href="/hellopt/meeting";
-      
-    });
-  });
-
-}).call(this);
+/*null 방지*/
+$("#submit").click(function(){
+	if($("#mComment").val().length==0) {
+		alert("개설자 한마디를 입력하세요.");
+		$("#mComment").focus();
+		return false;
+	};
+	
+	if($("#maxCount").val().length==0) {
+		alert("모임 최대 인원수를 입력하세요.");
+		$("#maxCount").focus();
+		return false;
+	};
+	
+	if($("#datePicker").val().length==0) {
+		alert("모임 날짜를 선택하세요.");
+		$("#datePicker").focus();
+		return false;
+	};
+	
+	if($("#mSubject").val().length==0) {
+		alert("제목을 입력하세요.");
+		$("#mSubject").focus();
+		return false;
+	};
+	
+	if($("#mMemo").val().length==0) {
+		alert("요약정보를 입력하세요.");
+		$("#mMemo").focus();
+		return false;
+	};
+	
+	if($("#details").val().length==0) {
+		alert("상세정보를 입력하세요.");
+		$("#details").focus();
+		return false;
+	};
+	
+	if($("#include").val().length==0) {
+		alert("포함사항을 입력하세요.");
+		$("#include").focus();
+		return false;
+	};
+	
+	if($("#mLocation").val().length==0) {
+		alert("주소 검색 필수.");
+		$("#mLocation").focus();
+		return false;
+	};
+	
+	if($("#mLocationC").val().length==0) {
+		alert("상세위치를 입력하세요.");
+		$("#mLocationC").focus();
+		return false;
+	};
+	
+	if($("#mPrice").val().length==0) {
+		alert("모임금액을 입력하세요.");
+		$("#mPrice").focus();
+		return false;
+	};
+	
+	if($("#uploadFile").val().length==0) {
+		alert("사진 업로드 필수.");
+		$("#uploadFile").focus();
+		return false;
+	};
+	
+});
 
 
 

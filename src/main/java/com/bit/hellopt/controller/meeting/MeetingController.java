@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
@@ -199,10 +200,29 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("/meetingDelete")
-	public String meetingDelete(int meetingIdx) {
-		service.deleteMeeting(meetingIdx);
-		System.out.println("getMeetingDelete 성공");
-	
-	return "redirect:/meeting";
+	public void meetingDelete(Principal principal, int meetingIdx, HttpServletResponse response ,HttpServletRequest request) throws Exception {
+		
+		String sessionId = principal.getName();
+		int idx = service.getMeetingOne(meetingIdx).getMeetingIdx();
+		String loginId = service.getMeetingOne(meetingIdx).getFkUserId();
+		
+		System.out.println(sessionId);
+		System.out.println(loginId);
+		
+		if ( sessionId.equals(loginId) ) {
+			service.deleteMeeting(meetingIdx);
+			System.out.println("getMeetingDelete 성공");
+			response.sendRedirect("/meeting");
+		
+		} else {
+			
+		    response.setContentType("text/html; charset=UTF-8");
+		    response.getWriter().println("<script>alert(' 삭제 권한이 없습니다 '); </script>");
+		    
+			response.sendRedirect("meetingOne?meetingIdx="+idx);
+			
+			//return "redirect:/meetingOne?meetingIdx="+idx;
+		}
+		//return "redirect:/meeting";
 	}
 }

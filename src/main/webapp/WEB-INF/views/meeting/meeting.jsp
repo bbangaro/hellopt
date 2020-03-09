@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>	
 
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
@@ -83,8 +84,8 @@
 			</c:forEach>
 			  
 			</div>
-	
-			<input type="submit" name="" value="모임 개설하기" class="send-btn">
+			
+				<input type="submit" name="" value="모임 개설하기" class="send-btn">
 		
 		</div>
 	</div>
