@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -54,8 +55,16 @@ public class RBoardController {
 	
 	@RequestMapping("/review")
 	public String getRBoardList(RBoardVO vo, Model model, User uvo, 
-			@AuthenticationPrincipal CustomUserDetail customUser) {
+			@AuthenticationPrincipal CustomUserDetail customUser,
+			@RequestParam(defaultValue="1") int curPage ) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
+		
+//		//레코드의 갯수 계산
+//		int count = rService.countArticle(searchOption, keyword);
+//		
+//		//페이지 나누기 관련 처리
+//		BoardPager boardPager = new BoardPager(count, curPage);
+		
 		
 //		List<RBoardVO> rBoardList = rService.getRBoardList(vo);
 		List<RBoardVO> userjoin = rService.Join2();

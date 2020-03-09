@@ -2,8 +2,10 @@ package com.bit.hellopt.data;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.bit.hellopt.vo.reviewboard.RCommentVO;
 
@@ -19,8 +21,11 @@ public interface RCommentMapper {
 	public void create(RCommentVO vo);
 	
 	//댓글 수정
+	@Update("UPDATE REVIEW_COMMENT_TB "
+			+ "SET REV_CMT_COMMENT = #{revCmtComment}"
+			+ "WHERE REV_CMT IDX=#{revCmtIdx}")
 	public void update(RCommentVO vo);
 	
-	//댓글 삭제
+	@Delete("DELETE FROM REVIEW_COMMENT_TB WHERE REV_CMT_IDX= #{revCmtIdx}")
 	public void delete(int revCmtIdx);
 }

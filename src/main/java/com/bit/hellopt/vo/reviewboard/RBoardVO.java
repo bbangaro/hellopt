@@ -23,7 +23,7 @@ public class RBoardVO {
 	private String revStar;
 	private String revCategory;
 	private List<RFileVO> filevo;
-	private int cmtCnt;
+	private int cmtCnt; //게시글 댓글의 수 
 	
 	public int getCmtCnt() {
 		return cmtCnt;

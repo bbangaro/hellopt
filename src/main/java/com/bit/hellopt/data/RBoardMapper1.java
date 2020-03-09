@@ -8,12 +8,13 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.user.User;
 
 public interface RBoardMapper1 {
-
+	
 	//전체 후기 조회
 	@Select("SELECT * FROM REVIEW_BOARD_TB ORDER BY REV_IDX DESC")
 	public List<RBoardVO> getRBoardList();
@@ -60,4 +61,15 @@ public interface RBoardMapper1 {
 	
 	@Delete("DELETE FROM REVIEW_FILE_TB WHERE REV_IDX = #{revIdx}")
 	public void uploadFileDel(RBoardVO vo);
+	
+	//총 게시글 갯수 출력
+	@Select("SELECT COUNT(*) FROM BOARD")
+	public int countBoard();
+	
+	//페이징 처리 후 게시글 조회
+	@Select("SELECT * FROM ("
+			+ "SELECT ROWNUM RN, A.*"
+			+ "		FROM("
+			+ "				SELECT* FROM REV_)")
+	public List<RBoardVO> selectRBord(PagingVO vo);
 }

@@ -52,6 +52,13 @@
 <table class="tbl_wrap">
 	<thead class="tbl_head01">
 		<tr>
+		<sec:authorize access="isAuthenticated()">
+			<sec:authentication property = "principal.username"/>
+			<td><a href="#this" id="modify" class= "btn">글 수정</a></td>
+			<td><a href="#this" id="delete" class= "btn">글 삭제</a></td>
+		</sec:authorize>
+		</tr>
+		<tr>
 			<c:if test="${rBoard.userFileName == null }">
 			<td rowspan="3"><img class='profile' src="/hellopt/file/4e464b9505d74c6f94e5241fe3c3dc6a.png"></td>
 			</c:if>
@@ -64,7 +71,7 @@
 			<td>수업이름</td>
 		</tr>
 		<tr>
-		
+		<!--별점기능 -->
 		<td class="starRev"> 
 <%-- 	if문 써서	<c:forEach var="i" begin="1" end="5" step="1" >
 				<c:if test="${i  > rBoard.revStar }">
@@ -96,20 +103,35 @@
 		<tr>
 			<td colspan="2">날짜 :<fmt:formatDate value="${rBoard.revRegdate }" type="date"/></td>
 		</tr>
-		<tr>
-		<sec:authorize access="isAuthenticated()">
-			<td><a href="#this" id="modify" class= "btn">글 수정</a></td>
-			<td><a href="#this" id="delete" class= "btn">글 삭제</a></td>
-		</sec:authorize>
-		</tr>
+
 	</tbody>
-	<c:forEach var="trainer" items="${trainerList }">
 	<tfoot>
 		<tr>
-			<td colspan="2"><a href="">트레이너${trainer.name } <img src=""></a></td>
+			
+		<!-- 댓글이 있으면 게시글 이름 옆에 출력하기 -->
+		<c:if test="${rBoard.cmtCnt > 0 }">
+		<td>
+			<a href="#this" id="cmtCnt"> 댓글(${rBoard.cmtCnt })개 모두 보기</a>
+		</td>
+		</c:if>
 		</tr>
+		<tr>
+			<sec:authorize access="isAuthenticated()">
+			<textarea rows="5" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
+			<button type="button" id="btnReply">등록</button>
+			</sec:authorize>
+		</tr>
+		<c:forEach var="row" items="${replyList }">
+		<tr>
+			<td id="listReply">
+			${row.userName}(<fmt:formatDate value="${row.regdate }" pattern="yyyy-MM-dd HH:mm:ss"/>)
+			<br>
+			${row.revCmtComment }
+			</td>	
+		</tr>
+		</c:forEach>
 	</tfoot>
-	</c:forEach>
+	
 </table>
 </c:forEach>
 </form>
@@ -117,15 +139,72 @@
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
 	$(document).ready(function(){
+		//댓글쓰기 버튼 클릭 이벤트 (ajax로 처리)
+		$("#btnReply").click(funtion(){
+			var replytext=$("#replytext").val();
+			var revIdx="${RBoardVO.revIdx}"
+			var param="replytext=" + revCmtComment + "&revIdx=" + revIdx;
+			$.ajax({
+				type: "post",
+				url:"${path}/review/reply/insert",
+				data: param,
+				success: function(){
+					alert("댓글이 등록되었습니다.");
+					listReply2();
+				}
+			});
+			
+		});
+		
+		//게시글 수정
 		$("#modify").on("click", function(e){
 			e.preventDefault();
 			fn_BoardModify($(this));
-		})
+		});
+		//게시글 삭제
 		$("a[name='delete']").on("click", function(e){
 			e.preventDefault();
 			fn_BoardDelete($(this));
+		});
+	});
+	
+	//Controller방식
+	//**댓글 목록1
+	function listReply(){
+		$.ajax({
+			type: "get",
+			url: "${path}/review/reply?revIdx={rBoard.revIdx}",
+			success: function(result){
+				//response Text가 result에 저장됨.
+				$("#listReply").html(result);
+			}
+		});
+	}
+	//RestController방식(Json)
+	//**댓글 목록2(json)
+	function listReply2(){
+		$.ajax({
+			type: "get",
+			//contentType: "application/json", ==>생략가능 (RestController가 )
+			url: "${path}/reviewjson?revIdx=${rBaord.revIdx}",
+			success:function(result){
+				console.log(result);
+				var output = "<table>";
+				for(var i in result){
+					output +="<tr>";
+					output +="<td>" + result[i].userName;
+					output +="(" + changeDate(result[i].regdate)+ ")<br>";
+					output += result[i].revCmtComment"</td>" ;
+					output +="<tr>";
+				}
+			output +="</table>";
+			$("#listReply").html(output);
+			}
 		})
-	})
+	}
+	
+	
+	
 	function fn_BoardModify(obj){
 		var comSubmit = new ComSubmit("frm");
 		comSubmi.setUrl("<c:url value='/review/updateform' />");
