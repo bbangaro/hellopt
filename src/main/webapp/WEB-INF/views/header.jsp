@@ -33,8 +33,8 @@
                     <li><a href="#" class="artist_open">Trainer introduce</a></li>
                     <li><a href="#" class="artist_open">How to Workout</a>
                     	 <ul class="artist_depth02">
-                            <li><a href="${pageContext.request.contextPath}/exercise-Info">Exercise-Info</a></li>
-                            <li><a href="${pageContext.request.contextPath}/exercise-TipInfo">Exercise-TipInfo</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exerciseinfolist">Exercise-Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exercisetipinfolist">Exercise-TipInfo</a></li>
                         </ul>
                     </li>
                     <li><a href="#" class="artist_open">Home training</a>

@@ -8,32 +8,20 @@
 <head>
 <meta charset="UTF-8">
 <title>운동정보 게시판~!</title>
-
-<style>
-	
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: orange; }
-	.center { text-align: center; }
-	.border-none, .border-none td { border: none; }
-</style>
+	<script src="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/exerciseInfoList.css"></script>
 
 </head>
 <body>
 
-<div id="container">
+<div id="wrap">
 	<h1>운동정보 목록</h1>
 	<h3>${isUser}님 환영합니다~!!!</h3>
 
 	<!-- 검색을 위한 폼 -->
 	<form action="exerciseinfolist" method="post">
-	<table class="border-none">
-		<tr>
-			<td>
+	<div class="border-none">
+		<p>
+			<span>
 				<select name="searchCondition">
 				<c:forEach var="option" items="${conditionMap }">
 					<option value="${option.value }">${option.key }</option>
@@ -42,50 +30,53 @@
 				
 				<input type="text" name="searchKeyword">
 				<input type="submit" value="검색">
-			</td>
-		</tr>
-	</table>
+			</span>
+		</p>
+	</div>
 	</form>
 
 	<!-- 데이터 표시 -->
+    <!-- width color 등 설정해볼것~! -->
 	<form>
-	<table>
-		<tr>
-			<th width="80">운동번호</th>
-			<th width="80">운동이름</th>
-			<th width="80">운동부위</th>
-			<th width="80">운동방법</th>
-			<th width="80">운동사진</th>
-			<th width="100">운동동영상</th>
-			<th width="80">주의사항</th>
-			<th width="100">세트당횟수</th>
-			<th width="80">세트횟수</th>
-			<th width="80">휴식시간</th>
-		</tr>
+    <div id="table">    
+        <div class="row1">
+            <p>
+            <span class="cell col1">운동번호</span>
+			<span class="cell col2">운동이름</span>
+            <span class="cell col3">운동부위</span>
+            <span class="cell col4">운동방법</span>
+            <span class="cell col5">운동사진</span>
+            <span class="cell col6">운동동영상</span>
+            <span class="cell col7">주의사항</span>
+            <span class="cell col8">세트당횟수</span>
+            <span class="cell col9">세트횟수</span>
+            <span class="cell col10">휴식시간</span>
+            </p>
+        </div>
 		
 		<c:forEach var="exerciseInformation" items="${exerciseInformationList }">
-		<tr>
-			<td class="center">${exerciseInformation.exerciseIdx }</td>
-			<td>
+            <div class="row2">
+                <p>
+			<span class="center">${exerciseInformation.exerciseIdx }</span>
+			<span>
 				<a href="exerciseinfo?exerciseIdx=${exerciseInformation.exerciseIdx }">
 					${exerciseInformation.exerciseName }
 				</a>
-			</td>
-			<td>${exerciseInformation.exerciseParts }</td>
-			<td>${exerciseInformation.howtoExercise }</td>
-			<td>${exerciseInformation.exercisePicturesName }</td>
-			<td>${exerciseInformation.exerciseVideo }</td>
-			<td>${exerciseInformation.caution }</td>
-			<td>${exerciseInformation.repetition }</td>
-			<td>${exerciseInformation.setCount }</td>
-			<td>${exerciseInformation.restTime }</td>
-		</tr>
+			</span>
+			<span>${exerciseInformation.exerciseParts }</span>
+			<span>${exerciseInformation.howtoExercise }</span>
+			<span>${exerciseInformation.exercisePicturesName }</span>
+			<span>${exerciseInformation.exerciseVideo }</span>
+			<span>${exerciseInformation.caution }</span>
+			<span>${exerciseInformation.repetition }</span>
+			<span>${exerciseInformation.setCount }</span>
+			<span>${exerciseInformation.restTime }</span>
+                </p>
+            </div>
 		</c:forEach>
-	</table>
-	</form>
+	</div>
+    </form>
+    </div>
 	<p><a href="insertExerciseInformationform">운동정보글등록</a></p>
-</div>
-
-
-</body>
+    </body>
 </html>

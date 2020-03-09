@@ -59,6 +59,10 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/faq1").setViewName("faq1");
 		registry.addViewController("/faq2").setViewName("faq2");
 		registry.addViewController("/audition").setViewName("audition");
+		registry.addViewController("/exerciseInfo").setViewName("exerciseInfo");
+		registry.addViewController("/exerciseInfoList").setViewName("exerciseInfoList");
+		registry.addViewController("/exerciseInfoTip").setViewName("exerciseInfoTip");
+		registry.addViewController("/exerciseInfoTipList").setViewName("exerciseInfoTipList");
 	}
 
 	//Controller에서 View 리턴 시 View 위치와 확장자를 설정
