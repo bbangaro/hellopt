@@ -794,7 +794,16 @@ h2 {
 	
 	
 }
-
+.meeting-header{
+	pointer-events : none !important;
+	all : unset !important;
+	color: white;
+    text-decoration: none;
+}
+.meeting-header:hover{
+	color: white !important;
+	cursor: pointer !important;
+}
 .address-btn {
     border: 0px;
     font-size: 15px;
@@ -806,7 +815,15 @@ h2 {
     border-radius: 3rem;
     cursor: pointer;
 }
-
+.file-btn{
+	border: 0px;
+    font-size: 15px;
+    margin-bottom: 4px;
+    margin-left: 10px;
+    color: white;
+    border-radius: 3rem;
+    cursor: pointer;
+}
 .profile-detail{
 	display: inline-block;
 }
@@ -816,7 +833,6 @@ h2 {
 }
 .profile-detail2{
 	display: inline-block;
-    margin-left: 20px;
 }
 .username {
 	background-color: black;
@@ -967,7 +983,9 @@ h2 {
     display: inline-block;
 }
 .m-select {
-	margin-left: 20px
+	margin-left: 20px;
+	background: #580505
+	
 }
 
 

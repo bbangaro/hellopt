@@ -31,7 +31,7 @@
 
 	<div class="hello_body center">
 	
-		<h2>Meeting</h2>
+		<h2><a class="meeting-header" href="${pageContext.request.contextPath}/meeting">Meeting</a></h2>
 		
 		<form class="auto" action="meetingWriteOk" method="post" enctype="multipart/form-data" autocomplete="off">
 			<div class="boarder-line">
@@ -70,7 +70,7 @@
 							<c:forEach var="local" items="${localList}">
 								<option value="${local.localNo }">${local.local }</option>
 							</c:forEach>	
-							</select>	
+							</select>
 						</div>
 					</div>
 
@@ -135,7 +135,9 @@
 						</div>
 					</div>
 					
-					<input type="file" name="uploadFile" multiple="multiple">
+					<div class="meeting-title">파　　일
+					<input type="file" class="file-btn" name="uploadFile" multiple="multiple">
+					</div>
 					
 				<!-- 내용물 넣기 -->				
 				<hr class="meeting-line">

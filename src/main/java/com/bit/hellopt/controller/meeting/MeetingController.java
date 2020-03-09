@@ -175,6 +175,7 @@ public class MeetingController {
 	@RequestMapping("/meetingUpdate")
 	public String meetingUpdate(Principal principal, Model model, int meetingIdx) {
 	MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+	List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
 	System.out.println("getMeetingUpdate 성공");
 
 	List<LocalVO> localList = service.getLocalVO();
@@ -183,6 +184,7 @@ public class MeetingController {
 	model.addAttribute("localList", localList);
 	model.addAttribute("categoryList", categoryList);
 	model.addAttribute("meetingOne", meetingOne);
+	model.addAttribute("meetingOneFile", MeetingOneFile);
 	
 	
 	return "meeting/meetingUpdate";

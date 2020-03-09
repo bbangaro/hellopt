@@ -37,7 +37,7 @@
 
 	<div class="hello_body center">
 	
-		<h2>Meeting</h2>
+		<h2><a class="meeting-header" href="${pageContext.request.contextPath}/meeting">Meeting</a></h2>
 			<div class="boarder-oline">
 			
 				

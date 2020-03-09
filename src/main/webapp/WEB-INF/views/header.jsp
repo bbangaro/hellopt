@@ -7,19 +7,19 @@
 
 
 <body>
-	<div class="userName">
-		<sec:authorize access="isAuthenticated()">
-			<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
-			<sec:authentication property="principal" var="user" />
-			<span>${user.username}님 안녕하세요</span>
-		</sec:authorize>
-	</div>
 
 	<!-- 상단 시작 { -->
     <header id="hd" class="ease" style="z-index: 9999;">
         <h1>
             <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
+		<div class="userName">
+			<sec:authorize access="isAuthenticated()">
+				<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
+				<sec:authentication property="principal" var="user" />
+				<span>${user.username}님 안녕하세요</span>
+				</sec:authorize>
+		</div>
         <button type="button" role="togglebutton" class="nav_button"><span></span></button>
     </header>
     <!-- 상단 끝 } -->

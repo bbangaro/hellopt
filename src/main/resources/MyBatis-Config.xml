@@ -18,6 +18,11 @@
 		<typeAlias alias="LocalVO" type="com.bit.hellopt.vo.meeting.LocalVO" />
 		<typeAlias alias="MeetingVO" type="com.bit.hellopt.vo.meeting.MeetingVO" />
 		<typeAlias alias="MeetingMapper" type="com.bit.hellopt.data.MeetingMapper" />
+
+		<typeAlias alias="CalendarVO" type="com.bit.hellopt.vo.calendar.CalendarVO" />
+		<typeAlias alias="CalendarMapper" type="com.bit.hellopt.data.CalendarMapper" />
+		<!-- 
+		 -->
 	</typeAliases>
 
 </configuration>
