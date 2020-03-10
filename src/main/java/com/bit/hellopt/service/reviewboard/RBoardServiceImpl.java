@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.data.RBoardMapper1;
 import com.bit.hellopt.data.RBoardMapper2;
+import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.user.User;
@@ -84,6 +85,16 @@ public class RBoardServiceImpl implements RBoardService {
 	@Override
 	public List<RBoardVO> Join2() {
 		return mapper2.join2();
+	}
+
+	@Override
+	public int countBoard() {
+		return mapper.countBoard();
+	}
+
+	@Override
+	public List<RBoardVO> selectRBord(PagingVO pvo) {
+		return mapper.selectRBord(pvo);
 	}
 
 

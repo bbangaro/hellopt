@@ -40,11 +40,33 @@
 		  cursor: pointer;
 		}
 	td .star.on{background-position:0 0;}
+	
+	a {
+		text-decoration: none;
+	}
 </style>
 </head>
+<script>
+	function selChange(){
+		var sel = document.getElementById('cntperPage').vlaue;
+		location.href="review?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
+</script>
 <body>
-
 <div id = "container">
+<div id="outter">
+	<div style="float:right;">
+		<select id="cntPerPage" name="sel" onchange="selChange()">
+			<option value="5"
+				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기 </option>
+			<option value="10"
+				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기 </option>
+			<option value="15"
+				<c:if test="${paging.cntPerPage == 15 }">selected</c:if>>15줄 보기</option>
+		</select>
+	</div>
+</div>
+
 <form>
 
 	<p><a href="${pageContext.request.contextPath}/review/insertform">후기쓰러가기</a></p>	
@@ -108,16 +130,16 @@
 	<tfoot>
 		<tr>
 			
-		<!-- 댓글이 있으면 게시글 이름 옆에 출력하기 -->
+		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
 		<c:if test="${rBoard.cmtCnt > 0 }">
 		<td>
-			<a href="#this" id="cmtCnt"> 댓글(${rBoard.cmtCnt })개 모두 보기</a>
+			<a href="#this" id="cmtCnt"> 댓글${rBoard.cmtCnt }개 모두 보기</a>
 		</td>
-		</c:if>
+		</c:if> 
 		</tr>
 		<tr>
 			<sec:authorize access="isAuthenticated()">
-			<textarea rows="5" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
+			<textarea rows="2" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
 			<button type="button" id="btnReply">등록</button>
 			</sec:authorize>
 		</tr>
@@ -132,6 +154,25 @@
 		</c:forEach>
 	</tfoot>
 	
+	<!--페이징 -->
+	<div style = "display: block; text-align: center;">
+		<c:if test="${paging.startPage != 1 }">
+			<a href="/review?nowPage=${paging.startPage -1 }$cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.lastPage }">
+					<a href="/review?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage }">
+			<a href="/review?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage }">&gt;</a>
+		</c:if>
+	</div>
 </table>
 </c:forEach>
 </form>
@@ -215,7 +256,7 @@
 		comSubmi.setUrl("<c:url value='/review/deleteboard' />");
 		comSubmit.submit();
 	}
-	
+
 	
 </script>
 </body>

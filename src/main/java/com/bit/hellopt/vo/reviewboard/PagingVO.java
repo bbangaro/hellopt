@@ -8,19 +8,18 @@ public class PagingVO {
 	
 	public PagingVO() {}
 	
-	public PagingVO(int nowPage, int startPage, int endPage, int total, int cntPerPage,
-			int lastPage, int start, int end, int cntPage) {
-		this.nowPage = nowPage;
-		this.startPage = startPage;
-		this.endPage = endPage;
-		this.total = total;
-		this.cntPerPage = cntPerPage;
-		this.lastPage = lastPage;
-		this.start = start;
-		this.end = end;
-		this.cntPage = cntPage;
+	public PagingVO(int nowPage, int total, int cntPerPage) {
+		setNowPage(nowPage);
+		setCntPerPage(cntPerPage);
+		setTotal(total);
+		calcLastPage(getTotal(), getCntPerPage());
+		calcStartEnd(getNowPage(), cntPage);
+		calcStartEnd(getNowPage(), getCntPerPage());
+		
 	}
-	
+
+
+
 	//제일 마지막 페이지 계산
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int)Math.ceil((double)total/ (double)cntPerPage));
