@@ -66,8 +66,7 @@
 									</div>
 									<c:forEach var="member" items="${classMember }">
 										<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
-											<%-- <button onclick="location.href='viewer?classIdx=${liveClass.classIdx }'" style="color:white;">방송보기</button> --%>
-											<button onclick="location.href='live_test?classIdx=${liveClass.classIdx }'" style="color:white;">방송보기</button>
+											<button onclick="location.href='viewer?classIdx=${liveClass.classIdx }'" style="color:white;">방송보기</button>
 										</c:if>
 									</c:forEach>
 								</li>

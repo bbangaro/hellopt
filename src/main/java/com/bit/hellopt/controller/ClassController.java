@@ -104,7 +104,7 @@ public class ClassController {
 		return "class/broadcaster";
 	}
 
-/*	@RequestMapping("/viewer")
+	@RequestMapping("/viewer")
 	public String getClassName2(int classIdx, Model model) {
 		String className = service3.getClassName(classIdx);
 		System.out.println("강의 제목 가져오기 성공^^");
@@ -112,15 +112,5 @@ public class ClassController {
 		model.addAttribute("classIdx", classIdx);
 		model.addAttribute("className", className);
 		return "class/viewer";
-	}*/
-	
-	@RequestMapping("/live_test")
-	public String getClassName2(int classIdx, Model model) {
-		String className = service3.getClassName(classIdx);
-		System.out.println("강의 제목 가져오기 성공^^");
-		
-		model.addAttribute("classIdx", classIdx);
-		model.addAttribute("className", className);
-		return "class/live_test";
 	}
 }
