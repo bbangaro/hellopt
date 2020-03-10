@@ -99,6 +99,7 @@ public class ClassController {
 		String className = service3.getClassName(classIdx);
 		System.out.println("강의 제목 가져오기 성공^^");
 		
+		model.addAttribute("classIdx", classIdx);
 		model.addAttribute("className", className);
 		return "class/broadcaster";
 	}
@@ -108,6 +109,7 @@ public class ClassController {
 		String className = service3.getClassName(classIdx);
 		System.out.println("강의 제목 가져오기 성공^^");
 		
+		model.addAttribute("classIdx", classIdx);
 		model.addAttribute("className", className);
 		return "class/viewer";
 	}*/
@@ -117,6 +119,7 @@ public class ClassController {
 		String className = service3.getClassName(classIdx);
 		System.out.println("강의 제목 가져오기 성공^^");
 		
+		model.addAttribute("classIdx", classIdx);
 		model.addAttribute("className", className);
 		return "class/live_test";
 	}

@@ -228,9 +228,10 @@
     
 		var userId = $("#userid").val();
 		
-		//나중에 classIdx로 대체
+		console.log("classIdx : " + ${classIdx });
+
 		//var roomId = Math.round(Math.random() * 999999999) + 999999999;
-		var roomId = 65;
+		var roomId = ${classIdx };
 		
 		console.log("userId: " + userId);
 		console.log("roomId: " + roomId);
