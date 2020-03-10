@@ -13,11 +13,7 @@
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/live.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/reset.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/chat.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/style.css">
-	
-	<!-- 채팅용 -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 	
 	<!-- This Library is used to detect WebRTC features -->
 	<script src="${pageContext.request.contextPath }/resources/js/live/DetectRTC.js"></script>
@@ -29,9 +25,10 @@
 	<script src="${pageContext.request.contextPath }/resources/js/live/broadcast.js"> </script>
 
 <style>
-	audio, video {
+	video {
 	    vertical-align: top;
 	    width: 70%;
+	    float: left;
 	}
 	
 	input {
@@ -72,21 +69,14 @@
 			
 			        <!-- local/remote videos container -->
 			        <div id="videos-container">
-				        <div class="mesgs">
-							<div class="msg_history"></div>
-							<div class="type_msg">
-								<div class="input_msg_write">
-									<input type="text" class="write_msg"
-										placeholder="Type a message" />
-									<button class="msg_send_btn" type="button" id="send">
-										<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-									</button>
-								</div>
-							</div>
-						</div>
+			        </div>
+			        
+			        <div id="chat-container">
+						<iframe id="chat" src="http://localhost:3000"></iframe>
 			        </div>
 			    </section>
 			</article>
+			
 		</div>
 		<!-- // sub-content -->
 	</div>
@@ -289,49 +279,22 @@
    }
 
 </script>
-    
-<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
-  <script>
-         $(function() {
-            /* var socket = io("http://localhost:3000"); */
-            
-            var id = $("#userid").val();
-            
-            socket.emit("in_msg", {id :id, name:"test2", img: "${pageContext.request.contextPath}/resources/images/meeting/sample3.jpg"});
-            
-            socket.emit("out_msg", {id :"test3", name:"test3", img: "${pageContext.request.contextPath}/resources/images/meeting/sample3.jpg"});
- 
-            //msg에서 키를 누를떄
-            $(".write_msg").keydown(function(key) {
-                //해당하는 키가 엔터키(13) 일떄
-                if (key.keyCode == 13) {
-                    //msg_process를 클릭해준다.
-                   send.click();
-                }
-            });
- 
-            //msg_process를 클릭할 때
-            $(".msg_send_btn").click(function() {
-                //소켓에 send_msg라는 이벤트로 input에 #msg의 벨류를 담고 보내준다.
-                socket.emit("send_msg", {msg:$(".write_msg").val(), id:id});
-                //#msg에 벨류값을 비워준다.
-                $(".write_msg").val("");
-            });
-                
-            
-            //소켓 서버로 부터 send_msg를 통해 이벤트를 받을 경우 
-            socket.on('send_msg', function(msg) {
-            	//div 태그를 만들어 텍스트를 msg로 지정을 한뒤 #chat_box에 추가를 시켜준다.
-	            if(msg.id != id) {
-	            	$('<div class="incoming_msg"><div class="received_msg"><div class="received_withd_msg"><p>'+msg.msg+'</p><span class="time_date">'+msg.id+'</span></div></div></div>').appendTo(".msg_history");
-	            }  
-	            else if(msg.id == id) {
-	            	console.log("55555")
-	            	$('<div class="outgoing_msg"><div class="sent_msg"><p>'+msg.msg+'</p><span class="time_date">'+msg.id+'</span></div>').appendTo(".msg_history");
-	            } 
-				
-            })
-        }); 
-    </script>      
+<script>
+	var userId = $("#userid").val();
+	
+	//나중에 classIdx로 대체
+	//var roomId = Math.round(Math.random() * 999999999) + 999999999;
+	var roomId = 65;
+	
+	console.log("userId: " + userId);
+	console.log("roomId: " + roomId);
+	
+	//채팅서버로 룸아이디, 유저아이디 전송
+	setTimeout(function () {
+		document.querySelector("#chat").contentWindow.postMessage(JSON.stringify({"roomId": roomId, "sender": userId}), "*");	
+	}, 1000);
+	
+</script>    
+
 </body>
 </html>

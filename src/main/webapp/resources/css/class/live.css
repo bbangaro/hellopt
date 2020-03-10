@@ -45,6 +45,20 @@ table, tr, td {
 	width: 100%!important;
 }
 
+iframe {
+	height: 660px;
+	width: 105%;
+	overflow-y: scroll;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+	
+#chat-container {
+	width: 29%;
+	overflow: hidden;
+	float: right;
+}
+
 @media all and (max-width: 800px) {
     body {
         font-size: 1.1em;
