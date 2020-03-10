@@ -1,53 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>운동정보 상세보기~!</title>
-
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/skin/board/tour/style.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/content.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/default.css?ver=171222">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/style.css">
-<link rel="stylesheet" href="http://www.kozofficial.com/theme/basic/css/content.css">
-
-<style>
-	#container {
-		width: 700px;
-		margin: 0 auto;
-	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: orange; }
-	.center { text-align: center; }
-	.border-none, .border-none td { border: none; }
-</style>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/exercise.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
+	<div id="wrap">
 
-<div id="container">
-	<p class="textbold">대한민국 No.1 그룹운동 플랫폼 <b>헬로피티</b></p>
-	<p class="txt">Hello 운동정보~!</p>
-	<p class="txt">헬로피티에서 제공하는 운동방법을 통해<b> 건강하고 아름다운 몸</b>을 가꾸세요</p>
-	
-	<br>
-	<hr>
-	
-	<div class="top">
-		<h1 align="center">운동정보 상세</h1>
-		<img src="imgs/연무니.jpg" alt="인체사진">
-		<hr>
-		<form action="updateExerciseInformation" method="post">
-		<input type="hidden" name="exerciseIdx" value="${exerciseInformation.exerciseIdx }">
-		<div>
-			<p>
+		<div class="exercisebox">
+			<div class="bannertxtbox">
+				<p class="bannertxt"><span class="bannertxt_big">대한민국 No.1 그룹운동 플랫폼 헬로피티</span><br>
+			헬로피티에서 제공하는 운동방법을 통해 건강하고 아름다운 몸을 가꾸세요.</p>
+				</div>
+			</div>
+			</div>
+
+		<div class="exercisebox">
+		
+			<div class="exercise_inner">
+				<div class="exerciseImg">
+					<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseA.jpg" alt="운동부위사진" class="exerciseImg_img">
+				</div>
+				<div class="exercise">
+			
+			<h1 align="center">운동정보 상세</h1>
+			<img src="imgs/연무니.jpg" alt="인체사진">
+			<hr>
+			<form action="updateExerciseInformation" method="post">
+			<input type="hidden" name="exerciseIdx" value="${exerciseInformation.exerciseIdx }">
+			<div>
+				<p>
         	<!-- <img src="resources/images/연문.jpg"> -->
         		<input type="text" name="exerciseName"
         			value="${exerciseInformation.exerciseName }">
@@ -99,14 +86,8 @@
                 <input type="text" name="restTime"
                     value="${exerciseInformation.restTime }">
 			</form>
-		<p>
-			<a href="insertexerciseinformation">글등록</a>
-			<a href="deleteexerciseinformation?exerciseIdx=${exerciseInformation.getExerciseIdx() }">글삭제</a>
-			<a href="getexerciseinformationlist">글목록</a>
-		</p>
-	</div>
-	</div>
-
-
+				</div>
+			</div>
+		</div>
 </body>
 </html>

@@ -72,7 +72,7 @@ public class ExerciseInformationTipController {
 		List<ExerciseInformationTipVO> exerciseInformationTipList = exerciseInformationTipService.getExerciseInformationTipList(vo);
 		model.addAttribute("exerciseInformationTipList", exerciseInformationTipList);
 		
-		return "exerciseInfoTipList";
+		return "exercise/exerciseInfoTipList";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
@@ -86,7 +86,7 @@ public class ExerciseInformationTipController {
 		model.addAttribute("exerciseInformationTip", exerciseInformationTip); //데이터 저장
 		System.out.println("> exerciseInformationTip : " + exerciseInformationTip);
 		
-		return "exerciseInfoTip";
+		return "exercise/exerciseInfoTip";
 	}
 	
 	@Value("${file.directory}")
@@ -94,12 +94,12 @@ public class ExerciseInformationTipController {
 	
 	@GetMapping("/exercise/tipform") 
 	public String uploadForm() {
-		return "insertExerciseInformationTip";
+		return "exercise/insertExerciseInformationTip";
 	}
 	
 	@GetMapping("insertexerciseinformationtipform")
 	public String form() {
-		return "insertExerciseInformationTipform";
+		return "exercise/insertExerciseInformationTipform";
 	}
 	
 	@RequestMapping("insertexerciseinformationtip")
@@ -162,7 +162,7 @@ public class ExerciseInformationTipController {
 		System.out.println("> exerciseInformationTip vo : " + vo);
 		
 		exerciseInformationTipService.updateExerciseInformationTip(vo);
-		return "exerciseInfoTipList";
+		return "exercise/exerciseInfoTipList";
 	}
 	
 	@RequestMapping("/deleteexerciseinformationtip")
@@ -170,7 +170,7 @@ public class ExerciseInformationTipController {
 		System.out.println(">>> 글 삭제 처리 - deleteExerciseInformationTip()"); 
 		
 		exerciseInformationTipService.deleteExerciseInformationTip(vo);
-		return "exerciseInfoTipList";
+		return "exercise/exerciseInfoTipList";
 	}
 	
 	//---------------------------------

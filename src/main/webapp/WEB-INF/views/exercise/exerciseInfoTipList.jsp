@@ -77,7 +77,7 @@
 		</c:forEach>
 	</table>
 	</form>
-	<p><a href="insertExerciseInformationTipform">운동정보팁글등록</a></p>
+	<p><a href="exercise/insertExerciseInformationTipform">운동정보팁글등록</a></p>
 </div>
 
 

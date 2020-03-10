@@ -83,8 +83,7 @@ public class ExerciseInformationController {
 		
 		System.out.println("exerciseInformationList: " + exerciseInformationList.toString());
 		model.addAttribute("exerciseInformationList", exerciseInformationList);
-		return "exerciseInfoList";
-		
+		return "exercise/exerciseInfoList";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
@@ -98,7 +97,7 @@ public class ExerciseInformationController {
 		model.addAttribute("exerciseInformation", exerciseInformation); //데이터 저장
 		System.out.println("> exerciseInformation : " + exerciseInformation);
 		
-		return "exerciseInfo";
+		return "exercise/exerciseInfo";
 	}
 	
 	@Value("${file.directory}")
@@ -106,12 +105,12 @@ public class ExerciseInformationController {
 	
 	@GetMapping("/exercise") //
 	public String uploadForm() {
-		return "insertExerciseInformation";
+		return "exercise/insertexerciseinformation";
 	}
 	
-	@GetMapping("insertexerciseinformationform")
+	@GetMapping("/insertexerciseinformationform")
 	public String form() {	
-		return "insertExerciseInformationform";
+		return "exercise/insertexerciseinformationform";
 	}
 	
 	@GetMapping("insertexerciseinformation")
@@ -201,7 +200,7 @@ public class ExerciseInformationController {
 		System.out.println("> exerciseInformation vo : " + vo);
 		
 		exerciseInformationService.updateExerciseInformation(vo);
-		return "exerciseInfoList";
+		return "exercise/exerciseInfoList";
 	}
 	
 	@RequestMapping("/deleteexerciseinfo")
@@ -209,7 +208,7 @@ public class ExerciseInformationController {
 		System.out.println(">>> 글 삭제 처리 - deleteExerciseInformation()"); 
 		
 		exerciseInformationService.deleteExerciseInformation(vo);
-		return "exerciseInfoList";
+		return "exercise/exerciseInfoList";
 	}
 	
 	//---------------------------------
