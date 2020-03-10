@@ -17,12 +17,37 @@ public class RBoardVO {
 	private int revIdx;
 	private String userId;
 	private String userName;
-	private List<User> user;
+	private String userFileName;
 	private String revContent;
 	private Date revRegdate;
 	private String revStar;
 	private String revCategory;
 	private List<RFileVO> filevo;
+	private int cmtCnt; //게시글 댓글의 수 
+	
+	public int getCmtCnt() {
+		return cmtCnt;
+	}
+
+
+
+	public void setCmtCnt(int cmtCnt) {
+		this.cmtCnt = cmtCnt;
+	}
+
+
+
+	public String getUserFileName() {
+		return userFileName;
+	}
+
+
+
+	public void setUserFileName(String userFileName) {
+		this.userFileName = userFileName;
+	}
+
+
 
 	public int getRevIdx() {
 		return revIdx;
@@ -57,20 +82,6 @@ public class RBoardVO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-
-
-	public List<User> getUser() {
-		return user;
-	}
-
-
-
-	public void setUser(List<User> user) {
-		this.user = user;
-	}
-
-
 
 	public String getRevContent() {
 		return revContent;
@@ -134,9 +145,9 @@ public class RBoardVO {
 
 	@Override
 	public String toString() {
-		return "RBoardVO [revIdx=" + revIdx + ", userId=" + userId + ", userName=" + userName + ", user=" + user
-				+ ", revContent=" + revContent + ", revRegdate=" + revRegdate + ", revStar=" + revStar
-				+ ", revCategory=" + revCategory + ", filevo=" + filevo + "]";
+		return "RBoardVO [revIdx=" + revIdx + ", userId=" + userId + ", userName=" + userName + ", userFileName="
+				+ userFileName + ", revContent=" + revContent + ", revRegdate=" + revRegdate + ", revStar=" + revStar
+				+ ", revCategory=" + revCategory + ", filevo=" + filevo + ", cmtCnt=" + cmtCnt + "]";
 	}
 
 	

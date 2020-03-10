@@ -117,7 +117,16 @@
 	    <artifactId>commons-io</artifactId>
 	    <version>2.0.1</version>
 	</dependency> 
-		
+
+	<!-- 리뷰 댓글기능 위한 추가 : 수현 -->		
+	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.10.2</version>
+	</dependency>
+
+
 		
 		
 		<!-- Servlet -->

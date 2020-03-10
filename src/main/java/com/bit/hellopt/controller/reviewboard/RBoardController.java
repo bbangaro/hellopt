@@ -18,10 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -30,9 +32,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
+import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
+import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 
 @Controller
@@ -52,25 +56,37 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review")
-	public String getRBoardList(RBoardVO vo, Model model,
-			@AuthenticationPrincipal CustomUserDetail customUser) {
+	public String getRBoardList(RBoardVO vo,PagingVO pvo, Model model, User uvo, 
+			@AuthenticationPrincipal CustomUserDetail customUser,
+			@RequestParam(defaultValue="1") int curPage, 
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
+			
+		//레코드의 갯수 계산
+		int total = rService.countBoard();
+		if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "5";
+		} else if(nowPage == null) {
+				nowPage = "1";
+		} else if (cntPerPage == null) {
+				cntPerPage = "5";
+		}
+		pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging",pvo);
+		model.addAttribute("viewAll", rService.selectRBord(pvo));
+			
+		List<RBoardVO> userjoin = rService.Join2();
 		
-		List<RBoardVO> rBoardList = rService.getRBoardList();
-
-		for(RBoardVO rvo :rBoardList) {
+		for(RBoardVO rvo :userjoin) {
 			rvo.setFilevo(rService.getFileList(rvo.getRevIdx()));
 		}
+		System.out.println("rBoardList: " + userjoin.toString());
+//		System.out.println("userjoin: " + userjoin.toString());
 
-		User user = new User();
-		String profile = profileService.selectProfile(customUser.getUsername()).getStoredFileName();
-		user.setUserProfile(profile);
-		
-		
-		System.out.println("rBoardList: " + rBoardList.toString());
-
-		model.addAttribute("rBoardList", rBoardList);
-		model.addAttribute("user", user);
+		model.addAttribute("rBoardList", userjoin);
+//		model.addAttribute("userjoin", userjoin);
 		
 		return "reviewBoard";
 	}
@@ -84,7 +100,7 @@ public class RBoardController {
 		String name = customUser.getName();
 		vo.setUserId(userId);
 		vo.setUserName(name);
-		vo.setUser(rService.selectUserId(userId));
+		
 		
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		System.out.println("글 vo " +vo);
@@ -131,16 +147,23 @@ public class RBoardController {
 		return "redirect:/review";
 	}
 	
-	
-	@PostMapping("/updateboard")
-	public String updateBoard(@ModelAttribute("board")RBoardVO vo) {
+	@PostMapping("/review/updateform")
+	public String updateBoardForm(@ModelAttribute("rBoardList")RBoardVO vo) {
+		System.out.println(">>> 글 수정 처리 - updateBoard()");
+		System.out.println(">> board vo :" + vo);
+		
+		rService.updateBoard(vo);
+		return "insertRBoard";
+	}
+	@PostMapping("/review/updateboard")
+	public String updateBoard(@ModelAttribute("rBoardList")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		System.out.println(">> board vo :" + vo);
 		
 		rService.updateBoard(vo);
 		return "redirect:/review";
 	}
-	@PostMapping("/deleteboard")
+	@PostMapping("/review/deleteboard")
 	public String deleteBoard(RBoardVO vo) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
