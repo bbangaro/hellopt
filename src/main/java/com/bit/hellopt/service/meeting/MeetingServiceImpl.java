@@ -24,6 +24,11 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<MeetingVO> getMeetingVO() {
 		return meetingMapper.getMeetingVO();
 	}
+	// 미팅 상세 리스트 cnt로 가져오기
+	@Override
+	public List<MeetingVO> getMeetingCnt() {
+		return meetingMapper.getMeetingCnt();
+	}
 	
 	// 지역TB조회
 	@Override
@@ -87,6 +92,11 @@ public class MeetingServiceImpl implements MeetingService {
 	public void updateMaxMeeting(MeetingVO meetingVO) {
 		meetingMapper.updateMaxMeeting(meetingVO);
 	}
+	// 모임 글 조회수
+	@Override
+	public void clickCount(MeetingVO meetingVO) {
+		meetingMapper.clickCount(meetingVO);
+	}
 	
 	// 모임 삭제
 	@Override
@@ -94,6 +104,7 @@ public class MeetingServiceImpl implements MeetingService {
 		meetingMapper.deleteMeeting(meetingIdx);
 		
 	}
+
 
 	
 

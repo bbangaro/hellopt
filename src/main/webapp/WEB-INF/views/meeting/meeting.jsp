@@ -37,7 +37,7 @@
 			<c:forEach var="meeting" items="${meetingList}">
 
 			  <div class="service-details">
-			    <img src="${pageContext.request.contextPath}/resources/images/meeting/sample3.jpg">
+			    <img src="${pageContext.request.contextPath}/downloadFile?mSysImg=${meeting.meetingFileVO[0].mSysImg }">
 			    <div class="service-hover-text">
 			      <h3>${meeting.mSubject}</h3>
 			      <h4 class="mlocal">${meeting.fkLocalNo }</h4>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
@@ -44,11 +45,15 @@
 				<p class="meeting-detailsb">${meetingOne.mSubject } </p>
 				
 				<!-- 여기는 작성자만 보인다 -->
-				<div class="mUD">
-				<input type="button" value="수정" class="send-btn3 send-u">
-				<input type="button" value="삭제" class="send-btn3 send-d">
-				</div>
-				
+				<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal" var="user" />
+					<c:if test="${user.username eq meetingOne.fkUserId }">
+						<div class="mUD">
+						<input type="button" value="수정" class="send-btn3 send-u">
+						<input type="button" value="삭제" class="send-btn3 send-d">
+						</div>
+					</c:if>
+				</sec:authorize>
 				<hr class="meeting-line">
 				<!-- 내용물 넣기 -->
 				
@@ -87,7 +92,7 @@
 				  <div class="swiper-container">
 				    <div class="swiper-wrapper">
 				    
-				    <c:forEach var="file" items="${meetingOneFile}">
+				    <c:forEach var="file" items="${meetingOne.meetingFileVO}">
 				      <div class="swiper-slide" style="background-image:url(${pageContext.request.contextPath}/downloadFile?mSysImg=${file.mSysImg} )"></div>
 					</c:forEach>				   
 				    </div>
@@ -130,14 +135,16 @@
 				<!-- 내용물 넣기 -->				
 				
 				<p class="meeting-detailsb"> 회원들이 많이 본 모임 </p>
-				
-				    <div class="m-profile">
-				        <img class="profile-thumbnail" src="${pageContext.request.contextPath}/resources/images/meeting/nature-1.jpg" class="thumbnail">
-				        <h3 class="mname">${meetingOne.mSubject }</h3>
-				        <img class="mtitleimg" src="${pageContext.request.contextPath}/resources/images/meeting/location.png" width="20px" height="20px">
-				        <p class="mtitle">
-				        ${meetingOne.local }</p>
-				    </div>
+					
+					<c:forEach var="meetingCnt" items="${meetingCnt}">
+					    <div class="m-profile">
+					       	<img class="profile-thumbnail" src="${pageContext.request.contextPath}/downloadFile?mSysImg=${meetingCnt.meetingFileVO[0].mSysImg }" class="thumbnail">
+					        <h3 class="mname"><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meetingCnt.meetingIdx }">${meetingCnt.mSubject }</a></h3>
+					        <img class="mtitleimg" src="${pageContext.request.contextPath}/resources/images/meeting/location.png" width="20px" height="20px">
+					        <p class="mtitle">
+					        ${meetingCnt.local }</p>
+					    </div>
+					</c:forEach>
 				
 				<input type="hidden" id="meeting-idx" value=${meetingOne.meetingIdx }>
 				

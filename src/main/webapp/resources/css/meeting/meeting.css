@@ -361,7 +361,7 @@ h2 {
 	overflow: hidden;
 	position: relative;
 	filter:grayscale(50%);
-	margin-bottom: 8px;
+	margin-bottom: 20px;
     border-radius: 10px;
 }
 
@@ -486,6 +486,7 @@ h2 {
 }
 .categoryimg{
 	all: unset;
+	margin-right: 3px;
 	width: 25px !important;
 	height: 25px !important;
 }
@@ -511,7 +512,6 @@ h2 {
 	color: black;
 }
 .minner{
-	border: 0.1px solid black;
 	width: 734px;
     height: 174px;
     margin: auto;
@@ -1002,6 +1002,7 @@ h2 {
   margin-top: 12px;
   margin-left: 10px;
   position: relative;
+  float: left;
 }   
 .profile-thumbnail {
     width: 124px;

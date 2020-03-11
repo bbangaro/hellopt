@@ -44,6 +44,10 @@ public class MeetingController {
 		List<MeetingVO> meetingList = service.getMeetingVO();
 		System.out.println("getMeetingList 성공");
 		
+		for (MeetingVO vo : meetingList) {
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
 		model.addAttribute("meetingList", meetingList);
 		return "meeting/meeting";
 	}
@@ -100,17 +104,32 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("/meetingOne")
-	public String meetingOne(Principal principal, Model model, int meetingIdx) {
-		
+	public String meetingOne(Principal principal, Model model, int meetingIdx, MeetingVO meetingVO) {
+		//상세리스트
 		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+		//상세리스트에서 파일 슬라이드
 		List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
+		meetingOne.setMeetingFileVO(MeetingOneFile);
 		
-		System.out.println(MeetingOneFile.toString());
+		//상세리스트 하단 많이 본 모임
+		List<MeetingVO> meetingCnt = service.getMeetingCnt();
 		
-		System.out.println(meetingIdx);
+		for (MeetingVO vo : meetingCnt) {
+			// 파일없는 vo 안에 fileVO 셋팅 ( fileVO = list vo의 idx로 파일 이미지 전부 소환하기 )
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+
+
+
+		
+		
+		//클릭수 증가
+		service.clickCount(meetingVO);
+		
 		System.out.println("getMeetingOne 성공");
 		model.addAttribute("meetingOne", meetingOne);
-		model.addAttribute("meetingOneFile", MeetingOneFile);
+		//model.addAttribute("meetingOneFile", MeetingOneFile);
+		model.addAttribute("meetingCnt", meetingCnt);
 		return "meeting/meetingOne";
 	}
 	

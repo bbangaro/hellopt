@@ -12,6 +12,23 @@
 		   AND M.FK_LOCAL_NO = L.LOCAL_NO
 	</select>
 	
+	<select id="getMeetingCnt" parameterType="MeetingVO" resultType="MeetingVO">
+		SELECT *
+		FROM
+		 (
+		     SELECT MEETING_IDX, FK_USER_ID, M_COMMENT,C.M_CATEGORY, L.LOCAL, M_DATE, M_SUBJECT, M_MEMO, DETAILS, 
+			         INCLUDE, M_LOCATION, M_LOCATION_C, M_PRICE, PROGRESS_ST, M_CNT, INS_DT
+			    FROM MEETING_TB M, M_CATEGORY_CODE_TB C, LOCAL_CODE_TB L
+			   WHERE M.FK_M_CATEGORY_NO = C.M_CATEGORY_NO  
+			     AND M.FK_LOCAL_NO = L.LOCAL_NO
+			     AND PROGRESS_ST = '진행중'       
+			ORDER BY M_CNT DESC
+		 )
+		<![CDATA[
+		WHERE ROWNUM <= 3
+		]]>
+	</select>
+	
 	<select id="getLocalVO" parameterType="LocalVO" resultType="LocalVO">
 		SELECT * FROM LOCAL_CODE_TB
 	</select>
@@ -30,6 +47,8 @@
 		   AND M.MEETING_IDX = A.FK_MEETING_IDX 
 		   AND MEETING_IDX = #{meetingIdx}
 	</select>
+	
+	
 	<select id="getMeetingOneFiles" parameterType="int" resultType="com.bit.hellopt.vo.meeting.MeetingFileVO">
 		SELECT FILE_IDX, FK_MEETING_IDX, FILE_PATH, M_ORI_IMG, M_SYS_IMG
 	      FROM MEETING_TB M, MEETING_FILE_TB F 
@@ -76,6 +95,12 @@
 		UPDATE MEETING_APPLY_TB 
 		   SET MAX_COUNT = #{maxCount} 
 	     WHERE FK_MEETING_IDX = #{meetingIdx}
+	</update>
+	
+	<update id="clickCount" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
+		UPDATE MEETING_TB 
+		   SET M_CNT = M_CNT + 1  
+	     WHERE MEETING_IDX = #{meetingIdx}
 	</update>
 	
 	<delete id="deleteMeeting" parameterType="int">

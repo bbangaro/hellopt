@@ -11,6 +11,8 @@ public interface MeetingService {
 	
 	// 미팅 테이블 전체 조회
 	List<MeetingVO> getMeetingVO();
+	// 게시글 상세 조회 내에서 조회수 많은 게시글 목록
+	List<MeetingVO> getMeetingCnt();
 	
 	// 지역 카테고리 조회
 	List<LocalVO> getLocalVO();
@@ -35,7 +37,8 @@ public interface MeetingService {
 	void updateMeetingOk(MeetingVO meetingVO);
 	// 게시글 수정 > 최대인원수
 	void updateMaxMeeting(MeetingVO meetingVO);
-	
+	// 게시글 카운트 수 ++
+	void clickCount(MeetingVO meetingVO);
 	
 	// 게시글 삭제
 	void deleteMeeting(int meetingIdx);
