@@ -39,7 +39,7 @@
 			  <div class="service-details">
 			    <img src="${pageContext.request.contextPath}/downloadFile?mSysImg=${meeting.meetingFileVO[0].mSysImg }">
 			    <div class="service-hover-text">
-			      <h3>${meeting.mSubject}</h3>
+			      <h3 class="msub">${meeting.mSubject}</h3>
 			      <h4 class="mlocal">${meeting.fkLocalNo }</h4>
 			      
 					<!-- 이건 현재 날짜 뽑는거 -->

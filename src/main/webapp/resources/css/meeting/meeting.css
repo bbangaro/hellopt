@@ -471,7 +471,7 @@ h2 {
 	color:black;
 }
  .msub{
- 
+ text-shadow: 2px 2px 0px #d3d3d3;
 }
 .mcategory{
     margin-left: 15px;
@@ -520,7 +520,8 @@ h2 {
 .service-details .service-text {
 	float: left;
 	left: 170px;
-    box-shadow: 0px  2px 6px black inset
+   box-shadow: -3px -1px 7px #392f31 inset;
+
 } 
 
 .service-white {
@@ -1031,6 +1032,31 @@ h2 {
     float: right;
     margin-right: 60px;
 }
+
+.mAdmin {
+	color: white;
+	
+	font-size: 21px;
+    border: 0px solid black;
+	border-left: 3px solid #b4000f;
+	background-color: black;
+	
+    padding-left: 10px;
+	
+}
+
+.mAdminBtn {
+	float: right
+}
+.mBtn{
+	color: white;
+	font-size: 21px;
+}
+.mAdminCenter{
+	margin-left: 35%;
+}
+
+
 
 
 /* 슬라이드테스트 */

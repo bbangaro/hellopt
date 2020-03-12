@@ -52,6 +52,15 @@ public class MeetingController {
 		return "meeting/meeting";
 	}
 	
+	@RequestMapping("/admin/meetingAdmin")
+	public String meetingAdmin(Principal principal , Model model) {
+		//              저장 할 이름
+		List<MeetingVO> meetingList = service.getMeetingVO();
+		System.out.println("getMeetingAdminList 성공");
+		
+		model.addAttribute("meetingList", meetingList);
+		return "meeting/meetingAdmin";
+	}
 	
 	@RequestMapping("/downloadFile")
 	public void downloadFile(MeetingFileVO meetingFileVO, HttpServletResponse response) throws Exception {
