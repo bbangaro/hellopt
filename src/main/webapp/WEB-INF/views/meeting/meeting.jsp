@@ -70,12 +70,13 @@
 					      <img class="categoryimg" src="${pageContext.request.contextPath}/resources/images/meeting/localtag.png" >
 					         ${meeting.mCategory}
 				      </a>
-				      <a class="mpro">${meeting.progressSt}</a>
-				      <p class="msub"><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
 				      <a class="lcategory">
 					      <img class="localimg" src="${pageContext.request.contextPath}/resources/images/meeting/location.png">
 					      ${meeting.local }
 				      </a>
+				      <a class="mpro">${meeting.progressSt}</a>
+				      
+				      <p class="msub"><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
 				      <a class="mprice">회비 ${meeting.mPrice }원</a>
 			      </div>
 			    </div>
