@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
+import com.bit.hellopt.vo.reviewboard.Pagination;
 import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
@@ -42,6 +43,7 @@ import com.bit.hellopt.vo.user.User;
 @Controller
 @SessionAttributes("rBoard")
 public class RBoardController {
+	private static final RBoardVO RBoardVO = null;
 	@Autowired
 	RBoardService rService;
 	@Autowired
@@ -58,27 +60,14 @@ public class RBoardController {
 	@RequestMapping("/review")
 	public String getRBoardList(RBoardVO vo,PagingVO pvo, Model model, User uvo, 
 			@AuthenticationPrincipal CustomUserDetail customUser, 
-			@RequestParam(value="nowPage", required=false)String nowPage,
-			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			@RequestParam(defaultValue="1")int curPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
-		System.out.println("받자마자 페이징:" + pvo);
-		//레코드의 갯수 계산
-		int total = rService.countBoard();
+;
 		
-		if (nowPage == null && cntPerPage == null) {
-				nowPage = "1";
-				cntPerPage = "5";
-		} else if(nowPage == null) {
-				nowPage = "1";
-		} else if (cntPerPage == null) {
-				cntPerPage = "5";
-		}
-		pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		model.addAttribute("paging",pvo);
+		model.addAttribute("listCnt",listCnt);
 		model.addAttribute("viewAll", rService.selectRBord(pvo));
 		System.out.println("페이징처리:"+ pvo);	
 		System.out.println("viewAll:"+ rService.selectRBord(pvo));	
-		System.out.println("total: " + total);
 		
 		List<RBoardVO> userjoin = rService.Join2();
 		
