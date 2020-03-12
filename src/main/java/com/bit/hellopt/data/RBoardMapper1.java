@@ -72,5 +72,5 @@ public interface RBoardMapper1 {
 			+ "		FROM("
 			+ "				SELECT * FROM REVIEW_BOARD_TB ORDER BY REV_IDX DESC) A"
 			+ "			) WHERE RN BETWEEN #{start}AND #{end}")
-	public List<RBoardVO> selectRBord(PagingVO vo);
+	public List<RBoardVO> selectRBord(PagingVO pvo);
 }

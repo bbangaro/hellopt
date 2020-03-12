@@ -43,6 +43,15 @@
 	
 	a {
 		text-decoration: none;
+		color: white;
+	}
+	button {
+		background-color:white;
+	}
+	#paging{
+		display: block;
+		text-align: center;
+		background-color: yellow;
 	}
 </style>
 </head>
@@ -153,11 +162,12 @@
 		</tr>
 		</c:forEach>
 	</tfoot>
-	
+</table>	
+</c:forEach>
 	<!--페이징 -->
-	<div style = "display: block; text-align: center;">
+	<div id="paging">
 		<c:if test="${paging.startPage != 1 }">
-			<a href="/review?nowPage=${paging.startPage -1 }$cntPerPage=${paging.cntPerPage}">&lt;</a>
+			<a href="/review?nowPage=${paging.startPage -1 }&cntPerPage=${paging.cntPerPage}">[이전]</a>
 		</c:if>
 		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 			<c:choose>
@@ -170,11 +180,9 @@
 			</c:choose>
 		</c:forEach>
 		<c:if test="${paging.endPage != paging.lastPage }">
-			<a href="/review?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage }">&gt;</a>
+			<a href="/review?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage }">[다음]</a>
 		</c:if>
 	</div>
-</table>
-</c:forEach>
 </form>
 </div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
@@ -195,7 +203,7 @@
 				}
 			});
 			
-		});
+		})
 		
 		//게시글 수정
 		$("#modify").on("click", function(e){

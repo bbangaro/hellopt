@@ -23,9 +23,10 @@
 
 </head>
 <body>
-
+	<br><br><br><br>
 <form id="frm" method="post" 
 		enctype="multipart/form-data">
+	
 <select>
 	<c:forEach var = "class" items="${classMap }">
 	<option>수강한 클래스 선택</option>
@@ -36,15 +37,14 @@
 	<option>트레이너 선생님 선택</option>
 	</c:forEach>
 </select> 
-
 	<table class="board_view">
 		<colgroup>
 			<col width="15%">
 			<col width="*">
 		</colgroup>
-		<caption>후기작성</caption>
 		<tbody>
 		<tr>
+			
 			<td>별점</td>
 			<td class="starRev">
 				<span class="star on">1</span>
@@ -126,10 +126,10 @@
 	$('.starRev span').click(function(){
 		$(this).parent().children('span').removeClass('on');
 		$(this).addClass('on').prevAll('span').addClass('on');
-		var star = $(this).text(); 
-		$('#revStar1').attr('value',star);  
+ 		var star = $(this).text(); 
+		$('#revStar1').attr('value',star);   
 		  return false;
-		});
+		})
 </script>
 </body>
 </html>

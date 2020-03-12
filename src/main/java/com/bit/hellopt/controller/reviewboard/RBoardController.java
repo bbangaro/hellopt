@@ -57,14 +57,14 @@ public class RBoardController {
 	
 	@RequestMapping("/review")
 	public String getRBoardList(RBoardVO vo,PagingVO pvo, Model model, User uvo, 
-			@AuthenticationPrincipal CustomUserDetail customUser,
-			@RequestParam(defaultValue="1") int curPage, 
+			@AuthenticationPrincipal CustomUserDetail customUser, 
 			@RequestParam(value="nowPage", required=false)String nowPage,
 			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
-			
+		System.out.println("받자마자 페이징:" + pvo);
 		//레코드의 갯수 계산
 		int total = rService.countBoard();
+		
 		if (nowPage == null && cntPerPage == null) {
 				nowPage = "1";
 				cntPerPage = "5";
@@ -76,7 +76,10 @@ public class RBoardController {
 		pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		model.addAttribute("paging",pvo);
 		model.addAttribute("viewAll", rService.selectRBord(pvo));
-			
+		System.out.println("페이징처리:"+ pvo);	
+		System.out.println("viewAll:"+ rService.selectRBord(pvo));	
+		System.out.println("total: " + total);
+		
 		List<RBoardVO> userjoin = rService.Join2();
 		
 		for(RBoardVO rvo :userjoin) {

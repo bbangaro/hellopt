@@ -13,12 +13,9 @@ public class PagingVO {
 		setCntPerPage(cntPerPage);
 		setTotal(total);
 		calcLastPage(getTotal(), getCntPerPage());
-		calcStartEnd(getNowPage(), cntPage);
+		calcStartEndPage(getNowPage(), cntPage);
 		calcStartEnd(getNowPage(), getCntPerPage());
-		
 	}
-
-
 
 	//제일 마지막 페이지 계산
 	public void calcLastPage(int total, int cntPerPage) {
@@ -31,7 +28,7 @@ public class PagingVO {
 			setEndPage(getLastPage());
 		}
 		setStartPage(getEndPage() - cntPage + 1);
-		if(getStartPage()<1) {
+		if(getStartPage()< 1) {
 			setStartPage(1);
 		}
 	}
@@ -40,8 +37,6 @@ public class PagingVO {
 		setEnd(nowPage * cntPerPage);
 		setStart(getEnd() - cntPerPage + 1);
 	}
-	
-	
 	
 	public int getNowPage() {
 		return nowPage;
