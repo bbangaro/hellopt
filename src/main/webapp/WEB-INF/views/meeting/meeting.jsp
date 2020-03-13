@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>	
 
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
@@ -36,9 +37,9 @@
 			<c:forEach var="meeting" items="${meetingList}">
 
 			  <div class="service-details">
-			    <img src="${pageContext.request.contextPath}/resources/images/meeting/sample3.jpg">
+			    <img src="${pageContext.request.contextPath}/downloadFile?mSysImg=${meeting.meetingFileVO[0].mSysImg }">
 			    <div class="service-hover-text">
-			      <h3>${meeting.mSubject}</h3>
+			      <h3 class="msub">${meeting.mSubject}</h3>
 			      <h4 class="mlocal">${meeting.fkLocalNo }</h4>
 			      
 					<!-- 이건 현재 날짜 뽑는거 -->
@@ -69,12 +70,13 @@
 					      <img class="categoryimg" src="${pageContext.request.contextPath}/resources/images/meeting/localtag.png" >
 					         ${meeting.mCategory}
 				      </a>
-				      <a class="mpro">${meeting.progressSt}</a>
-				      <p class="msub"><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
 				      <a class="lcategory">
 					      <img class="localimg" src="${pageContext.request.contextPath}/resources/images/meeting/location.png">
 					      ${meeting.local }
 				      </a>
+				      <a class="mpro">${meeting.progressSt}</a>
+				      
+				      <p class="msub"><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
 				      <a class="mprice">회비 ${meeting.mPrice }원</a>
 			      </div>
 			    </div>
@@ -83,8 +85,8 @@
 			</c:forEach>
 			  
 			</div>
-	
-			<input type="submit" name="" value="모임 개설하기" class="send-btn">
+			
+				<input type="submit" name="" value="모임 개설하기" class="send-btn">
 		
 		</div>
 	</div>

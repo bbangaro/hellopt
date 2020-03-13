@@ -83,11 +83,9 @@
 						</div>
 
 						<button class="detail-btn"
-							onclick="location.href='regclass?fkClassIdx=${classDetail.classIdx}'">강의
-							신청</button>
+							onclick="location.href='regclass?fkClassIdx=${classDetail.classIdx}'">강의신청</button>
 						<button style="float: right" class="detail-btn"
 							onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의삭제</button>
-
 					</div>
 					<!--sub-content-->
 

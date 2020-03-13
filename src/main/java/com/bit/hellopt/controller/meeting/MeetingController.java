@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
@@ -43,10 +44,23 @@ public class MeetingController {
 		List<MeetingVO> meetingList = service.getMeetingVO();
 		System.out.println("getMeetingList 성공");
 		
+		for (MeetingVO vo : meetingList) {
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
 		model.addAttribute("meetingList", meetingList);
 		return "meeting/meeting";
 	}
 	
+	@RequestMapping("/admin/meetingAdmin")
+	public String meetingAdmin(Principal principal , Model model) {
+		//              저장 할 이름
+		List<MeetingVO> meetingList = service.getMeetingVO();
+		System.out.println("getMeetingAdminList 성공");
+		
+		model.addAttribute("meetingList", meetingList);
+		return "meeting/meetingAdmin";
+	}
 	
 	@RequestMapping("/downloadFile")
 	public void downloadFile(MeetingFileVO meetingFileVO, HttpServletResponse response) throws Exception {
@@ -99,17 +113,32 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("/meetingOne")
-	public String meetingOne(Principal principal, Model model, int meetingIdx) {
-		
+	public String meetingOne(Principal principal, Model model, int meetingIdx, MeetingVO meetingVO) {
+		//상세리스트
 		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+		//상세리스트에서 파일 슬라이드
 		List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
+		meetingOne.setMeetingFileVO(MeetingOneFile);
 		
-		System.out.println(MeetingOneFile.toString());
+		//상세리스트 하단 많이 본 모임
+		List<MeetingVO> meetingCnt = service.getMeetingCnt();
 		
-		System.out.println(meetingIdx);
+		for (MeetingVO vo : meetingCnt) {
+			// 파일없는 vo 안에 fileVO 셋팅 ( fileVO = list vo의 idx로 파일 이미지 전부 소환하기 )
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+
+
+
+		
+		
+		//클릭수 증가
+		service.clickCount(meetingVO);
+		
 		System.out.println("getMeetingOne 성공");
 		model.addAttribute("meetingOne", meetingOne);
-		model.addAttribute("meetingOneFile", MeetingOneFile);
+		//model.addAttribute("meetingOneFile", MeetingOneFile);
+		model.addAttribute("meetingCnt", meetingCnt);
 		return "meeting/meetingOne";
 	}
 	
@@ -199,10 +228,29 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("/meetingDelete")
-	public String meetingDelete(int meetingIdx) {
-		service.deleteMeeting(meetingIdx);
-		System.out.println("getMeetingDelete 성공");
-	
-	return "redirect:/meeting";
+	public void meetingDelete(Principal principal, int meetingIdx, HttpServletResponse response ,HttpServletRequest request) throws Exception {
+		
+		String sessionId = principal.getName();
+		int idx = service.getMeetingOne(meetingIdx).getMeetingIdx();
+		String loginId = service.getMeetingOne(meetingIdx).getFkUserId();
+		
+		System.out.println(sessionId);
+		System.out.println(loginId);
+		
+		if ( sessionId.equals(loginId) ) {
+			service.deleteMeeting(meetingIdx);
+			System.out.println("getMeetingDelete 성공");
+			response.sendRedirect("/meeting");
+		
+		} else {
+			
+		    response.setContentType("text/html; charset=UTF-8");
+		    response.getWriter().println("<script>alert(' 삭제 권한이 없습니다 '); </script>");
+		    
+			response.sendRedirect("meetingOne?meetingIdx="+idx);
+			
+			//return "redirect:/meetingOne?meetingIdx="+idx;
+		}
+		//return "redirect:/meeting";
 	}
 }

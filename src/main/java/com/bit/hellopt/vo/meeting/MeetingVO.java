@@ -1,5 +1,7 @@
 package com.bit.hellopt.vo.meeting;
 
+import java.util.List;
+
 public class MeetingVO {
 	
     // 게시글_시퀀스 
@@ -45,6 +47,10 @@ public class MeetingVO {
     private String userId;
     // 모임최대인원
     private int maxCount;
+    
+    
+    private List<MeetingFileVO> meetingFileVO;
+    
     
     // getter / setter
 	public int getMeetingIdx() {
@@ -180,6 +186,12 @@ public class MeetingVO {
 	public void setLocal(String local) {
 		this.local = local;
 	}
+	public List<MeetingFileVO> getMeetingFileVO() {
+		return meetingFileVO;
+	}
+	public void setMeetingFileVO(List<MeetingFileVO> meetingFileVO) {
+		this.meetingFileVO = meetingFileVO;
+	}
 	@Override
 	public String toString() {
 		return "MeetingVO [meetingIdx=" + meetingIdx + ", fkUserId=" + fkUserId + ", mComment=" + mComment
@@ -187,7 +199,8 @@ public class MeetingVO {
 				+ mSubject + ", mMemo=" + mMemo + ", details=" + details + ", include=" + include + ", mLocation="
 				+ mLocation + ", mLocationC=" + mLocationC + ", mPrice=" + mPrice + ", progressSt=" + progressSt
 				+ ", mCnt=" + mCnt + ", insDt=" + insDt + ", mCategory=" + mCategory + ", local=" + local
-				+ ", userName=" + userName + ", userId=" + userId + ", maxCount=" + maxCount + "]";
+				+ ", userName=" + userName + ", userId=" + userId + ", maxCount=" + maxCount + ", meetingFileVO="
+				+ meetingFileVO + "]";
 	}
     
 

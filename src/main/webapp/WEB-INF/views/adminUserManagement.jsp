@@ -11,6 +11,7 @@
 <title>유저 관리</title>
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/admin/meetingAdmin">모임신청 게시글 현황</a>
 <h2>회원 정보 관리</h2>
 	<table>
 		<thead>

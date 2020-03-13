@@ -149,7 +149,12 @@
 					
 				<!-- 내용물 넣기 -->				
 				<hr class="meeting-line">
-				 <input type="submit" name="" value="수정하기" class="send-btn2">
+				<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal" var="user" />
+					<c:if test="${user.username eq meetingOne.fkUserId }">
+						 <input type="submit" name="" value="수정하기" class="send-btn2">
+					</c:if>
+				</sec:authorize>
 				
 			</div>	
 	    </form>
