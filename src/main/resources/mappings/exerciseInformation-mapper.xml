@@ -4,6 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bit.hellopt.data.exercise.ExerciseMapper">
 
+	<!-- 전체 게시글 갯수 조회 -->
+	<select id="getExerciseTotalCount" resultType="int">
+		SELECT COUNT(*) FROM EXERCISE_INFORMATION_TB
+	</select>
+
+	<!-- 페이지에 표시할 게시글 조회 
+		parameterType="Map" : begin, end 값 전달 용도
+		key-value 형태의 Map 사용 바인드변수명이 key가 됨-->
+	<select id="getExerciseCountlist" resultType="com.bit.hellopt.vo.exercise.ExerciseInformationVO"
+			parameterType="Map">
+
+		SELECT *
+		FROM (SELECT ROWNUM AS R_NUM, A.*
+  				FROM (SELECT *
+        			  FROM EXERCISE_INFORMATION_TB
+        			  ORDER BY B_IDX DESC ) AS A
+<![CDATA[
+    			WHERE ROWNUM <=#{end} ) AS B
+		WHERE B.R_NUM >= #{begin}
+]]>
+	</select>
+
+	<select id="getExerciseFileList" resultType="com.bit.hellopt.vo.exercise.ExerciseInformationFileVO"
+			parameterType="exerciseInformation">
+
+		SELECT * FROM EXERCISE_FILE_TB
+		WHERE EXERCISE_IDX = #{exerciseIdx}
+	</select>
+
 	<select id="getExerciseInformationList" parameterType="exerciseInformation"
 		resultType="exerciseInformation">
 		SELECT * FROM EXERCISE_INFORMATION_TB
@@ -22,10 +51,10 @@
 	</select>
 	
 	<insert id="insertExerciseInformation" parameterType="exerciseInformation">
-		INSERT INTO EXERCISE_INFORMATION_TB (EXERCISE_IDX, EXERCISE_NAME, EXERCISE_PARTS,
-		HOWTO_EXERCISE, EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
+		INSERT INTO EXERCISE_INFORMATION_TB (EXERCISE_IDX, EXERCISE_NAME, EXERCISE_ENAME, EXERCISE_PARTS,
+		HOWTO_EXERCISE, HOWTO_EXERCISE2, EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
 		VALUES ((SELECT NVL(MAX(EXERCISE_IDX), 0) + 1 FROM EXERCISE_INFORMATION_TB),
-				#{exerciseName}, #{exerciseParts}, #{howtoExercise}, #{exercisePicturesName},
+				#{exerciseName}, #{exerciseEName}, #{exerciseParts}, #{howtoExercise}, #{howtoExercise2}, #{exercisePictures},
 				#{exerciseVideo}, #{caution}, #{repetition}, #{setCount}, #{restTime})
 	</insert>
   	
