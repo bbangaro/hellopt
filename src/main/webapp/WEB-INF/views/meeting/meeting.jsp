@@ -34,8 +34,8 @@
 				
 			<div class="container">
 			
-			<c:forEach var="meeting" items="${meetingList}">
-
+			<c:forEach var="meeting" items="${meetingList}"> <!--  반복문의 시작 -->
+			 <c:if test="${meeting.progressSt == '진행중'}">
 			  <div class="service-details">
 			    <img src="${pageContext.request.contextPath}/downloadFile?mSysImg=${meeting.meetingFileVO[0].mSysImg }">
 			    <div class="service-hover-text">
@@ -81,8 +81,8 @@
 			      </div>
 			    </div>
 			  </div>
-			  
-			</c:forEach>
+			</c:if>
+			</c:forEach> <!-- 반복문의 끝 -->
 			  
 			</div>
 			

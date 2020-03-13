@@ -185,7 +185,7 @@
 
   .send-btn{
     border: 1px solid black;
-    width: 95%;
+    width: 92%;
     margin-left: 28px;
     margin-top: 30px;
     padding: 5px 0 7px;
@@ -520,7 +520,7 @@ h2 {
 .service-details .service-text {
 	float: left;
 	left: 170px;
-   box-shadow: -3px -1px 7px #392f31 inset;
+    box-shadow: -3px -1px 7px #723838 inset;
 
 } 
 
@@ -1073,7 +1073,12 @@ h2 {
     border-spacing: 0 10px;
 }
 
-
+.red {
+	color: #b4000f
+}
+.white {
+	color: white;
+}
 
 /* 슬라이드테스트 */
 

@@ -67,7 +67,7 @@
 		       INCLUDE, M_LOCATION, M_LOCATION_C, M_PRICE, PROGRESS_ST, M_CNT, INS_DT) 
 	    VALUES (#{meetingIdx}, #{fkUserId}, #{mComment}, #{fkMCategoryNo}, #{fkLocalNo},  
 			   #{mDate}, #{mSubject}, #{mMemo}, #{details}, #{include} , #{mLocation}, #{mLocationC}, #{mPrice}, 
-			   '진행중', 0, SYSDATE )
+			   '대기', 0, SYSDATE )
 	</insert>
 	<!-- 어쩔 수 없이 FK 테이블에 +1 해서  ...  -->
 	<insert id="insertMaxMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">

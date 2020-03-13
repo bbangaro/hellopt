@@ -67,14 +67,14 @@ public class MeetingController {
 		service.updateProgressY(meetingVO);
 		System.out.println("progressY 성공");
 		
-		return "meeting/meetingAdmin";
+		return "redirect:/admin/meetingAdmin";
 	}
 	@RequestMapping("/admin/progressN")
 	public String updateProgressN(MeetingVO meetingVO) {
 		service.updateProgressN(meetingVO);
 		System.out.println("progressN 성공");
 		
-		return "meeting/meetingAdmin";
+		return "redirect:/admin/meetingAdmin";
 	}
 	
 	

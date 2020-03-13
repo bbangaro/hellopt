@@ -30,8 +30,21 @@
 						<c:forEach var="mAdmin" items="${meetingList}">
 						<tr>
 					 	<td class="adminTd" ><a class="mBtn" href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${mAdmin.meetingIdx }">${mAdmin.mSubject}</a></td>
-					 	<td class="adminTd2"><a class="mBtn" href="${pageContext.request.contextPath}/admin/progressY?meetingIdx=${mAdmin.meetingIdx }">승낙</a></td>
-					 	<td class="adminTd2"><a class="mBtn" href="${pageContext.request.contextPath}/admin/progressN?meetingIdx=${mAdmin.meetingIdx }">거절</a></td>
+					 	
+					 	<c:if test="${mAdmin.progressSt == '진행중' }">
+					 	<td class="adminTd2"><a class="mBtn red" href="${pageContext.request.contextPath}/admin/progressY?meetingIdx=${mAdmin.meetingIdx }">승낙</a></td>
+					 	</c:if>
+					 	<c:if test="${mAdmin.progressSt == '대기' }">
+					 	<td class="adminTd2"><a class="mBtn white" href="${pageContext.request.contextPath}/admin/progressY?meetingIdx=${mAdmin.meetingIdx }">승낙</a></td>
+					 	</c:if>
+					 	
+					 	<c:if test="${mAdmin.progressSt == '대기' }">
+					 	<td class="adminTd2"><a class="mBtn red" href="${pageContext.request.contextPath}/admin/progressN?meetingIdx=${mAdmin.meetingIdx }">대기</a></td>
+						</c:if>
+						<c:if test="${mAdmin.progressSt == '진행중' }">
+					 	<td class="adminTd2"><a class="mBtn white" href="${pageContext.request.contextPath}/admin/progressN?meetingIdx=${mAdmin.meetingIdx }">대기              ,,,,,,,,, </a></td>
+						</c:if>
+						
 						</tr>
 						</c:forEach>
 					</tbody>
