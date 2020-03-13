@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
+//import com.bit.hellopt.vo.reviewboard.Pagination;
 import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
@@ -42,6 +44,7 @@ import com.bit.hellopt.vo.user.User;
 @Controller
 @SessionAttributes("rBoard")
 public class RBoardController {
+	private static final RBoardVO RBoardVO = null;
 	@Autowired
 	RBoardService rService;
 	@Autowired
@@ -57,26 +60,31 @@ public class RBoardController {
 	
 	@RequestMapping("/review")
 	public String getRBoardList(RBoardVO vo,PagingVO pvo, Model model, User uvo, 
-			@AuthenticationPrincipal CustomUserDetail customUser,
-			@RequestParam(defaultValue="1") int curPage, 
-			@RequestParam(value="nowPage", required=false)String nowPage,
-			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			@AuthenticationPrincipal CustomUserDetail customUser, 
+			@RequestParam(defaultValue="1")int curPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
-			
-		//레코드의 갯수 계산
-		int total = rService.countBoard();
-		if (nowPage == null && cntPerPage == null) {
-				nowPage = "1";
-				cntPerPage = "5";
-		} else if(nowPage == null) {
-				nowPage = "1";
-		} else if (cntPerPage == null) {
-				cntPerPage = "5";
-		}
-		pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		model.addAttribute("paging",pvo);
-		model.addAttribute("viewAll", rService.selectRBord(pvo));
-			
+;
+		//paging///
+		
+		int pageSize = vo.getPageSize(); //한  페이지에 나오는 게시물 개수
+		int pageIndex = vo.getPageIndex();//현재 선택한 페이지number
+		int pageGroupSize = vo.getPageGroupSize();//페이지 번호가 몇개인지
+		int startRow = (pageIndex -1)*pageSize +1; //한 페이지의 시작글 번호
+		int endRow = pageIndex*pageSize; //한 페이지의 마지막 글 번호
+		
+		vo.setStartRow(startRow);
+		vo.setEndRow(endRow);
+//		int count = rService.boardCount(vo);//게시물 총 개수
+		
+//		int pageGroupCount = count / (pageSize * pageGroupSize) + (count % (pageSize * pageGroupSize)== 0 ? 0:1);
+		int nowPageGroup = (int)Math.ceil((double) pageIndex / pageGroupSize);
+		
+		List<RBoardVO> boardList = rService.getRBoardList();
+//		ModelMap.put()
+		
+		
+		
+		
 		List<RBoardVO> userjoin = rService.Join2();
 		
 		for(RBoardVO rvo :userjoin) {

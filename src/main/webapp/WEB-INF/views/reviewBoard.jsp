@@ -43,6 +43,15 @@
 	
 	a {
 		text-decoration: none;
+		color: white;
+	}
+	button {
+		background-color:white;
+	}
+	#paging{
+		display: block;
+		text-align: center;
+		background-color: yellow;
 	}
 </style>
 </head>
@@ -54,7 +63,7 @@
 </script>
 <body>
 <div id = "container">
-<div id="outter">
+<%-- <div id="outter">
 	<div style="float:right;">
 		<select id="cntPerPage" name="sel" onchange="selChange()">
 			<option value="5"
@@ -65,7 +74,7 @@
 				<c:if test="${paging.cntPerPage == 15 }">selected</c:if>>15줄 보기</option>
 		</select>
 	</div>
-</div>
+</div> --%>
 
 <form>
 
@@ -153,28 +162,36 @@
 		</tr>
 		</c:forEach>
 	</tfoot>
-	
+</table>	
+</c:forEach>
 	<!--페이징 -->
-	<div style = "display: block; text-align: center;">
-		<c:if test="${paging.startPage != 1 }">
-			<a href="/review?nowPage=${paging.startPage -1 }$cntPerPage=${paging.cntPerPage}">&lt;</a>
+	<div id="paging">
+		<c:if test="${pagination.curRange ne 1 }">
+			<a href="#" onClick = "fn_pageing('${pagination.prevPage}')">[처음]</a>
 		</c:if>
-		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+		<c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="pageNum">
 			<c:choose>
-				<c:when test="${p == paging.nowPage }">
-					<b>${p }</b>
+				<c:when test="${pageNum eq pagination.curPage }">
+					<span style = "font-weight: bold;">
+						<a href="#" onClick="fn_paging('${pageNum}')">${pageNum }</a>
+					</span>
 				</c:when>
-				<c:when test="${p != paging.lastPage }">
-					<a href="/review?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-				</c:when>
+				<c:otherwise>
+					<a href="#" onClick="fn_paging('${pageNum}')">${pageNum }</a>
+				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		<c:if test="${paging.endPage != paging.lastPage }">
-			<a href="/review?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage }">&gt;</a>
+		<c:if test="${paging.curPage ne pagination.pageCnt && pagination.pageCnt >0}">
+			<a href="#" onClick="fn_paging('${pagination.nextPage}')">[다음]</a>
 		</c:if>
+		<c:if test="${pagination.cuRange ne pagination.rangeCnt && pagination.rangeCnt >0 }">
+			<a href="#" onClick="fn_paging('${pagination.pageCnt}')">[끝]</a>
+		</c:if>
+		
+		<div>
+			총 게시글 수 : ${pagination.listCnt } / 총 페이지 수 : ${pagination.pageCnt } / 현재 페이지 : ${pagination.curPge }/ 현재 블럭: ${pagination.curRange } /총 블럭수 : ${pagination.rangeCnt }
+		</div>
 	</div>
-</table>
-</c:forEach>
 </form>
 </div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
@@ -195,7 +212,7 @@
 				}
 			});
 			
-		});
+		})
 		
 		//게시글 수정
 		$("#modify").on("click", function(e){

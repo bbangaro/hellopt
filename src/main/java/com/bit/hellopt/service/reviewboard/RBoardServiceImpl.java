@@ -88,8 +88,8 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public int countBoard() {
-		return mapper.countBoard();
+	public int countBoard(RBoardVO vo) {
+		return mapper.countBoard(vo);
 	}
 
 	@Override

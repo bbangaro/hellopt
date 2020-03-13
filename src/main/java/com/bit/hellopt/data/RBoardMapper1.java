@@ -64,7 +64,7 @@ public interface RBoardMapper1 {
 	
 	//총 게시글 갯수 출력
 	@Select("SELECT COUNT(*) FROM REVIEW_BOARD_TB")
-	public int countBoard();
+	public int countBoard(RBoardVO vo);
 	
 	//페이징 처리 후 게시글 조회
 	@Select("SELECT * FROM ("
@@ -72,5 +72,5 @@ public interface RBoardMapper1 {
 			+ "		FROM("
 			+ "				SELECT * FROM REVIEW_BOARD_TB ORDER BY REV_IDX DESC) A"
 			+ "			) WHERE RN BETWEEN #{start}AND #{end}")
-	public List<RBoardVO> selectRBord(PagingVO vo);
+	public List<RBoardVO> selectRBord(PagingVO pvo);
 }

@@ -25,7 +25,7 @@ public interface RBoardService {
 	List<RBoardVO> getProfilePic();
 	
 	//게시뭄 총 갯수
-	int countBoard();
+	int countBoard(RBoardVO vo);
 	
 	//페이징 처리 게시글 조회
 	public List<RBoardVO> selectRBord(PagingVO pvo);
