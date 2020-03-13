@@ -66,7 +66,7 @@
                             <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
                         </ul>
                     </li>
-                    <li class="artist_open"><a href="#">review</a></li>
+                    <li class="artist_open"><a href="${pageContext.request.contextPath}/review">review</a></li>
                     <li class="artist_open"><a href="${pageContext.request.contextPath}/faq1">FAQ</a></li>
                 </ul>
                 <ul class="user_case">

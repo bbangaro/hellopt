@@ -28,6 +28,9 @@ public interface MeetingMapper {
 	public void updateMaxMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void clickCount(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	
+	public void updateProgressY(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
+	public void updateProgressN(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
+	
 	public void deleteMeeting(int meetingIdx);
 	
 }

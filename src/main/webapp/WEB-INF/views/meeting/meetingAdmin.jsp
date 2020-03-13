@@ -19,14 +19,23 @@
 				
 			<div class="mAdminCenter">
 					
-				<c:forEach var="mAdmin" items="${meetingList}">
-				<div>
-					<span class="mAdmin">${mAdmin.mSubject}</span> 
-				</div>
-				<div class="mAdminBtn">
-					<a class="mBtn" href="#">승낙</a> <a class="mBtn" href="#">거절</a></span>
-				</div>
-				</c:forEach>
+				
+				<table class="meetingAdminTb ">
+					<thead>
+						<tr>
+						<th class="adminTh" colspan="3">오프라인 모임 신청 대기 목록</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="mAdmin" items="${meetingList}">
+						<tr>
+					 	<td class="adminTd" ><a class="mBtn" href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${mAdmin.meetingIdx }">${mAdmin.mSubject}</a></td>
+					 	<td class="adminTd2"><a class="mBtn" href="${pageContext.request.contextPath}/admin/progressY?meetingIdx=${mAdmin.meetingIdx }">승낙</a></td>
+					 	<td class="adminTd2"><a class="mBtn" href="${pageContext.request.contextPath}/admin/progressN?meetingIdx=${mAdmin.meetingIdx }">거절</a></td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 				
 			</div>
 			

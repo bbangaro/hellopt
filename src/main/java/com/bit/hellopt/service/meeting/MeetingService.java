@@ -40,6 +40,11 @@ public interface MeetingService {
 	// 게시글 카운트 수 ++
 	void clickCount(MeetingVO meetingVO);
 	
+	// 게시글 승낙y
+	void updateProgressY(MeetingVO meetingVO);
+	// 게시글 승낙n
+	void updateProgressN(MeetingVO meetingVO);
+	
 	// 게시글 삭제
 	void deleteMeeting(int meetingIdx);
 	

@@ -103,6 +103,18 @@
 	     WHERE MEETING_IDX = #{meetingIdx}
 	</update>
 	
+	<update id="updateProgressY" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
+		UPDATE MEETING_TB 
+		   SET PROGRESS_ST = '진행중'  
+	     WHERE MEETING_IDX = #{meetingIdx}
+	</update>
+	
+	<update id="updateProgressN" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
+		UPDATE MEETING_TB 
+		   SET PROGRESS_ST = '대기'  
+	     WHERE MEETING_IDX = #{meetingIdx}
+	</update>
+	
 	<delete id="deleteMeeting" parameterType="int">
 		DELETE FROM MEETING_TB WHERE MEETING_IDX = #{meetingIdx}
 	</delete>

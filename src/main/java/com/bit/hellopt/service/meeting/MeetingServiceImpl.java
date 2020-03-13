@@ -98,13 +98,23 @@ public class MeetingServiceImpl implements MeetingService {
 		meetingMapper.clickCount(meetingVO);
 	}
 	
+	//모임 승낙y
+	@Override
+	public void updateProgressY(MeetingVO meetingVO) {
+		meetingMapper.updateProgressY(meetingVO);
+	}
+	//모임 승낙n
+	@Override
+	public void updateProgressN(MeetingVO meetingVO) {
+		meetingMapper.updateProgressN(meetingVO);
+	}
+	
 	// 모임 삭제
 	@Override
 	public void deleteMeeting(int meetingIdx) {
 		meetingMapper.deleteMeeting(meetingIdx);
 		
 	}
-
 
 	
 

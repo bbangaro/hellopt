@@ -62,6 +62,22 @@ public class MeetingController {
 		return "meeting/meetingAdmin";
 	}
 	
+	@RequestMapping("/admin/progressY")
+	public String updateProgressY(MeetingVO meetingVO) {
+		service.updateProgressY(meetingVO);
+		System.out.println("progressY 성공");
+		
+		return "meeting/meetingAdmin";
+	}
+	@RequestMapping("/admin/progressN")
+	public String updateProgressN(MeetingVO meetingVO) {
+		service.updateProgressN(meetingVO);
+		System.out.println("progressN 성공");
+		
+		return "meeting/meetingAdmin";
+	}
+	
+	
 	@RequestMapping("/downloadFile")
 	public void downloadFile(MeetingFileVO meetingFileVO, HttpServletResponse response) throws Exception {
 		// http://localhost:8000/hellopt/downloadFile?mSysImg=ff0ca98a-bfa0-4094-abae-8793a628c55d.jpg
