@@ -66,3 +66,44 @@ body {
 .exerciseImg_img {
 	width: 100%;
 }
+
+.nick {
+    padding: 0px 10px;
+    color: #00e676;
+    font-weight: normal;
+    font-size: 17px;
+}
+
+.exercise_video {
+	margin: 20px 0px;
+}
+
+.exercise_video_txt {
+	border-bottom: 1px solid #424242;
+	padding-bottom: 8px;
+	font-size: 2em;
+}
+
+.exercise_video_box {
+	width: 792px;
+	height: 628px;
+	margin: 20px auto;
+	border: 1px solid #424242;
+}
+
+.exercise_dd {
+	width: 792px;
+	margin: 20px auto;
+	border: 1px solid #424242;
+}
+
+
+
+/* youtube 박스 크기 */
+
+	
+
+
+
+
+

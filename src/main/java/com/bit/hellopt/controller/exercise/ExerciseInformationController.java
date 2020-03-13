@@ -2,15 +2,12 @@ package com.bit.hellopt.controller.exercise;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,13 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.service.exercise.ExerciseInformationService;
+import com.bit.hellopt.vo.exercise.ExerciseInformationFileVO;
 import com.bit.hellopt.vo.exercise.ExerciseInformationListVO;
 import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 
@@ -93,6 +90,21 @@ public class ExerciseInformationController {
 		System.out.println(">>> 글 상세 조회 처리 - getExerciseInformation()");
 		
 		ExerciseInformationVO exerciseInformation = exerciseInformationService.getExerciseInformation(vo);
+		
+		exerciseInformation.splitExercisePicturesList();
+		for(String str : exerciseInformation.getExercisePicturesList()) {
+			System.out.println("이미지: " + str);
+		}
+		
+		//테이블 쓸것 같으면 100행에 있는것을 사용할것~!
+		/*
+		List<ExerciseInformationFileVO> exerciseFileList = exerciseInformationService.getExerciseFileList(vo);
+		
+		for(ExerciseInformationFileVO v : exerciseFileList) {
+			System.out.println(v);
+		}
+		model.addAttribute("파일 리스트목록 사용할이름", exerciseFileList);
+		*/
 		//model.addAttribute(exerciseInformation); //exerciseInformationVO
 		model.addAttribute("exerciseInformation", exerciseInformation); //데이터 저장
 		System.out.println("> exerciseInformation : " + exerciseInformation);
@@ -125,7 +137,7 @@ public class ExerciseInformationController {
 			Model model) throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertExerciseInformation()");
 		System.out.println("글 vo " + vo);
-		exerciseInformationService.insertExerciseInformation(vo);
+		
 		
 		String path = "C:/hellopt_file/";
 		
@@ -135,8 +147,8 @@ public class ExerciseInformationController {
 		if(!dir.isDirectory()) {
 			dir.mkdirs();
 		}
-		
-		List<MultipartFile> fileList = mtfRequest.getFiles("exercisePictures");
+		vo.setExercisePictures("");
+		List<MultipartFile> fileList = mtfRequest.getFiles("exerciseFile");
 		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
 			
 		} else {//for (MultipartFile filePart : fileList)
@@ -155,15 +167,21 @@ public class ExerciseInformationController {
 				System.out.println("저장된 파일 사이즈 : " + fileSize);
 				fileList.get(i).transferTo(new File(savePath)); //파일 저장
 				System.out.println("저장된 파일 경로 : " + savePath);
-				
+				//
+				vo.setExercisePictures( vo.getExercisePictures()+ saveFileName+",");
 				System.out.println("exerciseInformationFileOname, saveFileName, fileSize: " + exerciseInformationFileOname + saveFileName + fileSize + exerciseIdx);
-				
+				//제약조건을 달면, 162행에 있는 exerciseInformationService.uploadFile을 맨 밑으로 내려야 함.
 				exerciseInformationService.uploadFile(exerciseInformationFileOname, saveFileName, fileSize, exerciseIdx);
 				
 				System.out.println("글정보" + vo);
 				
 			}
 		}
+		if(vo.getExercisePictures().length()>0) {
+			vo.setExercisePictures(vo.getExercisePictures().substring(0, vo.getExercisePictures().length()-1 ) );
+		} exerciseInformationService.insertExerciseInformation(vo);
+		
+		
 		return "redirect:/exerciseinfolist";
 	}
 		/* *** 파일 업로드 처리 ********

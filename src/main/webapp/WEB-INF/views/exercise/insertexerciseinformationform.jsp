@@ -2,105 +2,95 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
+
 <title>운동정보등록</title>
-<style>
-	#container {
-		width: 700px;
-		margin: 0 auto;
-	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: orange; }
-	.center { text-align: center; }
-	.border-none, .border-none td { border: none; }
-</style>
+	
 </head>
+
 <body>
-<c:if test="${not empty error }">
-<h4 class=error>An error occurred :${error }</h4>
-<br>
-</c:if>
+<div id="wrapper">
+	<div class="con-wr contact">
+		<div class="con-inner sub-sub">
+		    <div class="tit-wr tit-wr-ani">
+		      <h2>운동 정보 입력</h2>
+			</div>
 
-<div id="container">
-	<h1>운동정보등록</h1>
-
-	<hr>
-	<form:form method="post" action="${pageContext.request.contextPath}/insertExerciseInformation"
-			enctype="multipart/form-data">
-	<table>
-		<tr>
-			<th>운동이름</th>
-			<td>
-				<input type="text" name="exerciseName" size="100">
-			</td>
-		</tr>
-		<tr>
-			<th>운동부위</th>
-			<td>
-				<input type="text" name="exerciseParts">
-			</td>
-		</tr>
-		<tr>
-			<th>운동방법</th>
-			<td>
-				<input type="text" name="howtoExercise">
-			</td>
-		</tr>
-		<tr>
-			<th>운동사진</th>
-			<td>
-				<input multiple="multiple" type="file" name="exercisePictures">
-				<!-- name="file" -->
-			</td>
-		</tr>
-		<tr>
-			<th>운동동영상</th>
-			<td>
-				<input type="text" name="exerciseVideo">
-			</td>
-		</tr>
-		<tr>
-			<th>주의사항</th>
-			<td>
-				<input type="text" name="caution">
-			</td>
-		</tr>
-		<tr>
-			<th>세트당횟수</th>
-			<td>
-				<input type="text" name="repetition">
-			</td>
-		</tr>
-		<tr>
-			<th>세트횟수</th>
-			<td>
-				<input type="text" name="setCount">
-			</td>
-		</tr>
-		<tr>
-			<th>휴식시간</th>
-			<td>
-				<input type="text" name="restTime">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="center">
-				<input type="submit" value="운동정보 등록">
-			</td>			
-		</tr>
-	</table>		
-	</form:form>
-	<p><a href="exerciseinfolist">운동 정보 목록 가기</a></p>
+			<div class="sub-content">
+			  <div class="basic-table">
+			    <form:form class="open" method="post" action="${pageContext.request.contextPath}/insertexerciseinformation"
+					enctype="multipart/form-data">
+			        <ul>
+			          <li>
+			            <label for="className" class="sound_only">운동이름</label>
+			            <input type="text" name="exerciseName" id="className" required value="" placeholder="운동이름">
+			          </li>
+			          <li>
+			            <label for="tel" class="sound_only">운동영어이름</label>
+			            <input type="text" name="exerciseEName" id="classType" required value="" placeholder="운동영어이름">
+			          </li>
+			          <li>
+			            <label for="classLength" class="sound_only">운동부위</label>
+			          	<select name="exerciseParts">
+							<option value="가슴">가슴</option>
+							<option value="등">등</option>
+							<option value="어깨">어깨</option>
+							<option value="팔">팔</option>
+							<option value="복근">복근</option>
+							<option value="하체">하체</option>
+						</select>
+			          </li>
+			          <li>
+			            <label for="classDay" class="sound_only">운동사진</label>
+			            <input multiple="multiple" type="file" name="exerciseFile" id="classDay" required value="" placeholder="운동사진">
+			          </li>
+			          <li>
+			            <label for="classTime" class="sound_only">운동동영상</label>
+			            <input type="text" name="exerciseVideo" id="classTime" required value="" placeholder="운동동영상">
+			          </li>
+			          <li>
+			            <label for="classTime" class="sound_only">운동주의사항</label>
+			            <input type="text" name="caution" id="classTime" required value="" placeholder="주의사항">
+			          </li>
+			          <li>
+			            <label for="classTime" class="sound_only">반복횟수</label>
+			            <input type="text" name="repetition" id="classTime" required value="" placeholder="반복횟수">
+			          </li>
+			          <li>
+			            <label for="classTime" class="sound_only">세트횟수</label>
+			            <input type="text" name="setCount" id="classTime" required value="" placeholder="세트횟수">
+			          </li>
+			          <li>
+			            <label for="classTime" class="sound_only">휴식시간</label>
+			            <input type="text" name="restTime" id="classTime" required value="" placeholder="휴식시간">
+			          </li>       
+			          <li>
+			            <label for="classTime" class="sound_only">운동방법1</label>
+			            <input type="text" name="howtoExercise" id="classTime" required value="" placeholder="운동방법1">
+			          </li>
+			          <li>
+			            <label for="classTime" class="sound_only">운동방법2</label>
+			            <input type="text" name="howtoExercise2" id="classTime" required value="" placeholder="운동방법2">
+			          </li>
+			        </ul>
+			        <input type="submit" name="" value="Send" class="send-btn">
+			    </form:form>
+			  </div>
+		 	</div>
+		</div>
+	</div>
 </div>
-
+			
+<%-- <c:if test="${not empty error }"> --%>
+<%-- <h4 class=error>An error occurred :${error }</h4> --%>
+<!-- <br> -->
+<%-- </c:if> --%>
 
 </body>
 </html>

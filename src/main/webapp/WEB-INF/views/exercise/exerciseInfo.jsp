@@ -24,67 +24,86 @@
 		
 			<div class="exercise_inner">
 				<div class="exerciseImg">
-					<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseA.jpg" alt="운동부위사진" class="exerciseImg_img">
+					<c:choose>
+						<c:when test="${exerciseInformation.exerciseParts eq '가슴'}">
+							<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseC.jpg" alt="운동부위사진" class="exerciseImg_img">
+						</c:when>
+						<c:when test="${exerciseInformation.exerciseParts eq '등'}">
+							<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseB.jpg" alt="운동부위사진" class="exerciseImg_img">
+						</c:when>
+						<c:when test="${exerciseInformation.exerciseParts eq '어깨'}">
+							<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseS.jpg" alt="운동부위사진" class="exerciseImg_img">
+						</c:when>
+						<c:when test="${exerciseInformation.exerciseParts eq '팔'}">
+							<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseA.jpg" alt="운동부위사진" class="exerciseImg_img">
+						</c:when>
+						<c:when test="${exerciseInformation.exerciseParts eq '복근'}">
+							<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseABS.jpg" alt="운동부위사진" class="exerciseImg_img">
+						</c:when>
+						<c:when test="${exerciseInformation.exerciseParts eq '하체'}">
+							<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseL.jpg" alt="운동부위사진" class="exerciseImg_img">
+						</c:when>
+					</c:choose>
 				</div>
-				<div class="exercise">
-			
-			<h1 align="center">운동정보 상세</h1>
-			<img src="imgs/연무니.jpg" alt="인체사진">
+				<div class="exerciseinfo">
+					<h2 class="exercisetitle">${exerciseInformation.exerciseName }<span class="nick">${exerciseInformation.exerciseEName }</span></h2>
 			<hr>
 			<form action="updateExerciseInformation" method="post">
 			<input type="hidden" name="exerciseIdx" value="${exerciseInformation.exerciseIdx }">
 			<div>
-				<p>
-        	<!-- <img src="resources/images/연문.jpg"> -->
-        		<input type="text" name="exerciseName"
-        			value="${exerciseInformation.exerciseName }">
-        	</p>
-        	<div class="youtubebox">
-        		<!-- script 뭐시기 확인해 볼것~!!! -->
-        		<iframe src="https://movie2.koreahosting.kr/traffic-unlimited-2/player/testdemo/player.php?file=376782349&autoplay=1&loop=0">
-        		</iframe>
-        		<p>
-        		<!-- 나중에 동영상들도 다 내 컴퓨터에 저장해서 불러오는 형식으로 변경할것! --> 동영상 넣는곳~!
-        		</p>
+				<div class="exercise_video">
+					<h3 class="exercise_video_txt">운동 동영상</h3>
+					<div class="exercise_video_box">
+					<iframe width="792" height="450"
+							src="https://www.youtube.com/embed/${exerciseInformation.exerciseVideo }" frameborder="0"
+							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen></iframe>
+					
+					</div>
+				
         	</div>
         	</div>
-        	<hr>
-        	<br>
-        		<h2>상세설명</h2>
-        	<br>
-        	<hr>
-	            <input type="file" name="exercisePicturesName"
-	                value="${exerciseInformation.exercisePicturesName }">
+        	
+        	<br><br>
 	        
-	        <div align="right">
-	            <img src="images/신체가슴.jpg" width="250" height="250">
-            </div>
-            	<h2>${exerciseInformation.exerciseName }</h2>
-            <h3>상세 설명</h3>
-                <input type="text" name="exerciseParts"
-                    value="${exerciseInformation.exerciseParts }">
+	        <!-- JSTL 인덱스값으로 데이터를 받아와서 처리해야하는건지, 아니면 다른방법으로 처리해야하는건지 알아볼것! -->
+	        <!-- 
+	        	<c:forEach items="${exerciseInformation.exercisePictures }" var="b" varStatus="status">
+	        		[${status.index }]: ${exerciseInformation.exercisePictures }
+	        
+	        
+	        	</c:forEach>
+	         -->
+	        <!-- <c:forEach var="pictures" items="${exerciseInformation.exercisePicturesList }">
+            	<img src="/hellopt/file/${pictures }" width="250" height="250">
+				<br><br><br>
+            </c:forEach> -->
             
-                <img src="images/가슴.jpg" width="250" height="250">
-                <input type="file" name="exercisePicturesName"
-                    value="${exerciseInformation.exercisePicturesName }">
-                <img src="images/딥스.jpg" width="250" height="250">
-                <input type="file" name="exercisePicturesName"
-                    value="${exerciseInformation.exercisePicturesName }">
-                <img src="images/딥스2.jpg" width="250" height="250">
-                <input type="file" name="exercisePicturesName"
-                    value="${exerciseInformation.exercisePicturesName }">
-                <input type="text" name="howtoExercise"
-                    value="${exerciseInformation.howtoExercise }">
-                <input type="text" name="caution"
-                    value="${exerciseInformation.caution }">
-                <input type="text" name="exerciseVideo"
-                    value="${exerciseInformation.exerciseVideo }">
-                <input type="text" name="repetition"
-                    value="${exerciseInformation.repetition }">
-                <input type="text" name="setCount"
-                    value="${exerciseInformation.setCount }">
-                <input type="text" name="restTime"
-                    value="${exerciseInformation.restTime }">
+            <div class="exercise_dd">
+            
+            	<c:forEach var="file" items="${exerciseInformation.exercisePicturesList }">
+            		<img src="/hellopt/file/${file }" width="250" height="250">
+            		<br><br>
+            		
+            	</c:forEach>
+            
+            	<h2>운동방법</h2>
+            	<h2>${exerciseInformation.howtoExercise }</h2>
+            	<h2>${exerciseInformation.howtoExercise2 }</h2>
+                <hr>
+                <h2>주의사항</h2>
+                <h2>${exerciseInformation.caution }</h2>
+				<hr>
+				<h2>권장반복횟수</h2>
+				<h2>${exerciseInformation.repetition }회</h2>
+				<hr>
+				<h2>권장세트횟수</h2>
+				<h2>${exerciseInformation.setCount }회</h2>
+				<hr>
+				<h2>권장휴식시간</h2>
+				<h2>${exerciseInformation.restTime }초</h2>
+				<hr>
+			</div>
 			</form>
 				</div>
 			</div>

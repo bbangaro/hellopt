@@ -26,6 +26,12 @@
 ]]>
 	</select>
 
+	<select id="getExerciseFileList" resultType="com.bit.hellopt.vo.exercise.ExerciseInformationFileVO"
+			parameterType="exerciseInformation">
+
+		SELECT * FROM EXERCISE_FILE_TB
+		WHERE EXERCISE_IDX = #{exerciseIdx}
+	</select>
 
 	<select id="getExerciseInformationList" parameterType="exerciseInformation"
 		resultType="exerciseInformation">
@@ -45,10 +51,10 @@
 	</select>
 	
 	<insert id="insertExerciseInformation" parameterType="exerciseInformation">
-		INSERT INTO EXERCISE_INFORMATION_TB (EXERCISE_IDX, EXERCISE_NAME, EXERCISE_PARTS,
-		HOWTO_EXERCISE, EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
+		INSERT INTO EXERCISE_INFORMATION_TB (EXERCISE_IDX, EXERCISE_NAME, EXERCISE_ENAME, EXERCISE_PARTS,
+		HOWTO_EXERCISE, HOWTO_EXERCISE2, EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
 		VALUES ((SELECT NVL(MAX(EXERCISE_IDX), 0) + 1 FROM EXERCISE_INFORMATION_TB),
-				#{exerciseName}, #{exerciseParts}, #{howtoExercise}, #{exercisePicturesName},
+				#{exerciseName}, #{exerciseEName}, #{exerciseParts}, #{howtoExercise}, #{howtoExercise2}, #{exercisePictures},
 				#{exerciseVideo}, #{caution}, #{repetition}, #{setCount}, #{restTime})
 	</insert>
   	

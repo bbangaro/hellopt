@@ -16,5 +16,6 @@ public interface ExerciseInformationService {
 	List<ExerciseInformationVO> getExerciseInformationList(ExerciseInformationVO vo);
 	void uploadFile(String exerciseInformationFileOname, String saveFileName, long fileSize, int exerciseIdx);
 	List<ExerciseInformationFileVO> getFileList(int exerciseIdx);
+	List<ExerciseInformationFileVO> getExerciseFileList(ExerciseInformationVO vo);
 	
 }

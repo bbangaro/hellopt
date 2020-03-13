@@ -68,7 +68,7 @@
 	<!-- 데이터 표시 -->
     <!-- width color 등 설정해볼것~! -->
 	<form>
-    <div id="table">    
+    <div id="table">
         <div class="row1">
             <p>
 			<span class="cell col2">운동이름</span>
@@ -86,12 +86,13 @@
 				</a>
 			</span>
 			<span>${exerciseInformation.exerciseParts }</span>
-			<span>${exerciseInformation.exercisePicturesName }</span>
+			<span>${exerciseInformation.exercisePictures }</span>
                 </p>
             </div>
 		</c:forEach>
 	</div>
     </form>
+    </div>
     </div>
 	<p><a href="insertexerciseinformationform">운동정보글등록</a></p>
     </body>

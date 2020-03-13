@@ -23,6 +23,8 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 	}
 	@Override
 	public void insertExerciseInformation(ExerciseInformationVO vo) {
+		System.out.println("----------------------------------------------");
+		System.out.println(vo.getExercisePictures());
 		mapper.insertExerciseInformation(vo);
 	}
 
@@ -64,6 +66,11 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 	public List<ExerciseInformationFileVO> getFileList(int exerciseIdx) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public List<ExerciseInformationFileVO> getExerciseFileList(ExerciseInformationVO vo) {
+		
+		return mapper.getExerciseFileList(vo);
 	}
 	
 }
