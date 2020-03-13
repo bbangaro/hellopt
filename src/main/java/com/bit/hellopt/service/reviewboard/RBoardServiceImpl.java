@@ -88,13 +88,13 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public int countBoard(RBoardVO vo) {
-		return mapper.countBoard(vo);
+	public int getTotalCount() {
+		return mapper.getTotalCount();
 	}
 
 	@Override
-	public List<RBoardVO> selectRBord(PagingVO pvo) {
-		return mapper.selectRBord(pvo);
+	public List<RBoardVO> boardList(RBoardVO vo) {
+		return mapper.boardList(vo);
 	}
 
 

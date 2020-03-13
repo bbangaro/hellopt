@@ -37,6 +37,7 @@ import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
+import com.bit.hellopt.vo.reviewboard.RPagingVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
 import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
@@ -44,7 +45,7 @@ import com.bit.hellopt.vo.user.User;
 @Controller
 @SessionAttributes("rBoard")
 public class RBoardController {
-	private static final RBoardVO RBoardVO = null;
+	private static final RBoardVO RBoard = null;
 	@Autowired
 	RBoardService rService;
 	@Autowired
@@ -59,36 +60,46 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review")
-	public String getRBoardList(RBoardVO vo,PagingVO pvo, Model model, User uvo, 
+	public String getRBoardList(ModelMap modelMap, RBoardVO vo,RPagingVO rvo, Model model, User uvo, 
 			@AuthenticationPrincipal CustomUserDetail customUser, 
-			@RequestParam(defaultValue="1")int curPage) {
+			@RequestParam(defaultValue="1")Integer cPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 ;
 		//paging///
+		RPagingVO p = new RPagingVO();
+		//1.전체 게시물의 수를 구하기
+		p.setTotalRecord(rService.getTotalCount());
+		p.setTotalPage();//전체 페이지 갯수 구하기
 		
-		int pageSize = vo.getPageSize(); //한  페이지에 나오는 게시물 개수
-		int pageIndex = vo.getPageIndex();//현재 선택한 페이지number
-		int pageGroupSize = vo.getPageGroupSize();//페이지 번호가 몇개인지
-		int startRow = (pageIndex -1)*pageSize +1; //한 페이지의 시작글 번호
-		int endRow = pageIndex*pageSize; //한 페이지의 마지막 글 번호
+		System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
+		System.out.println(">전체 게시글 수 : " + p.getTotalPage());
+		System.out.println("cPage" + cPage);
 		
-		vo.setStartRow(startRow);
-		vo.setEndRow(endRow);
-//		int count = rService.boardCount(vo);//게시물 총 개수
+		if(cPage != null) {
+			p.setNowPage(cPage);
+		}
 		
-//		int pageGroupCount = count / (pageSize * pageGroupSize) + (count % (pageSize * pageGroupSize)== 0 ? 0:1);
-		int nowPageGroup = (int)Math.ceil((double) pageIndex / pageGroupSize);
+		p.setEnd(p.getNowPage() * p.getNumPerPage());
+		p.setBegin(p.getEnd() - p.getNumPerPage() + 1);
 		
-		List<RBoardVO> boardList = rService.getRBoardList();
-//		ModelMap.put()
+		System.out.println("---------------");
+		System.out.println(">>현재 페이지 : " + p.getNowPage());
+		System.out.println(">>시작번호(begin) : " + p.getBegin());
+		System.out.println(">>끝 번호(end) : " + p.getEnd());
 		
+		//블록계산하기
+		int nowPage = p.getNowPage();
+		int beginPage = (nowPage -1) / p.getPagePerBlock() * p.getPagePerBlock() + 1;
+		p.setBegin(beginPage);
+		p.setEndPage(p.getBeginPage() + p.getPagePerBlock() -1);
 		
+		if(p.getEndPage() > p.getTotalPage())
 		
 		
 		List<RBoardVO> userjoin = rService.Join2();
 		
-		for(RBoardVO rvo :userjoin) {
-			rvo.setFilevo(rService.getFileList(rvo.getRevIdx()));
+		for(RBoardVO vo1 :userjoin) {
+			vo1.setFilevo(rService.getFileList(vo1.getRevIdx()));
 		}
 		System.out.println("rBoardList: " + userjoin.toString());
 //		System.out.println("userjoin: " + userjoin.toString());
@@ -159,6 +170,8 @@ public class RBoardController {
 	public String updateBoardForm(@ModelAttribute("rBoardList")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		System.out.println(">> board vo :" + vo);
+		
+		
 		
 		rService.updateBoard(vo);
 		return "insertRBoard";

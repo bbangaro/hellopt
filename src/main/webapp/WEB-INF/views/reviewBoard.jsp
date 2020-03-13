@@ -48,7 +48,7 @@
 	button {
 		background-color:white;
 	}
-	#paging{
+	.jb-center{
 		display: block;
 		text-align: center;
 		background-color: yellow;
@@ -165,40 +165,55 @@
 </table>	
 </c:forEach>
 	<!--페이징 -->
-	<div id="paging">
-		<c:if test="${pagination.curRange ne 1 }">
-			<a href="#" onClick = "fn_pageing('${pagination.prevPage}')">[처음]</a>
-		</c:if>
-		<c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="pageNum">
-			<c:choose>
-				<c:when test="${pageNum eq pagination.curPage }">
-					<span style = "font-weight: bold;">
-						<a href="#" onClick="fn_paging('${pageNum}')">${pageNum }</a>
-					</span>
-				</c:when>
-				<c:otherwise>
-					<a href="#" onClick="fn_paging('${pageNum}')">${pageNum }</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${paging.curPage ne pagination.pageCnt && pagination.pageCnt >0}">
-			<a href="#" onClick="fn_paging('${pagination.nextPage}')">[다음]</a>
-		</c:if>
-		<c:if test="${pagination.cuRange ne pagination.rangeCnt && pagination.rangeCnt >0 }">
-			<a href="#" onClick="fn_paging('${pagination.pageCnt}')">[끝]</a>
+	
+	<c:if test="${count > 0 }">
+		<c:set var="pageCount" value="${count/ pageSize + (count % pageSize == 0 ? 0 : 1) }" />
+		<c:set var="startPage" value="${pageGroupSize*(nowPageGroup -1) +1 }" />
+		<c:set var="endPage" value="${startPage + pageGroupSize -1 }" />
+		
+		<c:if test="${endPage > pageCount }">
+			<c:set var="endPage" value="${pageCount }"/>
 		</c:if>
 		
-		<div>
-			총 게시글 수 : ${pagination.listCnt } / 총 페이지 수 : ${pagination.pageCnt } / 현재 페이지 : ${pagination.curPge }/ 현재 블럭: ${pagination.curRange } /총 블럭수 : ${pagination.rangeCnt }
+		<div class="jb-center">
+		
+			<ul class="pagination">
+				<c:if test="${nowPageGroup > 1 }">
+				<li>
+					<a href="#" onclick = 'paging_script(${(nowPageGroup - 2)*pageGroupSize + 1}, ${pageSize},"vo", "/review);'>
+						<span class="glyphicon-chevron-left"></span>
+					</a>
+				</li>
+				</c:if>
+				
+			 	<c:if test="${nowPageGroup == 1}">
+					 <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li> 
+				</c:if> 
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<li <c:if test="${pageIndex == 1}"> class="activ" </c:if>>
+						<a href="#" onclick='paging_script(${1}, ${pageSize }, "vo", "/review");'>${i}</a>
+					</li>
+				</c:forEach>
+					<c:if test="${nowPageGroup < pageGroupCount }">
+						<li>
+							<a href="#" onclick='paging_script(${nowPageGroup*pageGroupSize+1}, ${pageSize },"vo", "review");'>
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</a>	
+						</li>
+					</c:if>
+			</ul> 
+		
 		</div>
-	</div>
+		
+	</c:if>
+ 	<!--페이징끝 -->
 </form>
 </div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
 	$(document).ready(function(){
 		//댓글쓰기 버튼 클릭 이벤트 (ajax로 처리)
-		$("#btnReply").click(funtion(){
+		$("#btnReply").click(function(){
 			var replytext=$("#replytext").val();
 			var revIdx="${RBoardVO.revIdx}"
 			var param="replytext=" + revCmtComment + "&revIdx=" + revIdx;
@@ -212,10 +227,11 @@
 				}
 			});
 			
-		})
+		});
 		
 		//게시글 수정
 		$("#modify").on("click", function(e){
+			console.log(e);
 			e.preventDefault();
 			fn_BoardModify($(this));
 		});
@@ -252,7 +268,7 @@
 					output +="<tr>";
 					output +="<td>" + result[i].userName;
 					output +="(" + changeDate(result[i].regdate)+ ")<br>";
-					output += result[i].revCmtComment"</td>" ;
+					output += result[i].revCmtComment + "</td>" ;
 					output +="<tr>";
 				}
 			output +="</table>";
@@ -260,15 +276,17 @@
 			}
 		})
 	}
-	
-	
-	
-	function fn_BoardModify(obj){
+
+	function fn_BoardModify(){
+		/* var comSubmit = new ComSubmit("frm");
+		comSubmit.setUrl("<c:url value='/review/updateform' />");
+		comSubmit.submit(); */
+		
 		var comSubmit = new ComSubmit("frm");
-		comSubmi.setUrl("<c:url value='/review/updateform' />");
-		comSubmit.submit();
+ 		comSubmit.setUrl("<c:url value='/review/updateform'/>");
+ 		comSubmit.submit();
 	}
-	function fn_BoardDelete(obj){
+	function fn_BoardDelete(){
 		var comSubmit = new ComSubmit("frm");
 		comSubmi.setUrl("<c:url value='/review/deleteboard' />");
 		comSubmit.submit();
