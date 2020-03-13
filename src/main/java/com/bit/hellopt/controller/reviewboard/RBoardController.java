@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,7 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
-import com.bit.hellopt.vo.reviewboard.Pagination;
+//import com.bit.hellopt.vo.reviewboard.Pagination;
 import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
@@ -63,11 +64,26 @@ public class RBoardController {
 			@RequestParam(defaultValue="1")int curPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 ;
+		//paging///
 		
-		model.addAttribute("listCnt",listCnt);
-		model.addAttribute("viewAll", rService.selectRBord(pvo));
-		System.out.println("페이징처리:"+ pvo);	
-		System.out.println("viewAll:"+ rService.selectRBord(pvo));	
+		int pageSize = vo.getPageSize(); //한  페이지에 나오는 게시물 개수
+		int pageIndex = vo.getPageIndex();//현재 선택한 페이지number
+		int pageGroupSize = vo.getPageGroupSize();//페이지 번호가 몇개인지
+		int startRow = (pageIndex -1)*pageSize +1; //한 페이지의 시작글 번호
+		int endRow = pageIndex*pageSize; //한 페이지의 마지막 글 번호
+		
+		vo.setStartRow(startRow);
+		vo.setEndRow(endRow);
+//		int count = rService.boardCount(vo);//게시물 총 개수
+		
+//		int pageGroupCount = count / (pageSize * pageGroupSize) + (count % (pageSize * pageGroupSize)== 0 ? 0:1);
+		int nowPageGroup = (int)Math.ceil((double) pageIndex / pageGroupSize);
+		
+		List<RBoardVO> boardList = rService.getRBoardList();
+//		ModelMap.put()
+		
+		
+		
 		
 		List<RBoardVO> userjoin = rService.Join2();
 		
