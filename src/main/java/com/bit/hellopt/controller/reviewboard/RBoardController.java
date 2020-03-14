@@ -66,14 +66,16 @@ public class RBoardController {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 ;
 		//paging///
+
 		RPagingVO p = new RPagingVO();
+		model.addAttribute("pvo", p);
 		//1.전체 게시물의 수를 구하기
 		p.setTotalRecord(rService.getTotalCount());
 		p.setTotalPage();//전체 페이지 갯수 구하기
 		
 		System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
-		System.out.println(">전체 게시글 수 : " + p.getTotalPage());
-		System.out.println("cPage" + cPage);
+		System.out.println(">전체 페이지 수 : " + p.getTotalPage());
+		System.out.println("cPage:" + cPage);
 		
 		if(cPage != null) {
 			p.setNowPage(cPage);
@@ -93,7 +95,15 @@ public class RBoardController {
 		p.setBegin(beginPage);
 		p.setEndPage(p.getBeginPage() + p.getPagePerBlock() -1);
 		
-		if(p.getEndPage() > p.getTotalPage())
+		if(p.getEndPage() > p.getTotalPage()) {
+			p.setEndPage(p.getTotalPage());
+		}
+		Map<String, Integer> map = new HashMap<>();
+		map.put("begin", p.getBegin());
+		map.put("end", p.getEnd());
+		
+		List<RBoardVO> rList = rService.boardList(map);
+		System.out.println("현재 페이지 글목록(list)" + rList);
 		
 		
 		List<RBoardVO> userjoin = rService.Join2();
@@ -167,9 +177,10 @@ public class RBoardController {
 	}
 	
 	@PostMapping("/review/updateform")
-	public String updateBoardForm(@ModelAttribute("rBoardList")RBoardVO vo) {
+	public String updateBoardForm(Model model,@RequestParam("") @ModelAttribute("rBoardList")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		System.out.println(">> board vo :" + vo);
+		
 		
 		
 		
@@ -185,10 +196,10 @@ public class RBoardController {
 		return "redirect:/review";
 	}
 	@PostMapping("/review/deleteboard")
-	public String deleteBoard(RBoardVO vo) {
+	public String deleteBoard(int revIdx, Model model) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
-		rService.deleteBoard(vo);
+		rService.deleteBoard(revIdx);
 		return "redirect:/review";
 	}
 }

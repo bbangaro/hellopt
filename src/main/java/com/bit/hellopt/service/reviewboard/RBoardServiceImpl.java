@@ -2,6 +2,7 @@ package com.bit.hellopt.service.reviewboard;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +39,8 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public void deleteBoard(RBoardVO vo) {
-		mapper.deleteRBoard(vo);
+	public void deleteBoard(int revIdx) {
+		mapper.deleteRBoard(revIdx);
 		
 	}
 
@@ -93,8 +94,8 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public List<RBoardVO> boardList(RBoardVO vo) {
-		return mapper.boardList(vo);
+	public List<RBoardVO> boardList(Map<String, Integer> map) {
+		return mapper.boardList(map);
 	}
 
 

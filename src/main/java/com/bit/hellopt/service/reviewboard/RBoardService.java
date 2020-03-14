@@ -1,6 +1,7 @@
 package com.bit.hellopt.service.reviewboard;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -15,7 +16,7 @@ public interface RBoardService {
 	
 	void insertBoard(RBoardVO vo);
 	void updateBoard(RBoardVO vo);
-	void deleteBoard(RBoardVO vo);
+	void deleteBoard(int revIdx);
 	void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx);
 	List<RBoardVO> getRBoardList();
 	List<RBoardVO> Join2();
@@ -27,5 +28,5 @@ public interface RBoardService {
 	//게시뭄 총 갯수
 	int getTotalCount();
 	//페이징 처리 게시글 조회
-	List<RBoardVO> boardList(RBoardVO vo);
+	List<RBoardVO> boardList(Map<String, Integer> map);
 }

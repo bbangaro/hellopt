@@ -2,6 +2,7 @@ package com.bit.hellopt.data;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -51,7 +52,7 @@ public interface RBoardMapper1 {
 	public void updateRBoard(RBoardVO vo);
 	//후기삭제
 	@Delete("DELETE FROM REVIEW_BOARD_TB WHERE REV_IDX = #{revIdx}")
-	public void deleteRBoard(RBoardVO vo);
+	public void deleteRBoard(int revIdx);
 
 	//파일 저장용 db에 입력하는 것...
 	@Insert("INSERT INTO REVIEW_FILE_TB(REV_FILE_IDX, REV_FILE_ONAME, REV_FILE_SNAME, REV_FILE_SIZE, REV_IDX)\r\n" + 
@@ -72,6 +73,6 @@ public interface RBoardMapper1 {
 			+ "		FROM("
 			+ "				SELECT * FROM REVIEW_BOARD_TB ORDER BY REV_IDX DESC) A"
 			+ "			) WHERE RN BETWEEN #{begin}AND #{end}")
-	public List<RBoardVO> boardList(RBoardVO vo);
+	public List<RBoardVO> boardList(Map<String, Integer> map);
 
 }

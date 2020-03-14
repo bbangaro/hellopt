@@ -53,6 +53,33 @@
 		text-align: center;
 		background-color: yellow;
 	}
+	.paging { list-style: none; }
+	.paging li {
+		float: left;
+		margin-right: 8px;
+	}
+	.paging li a {
+		text-decoration: none;
+		display: block;
+		padding: 3px 7px;
+		border: 1px solid #00B3DC;
+		font-weight: bold;
+		color: black;
+	}
+	.paging .disable {
+		border: 1px solid silver;
+		padding: 3px 7px;
+		color: silver;
+	}
+	.paging .now {
+		border: 1px solid #ff4aa5;
+		padding: 3px 7px;
+		background-color: #ff4aa5;
+	}
+	.paging li a:hover {
+		background-color: #00B3DC;
+		color: white;
+	}
 </style>
 </head>
 <script>
@@ -165,47 +192,49 @@
 </table>	
 </c:forEach>
 	<!--페이징 -->
-	
-	<c:if test="${count > 0 }">
-		<c:set var="pageCount" value="${count/ pageSize + (count % pageSize == 0 ? 0 : 1) }" />
-		<c:set var="startPage" value="${pageGroupSize*(nowPageGroup -1) +1 }" />
-		<c:set var="endPage" value="${startPage + pageGroupSize -1 }" />
-		
-		<c:if test="${endPage > pageCount }">
-			<c:set var="endPage" value="${pageCount }"/>
-		</c:if>
-		
-		<div class="jb-center">
-		
-			<ul class="pagination">
-				<c:if test="${nowPageGroup > 1 }">
-				<li>
-					<a href="#" onclick = 'paging_script(${(nowPageGroup - 2)*pageGroupSize + 1}, ${pageSize},"vo", "/review);'>
-						<span class="glyphicon-chevron-left"></span>
-					</a>
-				</li>
-				</c:if>
-				
-			 	<c:if test="${nowPageGroup == 1}">
-					 <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li> 
-				</c:if> 
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<li <c:if test="${pageIndex == 1}"> class="activ" </c:if>>
-						<a href="#" onclick='paging_script(${1}, ${pageSize }, "vo", "/review");'>${i}</a>
+	<br><br><br>
+	<td colspan="4">
+		<ol class="paging">
+			<c:choose>
+				<c:when test="${pvo.beginPage == 1}">
+					<li class="disable">이전으로<li>
+				</c:when>
+				<c:otherwise>
+					<li>
+						<a href="review?cPage=${pvo.beginPage - 1 }">이전으로</a>
 					</li>
-				</c:forEach>
-					<c:if test="${nowPageGroup < pageGroupCount }">
-						<li>
-							<a href="#" onclick='paging_script(${nowPageGroup*pageGroupSize+1}, ${pageSize },"vo", "review");'>
-								<span class="glyphicon glyphicon-chevron-right"></span>
-							</a>	
-						</li>
-					</c:if>
-			</ul> 
+				</c:otherwise>
+			</c:choose>
+			
+			<!-- 블록내에 표시할 페이지 표시(시작페이지~끝페이지)  -->
+			<c:forEach var="k" begin="${pvo.beginPage }" end="${pvo.endPage }">
+			<c:choose>
+				<c:when test="${k == pvo.nowPage }">
+					<li class="now">${k }</li>
+				</c:when>
+				<c:otherwise>
+					<li>
+						<a href="review?cPage="${k }">${k }</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			</c:forEach>
+			<!-- [다음으로]에 대한 사용여부 처리 -->
+			<!-- 사용불가(disable) 
+					endPage가 전체페이지 수보다 크거나 같으면
+				-->
+			<c:choose>
+				<c:when test="${pvo.endPage >= pvo.totalPage }">
+					<li class="disable">다음으로 </li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="review?cPage="${pvo.endPage + 1 }></a>다음으로</li>
+				</c:otherwise>
+			</c:choose>
+		</ol>
+	</td>
 		
-		</div>
 		
-	</c:if>
  	<!--페이징끝 -->
 </form>
 </div>	
@@ -233,14 +262,15 @@
 		$("#modify").on("click", function(e){
 			console.log(e);
 			e.preventDefault();
-			fn_BoardModify($(this));
-		});
+			fn_modifyBoard();
+		})
 		//게시글 삭제
-		$("a[name='delete']").on("click", function(e){
+		$("#delete").on("click", function(e){
+			alert("삭제하시겠습니까");
 			e.preventDefault();
-			fn_BoardDelete($(this));
-		});
-	});
+			fn_deleteBoard();
+		})
+	})
 	
 	//Controller방식
 	//**댓글 목록1
@@ -277,16 +307,13 @@
 		})
 	}
 
-	function fn_BoardModify(){
-		/* var comSubmit = new ComSubmit("frm");
-		comSubmit.setUrl("<c:url value='/review/updateform' />");
-		comSubmit.submit(); */
+	function fn_modifyBoard(){
 		
 		var comSubmit = new ComSubmit("frm");
  		comSubmit.setUrl("<c:url value='/review/updateform'/>");
  		comSubmit.submit();
 	}
-	function fn_BoardDelete(){
+	function fn_deleteBoard(){
 		var comSubmit = new ComSubmit("frm");
 		comSubmi.setUrl("<c:url value='/review/deleteboard' />");
 		comSubmit.submit();
