@@ -1,0 +1,63 @@
+*{
+   margin: 0 auto;
+    padding: 0; 
+}
+a{
+    color: #000;
+    text-decoration: none;
+    font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+}
+a:hover{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+/* category */
+.cafe_category{
+    padding: 30px 30px 0 30px;
+    border: 1px solid #ddd;
+    position: relative;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+/* cafe_nutrition */
+.meal_contents{
+	margin: 100px auto 0 auto;
+	width: 1024px;
+}
+.info_form{
+    font-size: 12px;
+}
+.info_p{
+    font-size: 11px;
+    padding: 20px 0px;
+}
+.info_lileft{
+    float: left; 
+    width: 50%;
+    padding-bottom: 15px;
+}
+.infor_clear{
+    clear: both;
+}
+.active_box{
+    clear: both;
+}
+.info_label{
+   width: 75px;
+    display: inline-block;
+}
+.nutrition_inputS{
+    width: 218px;
+    height: 18px;
+    border: 1px solid #e8e8e8;
+    padding: 5px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.active_span{
+    font-size:10px;
+    color: #9a9a9a;
+}
