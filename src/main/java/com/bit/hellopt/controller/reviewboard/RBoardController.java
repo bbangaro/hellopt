@@ -64,23 +64,24 @@ public class RBoardController {
 			@AuthenticationPrincipal CustomUserDetail customUser, 
 			@RequestParam(defaultValue="1")Integer cPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
-;
-		//paging///
 
+		//paging///
+		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
 		RPagingVO p = new RPagingVO();
-		model.addAttribute("pvo", p);
+		
 		//1.전체 게시물의 수를 구하기
 		p.setTotalRecord(rService.getTotalCount());
 		p.setTotalPage();//전체 페이지 갯수 구하기
 		
 		System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
 		System.out.println(">전체 페이지 수 : " + p.getTotalPage());
-		System.out.println("cPage:" + cPage);
 		
+		//2. 현재 페이지 구하기(default : 1)
+		System.out.println("cPage:" + cPage);
 		if(cPage != null) {
 			p.setNowPage(cPage);
 		}
-		
+		//3. 현재페이지의 시작번호(begin)와 끝번호(end) 구하기
 		p.setEnd(p.getNowPage() * p.getNumPerPage());
 		p.setBegin(p.getEnd() - p.getNumPerPage() + 1);
 		
@@ -90,32 +91,33 @@ public class RBoardController {
 		System.out.println(">>끝 번호(end) : " + p.getEnd());
 		
 		//블록계산하기
+		//4. 블록의 시작페이지, 끝페이지 구하기(현재페이지 번호 사용)
 		int nowPage = p.getNowPage();
 		int beginPage = (nowPage -1) / p.getPagePerBlock() * p.getPagePerBlock() + 1;
-		p.setBegin(beginPage);
+		p.setBeginPage(beginPage);
 		p.setEndPage(p.getBeginPage() + p.getPagePerBlock() -1);
 		
-		if(p.getEndPage() > p.getTotalPage()) {
+		//4-1 끝페이지(endPage)가 전체 페이지 수(totalPage) 보다 크면
+		if (p.getEndPage() > p.getTotalPage()) {
 			p.setEndPage(p.getTotalPage());
 		}
+		
+		//-------------------------------------
+		//현재페이지 기준으로 게시글 가져오기
 		Map<String, Integer> map = new HashMap<>();
 		map.put("begin", p.getBegin());
-		map.put("end", p.getEnd());
+		map.put("end", p.getEnd());	
 		
-		List<RBoardVO> rList = rService.boardList(map);
-		System.out.println("현재 페이지 글목록(list)" + rList);
-		
-		
-		List<RBoardVO> userjoin = rService.Join2();
+		System.out.println("map값:" +map);
+		List<RBoardVO> userjoin = rService.Join2(map);
 		
 		for(RBoardVO vo1 :userjoin) {
 			vo1.setFilevo(rService.getFileList(vo1.getRevIdx()));
 		}
-		System.out.println("rBoardList: " + userjoin.toString());
-//		System.out.println("userjoin: " + userjoin.toString());
+		System.out.println("현재페이지 글목록(list): " + userjoin.toString());
 
 		model.addAttribute("rBoardList", userjoin);
-//		model.addAttribute("userjoin", userjoin);
+		model.addAttribute("pvo", p);
 		
 		return "reviewBoard";
 	}

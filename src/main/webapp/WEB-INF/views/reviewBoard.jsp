@@ -201,7 +201,7 @@
 				</c:when>
 				<c:otherwise>
 					<li>
-						<a href="review?cPage=${pvo.beginPage - 1 }">이전으로</a>
+						<a class="disable" href="review?cPage=${pvo.beginPage - 1 }">이전으로</a>
 					</li>
 				</c:otherwise>
 			</c:choose>
@@ -214,7 +214,7 @@
 				</c:when>
 				<c:otherwise>
 					<li>
-						<a href="review?cPage="${k }">${k }</a>
+						<a href="review?cPage=${k}">${k }</a>
 					</li>
 				</c:otherwise>
 			</c:choose>
@@ -228,7 +228,9 @@
 					<li class="disable">다음으로 </li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="review?cPage="${pvo.endPage + 1 }></a>다음으로</li>
+					<li >
+						<a href="review?cPage=${pvo.endPage + 1 }">다음으로</a>
+					</li>
 				</c:otherwise>
 			</c:choose>
 		</ol>

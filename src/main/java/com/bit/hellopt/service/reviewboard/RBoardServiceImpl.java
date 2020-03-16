@@ -84,8 +84,8 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public List<RBoardVO> Join2() {
-		return mapper2.join2();
+	public List<RBoardVO> Join2(Map<String, Integer>map) {
+		return mapper2.join2(map);
 	}
 
 	@Override
@@ -93,10 +93,7 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper.getTotalCount();
 	}
 
-	@Override
-	public List<RBoardVO> boardList(Map<String, Integer> map) {
-		return mapper.boardList(map);
-	}
+
 
 
 
