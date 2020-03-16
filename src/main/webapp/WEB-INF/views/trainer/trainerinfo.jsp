@@ -10,9 +10,7 @@
 </head>
 <body>
     <div id="wrap">
-        <header id="">
 
-        </header>
         <div class="trainerbox">
             <div class="trainerImg">
                 <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">

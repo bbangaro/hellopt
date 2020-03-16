@@ -11,9 +11,6 @@
 </head>
 <body>
     <div id="wrap">
-        <header id="">
-
-        </header>
         <div class="trainerbox_banner">
         <div class="${pageContext.request.contextPath}/resources/images/trainer/banner.png">
 

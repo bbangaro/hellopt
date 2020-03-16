@@ -3,6 +3,11 @@ body {
     color: #fff;
 }
 
+#wrap {
+     width: 100%;
+     margin: 100px auto 0 auto;
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -40,7 +45,7 @@ body {
 
 .nick {
     padding: 0px 10px;
-    color: #00e676;
+    color: #dc3545;
     font-weight: normal;
     font-size: 17px;
 }
@@ -140,7 +145,7 @@ body {
 }
 
 .bannertxt {
-    padding: 65px 40px 40px 40px;
+    padding: 30px 40px 40px 40px;
 }
 
 .bannertxt_big {
