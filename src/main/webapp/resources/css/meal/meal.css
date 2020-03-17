@@ -3,7 +3,7 @@
     padding: 0; 
 }
 a{
-    color: #000;
+    color: #dc3545;
     text-decoration: none;
     font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
 }
@@ -17,7 +17,6 @@ li{
 /* category */
 .cafe_category{
     padding: 30px 30px 0 30px;
-    border: 1px solid #ddd;
     position: relative;
     border-radius: 5px;
     margin-bottom: 40px;
@@ -31,6 +30,7 @@ li{
 /* cafe_nutrition */
 .nutrtion_subtitle{
     font-size: 16px;
+    margin-bottom: 10px;
 }
 .info_p{
     font-size: 11px;
@@ -46,7 +46,7 @@ li{
 }
 .active_box{
     clear: both;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid #373737;
 }
 .info_label{
    width: 75px;
@@ -54,7 +54,7 @@ li{
 }
 .nutrition_inputS{
     width: 218px;
-    height: 18px;
+    height: 25px;
     border: 1px solid #e8e8e8;
     padding: 5px;
     font-size: 11px;
@@ -65,11 +65,14 @@ li{
     padding: 20px 0 10px 0;
 }
 .active_span{
-    font-size:10px;
+    font-size:11px;
     color: #9a9a9a;
 }
 .active_li{
     padding: 5px 0px;
+}
+.inactive1{
+	margin-bottom: 0.0rem;
 }
 .active_btn_box{
     text-align: center;
@@ -92,7 +95,7 @@ li{
     background-color: #e8e8e8; 
     border: none;
     color: #000;
-    padding: 5px 32px;
+    padding: 4px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -106,68 +109,138 @@ li{
 }
 /*box - 2*/
 .menu_search_box{
-    margin: 20px 0;
-    border-top: 1px solid #e8e8e8;
-    border-bottom: 1px solid #e8e8e8;
-    padding: 10px 0;
+    margin-bottom: 10px;
 }
 .nutrition_inputL{
-    width: 783px;
-    height: 18px;
+    width: 90%;
+    height: 31px;
     border: 1px solid #e8e8e8;
-    padding: 5px;
+    padding: 10px;
     font-size: 11px;
     cursor: pointer;
 }
+.inputright{
+    float: right;
+}
 .menu_title_p{
-    width: 25%;
+    width: 150px;
     float: left;
     text-align: center;
 }
+.menu_title_pbig{
+    width: 504px;
+}
 .menu_title{
-    width: 100%;
-    height: 30px;
+    clear: both;
+    height: 42px;
     line-height: 30px;
     padding: 5px;
-    border-bottom: 1px solid #4f4f4f;
-    border-top: 1px solid #4f4f4f;
+    border-bottom: 1px solid #373737;
+    border-top: 1px solid #dc3545;
 }
 .menu_list_box{
     margin-bottom: 20px;
-    border-bottom: 1px solid #4f4f4f;
+    border-bottom: 1px solid #373737;
 }
 
 .menu_list_li{
     height: 35px;
     line-height: 35px;
 }
+
 .menu_list_lip{
     float: left;
-    width: 25%;
+    width: 150px;
     text-align: center;
 }
+.menu_list_lipbig{
+    width: 508px;
+    text-align: left;
+    padding-left: 40px;
+}
+
 .kacl_box{
+    float: left;
     width: 50%;
-    margin: 20px 0;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px; 
+    margin: 0px 0 2px 0;
+    border-top: 1px solid #373737;
+    border-bottom: 1px solid #373737;
 }
 .goal_kacl{
-    display: inline-block;
-    padding: 20px 40px;
+   float: left;
+    width: 30%;
+   height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #393939;
 }
 .goal_kacl_num{
-    display: inline-block;
-    padding: 20px;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 25px;
+    font-size: 28px;
+    color: #b30000;
+}
+.nutrtion_info{
+    float: left;
+    width: 10%;
+    height: 38px;
+    line-height: 40px;
+    text-align: center;
+}
+.nutrtion_box{
+    clear: both;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    border-top: 1px solid #373737;
+    border-bottom: 1px solid #373737;
+}
+.nutrtion_info:nth-child(odd) {
+  width: 15%;
+  background-color: #393939;
 }
 .menu_title_pd{
     float: left;
+    width: 102px;
+    text-align: center;
 }
-.menu_check_btn{
-/*    background: url(../../img/check_btn.png) 50% 0;
-    display: block;
-    height: 24px;
-    width: 24px;
-    background-repeat: no-repeat;
-    cursor: pointer;*/
+.menu_title_pdsmall{
+    width: 42px;
+}
+.menu_title_pdbig{
+    width: 300px;
+}
+
+.menu_list_lipd{
+    float: left;
+    width: 102px;
+    text-align: center;
+}
+.menu_list_lipdsmall{
+    width: 42px;
+}
+.menu_list_lipdbig{
+    width:300px;
+}
+.box-radio-input input[type="radio"]{
+    display:none;
+}
+
+.box-radio-input input[type="radio"] + span{
+    display:inline-block;
+    background:none;
+    border:1px solid #dfdfdf;    
+    padding:0px 10px;
+    text-align:center;
+    height:35px;
+    line-height:33px;
+    font-weight:500;
+    cursor:pointer;
+}
+.box-radio-input input[type="radio"]:checked + span{
+    border:1px solid #dc3545;
+    background:#dc3545;
+    color:#fff;
 }
