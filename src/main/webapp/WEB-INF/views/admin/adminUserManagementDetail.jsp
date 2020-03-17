@@ -18,7 +18,7 @@
 		method="POST" modelAttribute="user" enctype="multipart/form-data">
 		<ul>
 			<c:if test="${ not empty user.userProfile }">
-				<li><img src="${pageContext.request.contextPath}/file/${ user.userProfile }" alt="profile"></li>
+				<li><img src="${pageContext.request.contextPath}/s3/profile/${ user.userProfile }" alt="profile"></li>
 			</c:if>
 			
 			<li><form:label path="userId">아이디</form:label> <form:input

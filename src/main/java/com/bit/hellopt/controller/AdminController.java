@@ -32,7 +32,7 @@ public class AdminController {
 		model.addAttribute("userList", userService.pagingUserList(page));
 		model.addAttribute("lastPage", userService.getLastPage(page));
 		
-		return "adminUserManagement";
+		return "admin/adminUserManagement";
 	}
 	
 	@GetMapping("/admin/user/{userId}")
@@ -45,7 +45,7 @@ public class AdminController {
 		}
 
 		model.addAttribute("user", user);
-		return "adminUserManagementDetail";
+		return "admin/adminUserManagementDetail";
 	}
 	
 	@PostMapping("/admin/user/update")
