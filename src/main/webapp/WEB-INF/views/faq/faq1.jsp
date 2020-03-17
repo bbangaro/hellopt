@@ -30,7 +30,7 @@
             <ul class="accordion">
                 <li>
                     <p class="subject">Q. 어떤 프로그램이 있나요? </p>
-                    <div class="contents">
+                    <div class="content">
                         <p class="oline">[Oline]</p>
                         <br>
                         <p class="textbold">"어디서든 함께하는 즐거움과 시너지를 통해 운동하는 Life Style 만들기"</p>
