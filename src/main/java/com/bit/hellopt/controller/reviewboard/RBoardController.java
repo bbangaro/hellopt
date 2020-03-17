@@ -60,7 +60,7 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review")
-	public String getRBoardList(ModelMap modelMap, RBoardVO vo,RPagingVO rvo, Model model, User uvo, 
+	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo, 
 			@AuthenticationPrincipal CustomUserDetail customUser, 
 			@RequestParam(defaultValue="1")Integer cPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
@@ -111,6 +111,7 @@ public class RBoardController {
 		System.out.println("map값:" +map);
 		List<RBoardVO> userjoin = rService.Join2(map);
 		
+		//이미지 업로드한거 보여주기
 		for(RBoardVO vo1 :userjoin) {
 			vo1.setFilevo(rService.getFileList(vo1.getRevIdx()));
 		}
@@ -119,7 +120,7 @@ public class RBoardController {
 		model.addAttribute("rBoardList", userjoin);
 		model.addAttribute("pvo", p);
 		
-		return "reviewBoard";
+		return "/review/reviewBoard";
 	}
 	
 	@PostMapping("/insertrboard")
@@ -182,23 +183,21 @@ public class RBoardController {
 	public String updateBoardForm(Model model,@RequestParam("") @ModelAttribute("rBoardList")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		System.out.println(">> board vo :" + vo);
-		
-		
-		
-		
-		rService.updateBoard(vo);
-		return "insertRBoard";
+		Map<String, Integer> map = new HashMap<>();
+
+		rService.Join2(map);
+		return "/review/insertform";
 	}
 	@PostMapping("/review/updateboard")
-	public String updateBoard(@ModelAttribute("rBoardList")RBoardVO vo) {
+	public String updateRBoard(@ModelAttribute("rBoardList")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		System.out.println(">> board vo :" + vo);
 		
 		rService.updateBoard(vo);
 		return "redirect:/review";
 	}
-	@PostMapping("/review/deleteboard")
-	public String deleteBoard(int revIdx, Model model) {
+	@RequestMapping("/deleterboard")
+	public String deleteRBoard(int revIdx, Model model) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
 		rService.deleteBoard(revIdx);

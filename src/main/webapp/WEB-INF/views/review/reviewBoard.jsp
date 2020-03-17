@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>후기게시판</title>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <style>
  	.content {
@@ -104,17 +104,18 @@
 </div> --%>
 
 <form>
-
+	<sec:authorize access="isAuthenticated()">
 	<p><a href="${pageContext.request.contextPath}/review/insertform">후기쓰러가기</a></p>	
+	</sec:authorize>
 <c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
 <table class="tbl_wrap">
 	<thead class="tbl_head01">
 		<tr>
-		<sec:authorize access="isAuthenticated()">
-			<sec:authentication property = "principal.username"/>
-			<td><a href="#this" id="modify" class= "btn">글 수정</a></td>
-			<td><a href="#this" id="delete" class= "btn">글 삭제</a></td>
-		</sec:authorize>
+		<sec:authentication var="principal" property="principal" />
+		<c:if test="${rBoard.userId == principal.username}">
+			<td><a href="review/updateform?revIdx=${rBoard.revIdx}" class= "btn">글 수정</a></td>
+			<td><a href="deleterboard?revIdx=${rBoard.revIdx }" class="btn">글 삭제</a></td>
+		</c:if>
 		</tr>
 		<tr>
 			<c:if test="${rBoard.userFileName == null }">
@@ -165,20 +166,23 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			
 		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
-		<c:if test="${rBoard.cmtCnt > 0 }">
-		<td>
-			<a href="#this" id="cmtCnt"> 댓글${rBoard.cmtCnt }개 모두 보기</a>
-		</td>
-		</c:if> 
+			<c:if test="${rBoard.cmtCnt > 0 }">
+			<td>
+				<a href="#this" id="cmtCnt"> 댓글${rBoard.cmtCnt }개 모두 보기</a>
+			</td>
+			</c:if> 
 		</tr>
+		<sec:authorize access="isAuthenticated()">
 		<tr>
-			<sec:authorize access="isAuthenticated()">
-			<textarea rows="2" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
-			<button type="button" id="btnReply">등록</button>
-			</sec:authorize>
+			<td>
+				<textarea rows="2" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
+			</td>
+			<td>
+				<button type="button" id="btnReply">등록</button>
+			</td>	
 		</tr>
+		</sec:authorize>
 		<c:forEach var="row" items="${replyList }">
 		<tr>
 			<td id="listReply">
@@ -235,8 +239,6 @@
 			</c:choose>
 		</ol>
 	</td>
-		
-		
  	<!--페이징끝 -->
 </form>
 </div>	
@@ -259,21 +261,7 @@
 			});
 			
 		});
-		
-		//게시글 수정
-		$("#modify").on("click", function(e){
-			console.log(e);
-			e.preventDefault();
-			fn_modifyBoard();
-		})
-		//게시글 삭제
-		$("#delete").on("click", function(e){
-			alert("삭제하시겠습니까");
-			e.preventDefault();
-			fn_deleteBoard();
-		})
-	})
-	
+
 	//Controller방식
 	//**댓글 목록1
 	function listReply(){
@@ -309,17 +297,6 @@
 		})
 	}
 
-	function fn_modifyBoard(){
-		
-		var comSubmit = new ComSubmit("frm");
- 		comSubmit.setUrl("<c:url value='/review/updateform'/>");
- 		comSubmit.submit();
-	}
-	function fn_deleteBoard(){
-		var comSubmit = new ComSubmit("frm");
-		comSubmi.setUrl("<c:url value='/review/deleteboard' />");
-		comSubmit.submit();
-	}
 
 	
 </script>
