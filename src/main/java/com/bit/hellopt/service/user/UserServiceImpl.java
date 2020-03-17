@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.data.UserMapper;
 import com.bit.hellopt.data.UserXMLMapper;
 import com.bit.hellopt.vo.user.User;
@@ -17,7 +18,7 @@ public class UserServiceImpl implements UserService{
 	UserMapper mapper;
 	@Autowired
 	UserXMLMapper xmlMapper;
-	
+		
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
