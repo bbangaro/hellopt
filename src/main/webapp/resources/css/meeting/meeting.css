@@ -471,8 +471,10 @@ h2 {
 	color:black;
 }
  .msub{
- text-shadow: 2px 2px 0px #d3d3d3;
-}
+ /* 
+ text-shadow: 2px 2px 0px #d3d3d3; 
+ */
+ }
 .mcategory{
     margin-left: 15px;
     float: left;

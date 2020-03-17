@@ -14,9 +14,6 @@
 <body>
 
     <div id="wrap">
-        <header id="">
-
-        </header>
         <div class="banner">
             <img class="bnimg" src="${pageContext.request.contextPath}/resources/images/audition/Audition.jpg" alt="에프터 서비스 배너 이미지">
         </div>

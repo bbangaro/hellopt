@@ -50,11 +50,11 @@
                             <li><a href="${pageContext.request.contextPath}/audition">Apply for Trainer</a></li>
                        </ul>
                     </li>
-                    <li><a href="#" class="artist_open">Workout&Plan</a>
+                    <li><a href="#" class="artist_open">Workout&Nutrition</a>
                     	 <ul class="artist_depth02">
-                       	    <li><a href="#">Plan</a></li>
-                            <li><a href="${pageContext.request.contextPath}/exercise-Info">Exercise-Info</a></li>
-                            <li><a href="${pageContext.request.contextPath}/exercise-TipInfo">Exercise-TipInfo</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exerciseinfo">Exercise Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exercisetipinfo">Exercise TipInfo</a></li>
+                       	    <li><a href="${pageContext.request.contextPath}/meal">Nutrition</a></li>
                        </ul>
                     </li>
                     <li><a href="#" class="artist_open">Training</a>
