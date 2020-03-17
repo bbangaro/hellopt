@@ -27,7 +27,7 @@
                                 <input type="radio" id="male" name="gender" value="male">
                                 <label for="female">여성</label>
                                 <input type="radio" id="female" name="gender" value="female">-->
-                                <label class="box-radio-input"><input type="radio" nid="male" name="gender" value="male" checked="checked"><span>남성</span></label>
+                                <label class="box-radio-input"><input type="radio" id="male" name="gender" value="male" checked="checked"><span>남성</span></label>
                                 <label class="box-radio-input"><input type="radio" id="female" name="gender" value="female"><span>여성</span></label>
                             </li>
                             <li class="info_lileft infor_clear">
@@ -49,7 +49,7 @@
                                 </label>
                             </li>
                             <li class="active_li">
-                               <input type="radio" id="rowactive" name="activity" value="inactive">
+                               <input type="radio" id="rowactive" name="activity" value="inactive1">
                                 <label for="rowactive" class="inactive1">저 활동적 <span class="active_span">(대부분의 시간을 앉아서 하는 정적 활동 수준)</span>
                                 </label>
                             </li>
