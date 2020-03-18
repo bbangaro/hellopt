@@ -6,5 +6,7 @@ import com.bit.hellopt.vo.meal.MealVO;
 
 public interface MealService {
 	//전체조회
-	List<MealVO> getMealList();
+	List<MealVO> getMealList(String search, String searchtxt, int startRow, int endRow);
+
+	int totalCount(String search, String searchtxt);
 }

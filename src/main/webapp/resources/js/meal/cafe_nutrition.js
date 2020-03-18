@@ -1,6 +1,6 @@
 $(document).ready(function () {
     /* 저장버튼 클릭시 */
-    $('#infoAndMenu').css('display', 'none');
+    //$('#infoAndMenu').css('display', 'none');
     
     $(document).on('click', '#personinfoBtn', function () {
         console.log("저장 버튼클릭");
@@ -32,8 +32,8 @@ $(document).ready(function () {
             alert("신체활동 수준설정을 선택해주세요");
             return;
         }else{
-            $('#myInfo').css('display', 'none');
-            $('#infoAndMenu').css('display', 'block');
+            //$('#myInfo').css('display', 'none');
+            //$('#infoAndMenu').css('display', 'block');
             
             /*필요한 칼로리 총량 계산식*/
             if (gender == "male") {

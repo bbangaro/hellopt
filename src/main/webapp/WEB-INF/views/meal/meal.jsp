@@ -95,8 +95,8 @@
                 </div>
                     <h3 class="nutrtion_subtitle">메뉴 검색</h3>
                     <div class="menu_search_box">
-                        <form action="" method="post">
-                            <input type="text" id="menusearchtxt"name="menusearchtxt" class="nutrition_inputL" placeholder="메뉴 명을 작성하세요">
+                        <form method="get" action="meal?currpage=${page.startBlock}">
+                            <input type="text" id="menusearchtxt"name="searchtxt" class="nutrition_inputL" placeholder="메뉴 명을 작성하세요">
 		                    <input type="submit" value="검색" class="admin_btnS subminbtn inputright">
                         </form>
                     </div>
@@ -125,6 +125,20 @@
                         </ul>
                     </div>
                 </div>
+                <c:if test="${page.prev}">
+      <a href="meal?currpage=${page.startBlock-1}&search=${search}&searchtxt=${searchtxt}"><c:out value="이전"/></a>
+   </c:if>
+   <c:forEach var="index" begin="${page.startBlock}" end="${page.endBlock}">
+      <c:if test="${index==page.currPage}">
+         <c:out value="${index}"/>
+      </c:if>
+      <c:if test="${index!=page.currPage}">
+         <a href="meal?currpage=${index}&search=${search}&searchtxt=${searchtxt}">${index}</a>
+      </c:if>
+   </c:forEach>
+   <c:if test="${page.next}">
+      <a href="meal?currpage=${page.endBlock+1}&search=${search}&searchtxt=${searchtxt}"><c:out value="다음"/></a>
+   </c:if>
                 <h3 class="nutrtion_subtitle">메뉴 정보</h3>
                 <div class="menu_title">
                       <p class="menu_title_pd menu_title_pdsmall">번호</p>
@@ -150,6 +164,7 @@
                                 <p class="menu_list_lipd">100</p> -->
                             </li>
                         </ul>
+                        
                     </div>
                     <div class="active_btn_box">
                        <input type="submit" value="평가" class="admin_btn subminbtn">
