@@ -13,7 +13,7 @@ blockquote {margin:0; padding:0;}
   vertical-align: top;
   width: 92%;
  }
- .received_withd_msg p {
+ /* .received_withd_msg p {
   background: #ebebeb none repeat scroll 0 0;
   border-radius: 3px;
   color: #646464;
@@ -21,7 +21,7 @@ blockquote {margin:0; padding:0;}
   margin: 0;
   padding: 5px 10px 5px 12px;
   width: 100%;
-}
+} */
 .time_date {
   color: #747474;
   display: block;
@@ -30,13 +30,13 @@ blockquote {margin:0; padding:0;}
 }
 .received_withd_msg { width: 70%;}
 
- .mesgs {
+/*  .mesgs {
   width: 29%;
   height: 650px;
   overflow: hidden;
   scroll: hidden;
   box-sizing: border-box;
-} 
+}  */
 
  .sent_msg p {
   background: #05728f none repeat scroll 0 0;
@@ -44,9 +44,21 @@ blockquote {margin:0; padding:0;}
   font-size: 14px;
   margin: 0; color:#fff;
   padding: 5px 10px 5px 12px;
-  width:100%;
+  /* width:100%; */
 }
+
+ .received_msg p {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 65%;
+}
+
 .outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
+.incoming_msg{ overflow:hidden; margin:26px 0 26px;}
 
 .sent_msg {
   float: right;
@@ -62,7 +74,7 @@ blockquote {margin:0; padding:0;}
   width: 100%;
 }
 
-.type_msg {border-top: 1px solid #4C4C4B; position: relative; padding: 0 10px;}
+.type_msg {border-top: 1px solid #4C4C4B; position: relative; /* padding: 0 10px; */}
 
 .msg_send_btn {
   background: #05728f none repeat scroll 0 0;
@@ -79,13 +91,14 @@ blockquote {margin:0; padding:0;}
 }
 
 .msg_history {
-  height: 597px;
+  height: 660px;
   overflow-y: auto; 
 }
 </style>
 
 
-<script src="http://192.168.0.53:3000/socket.io/socket.io.js"></script>
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<!-- <script src="http://192.168.0.53:3000/socket.io/socket.io.js"></script> -->
 <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
 	
 <blockquote id="mesgs">
@@ -115,13 +128,13 @@ blockquote {margin:0; padding:0;}
     		console.log("내가 보낸 메세지");
          	$('<div class="outgoing_msg"><div class="sent_msg"><p>'
          			+ data.msg + '</p><span class="time_date">'
-         			+ data.sender + '</span></div>').appendTo(".msg_history");
+         			+ data.sender + '</span></div></div>').appendTo(".msg_history");
          	$(".msg_history").scrollTop($(".msg_history").height());
     	} else {
     		console.log("남이 보낸 메세지")
-    		$('<div class="incoming_msg"><div class="received_msg"><div class="received_withd_msg"><p>'
+    		$('<div class="incoming_msg"><div class="received_msg"><p>'
     				+ data.msg + '</p><span class="time_date">'
-    				+ data.sender + '</span></div></div></div>').appendTo(".msg_history");
+    				+ data.sender + '</span></div></div>').appendTo(".msg_history");
          	$(".msg_history").scrollTop($(".msg_history").height());
     		
     	}
