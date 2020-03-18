@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -107,12 +108,14 @@
                   </div>
                     <div class="menu_list_box">
                         <ul>
+                        <c:forEach var="meal" items="${mealList }">
                             <li class="menu_list_li">
-                               <p class="menu_list_lip menu_list_lipbig">아메리카노</p>
-                                <p class="menu_list_lip">150</p>
-                                <p class="menu_list_lip">100</p>
+                               <p class="menu_list_lip menu_list_lipbig">${meal.mealName }</p>
+                                <p class="menu_list_lip">${meal.mealAmount }</p>
+                                <p class="menu_list_lip">${meal.mealKcal }</p>
                                 <p class="menu_list_lip"><a href="#"alt="선택">+</a></p> 
                             </li>
+                        </c:forEach>
                         </ul>
                     </div>
                 </div>

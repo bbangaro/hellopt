@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Select;
 import com.bit.hellopt.vo.meal.MealVO;
 
 public interface MealMapper {
-	
-	@Select("SELECT * FROM MEAL_TB")
+
+	@Select("SELECT * FROM MEAL_TB WHERE ROWNUM <= 10")
 	public List<MealVO> getMeal();
 
 }
