@@ -71,4 +71,29 @@ $(document).ready(function () {
         
     });
 
+    //선택된 음식 담는 코드
+    $(document).on('click', '.menuadd', function () {
+        let mealNo=$(this).siblings().eq(0).val();
+        let mealUnit=$(this).siblings().eq(1).val();
+        let mealProtein=$(this).siblings().eq(2).val();
+        let mealFat=$(this).siblings().eq(3).val();
+        let mealCarb=$(this).siblings().eq(4).val();
+        let mealSoium=$(this).siblings().eq(5).val();
+        let mealName=$(this).siblings().eq(6).text();
+        let mealAmount=$(this).siblings().eq(7).text();
+        let mealKcal=$(this).siblings().eq(8).text();
+        console.log("mealNo", mealNo);
+        console.log("mealName", mealName);
+        $( ".menuaddBox" ).append('<p class="menu_list_lipd menu_list_lipdsmall">'+mealNo+'</p>');
+        $( ".menuaddBox" ).append('<p class="menu_list_lipd menu_list_lipdbig">'+mealName+'</p>');
+        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealAmount+'</p>');
+        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealKcal+'</p>');
+        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealCarb+'</p>');
+        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealProtein+'</p>');
+        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealFat+'</p>');
+        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealSoium+'</p>');
+        /*$( ".menuaddBox" ).append( "<p>"+mealNo+ mealName+ "</p>" );*/
+
+     });
+    
 });

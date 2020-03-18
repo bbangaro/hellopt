@@ -110,10 +110,16 @@
                         <ul>
                         <c:forEach var="meal" items="${mealList }">
                             <li class="menu_list_li">
+                            <input type="hidden" value="${meal.mealNo}">
+                                 <input type="hidden" value="${meal.mealUnit}">
+                                 <input type="hidden" value="${meal.mealProtein}">
+                                 <input type="hidden" value="${meal.mealFat}">
+                                 <input type="hidden" value="${meal.mealCarb}">
+                                 <input type="hidden" value="${meal.mealSodium}">
                                <p class="menu_list_lip menu_list_lipbig">${meal.mealName }</p>
                                 <p class="menu_list_lip">${meal.mealAmount }</p>
                                 <p class="menu_list_lip">${meal.mealKcal }</p>
-                                <p class="menu_list_lip"><a href="#"alt="선택">+</a></p> 
+                                <p class="menu_list_lip menuadd">+</p> 
                             </li>
                         </c:forEach>
                         </ul>
@@ -133,15 +139,15 @@
                 <form action="" method="post">
                    <div class="menu_list_box">
                         <ul>
-                            <li class="menu_list_li">
-                              <p class="menu_list_lipd menu_list_lipdsmall">1</p>
+                            <li class="menu_list_li menuaddBox">
+                              <!-- <p class="menu_list_lipd menu_list_lipdsmall">1</p>
                                <p class="menu_list_lipd menu_list_lipdbig">아메리카노</p>
                                 <p class="menu_list_lipd">100</p>
                                 <p class="menu_list_lipd">100</p>
                                 <p class="menu_list_lipd">100</p>
                                 <p class="menu_list_lipd">100</p>
                                 <p class="menu_list_lipd">100</p>
-                                <p class="menu_list_lipd">100</p>
+                                <p class="menu_list_lipd">100</p> -->
                             </li>
                         </ul>
                     </div>
