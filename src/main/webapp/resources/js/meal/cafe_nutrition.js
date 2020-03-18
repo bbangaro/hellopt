@@ -15,6 +15,7 @@ $(document).ready(function () {
         let activity = $('input:radio[name="activity"]:checked').val();
         console.log("activity", activity);
         
+        /*예외처리*/
         if( age == ""){ 
             alert("나이를 입력해주세요");
             return;
@@ -33,9 +34,41 @@ $(document).ready(function () {
         }else{
             $('#myInfo').css('display', 'none');
             $('#infoAndMenu').css('display', 'block');
+            
+            /*필요한 칼로리 총량 계산식*/
+            if (gender == "male") {
+            	var mval1 = 13.75 * kg;
+            	var mval2 = 5.0 * cm;
+            	var mval3 = 6.8 * age;
+            	var mresult = 66.5 + mval1 + mval2 - mval3;
+            	var mval4 = activity;
+            } else if (gender == "female") {
+            	var mval1 = 9.6 * kg;
+                var mval2 = 1.85 * cm;
+                var mval3 = 4.7 * age;
+                var mresult = 655.1 + mval1 + mval2 - mval3;
+                var mval4 = activity;
+            }
+            
+            switch (mval4) {
+            case "inactive":
+            	MyCalorie = mresult * 1.3;
+            	break;
+            case "rowactive":
+            	MyCalorie = mresult * 1.5;
+            	break;
+            case "activity":
+            	MyCalorie = mresult * 1.7;
+            	break;
+            case "veryactivity":
+            	MyCalorie = mresult * 1.9;
+            	break;
+            }
+            
+            document.getElementById("calories").innerHTML = MyCalorie.toFixed(2);
+            
         }
         
     });
-
 
 });

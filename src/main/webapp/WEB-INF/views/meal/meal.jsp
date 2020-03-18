@@ -49,7 +49,7 @@
                                 </label>
                             </li>
                             <li class="active_li">
-                               <input type="radio" id="rowactive" name="activity" value="inactive1">
+                               <input type="radio" id="rowactive" name="activity" value="rowactive">
                                 <label for="rowactive" class="inactive1">저 활동적 <span class="active_span">(대부분의 시간을 앉아서 하는 정적 활동 수준)</span>
                                 </label>
                             </li>
@@ -76,7 +76,7 @@
                 <div>
                    <div class="kacl_box">
                     <p class="goal_kacl">목표 섭취 열량(kacl)</p>
-                    <p class="goal_kacl_num">1751.0</p>
+                    <p class="goal_kacl_num" id="calories"></p>
                 </div>
                 <div class="kacl_box">
                     <p class="goal_kacl">총 섭취 열량(kacl)</p>
