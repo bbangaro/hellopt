@@ -22,6 +22,7 @@ public interface MeetingService {
 		
 	// 게시글 상세 조회
 	MeetingVO getMeetingOne(int meetingIdx);
+	MeetingVO resCount(int meetingIdx);
 	List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);
 	
 	// 게시글 입력
@@ -32,6 +33,8 @@ public interface MeetingService {
 	void insertConsentYn(MeetingVO meetingVO);
 	// 게시글 입력 > 업롣 파일
 	void insertMeetingFiles(int fkMeetingIdx, String mOriImg, String mSysImg, String filePath);
+	// 모임 예약 인서트
+	void insertReservationMeeting(MeetingVO meetingVO);
 	
 	// 게시글 수정
 	void updateMeetingOk(MeetingVO meetingVO);

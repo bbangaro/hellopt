@@ -132,6 +132,8 @@ public class MeetingController {
 	public String meetingOne(Principal principal, Model model, int meetingIdx, MeetingVO meetingVO) {
 		//상세리스트
 		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+		MeetingVO resCount = service.resCount(meetingIdx);
+		System.out.println(resCount.getMeetingIdx());
 		//상세리스트에서 파일 슬라이드
 		List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
 		meetingOne.setMeetingFileVO(MeetingOneFile);
@@ -143,16 +145,13 @@ public class MeetingController {
 			// 파일없는 vo 안에 fileVO 셋팅 ( fileVO = list vo의 idx로 파일 이미지 전부 소환하기 )
 			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
 		}
-
-
-
-		
 		
 		//클릭수 증가
 		service.clickCount(meetingVO);
 		
 		System.out.println("getMeetingOne 성공");
 		model.addAttribute("meetingOne", meetingOne);
+		model.addAttribute("resCount", resCount);
 		//model.addAttribute("meetingOneFile", MeetingOneFile);
 		model.addAttribute("meetingCnt", meetingCnt);
 		return "meeting/meetingOne";
@@ -215,6 +214,19 @@ public class MeetingController {
 		
 		
 		return "redirect:/meeting";
+	}
+	
+	@RequestMapping("/meetingRes")
+	public void meetingUpdate(Principal principal, MeetingVO meetingVO, HttpServletResponse response) throws Exception {
+		
+		System.out.println("res : "+meetingVO);
+		int idx = meetingVO.getMeetingIdx();
+		service.insertReservationMeeting(meetingVO);
+		
+		response.sendRedirect("meetingOne?meetingIdx="+idx);
+		
+	//return "redirect:/meetingOne";
+	
 	}
 	
 	@RequestMapping("/meetingUpdate")

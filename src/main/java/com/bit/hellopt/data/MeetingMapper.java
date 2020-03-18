@@ -17,12 +17,14 @@ public interface MeetingMapper {
 	public List<CategoryCodeVO> getCategoryCodeVO();
 
 	public MeetingVO getMeetingOne(int meetingIdx);
+	public MeetingVO resCount(int meetingIdx);
 	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);
 	
 	public void insertMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void insertMaxMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void insertConsentYn(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void insertMeetingFiles(HashMap<String, Object> HashMap);
+	public void insertReservationMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	
 	public void updateMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void updateMaxMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);

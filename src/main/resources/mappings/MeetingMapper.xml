@@ -38,7 +38,7 @@
 	</select>
 	
 	<select id="getMeetingOne" parameterType="int" resultType="MeetingVO">
-		SELECT MEETING_IDX, M.FK_USER_ID, M_COMMENT, C.M_CATEGORY, L.LOCAL, M_DATE, M_SUBJECT, M_MEMO, DETAILS, INCLUDE, 
+		SELECT distinct MEETING_IDX, M.FK_USER_ID, M_COMMENT, C.M_CATEGORY, L.LOCAL, M_DATE, M_SUBJECT, M_MEMO, DETAILS, INCLUDE, 
 		       M_LOCATION, M_LOCATION_C, M_PRICE, PROGRESS_ST, M_CNT, INS_DT, U.USER_NAME , A.MAX_COUNT
 	      FROM MEETING_TB M, M_CATEGORY_CODE_TB C, LOCAL_CODE_TB L, USERS_TB U, MEETING_APPLY_TB A 
 		 WHERE M.FK_M_CATEGORY_NO = C.M_CATEGORY_NO 
@@ -46,6 +46,13 @@
 		   AND M.FK_USER_ID = U.USER_ID
 		   AND M.MEETING_IDX = A.FK_MEETING_IDX 
 		   AND MEETING_IDX = #{meetingIdx}
+	</select>
+	
+	<select id="resCount" parameterType="int" resultType="MeetingVO">
+		SELECT COUNT(*) MEETING_IDX
+		  FROM MEETING_APPLY_TB 
+		 WHERE FK_MEETING_IDX = #{meetingIdx} 
+	    GROUP BY FK_MEETING_IDX 
 	</select>
 	
 	
@@ -74,6 +81,12 @@
 		INSERT INTO MEETING_APPLY_TB (FK_MEETING_IDX, FK_USER_ID, MAX_COUNT) 
 		VALUES ( (#{meetingIdx})+1 , #{fkUserId}, #{maxCount} )
 	</insert>
+	
+	<insert id="insertReservationMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
+		INSERT INTO MEETING_APPLY_TB (FK_MEETING_IDX, FK_USER_ID, MAX_COUNT) 
+		VALUES ( #{meetingIdx} , #{fkUserId}, #{maxCount} )
+	</insert>
+	
 	<insert id="insertConsentYn" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 		INSERT INTO CONSENT_YN_TB (FK_MEETING_IDX, CONSENT_YN, CONSENT_CHK_YN) 
 		VALUES ( (#{meetingIdx})+1 , 'N' , 'N' )

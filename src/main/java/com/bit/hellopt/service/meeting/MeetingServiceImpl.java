@@ -52,7 +52,10 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx) {
 		return meetingMapper.getMeetingOneFiles(meetingIdx);
 	}
-
+	@Override
+	public MeetingVO resCount(int meetingIdx) {
+		return meetingMapper.resCount(meetingIdx);
+	}
 
 
 	// 모임 개설 인서트
@@ -81,7 +84,13 @@ public class MeetingServiceImpl implements MeetingService {
 		
 		meetingMapper.insertMeetingFiles(hm);
 	}
+	// 모임 예약
+	@Override
+	public void insertReservationMeeting(MeetingVO meetingVO) {
+		meetingMapper.insertReservationMeeting(meetingVO);
+	}
 
+	
 	// 모임 수정 
 	@Override
 	public void updateMeetingOk(MeetingVO meetingVO) {
@@ -115,8 +124,9 @@ public class MeetingServiceImpl implements MeetingService {
 		meetingMapper.deleteMeeting(meetingIdx);
 		
 	}
-
 	
+	
+
 
 
 }
