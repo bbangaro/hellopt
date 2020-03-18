@@ -16,37 +16,18 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/style.css">
 	
 	<!-- This Library is used to detect WebRTC features -->
-	<script src="${pageContext.request.contextPath }/resources/js/live/DetectRTC.js"></script>
+<%-- 	<script src="${pageContext.request.contextPath }/resources/js/live/DetectRTC.js"></script>
 	<script src="https://www.webrtc-experiment.com/socket.io.js"> </script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/adapter-latest.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/IceServersHandler.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/CodecsHandler.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/RTCPeerConnection-v1.5.js"> </script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/broadcast.js"> </script>
-
+ --%>
 <style>
 	video {
 	    vertical-align: top;
-	    width: 70%;
-	    float: left;
-	}
-	
-	input {
-	    border: 1px solid #d9d9d9;
-	    border-radius: 1px;
-	    font-size: 2em;
-	    margin: .2em;
-	    width: 50%;
-	}
-	
-	.setup {
-	    border-bottom-left-radius: 0;
-	    border-top-left-radius: 0;
-	    font-size: 102%;
-	    height: 47px;
-	    margin-left: 10px;
-	    margin-top: 8px;
-	    position: absolute;
+	    width: 100%;
 	}
 </style>
 <script>
@@ -64,19 +45,22 @@
 		<div class="sub-content">
 			<article>
 			    <section class="experiment">
-			        <!-- list of all available broadcasting rooms -->
-			        <table id="rooms-list"></table>
+<!-- 			        list of all available broadcasting rooms
+			        <table id="rooms-list"></table> -->
 			
 			        <!-- local/remote videos container -->
-			        <div id="videos-container">
+			       	<div class="video-info">
+			        	<div id="videos-container">
+			        		<video playsinline autoplay="autoplay"></video>
+			        	</div>
+			        	<div id="class-name"><p>${className } 강의입니다.</p></div>
 			        </div>
 			        
 			        <div id="chat-container">
-						<iframe id="chat" src="http://localhost:3000"></iframe>
+						<iframe id="chat" src="http://localhost:3000" scrolling="no"></iframe>
 			        </div>
 			    </section>
 			</article>
-			
 		</div>
 		<!-- // sub-content -->
 	</div>
@@ -94,11 +78,11 @@
    // MIT License   - https://www.webrtc-experiment.com/licence/
    // Documentation - https://github.com/muaz-khan/WebRTC-Experiment/tree/master/webrtc-broadcasting
 
-   var config = {
+/*    var config = {
        openSocket: function(config) {
            var SIGNALING_SERVER = 'https://socketio-over-nodejs2.herokuapp.com:443/';
 
-           config.channel = config.channel;
+           config.channel = ${classIdx };
            //var sender = Math.round(Math.random() * 999999999) + 999999999;
            
            var userid = $("#userid").val();
@@ -108,12 +92,12 @@
            console.log("channel: " + config.channel);
            
            io.connect(SIGNALING_SERVER).emit('new-channel', {
-               channel: config.channel,
+               channel: ${classIdx },
                sender: userid
            });
 
-           var socket = io.connect(SIGNALING_SERVER + config.channel);
-           socket.channel = config.channel;
+           var socket = io.connect(SIGNALING_SERVER + ${classIdx });
+           socket.channel = ${classIdx };
            socket.on('connect', function () {
                if (config.callback) config.callback(socket);
            });
@@ -162,7 +146,7 @@
                 '<td><button class="join">Join</button></td>';
             roomsList.appendChild(tr);
 
-            var joinRoomButton = tr.querySelector('.join'); */
+            var joinRoomButton = tr.querySelector('.join'); 
             
             var div = document.createElement('div');
             div.innerHTML = '<div><strong>' + room.roomName + '</strong> 강의에 참여하기 위해서는 방송보기 버튼을 클릭해주세요!</div>' +
@@ -254,7 +238,7 @@
 
    var broadcastUI = broadcast(config);
 
-   /* UI specific */
+   // UI specific 
    var videosContainer = document.getElementById('videos-container') || document.body;
    var setupNewBroadcast = document.getElementById('setup-new-broadcast');
    var roomsList = document.getElementById('rooms-list');
@@ -276,9 +260,11 @@
        setTimeout(function() {
            video.style[navigator.mozGetUserMedia ? 'transform' : '-webkit-transform'] = 'rotate(360deg)';
        }, 1000);
-   }
+   } */
 
 </script>
+<script src="http://localhost:5000/socket.io/socket.io.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/live/viewer.js"> </script>
  <script>
 	var userId = $("#userid").val();
 	

@@ -16,26 +16,8 @@
 	
 	    video {
 	        vertical-align: top;
-	        width: 70%;
-	        float: left;
-	    }
-	
-	    input {
-	        border: 1px solid #d9d9d9;
-	        border-radius: 1px;
-	        font-size: 2em;
-	        margin: .2em;
-	        width: 50%;
-	    }
-	
-	    .setup {
-	        border-bottom-left-radius: 0;
-	        border-top-left-radius: 0;
-	        font-size: 102%;
-	        height: 47px;
-	        margin-left: 10px;
-	        margin-top: 8px;
-	        position: absolute;
+	        width: 100%;
+	        /* float: left; */
 	    }
 	
 	</style>
@@ -44,16 +26,18 @@
 	</script>
 	
 	<!-- This Library is used to detect WebRTC features -->
-	<script src="${pageContext.request.contextPath }/resources/js/live/DetectRTC.js"></script>
+<%-- 	<script src="${pageContext.request.contextPath }/resources/js/live/DetectRTC.js"></script>
 	<script src="https://www.webrtc-experiment.com/socket.io.js"> </script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/adapter-latest.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/IceServersHandler.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/CodecsHandler.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/live/RTCPeerConnection-v1.5.js"> </script>
-	<script src="${pageContext.request.contextPath }/resources/js/live/broadcast.js"> </script>
+	<script src="${pageContext.request.contextPath }/resources/js/live/broadcast.js"> </script> --%>
 </head>
 <body>
-
+	
+	
+	
 	<div id="wrapper">
 		<div class="tit-wr tit-wr-ani">
 			<h2>라이브 스트리밍</h2>
@@ -63,19 +47,14 @@
 		<div class="sub-content">
 			<article>
 			    <section class="experiment">
-			        <section>
-			            <input type="text" id="broadcast-name" value="${className }" readonly>
-			            <button id="setup-new-broadcast" class="setup">방송시작</button>
-			        </section>
-			
-			        <!-- list of all available broadcasting rooms -->
-			        <table id="rooms-list"></table>
-			
-			        <!-- local/remote videos container -->
-			        <div id="videos-container"></div>
-			        
+			        <div class="video-info">
+			        	<div id="videos-container">
+			        		<video playsinline autoplay="autoplay"></video>
+			        	</div>
+			        	<div id="class-name"><p>${className } 강의입니다.</p></div>
+			        </div>
 			        <div id="chat-container">
-						<iframe id="chat" src="http://localhost:3000"></iframe>
+						<iframe id="chat" src="http://localhost:3000" scrolling="no"></iframe>
 			        </div>
 			    </section>
 			</article>
@@ -95,24 +74,23 @@
         // MIT License   - https://www.webrtc-experiment.com/licence/
         // Documentation - https://github.com/muaz-khan/WebRTC-Experiment/tree/master/webrtc-broadcasting
 
-        var config = {
+/*         var config = {
             openSocket: function(config) {
                 var SIGNALING_SERVER = 'https://socketio-over-nodejs2.herokuapp.com:443/';
-
-                config.channel = config.channel;
-                
                 var userid = $("#userid").val();
+
+                config.channel =  ${classIdx };
 				
                 console.log("userid: " + userid);
                 console.log("channel: " + config.channel);
                 
                 io.connect(SIGNALING_SERVER).emit('new-channel', {
-                    channel: config.channel,
+                    channel: ${classIdx },
                     sender: userid
                 });
 
-                var socket = io.connect(SIGNALING_SERVER + config.channel);
-                socket.channel = config.channel;
+                var socket = io.connect(SIGNALING_SERVER + ${classIdx });
+                socket.channel = ${classIdx };
                 socket.on('connect', function () {
                     if (config.callback) config.callback(socket);
                 });
@@ -130,7 +108,6 @@
             },
             onRemoteStream: function(htmlElement) {
                 videosContainer.appendChild(htmlElement);
-                rotateInCircle(htmlElement);
             },
             onNewParticipant: function(numberOfViewers) {
                 document.title = 'Viewers: ' + numberOfViewers;
@@ -141,29 +118,26 @@
         };
 
         function setupNewBroadcastButtonClickHandler() {
-            document.getElementById('broadcast-name').disabled = true;
-            document.getElementById('setup-new-broadcast').disabled = true;
 
             DetectRTC.load(function() {
                 captureUserMedia(function() {
                     var shared = 'video';
 
                     broadcastUI.createRoom({
-                        roomName: (document.getElementById('broadcast-name') || { }).value,
+                        roomName: (document.getElementById('className') || { }).value,
                         isAudio: shared === 'audio'
                     });
                 });
                 hideUnnecessaryStuff();
-            });
+            }); 
         }
 
         function captureUserMedia(callback) {
             var constraints = null;
-            window.option = broadcastingOption ? broadcastingOption.value : '';
 
             if (DetectRTC.hasWebcam !== true) {
                 alert('DetectRTC library is unable to find webcam; maybe you denied webcam access once and it is still denied or maybe webcam device is not attached to your system or another app is using same webcam.');
-            }
+            } 
 
             var htmlElement = document.createElement('video');
 
@@ -186,7 +160,6 @@
                     config.attachStream = stream;
                     
                     videosContainer.appendChild(htmlElement);
-                    rotateInCircle(htmlElement);
                     
                     callback && callback();
                 },
@@ -200,12 +173,9 @@
 
         var broadcastUI = broadcast(config);
 
-        /* UI specific */
+        // UI specific 
         var videosContainer = document.getElementById('videos-container') || document.body;
         var setupNewBroadcast = document.getElementById('setup-new-broadcast');
-        var roomsList = document.getElementById('rooms-list');
-
-        var broadcastingOption = document.getElementById('broadcasting-option');
 
         if (setupNewBroadcast) setupNewBroadcast.onclick = setupNewBroadcastButtonClickHandler;
 
@@ -215,15 +185,21 @@
             for (var i = 0; i < length; i++) {
                 visibleElements[i].style.display = 'none';
             }
-        }
-
-        function rotateInCircle(video) {
-            video.style[navigator.mozGetUserMedia ? 'transform' : '-webkit-transform'] = 'rotate(0deg)';
-            setTimeout(function() {
-                video.style[navigator.mozGetUserMedia ? 'transform' : '-webkit-transform'] = 'rotate(360deg)';
-            }, 1000);
-        }
+        } */
+        
+		var confirm = confirm("방송을 시작하려면 확인을 눌러주세요");
+		
+		if (confirm) {
+			//setupNewBroadcastButtonClickHandler();
+		} else {
+			alert("이전 페이지로 이동합니다.")
+			history.back();
+		}
+        
     </script>
+    
+    
+	<script src="http://localhost:5000/socket.io/socket.io.js"></script>
     <script>
     
 		var userId = $("#userid").val();
@@ -241,6 +217,7 @@
 			document.querySelector("#chat").contentWindow.postMessage(JSON.stringify({"roomId": roomId, "sender": userId}), "*");	
 		}, 1000);
 	</script>    
+	<script src="${pageContext.request.contextPath }/resources/js/live/broadcaster.js"> </script>
     
 	
 </body>
