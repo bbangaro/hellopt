@@ -93,6 +93,12 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper.getTotalCount();
 	}
 
+	@Override
+	public RBoardVO Join3(int revIdx) {
+		
+		return mapper2.join3(revIdx);
+	}
+
 
 
 

@@ -82,12 +82,7 @@
 	}
 </style>
 </head>
-<script>
-	function selChange(){
-		var sel = document.getElementById('cntperPage').vlaue;
-		location.href="review?nowPage=${paging.nowPage}&cntPerPage="+sel;
-	}
-</script>
+
 <body>
 <div id = "container">
 <%-- <div id="outter">
@@ -111,11 +106,13 @@
 <table class="tbl_wrap">
 	<thead class="tbl_head01">
 		<tr>
+		<sec:authorize access="isAuthenticated()">
 		<sec:authentication var="principal" property="principal" />
 		<c:if test="${rBoard.userId == principal.username}">
-			<td><a href="review/updateform?revIdx=${rBoard.revIdx}" class= "btn">글 수정</a></td>
-			<td><a href="deleterboard?revIdx=${rBoard.revIdx }" class="btn">글 삭제</a></td>
+			<td><input type = "button" value="글 수정" onclick = "modify(${rBoard.revIdx})"></td>
+			<td><input type = "button" value="글 삭제" onclick = "del(${rBoard.revIdx })"></td>
 		</c:if>
+		</sec:authorize>
 		</tr>
 		<tr>
 			<c:if test="${rBoard.userFileName == null }">
@@ -245,6 +242,7 @@
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
 	$(document).ready(function(){
+		
 		//댓글쓰기 버튼 클릭 이벤트 (ajax로 처리)
 		$("#btnReply").click(function(){
 			var replytext=$("#replytext").val();
@@ -258,10 +256,22 @@
 					alert("댓글이 등록되었습니다.");
 					listReply2();
 				}
-			});
+			})
 			
-		});
+		})
+	})
 
+	function del(revIdx) {
+		var chk = confirm("정말 삭제 하시겠습니까?");
+		if (chk){
+			location.href = 'deleterboard?revIdx='+revIdx;	
+		}
+	}	
+	function modify(revIdx) {
+			location.href = '${pageContext.request.contextPath}/review/updateform?revIdx='+revIdx;	
+			
+	}	
+	
 	//Controller방식
 	//**댓글 목록1
 	function listReply(){

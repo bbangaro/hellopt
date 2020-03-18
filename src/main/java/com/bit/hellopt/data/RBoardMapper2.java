@@ -11,5 +11,6 @@ import com.bit.hellopt.vo.user.User;
 public interface RBoardMapper2 {
 	public User join1(String userId);
 	public List<RBoardVO> join2(Map<String, Integer> map);
+	public RBoardVO join3(int revIdx);
 	public List<RBoardVO> getProfilePic();
 }

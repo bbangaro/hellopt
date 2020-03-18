@@ -23,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -179,20 +180,31 @@ public class RBoardController {
 		return "redirect:/review";
 	}
 	
-	@PostMapping("/review/updateform")
-	public String updateBoardForm(Model model,@RequestParam("") @ModelAttribute("rBoardList")RBoardVO vo) {
+	
+	
+	@RequestMapping("/review/updateform")
+	public String updateBoardForm(Model model,@RequestParam("revIdx")int revIdx) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
-		System.out.println(">> board vo :" + vo);
-		Map<String, Integer> map = new HashMap<>();
+		
+		RBoardVO userjoin = rService.Join3(revIdx);
+		
+		List<RFileVO> filevo = rService.getFileList(revIdx);
+		//이미지 업로드한거 보여주기
+		userjoin.setFilevo(filevo );
 
-		rService.Join2(map);
-		return "/review/insertform";
+		System.out.println("현재페이지 글목록(list): " + userjoin.toString());
+		
+		model.addAttribute("rBoard", rService.Join3(revIdx));
+		System.out.println("rBoard:" + rService.Join3(revIdx));
+		
+		return "review/revUpdateForm";
 	}
-	@PostMapping("/review/updateboard")
+	@PostMapping("/updaterboard")
 	public String updateRBoard(@ModelAttribute("rBoardList")RBoardVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		System.out.println(">> board vo :" + vo);
-		
+		//이미지 업로드한거 보여주기
+
 		rService.updateBoard(vo);
 		return "redirect:/review";
 	}
@@ -203,4 +215,48 @@ public class RBoardController {
 		rService.deleteBoard(revIdx);
 		return "redirect:/review";
 	}
+	
+	@RequestMapping("/review/upload")
+	public String upload(MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
+
+		System.out.println(">>> 글 등록 처리 - insertBoard()");
+		
+		String path = "C:/hellopt_file/";
+	
+		File dir = new File(path);
+		
+		
+		if(!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		
+		
+		//넘어온 파일을 리스트로 저장
+		List<MultipartFile> fileList = multi.getFiles("file_0");
+		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
+		
+		}else {//for (MultipartFile filePart : fileList)
+			
+			for (int i = 0; i < fileList.size(); i++) {
+				//원본파일명
+				String revFileOname = fileList.get(i).getOriginalFilename();
+				String FileExtension = revFileOname.substring(revFileOname.lastIndexOf("."));
+				//파일명  중복되지 않게 처리 한 저장될 이름
+				String saveFileName = UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
+				
+				String savePath = path + saveFileName; //저장될 파일 경로
+				System.out.println("실제 파일 이름 : " + revFileOname);
+				System.out.println("저장된 파일 이름 : " + saveFileName);
+				long fileSize = fileList.get(i).getSize(); //파일사이즈
+				System.out.println("저장된 파일 사이즈 : " + fileSize);
+				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				System.out.println("저장된 파일 경로" + savePath);
+
+
+			}
+		}
+		return "redirect:/review";
+	}
+	
+	
 }

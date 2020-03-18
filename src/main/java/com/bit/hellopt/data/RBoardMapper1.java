@@ -60,6 +60,11 @@ public interface RBoardMapper1 {
 			+ " #{revFileOname}, #{revFileSname}, #{revFileSize}, (SELECT NVL(MAX(REV_IDX), 0) FROM REVIEW_BOARD_TB) )")
 	public void uploadFile(HashMap<String, Object> hm);
 	
+	@Insert("INSERT INTO REVIEW_FILE_TB(REV_FILE_IDX, REV_FILE_ONAME, REV_FILE_SNAME, REV_FILE_SIZE, REV_IDX)\r\n" + 
+			"VALUES(review_file_tb_seq.nextval,"
+			+ " #{revFileOname}, #{revFileSname}, #{revFileSize}, (null))")
+	public void reUploadFile(HashMap<String, Object> hm);
+	
 	@Delete("DELETE FROM REVIEW_FILE_TB WHERE REV_IDX = #{revIdx}")
 	public void uploadFileDel(RBoardVO vo);
 	

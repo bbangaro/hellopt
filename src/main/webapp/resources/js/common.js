@@ -10,7 +10,6 @@ function gfn_isNull(str) {
 } 
 
 function ComSubmit(opt_formId) {
-	alert("ss")
 	this.formId = gfn_isNull(opt_formId) == true ? "commonForm" : opt_formId; 
 	this.url = ""; 
 	if(this.formId == "commonForm"){ 

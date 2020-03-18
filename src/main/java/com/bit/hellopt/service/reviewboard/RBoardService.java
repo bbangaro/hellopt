@@ -29,4 +29,5 @@ public interface RBoardService {
 	int getTotalCount();
 	//페이징 처리 게시글 조회
 	List<RBoardVO> Join2(Map<String, Integer>map);
+	RBoardVO Join3(int revIdx);
 }
