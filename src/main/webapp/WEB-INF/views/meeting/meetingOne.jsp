@@ -107,10 +107,10 @@
 					</p>
 					
 					<p class="meeting-detail"> 상세정보 </p>
-					<textarea  cols="90" rows="10" class="onemeeting-textarea">${meetingOne.details }</textarea>
+					<textarea  cols="90" rows="10" class="onemeeting-textarea" readonly>${meetingOne.details }</textarea>
 							
 					<p class="meeting-detail"> 포함사항 </p>
-					<textarea  cols="90" rows="5" class="onemeeting-include">${meetingOne.include }</textarea>
+					<textarea  cols="90" rows="5" class="onemeeting-include" readonly>${meetingOne.include }</textarea>
 					
 					
 					<p class="meeting-detail"> 만나는 장소 </p>
@@ -145,31 +145,43 @@
 					        ${meetingCnt.local }</p>
 					    </div>
 					</c:forEach>
-				
-				<input type="hidden" id="meeting-idx" value=${meetingOne.meetingIdx }>
+					
 				
 			</div> <!-- meeting-one의 끝 -->
 			
 				    
 				<!-- 버튼 부분 -->
-				<input type="submit" name="" value="목록으로" class="send-btn2">
+				<input type="button" name="" value="목록으로" class="send-btn2">
 				
 			</div> <!-- border-line의 끝 -->
 			
 			<div class="right-side">
+
+
+
+			<form action="meetingRes" method="post">
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal" var="user" />
+					<input type="text" name="fkUserId" value="${user.username}">
+				</sec:authorize>
+					<input type="text" id="meeting-idx" name="meetingIdx" value="${meetingOne.meetingIdx }">
+					<input type="text" name="maxCount" value="${meetingOne.maxCount }">
+
 				<p class="area"><img  src="${pageContext.request.contextPath}/resources/images/meeting/location.png"> ${meetingOne.local } </p>	
 				<div  id="datePicker" class="">
 					<input type="hidden" id="datePicker" value="${meetingOne.mDate }" disabled >
 				</div>
 				
 				<div class="drop-rv">
-				<input type="submit" value="예약하기" class="r-btn">
+				<input type="button" value="예약하기" class="r-btn">
 					<div class="dropdown-content">
-					<p class="m-condition"> 신청현황 : 2/16명 </p>	
+					<p class="m-condition"><button type="submit"> 신청현황 : ${resCount.meetingIdx }/${meetingOne.maxCount }명</button></p>	
 					</div>
 				</div>
+			</form>
 				
 			</div>	<!-- right-side의 끝 -->
+				
 				
 	</div> <!-- hello_body의 끝 -->
 </div> <!-- hello_top 의 끝 -->
