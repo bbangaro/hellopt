@@ -84,24 +84,16 @@
             	<c:forEach var="file" items="${exerciseInformation.exercisePicturesList }">
             		<img src="/hellopt/file/${file }" width="250" height="250">
             		<br><br>
-            		
             	</c:forEach>
             
-            	<h2>운동방법</h2>
-            	<h2>${exerciseInformation.howtoExercise }</h2>
+            	<h2>운동방법 : ${exerciseInformation.howtoExercise }</h2>
             	<h2>${exerciseInformation.howtoExercise2 }</h2>
                 <hr>
-                <h2>주의사항</h2>
-                <h2>${exerciseInformation.caution }</h2>
+                <h2>주의사항 : ${exerciseInformation.caution }</h2>
 				<hr>
-				<h2>권장반복횟수</h2>
-				<h2>${exerciseInformation.repetition }회</h2>
-				<hr>
-				<h2>권장세트횟수</h2>
-				<h2>${exerciseInformation.setCount }회</h2>
-				<hr>
-				<h2>권장휴식시간</h2>
-				<h2>${exerciseInformation.restTime }초</h2>
+				<h2>권장반복횟수 : ${exerciseInformation.repetition }회</h2>
+				<h2>권장세트횟수 : ${exerciseInformation.setCount }회</h2>
+				<h2>권장휴식시간 : ${exerciseInformation.restTime }초</h2>
 				<hr>
 			</div>
 			</form>

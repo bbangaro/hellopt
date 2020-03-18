@@ -1,6 +1,7 @@
 package com.bit.hellopt.service.exercise;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bit.hellopt.vo.exercise.ExerciseInformationFileVO;
 import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
@@ -12,10 +13,12 @@ public interface ExerciseInformationService {
 	void deleteExerciseInformation(ExerciseInformationVO vo);
 	ExerciseInformationVO getExerciseInformation(ExerciseInformationVO vo);
 	List<ExerciseInformationVO> selectFile(ExerciseInformationFileVO evo);
-	List<ExerciseInformationVO> getExerciseInformationList();
+	public List<ExerciseInformationVO> getExerciseInformationList(Map<String, Integer> map);
 	List<ExerciseInformationVO> getExerciseInformationList(ExerciseInformationVO vo);
 	void uploadFile(String exerciseInformationFileOname, String saveFileName, long fileSize, int exerciseIdx);
 	List<ExerciseInformationFileVO> getFileList(int exerciseIdx);
 	List<ExerciseInformationFileVO> getExerciseFileList(ExerciseInformationVO vo);
+	int getExerciseTotalCount();
+	List<ExerciseInformationVO> getExerciseCountlist(Map<String, Integer> map);
 	
 }

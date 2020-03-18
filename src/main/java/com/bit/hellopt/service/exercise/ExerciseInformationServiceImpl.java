@@ -1,12 +1,14 @@
 package com.bit.hellopt.service.exercise;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.hellopt.data.exercise.ExerciseMapper;
 import com.bit.hellopt.vo.exercise.ExerciseInformationFileVO;
+import com.bit.hellopt.vo.exercise.ExerciseInformationPaging;
 import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 
 
@@ -39,13 +41,8 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 	}
 
 	@Override
-	public ExerciseInformationVO getExerciseInformation(ExerciseInformationVO vo) {
-		return mapper.getExerciseInformation(vo);
-	}
-
-	@Override
-	public List<ExerciseInformationVO> getExerciseInformationList() {
-		return mapper.getExerciseInformationList();
+	public List<ExerciseInformationVO> getExerciseInformationList(Map<String, Integer> map) {
+		return mapper.getExerciseInformationList(map);
 	}
 
 	@Override
@@ -71,6 +68,18 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 	public List<ExerciseInformationFileVO> getExerciseFileList(ExerciseInformationVO vo) {
 		
 		return mapper.getExerciseFileList(vo);
+	}
+	@Override
+	public int getExerciseTotalCount() {
+		return mapper.getExerciseTotalCount();
+	}
+	@Override
+	public List<ExerciseInformationVO> getExerciseCountlist(Map<String, Integer> map) {
+		return mapper.getExerciseCountlist(map);
+	}
+	@Override
+	public ExerciseInformationVO getExerciseInformation(ExerciseInformationVO vo) {
+		return mapper.getExerciseInformation(vo);
 	}
 	
 }

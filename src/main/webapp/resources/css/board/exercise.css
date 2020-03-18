@@ -44,12 +44,48 @@ body {
 	margin-right: 56px;
 }
 
+
 /* 검색 폼 위치 설정 */
 .searchForm {
 	position: absolute;
 	right: 550px;
 	top: 150px;	
 }
+
+.row {
+	text-align: center;
+}
+
+.preclass {
+	width: 792px;
+	height: 280px;
+}
+
+.exercise_caption {
+	position: absolute;
+    bottom: 25px;
+    left: 0;
+    width: 283px;
+    height: 150px;
+    background-color: black;
+    opacity: 0.7;
+    padding: 15px;
+	
+}
+
+.captiontitle {
+    color: white;
+    font-weight: 800;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.captiontxt {
+	font-size: 14px;
+    color: white;
+    overflow: hidden;
+}
+
 
 /* exerciseInfo 상세보기창 */
 .exercisebox {
@@ -94,16 +130,50 @@ body {
 .exercise_dd {
 	width: 792px;
 	margin: 20px auto;
-	border: 1px solid #424242;
+	text-align: center;
 }
-
-
 
 /* youtube 박스 크기 */
 
 	
+.center {
+	text-align: center;
+}
 
 
+/* .exercise 주석할수도 있음  */
+.exerciseImg_img:hover img {
+	-webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-transition: all 0.8s;
+    transition: all 0.8s;
+    opacity:1;
+}
 
+.exerciseImg_img:hover .exercise_caption {
+	opacity: 1;
+	bottom: 10px;
+}
+
+/* paging */
+tr {
+	text-align: center;
+	padding: 4px 10px;
+	background-color: agenda;
+}
+
+.disable {
+	padding: 3px 7px;
+	border: 1px solid silver;
+	color: silver;
+}
+
+.now {
+	padding: 3px 7px;
+	border: 1px solid #ff4aa5;
+	background: #b4000f;
+	color: white;
+	font-weight: bold;
+}
 
 

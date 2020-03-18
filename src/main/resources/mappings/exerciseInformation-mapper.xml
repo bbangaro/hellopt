@@ -33,10 +33,18 @@
 		WHERE EXERCISE_IDX = #{exerciseIdx}
 	</select>
 
+	<!-- 검색 정보 가져오기 -->
 	<select id="getExerciseInformationList" parameterType="exerciseInformation"
 		resultType="exerciseInformation">
-		SELECT * FROM EXERCISE_INFORMATION_TB
-		WHERE 1=1
+<!--  		SELECT * FROM EXERCISE_INFORMATION_TB -->
+<!--  		WHERE 1=1 -->
+		SELECT *
+         FROM (SELECT ROWNUM R_NUM, BBS. * 
+               FROM(SELECT * FROM EXERCISE_INFORMATION_TB
+			 		WHERE 1=1) BBS
+            ) 
+         WHERE R_NUM BETWEEN #{begin} AND #{end}
+
 		<if test="searchCondition == 'EXERCISE_NAME' ">
 			AND EXERCISE_NAME LIKE '%'|| #{searchKeyword} ||'%'
 		</if>
@@ -45,11 +53,13 @@
 		</if>
 	</select>
 	
-	<select id="getExerciseInformation" parameterType="exerciseInformation"
+	<!-- 게시글 상세보기 -->
+	<select id="getExerciseInformation" parameterType="Map"
 		resultType="exerciseInformation">
-		SELECT * FROM EXERCISE_INFORMATION_TB WHERE EXERCISE_IDX = #{exerciseIdx}
-	</select>
+ 		SELECT * FROM EXERCISE_INFORMATION_TB WHERE EXERCISE_IDX = #{exerciseIdx}
+    </select>
 	
+	<!-- 게시글 입력 -->
 	<insert id="insertExerciseInformation" parameterType="exerciseInformation">
 		INSERT INTO EXERCISE_INFORMATION_TB (EXERCISE_IDX, EXERCISE_NAME, EXERCISE_ENAME, EXERCISE_PARTS,
 		HOWTO_EXERCISE, HOWTO_EXERCISE2, EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
@@ -58,10 +68,12 @@
 				#{exerciseVideo}, #{caution}, #{repetition}, #{setCount}, #{restTime})
 	</insert>
   	
+  	<!-- 게시글 수정 -->
 	<update id="updateExerciseInformation" parameterType="exerciseInformation">
 		UPDATE EXERCISE_INFORMATION_TB SET EXERCISE_NAME = #{exerciseName}, EXERCISE_PARTS = #{exerciseParts} WHERE EXERCISE_IDX = #{exerciseIdx}
 	</update>
 	
+	<!-- 게시글 삭제 -->
 	<delete id="deleteExerciseInformation" parameterType="exerciseInformation">
 		DELETE FROM EXERCISE_INFORMATION_TB WHERE EXERCISE_IDX = #{exerciseIdx}
 	</delete>
