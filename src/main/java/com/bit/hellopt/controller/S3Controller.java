@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit.hellopt.commons.utils.S3Utils;
 
@@ -27,7 +26,7 @@ public class S3Controller {
 	public void getS3Image(HttpServletResponse response, 
 			@PathVariable String path, @PathVariable String key) {
 		try {
-			File file = s3Utils.fileDownload(path +"/", key);
+			File file = s3Utils.downloadFile(path +"/", key);
 			FileInputStream fis;
 			fis = new FileInputStream(file);
 			response.setContentType(MediaType.IMAGE_JPEG_VALUE);

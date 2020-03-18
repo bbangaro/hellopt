@@ -1,7 +1,6 @@
 package com.bit.hellopt.service.user;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,12 +35,13 @@ public class UserProfileServiceImpl implements UserProfileService {
 		profile.setFkUserId(user.getUserId());
 		profile.setOriginalFileName(multipartFile.getOriginalFilename());
 		
-		String rpath = "C:/hellopt_file/";
 		
 		Calendar calendar = Calendar.getInstance(); 
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmmss");
 		
 		String storedName = generateRandomString() +  formatter.format(calendar.getTime()) + "." + multipartFile.getOriginalFilename().split("\\.")[1];
+		
+		profile.setStoredFileName(storedName);
 		
 		File file = new File(multipartFile.getOriginalFilename());
 		
@@ -53,7 +53,8 @@ public class UserProfileServiceImpl implements UserProfileService {
 			e.printStackTrace();
 		}
 	
-		s3Utils.fileUpload("profile/", storedName, file);
+		s3Utils.uploadFile("profile/", storedName, file);
+		mapper.insertProfile(profile);
 		
 		/*
 		 * try { file.transferTo(new File(rpath + storedName));
@@ -67,6 +68,44 @@ public class UserProfileServiceImpl implements UserProfileService {
 	@Override
 	public ProfileVO selectProfile(String userId) {
 		return mapper.selectProfile(userId);
+	}
+	
+	public String updateProfile(User user, MultipartFile multipartFile) {
+		
+		ProfileVO storedProfile = selectProfile(user.getUserId());
+		
+		ProfileVO profile = new ProfileVO();
+		profile.setFkUserId(user.getUserId());
+		profile.setOriginalFileName(multipartFile.getOriginalFilename());
+		
+		Calendar calendar = Calendar.getInstance(); 
+		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmmss");
+		
+		String storedName = generateRandomString() +  formatter.format(calendar.getTime()) + "." + multipartFile.getOriginalFilename().split("\\.")[1];
+		profile.setStoredFileName(storedName);
+		
+		File file = new File(multipartFile.getOriginalFilename());
+		
+		try {
+			multipartFile.transferTo(file);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(storedProfile != null) {
+			s3Utils.deleteFile("profile/", storedProfile.getStoredFileName());
+			s3Utils.uploadFile("profile/", storedName, file);
+			mapper.updateProfile(profile);
+		} else {
+			s3Utils.uploadFile("profile/", storedName, file);
+			mapper.insertProfile(profile);
+		}
+	
+		
+		
+		return storedName;
 	}
 
 	public String generateRandomString() {

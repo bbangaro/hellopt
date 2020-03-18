@@ -52,7 +52,7 @@ public class AdminController {
 	public String adminUserDetailUpdate(@ModelAttribute User user,  @RequestParam MultipartFile file) {
 			userService.updateUser(user);
 			if(!file.isEmpty()) {
-				profileService.insertProfile(user, file);
+				profileService.updateProfile(user, file);
 			}
 			
 		return "redirect:/admin/user";

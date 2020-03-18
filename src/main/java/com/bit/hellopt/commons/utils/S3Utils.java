@@ -13,7 +13,6 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
@@ -32,7 +31,7 @@ public class S3Utils {
 				.build();
 	}
 	
-	public void multipartUpload(String path, String key, MultipartFile multipartFile) {
+	public void uploadMultipart(String path, String key, MultipartFile multipartFile) {
 		File file = new File(multipartFile.getOriginalFilename());
 		try {
 			multipartFile.transferTo(file);
@@ -47,7 +46,7 @@ public class S3Utils {
 		System.out.println("Amazon S3 MultipartFile upload Done!");
 	}
 	
-	public void fileUpload(String path, String key, File file) {
+	public void uploadFile(String path, String key, File file) {
 		try {
 			s3.putObject(this.bucketName, path + key, file);
 		} catch(AmazonServiceException e) {
@@ -56,7 +55,7 @@ public class S3Utils {
 		System.out.println("Amazon S3 File upload Done!");
 	}
 	
-	public File fileDownload(String path, String key) {
+	public File downloadFile(String path, String key) {
 		try {
 			File file = new File(key);
 			S3Object s3obj = s3.getObject(bucketName, path + key);
@@ -78,5 +77,13 @@ public class S3Utils {
 			System.out.println(e.getMessage());
 		}
 		return null;
+	}
+	
+	public void deleteFile(String path, String key) {
+		try {
+			s3.deleteObject(bucketName, path + key);
+		} catch (AmazonServiceException e) {
+			System.out.println(e.getErrorMessage());
+		}
 	}
 }
