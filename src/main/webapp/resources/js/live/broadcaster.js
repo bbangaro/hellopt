@@ -11,7 +11,7 @@ const config = { // eslint-disable-line no-unused-vars
   }]
 };
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("http://localhost:3000");
 const video = document.querySelector('video'); // eslint-disable-line no-unused-vars
 
 window.onunload = window.onbeforeunload = function() {
@@ -34,7 +34,7 @@ let constraints = {
 };
 
 //룸아이디로 룸에 조인하기
-socket.emit('joinroom', {roomId: roomId, sender: userId});
+socket.emit('joinroom', {roomId: roomId, userId: userId});
 console.log("룸에 조인");
 
 //오디오, 비디오 접근

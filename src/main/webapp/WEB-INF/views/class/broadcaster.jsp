@@ -11,6 +11,12 @@
 	
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 	
+	<!-- 다양한 플랫폼에서 WebRTC 구현 간의 다양한 차이점을 없애주는 라이브러리 -->
+	<script src="${pageContext.request.contextPath }/resources/js/live/adapter-latest.js"></script>
+	
+	<!-- 캠, 마이크 있는지 확인하는 라이브러리 -->
+	<script src="${pageContext.request.contextPath }/resources/js/live/DetectRTC.js"></script>
+	
 	<style>
 	    video {
 	        vertical-align: top;
@@ -60,12 +66,17 @@
 		if (!confirm) {
 			alert("이전 페이지로 이동합니다.")
 			history.back();
+		} else {
+			DetectRTC.load(function() {
+				if (DetectRTC.hasWebcam !== true) {
+	                alert('DetectRTC library is unable to find webcam; maybe you denied webcam access once and it is still denied or maybe webcam device is not attached to your system or another app is using same webcam.');
+	            } 
+			});
 		}
     </script>
     
-	<script src="http://localhost:5000/socket.io/socket.io.js"></script>
+	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script>
-    
 		var userId = $("#userid").val();
 		var roomId = ${classIdx };
 		
@@ -78,7 +89,7 @@
 		}, 1000);
 	</script>    
 	
-	<script src="${pageContext.request.contextPath }/resources/js/live/broadcaster.js"> </script>
+	<script src="${pageContext.request.contextPath }/resources/js/live/broadcaster.js"></script>
 	
 </body>
 </html>

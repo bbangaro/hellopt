@@ -9,15 +9,20 @@
 <meta charset="UTF-8">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/live.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/reset.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/live.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/style.css">
+
+<!-- 다양한 플랫폼에서 WebRTC 구현 간의 다양한 차이점을 없애주는 라이브러리 -->
+<script src="${pageContext.request.contextPath }/resources/js/live/adapter-latest.js"></script>
+
 <style>
 	video {
 	    vertical-align: top;
 	    width: 100%;
 	}
 </style>
+
 <script>
     document.createElement('article');
 </script>
@@ -57,24 +62,22 @@
 
 	<input type="hidden" value="${className }" id="className">
 
-<script src="http://localhost:5000/socket.io/socket.io.js"></script>
-<script>
-	var userId = $("#userid").val();
-	
-	console.log("classIdx : " + ${classIdx });
+	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+    
+		var userId = $("#userid").val();
+		var roomId = ${classIdx };
+		
+		console.log("userId: " + userId);
+		console.log("roomId: " + roomId);
+		
+		//채팅서버로 룸아이디, 유저아이디 전송
+		setTimeout(function () {
+			document.querySelector("#chat").contentWindow.postMessage(JSON.stringify({"roomId": roomId, "userId": userId}), "*");	
+		}, 1000);
+	</script>
 
-	var roomId = ${classIdx };
-	
-	console.log("userId: " + userId);
-	console.log("roomId: " + roomId);
-	
-	//채팅서버로 룸아이디, 유저아이디 전송
-	setTimeout(function () {
-		document.querySelector("#chat").contentWindow.postMessage(JSON.stringify({"roomId": roomId, "userId": userId}), "*");	
-	}, 1000);
-</script>  
-
-<script src="${pageContext.request.contextPath }/resources/js/live/viewer.js"> </script>
+	<script src="${pageContext.request.contextPath }/resources/js/live/viewer.js"> </script>
 
 </body>
 </html>
