@@ -4,7 +4,7 @@
 
 <code>%username%</code>
 
-입력해서 사용자 폴더로 이동
+입력해서 폴더 이동
 
 .aws 폴더 생성 후 .aws 폴더에 credential 파일 저장(업로드, 다운로드 시 권한 확인용 없으면 profile 에러 발생)
 
