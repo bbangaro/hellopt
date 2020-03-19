@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main/login.css">
-
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main/center.css">
 </head>
@@ -39,7 +39,9 @@
 				type="button" onclick="getAddress()" value="우편번호 찾기"> <form:input
 					path="userAddress" id="roadAddr" placeholder="ADDRESS" /></li>
 			<li><form:label path="userBirth">생년월일</form:label> <form:input
-					type="date" path="userBirth" /></li>
+					type="date" path="userBirth" />
+				<form:errors path="userBirth" cssClass="error"></form:errors>
+			</li>
 			<li><form:label path="userJob">직업</form:label> <form:input
 					path="userJob" placeholder="JOB" /></li>
 			<li><form:label path="userRoot">알게된 경로</form:label> <select
@@ -49,12 +51,11 @@
 					<option value="search">검색으로</option>
 			</select></li>
 			<li><form:label path="userHeight">키</form:label> <form:input
-					path="userHeight" placeholder="170" /></li>
+					type="number" min="0" max="300" path="userHeight" placeholder="170" /></li>
 			<li><form:label path="userWeight">몸무게</form:label> <form:input
-					path="userWeight" placeholder="80" /></li>
+					type="number" min="0" max="300" path="userWeight" placeholder="80" /></li>
 			<li><label for="file">프로필 사진</label> <input type="file"
 				name="file" /></li>
-
 		</ul>
 		<input type="button" onclick="formCheck()" value="회원가입">
 	</form:form>

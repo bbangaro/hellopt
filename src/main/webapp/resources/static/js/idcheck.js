@@ -30,6 +30,6 @@ function formCheck() {
 		let form = document.getElementById('user');
 		form.submit();
 	} else {
-		alert("중복되지 않는 아이디를 사용해 주십시오");
+		alert("아이디를 확인해주십시오");
 	}
 }

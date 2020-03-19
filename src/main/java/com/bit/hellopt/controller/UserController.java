@@ -39,7 +39,7 @@ public class UserController {
 	 * @param user 회원 정보
 	 * @param bindingResult 회원 정보 유효성 검사 결과
 	 * @param file 프로필 사진
-	 * @return 회원 가입 후 메인 화면으로
+	 * @return 회원 가입 후 메인 화면 view
 	 */
 	
 	@PostMapping("/user")
@@ -53,8 +53,10 @@ public class UserController {
 			
 			if(!file.isEmpty()) {
 				profileFile = profileService.insertProfile(user, file);
+				
 			}
 			user.setUserProfile(profileFile);
+			logger.info("register user Birth:", user.getUserBirth());
 			userService.regiserUser(user);
 			
 		}

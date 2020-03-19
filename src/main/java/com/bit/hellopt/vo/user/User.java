@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 public class User {
 	@Pattern(regexp = "^[0-9a-z-_]{5,20}$", message = "5~20 characters consisting of lowercase letters(a-z), numbers, or special characters (_, -)")
 	private String userId;
-	@Pattern(regexp = "^[\\w!@#$%^&*()-_]{5,20}$", message = "8~16 characters consisting of letters(A-Z, a-z), numbers, or special characters(!, @, #, $, %, ^, &, *, (, ), _, -).")
+	@Pattern(regexp = "^[\\w!@#$%^&*()-_]{5,20}$", message = "5~20 characters consisting of letters(A-Z, a-z), numbers, or special characters(!, @, #, $, %, ^, &, *, (, ), _, -).")
 	private String userPw;
 	@NotBlank
 	private String userName;
@@ -18,7 +18,7 @@ public class User {
 	private String userAddress;
 	@Size(max = 20)
 	private String userJob;
-	@Size(max = 10)
+	@Pattern(regexp = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$", message = "please date YYYY-MM-DD format")
 	private String userBirth;
 	private String userRoot;
 	private int userHeight;

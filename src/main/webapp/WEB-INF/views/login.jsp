@@ -12,7 +12,7 @@
 <body>
 	<h2>Login</h2>
 	<c:if test="${param.error}">
-			<p class="error">로그인 에러가 발생했습니다.</p>
+			<p class="error">로그인에 실패했습니다.</p>
 	</c:if>
 	<form name='f' action="login" method='POST'>
 		<ul>
