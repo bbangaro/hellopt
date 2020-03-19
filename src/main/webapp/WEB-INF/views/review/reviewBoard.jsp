@@ -138,10 +138,10 @@
 				</c:if>	
 			</c:forEach> --%>
 			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
-				<span class="star on">i</span>
+				<span class="star on">${i}</span>
 			</c:forEach> 
 			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
-				<span class="star">i</span>
+				<span class="star">${i}</span>
 			</c:forEach>   
 			</td>
 		</tr>

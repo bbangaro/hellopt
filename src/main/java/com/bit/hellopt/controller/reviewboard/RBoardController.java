@@ -54,6 +54,9 @@ public class RBoardController {
 	
 	@Autowired
 	ServletContext servletContext;
+
+	/*@Autowired
+	S3Utils s3Utils;*/
 	
 	public RBoardController(RBoardService rService) {
 		this.rService = rService;
@@ -147,6 +150,7 @@ public class RBoardController {
 		if(!dir.isDirectory()) {
 			dir.mkdirs();
 		}
+		
 		//넘어온 파일을 리스트로 저장
 		List<MultipartFile> fileList = multi.getFiles("file_0");
 		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
@@ -192,20 +196,63 @@ public class RBoardController {
 		//이미지 업로드한거 보여주기
 		userjoin.setFilevo(filevo );
 
-		System.out.println("현재페이지 글목록(list): " + userjoin.toString());
-		
-		model.addAttribute("rBoard", rService.Join3(revIdx));
-		System.out.println("rBoard:" + rService.Join3(revIdx));
+		model.addAttribute("rBoard", userjoin);
+		model.addAttribute("fileList", filevo);
+		System.out.println("수정페이지 글정보(list): " + userjoin.toString());
 		
 		return "review/revUpdateForm";
 	}
 	@PostMapping("/updaterboard")
-	public String updateRBoard(@ModelAttribute("rBoardList")RBoardVO vo) {
+	public String updateRBoard(@ModelAttribute("rBoard")RBoardVO vo, Model model,
+			MultipartHttpServletRequest multi,
+			@AuthenticationPrincipal CustomUserDetail customUser ) 
+					throws IllegalStateException, IOException{
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
-		System.out.println(">> board vo :" + vo);
-		//이미지 업로드한거 보여주기
+
+		System.out.println("vo:" + vo.toString());
+		
 
 		rService.updateBoard(vo);
+
+		String path = "C:/hellopt_file/";
+		
+		int revIdx = vo.getRevIdx();
+		System.out.println("revIdx: " + revIdx);
+		File dir = new File(path);
+		if(!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		
+		//넘어온 파일을 리스트로 저장
+		List<MultipartFile> fileList = multi.getFiles("file_0");
+		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
+		
+		}else {//for (MultipartFile filePart : fileList)
+			for (int i = 0; i < fileList.size(); i++) {
+				//원본파일명
+				String revFileOname = fileList.get(i).getOriginalFilename();
+				String FileExtension 
+						= revFileOname.substring(revFileOname.lastIndexOf("."));
+				//파일명  중복되지 않게 처리 한 저장될 이름
+				String saveFileName 
+						= UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
+				
+				String savePath = path + saveFileName; //저장될 파일 경로
+				System.out.println("실제 파일 이름 : " + revFileOname);
+				System.out.println("저장된 파일 이름 : " + saveFileName);
+				long fileSize = fileList.get(i).getSize(); //파일사이즈
+				System.out.println("저장된 파일 사이즈 : " + fileSize);
+				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				System.out.println("저장된 파일 경로" + savePath);
+				
+				System.out.println("revFileOname, saveFileName, fileSize: "+ revFileOname+ saveFileName + fileSize + revIdx);
+				
+				rService.uploadFile(revFileOname, saveFileName, fileSize, revIdx);
+				
+				System.out.println("글정보" + vo);
+
+			}
+		}
 		return "redirect:/review";
 	}
 	@RequestMapping("/deleterboard")
@@ -216,47 +263,47 @@ public class RBoardController {
 		return "redirect:/review";
 	}
 	
-	@RequestMapping("/review/upload")
-	public String upload(MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
-
-		System.out.println(">>> 글 등록 처리 - insertBoard()");
-		
-		String path = "C:/hellopt_file/";
-	
-		File dir = new File(path);
-		
-		
-		if(!dir.isDirectory()) {
-			dir.mkdirs();
-		}
-		
-		
-		//넘어온 파일을 리스트로 저장
-		List<MultipartFile> fileList = multi.getFiles("file_0");
-		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
-		
-		}else {//for (MultipartFile filePart : fileList)
-			
-			for (int i = 0; i < fileList.size(); i++) {
-				//원본파일명
-				String revFileOname = fileList.get(i).getOriginalFilename();
-				String FileExtension = revFileOname.substring(revFileOname.lastIndexOf("."));
-				//파일명  중복되지 않게 처리 한 저장될 이름
-				String saveFileName = UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
-				
-				String savePath = path + saveFileName; //저장될 파일 경로
-				System.out.println("실제 파일 이름 : " + revFileOname);
-				System.out.println("저장된 파일 이름 : " + saveFileName);
-				long fileSize = fileList.get(i).getSize(); //파일사이즈
-				System.out.println("저장된 파일 사이즈 : " + fileSize);
-				fileList.get(i).transferTo(new File(savePath)); //파일 저장
-				System.out.println("저장된 파일 경로" + savePath);
-
-
-			}
-		}
-		return "redirect:/review";
-	}
+//	@RequestMapping("/review/upload")
+//	public String upload(MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
+//
+//		System.out.println(">>> 글 등록 처리 - insertBoard()");
+//		
+//		String path = "C:/hellopt_file/";
+//	
+//		File dir = new File(path);
+//		
+//		
+//		if(!dir.isDirectory()) {
+//			dir.mkdirs();
+//		}
+//		
+//		
+//		//넘어온 파일을 리스트로 저장
+//		List<MultipartFile> fileList = multi.getFiles("file_0");
+//		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
+//		
+//		}else {//for (MultipartFile filePart : fileList)
+//			
+//			for (int i = 0; i < fileList.size(); i++) {
+//				//원본파일명
+//				String revFileOname = fileList.get(i).getOriginalFilename();
+//				String FileExtension = revFileOname.substring(revFileOname.lastIndexOf("."));
+//				//파일명  중복되지 않게 처리 한 저장될 이름
+//				String saveFileName = UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
+//				
+//				String savePath = path + saveFileName; //저장될 파일 경로
+//				System.out.println("실제 파일 이름 : " + revFileOname);
+//				System.out.println("저장된 파일 이름 : " + saveFileName);
+//				long fileSize = fileList.get(i).getSize(); //파일사이즈
+//				System.out.println("저장된 파일 사이즈 : " + fileSize);
+//				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+//				System.out.println("저장된 파일 경로" + savePath);
+//
+//
+//			}
+//		}
+//		return "redirect:/review";
+//	}
 	
 	
 }

@@ -47,19 +47,11 @@
 			
 			<td>별점</td>
 			<td class="starRev">
-<%-- 	if문 써서	<c:forEach var="i" begin="1" end="5" step="1" >
-				<c:if test="${i  > rBoard.revStar }">
-					<span class="star"></span>
-				</c:if>	
-				<c:if test="${i  <= rBoard.revStar }">
-					<span class="star on"></span>
-				</c:if>	
-			</c:forEach> --%>
 			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
-				<span class="star on">i</span>
+				<span class="star on">${i }</span>
 			</c:forEach> 
 			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
-				<span class="star">i</span>
+				<span class="star">${i }</span>
 			</c:forEach>  
 				<input id="revStar1" type="hidden" name="revStar" value="">
 			<td> 
@@ -79,17 +71,101 @@
 			<a href="#this" class="btn" id ="delete" name="delete" >삭제하기</a>
 		</p>
 	</div>
+	<!-- 파일업로드 다시 하기 -->
+	<div class = "input_wrap">
+		<a href="javascript:" onclick="fileUploadaction();" class="my_button">파일 업로드</a>
+		<input type="file" id="input_imgs" multiple>
+	</div>
 	
+	<div>
+		<div class="imgs_wrap">
+			<img id="img">
+		</div>
+	</div>
 	
+	<a href="javacript:" class="my_button" onclick="submitAction();">업로드</a>
 	
-	<a href="#this" id="addFile" class="btn">파일 추가하기</a>
 	<a href="#this" id="list" class="btn">목록으로</a>
-	<a href="#this" id="write" class="btn">작성완료</a>
+	<a href="#this" id="modify" class="btn">수정완료</a>
 </form>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 
 <script type="text/javascript">
+//--다중 파일 선택시 미리보기
+	
+	//이미지 정보들을 담을 배열
+	var sel_files =[];
 
+	$(document).ready(function(){
+		$("#input_imgs").on("change", handleImgFileSelect);
+	});
+	
+	function fileUploadAction(){
+		console.log("fileUploadAction");
+		$("#input_imgs").trigger('click');
+	}
+	
+	function handleImgFileSelect(e){
+		
+		// 이미지 정보들을 초기화
+		sel_files = [];
+		$(".imgs_wrap").empty();
+	
+		var files = e.target.files;
+		var filesArr =Array.prototype.slice.call(files);
+		
+		var index = 0;
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			}
+			sel_files.push(f);
+			
+			var reader = new FileReader();
+			reader.onload = function(e){
+				var html = "<a href=\"javacript:void(0);\"onclick=\"deleteImageAction("+index+")\"id=\"img_id_"+indext+"\"><img src=\""+e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>;
+				$(".imgs_wrap").append(html);
+				index++;
+				
+			}
+			reader.readAsDataURL(F);
+		});
+	}
+	
+	//다중 파일 미리보기에서 특정 이미지만 삭제하기
+	function deleteImageAction(index){
+		console.log("index : " + index);
+		sel_files.splice(index, 1);
+		
+		var img_id = "#img_id_" + index;
+		$(img_id).remove();
+		
+		console.log(sel_files);
+	}
+	
+	//다중 파일 post 전송
+	function submitAction(){
+		var data = new FormData();
+		
+		for(var i = 0, len=sel_files.length; i < len; i++){
+			var name = "image_" + i;
+			data.append(name, sel_files.length);
+			
+			
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "./study01_af.php");
+			xhr.onload = function(e){
+				if(this.status == 200){
+					console.log("Result:" + e.currentTarget.responseText);
+				}
+			}
+			xhr.send(data);
+		}
+	}
+	
+	
+/* 
 	$('#file').on("change", function(){
 		var formData = new FormData($('#frm')[0]);
 		$.ajax({
@@ -108,15 +184,15 @@
 		 	} 
 		 		
 		});
-	});
+	}); */
 	var g_count = 1; 
  		$("#list").on("click", function(e){
  			e.preventDefault();
  			fn_openBoardList(); 
  		})
- 		$("#write").on("click", function(e){
+ 		$("#modify").on("click", function(e){
  			e.preventDefault();
- 			fn_writeBoard();
+ 			fn_modifyBoard();
  		})
  		$("a[name='delete']").on("click", function(e){//파일삭제버튼
  			e.preventDefault();
@@ -134,9 +210,9 @@
  		comSubmit.submit();
  	}
  	
- 	function fn_writeBoard(){
+ 	function fn_modifyBoard(){
  		var comSubmit = new ComSubmit("frm");
- 		comSubmit.setUrl("<c:url value='/insertrboard'/>");
+ 		comSubmit.setUrl("<c:url value='/updaterboard'/>");
  		comSubmit.submit();
  	}
  	function fn_fileDelete(obj){
