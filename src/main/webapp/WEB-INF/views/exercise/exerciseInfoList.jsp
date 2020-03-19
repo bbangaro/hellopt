@@ -59,7 +59,7 @@
 
 	<!-- 검색을 위한 폼 -->
 	<div class="searchForm">
-	<form action="exerciseinfolist" method="post">
+	<form action="exerciseinfolist" method="get">
 		<div class="border-none">
 		<p>
 			<span>
@@ -99,6 +99,8 @@
 							<li><a href="exerciseinfolist?cPage=${k }">${k }</a></li>
 						</c:if>
 					</c:forEach>
+					
+					<!-- 여기서 조건문 하나 더 태워야하나 ex -> cPage=${k }?운동부위에따른 번호 부여한값 뭐시기저시기 -->
 					
 					<c:choose>
 						<c:when test="${pvo.endPage >= pvo.totalPage}">

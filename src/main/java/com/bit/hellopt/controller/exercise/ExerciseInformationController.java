@@ -30,7 +30,7 @@ import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 
 
 @Controller
-@SessionAttributes("exerciseinformation") //exerciseInformation 라는 이름의 Model이 있으면 session에 저장
+@SessionAttributes("exerciseinformation") //exerciseInformation 라는 이름의 Model이 있으면 session에 저장 html과 연관됨
 public class ExerciseInformationController {
 	@Autowired
 	ExerciseInformationService exerciseInformationService;
@@ -60,9 +60,6 @@ public class ExerciseInformationController {
 	@RequestMapping("/exerciseinfolist")
 	public String getExerciseInformationList(ExerciseInformationVO vo, Model model, 
 			@RequestParam(defaultValue="1") Integer cPage) {
-		System.out.println(">>> 글 전체 목록 조회 처리-getExerciseInformationList()");
-		System.out.println("condition : " + vo.getSearchCondition());
-		System.out.println("keyword : " + vo.getSearchKeyword());
 		
 		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
 		ExerciseInformationPaging p = new ExerciseInformationPaging();
@@ -107,8 +104,12 @@ public class ExerciseInformationController {
 		map.put("begin", p.getBegin());
 		map.put("end", p.getEnd());
 		
-//		List<ExerciseInformationVO> list = ExerciseInformationService.getExerciseCountlist(map);
-//		System.out.println("현재페이지 글목록(list) : " + list);
+		List<ExerciseInformationVO> list = exerciseInformationService.getExerciseCountlist(map);
+		System.out.println("현재페이지 글목록(list) : " + list);
+		
+		System.out.println(">>> 글 전체 목록 조회 처리-getExerciseInformationList()");
+		System.out.println("condition : " + vo.getSearchCondition());
+		System.out.println("keyword : " + vo.getSearchKeyword());
 		
 		//null 체크 후 초기값 설정
 		if (vo.getSearchCondition() == null) {
@@ -120,7 +121,7 @@ public class ExerciseInformationController {
 		System.out.println("null처리후 condition : " + vo.getSearchCondition());
 		System.out.println("null처리후 keyword : -" + vo.getSearchKeyword() + "-");
 		
-		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationList(map);
+		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationSearch(map);
 		
 		for(ExerciseInformationVO evo : exerciseInformationList) {
 			evo.setFilevo(exerciseInformationService.getFileList(evo.getExerciseIdx()));

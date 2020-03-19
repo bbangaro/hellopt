@@ -10,7 +10,7 @@ import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 
 public interface ExerciseMapper {//이놈아가 DAO다.
 	public List<ExerciseInformationVO> getExerciseInformationList(ExerciseInformationVO vo);
-	public List<ExerciseInformationVO> getExerciseInformationList(Map<String, Integer> map);
+	public List<ExerciseInformationVO> getExerciseInformationSearch(Map<String, Integer> map);
 	public ExerciseInformationVO getExerciseInformation(ExerciseInformationVO vo);
 	public void insertExerciseInformation(ExerciseInformationVO vo);
 	public void updateExerciseInformation(ExerciseInformationVO vo);
@@ -19,6 +19,5 @@ public interface ExerciseMapper {//이놈아가 DAO다.
 	public void uploadFile(HashMap<String, Object> hm);
 	public List<ExerciseInformationFileVO> getExerciseFileList(ExerciseInformationVO vo);
 	List<ExerciseInformationVO> getExerciseCountlist(Map<String, Integer> map);
-	
 	
 }

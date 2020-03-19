@@ -14,16 +14,13 @@
 		key-value 형태의 Map 사용 바인드변수명이 key가 됨-->
 	<select id="getExerciseCountlist" resultType="com.bit.hellopt.vo.exercise.ExerciseInformationVO"
 			parameterType="Map">
-
 		SELECT *
 		FROM (SELECT ROWNUM AS R_NUM, A.*
   				FROM (SELECT *
         			  FROM EXERCISE_INFORMATION_TB
-        			  ORDER BY B_IDX DESC ) AS A
-<![CDATA[
-    			WHERE ROWNUM <=#{end} ) AS B
-		WHERE B.R_NUM >= #{begin}
-]]>
+        			  ORDER BY EXERCISE_IDX DESC ) A)
+
+    			WHERE ROWNUM BETWEEN #{begin} AND #{end}
 	</select>
 
 	<select id="getExerciseFileList" resultType="com.bit.hellopt.vo.exercise.ExerciseInformationFileVO"
@@ -51,6 +48,28 @@
 		<if test="searchCondition == 'EXERCISE_PARTS' ">
 			AND EXERCISE_PARTS LIKE '%'|| #{searchKeyword} ||'%'
 		</if>
+	</select>
+	
+	<!-- VO에서 검색 결과 불러오기 -->
+	<select id="getExerciseInformationSearch" parameterType="Map"
+		resultType="exerciseInformation">
+<!--  		SELECT * FROM EXERCISE_INFORMATION_TB -->
+<!--  		WHERE 1=1 -->
+		SELECT *
+         FROM (SELECT ROWNUM R_NUM, BBS. * 
+               FROM(SELECT * FROM EXERCISE_INFORMATION_TB
+			 		WHERE 1=1) BBS
+            ) 
+         WHERE R_NUM BETWEEN #{begin} AND #{end}
+		
+			AND EXERCISE_PARTS LIKE '%'|| '가슴' ||'%'
+
+<!-- 		<if test="searchCondition == 'EXERCISE_NAME' "> -->
+<!-- 			AND EXERCISE_NAME LIKE '%'|| #{searchKeyword} ||'%' -->
+<!-- 		</if> -->
+<!-- 		<if test="searchCondition == 'EXERCISE_PARTS' "> -->
+<!-- 			AND EXERCISE_PARTS LIKE '%'|| '가슴' ||'%' -->
+<!-- 		</if> -->
 	</select>
 	
 	<!-- 게시글 상세보기 -->

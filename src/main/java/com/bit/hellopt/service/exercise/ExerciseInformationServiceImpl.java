@@ -41,8 +41,9 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 	}
 
 	@Override
-	public List<ExerciseInformationVO> getExerciseInformationList(Map<String, Integer> map) {
-		return mapper.getExerciseInformationList(map);
+	public List<ExerciseInformationVO> getExerciseInformationSearch(Map<String, Integer> map) {
+		System.out.println("서비스 임플까진 먹습니다.");
+		return mapper.getExerciseInformationSearch(map);
 	}
 
 	@Override
