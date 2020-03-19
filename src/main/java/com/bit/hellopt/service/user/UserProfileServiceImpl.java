@@ -53,7 +53,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 			e.printStackTrace();
 		}
 	
-		s3Utils.uploadFile("profile/", storedName, file);
+		s3Utils.uploadFile("profile/" + storedName, file);
 		mapper.insertProfile(profile);
 		
 		/*
@@ -95,11 +95,11 @@ public class UserProfileServiceImpl implements UserProfileService {
 		}
 		
 		if(storedProfile != null) {
-			s3Utils.deleteFile("profile/", storedProfile.getStoredFileName());
-			s3Utils.uploadFile("profile/", storedName, file);
+			s3Utils.deleteFile("profile/" + storedProfile.getStoredFileName());
+			s3Utils.uploadFile("profile/" + storedName, file);
 			mapper.updateProfile(profile);
 		} else {
-			s3Utils.uploadFile("profile/", storedName, file);
+			s3Utils.uploadFile("profile/" + storedName, file);
 			mapper.insertProfile(profile);
 		}
 	
