@@ -2,11 +2,10 @@ package com.bit.hellopt.controller.exercise;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,16 +25,21 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.service.exercise.ExerciseInformationService;
 import com.bit.hellopt.vo.exercise.ExerciseInformationListVO;
+import com.bit.hellopt.vo.exercise.ExerciseInformationPaging;
 import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 
 
 @Controller
-@SessionAttributes("exerciseInformation") //exerciseInformation 라는 이름의 Model이 있으면 session에 저장
+@SessionAttributes("exerciseinformation") //exerciseInformation 라는 이름의 Model이 있으면 session에 저장 html과 연관됨
 public class ExerciseInformationController {
 	@Autowired
-	private ExerciseInformationService exerciseInformationService;
+	ExerciseInformationService exerciseInformationService;
 	@Autowired
-	private ServletContext servletContext;
+	ServletContext servletContext;
+	
+	public ExerciseInformationController(ExerciseInformationService exerciseInformationService) {
+		this.exerciseInformationService = exerciseInformationService;
+	}
 	
 	//메소드에 선언된 @ModelAttribute 는 리턴된 데이터를 View에 전달
 	//@ModelAttribute 선언된 메소드는 @RequestMapping 메소드보다 먼저 실행됨
@@ -52,8 +57,56 @@ public class ExerciseInformationController {
 
 	//리턴타입 ModelAndView -> String 변경해서 리턴타입 통일
 	//전달할 데이터 저장타입  ModelAndView -> Model
-	@RequestMapping("/exerciseInfoList")
-	public String getExerciseInformationList(ExerciseInformationVO vo, Model model) {
+	@RequestMapping("/exerciseinfolist")
+	public String getExerciseInformationList(ExerciseInformationVO vo, Model model, 
+			@RequestParam(defaultValue="1") Integer cPage) {
+		
+		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
+		ExerciseInformationPaging p = new ExerciseInformationPaging();
+		//1. 전체 게시물의 수를 구하기
+		p.setTotalRecord(exerciseInformationService.getExerciseTotalCount()); 
+		p.setTotalPage(); //전체 페이지 갯수 구하기
+		
+		System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
+		System.out.println(">전체 페이지 수 : " + p.getTotalPage());
+		
+		//2. 현재 페이지 구하기(default : 1)
+		
+		if (cPage != null) {//넘겨받은 페이지 값이 있으면
+			p.setNowPage(cPage);
+		}
+		
+		//3. 현재페이지의 시작번호(begin)와 끝번호(end) 구하기
+//		p.setEnd(p.getNowPage() * p.getNumPerPage());
+//		p.setBegin(p.getEnd() - p.getNumPerPage() + 1);
+		
+		p.setBegin((p.getNowPage() -1 ) * p.getNumPerPage() + 1);
+		p.setEnd((p.getBegin() - 1) + p.getNumPerPage());
+		
+		System.out.println("-------------");
+		System.out.println(">>현재 페이지 : " + p.getNowPage());
+		System.out.println(">>시작번호(begin) : " + p.getBegin());
+		System.out.println(">>끝번호(end) : " + p.getEnd());
+		
+		//------- 블록(block) 계산하기 ----------
+		//4. 블록의 시작페이지, 끝페이지 구하기(현재페이지 번호 사용)
+		int nowPage = p.getNowPage();
+		int beginPage = (nowPage - 1) / p.getPagePerBlock() * p.getPagePerBlock() + 1;
+		p.setBeginPage(beginPage);
+		p.setEndPage(p.getBeginPage() + p.getPagePerBlock() - 1);
+		
+		//4-1 끝페이지(endPage)가 전체 페이지 수(totalPage) 보다 크면
+		if (p.getEndPage() > p.getTotalPage()) {
+			p.setEndPage(p.getTotalPage());
+		}
+
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", p.getBegin());
+		map.put("end", p.getEnd());
+		
+		List<ExerciseInformationVO> list = exerciseInformationService.getExerciseCountlist(map);
+		System.out.println("현재페이지 글목록(list) : " + list);
+		
 		System.out.println(">>> 글 전체 목록 조회 처리-getExerciseInformationList()");
 		System.out.println("condition : " + vo.getSearchCondition());
 		System.out.println("keyword : " + vo.getSearchKeyword());
@@ -68,85 +121,138 @@ public class ExerciseInformationController {
 		System.out.println("null처리후 condition : " + vo.getSearchCondition());
 		System.out.println("null처리후 keyword : -" + vo.getSearchKeyword() + "-");
 		
-		//List<ExerciseInformationVO> exerciseInformationList = exerciseInformationDAO.getExerciseInformationList();
-		//List<ExerciseInformationVO> exerciseInformationList = exerciseInformationDAO.getExerciseInformationList(vo);
-		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationList(vo);
-		model.addAttribute("exerciseInformationList", exerciseInformationList);
+		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationSearch(map);
 		
-		return "exerciseInfoList";
+		for(ExerciseInformationVO evo : exerciseInformationList) {
+			evo.setFilevo(exerciseInformationService.getFileList(evo.getExerciseIdx()));
+		}
+		
+		System.out.println("exerciseInformationList: " + exerciseInformationList.toString());
+		model.addAttribute("exerciseInformationList", exerciseInformationList);
+		model.addAttribute("pvo", p);
+		model.addAttribute("cPage", cPage);
+		
+		/*ExerciseInformationVO exerciseInformation = exerciseInformationService.getExerciseInformation(vo);
+		
+		exerciseInformation.splitExercisePicturesList();
+		for(String str : exerciseInformation.getExercisePicturesList()) {
+			System.out.println("이미지: " + str);
+		}
+		
+		model.addAttribute("exerciseInformation", exerciseInformation);
+		System.out.println("exerciseInformation에서 가져온 첫번째 이미지 경로 -> exerciseInformationList : " + exerciseInformation);
+		*/
+		return "exercise/exerciseInfoList";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//전달할 데이타 저장타입 : ModleAndView -> Model
-	@RequestMapping("exerciseInfo")
+	@RequestMapping("exerciseinfo")
 	public String getExerciseInformation(ExerciseInformationVO vo, Model model) {
 		System.out.println(">>> 글 상세 조회 처리 - getExerciseInformation()");
 		
 		ExerciseInformationVO exerciseInformation = exerciseInformationService.getExerciseInformation(vo);
+		
+		exerciseInformation.splitExercisePicturesList();
+		for(String str : exerciseInformation.getExercisePicturesList()) {
+			System.out.println("이미지: " + str);
+		}
+		
+		//테이블 쓸것 같으면 100행에 있는것을 사용할것~!
+		/*
+		List<ExerciseInformationFileVO> exerciseFileList = exerciseInformationService.getExerciseFileList(vo);
+		
+		for(ExerciseInformationFileVO v : exerciseFileList) {
+			System.out.println(v);
+		}
+		model.addAttribute("파일 리스트목록 사용할이름", exerciseFileList);
+		*/
 		//model.addAttribute(exerciseInformation); //exerciseInformationVO
 		model.addAttribute("exerciseInformation", exerciseInformation); //데이터 저장
 		System.out.println("> exerciseInformation : " + exerciseInformation);
 		
-		return "exerciseInfo";
+		return "exercise/exerciseInfo";
 	}
 	
 	@Value("${file.directory}")
 	private String fileDirectory;
 	
-	@GetMapping("/exercise") //내가 
+	@GetMapping("/exercise") //
 	public String uploadForm() {
-		return "insertExerciseInformation";
+		return "exercise/insertexerciseinformation";
 	}
 	
-	@GetMapping("insertExerciseInformationform")
-	public String form() {
-		return "insertExerciseInformationform";
+	@GetMapping("/insertexerciseinformationform")
+	public String form() {	
+		return "exercise/insertexerciseinformationform";
 	}
 	
-	@RequestMapping("insertExerciseInformation")
-	public String insertExerciseInformation(ExerciseInformationVO vo, @RequestParam("exercisePictures") MultipartFile file, MultipartHttpServletRequest mtfRequest,
+	@GetMapping("insertexerciseinformation")
+	public String insertExerciseInformation(ExerciseInformationVO vo, Model model) throws IllegalStateException, IOException {
+		
+		return "redirect:/exerciseinfo";
+	}
+	
+	@PostMapping("insertexerciseinformation")
+	public String insertExerciseInformation(ExerciseInformationVO vo,/* @RequestParam("exercisePictures")*/ MultipartFile file, MultipartHttpServletRequest mtfRequest,
 			Model model) throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertExerciseInformation()");
+		System.out.println("글 vo " + vo);
 		
-		List<MultipartFile> fileList = mtfRequest.getFiles("exercisePictures");
 		
-		//@RequestParam("file")이었었음
+		String path = "C:/hellopt_file/";
 		
+		int exerciseIdx = vo.getExerciseIdx();
+		System.out.println("exerciseIdx: " + exerciseIdx);
+		File dir = new File(path);
+		if(!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		vo.setExercisePictures("");
+		List<MultipartFile> fileList = mtfRequest.getFiles("exerciseFile");
+		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
+			
+		} else {//for (MultipartFile filePart : fileList)
+			for (int i = 0; i < fileList.size(); i++) {
+				//원본파일명
+				String exerciseInformationFileOname = fileList.get(i).getOriginalFilename();
+				String FileExtension
+						= exerciseInformationFileOname.substring(exerciseInformationFileOname.lastIndexOf("."));
+				//파알명 중복되지 않게 처리 한 저장될 이름
+				String saveFileName
+						= UUID.randomUUID().toString().replaceAll("-", "")+FileExtension;
+				String savePath = path + saveFileName; //저장된 파일 경로
+				System.out.println("실제 파일 이름 : " + exerciseInformationFileOname);
+				System.out.println("저장된 파일 이름 : " + saveFileName);
+				long fileSize = fileList.get(i).getSize(); //파일 사이즈
+				System.out.println("저장된 파일 사이즈 : " + fileSize);
+				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				System.out.println("저장된 파일 경로 : " + savePath);
+				//
+				vo.setExercisePictures( vo.getExercisePictures()+ saveFileName+",");
+				System.out.println("exerciseInformationFileOname, saveFileName, fileSize: " + exerciseInformationFileOname + saveFileName + fileSize + exerciseIdx);
+				//제약조건을 달면, 162행에 있는 exerciseInformationService.uploadFile을 맨 밑으로 내려야 함.
+				exerciseInformationService.uploadFile(exerciseInformationFileOname, saveFileName, fileSize, exerciseIdx);
+				
+				System.out.println("글정보" + vo);
+				
+			}
+		}
+		if(vo.getExercisePictures().length()>0) {
+			vo.setExercisePictures(vo.getExercisePictures().substring(0, vo.getExercisePictures().length()-1 ) );
+		} exerciseInformationService.insertExerciseInformation(vo);
+		
+		
+		return "redirect:/exerciseinfolist";
+	}
+	
 		/* *** 파일 업로드 처리 ********
 		 * MultipartFile 인터페이스 주요 메소드
 		 * String getOriginalFilename() : 업로드한 파일명 찾기
 		 * void transferTo(File destFile) : 업로드한 파일을 destFile에 저장
 		 * boolean isEmpty() : 업로드한 파일의 존재여부(없으면 true 리턴)
 		 */
-		String rootDirectory = mtfRequest.getSession().getServletContext().getRealPath("/");
-		Path path = Paths.get(rootDirectory + fileDirectory + file.getOriginalFilename());
-		String imageList = "";
-		for (MultipartFile mf : fileList) {
-            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-            long fileSize = mf.getSize(); // 파일 사이즈
-
-            System.out.println("originFileName : " + originFileName);
-            System.out.println("fileSize : " + fileSize);
-
-            String safeFile = path + originFileName;
-			
-			try {
-				file.transferTo(new File(servletContext.getRealPath("/resources/images/") + file.getOriginalFilename())); //여기 바꿔봐
-				//System.out.println("filepath" + servletContext.getRealPath("resources/images/") + file.getName() + file.getContentType());
-				//file.transferTo(new File(rootDirectory + "/resources/images")); //여기 바꿔봐
-			} catch (Exception e) {
-				e.printStackTrace();
-				//throw new RuntimeException("File saving failed", e);
-			}
-			System.out.println("파일업로드테스트 : " + file.getOriginalFilename());
-			model.addAttribute("filename", file.getOriginalFilename());
-			imageList += file.getOriginalFilename() + ",";
-			}
-		vo.setExercisePicturesName(imageList);
-		exerciseInformationService.insertExerciseInformation(vo);
-		return "redirect:/exerciseInfoList";
-			
-		}
+		
 		
 //		MultipartFile uploadFile = vo.getUploadFile();
 //		System.out.println("uploadFile : " + uploadFile);
@@ -168,21 +274,21 @@ public class ExerciseInformationController {
 	
 	//@ModelAttribute("exerciseInformation") : Model에 exerciseInformation 라는 속성명의 객체 있으면 사용
 	//    없으면 exerciseInformation라는 이름으로 새로 생성 
-	@RequestMapping("/updateExerciseInfo")
+	@RequestMapping("/updateexerciseinfo")
 	public String updateExerciseInformation(@ModelAttribute("exerciseInformation") ExerciseInformationVO vo) {
 		System.out.println(">>> 글 수정 처리 - updateExerciseInformation()");
 		System.out.println("> exerciseInformation vo : " + vo);
 		
 		exerciseInformationService.updateExerciseInformation(vo);
-		return "exerciseInfoList";
+		return "exercise/exerciseInfoList";
 	}
 	
-	@RequestMapping("/deleteExerciseInfo")
+	@RequestMapping("/deleteexerciseinfo")
 	public String deleteExerciseInformation(ExerciseInformationVO vo) {
 		System.out.println(">>> 글 삭제 처리 - deleteExerciseInformation()"); 
 		
 		exerciseInformationService.deleteExerciseInformation(vo);
-		return "exerciseInfoList";
+		return "exercise/exerciseInfoList";
 	}
 	
 	//---------------------------------
@@ -199,6 +305,5 @@ public class ExerciseInformationController {
 	
 		return exerciseInformationListVO;
 	}
-	
 	
 }

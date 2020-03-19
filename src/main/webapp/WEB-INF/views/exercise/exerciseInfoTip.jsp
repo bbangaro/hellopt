@@ -78,9 +78,9 @@
 	</table>
 	</form>
 	<p>
-		<a href="insertExerciseInformationTip">글등록</a>
-		<a href="deleteExerciseInformationTip?tipIdx=${exerciseInformation.getTipIdx() }">글삭제</a>
-		<a href="getExerciseInformationTipList">글목록</a>
+		<a href="exercise/insertExerciseInformationTip">글등록</a>
+		<a href="exercise/deleteExerciseInformationTip?tipIdx=${exerciseInformation.getTipIdx() }">글삭제</a>
+		<a href="exercise/getExerciseInformationTipList">글목록</a>
 	</p>
 </div>
 

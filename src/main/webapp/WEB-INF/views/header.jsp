@@ -52,10 +52,9 @@
                     </li>
                     <li><a href="#" class="artist_open">Workout&Plan</a>
                     	 <ul class="artist_depth02">
-                       	    <li><a href="#">Plan</a></li>
-                            <li><a href="${pageContext.request.contextPath}/exercise-Info">Exercise-Info</a></li>
-                            <li><a href="${pageContext.request.contextPath}/exercise-TipInfo">Exercise-TipInfo</a></li>
-                       </ul>
+                            <li><a href="${pageContext.request.contextPath}/exerciseinfolist">Exercise Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exerciseinfotiplist">Exercise TipInfo</a></li>
+                        </ul>
                     </li>
                     <li><a href="#" class="artist_open">Training</a>
                         <ul class="artist_depth02">
