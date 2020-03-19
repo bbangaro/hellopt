@@ -20,9 +20,14 @@ window.onunload = window.onbeforeunload = function() {
 
 let peerConnection;
 
-socket.on('broadcaster', function() {
-	socket.emit('viewer');
-	console.log("viewer 이벤트 전달");
+//룸아이디로 룸에 조인하기
+socket.emit('joinroom', {roomId: roomId, sender: userId});
+console.log("룸에 조인222222");
+
+
+socket.on('broadcaster', function(roomId) {
+	socket.emit('viewer', roomId);
+	console.log("viewer 이벤트 전달!");
 })
 
 socket.on('offer', function(id, description) {
@@ -61,11 +66,13 @@ socket.on('candidate', function(id, candidate) {
 });
 
 socket.on('connect', function() {
-	socket.emit('viewer');
-	console.log("viewer 이벤트 된다된다된다");
+	socket.emit('viewer', roomId);
+	console.log("viewer 이벤트 전달");
 });
 
 socket.on('out', function() {
 	peerConnection.close();
 	console.log("peerConnection 끝");
 });
+
+

@@ -33,19 +33,23 @@ let constraints = {
 	video: true
 };
 
+//룸아이디로 룸에 조인하기
+socket.emit('joinroom', {roomId: roomId, sender: userId});
+console.log("룸에 조인");
+
 //오디오, 비디오 접근
 navigator.mediaDevices.getUserMedia(constraints)
 .then(function(stream) {
 	video.srcObject = stream;
-	socket.emit('broadcaster');
-	console.log("broadcaster 이벤트 전달");
+	socket.emit('broadcaster', roomId);
+	console.log(roomId + "번방에 broadcaster 이벤트 전달");
 }).catch(function(err) {
 	console.log(err);
 });
 
 socket.on('connect', function() {
-	socket.emit('broadcaster');
-	console.log("이벤트를 보내자");
+	socket.emit('broadcaster', roomId);
+	console.log("broadcaster 이벤트를 보내자");
 })
 
 socket.on('answer', function(id, description) {
@@ -54,8 +58,8 @@ socket.on('answer', function(id, description) {
 	console.log("answer 이벤트 받음");
 });
 
-//서버에서 viewer이벤트를 보내주면 broadcater가 offer를 생성해서 보냄
-//id는...??
+//서버에서 viewer이벤트를 보내주면 broadcaster가 offer를 생성해서 보냄
+//id는 서버에서 보내는 소켓아이디
 socket.on('viewer', function(id) {
 	let peerConnection = new RTCPeerConnection(config);
 	peerConnections[id] = peerConnection;
@@ -89,8 +93,5 @@ socket.on('out', function(id) {
 	delete peerConnections[id];
 	console.log("peerCnn 삭제");
 })
-
-
-
 
 
