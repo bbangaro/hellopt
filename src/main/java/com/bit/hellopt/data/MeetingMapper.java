@@ -2,6 +2,7 @@ package com.bit.hellopt.data;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.bit.hellopt.vo.meeting.CategoryCodeVO;
 import com.bit.hellopt.vo.meeting.LocalVO;
@@ -18,6 +19,7 @@ public interface MeetingMapper {
 
 	public MeetingVO getMeetingOne(int meetingIdx);
 	public MeetingVO resCount(int meetingIdx);
+	public MeetingVO resUser(Map<String, Object> hm);
 	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);
 	
 	public void insertMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);

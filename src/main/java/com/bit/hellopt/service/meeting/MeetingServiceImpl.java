@@ -2,6 +2,7 @@ package com.bit.hellopt.service.meeting;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,11 @@ public class MeetingServiceImpl implements MeetingService {
 	@Override
 	public MeetingVO resCount(int meetingIdx) {
 		return meetingMapper.resCount(meetingIdx);
+	}
+	
+	@Override
+	public MeetingVO resUser(Map<String, Object> hm) {
+		return meetingMapper.resUser(hm);
 	}
 
 
@@ -124,6 +130,7 @@ public class MeetingServiceImpl implements MeetingService {
 		meetingMapper.deleteMeeting(meetingIdx);
 		
 	}
+	
 	
 	
 

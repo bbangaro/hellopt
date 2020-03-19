@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
@@ -129,11 +131,22 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("/meetingOne")
-	public String meetingOne(Principal principal, Model model, int meetingIdx, MeetingVO meetingVO) {
+	public String meetingOne(Principal principal, Model model, int meetingIdx, String fkUserId, MeetingVO meetingVO) {
 		//상세리스트
 		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
 		MeetingVO resCount = service.resCount(meetingIdx);
-		System.out.println(resCount.getMeetingIdx());
+		
+		Map<String, Object> hm = new HashMap<>();
+		
+		fkUserId = principal.getName();
+		
+		hm.put("fkUserId", fkUserId);
+		hm.put("meetingIdx", meetingIdx);
+		System.out.println(hm);
+		MeetingVO resUser = service.resUser(hm);
+		System.out.println("resUser : " + resUser);
+		
+		
 		//상세리스트에서 파일 슬라이드
 		List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
 		meetingOne.setMeetingFileVO(MeetingOneFile);
@@ -154,6 +167,7 @@ public class MeetingController {
 		model.addAttribute("resCount", resCount);
 		//model.addAttribute("meetingOneFile", MeetingOneFile);
 		model.addAttribute("meetingCnt", meetingCnt);
+		model.addAttribute("resUser", resUser);
 		return "meeting/meetingOne";
 	}
 	

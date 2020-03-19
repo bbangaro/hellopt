@@ -1,6 +1,10 @@
 package com.bit.hellopt.service.meeting;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.bit.hellopt.vo.meeting.CategoryCodeVO;
 import com.bit.hellopt.vo.meeting.LocalVO;
@@ -23,6 +27,7 @@ public interface MeetingService {
 	// 게시글 상세 조회
 	MeetingVO getMeetingOne(int meetingIdx);
 	MeetingVO resCount(int meetingIdx);
+	MeetingVO resUser(Map<String, Object> hm);
 	List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);
 	
 	// 게시글 입력

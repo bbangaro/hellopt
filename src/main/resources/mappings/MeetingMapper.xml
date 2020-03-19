@@ -52,7 +52,12 @@
 		SELECT COUNT(*) MEETING_IDX
 		  FROM MEETING_APPLY_TB 
 		 WHERE FK_MEETING_IDX = #{meetingIdx} 
-	    GROUP BY FK_MEETING_IDX 
+	  GROUP BY FK_MEETING_IDX 
+	</select>
+	
+	<select id="resUser" parameterType="HashMap" resultType="MeetingVO">
+		SELECT * FROM MEETING_APPLY_TB 
+		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
 	</select>
 	
 	
@@ -63,7 +68,7 @@
 		   AND FK_MEETING_IDX = #{meetingIdx}
 	</select>
 	
-	<!-- 뽑힌 시퀀스 번호가 디비에는 =1되어서 들어간다.. 이유가 뭘까...  -->
+	<!-- 뽑힌 시퀀스 번호가 디비에는 +1되어서 들어간다.. 이유가 뭘까...  -->
 	 <insert id="insertMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 	 		<selectKey resultType="int" keyProperty="meetingIdx" order="BEFORE">
 	 			SELECT MEETING_TB_SEQ.NEXTVAL FROM DUAL
