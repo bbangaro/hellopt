@@ -95,9 +95,14 @@
                 </div>
                     <h3 class="nutrtion_subtitle">메뉴 검색</h3>
                     <div class="menu_search_box">
-                        <form method="get" action="meal?currpage=${page.startBlock}">
-                            <input type="text" id="menusearchtxt"name="searchtxt" class="nutrition_inputL" placeholder="메뉴 명을 작성하세요">
-		                    <input type="submit" value="검색" class="admin_btnS subminbtn inputright">
+                        <form method="get" action="meal?currpage=${page.startBlock}" id="searchform">
+                           <select class="menusearch" name="search">
+                              <option value="MEAL_NAME" selected="selected">메뉴명</option>
+                              <option value="MEAL_KCAL">칼로리</option>
+                            </select>
+                            <input type="text" id="menusearchtxt" name="searchtxt" class="nutrition_inputL" placeholder="메뉴 명을 작성하세요">
+                            <input type="hidden" id="tempmode" name="tempmode" value="${tempmode}">
+                          <input type="button" id="searchbtn" value="검색" class="admin_btnS subminbtn inputright">
                         </form>
                     </div>
                   <div class="menu_title">
@@ -119,26 +124,29 @@
                                <p class="menu_list_lip menu_list_lipbig">${meal.mealName }</p>
                                 <p class="menu_list_lip">${meal.mealAmount }</p>
                                 <p class="menu_list_lip">${meal.mealKcal }</p>
-                                <p class="menu_list_lip menuadd">+</p> 
+                                <input type="hidden" id="${checkedState+MEAL_NO}" value="0">
+                                <p class="menu_list_lip menuadd">+</p>
                             </li>
                         </c:forEach>
                         </ul>
                     </div>
-                </div>
-                <c:if test="${page.prev}">
-      <a href="meal?currpage=${page.startBlock-1}&search=${search}&searchtxt=${searchtxt}"><c:out value="이전"/></a>
-   </c:if>
-   <c:forEach var="index" begin="${page.startBlock}" end="${page.endBlock}">
-      <c:if test="${index==page.currPage}">
-         <c:out value="${index}"/>
-      </c:if>
-      <c:if test="${index!=page.currPage}">
-         <a href="meal?currpage=${index}&search=${search}&searchtxt=${searchtxt}">${index}</a>
-      </c:if>
-   </c:forEach>
-   <c:if test="${page.next}">
-      <a href="meal?currpage=${page.endBlock+1}&search=${search}&searchtxt=${searchtxt}"><c:out value="다음"/></a>
-   </c:if>
+                <div class="pageing_box">
+                        <c:if test="${page.prev}">
+                     <a href="meal?currpage=${page.startBlock-1}&search=${search}&searchtxt=${searchtxt}" onclick="javascript:click()"><c:out value="이전"/></a>
+                  </c:if>
+                  <c:forEach var="index" begin="${page.startBlock}" end="${page.endBlock}">
+                     <c:if test="${index==page.currPage}">
+                        <c:out value="${index}"/>
+                     </c:if>
+                     <c:if test="${index!=page.currPage}">
+                        <a href="meal?currpage=${index}&search=${search}&searchtxt=${searchtxt}" onclick="javascript:click()">${index}</a>
+                     </c:if>
+                  </c:forEach>
+                  <c:if test="${page.next}">
+                     <a href="meal?currpage=${page.endBlock+1}&search=${search}&searchtxt=${searchtxt}"><c:out value="다음"/></a>
+                  </c:if>
+                  </div>
+               </div>
                 <h3 class="nutrtion_subtitle">메뉴 정보</h3>
                 <div class="menu_title">
                       <p class="menu_title_pd menu_title_pdsmall">번호</p>

@@ -177,10 +177,7 @@ li{
 .goal_kacl_num{
     float: left;
     height: 50px;
-    line-height: 50px;
     padding-left: 25px;
-    font-size: 28px;
-    color: #b30000;
 }
 .nutrtion_info{
     float: left;
@@ -243,4 +240,25 @@ li{
     border:1px solid #dc3545;
     background:#dc3545;
     color:#fff;
+}
+
+.menusearch{
+   width: 6%;
+    height: 32px;
+    float: left;
+    font-size: 11px;
+    padding: 0 5px;
+    /* text-align: center; */
+    margin-right: 10px;
+    border: 1px solid #e8e8e8;
+}
+.pageing_box{
+   text-align: center;
+}
+.goal_kacl_numinput{
+   border: none;
+    font-size: 28px;
+    line-height: 50px;
+    color: #b30000;
+    background-color: white;
 }

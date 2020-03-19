@@ -1,6 +1,26 @@
 $(document).ready(function () {
-    /* 저장버튼 클릭시 */
-    //$('#infoAndMenu').css('display', 'none');
+   
+   $('#searchbtn').on('click',function() {
+      console.log("검색버튼");
+      $('#tempmode').val(1);
+      $('#searchform').submit();
+   })
+   /*function searchSubmit(obj) {
+      
+      $('#tempmode').val(1);
+      obj.submit();
+   }*/
+      let mode = $('#tempmode').val();
+      if(mode == 0) {
+         console.log("mode가 0일때");
+         $('#myInfo').css('display', 'block');
+         $('#infoAndMenu').css('display', 'none');
+      } else {
+         console.log("mode가 1일때");
+         $('#myInfo').css('display', 'none');
+         $('#infoAndMenu').css('display', 'block');
+      }
+   
     
     $(document).on('click', '#personinfoBtn', function () {
         console.log("저장 버튼클릭");
@@ -15,7 +35,6 @@ $(document).ready(function () {
         let activity = $('input:radio[name="activity"]:checked').val();
         console.log("activity", activity);
         
-        /*예외처리*/
         if( age == ""){ 
             alert("나이를 입력해주세요");
             return;
@@ -32,18 +51,18 @@ $(document).ready(function () {
             alert("신체활동 수준설정을 선택해주세요");
             return;
         }else{
-            //$('#myInfo').css('display', 'none');
-            //$('#infoAndMenu').css('display', 'block');
+           $('#myInfo').css('display', 'none');
+            $('#infoAndMenu').css('display', 'block');
+                    /*필요한 칼로리 총량 계산식*/
             
-            /*필요한 칼로리 총량 계산식*/
             if (gender == "male") {
-            	var mval1 = 13.75 * kg;
-            	var mval2 = 5.0 * cm;
-            	var mval3 = 6.8 * age;
-            	var mresult = 66.5 + mval1 + mval2 - mval3;
-            	var mval4 = activity;
+               var mval1 = 13.75 * kg;
+               var mval2 = 5.0 * cm;
+               var mval3 = 6.8 * age;
+               var mresult = 66.5 + mval1 + mval2 - mval3;
+               var mval4 = activity;
             } else if (gender == "female") {
-            	var mval1 = 9.6 * kg;
+               var mval1 = 9.6 * kg;
                 var mval2 = 1.85 * cm;
                 var mval3 = 4.7 * age;
                 var mresult = 655.1 + mval1 + mval2 - mval3;
@@ -52,48 +71,87 @@ $(document).ready(function () {
             
             switch (mval4) {
             case "inactive":
-            	MyCalorie = mresult * 1.3;
-            	break;
+               MyCalorie = mresult * 1.3;
+               break;
             case "rowactive":
-            	MyCalorie = mresult * 1.5;
-            	break;
+               MyCalorie = mresult * 1.5;
+               break;
             case "activity":
-            	MyCalorie = mresult * 1.7;
-            	break;
+               MyCalorie = mresult * 1.7;
+               break;
             case "veryactivity":
-            	MyCalorie = mresult * 1.9;
-            	break;
+               MyCalorie = mresult * 1.9;
+               break;
             }
-            
             document.getElementById("calories").innerHTML = MyCalorie.toFixed(2);
-            
         }
-        
+
     });
-
-    //선택된 음식 담는 코드
-    $(document).on('click', '.menuadd', function () {
-        let mealNo=$(this).siblings().eq(0).val();
-        let mealUnit=$(this).siblings().eq(1).val();
-        let mealProtein=$(this).siblings().eq(2).val();
-        let mealFat=$(this).siblings().eq(3).val();
-        let mealCarb=$(this).siblings().eq(4).val();
-        let mealSoium=$(this).siblings().eq(5).val();
-        let mealName=$(this).siblings().eq(6).text();
-        let mealAmount=$(this).siblings().eq(7).text();
-        let mealKcal=$(this).siblings().eq(8).text();
-        console.log("mealNo", mealNo);
-        console.log("mealName", mealName);
-        $( ".menuaddBox" ).append('<p class="menu_list_lipd menu_list_lipdsmall">'+mealNo+'</p>');
-        $( ".menuaddBox" ).append('<p class="menu_list_lipd menu_list_lipdbig">'+mealName+'</p>');
-        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealAmount+'</p>');
-        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealKcal+'</p>');
-        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealCarb+'</p>');
-        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealProtein+'</p>');
-        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealFat+'</p>');
-        $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealSoium+'</p>');
-        /*$( ".menuaddBox" ).append( "<p>"+mealNo+ mealName+ "</p>" );*/
-
-     });
+    //선택한 메뉴 담기
     
+    $(document).on('click', '.menuadd', function () {
+       let $this = $(this);
+       let mealNo=$(this).siblings().eq(0).val();
+       let mealUnit=$(this).siblings().eq(1).val();
+       let mealProtein=$(this).siblings().eq(2).val();
+       let mealFat=$(this).siblings().eq(3).val();
+       let mealCarb=$(this).siblings().eq(4).val();
+       let mealSoium=$(this).siblings().eq(5).val();
+       let mealName=$(this).siblings().eq(6).text();
+       let mealAmount=$(this).siblings().eq(7).text();
+       let mealKcal=$(this).siblings().eq(8).text();
+       let checkedState=$(this).siblings().eq(9).val();
+
+       console.log("mealNo", mealNo);
+       console.log("mealName", mealName);
+       
+       if(checkedState==0) {
+          $this.siblings().eq(9).val(1);
+          var result ='<li id="opt' + mealNo + '">';
+             result +='<p class="menu_list_lipd menu_list_lipdsmall">'+mealNo+'</p>';
+             result += '<p class="menu_list_lipd menu_list_lipdbig">'+mealName+'</p>';
+             result += '<p class="menu_list_lipd">'+mealAmount+'</p>';
+             result += '<p class="menu_list_lipd">'+mealKcal+'</p>';
+             result += '<p class="menu_list_lipd">'+mealCarb+'</p>';
+             result += '<p class="menu_list_lipd">'+mealProtein+'</p>';
+             result += '<p class="menu_list_lipd">'+mealFat+'</p>';
+             result += '<p class="menu_list_lipd">'+mealSoium+'</p>';
+             result += '</li>';
+             console.log('result', result);
+             
+          $('#menuaddBox').append(result);
+          
+          let totalCal = $('#kacltotal').val() + mealKcal;
+          console.log("totalCal"+totalCal);
+           $('#kacltotal').val(totalCal);
+           
+           
+       } else {
+          $this.siblings().eq(9).val(0);
+          $('#').remove();
+          
+          let totalCal = $('#kacltotal').val() - mealKcal;
+           $('#kacltotal').val(totalCal);
+          
+          
+       }
+       /*
+       $( ".menuaddBox" ).append('<p class="menu_list_lipd menu_list_lipdsmall">'+mealNo+'</p>');
+       $( ".menuaddBox" ).append('<p class="menu_list_lipd menu_list_lipdbig">'+mealName+'</p>');
+       $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealAmount+'</p>');
+       $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealKcal+'</p>');
+       $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealCarb+'</p>');
+       $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealProtein+'</p>');
+       $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealFat+'</p>');
+       $( ".menuaddBox" ).append('<p class="menu_list_lipd">'+mealSoium+'</p>');
+       */
+       /*$( ".menuaddBox" ).append( "<p>"+mealNo+ mealName+ "</p>" );*/
+       
+       let sumKcal= $(this).parent().parent().parent().parent().siblings().eq(3).children().children().children().children().eq(3);
+       
+       console.log(sumKcal);
+       
+    });
+    
+
 });

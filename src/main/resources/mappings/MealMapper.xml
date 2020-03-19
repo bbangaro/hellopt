@@ -6,18 +6,21 @@
 	
 	<parameterMap type="java.util.HashMap" id="hashMap"/>
 	<select id="getMeal" parameterMap="hashMap" resultType="com.bit.hellopt.vo.meal.MealVO">
-	select *
-      from (
-            select rownum as rnum, b.*
-            from (
-                   select meal_no, meal_name, meal_amount, meal_unit, meal_kcal, meal_protein, meal_fat, meal_carb, meal_sodium
-                   from MEAL_TB 
+	SELECT *
+      FROM (
+            SELECT ROWNUM AS RNUM, B.*
+              FROM (
+                    SELECT MEAL_NO, MEAL_NAME, MEAL_AMOUNT, MEAL_UNIT, MEAL_KCAL, MEAL_PROTEIN, MEAL_FAT, MEAL_CARB, MEAL_SODIUM
+                      FROM MEAL_TB 
                    <where>
                       <if test="searchtxt!=null and searchtxt!=''">
                          <choose>
-                            <when test="search=='employee_id'">
-                               and meal_name=#{searchtxt}
-                            </when>
+               <when test="search=='MEAL_NAME'">
+                  and MEAL_NAME like '%'|| #{searchtxt} ||'%'
+               </when>
+               <when test="search=='MEAL_KCAL'">
+                  and MEAL_KCAL like '%'|| #{searchtxt} ||'%'
+               </when>
                          </choose>
                       </if>
                    </where>
@@ -37,13 +40,16 @@
 	</select>
 	
 	<select id="getCount" resultType="int" parameterMap="hashMap">
-      select count(*)
-      from meal_tb
+      SELECT COUNT(*)
+        FROM MEAL_TB
       <where>
          <if test="searchtxt!=null and searchtxt!='' ">
             <choose>
-               <when test="search=='meal_name'">
-                  and meal_name=#{searchtxt}
+               <when test="search=='MEAL_NAME'">
+                  and MEAL_NAME like '%'|| #{searchtxt} ||'%'
+               </when>
+               <when test="search=='MEAL_KCAL'">
+                  and MEAL_KCAL like '%'|| #{searchtxt} ||'%'
                </when>
             </choose>
          </if>

@@ -25,18 +25,33 @@ public class MealController {
 			@RequestParam(required=false, defaultValue="1") int currpage
 			, @RequestParam(required=false, defaultValue="") String search
 			, @RequestParam(required=false, defaultValue="") String searchtxt
+			, @RequestParam(required=false, defaultValue="0") int tempmode
 			, Model model) {
 		
-		Pattern da=Pattern.compile("(\\d{4}$)");
-		if(search=="mealName"||"mealName".equals(search)) {
-			Matcher m=da.matcher(searchtxt);
-			if(!m.find()) {
-				searchtxt="";
-				model.addAttribute("searchtxt", "");
-			}else {
-				model.addAttribute("searchtxt", searchtxt);
-			}
-		}
+		System.out.println(searchtxt);
+		
+		Pattern da=Pattern.compile("(^[가-힣]*$)");
+	      if(search=="MEAL_NAME"||"MEAL_NAME".equals(search)) {
+	         Matcher m=da.matcher(searchtxt);
+	         if(!m.find()) {
+	            System.out.println(true);
+	            searchtxt="";
+	            model.addAttribute("searchtxt", "");
+	         }else {
+	            System.out.println(false);
+	            model.addAttribute("searchtxt", searchtxt);
+	         }
+	      }
+	      Pattern d=Pattern.compile("(^[0-9]*$)");
+	      if(search=="MEAL_KCAL"||"MEAL_KCAL".equals(search)) {
+	         Matcher m=d.matcher(searchtxt);
+	         if(!m.find()) {
+	            searchtxt="";
+	            model.addAttribute("searchtxt", "");
+	         }else {
+	            model.addAttribute("searchtxt", searchtxt);
+	         }
+	      }
 		
 		int totalCount=service.totalCount(search, searchtxt);
 		int pageSize=10;
@@ -50,6 +65,7 @@ public class MealController {
 		model.addAttribute("page", page);
 		model.addAttribute("search", search);
 		model.addAttribute("searchtxt", searchtxt);
+		model.addAttribute("tempmode", tempmode);
 		return "meal/meal";
 	}
 }
