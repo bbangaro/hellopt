@@ -77,21 +77,21 @@
                 <div>
                    <div class="kacl_box">
                     <p class="goal_kacl">목표 섭취 열량(kacl)</p>
-                    <p class="goal_kacl_num" id="calories"></p>
+                    <p class="goal_kacl_num1" id="calories"></p>
                 </div>
                 <div class="kacl_box">
                     <p class="goal_kacl">총 섭취 열량(kacl)</p>
-                    <p class="goal_kacl_num">1751.0</p>
+                    <p class="goal_kacl_num"><input type="text" value="0" id="kacltotal" class="goal_kacl_numinput"name="kacltotal"></p>
                 </div>
                 <div class="nutrtion_box">
                     <p class="nutrtion_info">탄수화물(g)</p>
-                    <p class="nutrtion_info">1751.0</p>
+                    <p class="nutrtion_info"><input type="text" value="0" id="carbtotal" class="nutrtion_infoinput" name="carbtotal"></p>
                     <p class="nutrtion_info">단백질(g)</p>
-                    <p class="nutrtion_info">1751.0</p>
+                    <p class="nutrtion_info"><input type="text" value="0" id="proteintotal" class="nutrtion_infoinput"name="proteintotal"></p>
                     <p class="nutrtion_info">지방(g)</p>
-                    <p class="nutrtion_info">1751.0</p>
+                    <p class="nutrtion_info"><input type="text" value="0" id="fattotal" class="nutrtion_infoinput"name="fattotal"></p>
                     <p class="nutrtion_info">나트륨(g)</p>
-                    <p class="nutrtion_info">1751.0</p>
+                    <p class="nutrtion_info"><input type="text" value="0" id="sodiumtotal" class="nutrtion_infoinput"name="sodiumtotal"></p>
                 </div>
                     <h3 class="nutrtion_subtitle">메뉴 검색</h3>
                     <div class="menu_search_box">
@@ -121,25 +121,26 @@
                                  <input type="hidden" value="${meal.mealFat}">
                                  <input type="hidden" value="${meal.mealCarb}">
                                  <input type="hidden" value="${meal.mealSodium}">
-                               <p class="menu_list_lip menu_list_lipbig">${meal.mealName }</p>
+                                <p class="menu_list_lip menu_list_lipbig">${meal.mealName }</p>
                                 <p class="menu_list_lip">${meal.mealAmount }</p>
                                 <p class="menu_list_lip">${meal.mealKcal }</p>
                                 <input type="hidden" id="${checkedState+MEAL_NO}" value="0">
-                                <p class="menu_list_lip menuadd">+</p>
+                                <p class="menu_list_lip menuadd"><input type="checkbox" value="" class="menuaddCheckbox"></p>
+                                
                             </li>
                         </c:forEach>
                         </ul>
                     </div>
                 <div class="pageing_box">
                         <c:if test="${page.prev}">
-                     <a href="meal?currpage=${page.startBlock-1}&search=${search}&searchtxt=${searchtxt}" onclick="javascript:click()"><c:out value="이전"/></a>
+                     <a href="meal?currpage=${page.startBlock-1}&search=${search}&searchtxt=${searchtxt}"><c:out value="이전"/></a>
                   </c:if>
                   <c:forEach var="index" begin="${page.startBlock}" end="${page.endBlock}">
                      <c:if test="${index==page.currPage}">
                         <c:out value="${index}"/>
                      </c:if>
                      <c:if test="${index!=page.currPage}">
-                        <a href="meal?currpage=${index}&search=${search}&searchtxt=${searchtxt}" onclick="javascript:click()">${index}</a>
+                        <a href="meal?currpage=${index}&search=${search}&searchtxt=${searchtxt}">${index}</a>
                      </c:if>
                   </c:forEach>
                   <c:if test="${page.next}">
@@ -149,7 +150,7 @@
                </div>
                 <h3 class="nutrtion_subtitle">메뉴 정보</h3>
                 <div class="menu_title">
-                      <p class="menu_title_pd menu_title_pdsmall">번호</p>
+                        <!-- <p class="menu_title_pd menu_title_pdsmall">번호</p> -->
                         <p class="menu_title_pd menu_title_pdbig">메뉴</p>
                         <p class="menu_title_pd">섭취량(g)</p>
                         <p class="menu_title_pd">열량(kacl)</p>
@@ -159,20 +160,9 @@
                         <p class="menu_title_pd">나트륨(g)</p>
                 </div>
                 <form action="" method="post">
-                   <div class="menu_list_box">
-                        <ul>
-                            <li class="menu_list_li menuaddBox">
-                              <!-- <p class="menu_list_lipd menu_list_lipdsmall">1</p>
-                               <p class="menu_list_lipd menu_list_lipdbig">아메리카노</p>
-                                <p class="menu_list_lipd">100</p>
-                                <p class="menu_list_lipd">100</p>
-                                <p class="menu_list_lipd">100</p>
-                                <p class="menu_list_lipd">100</p>
-                                <p class="menu_list_lipd">100</p>
-                                <p class="menu_list_lipd">100</p> -->
-                            </li>
+					<div class="menu_list_box">
+                        <ul id="menuaddBox">
                         </ul>
-                        
                     </div>
                     <div class="active_btn_box">
                        <input type="submit" value="평가" class="admin_btn subminbtn">

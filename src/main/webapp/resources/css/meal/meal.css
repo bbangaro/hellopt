@@ -139,8 +139,9 @@ li{
     border-top: 1px solid #dc3545;
 }
 .menu_list_box{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-bottom: 1px solid #373737;
+    padding-bottom: 10px;
 }
 
 .menu_list_li{
@@ -167,17 +168,28 @@ li{
     border-bottom: 1px solid #373737;
 }
 .goal_kacl{
-   float: left;
+    float: left;
     width: 30%;
-   height: 50px;
+    height: 50px;
     line-height: 50px;
     text-align: center;
     background-color: #393939;
+}
+.goal_kacl_num1{
+	float: left;
+    height: 50px;
+    padding-left: 25px;
+    line-height: 50px;
+	color: #007bff;
+	font-size: 25px;
 }
 .goal_kacl_num{
     float: left;
     height: 50px;
     padding-left: 25px;
+    line-height: 50px;
+    color: #dc3545;
+    font-size: 25px;
 }
 .nutrtion_info{
     float: left;
@@ -242,23 +254,37 @@ li{
     color:#fff;
 }
 
-.menusearch{
+menusearch{
    width: 6%;
     height: 32px;
     float: left;
     font-size: 11px;
     padding: 0 5px;
-    /* text-align: center; */
     margin-right: 10px;
     border: 1px solid #e8e8e8;
 }
 .pageing_box{
    text-align: center;
+   margin: 0 0 25px 0;
 }
 .goal_kacl_numinput{
-   border: none;
+   background-color: #1e1e1e;
+    border: none;
     font-size: 28px;
-    line-height: 50px;
+    line-height: 49px;
     color: #b30000;
-    background-color: white;
+}
+.nutrtion_infoinput{
+	color: #b30000;
+  	border: none;
+    width: 60px;
+    line-height: 37px;
+    background-color: #1e1e1e;
+}
+.menuaddCheckbox{
+   height: 34px;
+    cursor: pointer;
+}
+.menusearch{
+	display:none;
 }
