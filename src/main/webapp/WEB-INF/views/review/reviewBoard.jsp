@@ -116,7 +116,7 @@
 		</tr>
 		<tr>
 			<c:if test="${rBoard.userFileName == null }">
-			<td rowspan="3"><img class='profile' src="/hellopt/file/4e464b9505d74c6f94e5241fe3c3dc6a.png"></td>
+			<td rowspan="3"><img class='profile' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png"></td>
 			</c:if>
 			<c:if test="${rBoard.userFileName != null }">
 			<td rowspan="3"><img class='profile' src="/hellopt/file/${rBoard.userFileName}"></td>
