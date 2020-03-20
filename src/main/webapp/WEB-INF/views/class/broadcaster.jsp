@@ -42,11 +42,14 @@
 			        	<div id="videos-container">
 			        		<video playsinline autoplay="autoplay"></video>
 			        	</div>
+			        	<!-- //videos-container -->
 			        	<div id="class-name"><p>${className } 강의입니다.</p></div>
 			        </div>
+			        <!-- //video-info -->
 			        <div id="chat-container">
 						<iframe id="chat" src="http://localhost:3000" scrolling="no"></iframe>
 			        </div>
+			        <!-- //chat-container -->
 			    </section>
 			</article>
 		</div>
@@ -54,11 +57,11 @@
 	</div>
 	<!-- // wrapper -->
 
+	<!-- 로그인한 userId 얻어오기 -->
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal" var="user" />
 		<input type="hidden" value="${user.username }" id="userid">
 	</sec:authorize>
-	<input type="hidden" value="${className }" id="className">
 	
 	<script>
 		var confirm = confirm("방송을 시작하려면 확인을 눌러주세요");
@@ -69,12 +72,12 @@
 		} else {
 			DetectRTC.load(function() {
 				if (DetectRTC.hasWebcam !== true) {
-	                alert('DetectRTC library is unable to find webcam; maybe you denied webcam access once and it is still denied or maybe webcam device is not attached to your system or another app is using same webcam.');
+	                alert('카메라를 찾을 수 없습니다. 카메라가 시스템 상에 존재하지 않거나 카메라 접근을 허용하지 않았을 수 있습니다. 혹은 다른 앱에서 카메라를 사용중인지 확인해주세요.');
+	                history.back();
 	            } 
 			});
 		}
     </script>
-    
 	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script>
 		var userId = $("#userid").val();
@@ -88,8 +91,6 @@
 			document.querySelector("#chat").contentWindow.postMessage(JSON.stringify({"roomId": roomId, "userId": userId}), "*");	
 		}, 1000);
 	</script>    
-	
 	<script src="${pageContext.request.contextPath }/resources/js/live/broadcaster.js"></script>
-	
 </body>
 </html>
