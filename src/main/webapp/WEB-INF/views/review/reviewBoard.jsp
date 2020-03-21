@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>후기게시판</title>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <style>
  	.content {
@@ -82,12 +82,7 @@
 	}
 </style>
 </head>
-<script>
-	function selChange(){
-		var sel = document.getElementById('cntperPage').vlaue;
-		location.href="review?nowPage=${paging.nowPage}&cntPerPage="+sel;
-	}
-</script>
+
 <body>
 <div id = "container">
 <%-- <div id="outter">
@@ -104,21 +99,24 @@
 </div> --%>
 
 <form>
-
+	<sec:authorize access="isAuthenticated()">
 	<p><a href="${pageContext.request.contextPath}/review/insertform">후기쓰러가기</a></p>	
+	</sec:authorize>
 <c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
 <table class="tbl_wrap">
 	<thead class="tbl_head01">
 		<tr>
 		<sec:authorize access="isAuthenticated()">
-			<sec:authentication property = "principal.username"/>
-			<td><a href="#this" id="modify" class= "btn">글 수정</a></td>
-			<td><a href="#this" id="delete" class= "btn">글 삭제</a></td>
+		<sec:authentication var="principal" property="principal" />
+		<c:if test="${rBoard.userId == principal.username}">
+			<td><input type = "button" value="글 수정" onclick = "modify(${rBoard.revIdx})"></td>
+			<td><input type = "button" value="글 삭제" onclick = "del(${rBoard.revIdx })"></td>
+		</c:if>
 		</sec:authorize>
 		</tr>
 		<tr>
 			<c:if test="${rBoard.userFileName == null }">
-			<td rowspan="3"><img class='profile' src="/hellopt/file/4e464b9505d74c6f94e5241fe3c3dc6a.png"></td>
+			<td rowspan="3"><img class='profile' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png"></td>
 			</c:if>
 			<c:if test="${rBoard.userFileName != null }">
 			<td rowspan="3"><img class='profile' src="/hellopt/file/${rBoard.userFileName}"></td>
@@ -140,10 +138,10 @@
 				</c:if>	
 			</c:forEach> --%>
 			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
-				<span class="star on">i</span>
+				<span class="star on">${i}</span>
 			</c:forEach> 
 			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
-				<span class="star">i</span>
+				<span class="star">${i}</span>
 			</c:forEach>   
 			</td>
 		</tr>
@@ -165,20 +163,23 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			
 		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
-		<c:if test="${rBoard.cmtCnt > 0 }">
-		<td>
-			<a href="#this" id="cmtCnt"> 댓글${rBoard.cmtCnt }개 모두 보기</a>
-		</td>
-		</c:if> 
+			<c:if test="${rBoard.cmtCnt > 0 }">
+			<td>
+				<a href="#this" id="cmtCnt"> 댓글${rBoard.cmtCnt }개 모두 보기</a>
+			</td>
+			</c:if> 
 		</tr>
+		<sec:authorize access="isAuthenticated()">
 		<tr>
-			<sec:authorize access="isAuthenticated()">
-			<textarea rows="2" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
-			<button type="button" id="btnReply">등록</button>
-			</sec:authorize>
+			<td>
+				<textarea rows="2" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
+			</td>
+			<td>
+				<button type="button" id="btnReply">등록</button>
+			</td>	
 		</tr>
+		</sec:authorize>
 		<c:forEach var="row" items="${replyList }">
 		<tr>
 			<td id="listReply">
@@ -201,7 +202,7 @@
 				</c:when>
 				<c:otherwise>
 					<li>
-						<a href="review?cPage=${pvo.beginPage - 1 }">이전으로</a>
+						<a class="disable" href="review?cPage=${pvo.beginPage - 1 }">이전으로</a>
 					</li>
 				</c:otherwise>
 			</c:choose>
@@ -214,7 +215,7 @@
 				</c:when>
 				<c:otherwise>
 					<li>
-						<a href="review?cPage="${k }">${k }</a>
+						<a href="review?cPage=${k}">${k }</a>
 					</li>
 				</c:otherwise>
 			</c:choose>
@@ -228,19 +229,20 @@
 					<li class="disable">다음으로 </li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="review?cPage="${pvo.endPage + 1 }></a>다음으로</li>
+					<li >
+						<a href="review?cPage=${pvo.endPage + 1 }">다음으로</a>
+					</li>
 				</c:otherwise>
 			</c:choose>
 		</ol>
 	</td>
-		
-		
  	<!--페이징끝 -->
 </form>
 </div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
 	$(document).ready(function(){
+		
 		//댓글쓰기 버튼 클릭 이벤트 (ajax로 처리)
 		$("#btnReply").click(function(){
 			var replytext=$("#replytext").val();
@@ -254,23 +256,21 @@
 					alert("댓글이 등록되었습니다.");
 					listReply2();
 				}
-			});
+			})
 			
-		});
-		
-		//게시글 수정
-		$("#modify").on("click", function(e){
-			console.log(e);
-			e.preventDefault();
-			fn_modifyBoard();
-		})
-		//게시글 삭제
-		$("#delete").on("click", function(e){
-			alert("삭제하시겠습니까");
-			e.preventDefault();
-			fn_deleteBoard();
 		})
 	})
+
+	function del(revIdx) {
+		var chk = confirm("정말 삭제 하시겠습니까?");
+		if (chk){
+			location.href = 'deleterboard?revIdx='+revIdx;	
+		}
+	}	
+	function modify(revIdx) {
+			location.href = '${pageContext.request.contextPath}/review/updateform?revIdx='+revIdx;	
+			
+	}	
 	
 	//Controller방식
 	//**댓글 목록1
@@ -307,17 +307,6 @@
 		})
 	}
 
-	function fn_modifyBoard(){
-		
-		var comSubmit = new ComSubmit("frm");
- 		comSubmit.setUrl("<c:url value='/review/updateform'/>");
- 		comSubmit.submit();
-	}
-	function fn_deleteBoard(){
-		var comSubmit = new ComSubmit("frm");
-		comSubmi.setUrl("<c:url value='/review/deleteboard' />");
-		comSubmit.submit();
-	}
 
 	
 </script>
