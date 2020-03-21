@@ -2,8 +2,10 @@ package com.bit.hellopt.vo.reviewboard;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
-public class commandMap {
+public class CommandMap {
 	Map<String, Object> map = new HashMap<String, Object>();
 	
 	public void put(String key, Object value) {
@@ -16,6 +18,28 @@ public class commandMap {
 		return map.isEmpty();
 	}
 	public Map<String, Object> getMap(){
-		
+		return map;
 	}
+	public void clear() {
+		map.clear();
+	}
+	public boolean containskey(String key) {
+		return map.containsKey(key);
+	}
+	public boolean constainsValue(Object value) {
+		return map.containsValue(value);
+	}
+	public Object remove(String key) {
+		return map.remove(key);
+	}
+	public Set<Entry<String, Object>> entrySet(){
+		return map.entrySet();
+	}
+	public Set<String> keySet(){
+		return map.keySet();
+	}
+	public void putAll(Map<? extends String, ? extends Object> m) {
+		map.putAll(m);
+	}
+	
 }
