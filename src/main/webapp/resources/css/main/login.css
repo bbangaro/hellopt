@@ -37,11 +37,14 @@ input[type="text"] {
 
 label {
 	/* 임시 크기 */
-	width: 300px;
+	width: 100%;
 }
 
 .error {
 	color: red;
+}
+
+span .error {
 	display: inline-block;
 }
 

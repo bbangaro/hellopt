@@ -18,12 +18,13 @@ public class User {
 	private String userAddress;
 	@Size(max = 20)
 	private String userJob;
-	@Pattern(regexp = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$", message = "please date YYYY-MM-DD format")
+	@Pattern(regexp = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$", message = "please input date YYYY-MM-DD format")
 	private String userBirth;
 	private String userRoot;
 	private int userHeight;
 	private int userWeight;
 	private String userProfile;
+	private int userEnable;
 	
 	public User() {}
 
@@ -130,5 +131,13 @@ public class User {
 	public void setUserProfile(String userProfile) {
 		this.userProfile = userProfile;
 	}
-	
+
+	public int getUserEnable() {
+		return userEnable;
+	}
+
+	public void setUserEnable(int userEnable) {
+		this.userEnable = userEnable;
+	}
+
 }

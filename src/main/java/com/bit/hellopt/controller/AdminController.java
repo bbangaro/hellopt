@@ -33,9 +33,10 @@ public class AdminController {
 	@GetMapping("/admin/user")
 	public String adminUserManagement(Model model, 
 			@RequestParam(name = "page", defaultValue = "1") int page, 
-			@RequestParam(name = "search")String search) {
-		model.addAttribute("userList", userService.pagingUserList(page));
-		model.addAttribute("lastPage", userService.getLastPage(page));
+			@RequestParam(name = "search", defaultValue = "all")String search,
+			@RequestParam(name = "searchValue", defaultValue = "")String searchValue) {
+		model.addAttribute("userList", userService.pagingUserList(search, searchValue, page));
+		model.addAttribute("lastPage", userService.getLastPage(search, searchValue, page));
 		
 		return "admin/adminUserManagement";
 	}
@@ -80,7 +81,8 @@ public class AdminController {
 	public String adminDeleteUser(@RequestParam String userId) {
 		User user = new User();
 		user.setUserId(userId);
-		userService.deleteUser(user);
+		//userService.deleteUser(user);
+		userService.disableUser(user);
 		return "redirect:/admin/user";
 	}
 	
