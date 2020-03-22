@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main/login.css">
 <title>HelloPT</title>
@@ -12,7 +13,7 @@
 <body>
 	<h2>Login</h2>
 	<c:if test="${param.error}">
-			<p class="error">로그인 에러가 발생했습니다.</p>
+			<p class="error">아이디 / 비밀번호가 일치하지 않습니다.</p>
 	</c:if>
 	<form name='f' action="login" method='POST'>
 		<ul>

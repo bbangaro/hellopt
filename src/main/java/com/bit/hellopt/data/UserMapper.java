@@ -32,4 +32,7 @@ public interface UserMapper {
 	
 	@Delete("DELETE FROM users_tb WHERE user_id = #{userId}")
 	public void deleteUser(User user);
+	
+	@Update("UPDATE users_tb SET user_enable = 0 WHERE user_id = #{userId}")
+	public void disableUSer(User user);
 }

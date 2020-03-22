@@ -50,7 +50,24 @@
 		</tbody>
 	</table>
 	<c:forEach begin="${param.page - (param.page % 10) + 1}" end="${lastPage}" varStatus="idx">
-		<a href="${ pageContext.request.contextPath }/admin/user?page=${idx.count}">${idx.count}</a>
+		<c:choose>
+			<c:when test="${not empty param.search }">
+				<a href="${ pageContext.request.contextPath }/admin/user?search=${param.search}&searchValue=${param.searchValue}&page=${idx.count}">${idx.count}</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${ pageContext.request.contextPath }/admin/user?page=${idx.count}">${idx.count}</a>
+			</c:otherwise>
+		</c:choose>
+		
 	</c:forEach>
+	<form action="${pageContext.request.contextPath}/admin/user" method="get">
+	<select name="search">
+		<option value="id">아이디</option>
+		<option value="name">이름</option> 
+	</select>
+	<input type="text" name="searchValue">
+	<input type="submit" value="검색">
+	</form>
+	
 </body>
 </html>

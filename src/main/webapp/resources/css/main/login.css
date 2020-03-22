@@ -26,17 +26,34 @@ form input {
 	color: #fff;
 }
 
+input[type="text"] {
+	width: 100%;
+}
+
 .content li {
 	border-bottom: 1px solid #7d7d7d;
 	margin-bottom: 20px;
+}
+
+label {
+	/* 임시 크기 */
+	width: 100%;
 }
 
 .error {
 	color: red;
 }
 
+span .error {
+	display: inline-block;
+}
+
 input[type='radio'] {
 	display: inline;
+	margin: auto;
+}
+input[type="number"] {
+	margin: auto;
 }
 
 input[type='button'],  input[type='submit']{
