@@ -1,25 +1,27 @@
 function idCheck() {
     let httpRequest = new XMLHttpRequest();
     let userId = document.getElementById('userId').value;
+    let pattern = /[0-9a-z-_]{5,20}/g;
     
-    if(userId == "") {
-    	alert("아이디를 입력해주십시오");
+    if(!userId.match(pattern)) {
+    	alert("올바르지 않은 아이디 형식입니다.");
     	return;
-    }
-    
-    httpRequest.open('POST', "/hellopt/user/idcheck")
-    httpRequest.responseType = 'json';
-    httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    httpRequest.send(JSON.stringify({"userId" : userId}));
-    httpRequest.onload = function() {
-        let result = httpRequest.response;
-        let resultLabel = document.getElementById('idCheckResult');
-        if(result == 1) {
-            resultLabel.innerHTML = "중복된 아이디 입니다."
-        } else {
-        	resultLabel.innerHTML = "사용 가능한 아이디 입니다."
+    } else {
+    	httpRequest.open('POST', "/hellopt/user/idcheck")
+        httpRequest.responseType = 'json';
+        httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        httpRequest.send(JSON.stringify({"userId" : userId}));
+        httpRequest.onload = function() {
+            let result = httpRequest.response;
+            let resultLabel = document.getElementById('idCheckResult');
+            if(result == 1) {
+                resultLabel.innerHTML = "중복된 아이디 입니다."
+            } else {
+            	resultLabel.innerHTML = "사용 가능한 아이디 입니다."
+            }
         }
     }
+    
 }
 
 function formCheck() {
@@ -72,18 +74,28 @@ userPw.addEventListener("focus", (event) => {
 let userPwConfirm = document.getElementById("userPwConfirm");
 userPwConfirm.addEventListener("change", (event) => {
 	let info = document.getElementById("pw-cfm-info");
-	if(userPw.value != userPwConfirm.value) {
-		info.innerText = "비밀번호가 일치하지 않습니다.";
+	let pattern = /[\w!@#$%^&*()-_]{5,20}/g;
+	if(userPw.value.match(pattern)) {
+		if(userPw.value != userPwConfirm.value) {
+			info.innerText = "비밀번호가 일치하지 않습니다.";
+		} else {
+			info.innerText = "";
+		}
 	} else {
-		info.innerText = "";
+		info.innerText = "올바르지 않은 비밀번호 형식입니다.";
 	}
 });
 
 userPw.addEventListener("change", (event) => {
 	let info = document.getElementById("pw-cfm-info");
+	let pattern = /[\w!@#$%^&*()-_]{5,20}/g;
+	if(userPw.value.match(pattern)) {
 	if(userPw.value != userPwConfirm.value) {
 		info.innerText = "비밀번호가 일치하지 않습니다.";
 	} else {
 		info.innerText = "";
+	}
+	} else {
+		info.innerText = "올바르지 않은 비밀번호 형식입니다.";
 	}
 });

@@ -35,12 +35,22 @@ input[type="text"] {
 	margin-bottom: 20px;
 }
 
+label {
+	/* 임시 크기 */
+	width: 300px;
+}
+
 .error {
 	color: red;
+	display: inline-block;
 }
 
 input[type='radio'] {
 	display: inline;
+	margin: auto;
+}
+input[type="number"] {
+	margin: auto;
 }
 
 input[type='button'],  input[type='submit']{

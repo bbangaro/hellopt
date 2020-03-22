@@ -26,9 +26,9 @@
 				<label id="idCheckResult"></label></li>
 			<li>
 				<form:label path="userPw">비밀번호</form:label> 
-				<form:input path="userPw" placeholder="PASSWORD"/> 
+				<form:input path="userPw" type="password" placeholder="PASSWORD"/> 
 				<label id="pw-info"></label>
-				<input type="text" id="userPwConfirm" placeholder="PASSWORD CONFIRM" >
+				<input type="password" id="userPwConfirm" placeholder="PASSWORD CONFIRM" >
 				<label id="pw-cfm-info"></label>
 				<form:errors path="userPw" cssClass="error"></form:errors>
 			</li>
