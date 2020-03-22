@@ -19,13 +19,17 @@
 		<ul>
 			<li>
 				<form:label path="userId">아이디</form:label> 
-				<form:input path="userId" placeholder="ID" /> 
+				<form:input path="userId" placeholder="ID" />
+				<label id="id-info"></label>
 				<form:errors path="userId" cssClass="error"></form:errors>
 				<input type="button" onclick="idCheck()" value="아이디 중복 확인">
 				<label id="idCheckResult"></label></li>
 			<li>
 				<form:label path="userPw">비밀번호</form:label> 
 				<form:input path="userPw" placeholder="PASSWORD"/> 
+				<label id="pw-info"></label>
+				<input type="text" id="userPwConfirm" placeholder="PASSWORD CONFIRM" >
+				<label id="pw-cfm-info"></label>
 				<form:errors path="userPw" cssClass="error"></form:errors>
 			</li>
 			<li>

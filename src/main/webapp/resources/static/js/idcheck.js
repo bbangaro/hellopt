@@ -57,3 +57,33 @@ function loadPreviewImg(img, previewName) {
 	}
 }
 
+let userId = document.getElementById("userId");
+let idInfo = document.getElementById("id-info");
+userId.addEventListener("focus", (event) => {
+	idInfo.innerText = "영어 소문자, 숫자, -, _로 이루어진 5-20자 문자를 아이디로 사용할 수 있습니다.";
+});
+
+let userPw = document.getElementById("userPw");
+userPw.addEventListener("focus", (event) => {
+	document.getElementById("pw-info").innerText 
+	= "영어 대소문자, 숫자, 특수문자 !, @, #, $, %, ^, &, *, (, ), -, _로 이루어진 5-20자 문자를 비밀번호로 사용할 수 있습니다.";
+});
+
+let userPwConfirm = document.getElementById("userPwConfirm");
+userPwConfirm.addEventListener("change", (event) => {
+	let info = document.getElementById("pw-cfm-info");
+	if(userPw.value != userPwConfirm.value) {
+		info.innerText = "비밀번호가 일치하지 않습니다.";
+	} else {
+		info.innerText = "";
+	}
+});
+
+userPw.addEventListener("change", (event) => {
+	let info = document.getElementById("pw-cfm-info");
+	if(userPw.value != userPwConfirm.value) {
+		info.innerText = "비밀번호가 일치하지 않습니다.";
+	} else {
+		info.innerText = "";
+	}
+});
