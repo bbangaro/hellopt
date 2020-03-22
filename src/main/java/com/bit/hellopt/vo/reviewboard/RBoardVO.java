@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit.hellopt.vo.user.User;
 
 
-public class RBoardVO extends ListPagingVO{
+public class RBoardVO extends RPagingVO {
 	private int revIdx;
 	private String userId;
 	private String userName;

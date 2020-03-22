@@ -1,46 +1,35 @@
 package com.bit.hellopt.controller.reviewboard;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.service.user.UserProfileService;
-import com.bit.hellopt.service.user.UserService;
 //import com.bit.hellopt.vo.reviewboard.Pagination;
-import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.reviewboard.RPagingVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
-import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 
 @Controller
@@ -73,9 +62,14 @@ public class RBoardController {
 		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
 		RPagingVO p = new RPagingVO();
 		
+		System.out.println("getTotal 전: " + rService.getTotalCount());
+		
 		//1.전체 게시물의 수를 구하기
 		p.setTotalRecord(rService.getTotalCount());
 		p.setTotalPage();//전체 페이지 갯수 구하기
+		
+		
+		System.out.println("getTotal 후: " + rService.getTotalCount());
 		
 		System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
 		System.out.println(">전체 페이지 수 : " + p.getTotalPage());

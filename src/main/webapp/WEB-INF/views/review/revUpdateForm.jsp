@@ -167,6 +167,28 @@
 		</div>
 	</div>
 	
+	<!-- 이미지업로드방식 2 -->
+	<div class="preview-image">
+		<div id="sub" class="text-wrap">
+			<h4>서브 이미지</h4>
+		</div>
+	</div>
+	<p class="text">
+		상품의 다양한 이미지컷을
+		<br>
+		최대 2장까지 넣을 수 있습니다.	
+	</p>
+	<div class="imgDisplay">
+        <div class="view_area" style="display: flex;"></div>
+        <img class="subImage"  src="/app/resources/img/default_image.png" width="150px;" height="150px;"/>
+        <div class="filebox bs3-primary">
+            <label for="subImage">업로드</label>
+            <input type="file" name="subImage" id="subImage"accept="image/jpeg,image/gif,image/png" multiple>		
+        </div>
+	</div>
+	
+	
+	
 	<a href="javacript:" class="my_button" onclick="submitAction();">업로드</a>
 	
 	<a href="#this" id="list" class="btn">목록으로</a>
@@ -174,10 +196,67 @@
 </form>	
 
 
-<%@ include file="/WEB-INF/include/include-body.jsp" %>	
+<script>
+//다중 파일 업로드 새로함
+$('#subImage').on('change',function() {
+	var form = $("#product")[0];
+	console.log(form);
+	var data = new FormData(form);
+	$.ajax({
+		type : 'POST',
+		enctype : 'multipart/form-data',
+		url : "subImageUpload.do",
+		data : data,
+		processData : false,
+		contentType : false,
+		success : function(json){
+				console.log(json);
+				$('.subImage').remove();
+				
+			for (var i in json) {
+				$('.view_area').append(
+						"<div class='id'><img style='width:150px; height:150px;' src=/app/resources/img/"+json[i]+"><button type='button' onclick='imgDel(this);'>삭제하기</button></div>");
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown){
+			alert("오류가 발생하였습니다.");
+		}
+	});
+});
 
-<script type="text/javascript">
+//서브파일 이미지 업로드 삭제
+function imgDel(e) {
+		var imgs = e.previousElementSibling;
+		var src = imgs.src;
+		console.log(imgs.src);
+		var img = src.split('/');
+		var fileName = img[6];
+		console.log(fileName);
+		$.ajax({
+			type : 'post',
+			url : "subImageUploadDel.do",
+			data : {
+				fileName : fileName
+			},
+			success : function(e) {
+				console.log(e);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("오류가 발생하였습니다.");
+			}
+		});
+		var imgtag = $(e).parent(); //<div><img></div>태그에서 div태그
+		var imgtag2 = $(e).parent().parent();
+		imgtag.remove();
+		console.log($(".id").length);
+		if($('.id').length == 0){
+			imgtag2.append('<img class="subImage" src="/app/resources/img/default_image.png" width="150px;" height="150px;"/>');
+		}
+	};
+</script>
 	
+<%@ include file="/WEB-INF/include/include-body.jsp" %>	
+<script type="text/javascript">
 	
 /* 
 	$('#file').on("change", function(){

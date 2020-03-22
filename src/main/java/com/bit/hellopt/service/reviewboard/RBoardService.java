@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.user.User;
@@ -25,7 +24,7 @@ public interface RBoardService {
 	User selectUser();
 	List<RBoardVO> getProfilePic();
 	
-	//게시뭄 총 갯수
+	//게시물 총 갯수
 	int getTotalCount();
 	//페이징 처리 게시글 조회
 	List<RBoardVO> Join2(Map<String, Integer>map);
