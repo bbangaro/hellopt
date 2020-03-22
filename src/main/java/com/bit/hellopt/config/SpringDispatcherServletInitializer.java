@@ -32,7 +32,7 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
     @Override
     protected String[] getServletMappings() {
         return new String[] {
-            "/" //웹사이트 주소
+            "/" // 루트 컨텍스트로 오는 요청 다 매핑함
         };
     }
   

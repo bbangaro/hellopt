@@ -33,3 +33,27 @@ function formCheck() {
 		alert("아이디를 확인해주십시오");
 	}
 }
+
+function loadPreviewImg(img, previewName) {
+	let isIE = (navigator.appName == "Microsoft Internet Explorer");
+	let path = img.value;
+	let ext = path.substring(path.lastIndexOf('.') + 1).toLowerCase();
+	
+	if(ext == "gif" || ext =="jpeg" || ext == "jpg" || ext == "png") {
+		let preview = document.getElementById(previewName);
+		if(isIE) {
+			preview.src = path;
+		} else {
+			if(img.files[0]) {
+				let reader = new FileReader();
+				reader.onload = function (e) {
+					preview.src = e.target.result;
+				}
+				reader.readAsDataURL(img.files[0]);
+			}
+		}
+	} else {
+		alert("올바르지 않는 이미지 파일 형식입니다.")
+	}
+}
+
