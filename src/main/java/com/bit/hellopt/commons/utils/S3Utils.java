@@ -43,6 +43,21 @@ public class S3Utils {
 		System.out.println("Amazon S3 MultipartFile upload Done!");
 	}
 	
+	public void uploadMultipart(String key, MultipartFile multipartFile) {
+		File file = new File(multipartFile.getOriginalFilename());
+		try {
+			multipartFile.transferTo(file);
+			s3.putObject(this.bucketName, key, file);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch(AmazonServiceException e) {
+			System.out.println(e);
+		}
+		System.out.println("Amazon S3 MultipartFile upload Done!");
+	}
+	
 	public void uploadFile(String key, File file) {
 		try {
 			s3.putObject(this.bucketName, key, file);
