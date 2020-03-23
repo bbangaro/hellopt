@@ -113,12 +113,11 @@ $(document).ready(function () {
              
           $('#menuaddBox').append(result);
           
-          let totalCal = parseFloat($('#kacltotal').val()) + parseFloat(mealKcal);
-          console.log("totalCal"+totalCal);
+           let totalCal = parseFloat($('#kacltotal').val()) + parseFloat(mealKcal);
+           //console.log("totalCal"+totalCal);
            $('#kacltotal').val(totalCal);
            
            let carbtotal=parseFloat($('#carbtotal').val()) + parseFloat(mealCarb);
-           console.log("carbtotal"+carbtotal);
            $('#carbtotal').val(carbtotal);
            
            let proteintotal=parseFloat($('#proteintotal').val()) + parseFloat(mealProtein);
@@ -134,8 +133,9 @@ $(document).ready(function () {
           $this.siblings().eq(9).val(0);
           $('#opt' + mealNo ).remove(result);
           
-          let totalCal = parseFloat($('#kacltotal').val()) - parseFloat(mealKcal);
+           let totalCal = parseFloat($('#kacltotal').val()) - parseFloat(mealKcal);
            $('#kacltotal').val(totalCal);
+           
            let carbtotal=parseFloat($('#carbtotal').val()) - parseFloat(mealCarb);
            $('#carbtotal').val(carbtotal);
            
@@ -149,8 +149,123 @@ $(document).ready(function () {
            $('#sodiumtotal').val(sodiumtotal);
        }
        
-       console.log('아아아아아', $('#sodiumtotal').val());
+       console.log('칼로리 총량 : ', $('#kacltotal').val());
+       console.log('탄수화물 총량 : ', $('#carbtotal').val());
+       console.log('단백질 총량 : ', $('#proteintotal').val());
+       console.log('지방 총량 : ', $('#fattotal').val());
+       console.log()
+             
     });
     
+    //버튼클릭시 function
+    // console.log($('#sodiumtotal').val()););
+    // let kdjfdk= $('#sodiumtotal').val();
+    //kdjfdkdldkfd
+    
+    //모달창 띄워주기(일반적인 식사)
+    $("#modal_opne_btn").click(function(){
+    	console.log("버튼클릭시");
+    	$("#modal").attr("style", "display:block");
+    	
+    	//구글차트
+	    google.charts.load('current', {
+	    	'packages': ['bar']
+	    });
+	    google.charts.setOnLoadCallback(drawChart);
+	
+	    function drawChart() {
+	        var data = google.visualization.arrayToDataTable([
+	            ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
+	            ['총칼로리', 3000, 2400],
+	            ['탄수화물', 1000, 100],
+	            ['단백질', 1000, 100],
+	            ['지방', 1000, 400]
+	            ]);
+	        var options = {
+	                chart: {
+	                title: '나는 하루에 얼마나 먹었을까?',
+	                subtitle: '총칼로리, 탄수화물, 단백질, 지방',
+	                },
+	                bars: 'vertical' // Required for Material Bar Charts.
+	            };
+	        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+	        chart.draw(data, google.charts.Bar.convertOptions(options));
+	        }
+        });
+    
+    //모달창 닫기
+    $("#modal_close_btn").click(function(){
+    	$("#modal").attr("style", "display:none");
+    });
 
+	//모달창 띄워주기(다이어트 식단)
+	$("#modal_opne_btn1").click(function(){
+	console.log("버튼클릭시");
+	$("#modal").attr("style", "display:block");
+	
+	//구글차트
+    google.charts.load('current', {
+    	'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
+            ['총칼로리', 3000, 2400],
+            ['탄수화물', 1000, 100],
+            ['단백질', 1000, 100],
+            ['지방', 1000, 400]
+            ]);
+        var options = {
+                chart: {
+                title: '나는 하루에 얼마나 먹었을까?',
+                subtitle: '총칼로리, 탄수화물, 단백질, 지방',
+                },
+                bars: 'vertical' // Required for Material Bar Charts.
+            };
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    });
+
+	//모달창 띄워주기(벌크업 식단)
+	$("#modal_opne_btn2").click(function(){
+	console.log("버튼클릭시");
+	$("#modal").attr("style", "display:block");
+	
+	//구글차트
+    google.charts.load('current', {
+    	'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
+            ['총칼로리', 3000, 2400],
+            ['탄수화물', 1000, 100],
+            ['단백질', 1000, 100],
+            ['지방', 1000, 400]
+            ]);
+        var options = {
+                chart: {
+                title: '나는 하루에 얼마나 먹었을까?',
+                subtitle: '총칼로리, 탄수화물, 단백질, 지방',
+                },
+                bars: 'vertical' // Required for Material Bar Charts.
+            };
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    }); 
+    
 });
+
+
+
+
+
+
+
+

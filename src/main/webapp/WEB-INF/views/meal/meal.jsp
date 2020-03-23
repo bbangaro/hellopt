@@ -8,6 +8,7 @@
 <title>칼로리총량</title>
 <script src="${pageContext.request.contextPath}/resources/js/meal/cafe_nutrition.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/meal/meal.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
@@ -165,11 +166,24 @@
                         </ul>
                     </div>
                     <div class="active_btn_box">
-                       <input type="submit" value="평가" class="admin_btn subminbtn">
+                       <!-- <input type="submit" value="일반식사 평가" class="admin_btn subminbtn">
+                       <input type="submit" value="다이어트 식사 평가" class="admin_btn subminbtn">
+                       <input type="submit" value="벌크업 식사 평가" class="admin_btn subminbtn"> -->
+                       <!-- 모달연습부분 여기서부터 수정 -->
+                       <button type="button" id="modal_opne_btn">일반식사 평가</button>
+                       <button type="button" id="modal_opne_btn1">다이어트식사 평가</button>
+                       <button type="button" id="modal_opne_btn2">벌크업식사 평가</button>
+                    </div>
+                    <div id="modal">
+                    	<div class="modal_content">
+                    		<div id="barchart_material" style="width: 900px; height: 500px;"></div>
+                    		<button type="button" id="modal_close_btn">닫기</button>
+                    	</div>
+                    	<div class="modal_layer"></div>
                     </div>
                 </form>
             </div>
     </div>
-
+    
 </body>
 </html>
