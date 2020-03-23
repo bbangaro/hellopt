@@ -2,6 +2,7 @@ package com.bit.hellopt.controller.reviewboard;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -31,6 +33,7 @@ import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.reviewboard.RPagingVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
 import com.bit.hellopt.vo.user.User;
+import com.google.gson.Gson;
 
 @Controller
 @SessionAttributes("rBoard")
@@ -216,8 +219,8 @@ public class RBoardController {
 		if(!dir.isDirectory()) {
 			dir.mkdirs();
 		}
-		
-		//넘어온 파일을 리스트로 저장
+
+//넘어온 파일을 리스트로 저장
 		List<MultipartFile> fileList = multi.getFiles("file_0");
 		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
 		
@@ -257,47 +260,64 @@ public class RBoardController {
 		return "redirect:/review";
 	}
 	
-//	@RequestMapping("/review/upload")
-//	public String upload(MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
-//
-//		System.out.println(">>> 글 등록 처리 - insertBoard()");
-//		
-//		String path = "C:/hellopt_file/";
-//	
-//		File dir = new File(path);
-//		
-//		
-//		if(!dir.isDirectory()) {
-//			dir.mkdirs();
-//		}
-//		
-//		
-//		//넘어온 파일을 리스트로 저장
-//		List<MultipartFile> fileList = multi.getFiles("file_0");
-//		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
-//		
-//		}else {//for (MultipartFile filePart : fileList)
-//			
-//			for (int i = 0; i < fileList.size(); i++) {
-//				//원본파일명
-//				String revFileOname = fileList.get(i).getOriginalFilename();
-//				String FileExtension = revFileOname.substring(revFileOname.lastIndexOf("."));
-//				//파일명  중복되지 않게 처리 한 저장될 이름
-//				String saveFileName = UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
-//				
-//				String savePath = path + saveFileName; //저장될 파일 경로
-//				System.out.println("실제 파일 이름 : " + revFileOname);
-//				System.out.println("저장된 파일 이름 : " + saveFileName);
-//				long fileSize = fileList.get(i).getSize(); //파일사이즈
-//				System.out.println("저장된 파일 사이즈 : " + fileSize);
-//				fileList.get(i).transferTo(new File(savePath)); //파일 저장
-//				System.out.println("저장된 파일 경로" + savePath);
-//
-//
-//			}
-//		}
-//		return "redirect:/review";
-//	}
+	@PostMapping("/imgupload")
+	@ResponseBody
+	public String upload(RBoardVO vo, MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
+		Gson gson = new Gson();
+		//FolderSet set = new FolderSet();
+		System.out.println(">>> 이미지 업로드 처리 - upload()");
+		List<String> list = new ArrayList<String>();
+		
+		String path = "C:/hellopt_file/";
+		File dir = new File(path);
+		if(!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		//넘어온 파일을 리스트로 저장
+		List<MultipartFile> fileList = multi.getFiles("file_0");
+		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
+		
+		}else {//for (MultipartFile filePart : fileList)
+			
+			for (int i = 0; i < fileList.size(); i++) {
+				//원본파일명
+				String revFileOname = fileList.get(i).getOriginalFilename();
+				String FileExtension = revFileOname.substring(revFileOname.lastIndexOf("."));
+				//파일명  중복되지 않게 처리 한 저장될 이름
+				String saveFileName = UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
+				
+				String savePath = path + saveFileName; //저장될 파일 경로
+				System.out.println("실제 파일 이름 : " + revFileOname);
+				System.out.println("저장된 파일 이름 : " + saveFileName);
+				long fileSize = fileList.get(i).getSize(); //파일사이즈
+				System.out.println("저장된 파일 사이즈 : " + fileSize);
+				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				System.out.println("저장된 파일 경로" + savePath);
+				
+
+			}
+		}
+		return "redirect:/review";
+	}
+	@RequestMapping("/imgDel")
+	@ResponseBody
+	public void imguploadDel(MultipartHttpServletRequest multi,String revFileSname) {
+		System.out.println("데이터");
+		System.out.println(revFileSname);
+		
+		String path = "C:/hellopt_file/";
+		String savePath = path + revFileSname; //저장될 파일 경로
+		System.out.println(savePath);
+		
+		File file = new File(savePath);
+		if(file.exists()==true) {
+			file.delete();
+		}
+
+		
+		
+	}
+	
 	
 	
 }

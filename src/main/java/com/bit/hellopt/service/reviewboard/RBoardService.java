@@ -16,13 +16,17 @@ public interface RBoardService {
 	void insertBoard(RBoardVO vo);
 	void updateBoard(RBoardVO vo);
 	void deleteBoard(int revIdx);
+	
+	//	파일처리부분
 	void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx);
+	void imguploadDel(String revFileSname);
 	List<RBoardVO> getRBoardList();
 
 	List<RFileVO> getFileList(int revIdx);
 	List<User> selectUserId(String userId);
 	User selectUser();
 	List<RBoardVO> getProfilePic();
+	
 	
 	//게시물 총 갯수
 	int getTotalCount();

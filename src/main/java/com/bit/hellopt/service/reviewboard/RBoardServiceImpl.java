@@ -98,6 +98,12 @@ public class RBoardServiceImpl implements RBoardService {
 		return mapper2.join3(revIdx);
 	}
 
+	@Override
+	public void imguploadDel(String revFileSname) {
+		mapper.imguploadDel(revFileSname);
+		
+	}
+
 
 
 

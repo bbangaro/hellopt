@@ -9,13 +9,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <style>
-	.imgs_wrap {
-		width: 600px;
-		margin-top: 50px;
-	}
-	.imgs_wrap img {
-		max-width: 200px;
-	}
 	td .star{
 		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 		  background-size: auto 100%;
@@ -27,84 +20,8 @@
 		}
 	td .star.on{background-position:0 0;}
 </style>
-<script>
-//--다중 파일 선택시 미리보기
-	
-	//이미지 정보들을 담을 배열
-	var sel_files =[];
-
-	$(document).ready(function(){
-		$("#input_imgs").on("change", handleImgFileSelect);
-	});
-	
- 	function fileUploadAction(){
-		console.log("fileUploadAction");
-		$("#input_imgs").trigger('click');
-	} 
-	
-	function handleImgFileSelect(e){
-		
-		// 이미지 정보들을 초기화
- 		sel_files = [];
-		$(".imgs_wrap").empty(); 
-	
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		
-		var index = 0; 
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
-			sel_files.push(f);
-			
-			var reader = new FileReader();
-			reader.onload = function(e){
-				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id = \"img_id" +index+"\"><img src=\"" + e.target.result + "\" data-file='" + f.name + "' class='selProductFile' title='Click to remove'></a>";
-				$(".imgs_wrap").append(html);
-				index++;
-				
-			}
-			reader.readAsDataURL(f);
-		});
-	}
-	
-	//다중 파일 미리보기에서 특정 이미지만 삭제하기
-	function deleteImageAction(index){
-		console.log("index : " + index);
-		sel_files.splice(index, 1);
-		
-		var img_id = "#img_id_" + index;
-		$(img_id).remove();
-		
-		console.log(sel_files);
-	}
-</script>	
-<script>	
-	//다중 파일 post 전송
-	function submitAction(){
-		var data = new FormData();
-		
-		for(var i = 0, len=sel_files.length; i < len; i++){
-			var name = "image_" + i;
-			data.append(name, sel_files[i]);
-		}
-		data.append("image_count", sel_files.length);	
-		
-		
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "./study01_af.php");
-			xhr.onload = function(e){
-				if(this.status == 200){
-					console.log("Result:" + e.currentTarget.responseText);
-				}
-			}
-			xhr.send(data);
-		}
-</script>
-
 </head>
+
 <body>
 	<br><br><br><br>
 <form id="frm" method="post" 
@@ -147,137 +64,109 @@
 	</table>
 	<div id = "fileDiv">
 		<p>
-			<input  type="file" multiple="multiple" id="file" name="file_0" >
+			<input  type="file" multiple="multiple" id="files" name="file_0">
 			<c:forEach var="file" items="${rBoard.filevo }">
 				<p>${file.revFileOname } "></p>
 			</c:forEach>
 			<a href="#this" class="btn" id ="delete" name="delete" >삭제하기</a>
 		</p>
 	</div>
-	<!--  이미지 미리보기 -->
-	<h2>이미지 미리보기</h2>
-	<div class = "input_wrap">
-		<a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
-		<input type="file" id="input_imgs"  name="file_0" multiple>
+	<div class="fileImg fileEmpty" id="preView">
+		<span>파일 미리보기</span>
 	</div>
-	
-	<div>
-		<div class="imgs_wrap">
-			<img id="img" >
-		</div>
-	</div>
-	
-	<!-- 이미지업로드방식 2 -->
-	<div class="preview-image">
-		<div id="sub" class="text-wrap">
-			<h4>서브 이미지</h4>
-		</div>
-	</div>
-	<p class="text">
-		상품의 다양한 이미지컷을
-		<br>
-		최대 2장까지 넣을 수 있습니다.	
-	</p>
-	<div class="imgDisplay">
-        <div class="view_area" style="display: flex;"></div>
-        <img class="subImage"  src="/app/resources/img/default_image.png" width="150px;" height="150px;"/>
-        <div class="filebox bs3-primary">
-            <label for="subImage">업로드</label>
-            <input type="file" name="subImage" id="subImage"accept="image/jpeg,image/gif,image/png" multiple>		
-        </div>
-	</div>
-	
-	
-	
-	<a href="javacript:" class="my_button" onclick="submitAction();">업로드</a>
-	
 	<a href="#this" id="list" class="btn">목록으로</a>
 	<a href="#this" id="modify" class="btn">수정완료</a>
+	<input  type="file" multiple="multiple" id="files" name="file_0">
 </form>	
 
 
 <script>
 //다중 파일 업로드 새로함
-$('#subImage').on('change',function() {
-	var form = $("#product")[0];
-	console.log(form);
-	var data = new FormData(form);
-	$.ajax({
-		type : 'POST',
-		enctype : 'multipart/form-data',
-		url : "subImageUpload.do",
-		data : data,
-		processData : false,
-		contentType : false,
-		success : function(json){
-				console.log(json);
-				$('.subImage').remove();
-				
-			for (var i in json) {
-				$('.view_area').append(
-						"<div class='id'><img style='width:150px; height:150px;' src=/app/resources/img/"+json[i]+"><button type='button' onclick='imgDel(this);'>삭제하기</button></div>");
+	$('#files').change(function(){
+		fileBuffer = [];
+		const target = document.getElementsByName('file_0');
+		
+		//Array.prototype.push.apply(fileBuffer, target[0].files);
+		var html = '';
+		$.each(target[0].files, function(index, file){
+			const fileName = file.name;
+			html += '<div class="file">';
+			html += '<img src="'+ URL.createObjectURL(file) + '">';
+			html += '<span>' + fileName + '<span>';
+			html += '<span>기간 '+'<input type = "text" style="width:250px/"><span>';
+			html += '<a href="#" id="removeImg">x</a>';
+			html += '</div>';
+			
+			const fileEx = fileName.slice(fileName.indexOf(".") + 1).toLowerCase();
+			if(fileEx != "jpg" && fileEx != "gif" && "png" &&  fileEx != "gif" &&  fileEx != "bmp" && fileEx != "wmv" && fileEx != "mp4" && fileEx != "avi"){
+				alert("파일은  (jpg, png, gif, bmp, wmv, mp4, avi) 형식만 등록 가능합니다.")
+				resetFile();
+				return false;
 			}
-		},
-		error : function(jqXHR, textStatus, errorThrown){
-			alert("오류가 발생하였습니다.");
-		}
-	});
-});
-
-//서브파일 이미지 업로드 삭제
-function imgDel(e) {
-		var imgs = e.previousElementSibling;
-		var src = imgs.src;
-		console.log(imgs.src);
-		var img = src.split('/');
-		var fileName = img[6];
-		console.log(fileName);
-		$.ajax({
-			type : 'post',
-			url : "subImageUploadDel.do",
-			data : {
-				fileName : fileName
-			},
-			success : function(e) {
-				console.log(e);
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				alert("오류가 발생하였습니다.");
-			}
+			$('.fileList').html(html);
 		});
-		var imgtag = $(e).parent(); //<div><img></div>태그에서 div태그
-		var imgtag2 = $(e).parent().parent();
-		imgtag.remove();
-		console.log($(".id").length);
-		if($('.id').length == 0){
-			imgtag2.append('<img class="subImage" src="/app/resources/img/default_image.png" width="150px;" height="150px;"/>');
-		}
-	};
+	});
+	
+	$(document).on('click', '#removImg', function(){
+		const fileIndex = $(this).parent().index();
+		fileBuffer.splice(fileIndex, 1);
+		$('.fileList>div:eq('+fileIndex+')').remove();
+		
+		const target = document.getElementsByName('file_0');
+		console.log(fileBuffer);
+		console.log(target[0].files);
+	});
+
+ //파일 객체 초기화
+var agent = navigator.userAgent.toLowerCase();
+if((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ){
+	$(target).replaceWidth( $(target).clone(true));
+} else{
+	$(target).val("");
+}
+
+
+ajaxForm : function(id, file, func){
+	$('#frm').ajaxForm({
+		contentType : false,
+		processData: false, 
+		enctype: "multipart/form-data",
+		dataType : "POST",
+		dataType : "json",
+		beforeSubmit:function(data, form, option){
+			var fileSize = file.length;
+			if(fileSize>0){
+				for(var i = 0; i<fileSize; i++){
+					var obj = {
+							name : "file_0",
+							value : file[k],
+							type : "file"
+					};
+					console.log(obj);
+					data.push = obj;
+				}
+			}
+			console.log('beforeSubmit');
+			console.log(file);
+			console.log(data);
+			console.log(form);
+			console.log(option);
+		},
+		sucess: function(returnData){
+			console.log("returnData : " + returnData);
+			func(feturnData);
+		},
+		error : function(x,e){
+			console.log("[AF]ajax status : " +x.status);
+			console.log(e);
+		},
+	});
+} 
 </script>
 	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script type="text/javascript">
 	
-/* 
-	$('#file').on("change", function(){
-		var formData = new FormData($('#frm')[0]);
-		$.ajax({
-			type: "POST", 
-			enctype: 'multipart/form-data',
-		 	url: '/hellopt/review/upload',
-		 	data: formData, 
-		 	processData: false, 
-		 	contentType: false,
-		 	cache: false,
-		 	success: function (result) {
-		 		alert("성공");
-		 		
-		 	}, error: function (e) {
-		 		alert("실패");
-		 	} 
-		 		
-		});
-	}); */
 	var g_count = 1; 
  		$("#list").on("click", function(e){
  			e.preventDefault();
@@ -308,9 +197,7 @@ function imgDel(e) {
  		comSubmit.setUrl("<c:url value='/updaterboard'/>");
  		comSubmit.submit();
  	}
- 	function fn_fileDelete(obj){
- 		obj.parent().remove();
- 	}
+
  	function fn_fileAdd(){
  		var str 
  			= "<p><input type='file' name='file_"+(g_count++)+"'><a href='#this' name='delete' class='btn'>삭제하기</a></p>";

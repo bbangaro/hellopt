@@ -67,6 +67,9 @@ public interface RBoardMapper1 {
 	@Delete("DELETE FROM REVIEW_FILE_TB WHERE REV_IDX = #{revIdx}")
 	public void uploadFileDel(RBoardVO vo);
 	
+	@Delete("DELETE FROM REVIEW_FILE_TB WHERE REV_File_Sname = #{revFileSname}")
+	public void imguploadDel(String revFileSname);
+	
 	//총 게시글 갯수 출력
 	@Select("SELECT COUNT(*) FROM REVIEW_BOARD_TB")
 	public int getTotalCount();
