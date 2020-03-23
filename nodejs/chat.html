@@ -124,17 +124,17 @@ blockquote {margin:0; padding:0;}
     	console.log("data: " + data);
     	
     	console.log("소켓 메시지 전송");
-    	if(sender.match(data.sender)) {
+    	if(userId.match(data.userId)) {
     		console.log("내가 보낸 메세지");
          	$('<div class="outgoing_msg"><div class="sent_msg"><p>'
          			+ data.msg + '</p><span class="time_date">'
-         			+ data.sender + '</span></div></div>').appendTo(".msg_history");
+         			+ data.userId + '</span></div></div>').appendTo(".msg_history");
          	$(".msg_history").scrollTop($(".msg_history").height());
     	} else {
     		console.log("남이 보낸 메세지")
     		$('<div class="incoming_msg"><div class="received_msg"><p>'
     				+ data.msg + '</p><span class="time_date">'
-    				+ data.sender + '</span></div></div>').appendTo(".msg_history");
+    				+ data.userId + '</span></div></div>').appendTo(".msg_history");
          	$(".msg_history").scrollTop($(".msg_history").height());
     		
     	}
@@ -153,7 +153,7 @@ blockquote {margin:0; padding:0;}
     $(".msg_send_btn").click(function() {
     	console.log("메시지 전송");
         //소켓에 send_msg라는 이벤트로 input에 메세지를 담아서 보내기
-        socket.emit('send_msg', {roomId: roomId, sender: sender, msg: $(".write_msg").val()});
+        socket.emit('send_msg', {roomId: roomId, userId: userId, msg: $(".write_msg").val()});
         
         //메세지 창 비우기
         $(".write_msg").val("");
@@ -165,7 +165,7 @@ blockquote {margin:0; padding:0;}
     //message 이벤트 등록
     window.addEventListener('message', receiveMessage, false);
     var roomId = '';
-    var sender = '';
+    var userId = '';
     var msg = '';
 	
     //서버에서 전달받은 룸아이디, 유저아이디, 메시지
@@ -174,7 +174,7 @@ blockquote {margin:0; padding:0;}
     	//룸아이디
     	roomId = obj.roomId;
     	//유저아이디
-    	sender = obj.sender;
+    	userId = obj.userId;
     	//메시지
     	msg = obj.msg;
     	
