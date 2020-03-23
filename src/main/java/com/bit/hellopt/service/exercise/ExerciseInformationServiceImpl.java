@@ -41,8 +41,8 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 	}
 
 	@Override
-	public List<ExerciseInformationVO> getExerciseInformationSearch(Map<String, Integer> map) {
-		System.out.println("서비스 임플까진 먹습니다.");
+	public List<ExerciseInformationVO> getExerciseInformationSearch(Map<String, Object> map) {
+		System.out.println("서비스 임플까진 먹습니다.["+map+"]");
 		return mapper.getExerciseInformationSearch(map);
 	}
 
@@ -71,12 +71,8 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 		return mapper.getExerciseFileList(vo);
 	}
 	@Override
-	public int getExerciseTotalCount() {
-		return mapper.getExerciseTotalCount();
-	}
-	@Override
-	public List<ExerciseInformationVO> getExerciseCountlist(Map<String, Integer> map) {
-		return mapper.getExerciseCountlist(map);
+	public int getExerciseTotalCount(Map<String, Object> map) {
+		return mapper.getExerciseTotalCount(map);
 	}
 	@Override
 	public ExerciseInformationVO getExerciseInformation(ExerciseInformationVO vo) {

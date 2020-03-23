@@ -65,24 +65,10 @@
         	</div>
         	
         	<br><br>
-	        
-	        <!-- JSTL 인덱스값으로 데이터를 받아와서 처리해야하는건지, 아니면 다른방법으로 처리해야하는건지 알아볼것! -->
-	        <!-- 
-	        	<c:forEach items="${exerciseInformation.exercisePictures }" var="b" varStatus="status">
-	        		[${status.index }]: ${exerciseInformation.exercisePictures }
-	        
-	        
-	        	</c:forEach>
-	         -->
-	        <!-- <c:forEach var="pictures" items="${exerciseInformation.exercisePicturesList }">
-            	<img src="/hellopt/file/${pictures }" width="250" height="250">
-				<br><br><br>
-            </c:forEach> -->
             
             <div class="exercise_dd">
-            
-            	<c:forEach var="file" items="${exerciseInformation.exercisePicturesList }">
-            		<img src="/hellopt/file/${file }" width="250" height="250">
+            	<c:forEach var="file" items="${pageContext.request.contextPath}/s3/exercise/${exerciseInformation.exercisePictures }">
+            		<img src="${file }" width="250" height="250">
             		<br><br>
             	</c:forEach>
             
@@ -94,11 +80,17 @@
 				<h2>권장반복횟수 : ${exerciseInformation.repetition }회</h2>
 				<h2>권장세트횟수 : ${exerciseInformation.setCount }회</h2>
 				<h2>권장휴식시간 : ${exerciseInformation.restTime }초</h2>
+				
 				<hr>
 			</div>
 			</form>
 				</div>
 			</div>
+			<p class="cente">
+				<a href="deleteexerciseinfo?exerciseIdx=${exerciseInformation.exerciseIdx }">글 삭제</a>
+				<a href="updateexerciseinfo?exerciseIdx=${exerciseInformation.exerciseIdx }">글 수정</a>
+			</p>
+			<br><br>
 		</div>
 </body>
 </html>
