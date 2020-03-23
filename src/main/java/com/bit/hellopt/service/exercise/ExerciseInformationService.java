@@ -13,12 +13,11 @@ public interface ExerciseInformationService {
 	void deleteExerciseInformation(ExerciseInformationVO vo);
 	ExerciseInformationVO getExerciseInformation(ExerciseInformationVO vo);
 	List<ExerciseInformationVO> selectFile(ExerciseInformationFileVO evo);
-	public List<ExerciseInformationVO> getExerciseInformationSearch(Map<String, Integer> map);
+	public List<ExerciseInformationVO> getExerciseInformationSearch(Map<String, Object> map);
 	List<ExerciseInformationVO> getExerciseInformationList(ExerciseInformationVO vo);
 	void uploadFile(String exerciseInformationFileOname, String saveFileName, long fileSize, int exerciseIdx);
 	List<ExerciseInformationFileVO> getFileList(int exerciseIdx);
 	List<ExerciseInformationFileVO> getExerciseFileList(ExerciseInformationVO vo);
-	int getExerciseTotalCount();
-	List<ExerciseInformationVO> getExerciseCountlist(Map<String, Integer> map);
+	int getExerciseTotalCount(Map<String, Object> map);
 	
 }

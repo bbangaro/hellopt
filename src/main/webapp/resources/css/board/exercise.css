@@ -86,7 +86,6 @@ body {
     overflow: hidden;
 }
 
-
 /* exerciseInfo 상세보기창 */
 .exercisebox {
 	margin: 20px auto;
@@ -100,7 +99,8 @@ body {
 }
 
 .exerciseImg_img {
-	width: 100%;
+	width: 283px;
+	height: 350px;
 }
 
 .nick {
@@ -135,8 +135,7 @@ body {
 
 /* youtube 박스 크기 */
 
-	
-.center {
+.cente {
 	text-align: center;
 }
 
@@ -176,4 +175,8 @@ tr {
 	font-weight: bold;
 }
 
+.notnow {
+	padding: 3px 7px;
+	
+}
 

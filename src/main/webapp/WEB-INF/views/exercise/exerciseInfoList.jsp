@@ -44,9 +44,12 @@
 		<c:forEach var="exerciseInformation" items="${exerciseInformationList }">
 			<div class="exercise">
 				<a href="exerciseinfo?exerciseIdx=${exerciseInformation.exerciseIdx }">
-					<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseA.jpg" alt="운동사진" class="exerciseImg_img">
+<%-- 					<img src="${pageContext.request.contextPath}/resources/images/exercise/exerciseA.jpg" alt="운동사진" class="exerciseImg_img"> 밑에꺼 동적쿼리로 처리할것 --%>
+ 					<img src="${pageContext.request.contextPath}/s3/exercise/${exerciseInformation.exercisePictures}" alt="운동사진" class="exerciseImg_img">
+					
 					<div class="exercise_caption">
-						<p class="captiontitle">${exerciseInformation.exerciseName } ${exerciseInformation.exerciseEName }</p>
+						<p class="captiontitle">${exerciseInformation.exerciseName }
+								<br>			${exerciseInformation.exerciseEName }</p>
 						<pre class="captiontxt">${exerciseInformation.exerciseParts }</pre>
 					</div>
 					
@@ -59,17 +62,19 @@
 
 	<!-- 검색을 위한 폼 -->
 	<div class="searchForm">
-	<form action="exerciseinfolist" method="get">
+	<form action="exerciseinfolist" method="get" name ="formMap">
 		<div class="border-none">
 		<p>
 			<span>
 				<select name="searchCondition">
 				<c:forEach var="option" items="${conditionMap }">
-					<option value="${option.value }">${option.key }</option>
+				   <!-- if test searchCondition eq option.value eslecd 
+				     뭐시기가 이꼬르이면 검색조건이 계속해서 창에 남아있게, 아니면 뭐다 조건문 만들것 -->
+					<option value="${option.value }" >${option.key }</option>
 				</c:forEach>
 				</select>
 				
-				<input type="text" name="searchKeyword">
+				<input type="text" name="searchKeyword" value="${searchKeyword}">
 				<input type="submit" value="검색">
 			</span>
 		</p>
@@ -77,44 +82,42 @@
 	</form>
 	</div>
     </div>
-    <table>
-		<tr>
-			<td colspan="4">
-				<ol class="paging">
-					<c:choose>         
-						<c:when test="${pvo.beginPage < pvo.pagePerBlock}">
-							<li class="disable">이전으로</li>
-						</c:when>
-						<c:otherwise>
-							<li><a
-								href="exerciseinfolist?cPage=${pvo.beginPage - pvo.pagePerBlock}">이전으로</a></li>>
-					  	</c:otherwise>
-					</c:choose>
+    <div style= "width:100%;">
+    	<table style="margin: auto;">
+			<tr>
+		
+			<c:choose>         
+				<c:when test="${pvo.beginPage < pvo.pagePerBlock}">
+					<td class="disable">이전으로</td>
+				</c:when>
+				<c:otherwise>
+					<td><a href="exerciseinfolist?cPage=${pvo.beginPage - pvo.pagePerBlock}&searchKeyword=${searchKeyword}&searchCondition=${searchCondition}">이전으로</a></td>>
+			  	</c:otherwise>
+			</c:choose>
+			
+			<c:forEach var="k" begin="${pvo.beginPage }" end="${pvo.endPage}" step="1">
+				<c:if test="${k == pvo.nowPage}">
+					<td class="now">${k}</td>
+				</c:if>
+				<c:if test="${k != pvo.nowPage}">
+					<td class="notnow"><a href="exerciseinfolist?cPage=${k }&searchKeyword=${searchKeyword}&searchCondition=${searchCondition}">${k }</a></td>
+				</c:if>
+			</c:forEach>
+			
+			<c:choose>
+				<c:when test="${pvo.endPage >= pvo.totalPage}">
+					<td class="disable">다음으로</td>
+				</c:when>
+				<c:otherwise>
+					<td><a href="exerciseinfolist?cPage=${pvo.beginPage + pvo.pagePerBlock}&searchKeyword=${searchKeyword}&searchCondition=${searchCondition}">다음으로</a></td>
+			  	</c:otherwise>
+			</c:choose>
+		</table>
+	</div>
+	<br>
+	<p class="cente"><a href="insertexerciseinformationform">운동정보글등록</a></p>
 
-					<c:forEach var="k" begin="${pvo.beginPage }" end="${pvo.endPage}" step="1">
-						<c:if test="${k == pvo.nowPage}">
-							<li class="now">${k}</li>
-						</c:if>
-						<c:if test="${k != pvo.nowPage}">
-							<li><a href="exerciseinfolist?cPage=${k }">${k }</a></li>
-						</c:if>
-					</c:forEach>
-					
-					<!-- 여기서 조건문 하나 더 태워야하나 ex -> cPage=${k }?운동부위에따른 번호 부여한값 뭐시기저시기 -->
-					
-					<c:choose>
-						<c:when test="${pvo.endPage >= pvo.totalPage}">
-							<li class="disable">다음으로</li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="exerciseinfolist?cPage=${pvo.beginPage + pvo.pagePerBlock}">다음으로</a></li>
-					  	</c:otherwise>
-					</c:choose>
-				</ol>
-			</td>
-	</table>
-	<p class="center"><a href="insertexerciseinformationform">운동정보글등록</a></p>
-
+	<br><br>
     </div>
     </body>
 </html>

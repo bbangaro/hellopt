@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.service.exercise.ExerciseInformationService;
 import com.bit.hellopt.vo.exercise.ExerciseInformationListVO;
 import com.bit.hellopt.vo.exercise.ExerciseInformationPaging;
@@ -34,6 +35,8 @@ import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 public class ExerciseInformationController {
 	@Autowired
 	ExerciseInformationService exerciseInformationService;
+	@Autowired
+	S3Utils s3Utils;
 	@Autowired
 	ServletContext servletContext;
 	
@@ -59,12 +62,22 @@ public class ExerciseInformationController {
 	//전달할 데이터 저장타입  ModelAndView -> Model
 	@RequestMapping("/exerciseinfolist")
 	public String getExerciseInformationList(ExerciseInformationVO vo, Model model, 
-			@RequestParam(defaultValue="1") Integer cPage) {
+			  @RequestParam(defaultValue="1") Integer cPage
+			, @RequestParam(required = false) String searchKeyword
+			, @RequestParam(required = false) String searchCondition
+			
+			) {
+		
+		Map<String, Object> formMap = new HashMap<String,Object>();
+		
+		formMap.put("searchCondition", searchCondition);
+		formMap.put("searchKeyword", searchKeyword);
 		
 		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
 		ExerciseInformationPaging p = new ExerciseInformationPaging();
+		
 		//1. 전체 게시물의 수를 구하기
-		p.setTotalRecord(exerciseInformationService.getExerciseTotalCount()); 
+		p.setTotalRecord(exerciseInformationService.getExerciseTotalCount(formMap)); 
 		p.setTotalPage(); //전체 페이지 갯수 구하기
 		
 		System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
@@ -104,8 +117,6 @@ public class ExerciseInformationController {
 		map.put("begin", p.getBegin());
 		map.put("end", p.getEnd());
 		
-		List<ExerciseInformationVO> list = exerciseInformationService.getExerciseCountlist(map);
-		System.out.println("현재페이지 글목록(list) : " + list);
 		
 		System.out.println(">>> 글 전체 목록 조회 처리-getExerciseInformationList()");
 		System.out.println("condition : " + vo.getSearchCondition());
@@ -121,16 +132,20 @@ public class ExerciseInformationController {
 		System.out.println("null처리후 condition : " + vo.getSearchCondition());
 		System.out.println("null처리후 keyword : -" + vo.getSearchKeyword() + "-");
 		
-		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationSearch(map);
+		formMap.put("begin", p.getBegin());
+		formMap.put("end", p.getEnd());
+		
+		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationSearch(formMap);
 		
 		for(ExerciseInformationVO evo : exerciseInformationList) {
-			evo.setFilevo(exerciseInformationService.getFileList(evo.getExerciseIdx()));
+			evo.setExercisePictures(evo.getExercisePictures().split(",")[0]);
 		}
 		
 		System.out.println("exerciseInformationList: " + exerciseInformationList.toString());
 		model.addAttribute("exerciseInformationList", exerciseInformationList);
 		model.addAttribute("pvo", p);
 		model.addAttribute("cPage", cPage);
+		
 		
 		/*ExerciseInformationVO exerciseInformation = exerciseInformationService.getExerciseInformation(vo);
 		
@@ -142,6 +157,9 @@ public class ExerciseInformationController {
 		model.addAttribute("exerciseInformation", exerciseInformation);
 		System.out.println("exerciseInformation에서 가져온 첫번째 이미지 경로 -> exerciseInformationList : " + exerciseInformation);
 		*/
+		
+		model.addAttribute("searchKeyword"  , formMap.get("searchKeyword"));
+		model.addAttribute("searchCondition", formMap.get("searchCondition"));
 		return "exercise/exerciseInfoList";
 	}
 	
@@ -226,7 +244,8 @@ public class ExerciseInformationController {
 				System.out.println("저장된 파일 이름 : " + saveFileName);
 				long fileSize = fileList.get(i).getSize(); //파일 사이즈
 				System.out.println("저장된 파일 사이즈 : " + fileSize);
-				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				s3Utils.uploadMultipart("exercise/", saveFileName, fileList.get(i));
+				//fileList.get(i).transferTo(new File(savePath)); //파일 저장
 				System.out.println("저장된 파일 경로 : " + savePath);
 				//
 				vo.setExercisePictures( vo.getExercisePictures()+ saveFileName+",");
@@ -280,7 +299,7 @@ public class ExerciseInformationController {
 		System.out.println("> exerciseInformation vo : " + vo);
 		
 		exerciseInformationService.updateExerciseInformation(vo);
-		return "exercise/exerciseInfoList";
+		return "redirect:/exerciseinfolist";
 	}
 	
 	@RequestMapping("/deleteexerciseinfo")
@@ -288,7 +307,7 @@ public class ExerciseInformationController {
 		System.out.println(">>> 글 삭제 처리 - deleteExerciseInformation()"); 
 		
 		exerciseInformationService.deleteExerciseInformation(vo);
-		return "exercise/exerciseInfoList";
+		return "redirect:/exerciseinfolist";
 	}
 	
 	//---------------------------------
