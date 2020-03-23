@@ -2,6 +2,7 @@ package com.bit.hellopt.service.reviewboard;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.data.RBoardMapper1;
 import com.bit.hellopt.data.RBoardMapper2;
-import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.user.User;
@@ -38,8 +38,8 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public void deleteBoard(RBoardVO vo) {
-		mapper.deleteRBoard(vo);
+	public void deleteBoard(int revIdx) {
+		mapper.deleteRBoard(revIdx);
 		
 	}
 
@@ -83,19 +83,28 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public List<RBoardVO> Join2() {
-		return mapper2.join2();
+	public List<RBoardVO> Join2(Map<String, Integer>map) {
+		return mapper2.join2(map);
 	}
 
 	@Override
-	public int countBoard(RBoardVO vo) {
-		return mapper.countBoard(vo);
+	public int getTotalCount() {
+		return mapper.getTotalCount();
 	}
 
 	@Override
-	public List<RBoardVO> selectRBord(PagingVO pvo) {
-		return mapper.selectRBord(pvo);
+	public RBoardVO Join3(int revIdx) {
+		
+		return mapper2.join3(revIdx);
 	}
+
+	@Override
+	public void imguploadDel(String revFileSname) {
+		mapper.imguploadDel(revFileSname);
+		
+	}
+
+
 
 
 

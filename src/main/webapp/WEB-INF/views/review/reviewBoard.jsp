@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>후기게시판</title>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <style>
  	.content {
@@ -48,19 +48,41 @@
 	button {
 		background-color:white;
 	}
-	#paging{
+	.jb-center{
 		display: block;
 		text-align: center;
 		background-color: yellow;
 	}
+	.paging { list-style: none; }
+	.paging li {
+		float: left;
+		margin-right: 8px;
+	}
+	.paging li a {
+		text-decoration: none;
+		display: block;
+		padding: 3px 7px;
+		border: 1px solid #00B3DC;
+		font-weight: bold;
+		color: black;
+	}
+	.paging .disable {
+		border: 1px solid silver;
+		padding: 3px 7px;
+		color: silver;
+	}
+	.paging .now {
+		border: 1px solid #ff4aa5;
+		padding: 3px 7px;
+		background-color: #ff4aa5;
+	}
+	.paging li a:hover {
+		background-color: #00B3DC;
+		color: white;
+	}
 </style>
 </head>
-<script>
-	function selChange(){
-		var sel = document.getElementById('cntperPage').vlaue;
-		location.href="review?nowPage=${paging.nowPage}&cntPerPage="+sel;
-	}
-</script>
+
 <body>
 <div id = "container">
 <%-- <div id="outter">
@@ -77,21 +99,24 @@
 </div> --%>
 
 <form>
-
+	<sec:authorize access="isAuthenticated()">
 	<p><a href="${pageContext.request.contextPath}/review/insertform">후기쓰러가기</a></p>	
+	</sec:authorize>
 <c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
 <table class="tbl_wrap">
 	<thead class="tbl_head01">
 		<tr>
 		<sec:authorize access="isAuthenticated()">
-			<sec:authentication property = "principal.username"/>
-			<td><a href="#this" id="modify" class= "btn">글 수정</a></td>
-			<td><a href="#this" id="delete" class= "btn">글 삭제</a></td>
+		<sec:authentication var="principal" property="principal" />
+		<c:if test="${rBoard.userId == principal.username}">
+			<td><input type = "button" value="글 수정" onclick = "modify(${rBoard.revIdx})"></td>
+			<td><input type = "button" value="글 삭제" onclick = "del(${rBoard.revIdx })"></td>
+		</c:if>
 		</sec:authorize>
 		</tr>
 		<tr>
 			<c:if test="${rBoard.userFileName == null }">
-			<td rowspan="3"><img class='profile' src="/hellopt/file/4e464b9505d74c6f94e5241fe3c3dc6a.png"></td>
+			<td rowspan="3"><img class='profile' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png"></td>
 			</c:if>
 			<c:if test="${rBoard.userFileName != null }">
 			<td rowspan="3"><img class='profile' src="/hellopt/file/${rBoard.userFileName}"></td>
@@ -113,10 +138,10 @@
 				</c:if>	
 			</c:forEach> --%>
 			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
-				<span class="star on">i</span>
+				<span class="star on">${i}</span>
 			</c:forEach> 
 			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
-				<span class="star">i</span>
+				<span class="star">${i}</span>
 			</c:forEach>   
 			</td>
 		</tr>
@@ -138,20 +163,23 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			
 		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
-		<c:if test="${rBoard.cmtCnt > 0 }">
-		<td>
-			<a href="#this" id="cmtCnt"> 댓글${rBoard.cmtCnt }개 모두 보기</a>
-		</td>
-		</c:if> 
+			<c:if test="${rBoard.cmtCnt > 0 }">
+			<td>
+				<a href="#this" id="cmtCnt"> 댓글${rBoard.cmtCnt }개 모두 보기</a>
+			</td>
+			</c:if> 
 		</tr>
+		<sec:authorize access="isAuthenticated()">
 		<tr>
-			<sec:authorize access="isAuthenticated()">
-			<textarea rows="2" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
-			<button type="button" id="btnReply">등록</button>
-			</sec:authorize>
+			<td>
+				<textarea rows="2" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
+			</td>
+			<td>
+				<button type="button" id="btnReply">등록</button>
+			</td>	
 		</tr>
+		</sec:authorize>
 		<c:forEach var="row" items="${replyList }">
 		<tr>
 			<td id="listReply">
@@ -165,40 +193,58 @@
 </table>	
 </c:forEach>
 	<!--페이징 -->
-	<div id="paging">
-		<c:if test="${pagination.curRange ne 1 }">
-			<a href="#" onClick = "fn_pageing('${pagination.prevPage}')">[처음]</a>
-		</c:if>
-		<c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="pageNum">
+	<br><br><br>
+	<td colspan="4">
+		<ol class="paging">
 			<c:choose>
-				<c:when test="${pageNum eq pagination.curPage }">
-					<span style = "font-weight: bold;">
-						<a href="#" onClick="fn_paging('${pageNum}')">${pageNum }</a>
-					</span>
+				<c:when test="${pvo.beginPage == 1}">
+					<li class="disable">이전으로<li>
 				</c:when>
 				<c:otherwise>
-					<a href="#" onClick="fn_paging('${pageNum}')">${pageNum }</a>
+					<li>
+						<a class="disable" href="review?cPage=${pvo.beginPage - 1 }">이전으로</a>
+					</li>
 				</c:otherwise>
 			</c:choose>
-		</c:forEach>
-		<c:if test="${paging.curPage ne pagination.pageCnt && pagination.pageCnt >0}">
-			<a href="#" onClick="fn_paging('${pagination.nextPage}')">[다음]</a>
-		</c:if>
-		<c:if test="${pagination.cuRange ne pagination.rangeCnt && pagination.rangeCnt >0 }">
-			<a href="#" onClick="fn_paging('${pagination.pageCnt}')">[끝]</a>
-		</c:if>
-		
-		<div>
-			총 게시글 수 : ${pagination.listCnt } / 총 페이지 수 : ${pagination.pageCnt } / 현재 페이지 : ${pagination.curPge }/ 현재 블럭: ${pagination.curRange } /총 블럭수 : ${pagination.rangeCnt }
-		</div>
-	</div>
+			
+			<!-- 블록내에 표시할 페이지 표시(시작페이지~끝페이지)  -->
+			<c:forEach var="k" begin="${pvo.beginPage }" end="${pvo.endPage }">
+			<c:choose>
+				<c:when test="${k == pvo.nowPage }">
+					<li class="now">${k }</li>
+				</c:when>
+				<c:otherwise>
+					<li>
+						<a href="review?cPage=${k}">${k }</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			</c:forEach>
+			<!-- [다음으로]에 대한 사용여부 처리 -->
+			<!-- 사용불가(disable) 
+					endPage가 전체페이지 수보다 크거나 같으면
+				-->
+			<c:choose>
+				<c:when test="${pvo.endPage >= pvo.totalPage }">
+					<li class="disable">다음으로 </li>
+				</c:when>
+				<c:otherwise>
+					<li >
+						<a href="review?cPage=${pvo.endPage + 1 }">다음으로</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+		</ol>
+	</td>
+ 	<!--페이징끝 -->
 </form>
 </div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
 	$(document).ready(function(){
+		
 		//댓글쓰기 버튼 클릭 이벤트 (ajax로 처리)
-		$("#btnReply").click(funtion(){
+		$("#btnReply").click(function(){
 			var replytext=$("#replytext").val();
 			var revIdx="${RBoardVO.revIdx}"
 			var param="replytext=" + revCmtComment + "&revIdx=" + revIdx;
@@ -210,21 +256,21 @@
 					alert("댓글이 등록되었습니다.");
 					listReply2();
 				}
-			});
+			})
 			
 		})
-		
-		//게시글 수정
-		$("#modify").on("click", function(e){
-			e.preventDefault();
-			fn_BoardModify($(this));
-		});
-		//게시글 삭제
-		$("a[name='delete']").on("click", function(e){
-			e.preventDefault();
-			fn_BoardDelete($(this));
-		});
-	});
+	})
+
+	function del(revIdx) {
+		var chk = confirm("정말 삭제 하시겠습니까?");
+		if (chk){
+			location.href = 'deleterboard?revIdx='+revIdx;	
+		}
+	}	
+	function modify(revIdx) {
+			location.href = '${pageContext.request.contextPath}/review/updateform?revIdx='+revIdx;	
+			
+	}	
 	
 	//Controller방식
 	//**댓글 목록1
@@ -252,7 +298,7 @@
 					output +="<tr>";
 					output +="<td>" + result[i].userName;
 					output +="(" + changeDate(result[i].regdate)+ ")<br>";
-					output += result[i].revCmtComment"</td>" ;
+					output += result[i].revCmtComment + "</td>" ;
 					output +="<tr>";
 				}
 			output +="</table>";
@@ -260,19 +306,7 @@
 			}
 		})
 	}
-	
-	
-	
-	function fn_BoardModify(obj){
-		var comSubmit = new ComSubmit("frm");
-		comSubmi.setUrl("<c:url value='/review/updateform' />");
-		comSubmit.submit();
-	}
-	function fn_BoardDelete(obj){
-		var comSubmit = new ComSubmit("frm");
-		comSubmi.setUrl("<c:url value='/review/deleteboard' />");
-		comSubmit.submit();
-	}
+
 
 	
 </script>

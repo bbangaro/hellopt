@@ -1,50 +1,44 @@
 package com.bit.hellopt.controller.reviewboard;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.service.user.UserProfileService;
-import com.bit.hellopt.service.user.UserService;
 //import com.bit.hellopt.vo.reviewboard.Pagination;
-import com.bit.hellopt.vo.reviewboard.PagingVO;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
+import com.bit.hellopt.vo.reviewboard.RPagingVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
-import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
+import com.google.gson.Gson;
 
 @Controller
 @SessionAttributes("rBoard")
 public class RBoardController {
-	private static final RBoardVO RBoardVO = null;
+	private static final RBoardVO RBoard = null;
 	@Autowired
 	RBoardService rService;
 	@Autowired
@@ -52,6 +46,9 @@ public class RBoardController {
 	
 	@Autowired
 	ServletContext servletContext;
+
+	/*@Autowired
+	S3Utils s3Utils;*/
 	
 	public RBoardController(RBoardService rService) {
 		this.rService = rService;
@@ -59,44 +56,72 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review")
-	public String getRBoardList(RBoardVO vo,PagingVO pvo, Model model, User uvo, 
+	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo, 
 			@AuthenticationPrincipal CustomUserDetail customUser, 
-			@RequestParam(defaultValue="1")int curPage) {
+			@RequestParam(defaultValue="1")Integer cPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
-;
+
 		//paging///
+		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
+		RPagingVO p = new RPagingVO();
 		
-		int pageSize = vo.getPageSize(); //한  페이지에 나오는 게시물 개수
-		int pageIndex = vo.getPageIndex();//현재 선택한 페이지number
-		int pageGroupSize = vo.getPageGroupSize();//페이지 번호가 몇개인지
-		int startRow = (pageIndex -1)*pageSize +1; //한 페이지의 시작글 번호
-		int endRow = pageIndex*pageSize; //한 페이지의 마지막 글 번호
+		System.out.println("getTotal 전: " + rService.getTotalCount());
 		
-		vo.setStartRow(startRow);
-		vo.setEndRow(endRow);
-//		int count = rService.boardCount(vo);//게시물 총 개수
-		
-//		int pageGroupCount = count / (pageSize * pageGroupSize) + (count % (pageSize * pageGroupSize)== 0 ? 0:1);
-		int nowPageGroup = (int)Math.ceil((double) pageIndex / pageGroupSize);
-		
-		List<RBoardVO> boardList = rService.getRBoardList();
-//		ModelMap.put()
+		//1.전체 게시물의 수를 구하기
+		p.setTotalRecord(rService.getTotalCount());
+		p.setTotalPage();//전체 페이지 갯수 구하기
 		
 		
+		System.out.println("getTotal 후: " + rService.getTotalCount());
 		
+		System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
+		System.out.println(">전체 페이지 수 : " + p.getTotalPage());
 		
-		List<RBoardVO> userjoin = rService.Join2();
-		
-		for(RBoardVO rvo :userjoin) {
-			rvo.setFilevo(rService.getFileList(rvo.getRevIdx()));
+		//2. 현재 페이지 구하기(default : 1)
+		System.out.println("cPage:" + cPage);
+		if(cPage != null) {
+			p.setNowPage(cPage);
 		}
-		System.out.println("rBoardList: " + userjoin.toString());
-//		System.out.println("userjoin: " + userjoin.toString());
+		//3. 현재페이지의 시작번호(begin)와 끝번호(end) 구하기
+		p.setEnd(p.getNowPage() * p.getNumPerPage());
+		p.setBegin(p.getEnd() - p.getNumPerPage() + 1);
+		
+		System.out.println("---------------");
+		System.out.println(">>현재 페이지 : " + p.getNowPage());
+		System.out.println(">>시작번호(begin) : " + p.getBegin());
+		System.out.println(">>끝 번호(end) : " + p.getEnd());
+		
+		//블록계산하기
+		//4. 블록의 시작페이지, 끝페이지 구하기(현재페이지 번호 사용)
+		int nowPage = p.getNowPage();
+		int beginPage = (nowPage -1) / p.getPagePerBlock() * p.getPagePerBlock() + 1;
+		p.setBeginPage(beginPage);
+		p.setEndPage(p.getBeginPage() + p.getPagePerBlock() -1);
+		
+		//4-1 끝페이지(endPage)가 전체 페이지 수(totalPage) 보다 크면
+		if (p.getEndPage() > p.getTotalPage()) {
+			p.setEndPage(p.getTotalPage());
+		}
+		
+		//-------------------------------------
+		//현재페이지 기준으로 게시글 가져오기
+		Map<String, Integer> map = new HashMap<>();
+		map.put("begin", p.getBegin());
+		map.put("end", p.getEnd());	
+		
+		System.out.println("map값:" +map);
+		List<RBoardVO> userjoin = rService.Join2(map);
+		
+		//이미지 업로드한거 보여주기
+		for(RBoardVO vo1 :userjoin) {
+			vo1.setFilevo(rService.getFileList(vo1.getRevIdx()));
+		}
+		System.out.println("현재페이지 글목록(list): " + userjoin.toString());
 
 		model.addAttribute("rBoardList", userjoin);
-//		model.addAttribute("userjoin", userjoin);
+		model.addAttribute("pvo", p);
 		
-		return "reviewBoard";
+		return "/review/reviewBoard";
 	}
 	
 	@PostMapping("/insertrboard")
@@ -122,6 +147,7 @@ public class RBoardController {
 		if(!dir.isDirectory()) {
 			dir.mkdirs();
 		}
+		
 		//넘어온 파일을 리스트로 저장
 		List<MultipartFile> fileList = multi.getFiles("file_0");
 		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
@@ -155,27 +181,143 @@ public class RBoardController {
 		return "redirect:/review";
 	}
 	
-	@PostMapping("/review/updateform")
-	public String updateBoardForm(@ModelAttribute("rBoardList")RBoardVO vo) {
+	
+	
+	@RequestMapping("/review/updateform")
+	public String updateBoardForm(Model model,@RequestParam("revIdx")int revIdx) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
-		System.out.println(">> board vo :" + vo);
 		
-		rService.updateBoard(vo);
-		return "insertRBoard";
+		RBoardVO userjoin = rService.Join3(revIdx);
+		
+		List<RFileVO> filevo = rService.getFileList(revIdx);
+		//이미지 업로드한거 보여주기
+		userjoin.setFilevo(filevo );
+
+		model.addAttribute("rBoard", userjoin);
+		model.addAttribute("fileList", filevo);
+		System.out.println("수정페이지 글정보(list): " + userjoin.toString());
+		
+		return "review/revUpdateForm";
 	}
-	@PostMapping("/review/updateboard")
-	public String updateBoard(@ModelAttribute("rBoardList")RBoardVO vo) {
+	@PostMapping("/updaterboard")
+	public String updateRBoard(@ModelAttribute("rBoard")RBoardVO vo, Model model,
+			MultipartHttpServletRequest multi,
+			@AuthenticationPrincipal CustomUserDetail customUser ) 
+					throws IllegalStateException, IOException{
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
-		System.out.println(">> board vo :" + vo);
+
+		System.out.println("vo:" + vo.toString());
 		
+
 		rService.updateBoard(vo);
+
+		String path = "C:/hellopt_file/";
+		
+		int revIdx = vo.getRevIdx();
+		System.out.println("revIdx: " + revIdx);
+		File dir = new File(path);
+		if(!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+
+//넘어온 파일을 리스트로 저장
+		List<MultipartFile> fileList = multi.getFiles("file_0");
+		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
+		
+		}else {//for (MultipartFile filePart : fileList)
+			for (int i = 0; i < fileList.size(); i++) {
+				//원본파일명
+				String revFileOname = fileList.get(i).getOriginalFilename();
+				String FileExtension 
+						= revFileOname.substring(revFileOname.lastIndexOf("."));
+				//파일명  중복되지 않게 처리 한 저장될 이름
+				String saveFileName 
+						= UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
+				
+				String savePath = path + saveFileName; //저장될 파일 경로
+				System.out.println("실제 파일 이름 : " + revFileOname);
+				System.out.println("저장된 파일 이름 : " + saveFileName);
+				long fileSize = fileList.get(i).getSize(); //파일사이즈
+				System.out.println("저장된 파일 사이즈 : " + fileSize);
+				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				System.out.println("저장된 파일 경로" + savePath);
+				
+				System.out.println("revFileOname, saveFileName, fileSize: "+ revFileOname+ saveFileName + fileSize + revIdx);
+				
+				rService.uploadFile(revFileOname, saveFileName, fileSize, revIdx);
+				
+				System.out.println("글정보" + vo);
+
+			}
+		}
 		return "redirect:/review";
 	}
-	@PostMapping("/review/deleteboard")
-	public String deleteBoard(RBoardVO vo) {
+	@RequestMapping("/deleterboard")
+	public String deleteRBoard(int revIdx, Model model) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
-		rService.deleteBoard(vo);
+		rService.deleteBoard(revIdx);
 		return "redirect:/review";
 	}
+	
+	@PostMapping("/imgupload")
+	@ResponseBody
+	public String upload(RBoardVO vo, MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
+		Gson gson = new Gson();
+		//FolderSet set = new FolderSet();
+		System.out.println(">>> 이미지 업로드 처리 - upload()");
+		List<String> list = new ArrayList<String>();
+		
+		String path = "C:/hellopt_file/";
+		File dir = new File(path);
+		if(!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		//넘어온 파일을 리스트로 저장
+		List<MultipartFile> fileList = multi.getFiles("file_0");
+		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
+		
+		}else {//for (MultipartFile filePart : fileList)
+			
+			for (int i = 0; i < fileList.size(); i++) {
+				//원본파일명
+				String revFileOname = fileList.get(i).getOriginalFilename();
+				String FileExtension = revFileOname.substring(revFileOname.lastIndexOf("."));
+				//파일명  중복되지 않게 처리 한 저장될 이름
+				String saveFileName = UUID.randomUUID().toString().replaceAll("-","")+FileExtension; 
+				
+				String savePath = path + saveFileName; //저장될 파일 경로
+				System.out.println("실제 파일 이름 : " + revFileOname);
+				System.out.println("저장된 파일 이름 : " + saveFileName);
+				long fileSize = fileList.get(i).getSize(); //파일사이즈
+				System.out.println("저장된 파일 사이즈 : " + fileSize);
+				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				System.out.println("저장된 파일 경로" + savePath);
+				
+
+			}
+		}
+		return "redirect:/review";
+	}
+	@RequestMapping("/imgDel")
+	@ResponseBody
+	public void imguploadDel(MultipartHttpServletRequest multi,String revFileSname) {
+		System.out.println("데이터");
+		System.out.println(revFileSname);
+		
+		String path = "C:/hellopt_file/";
+		String savePath = path + revFileSname; //저장될 파일 경로
+		System.out.println(savePath);
+		
+		File file = new File(savePath);
+		if(file.exists()==true) {
+			file.delete();
+		}
+
+		
+		
+	}
+	
+	
+	
 }
