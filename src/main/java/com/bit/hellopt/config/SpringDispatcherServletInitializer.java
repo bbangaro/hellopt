@@ -25,6 +25,7 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
     protected Class <?> [] getServletConfigClasses() {
         return new Class[] {
             WebAppConfig.class //웹사이트 설정
+            , WebSocketConfig.class //웹소켓
         };
     }
 
@@ -32,7 +33,7 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
     @Override
     protected String[] getServletMappings() {
         return new String[] {
-            "/" //웹사이트 주소
+            "/" // 루트 컨텍스트로 오는 요청 다 매핑함
         };
     }
   
@@ -40,7 +41,6 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
     protected void customizeRegistration(Dynamic registration) {
         registration.setMultipartConfig(multipartConfig);
     }
-
-
+    
     
 }

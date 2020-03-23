@@ -1,8 +1,6 @@
 package com.bit.hellopt.commons.utils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
@@ -14,7 +12,6 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
 @Service
 public class S3Utils {
@@ -36,6 +33,21 @@ public class S3Utils {
 		try {
 			multipartFile.transferTo(file);
 			s3.putObject(this.bucketName, path + key, file);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch(AmazonServiceException e) {
+			System.out.println(e);
+		}
+		System.out.println("Amazon S3 MultipartFile upload Done!");
+	}
+	
+	public void uploadMultipart(String key, MultipartFile multipartFile) {
+		File file = new File(multipartFile.getOriginalFilename());
+		try {
+			multipartFile.transferTo(file);
+			s3.putObject(this.bucketName, key, file);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

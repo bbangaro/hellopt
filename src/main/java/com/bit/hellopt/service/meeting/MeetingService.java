@@ -1,6 +1,10 @@
 package com.bit.hellopt.service.meeting;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.bit.hellopt.vo.meeting.CategoryCodeVO;
 import com.bit.hellopt.vo.meeting.LocalVO;
@@ -22,6 +26,9 @@ public interface MeetingService {
 		
 	// 게시글 상세 조회
 	MeetingVO getMeetingOne(int meetingIdx);
+	MeetingVO progressCnt(String progressCnt);
+	MeetingVO resCount(int meetingIdx);
+	MeetingVO resUser(Map<String, Object> hm);
 	List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);
 	
 	// 게시글 입력
@@ -32,6 +39,8 @@ public interface MeetingService {
 	void insertConsentYn(MeetingVO meetingVO);
 	// 게시글 입력 > 업롣 파일
 	void insertMeetingFiles(int fkMeetingIdx, String mOriImg, String mSysImg, String filePath);
+	// 모임 예약 인서트
+	void insertReservationMeeting(MeetingVO meetingVO);
 	
 	// 게시글 수정
 	void updateMeetingOk(MeetingVO meetingVO);
@@ -40,8 +49,15 @@ public interface MeetingService {
 	// 게시글 카운트 수 ++
 	void clickCount(MeetingVO meetingVO);
 	
+	// 게시글 승낙y
+	void updateProgressY(MeetingVO meetingVO);
+	// 게시글 승낙n
+	void updateProgressN(MeetingVO meetingVO);
+	
 	// 게시글 삭제
 	void deleteMeeting(int meetingIdx);
+	// 모임 에약 취소(일반유저)
+	void resCancle(Map<String, Object> hm);
 	
 	
 

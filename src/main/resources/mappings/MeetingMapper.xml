@@ -10,6 +10,7 @@
 	      FROM MEETING_TB M, M_CATEGORY_CODE_TB C, LOCAL_CODE_TB L 
 	   	 WHERE M.FK_M_CATEGORY_NO = C.M_CATEGORY_NO  
 		   AND M.FK_LOCAL_NO = L.LOCAL_NO
+		   AND TO_DATE(M_DATE, 'YY/MM/DD') >= SYSDATE-1
 	</select>
 	
 	<select id="getMeetingCnt" parameterType="MeetingVO" resultType="MeetingVO">
@@ -38,7 +39,7 @@
 	</select>
 	
 	<select id="getMeetingOne" parameterType="int" resultType="MeetingVO">
-		SELECT MEETING_IDX, M.FK_USER_ID, M_COMMENT, C.M_CATEGORY, L.LOCAL, M_DATE, M_SUBJECT, M_MEMO, DETAILS, INCLUDE, 
+		SELECT distinct MEETING_IDX, M.FK_USER_ID, M_COMMENT, C.M_CATEGORY, L.LOCAL, M_DATE, M_SUBJECT, M_MEMO, DETAILS, INCLUDE, 
 		       M_LOCATION, M_LOCATION_C, M_PRICE, PROGRESS_ST, M_CNT, INS_DT, U.USER_NAME , A.MAX_COUNT
 	      FROM MEETING_TB M, M_CATEGORY_CODE_TB C, LOCAL_CODE_TB L, USERS_TB U, MEETING_APPLY_TB A 
 		 WHERE M.FK_M_CATEGORY_NO = C.M_CATEGORY_NO 
@@ -48,6 +49,23 @@
 		   AND MEETING_IDX = #{meetingIdx}
 	</select>
 	
+	<select id="resCount" parameterType="int" resultType="MeetingVO">
+		SELECT COUNT(*) MEETING_IDX
+		  FROM MEETING_APPLY_TB 
+		 WHERE FK_MEETING_IDX = #{meetingIdx} 
+	  GROUP BY FK_MEETING_IDX 
+	</select>
+	
+	<select id="resUser" parameterType="HashMap" resultType="MeetingVO">
+		SELECT * FROM MEETING_APPLY_TB 
+		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
+	</select>
+	
+	<select id="progressCnt" parameterType="String" resultType="MeetingVO">
+		SELECT COUNT(*) PROGRESS_ST
+	      FROM MEETING_TB
+		 WHERE PROGRESS_ST = '대기'
+	</select>
 	
 	<select id="getMeetingOneFiles" parameterType="int" resultType="com.bit.hellopt.vo.meeting.MeetingFileVO">
 		SELECT FILE_IDX, FK_MEETING_IDX, FILE_PATH, M_ORI_IMG, M_SYS_IMG
@@ -56,7 +74,7 @@
 		   AND FK_MEETING_IDX = #{meetingIdx}
 	</select>
 	
-	<!-- 뽑힌 시퀀스 번호가 디비에는 =1되어서 들어간다.. 이유가 뭘까...  -->
+	<!-- 뽑힌 시퀀스 번호가 디비에는 +1되어서 들어간다.. 이유가 뭘까...  -->
 	 <insert id="insertMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 	 		<selectKey resultType="int" keyProperty="meetingIdx" order="BEFORE">
 	 			SELECT MEETING_TB_SEQ.NEXTVAL FROM DUAL
@@ -67,13 +85,19 @@
 		       INCLUDE, M_LOCATION, M_LOCATION_C, M_PRICE, PROGRESS_ST, M_CNT, INS_DT) 
 	    VALUES (#{meetingIdx}, #{fkUserId}, #{mComment}, #{fkMCategoryNo}, #{fkLocalNo},  
 			   #{mDate}, #{mSubject}, #{mMemo}, #{details}, #{include} , #{mLocation}, #{mLocationC}, #{mPrice}, 
-			   '진행중', 0, SYSDATE )
+			   '대기', 0, SYSDATE )
 	</insert>
 	<!-- 어쩔 수 없이 FK 테이블에 +1 해서  ...  -->
 	<insert id="insertMaxMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 		INSERT INTO MEETING_APPLY_TB (FK_MEETING_IDX, FK_USER_ID, MAX_COUNT) 
 		VALUES ( (#{meetingIdx})+1 , #{fkUserId}, #{maxCount} )
 	</insert>
+	
+	<insert id="insertReservationMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
+		INSERT INTO MEETING_APPLY_TB (FK_MEETING_IDX, FK_USER_ID, MAX_COUNT) 
+		VALUES ( #{meetingIdx} , #{fkUserId}, #{maxCount} )
+	</insert>
+	
 	<insert id="insertConsentYn" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 		INSERT INTO CONSENT_YN_TB (FK_MEETING_IDX, CONSENT_YN, CONSENT_CHK_YN) 
 		VALUES ( (#{meetingIdx})+1 , 'N' , 'N' )
@@ -103,8 +127,26 @@
 	     WHERE MEETING_IDX = #{meetingIdx}
 	</update>
 	
+	<update id="updateProgressY" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
+		UPDATE MEETING_TB 
+		   SET PROGRESS_ST = '진행중'  
+	     WHERE MEETING_IDX = #{meetingIdx}
+	</update>
+	
+	<update id="updateProgressN" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
+		UPDATE MEETING_TB 
+		   SET PROGRESS_ST = '대기'  
+	     WHERE MEETING_IDX = #{meetingIdx}
+	</update>
+	
 	<delete id="deleteMeeting" parameterType="int">
 		DELETE FROM MEETING_TB WHERE MEETING_IDX = #{meetingIdx}
+	</delete>
+	
+	<delete id="resCancle" parameterType="HashMap">
+		DELETE 
+		  FROM MEETING_APPLY_TB 
+		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
 	</delete>
 	
 	

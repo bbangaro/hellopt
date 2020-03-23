@@ -2,6 +2,8 @@ package com.bit.hellopt.service.user;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bit.hellopt.vo.user.User;
 
 public interface UserService {
@@ -11,6 +13,7 @@ public interface UserService {
 	public User findUserById(String userId);
 	public void updateUser(User user);
 	public void deleteUser(User user);
-	public List<User> pagingUserList(int page);
-	public int getLastPage(int page);
+	public void disableUser(User user);
+	public List<User> pagingUserList(String search, String searchValue, int page);
+	public int getLastPage(String search, String searchValue, int page);
 }

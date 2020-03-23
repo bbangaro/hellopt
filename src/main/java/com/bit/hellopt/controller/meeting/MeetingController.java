@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.bit.hellopt.service.meeting.MeetingService;
 import com.bit.hellopt.vo.meeting.CategoryCodeVO;
@@ -37,6 +41,8 @@ public class MeetingController {
 	 */
 	@Autowired
 	MeetingService service;
+	
+	private MeetingAlarmHandler handler;
 	
 	@RequestMapping("/meeting")
 	public String meeting(Principal principal , Model model) {
@@ -61,6 +67,22 @@ public class MeetingController {
 		model.addAttribute("meetingList", meetingList);
 		return "meeting/meetingAdmin";
 	}
+	
+	@RequestMapping("/admin/progressY")
+	public String updateProgressY(MeetingVO meetingVO) {
+		service.updateProgressY(meetingVO);
+		System.out.println("progressY 성공");
+		
+		return "redirect:/admin/meetingAdmin";
+	}
+	@RequestMapping("/admin/progressN")
+	public String updateProgressN(MeetingVO meetingVO) {
+		service.updateProgressN(meetingVO);
+		System.out.println("progressN 성공");
+		
+		return "redirect:/admin/meetingAdmin";
+	}
+	
 	
 	@RequestMapping("/downloadFile")
 	public void downloadFile(MeetingFileVO meetingFileVO, HttpServletResponse response) throws Exception {
@@ -113,9 +135,22 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("/meetingOne")
-	public String meetingOne(Principal principal, Model model, int meetingIdx, MeetingVO meetingVO) {
+	public String meetingOne(Principal principal, Model model, int meetingIdx, String fkUserId, MeetingVO meetingVO) {
 		//상세리스트
 		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+		MeetingVO resCount = service.resCount(meetingIdx);
+		
+		Map<String, Object> hm = new HashMap<>();
+		
+		fkUserId = principal.getName();
+		
+		hm.put("fkUserId", fkUserId);
+		hm.put("meetingIdx", meetingIdx);
+		System.out.println(hm);
+		MeetingVO resUser = service.resUser(hm);
+		System.out.println("resUser : " + resUser);
+		
+		
 		//상세리스트에서 파일 슬라이드
 		List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
 		meetingOne.setMeetingFileVO(MeetingOneFile);
@@ -127,18 +162,16 @@ public class MeetingController {
 			// 파일없는 vo 안에 fileVO 셋팅 ( fileVO = list vo의 idx로 파일 이미지 전부 소환하기 )
 			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
 		}
-
-
-
-		
 		
 		//클릭수 증가
 		service.clickCount(meetingVO);
 		
 		System.out.println("getMeetingOne 성공");
 		model.addAttribute("meetingOne", meetingOne);
+		model.addAttribute("resCount", resCount);
 		//model.addAttribute("meetingOneFile", MeetingOneFile);
 		model.addAttribute("meetingCnt", meetingCnt);
+		model.addAttribute("resUser", resUser);
 		return "meeting/meetingOne";
 	}
 	
@@ -157,16 +190,17 @@ public class MeetingController {
 	}
 
 	@PostMapping("/meetingWriteOk")
-	public String meetingWriteOk(Principal principal, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException {
+	public String meetingWriteOk(Principal principal,WebSocketSession session, TextMessage message, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
+		
 		service.insertMeeting(meetingVO);
 		meetingVO.setMeetingIdx(meetingVO.getMeetingIdx());
 		meetingFileVO.setFkMeetingIdx(meetingVO.getMeetingIdx());
-		
 		service.insertMaxMeeting(meetingVO);
 		service.insertConsentYn(meetingVO);
-		System.out.println("getMeetingOk 성공");
 		
+		System.out.println("getMeetingOk 성공");
 		System.out.println("업로드 전:"+meetingVO.getMeetingIdx());
+		
 		//다중파일 업로드 처리
 		String realFolder = "C:/hellopt_file/";
 		File dir = new File(realFolder);
@@ -201,20 +235,33 @@ public class MeetingController {
 		return "redirect:/meeting";
 	}
 	
+	@RequestMapping("/meetingRes")
+	public void meetingUpdate(Principal principal, MeetingVO meetingVO, HttpServletResponse response) throws Exception {
+		
+		System.out.println("res : "+meetingVO);
+		int idx = meetingVO.getMeetingIdx();
+		service.insertReservationMeeting(meetingVO);
+		
+		response.sendRedirect("meetingOne?meetingIdx="+idx);
+		
+	//return "redirect:/meetingOne";
+	
+	}
+	
 	@RequestMapping("/meetingUpdate")
 	public String meetingUpdate(Principal principal, Model model, int meetingIdx) {
-	MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
-	List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
-	System.out.println("getMeetingUpdate 성공");
-
-	List<LocalVO> localList = service.getLocalVO();
-	List<CategoryCodeVO> categoryList = service.getCategoryCodeVO();
+		
+		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+		List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
+		System.out.println("getMeetingUpdate 성공");
 	
-	model.addAttribute("localList", localList);
-	model.addAttribute("categoryList", categoryList);
-	model.addAttribute("meetingOne", meetingOne);
-	model.addAttribute("meetingOneFile", MeetingOneFile);
-	
+		List<LocalVO> localList = service.getLocalVO();
+		List<CategoryCodeVO> categoryList = service.getCategoryCodeVO();
+		
+		model.addAttribute("localList", localList);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("meetingOne", meetingOne);
+		model.addAttribute("meetingOneFile", MeetingOneFile);				
 	
 	return "meeting/meetingUpdate";
 	}
@@ -252,5 +299,21 @@ public class MeetingController {
 			//return "redirect:/meetingOne?meetingIdx="+idx;
 		}
 		//return "redirect:/meeting";
+	}
+	@RequestMapping("/resCancle")
+	public void resCancle(Principal principal, int meetingIdx, String fkUserId, MeetingVO meetingVO, HttpServletResponse response) throws Exception {
+		
+		Map<String, Object> hm = new HashMap<>();
+		
+		fkUserId = principal.getName();
+		int idx = service.getMeetingOne(meetingIdx).getMeetingIdx();
+		
+		hm.put("fkUserId", fkUserId);
+		hm.put("meetingIdx", meetingIdx);
+		System.out.println(hm);
+		service.resCancle(hm);
+		
+		//return "redirect:/meetingOne";
+		response.sendRedirect("meetingOne?meetingIdx="+idx);
 	}
 }

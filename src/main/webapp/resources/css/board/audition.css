@@ -4,7 +4,7 @@
 }
 #wrap {
      width: 100%;
-     margin: 0 auto;
+     margin: 100px auto 0 auto;
 }
 body{
 	text-align: center;
@@ -140,7 +140,7 @@ a:hover {
     font-weight: normal;
 }
 .innert2_small.txtcolor{
-    color: #20c997 !important;
+    color: #dc3545 !important;
 
 }
 .inner2_gray{
@@ -193,7 +193,7 @@ a:hover {
     margin: 0 0 60px 0;
 }
 .txtline{
-    border-left: 2px solid #20c997;
+    border-left: 2px solid #dc3545;
     padding-right: 15px;
 }
 /*view04*/
@@ -210,7 +210,7 @@ a:hover {
 .dot{
     height: 150px;
     width: 150px;
-    background-color: rgb(209, 232, 223);
+    background-color: #f4c7cb;
     border-radius: 50%;
     display: inline-block;
     line-height: 150px;
@@ -219,7 +219,8 @@ a:hover {
 }
 .dot:last-child{
     margin-right: 0px;
-    background-color: rgb(133, 196, 171);
+    background-color: #dc3545;
+    color: white;
 }
 /*view05*/
 #view05{
@@ -241,13 +242,13 @@ a:hover {
 .view05_btn{
     width: 240px;
     height: 60px;
-    background-color:rgb(0, 230, 118);
+    background-color:#dc3545;
     line-height: 60px;
     border-radius: 8px;
     margin: 0 auto;
 }
 .view05_btn:hover{
-    background-color: #00c062;
+    background-color: #dc3545;
     transition:background-color 0.15s ease-in-out;
 }
 

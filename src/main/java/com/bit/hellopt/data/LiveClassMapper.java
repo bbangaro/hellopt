@@ -14,10 +14,10 @@ public interface LiveClassMapper {
 			+ "CLASS_START_DATE, CLASS_TIME, CLASS_DAY, LIVE_STATUS, TOTAL_VIEWER) "
 			+ "VALUES (CLASS_TB_SEQ.NEXTVAL, "
 			+ "#{fkUserId}, #{classType}, #{className}, #{totalMembers}, #{price}, #{classLength}, "
-			+ "SYSDATE, #{classTime}, #{classDay}, '방송예정', 0)")
+			+ "#{classStartDate}, #{classTime}, #{classDay}, '방송예정', 0)")
 	public void insertClass(com.bit.hellopt.vo.live.LiveClass liveClass);
 	
-	@Select("SELECT * FROM CLASS_TB")
+	@Select("SELECT * FROM CLASS_TB ORDER BY CLASS_IDX DESC")
 	public List<LiveClass> getLiveClass();
 	
 	@Select("SELECT * FROM CLASS_TB WHERE CLASS_IDX = #{classIdx}")
@@ -25,4 +25,5 @@ public interface LiveClassMapper {
 	
 	@Delete("DELETE FROM CLASS_TB WHERE CLASS_IDX = #{classIdx}")
 	public void deleteClass(int classIdx);
+	
 }

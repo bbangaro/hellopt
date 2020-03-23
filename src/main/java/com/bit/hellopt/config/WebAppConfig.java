@@ -51,8 +51,6 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/classDetail").setViewName("classDetail");
 		registry.addViewController("/review/insertform").setViewName("insertForm");
 		registry.addViewController("/openClassForm").setViewName("class/openClassForm");
-		registry.addViewController("/classDetail").setViewName("class/classDetail");
-		registry.addViewController("/chat").setViewName("chat");
 		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/hello").setViewName("hello");
 		registry.addViewController("/login").setViewName("login");
@@ -69,7 +67,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/traineradmin").setViewName("traineradmin");
 		registry.addViewController("/trainerupdate").setViewName("trainerupdate");
 		registry.addViewController("/trainerupdatepage").setViewName("trainerupdatepage");
-		registry.addViewController("/live").setViewName("class/live");
+		registry.addViewController("/multi").setViewName("class/multi");
 
 	}
 
@@ -125,5 +123,6 @@ public class WebAppConfig implements WebMvcConfigurer {
 		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
 		return multipartConfigElement;
 	}
+	
 
 }
