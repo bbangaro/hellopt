@@ -121,5 +121,6 @@ public class WebAppConfig implements WebMvcConfigurer {
 		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
 		return multipartConfigElement;
 	}
+	
 
 }

@@ -18,6 +18,7 @@ public interface MeetingMapper {
 	public List<CategoryCodeVO> getCategoryCodeVO();
 
 	public MeetingVO getMeetingOne(int meetingIdx);
+	public MeetingVO progressCnt(String progressSt);
 	public MeetingVO resCount(int meetingIdx);
 	public MeetingVO resUser(Map<String, Object> hm);
 	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);
@@ -36,6 +37,7 @@ public interface MeetingMapper {
 	public void updateProgressN(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	
 	public void deleteMeeting(int meetingIdx);
+	public void resCancle(Map<String, Object> hm);
 	
 }
 

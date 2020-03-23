@@ -42,7 +42,7 @@
 					 	<td class="adminTd2"><a class="mBtn red" href="${pageContext.request.contextPath}/admin/progressN?meetingIdx=${mAdmin.meetingIdx }">대기</a></td>
 						</c:if>
 						<c:if test="${mAdmin.progressSt == '진행중' }">
-					 	<td class="adminTd2"><a class="mBtn white" href="${pageContext.request.contextPath}/admin/progressN?meetingIdx=${mAdmin.meetingIdx }">대기              ,,,,,,,,, </a></td>
+					 	<td class="adminTd2"><a class="mBtn white" href="${pageContext.request.contextPath}/admin/progressN?meetingIdx=${mAdmin.meetingIdx }">대기 </a></td>
 						</c:if>
 						
 						</tr>

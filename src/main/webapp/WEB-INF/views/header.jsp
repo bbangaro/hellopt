@@ -3,17 +3,18 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
 	<script src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
 </head>
 
 
 <body>
-
 	<!-- 상단 시작 { -->
     <header id="hd" class="ease" style="z-index: 9999;">
         <h1>
             <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
 		<div class="userName">
+				<span id="result">알람</span>
 			<sec:authorize access="isAuthenticated()">
 				<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
 				<sec:authentication property="principal" var="user" />
@@ -104,4 +105,5 @@
         var g5_editor = "";
         var g5_cookie_domain = "";
     </script>
+    
 </body>

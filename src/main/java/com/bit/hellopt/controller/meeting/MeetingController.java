@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.bit.hellopt.service.meeting.MeetingService;
 import com.bit.hellopt.vo.meeting.CategoryCodeVO;
@@ -39,6 +41,8 @@ public class MeetingController {
 	 */
 	@Autowired
 	MeetingService service;
+	
+	private MeetingAlarmHandler handler;
 	
 	@RequestMapping("/meeting")
 	public String meeting(Principal principal , Model model) {
@@ -186,16 +190,17 @@ public class MeetingController {
 	}
 
 	@PostMapping("/meetingWriteOk")
-	public String meetingWriteOk(Principal principal, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException {
+	public String meetingWriteOk(Principal principal,WebSocketSession session, TextMessage message, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
+		
 		service.insertMeeting(meetingVO);
 		meetingVO.setMeetingIdx(meetingVO.getMeetingIdx());
 		meetingFileVO.setFkMeetingIdx(meetingVO.getMeetingIdx());
-		
 		service.insertMaxMeeting(meetingVO);
 		service.insertConsentYn(meetingVO);
-		System.out.println("getMeetingOk 성공");
 		
+		System.out.println("getMeetingOk 성공");
 		System.out.println("업로드 전:"+meetingVO.getMeetingIdx());
+		
 		//다중파일 업로드 처리
 		String realFolder = "C:/hellopt_file/";
 		File dir = new File(realFolder);
@@ -245,18 +250,18 @@ public class MeetingController {
 	
 	@RequestMapping("/meetingUpdate")
 	public String meetingUpdate(Principal principal, Model model, int meetingIdx) {
-	MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
-	List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
-	System.out.println("getMeetingUpdate 성공");
-
-	List<LocalVO> localList = service.getLocalVO();
-	List<CategoryCodeVO> categoryList = service.getCategoryCodeVO();
+		
+		MeetingVO meetingOne = service.getMeetingOne(meetingIdx);
+		List<MeetingFileVO> MeetingOneFile = service.getMeetingOneFiles(meetingIdx);
+		System.out.println("getMeetingUpdate 성공");
 	
-	model.addAttribute("localList", localList);
-	model.addAttribute("categoryList", categoryList);
-	model.addAttribute("meetingOne", meetingOne);
-	model.addAttribute("meetingOneFile", MeetingOneFile);
-	
+		List<LocalVO> localList = service.getLocalVO();
+		List<CategoryCodeVO> categoryList = service.getCategoryCodeVO();
+		
+		model.addAttribute("localList", localList);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("meetingOne", meetingOne);
+		model.addAttribute("meetingOneFile", MeetingOneFile);				
 	
 	return "meeting/meetingUpdate";
 	}
@@ -294,5 +299,21 @@ public class MeetingController {
 			//return "redirect:/meetingOne?meetingIdx="+idx;
 		}
 		//return "redirect:/meeting";
+	}
+	@RequestMapping("/resCancle")
+	public void resCancle(Principal principal, int meetingIdx, String fkUserId, MeetingVO meetingVO, HttpServletResponse response) throws Exception {
+		
+		Map<String, Object> hm = new HashMap<>();
+		
+		fkUserId = principal.getName();
+		int idx = service.getMeetingOne(meetingIdx).getMeetingIdx();
+		
+		hm.put("fkUserId", fkUserId);
+		hm.put("meetingIdx", meetingIdx);
+		System.out.println(hm);
+		service.resCancle(hm);
+		
+		//return "redirect:/meetingOne";
+		response.sendRedirect("meetingOne?meetingIdx="+idx);
 	}
 }

@@ -53,6 +53,12 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx) {
 		return meetingMapper.getMeetingOneFiles(meetingIdx);
 	}
+	
+	@Override
+	public MeetingVO progressCnt(String progressCnt) {
+		return meetingMapper.progressCnt(progressCnt);
+	}
+	
 	@Override
 	public MeetingVO resCount(int meetingIdx) {
 		return meetingMapper.resCount(meetingIdx);
@@ -62,7 +68,6 @@ public class MeetingServiceImpl implements MeetingService {
 	public MeetingVO resUser(Map<String, Object> hm) {
 		return meetingMapper.resUser(hm);
 	}
-
 
 	// 모임 개설 인서트
 	@Override
@@ -131,6 +136,11 @@ public class MeetingServiceImpl implements MeetingService {
 		
 	}
 	
+	// 모임 예약 취소 (유저)
+	@Override
+	public void resCancle(Map<String, Object> hm) {
+		meetingMapper.resCancle(hm);
+	}
 	
 	
 

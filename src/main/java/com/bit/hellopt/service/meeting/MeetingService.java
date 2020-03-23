@@ -26,6 +26,7 @@ public interface MeetingService {
 		
 	// 게시글 상세 조회
 	MeetingVO getMeetingOne(int meetingIdx);
+	MeetingVO progressCnt(String progressCnt);
 	MeetingVO resCount(int meetingIdx);
 	MeetingVO resUser(Map<String, Object> hm);
 	List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);
@@ -55,6 +56,8 @@ public interface MeetingService {
 	
 	// 게시글 삭제
 	void deleteMeeting(int meetingIdx);
+	// 모임 에약 취소(일반유저)
+	void resCancle(Map<String, Object> hm);
 	
 	
 

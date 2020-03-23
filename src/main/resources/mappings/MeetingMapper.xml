@@ -10,6 +10,7 @@
 	      FROM MEETING_TB M, M_CATEGORY_CODE_TB C, LOCAL_CODE_TB L 
 	   	 WHERE M.FK_M_CATEGORY_NO = C.M_CATEGORY_NO  
 		   AND M.FK_LOCAL_NO = L.LOCAL_NO
+		   AND TO_DATE(M_DATE, 'YY/MM/DD') >= SYSDATE-1
 	</select>
 	
 	<select id="getMeetingCnt" parameterType="MeetingVO" resultType="MeetingVO">
@@ -60,6 +61,11 @@
 		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
 	</select>
 	
+	<select id="progressCnt" parameterType="String" resultType="MeetingVO">
+		SELECT COUNT(*) PROGRESS_ST
+	      FROM MEETING_TB
+		 WHERE PROGRESS_ST = '대기'
+	</select>
 	
 	<select id="getMeetingOneFiles" parameterType="int" resultType="com.bit.hellopt.vo.meeting.MeetingFileVO">
 		SELECT FILE_IDX, FK_MEETING_IDX, FILE_PATH, M_ORI_IMG, M_SYS_IMG
@@ -135,6 +141,12 @@
 	
 	<delete id="deleteMeeting" parameterType="int">
 		DELETE FROM MEETING_TB WHERE MEETING_IDX = #{meetingIdx}
+	</delete>
+	
+	<delete id="resCancle" parameterType="HashMap">
+		DELETE 
+		  FROM MEETING_APPLY_TB 
+		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
 	</delete>
 	
 	

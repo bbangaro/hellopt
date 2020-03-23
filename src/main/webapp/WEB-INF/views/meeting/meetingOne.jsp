@@ -162,10 +162,10 @@
 			<form action="meetingRes" method="post">
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication property="principal" var="user" />
-					<input type="text" name="fkUserId" value="${user.username}">
+					<input type="hidden" name="fkUserId" value="${user.username}">
 				</sec:authorize>
-					<input type="text" id="meeting-idx" name="meetingIdx" value="${meetingOne.meetingIdx }">
-					<input type="text" name="maxCount" value="${meetingOne.maxCount }">
+					<input type="hidden" id="meeting-idx" name="meetingIdx" value="${meetingOne.meetingIdx }">
+					<input type="hidden" name="maxCount" value="${meetingOne.maxCount }">
 
 				<p class="area"><img  src="${pageContext.request.contextPath}/resources/images/meeting/location.png"> ${meetingOne.local } </p>	
 				<div  id="datePicker" class="">
@@ -174,9 +174,25 @@
 				
 				<div class="drop-rv">
 				<input type="button" value="예약하기" class="r-btn">
-					<div class="dropdown-content">
-					<p class="m-condition"><button type="submit"> 신청현황 : ${resCount.meetingIdx }/${meetingOne.maxCount }명</button></p>	
-					</div>
+					<c:choose>
+						<c:when test="${!empty resUser.fkMeetingIdx  and !empty resUser.fkUserId}" >
+							<div class="dropdown-content">
+							<p class="m-condition"><a class="res" href="${pageContext.request.contextPath}/resCancle?meetingIdx=${meetingOne.meetingIdx }"> 예약 취소  </a></p>	
+							</div>
+						</c:when>
+						
+						<c:when test="${resCount.meetingIdx lt meetingOne.maxCount }">
+							<div class="dropdown-content">
+							<p class="m-condition"><button class="res" type="submit"> 신청현황 : ${resCount.meetingIdx }/${meetingOne.maxCount }명</button></p>	
+							</div>
+						</c:when>
+						
+						<c:when test="${resCount.meetingIdx eq meetingOne.maxCount }">
+							<div class="dropdown-content">
+							<p class="m-condition"> 예약 마감되었습니다  </p>	
+							</div>
+						</c:when>
+					</c:choose>
 				</div>
 			</form>
 				

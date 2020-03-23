@@ -223,9 +223,10 @@
   }
   
    .r-btn{
-     border: 1px solid black;
-    width: 220px;
+    border: 1px solid black;
+    width: 219px;
     margin-top: 6px;
+    margin-left: 4px;
     padding: 5px 0 7px;
     
     background: #b4000f;
@@ -259,7 +260,8 @@
 
   display: none;
   position: absolute;
-  min-width: 220px;
+  margin-left: 2px;
+  min-width: 219px;
   padding: 5px 5px;
   z-index: 1;
   
@@ -801,6 +803,16 @@ h2 {
 }
 .meeting-header:hover{
 	color: white !important;
+	cursor: pointer !important;
+}
+.res{
+	pointer-events : none !important;
+	all : unset !important;
+	color: black;
+    text-decoration: none;
+}
+.res:hover{
+	color: black !important;
 	cursor: pointer !important;
 }
 .address-btn {
