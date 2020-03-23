@@ -290,26 +290,45 @@ menusearch{
 }
 
 /*모달css*/
-/* .modal {
-    display: none; Hidden by default
-    position: fixed; Stay in place
-    z-index: 1; Sit on top
-    left: 0;
-    top: 0;
-    width: 100%; Full width
-    height: 100%; Full height
-    overflow: auto; Enable scroll if needed
-    background-color: rgb(0,0,0); Fallback color
-    background-color: rgba(0,0,0,0.4); Black w/ opacity
+#modal_opne_btn{
+    background-color: #dc3545;
+    border: none;
+    color:#fff;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 5px;
 }
-
-Modal Content/Box
-.modal-content {
-    background-color: #333333;
-    margin: 15% auto; 15% from the top and centered
-    padding: 20px;
-    border: 1px solid #888;
-    width: auto; Could be more or less, depending on screen size     */
+#modal_opne_btn1{
+    background-color: #dc3545;
+    border: none;
+    color:#fff;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#modal_opne_btn2{
+    background-color: #dc3545;
+    border: none;
+    color:#fff;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 #modal {
     display: none;
     position: relative;
@@ -317,11 +336,6 @@ Modal Content/Box
     height: 100%;
     z-index: 1;
 }
-
-#modal h2 {
-    margin: 0;
-}
-
 #modal button {
     display: inline-block;
     width: 100px;
@@ -346,8 +360,21 @@ Modal Content/Box
    height: 100%;
    background: rgba(0, 0, 0, 0.5);
    z-index: -1;
-   }                      
-}
+   }
+#modal_close_btn{
+    background-color: #dc3545;
+    border: none;
+    color:#fff;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 5px;	
+}                      
+
 
 
 

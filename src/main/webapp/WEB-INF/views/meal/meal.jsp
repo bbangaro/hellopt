@@ -25,10 +25,6 @@
                             </li>
                             <li class="info_lileft">
                                 <label for="gender" class="info_label">성별</label>
-                                <!--<label for="male">남성</label>
-                                <input type="radio" id="male" name="gender" value="male">
-                                <label for="female">여성</label>
-                                <input type="radio" id="female" name="gender" value="female">-->
                                 <label class="box-radio-input"><input type="radio" id="male" name="gender" value="male" checked="checked"><span>남성</span></label>
                                 <label class="box-radio-input"><input type="radio" id="female" name="gender" value="female"><span>여성</span></label>
                             </li>
@@ -151,7 +147,6 @@
                </div>
                 <h3 class="nutrtion_subtitle">메뉴 정보</h3>
                 <div class="menu_title">
-                        <!-- <p class="menu_title_pd menu_title_pdsmall">번호</p> -->
                         <p class="menu_title_pd menu_title_pdbig">메뉴</p>
                         <p class="menu_title_pd">섭취량(g)</p>
                         <p class="menu_title_pd">열량(kacl)</p>

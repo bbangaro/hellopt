@@ -47,8 +47,8 @@ $(document).ready(function () {
         }else{
            $('#myInfo').css('display', 'none');
            $('#infoAndMenu').css('display', 'block');
+           
             /*필요한 칼로리 총량 계산식*/
-            
             if (gender == "male") {
                var mval1 = 13.75 * kg;
                var mval2 = 5.0 * cm;
@@ -80,6 +80,7 @@ $(document).ready(function () {
         }
 
     });
+    
     //선택한 메뉴 담기
     $(document).on('click', '.menuadd', function () {
        let $this = $(this);
