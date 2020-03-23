@@ -24,10 +24,11 @@ public class CustomUserDetail implements UserDetails{
 	private String name;
 	
 	public CustomUserDetail(User user) {
-		username = user.getUserId();
-		password = user.getUserPw();
-		auth = user.getUserRole();
-		name = user.getUserName();
+		this.username = user.getUserId();
+		this.password = user.getUserPw();
+		this.auth = user.getUserRole();
+		this.name = user.getUserName();
+		this.enable = (user.getUserEnable() == 1);
 	}
 
 	@Override
@@ -64,11 +65,11 @@ public class CustomUserDetail implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return this.enable;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {

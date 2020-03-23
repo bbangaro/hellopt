@@ -14,16 +14,13 @@
 		key-value 형태의 Map 사용 바인드변수명이 key가 됨-->
 	<select id="getExerciseCountlist" resultType="com.bit.hellopt.vo.exercise.ExerciseInformationVO"
 			parameterType="Map">
-
 		SELECT *
 		FROM (SELECT ROWNUM AS R_NUM, A.*
   				FROM (SELECT *
         			  FROM EXERCISE_INFORMATION_TB
-        			  ORDER BY B_IDX DESC ) AS A
-<![CDATA[
-    			WHERE ROWNUM <=#{end} ) AS B
-		WHERE B.R_NUM >= #{begin}
-]]>
+        			  ORDER BY EXERCISE_IDX DESC ) A)
+
+    			WHERE ROWNUM BETWEEN #{begin} AND #{end}
 	</select>
 
 	<select id="getExerciseFileList" resultType="com.bit.hellopt.vo.exercise.ExerciseInformationFileVO"
@@ -33,10 +30,18 @@
 		WHERE EXERCISE_IDX = #{exerciseIdx}
 	</select>
 
+	<!-- 검색 정보 가져오기 -->
 	<select id="getExerciseInformationList" parameterType="exerciseInformation"
 		resultType="exerciseInformation">
-		SELECT * FROM EXERCISE_INFORMATION_TB
-		WHERE 1=1
+<!--  		SELECT * FROM EXERCISE_INFORMATION_TB -->
+<!--  		WHERE 1=1 -->
+		SELECT *
+         FROM (SELECT ROWNUM R_NUM, BBS. * 
+               FROM(SELECT * FROM EXERCISE_INFORMATION_TB
+			 		WHERE 1=1) BBS
+            ) 
+         WHERE R_NUM BETWEEN #{begin} AND #{end}
+
 		<if test="searchCondition == 'EXERCISE_NAME' ">
 			AND EXERCISE_NAME LIKE '%'|| #{searchKeyword} ||'%'
 		</if>
@@ -45,11 +50,35 @@
 		</if>
 	</select>
 	
-	<select id="getExerciseInformation" parameterType="exerciseInformation"
+	<!-- VO에서 검색 결과 불러오기 -->
+	<select id="getExerciseInformationSearch" parameterType="Map"
 		resultType="exerciseInformation">
-		SELECT * FROM EXERCISE_INFORMATION_TB WHERE EXERCISE_IDX = #{exerciseIdx}
+<!--  		SELECT * FROM EXERCISE_INFORMATION_TB -->
+<!--  		WHERE 1=1 -->
+		SELECT *
+         FROM (SELECT ROWNUM R_NUM, BBS. * 
+               FROM(SELECT * FROM EXERCISE_INFORMATION_TB
+			 		WHERE 1=1) BBS
+            ) 
+         WHERE R_NUM BETWEEN #{begin} AND #{end}
+		
+			AND EXERCISE_PARTS LIKE '%'|| '가슴' ||'%'
+
+<!-- 		<if test="searchCondition == 'EXERCISE_NAME' "> -->
+<!-- 			AND EXERCISE_NAME LIKE '%'|| #{searchKeyword} ||'%' -->
+<!-- 		</if> -->
+<!-- 		<if test="searchCondition == 'EXERCISE_PARTS' "> -->
+<!-- 			AND EXERCISE_PARTS LIKE '%'|| '가슴' ||'%' -->
+<!-- 		</if> -->
 	</select>
 	
+	<!-- 게시글 상세보기 -->
+	<select id="getExerciseInformation" parameterType="Map"
+		resultType="exerciseInformation">
+ 		SELECT * FROM EXERCISE_INFORMATION_TB WHERE EXERCISE_IDX = #{exerciseIdx}
+    </select>
+	
+	<!-- 게시글 입력 -->
 	<insert id="insertExerciseInformation" parameterType="exerciseInformation">
 		INSERT INTO EXERCISE_INFORMATION_TB (EXERCISE_IDX, EXERCISE_NAME, EXERCISE_ENAME, EXERCISE_PARTS,
 		HOWTO_EXERCISE, HOWTO_EXERCISE2, EXERCISE_PICTURES, EXERCISE_VIDEO, CAUTION, REPETITION, SET_COUNT, REST_TIME)
@@ -58,10 +87,12 @@
 				#{exerciseVideo}, #{caution}, #{repetition}, #{setCount}, #{restTime})
 	</insert>
   	
+  	<!-- 게시글 수정 -->
 	<update id="updateExerciseInformation" parameterType="exerciseInformation">
 		UPDATE EXERCISE_INFORMATION_TB SET EXERCISE_NAME = #{exerciseName}, EXERCISE_PARTS = #{exerciseParts} WHERE EXERCISE_IDX = #{exerciseIdx}
 	</update>
 	
+	<!-- 게시글 삭제 -->
 	<delete id="deleteExerciseInformation" parameterType="exerciseInformation">
 		DELETE FROM EXERCISE_INFORMATION_TB WHERE EXERCISE_IDX = #{exerciseIdx}
 	</delete>

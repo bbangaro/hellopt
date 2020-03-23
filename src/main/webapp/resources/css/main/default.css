@@ -50,7 +50,7 @@ textarea, select {
 	font-family:  'Jeju Gothic', serif;
 	font-size:1em
 	}
-select {height: 43px; padding: 0 22px 0 10px; font-size: 16px; color: #fff; border: 0;  #1e1e1e right center no-repeat; 
+select {height: 30px; padding: 0 22px 0 10px; font-size: 16px; color: #fff; border: 0; background: url('/assets/img/select.png') #1e1e1e right center no-repeat; 
 		/* 셀렉트 박스 표시 옵션
 		-webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; appearance: none; 
 		*/

@@ -2,7 +2,6 @@ package com.bit.hellopt.vo.exercise;
 
 /* 
 오프셋 기반 페이지네이션 (Offset-based Pagination)
-
 커서 기반 페이지네이션 (Cursor-based Pagination)
 - 클라이언트가 가져간 마지막 row의 순서상 다음 row들을 n개 요청/응답하게 구현
 */ 
@@ -11,8 +10,8 @@ public class ExerciseInformationPaging {
 	private int nowPage = 1; 		//현재페이지
 	private int nowBlock = 1; 		//현재 블록(페이지 담는 단위)
 	
-	private int numPerPage = 8; 	//하나의 페이지에 표시할 게시글 수
-	private int pagePerBlock = 5; 	//블록당 표시하는 페이지 갯수 [1][2][3] / [4][5][6]
+	private int numPerPage = 9; 	//하나의 페이지에 표시할 게시글 수
+	private int pagePerBlock = 5; 	//블록당 표시하는 페이지 갯수 [1][2][3][4][5] / [6][7][8]
 	
 	private int totalRecord = 0; 	//DB에 user가 작성한 총 게시물 갯수(원본 게시글 수)
 	private int totalPage = 0; 		//전체 페이지 갯수

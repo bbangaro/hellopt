@@ -18,7 +18,7 @@
 		method="POST" modelAttribute="user" enctype="multipart/form-data">
 		<ul>
 			<c:if test="${ not empty user.userProfile }">
-				<li><img src="${pageContext.request.contextPath}/file/${ user.userProfile }" alt="profile"></li>
+				<li><img src="${pageContext.request.contextPath}/s3/profile/${ user.userProfile }" alt="profile"></li>
 			</c:if>
 			
 			<li><form:label path="userId">아이디</form:label> <form:input
@@ -62,8 +62,18 @@
 							</c:choose>
 						</c:otherwise>
 					</c:choose>
-
 			</select></li>
+			<li>
+				<form:label path="userEnable">회원 상태</form:label>
+				<c:choose>
+					<c:when test="${user.userEnable == 1 }">
+					<span>정상</span>
+					</c:when>
+					<c:otherwise>
+					<span>회원 정지</span>
+					</c:otherwise>
+				</c:choose>
+			</li>
 			<li><form:label path="userRoot">알게된 경로</form:label> <select
 				name="userRoot">
 					<c:choose>

@@ -2,10 +2,12 @@ package com.bit.hellopt.service.user;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.data.UserMapper;
 import com.bit.hellopt.data.UserXMLMapper;
 import com.bit.hellopt.vo.user.User;
@@ -17,7 +19,7 @@ public class UserServiceImpl implements UserService{
 	UserMapper mapper;
 	@Autowired
 	UserXMLMapper xmlMapper;
-	
+		
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -55,18 +57,21 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<User> pagingUserList(int page) {
-		return xmlMapper.pagingUserList(page);
+	public List<User> pagingUserList(String search, String searchValue, int page) {
+		return xmlMapper.pagingUserList(search, searchValue, page);
 	}
 
 	@Override
-	public int getLastPage(int page) {
-		int lastPage = xmlMapper.countUsers() / 10;
+	public int getLastPage(String search, 
+			String searchValue, int page) {
+		int lastPage = xmlMapper.countUsers(search, searchValue) / 10 + 1;
 		int _lastPage = page - (page % 10) + 10; 
 		return lastPage > _lastPage ? _lastPage : lastPage;
 	}
-	
-	
-	
+
+	@Override
+	public void disableUser(User user) {
+		mapper.disableUSer(user);
+	}
 	
 }

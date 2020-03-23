@@ -17,19 +17,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.service.exercise.ExerciseInformationService;
-import com.bit.hellopt.vo.exercise.ExerciseInformationFileVO;
 import com.bit.hellopt.vo.exercise.ExerciseInformationListVO;
+import com.bit.hellopt.vo.exercise.ExerciseInformationPaging;
 import com.bit.hellopt.vo.exercise.ExerciseInformationVO;
 
 
 @Controller
-@SessionAttributes("exerciseinformation") //exerciseInformation 라는 이름의 Model이 있으면 session에 저장
+@SessionAttributes("exerciseinformation") //exerciseInformation 라는 이름의 Model이 있으면 session에 저장 html과 연관됨
 public class ExerciseInformationController {
 	@Autowired
 	ExerciseInformationService exerciseInformationService;
@@ -57,7 +58,55 @@ public class ExerciseInformationController {
 	//리턴타입 ModelAndView -> String 변경해서 리턴타입 통일
 	//전달할 데이터 저장타입  ModelAndView -> Model
 	@RequestMapping("/exerciseinfolist")
-	public String getExerciseInformationList(ExerciseInformationVO vo, Model model) {
+	public String getExerciseInformationList(ExerciseInformationVO vo, Model model, 
+			@RequestParam(defaultValue="1") Integer cPage) {
+		
+		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
+		ExerciseInformationPaging p = new ExerciseInformationPaging();
+		//1. 전체 게시물의 수를 구하기
+		p.setTotalRecord(exerciseInformationService.getExerciseTotalCount()); 
+		p.setTotalPage(); //전체 페이지 갯수 구하기
+		
+		System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
+		System.out.println(">전체 페이지 수 : " + p.getTotalPage());
+		
+		//2. 현재 페이지 구하기(default : 1)
+		
+		if (cPage != null) {//넘겨받은 페이지 값이 있으면
+			p.setNowPage(cPage);
+		}
+		
+		//3. 현재페이지의 시작번호(begin)와 끝번호(end) 구하기
+//		p.setEnd(p.getNowPage() * p.getNumPerPage());
+//		p.setBegin(p.getEnd() - p.getNumPerPage() + 1);
+		
+		p.setBegin((p.getNowPage() -1 ) * p.getNumPerPage() + 1);
+		p.setEnd((p.getBegin() - 1) + p.getNumPerPage());
+		
+		System.out.println("-------------");
+		System.out.println(">>현재 페이지 : " + p.getNowPage());
+		System.out.println(">>시작번호(begin) : " + p.getBegin());
+		System.out.println(">>끝번호(end) : " + p.getEnd());
+		
+		//------- 블록(block) 계산하기 ----------
+		//4. 블록의 시작페이지, 끝페이지 구하기(현재페이지 번호 사용)
+		int nowPage = p.getNowPage();
+		int beginPage = (nowPage - 1) / p.getPagePerBlock() * p.getPagePerBlock() + 1;
+		p.setBeginPage(beginPage);
+		p.setEndPage(p.getBeginPage() + p.getPagePerBlock() - 1);
+		
+		//4-1 끝페이지(endPage)가 전체 페이지 수(totalPage) 보다 크면
+		if (p.getEndPage() > p.getTotalPage()) {
+			p.setEndPage(p.getTotalPage());
+		}
+
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", p.getBegin());
+		map.put("end", p.getEnd());
+		
+		List<ExerciseInformationVO> list = exerciseInformationService.getExerciseCountlist(map);
+		System.out.println("현재페이지 글목록(list) : " + list);
+		
 		System.out.println(">>> 글 전체 목록 조회 처리-getExerciseInformationList()");
 		System.out.println("condition : " + vo.getSearchCondition());
 		System.out.println("keyword : " + vo.getSearchKeyword());
@@ -72,7 +121,7 @@ public class ExerciseInformationController {
 		System.out.println("null처리후 condition : " + vo.getSearchCondition());
 		System.out.println("null처리후 keyword : -" + vo.getSearchKeyword() + "-");
 		
-		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationList(vo);
+		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationSearch(map);
 		
 		for(ExerciseInformationVO evo : exerciseInformationList) {
 			evo.setFilevo(exerciseInformationService.getFileList(evo.getExerciseIdx()));
@@ -80,6 +129,19 @@ public class ExerciseInformationController {
 		
 		System.out.println("exerciseInformationList: " + exerciseInformationList.toString());
 		model.addAttribute("exerciseInformationList", exerciseInformationList);
+		model.addAttribute("pvo", p);
+		model.addAttribute("cPage", cPage);
+		
+		/*ExerciseInformationVO exerciseInformation = exerciseInformationService.getExerciseInformation(vo);
+		
+		exerciseInformation.splitExercisePicturesList();
+		for(String str : exerciseInformation.getExercisePicturesList()) {
+			System.out.println("이미지: " + str);
+		}
+		
+		model.addAttribute("exerciseInformation", exerciseInformation);
+		System.out.println("exerciseInformation에서 가져온 첫번째 이미지 경로 -> exerciseInformationList : " + exerciseInformation);
+		*/
 		return "exercise/exerciseInfoList";
 	}
 	
@@ -130,7 +192,6 @@ public class ExerciseInformationController {
 		
 		return "redirect:/exerciseinfo";
 	}
-	
 	
 	@PostMapping("insertexerciseinformation")
 	public String insertExerciseInformation(ExerciseInformationVO vo,/* @RequestParam("exercisePictures")*/ MultipartFile file, MultipartHttpServletRequest mtfRequest,
@@ -184,6 +245,7 @@ public class ExerciseInformationController {
 		
 		return "redirect:/exerciseinfolist";
 	}
+	
 		/* *** 파일 업로드 처리 ********
 		 * MultipartFile 인터페이스 주요 메소드
 		 * String getOriginalFilename() : 업로드한 파일명 찾기
@@ -243,6 +305,5 @@ public class ExerciseInformationController {
 	
 		return exerciseInformationListVO;
 	}
-	
 	
 }
