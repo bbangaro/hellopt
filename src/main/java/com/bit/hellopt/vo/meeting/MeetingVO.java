@@ -47,6 +47,8 @@ public class MeetingVO {
     private String userId;
     // 모임최대인원
     private int maxCount;
+    // fk idx
+    private int fkMeetingIdx;
     
     
     private List<MeetingFileVO> meetingFileVO;
@@ -183,6 +185,12 @@ public class MeetingVO {
 	public String getLocal() {
 		return local;
 	}
+	public int getFkMeetingIdx() {
+		return fkMeetingIdx;
+	}
+	public void setFkMeetingIdx(int fkMeetingIdx) {
+		this.fkMeetingIdx = fkMeetingIdx;
+	}
 	public void setLocal(String local) {
 		this.local = local;
 	}
@@ -199,8 +207,8 @@ public class MeetingVO {
 				+ mSubject + ", mMemo=" + mMemo + ", details=" + details + ", include=" + include + ", mLocation="
 				+ mLocation + ", mLocationC=" + mLocationC + ", mPrice=" + mPrice + ", progressSt=" + progressSt
 				+ ", mCnt=" + mCnt + ", insDt=" + insDt + ", mCategory=" + mCategory + ", local=" + local
-				+ ", userName=" + userName + ", userId=" + userId + ", maxCount=" + maxCount + ", meetingFileVO="
-				+ meetingFileVO + "]";
+				+ ", userName=" + userName + ", userId=" + userId + ", maxCount=" + maxCount + ", fkMeetingIdx="
+				+ fkMeetingIdx + ", meetingFileVO=" + meetingFileVO + "]";
 	}
     
 

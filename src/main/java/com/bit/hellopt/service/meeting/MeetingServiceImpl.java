@@ -2,6 +2,7 @@ package com.bit.hellopt.service.meeting;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,8 +53,21 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx) {
 		return meetingMapper.getMeetingOneFiles(meetingIdx);
 	}
-
-
+	
+	@Override
+	public MeetingVO progressCnt(String progressCnt) {
+		return meetingMapper.progressCnt(progressCnt);
+	}
+	
+	@Override
+	public MeetingVO resCount(int meetingIdx) {
+		return meetingMapper.resCount(meetingIdx);
+	}
+	
+	@Override
+	public MeetingVO resUser(Map<String, Object> hm) {
+		return meetingMapper.resUser(hm);
+	}
 
 	// 모임 개설 인서트
 	@Override
@@ -81,7 +95,13 @@ public class MeetingServiceImpl implements MeetingService {
 		
 		meetingMapper.insertMeetingFiles(hm);
 	}
+	// 모임 예약
+	@Override
+	public void insertReservationMeeting(MeetingVO meetingVO) {
+		meetingMapper.insertReservationMeeting(meetingVO);
+	}
 
+	
 	// 모임 수정 
 	@Override
 	public void updateMeetingOk(MeetingVO meetingVO) {
@@ -98,15 +118,32 @@ public class MeetingServiceImpl implements MeetingService {
 		meetingMapper.clickCount(meetingVO);
 	}
 	
+	//모임 승낙y
+	@Override
+	public void updateProgressY(MeetingVO meetingVO) {
+		meetingMapper.updateProgressY(meetingVO);
+	}
+	//모임 승낙n
+	@Override
+	public void updateProgressN(MeetingVO meetingVO) {
+		meetingMapper.updateProgressN(meetingVO);
+	}
+	
 	// 모임 삭제
 	@Override
 	public void deleteMeeting(int meetingIdx) {
 		meetingMapper.deleteMeeting(meetingIdx);
 		
 	}
-
-
 	
+	// 모임 예약 취소 (유저)
+	@Override
+	public void resCancle(Map<String, Object> hm) {
+		meetingMapper.resCancle(hm);
+	}
+	
+	
+
 
 
 }

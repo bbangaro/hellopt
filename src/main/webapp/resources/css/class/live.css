@@ -3,7 +3,7 @@ article {
     min-width: 360px;
     height: 800px;
     width: 1300px;
-    border: 1px solid #7d7d7d;
+    /* border: 1px solid #7d7d7d; */
     margin: 110px auto 0 auto;
     padding: 2em;
 }
@@ -46,11 +46,27 @@ table, tr, td {
 }
 
 iframe {
-	height: 660px;
-	width: 105%;
-	overflow-y: scroll;
-	overflow: hidden;
+	height: 719px;
+	width: 100%;
+	/* overflow-y: scroll;
+	overflow: hidden; */
 	box-sizing: border-box;
+	border: 1px solid gray;
+}
+
+.video-info {
+	width: 70%;
+  	float: left;
+}
+
+#class-name {
+	padding: 20px;
+	background: #fff;
+	margin: 3px 0;
+}
+
+#class-name p {
+	color: black;
 }
 	
 #chat-container {
@@ -58,6 +74,7 @@ iframe {
 	overflow: hidden;
 	float: right;
 }
+
 
 @media all and (max-width: 800px) {
     body {

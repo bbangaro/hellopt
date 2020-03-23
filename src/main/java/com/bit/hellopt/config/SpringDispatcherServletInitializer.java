@@ -25,6 +25,7 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
     protected Class <?> [] getServletConfigClasses() {
         return new Class[] {
             WebAppConfig.class //웹사이트 설정
+            , WebSocketConfig.class //웹소켓
         };
     }
 
@@ -40,7 +41,6 @@ public class SpringDispatcherServletInitializer extends AbstractAnnotationConfig
     protected void customizeRegistration(Dynamic registration) {
         registration.setMultipartConfig(multipartConfig);
     }
-
-
+    
     
 }

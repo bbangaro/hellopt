@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,11 +53,13 @@
 								</tr>
 								<tr>
 									<th>수업 기간</th>
-									<td>${classDetail.classLength }</td>
+									<td>${classDetail.classLength }주</td>
 								</tr>
 								<tr>
 									<th>수업 시작일</th>
-									<td>${classDetail.classStartDate }</td>
+									<td>
+										<fmt:formatDate value="${classDetail.classStartDate }" pattern="yy/MM/dd"/>
+									</td>
 								</tr>
 								<tr>
 									<th>수업 요일</th>
@@ -67,11 +71,11 @@
 								</tr>
 								<tr>
 									<th>수업 인원</th>
-									<td>${classDetail.totalMembers }</td>
+									<td>${classDetail.totalMembers }명</td>
 								</tr>
 								<tr>
 									<th>가격</th>
-									<td>${classDetail.price }</td>
+									<td>${classDetail.price }원</td>
 								</tr>
 							</table>
 						</div>

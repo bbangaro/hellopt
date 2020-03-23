@@ -1,3 +1,15 @@
+(function () {
+
+	  $(document).ready(function () {
+	    return $(".send-send-btn2").click(function () {
+	 
+	    	location.href="/hellopt/meeting";
+	      
+	    });
+	  });
+
+	}).call(this);
+
 /* 너무 깔끔한 슬라이드 보류
 var swiper = new Swiper('.swiper-container', {
       zoom: true,

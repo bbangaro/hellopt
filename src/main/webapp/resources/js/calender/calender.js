@@ -1,4 +1,4 @@
-!(function() {
+ window.onload = function() {
   var today = moment(); // 현재 시간 구하기
 
   // 한글로 표시할 경우 (영어로 하려면 아래 lang부분 삭제)
@@ -56,6 +56,7 @@
   // 달력 헤더 생성
   Calendar.prototype.drawHeader = function() {
     var self = this;
+    //☆☆☆ 어디선가 header가 선언 되면?
     if (!this.header) {
       //Create the header elements
       this.header = createElement("div", "header"); // <div class='header'>생성
@@ -79,12 +80,13 @@
       this.header.appendChild(left);
       this.el.appendChild(this.header);
     }
-
     this.title.innerHTML = this.current.format("YYYY년 MM월");
     console.log("달력 Title : ", this.current.format("YYYY년 MM월"));
     // 현재 월 확인 -> DB에서 월 조회 후 등록된 리스트 가져오기
     console.log(this.current.format("MM") + "월"); // ex. 02. 03 ..
-
+    
+    
+ // json 시작 --------------------------------------------------------------------   
     $.ajax({
     	url : "selectMonth", 
     	data : { month : this.current.format("MM") },
@@ -96,25 +98,24 @@
     		//참고사항------------------------------
     		
     		//응답받은 데이터 형식 : [{}, {}, ... , {}] - 배열
-    		var strData = JSON.stringify(data); //JSON -> string
-    		console.log("-" + strData + "-");
+			var strData = JSON.stringify(data); //JSON -> string
+			console.log("-" + strData + "-");
     		
-    		var jsData = JSON.parse(strData); // string -> JSON
+    		var jsData = 
     		console.log("-" + jsData + "-");
     		
-    		//ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-    		
-    		
-    		
-    		
+
     		
     	},
     	error : function(jqXHR, textStatus, errorThrown){
     		alert("통신에러" );
     	}
     	
-    }); //json 끝
+    	
+    }); 
     
+//json 끝 -----------------------------------------------------------------------------------------------
+ 
   };
 
   
@@ -127,6 +128,7 @@
 
     // DB에 등록된 날짜에 맞춰 달력에 추가
     this.events.forEach(function(ev) {
+    	
       console.log("이벤트 리스트 : " + ev.day);
       ev.date = self.current.clone().date(ev.day);
     });
@@ -424,11 +426,16 @@
     }
     return ele;
   }
-})();
+  
+  monthData();
+  
+ };
+ 
 
 // 월별 등록된 리스트 -> DB에서 월 조회후 데이터 담기게!
-
-!(function() {
+var monthData = function () {
+	
+	
   var strData = [
     {
       content: "팔운동",
@@ -468,10 +475,10 @@
     }
   ];
 
-  function addDate(ev) {}
+ // function addDate(ev) {}
 
   // <div id='calendar'>에 리스트 추가
-  var calendar = new Calendar("#eventCalendar", strData);
-})();
+ var calendar = new Calendar("#eventCalendar", strData);
+};
 
 

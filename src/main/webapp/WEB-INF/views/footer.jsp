@@ -14,5 +14,7 @@
 	<p>Privacy policy</p>
 	<p class="footer_info">BIT CAMP</p>
 	<p class="copyright">ALL RIGHTS RESERVED. Â© 2019 HelloPT</p>
+	
+	<script src="${pageContext.request.contextPath}/resources/js/main/ws.js"></script>
 </div>
 <!-- <div class="dim_bg"></div> -->
