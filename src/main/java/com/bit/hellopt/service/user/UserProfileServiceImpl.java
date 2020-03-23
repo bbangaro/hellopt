@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.data.ProfileMapper;
 import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
@@ -23,35 +24,88 @@ public class UserProfileServiceImpl implements UserProfileService {
 	ProfileMapper mapper;
 	@Autowired
 	ServletContext servletContext;
+	
+	@Autowired
+	S3Utils s3Utils;
 
 	@Override
-	public void insertProfile(User user, MultipartFile file) {
+	public String insertProfile(User user, MultipartFile multipartFile) {
 		
 		ProfileVO profile = new ProfileVO();
 		profile.setFkUserId(user.getUserId());
-		profile.setOriginalFileName(file.getOriginalFilename());
+		profile.setOriginalFileName(multipartFile.getOriginalFilename());
 		
-		String rpath = servletContext.getRealPath("resources/images/profile/");
 		
 		Calendar calendar = Calendar.getInstance(); 
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmmss");
 		
-		String storedName = generateRandomString() +  formatter.format(calendar.getTime()) + "." + file.getOriginalFilename().split("\\.")[1];
+		String storedName = generateRandomString() +  formatter.format(calendar.getTime()) + "." + multipartFile.getOriginalFilename().split("\\.")[1];
+		
+		profile.setStoredFileName(storedName);
+		
+		File file = new File(multipartFile.getOriginalFilename());
 		
 		try {
-			file.transferTo(new File(rpath + storedName));
-			profile.setStoredFileName(storedName);
-			mapper.insertProfile(profile);
+			multipartFile.transferTo(file);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	
+		s3Utils.uploadFile("profile/" + storedName, file);
+		mapper.insertProfile(profile);
+		
+		/*
+		 * try { file.transferTo(new File(rpath + storedName));
+		 * profile.setStoredFileName(storedName); mapper.insertProfile(profile); } catch
+		 * (IllegalStateException e) { e.printStackTrace(); } catch (IOException e) {
+		 * e.printStackTrace(); }
+		 */
+		return storedName;
 	}
 
 	@Override
 	public ProfileVO selectProfile(String userId) {
 		return mapper.selectProfile(userId);
+	}
+	
+	public String updateProfile(User user, MultipartFile multipartFile) {
+		
+		ProfileVO storedProfile = selectProfile(user.getUserId());
+		
+		ProfileVO profile = new ProfileVO();
+		profile.setFkUserId(user.getUserId());
+		profile.setOriginalFileName(multipartFile.getOriginalFilename());
+		
+		Calendar calendar = Calendar.getInstance(); 
+		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmmss");
+		
+		String storedName = generateRandomString() +  formatter.format(calendar.getTime()) + "." + multipartFile.getOriginalFilename().split("\\.")[1];
+		profile.setStoredFileName(storedName);
+		
+		File file = new File(multipartFile.getOriginalFilename());
+		
+		try {
+			multipartFile.transferTo(file);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(storedProfile != null) {
+			s3Utils.deleteFile("profile/" + storedProfile.getStoredFileName());
+			s3Utils.uploadFile("profile/" + storedName, file);
+			mapper.updateProfile(profile);
+		} else {
+			s3Utils.uploadFile("profile/" + storedName, file);
+			mapper.insertProfile(profile);
+		}
+	
+		
+		
+		return storedName;
 	}
 
 	public String generateRandomString() {

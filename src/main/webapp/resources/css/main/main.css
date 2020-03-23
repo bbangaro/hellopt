@@ -12,15 +12,14 @@
 	margin: auto;
 	*/
 }
-/*
-body {
-    min-height: 100%;
-}
-*/
+
+
 
 /* footer 하단 고정 */
+
+
 .footer {
-  position: fixed;
+  /* position: fixed; */
   bottom: 10px;
   width: 100%;  
   text-align: center;
@@ -127,8 +126,11 @@ transition: 0.3s;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 9999;
+  height:100px;
+  transition:all 0.3s ease-in-out;
 }
+
 #hd h1 {
   position: absolute;
   left: 46px;
@@ -280,7 +282,7 @@ transition: 0.3s;
 }
 #navigation .nav_wrap .category a {
   /* text-transform: uppercase; */
-  padding: 0 27px;
+  margin : 50px;
   font-size: 30px;
   -webkit-transition: all 0.14s;
   -moz-transition: all 0.14s;
@@ -293,9 +295,12 @@ transition: 0.3s;
 }
 
 #navigation .nav_wrap ul.artist_depth02 {
+	margin-top: 10px;
+	width: 400px;
+    display: grid;
     position: absolute;
-    bottom: -119px;
-    font-size: 18px;
+   /* bottom: -160px; */
+    font-size: 15px;
     left: 50%;
     transform: translateX(-50%);
 	transition: 0.3s;
@@ -303,12 +308,11 @@ transition: 0.3s;
 	overflow:hidden;
 }
 #navigation .nav_wrap ul.artist_depth02.on {
-    display:block;
 	height:auto;
 }
 #navigation .nav_wrap ul.artist_depth02 li a {
-    font-size: 32px;
-    line-height: 1.7;
+    font-size: 20px;
+    line-height: 1.5;
 	opacity:0.6;
 }
 
@@ -324,7 +328,8 @@ transition:0.3s;
     margin-bottom: 0px;*/
 }
 #navigation .nav_wrap .user_case.on {
-    margin-top: 170px;
+    margin-top: 222px;
+    margin-bottom: -50px;
 }
 #navigation .nav_wrap .user_case a {
   text-transform: uppercase;
@@ -443,7 +448,10 @@ transition:0.3s;
   right: 58px;
   bottom: 43px;
   font-size: 20px;
+  /*
   font-family: 'Myriad Pro', sans-serif;
+  */
+  font-family:  'Jeju Gothic', serif;
   color: #686868;
 }
 .swiper-pagination-fraction .swiper-pagination-current {
@@ -626,7 +634,10 @@ transition:0.3s;
   font-size: 18px;
   animation: fadeIn 0.3s 3.5s ease-in alternate;
   animation-fill-mode: forwards;
+  /*
   font-family: 'Noto Sans KR', sans-serif;
+  */
+  font-family:  'Jeju Gothic', serif;
 }
 #about .focusing_content {
   /* position: absolute;
@@ -1202,3 +1213,23 @@ transition:0.3s;
   .ani-adj .sub-content{
     margin-top: 137px;
   }
+
+  .userName {
+  	float:right;
+  	color: #b3b3b3;
+  	font-size: 13px;
+  	font: 400 13.3333px Arial;
+  	margin-right: 48px;
+  	padding-top: 25px;
+  }
+  
+/* body 가운데 정렬 */
+.center {
+    width: 1024px;
+	min-height: 500px;
+    margin:-0 auto;
+}
+
+#hd {
+	
+}

@@ -405,7 +405,10 @@ display: block;
   font-size: 14px;
   color: #fff;
   text-align: left;
+  /*
   font-family: 'Noto Sans KR', sans-serif;
+  */
+  font-family:  'Jeju Gothic', serif;
   line-height: 1.7;
 }
 .basic-table table{
@@ -438,7 +441,10 @@ display: block;
   margin-top: 70px;
 }
 .basic-caption{
+	/*
   font-family: 'Noto Sans KR', sans-serif;
+	*/
+font-family:  'Jeju Gothic', serif;
   font-size: 14px;
   color: #5a5a5a;
   margin-top: 25px;
@@ -524,7 +530,10 @@ a.file {
     margin: 0 auto;
     margin-top: 30px;
     background: #b4000f;
+    /*
     font-family: 'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
+    */
+    font-family:  'Jeju Gothic', serif;
     font-size: 15px;
     -webkit-appearance:none;
     border-radius: 0;
@@ -873,7 +882,10 @@ a.btn_b01:hover, .btn_b01:hover{
   margin-top: 20px;
 }
 .track-table{
+  /*
   font-family: 'Noto Sans KR', sans-serif;
+  */
+  font-family:  'Jeju Gothic', serif;
   font-size: 14px;
 
 }
@@ -1278,7 +1290,10 @@ a.top-btn{
 
 /*로그인*/
 #mb_login #login_fs .btn_submit{
+  /*
   font-family: inherit;
+  */
+  font-family:  'Jeju Gothic', serif;
 }
 
 /*이메일 확인*/
@@ -1336,7 +1351,10 @@ a.top-btn{
   height: 45px;
   line-height: 44px;
   padding: 0 15px;
+  /*
   font-family: 'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
+  */
+  font-family:  'Jeju Gothic', serif;
 }
 .resi_button input{
   height: 46px;

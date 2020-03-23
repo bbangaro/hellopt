@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bit.hellopt.data.UserXMLMapper">
+<resultMap type="com.bit.hellopt.vo.user.User" id="userMap">
+	<id property="userId" column="user_id"/>
+	<result property="userPw" column="user_pw"/>
+	<result property="userPw" column="user_pw"/>
+	<result property="userRole" column="user_role"/>
+	<result property="userName" column="user_name"/>
+	<result property="userGender" column="user_gender"/>
+	<result property="userAddress" column="user_address"/>
+	<result property="userBirth" column="user_birth"/>
+	<result property="userJob" column="user_job"/>
+	<result property="userRoot" column="user_root"/>
+	<result property="userHeight" column="user_height"/>
+	<result property="userWeight" column="user_weight"/>
+	<result property="userProfile" column="stored_file_name"/>
+	
+</resultMap>
+	<select id="selectUser" parameterType="String" resultMap="userMap">
+		SELECT *
+		FROM user_profile_tb p, users_tb u WHERE p.fk_user_id = u.user_id AND user_id = #{userId}
+	</select>
+	<select id="pagingUserList" parameterType="int" resultMap="userMap">
+		<![CDATA[
+		SELECT * FROM (SELECT u.*, rownum r FROM (SELECT * FROM users_tb) u WHERE rownum < #{page} * 10 + 1) where r >= (#{page} - 1) * 10 + 1
+		]]>
+	</select>
+	<select id="countUsers" resultType="int">
+		SELECT count(*) FROM users_tb
+	</select>
+	
+</mapper>

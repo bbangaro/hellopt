@@ -1,5 +1,8 @@
 package com.bit.hellopt.config;
 
+import java.io.File;
+
+import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -41,12 +44,33 @@ public class WebAppConfig implements WebMvcConfigurer {
 	//바로 URL과 VIEW를 바로 매핑시켜줌
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+
+		//registry.addViewController("/signupform").setViewName("signupForm");
+		registry.addViewController("/review/insertform").setViewName("revInsertForm");
 		registry.addViewController("/openClassForm").setViewName("openClassForm");
 		registry.addViewController("/classDetail").setViewName("classDetail");
+		registry.addViewController("/review/insertform").setViewName("insertForm");
+		registry.addViewController("/openClassForm").setViewName("class/openClassForm");
+		registry.addViewController("/classDetail").setViewName("class/classDetail");
 		registry.addViewController("/chat").setViewName("chat");
 		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/hello").setViewName("hello");
 		registry.addViewController("/login").setViewName("login");
+		registry.addViewController("/faq1").setViewName("faq1");
+		registry.addViewController("/faq2").setViewName("faq2");
+		registry.addViewController("/audition").setViewName("audition");
+		registry.addViewController("/exerciseInfo").setViewName("exerciseInfo");
+		registry.addViewController("/exerciseInfoList").setViewName("exerciseInfoList");
+		registry.addViewController("/exerciseInfoTip").setViewName("exerciseInfoTip");
+		registry.addViewController("/exerciseInfoTipList").setViewName("exerciseInfoTipList");
+		registry.addViewController("/trainer").setViewName("trainer");
+		registry.addViewController("/trainerinfo").setViewName("trainerinfo");
+		registry.addViewController("/trainerinsert").setViewName("trainerinsert");
+		registry.addViewController("/traineradmin").setViewName("traineradmin");
+		registry.addViewController("/trainerupdate").setViewName("trainerupdate");
+		registry.addViewController("/trainerupdatepage").setViewName("trainerupdatepage");
+		registry.addViewController("/live").setViewName("class/live");
+
 	}
 
 	//Controller에서 View 리턴 시 View 위치와 확장자를 설정
@@ -66,6 +90,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/file/**").addResourceLocations("file:///C:/hellopt_file/");
 	}
 
 	// MyBatis 연동을 위한 설정
@@ -81,11 +106,24 @@ public class WebAppConfig implements WebMvcConfigurer {
 	  return factoryBean.getObject();
 	}
 	
-	// 파일 업로드를 위한 설정
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		multipartResolver.setMaxUploadSize(100000000);
+		//multipartResolver.setMaxUploadSize(1000000);
+		multipartResolver.setDefaultEncoding("UTF-8");
+		multipartResolver.setMaxUploadSize(52428800);
 		return multipartResolver;
 	}
+	
+	@Bean
+	public MultipartConfigElement multipartConfigElement() {
+		int maxUploadSizeInMb = 1024 * 1024;
+		//File uploadDirectory 수정할것~!~!~!~!~!~!
+//		File uploadDirectory = new File(System.getProperty("java.io.tmpdir"));
+//		MultipartConfigElement multipartConfigElement;
+		File uploadDirectory = new File("classpath:resources/images");
+		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(uploadDirectory.getAbsolutePath(), maxUploadSizeInMb, maxUploadSizeInMb * 2,maxUploadSizeInMb / 2);
+		return multipartConfigElement;
+	}
+
 }
