@@ -195,7 +195,7 @@ public class ExerciseInformationController {
 	@Value("${file.directory}")
 	private String fileDirectory;
 	
-	@GetMapping("/exercise") //
+	@GetMapping("/exercise")
 	public String uploadForm() {
 		return "exercise/insertexerciseinformation";
 	}
@@ -260,7 +260,6 @@ public class ExerciseInformationController {
 		if(vo.getExercisePictures().length()>0) {
 			vo.setExercisePictures(vo.getExercisePictures().substring(0, vo.getExercisePictures().length()-1 ) );
 		} exerciseInformationService.insertExerciseInformation(vo);
-		
 		
 		return "redirect:/exerciseinfolist";
 	}
