@@ -11,6 +11,7 @@
 <title>유저 관리</title>
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/admin/meetingAdmin">모임신청 게시글 현황</a>
 <h2>회원 정보 관리</h2>
 	<table>
 		<thead>
@@ -43,13 +44,13 @@
 							<c:when test="${ user.userRole eq 'ROLE_ADMIN' }">관리자</c:when>
 						</c:choose>
 					</td>
-					<td> <a href="${ pageContext.request.contextPath }/admin/user/${ user.userId }">관리</a></td>
+					<td> <a class="management-anchor" href="${ pageContext.request.contextPath }/admin/user/${ user.userId }">관리</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<c:forEach begin="${param.page - (param.page % 10) + 1}" end="${lastPage}" varStatus="idx">
-		<a href="#">${idx.count}</a>
+		<a href="${ pageContext.request.contextPath }/admin/user?page=${idx.count}">${idx.count}</a>
 	</c:forEach>
 </body>
 </html>

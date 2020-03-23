@@ -12,11 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -53,6 +49,9 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/review/insertform").setViewName("/review/revInsertForm");
 		registry.addViewController("/openClassForm").setViewName("openClassForm");
 		registry.addViewController("/classDetail").setViewName("classDetail");
+		registry.addViewController("/review/insertform").setViewName("insertForm");
+		registry.addViewController("/openClassForm").setViewName("class/openClassForm");
+		registry.addViewController("/classDetail").setViewName("class/classDetail");
 		registry.addViewController("/chat").setViewName("chat");
 		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/hello").setViewName("hello");
@@ -60,6 +59,10 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/faq1").setViewName("faq1");
 		registry.addViewController("/faq2").setViewName("faq2");
 		registry.addViewController("/audition").setViewName("audition");
+		registry.addViewController("/exerciseInfo").setViewName("exerciseInfo");
+		registry.addViewController("/exerciseInfoList").setViewName("exerciseInfoList");
+		registry.addViewController("/exerciseInfoTip").setViewName("exerciseInfoTip");
+		registry.addViewController("/exerciseInfoTipList").setViewName("exerciseInfoTipList");
 		registry.addViewController("/trainer").setViewName("trainer");
 		registry.addViewController("/trainerinfo").setViewName("trainerinfo");
 		registry.addViewController("/trainerinsert").setViewName("trainerinsert");
@@ -67,6 +70,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addViewController("/trainerupdate").setViewName("trainerupdate");
 		registry.addViewController("/trainerupdatepage").setViewName("trainerupdatepage");
 		registry.addViewController("/live").setViewName("class/live");
+
 	}
 
 	//Controller에서 View 리턴 시 View 위치와 확장자를 설정

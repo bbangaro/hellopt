@@ -1,5 +1,9 @@
 package com.bit.hellopt.vo.exercise;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -37,14 +41,17 @@ END;
 public class ExerciseInformationVO {
 	private int exerciseIdx;
 	private String exerciseName;
+	private String exerciseEName;
 	private String exerciseParts;
 	private String howtoExercise;
-	private String exercisePicturesName;
+	private String howtoExercise2;
+	private String exercisePictures;
 	private String exerciseVideo;
 	private String caution;
 	private int repetition;
 	private int setCount;
 	private int restTime;
+	private List<ExerciseInformationFileVO> filevo;
 	
 	//검색조건용 필드 추가
 	private String searchCondition;
@@ -52,6 +59,26 @@ public class ExerciseInformationVO {
 	
 	//파일업로드
 	private MultipartFile uploadFile;
+	
+	//임시
+	private List<String> exercisePicturesList = new ArrayList<>();
+	
+	public List<String> getExercisePicturesList() {
+		return exercisePicturesList;
+	}
+
+	public void setExercisePicturesList(List<String> exercisePicturesList) {
+		this.exercisePicturesList = exercisePicturesList;
+	}
+
+	public void splitExercisePicturesList() {
+		exercisePicturesList= Arrays.asList( exercisePictures.split(",") );
+		
+		/*
+		for(int i=0; i<exercisePicturesList.size(); i++) {
+			exercisePicturesList.set(i, "C:\\hellopt_file\\"+exercisePicturesList.get(i));
+		}*/
+	}
 	
 	public ExerciseInformationVO() {
 		//System.out.println(">> ExerciseInformationVO 객체 생성");
@@ -72,6 +99,14 @@ public class ExerciseInformationVO {
 	public void setExerciseName(String exerciseName) {
 		this.exerciseName = exerciseName;
 	}
+	
+	public String getExerciseEName() {
+		return exerciseEName;
+	}
+
+	public void setExerciseEName(String exerciseEName) {
+		this.exerciseEName = exerciseEName;
+	}
 
 	public String getExerciseParts() {
 		return exerciseParts;
@@ -89,12 +124,20 @@ public class ExerciseInformationVO {
 		this.howtoExercise = howtoExercise;
 	}
 
-	public String getExercisePicturesName() {
-		return exercisePicturesName;
+	public String getHowtoExercise2() {
+		return howtoExercise2;
 	}
 
-	public void setExercisePicturesName(String exercisePicturesName) {
-		this.exercisePicturesName = exercisePicturesName;
+	public void setHowtoExercise2(String howtoExercise2) {
+		this.howtoExercise2 = howtoExercise2;
+	}
+
+	public String getExercisePictures() {
+		return exercisePictures;
+	}
+
+	public void setExercisePictures(String exercisePictures) {
+		this.exercisePictures = exercisePictures;
 	}
 
 	public String getExerciseVideo() {
@@ -163,5 +206,25 @@ public class ExerciseInformationVO {
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
 	}
-	
+
+	//파일업로드를 위한 생성자
+	public List<ExerciseInformationFileVO> getFilevo() {
+		return filevo;
+	}
+
+	public void setFilevo(List<ExerciseInformationFileVO> filevo) {
+		this.filevo = filevo;
+	}
+
+	@Override
+	public String toString() {
+		return "ExerciseInformationVO [exerciseIdx=" + exerciseIdx + ", exerciseName=" + exerciseName
+				+ ", exerciseEName=" + exerciseEName + ", exerciseParts=" + exerciseParts + ", howtoExercise="
+				+ howtoExercise + ", howtoExercise2=" + howtoExercise2 + ", exercisePictures=" + exercisePictures
+				+ ", exerciseVideo=" + exerciseVideo + ", caution=" + caution + ", repetition=" + repetition
+				+ ", setCount=" + setCount + ", restTime=" + restTime + ", filevo=" + filevo + ", searchCondition="
+				+ searchCondition + ", searchKeyword=" + searchKeyword + ", uploadFile=" + uploadFile
+				+ ", exercisePicturesList=" + exercisePicturesList + "]";
+	}
+
 }

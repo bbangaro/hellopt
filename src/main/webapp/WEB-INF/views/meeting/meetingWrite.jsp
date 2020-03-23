@@ -45,10 +45,10 @@
 							
 							<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal" var="user" />
-								<input class="username" name="fkUserId" type="text" value="${user.username}" readonly>
+								<input class="username" id="fkUserId" name="fkUserId" type="text" value="${user.username}" readonly>
 							</sec:authorize>
 							<div class="profile-detail">
-								<textarea  cols="50" rows="5" class="meeting-comment" name="mComment" placeholder="숨쉬기 운동 마스터 입니다. 함께 하실분 : )"></textarea>
+								<textarea  cols="50" rows="5" class="meeting-comment" id="mComment" name="mComment" placeholder="개설자 한마디를 입력해주세요. "></textarea>
 							</div>
 							
 						</div>
@@ -76,7 +76,7 @@
 
 					<div class="meeting-title">최대인원
 						<div class="max-count">
-						    <input class="max-detail" name="maxCount" type="text" placeholder="00"> 명
+						    <input class="max-detail" id="maxCount" name="maxCount" type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="00"> 명
 						</div>
 					</div>
 
@@ -88,25 +88,25 @@
 					
 					<div class="meeting-title">모임제목
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mSubject" type="text" placeholder="제목">						
+							<input class="meeting-sub" id="mSubject" name="mSubject" type="text" placeholder="제목">						
 						</div>
 					</div>
 					
 					<div class="meeting-title">한줄소개
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mMemo" type="text" placeholder="8시간 소요, 자차 이동, 최대 8명">						
+							<input class="meeting-sub" id="mMemo" name="mMemo" type="text" placeholder="8시간 소요, 자차 이동, 최대 8명">						
 						</div>
 					</div>
 					
 					<div class="meeting-title">상세정보
 						<div class="meeting-content2">
-							<textarea  cols="90" rows="10" class="meeting-textarea" name="details"  placeholder="모임소개  &#13;&#10; 1. 최소인원 : &#13;&#10; 2. 출발시간 : &#13;&#10; 3. 도착시간 : &#13;&#10; 4. 점       심 : &#13;&#10; 5. 준  비  물 : "></textarea>
+							<textarea  cols="90" rows="10" class="meeting-textarea" id="details" name="details"  placeholder="모임소개  &#13;&#10; 1. 최소인원 : &#13;&#10; 2. 출발시간 : &#13;&#10; 3. 도착시간 : &#13;&#10; 4. 점       심 : &#13;&#10; 5. 준  비  물 : "></textarea>
 						</div>
 					</div>
 					
 					<div class="meeting-title">포함사항
 						<div class="meeting-content2">
-							<textarea  cols="90" rows="5" class="meeting-include" name="include" placeholder="점심식사, 간식"></textarea>					
+							<textarea  cols="90" rows="5" class="meeting-include" id="include" name="include" placeholder="점심식사, 간식"></textarea>					
 						</div>
 					</div>
 					
@@ -124,24 +124,30 @@
 							
 							<div class="meeting-content2">
 								<input type="hidden" class="meeting-mcomment" id="mLocation" name="mLocation" placeholder="위치">
-								<input class="meeting-mcomment" name="mLocationC" placeholder="위치 ">
+								<input class="meeting-mcomment" id="mLocationC" name="mLocationC" placeholder="상세위치 ">
 							</div>
 						</div>
 					</div>
 					
 					<div class="meeting-title">회　　비
 						<div class="meeting-content">
-							<input class="meeting-sub" name="mPrice" type="text" placeholder="30,000원">						
+							<input class="meeting-sub" id="mPrice" name="mPrice" type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="30,000원  (숫자만 입력하세요)">						
 						</div>
 					</div>
 					
 					<div class="meeting-title">파　　일
-					<input type="file" class="file-btn" name="uploadFile" multiple="multiple">
+					<input type="file" class="file-btn" id="uploadFile" name="uploadFile" multiple="multiple">
 					</div>
 					
 				<!-- 내용물 넣기 -->				
 				<hr class="meeting-line">
-				<input type="submit" name="" value="개설 신청하기" class="send-btn2">
+				
+				<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal" var="user" />
+					<c:if test="${user.username != null }">
+					<input type="submit" id="submit" value="개설 신청하기" class="send-btn2">
+					</c:if>
+				</sec:authorize>
 				
 			</div>	
 	    </form>

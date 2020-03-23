@@ -32,7 +32,7 @@ public class AdminController {
 		model.addAttribute("userList", userService.pagingUserList(page));
 		model.addAttribute("lastPage", userService.getLastPage(page));
 		
-		return "adminUserManagement";
+		return "admin/adminUserManagement";
 	}
 	
 	@GetMapping("/admin/user/{userId}")
@@ -45,14 +45,14 @@ public class AdminController {
 		}
 
 		model.addAttribute("user", user);
-		return "adminUserManagementDetail";
+		return "admin/adminUserManagementDetail";
 	}
 	
 	@PostMapping("/admin/user/update")
 	public String adminUserDetailUpdate(@ModelAttribute User user,  @RequestParam MultipartFile file) {
 			userService.updateUser(user);
 			if(!file.isEmpty()) {
-				profileService.insertProfile(user, file);
+				profileService.updateProfile(user, file);
 			}
 			
 		return "redirect:/admin/user";

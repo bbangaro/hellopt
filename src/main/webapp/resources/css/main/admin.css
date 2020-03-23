@@ -30,3 +30,16 @@ a {
 	font-weight: 600;
 	margin-bottom: 42px;
 }
+
+.management-anchor {
+	display: inline-block;
+	height: 1.5rem;
+	width: 3rem;
+	background: #b4000f;
+}
+
+.management-anchor:hover {
+	background: #ffffff;
+	color: #b4000f;
+	text-decoration: none;
+}

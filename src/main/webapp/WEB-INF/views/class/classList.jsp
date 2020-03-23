@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,9 +56,19 @@
 												<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
 										</div>
-									<button style="color: white; float:left;">방송시작</button>
-									<a href="classdetail?classIdx=${liveClass.classIdx }" style="color: white; float:right;">${liveClass.className }</a>
+										<sec:authorize access="isAuthenticated()">
+											<sec:authentication property="principal" var="user" />
+											<c:if test="${liveClass.fkUserId == user.username }">
+												<button onclick="location.href='broadcaster?classIdx=${liveClass.classIdx }'" style="color: white; float:left;">방송시작</button>
+											</c:if>	
+										</sec:authorize>
+										<a href="classdetail?classIdx=${liveClass.classIdx }" style="color: white; float:right;">${liveClass.className }</a>
 									</div>
+									<c:forEach var="member" items="${classMember }">
+										<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
+											<button onclick="location.href='viewer?classIdx=${liveClass.classIdx }'" style="color:white;">방송보기</button>
+										</c:if>
+									</c:forEach>
 								</li>
 							</c:forEach>
 						</ul>

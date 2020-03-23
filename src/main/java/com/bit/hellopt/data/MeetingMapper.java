@@ -10,6 +10,7 @@ import com.bit.hellopt.vo.meeting.MeetingVO;
 
 public interface MeetingMapper {
 	public List<MeetingVO> getMeetingVO();
+	public List<MeetingVO> getMeetingCnt();
 	
 	public List<LocalVO> getLocalVO();
 	
@@ -25,7 +26,7 @@ public interface MeetingMapper {
 	
 	public void updateMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	public void updateMaxMeeting(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
-	
+	public void clickCount(com.bit.hellopt.vo.meeting.MeetingVO meetingVO);
 	
 	public void deleteMeeting(int meetingIdx);
 	

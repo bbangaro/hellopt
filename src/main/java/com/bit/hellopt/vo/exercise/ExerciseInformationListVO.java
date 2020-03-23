@@ -2,17 +2,11 @@ package com.bit.hellopt.vo.exercise;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name="exerciseInformationList")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class ExerciseInformationListVO {
 
-	@XmlElement(name="exerciseInformation")
 	private List<ExerciseInformationVO> exerciseInformationList;
+	
+	private List<ExerciseInformationVO> exerciseInformationSearch;
 	
 	public List<ExerciseInformationVO> getExerciseInformationList() {
 		return exerciseInformationList;
@@ -20,6 +14,14 @@ public class ExerciseInformationListVO {
 	
 	public void setExerciseInformationList(List<ExerciseInformationVO> exerciseInformationList) {
 		this.exerciseInformationList = exerciseInformationList;
+	}
+
+	public List<ExerciseInformationVO> getExerciseInformationSearch() {
+		return exerciseInformationSearch;
+	}
+
+	public void setExerciseInformationSearch(List<ExerciseInformationVO> exerciseInformationSearch) {
+		this.exerciseInformationSearch = exerciseInformationSearch;
 	}
 	
 }

@@ -357,20 +357,18 @@ h2 {
 
 .service-details {
 	width: 1538px;
-	height: 193px;	
+	height: 211px;	
 	overflow: hidden;
 	position: relative;
 	filter:grayscale(50%);
-	margin-bottom: 8px;
-    border-radius: 10px;
 }
 
 .service-details img {
 	top: 0;
 	left: 0;
 	height: inherit;
-	width: 200px;
-	height: 200px;
+	width: 170px;
+	height: 170px;
 	float: left;
 	transition: all 0.8s;
 	-moz-transition: all 0.8s;
@@ -421,8 +419,8 @@ h2 {
 
 /*호버 움직이는 영역*/
 .service-details .service-hover-text{
-	width: 15.4%;
-	height: 200px;
+	width: 13.4%;
+	height: 170px;
 	position: absolute;
 	top: 0%;
 	left: 30%;
@@ -444,14 +442,15 @@ h2 {
 
 
 .service-details .service-text {
+	
 	width: 50%;
-	height: 200px;
+	height: 170px;
 	background: #000;
 	position: absolute;
 }
 
 .service-details .service-text p {
-	padding:74px 0px 35px 15px;
+	padding: 26px  0px 20px 14px;
 	font-size: 24px;
 	/*
 	font-family: "Open Sans";
@@ -472,10 +471,9 @@ h2 {
 	color:black;
 }
  .msub{
- 
+ text-shadow: 2px 2px 0px #d3d3d3;
 }
 .mcategory{
-    margin-top: 10px;
     margin-left: 15px;
     float: left;
     font-size: 18px;
@@ -486,6 +484,7 @@ h2 {
 }
 .categoryimg{
 	all: unset;
+	margin-right: 3px;
 	width: 25px !important;
 	height: 25px !important;
 }
@@ -496,35 +495,33 @@ h2 {
 	margin-left: 12px;
 }
 .mpro{
-	margin-top: 10px;
 	margin-right: 15px;
     float: right;
     
-	font-size: 18px;
-	color: black;
+	font-size: 15px;
+	color: #b4000f !important;
 }
 .mprice{
-	margin-right: 15px;
+	margin-right: 12px;
     float: right;
-    
-	font-size: 18px;
-	color: black;
+    font-size: 18px;
+    width: 126px;
+    text-align: center;
+    background-color: #ffd770;
 }
 .minner{
-	border: 0.1px solid black;
-	width: 734px;
-    height: 174px;
+	width: 733px;
     margin: auto;
     position: absolute;
-	top: 50%;
+	top: 54%;
 	left: 50%;
 	transform: translate(-50%, -52%);
 }
 .service-details .service-text {
 	float: left;
-	left: 200px;
-	border-top-right-radius: 10px;
-    border-bottom-right-radius: 29px 15px;
+	left: 170px;
+   box-shadow: -3px -1px 7px #392f31 inset;
+
 } 
 
 .service-white {
@@ -1002,6 +999,7 @@ h2 {
   margin-top: 12px;
   margin-left: 10px;
   position: relative;
+  float: left;
 }   
 .profile-thumbnail {
     width: 124px;
@@ -1034,6 +1032,31 @@ h2 {
     float: right;
     margin-right: 60px;
 }
+
+.mAdmin {
+	color: white;
+	
+	font-size: 21px;
+    border: 0px solid black;
+	border-left: 3px solid #b4000f;
+	background-color: black;
+	
+    padding-left: 10px;
+	
+}
+
+.mAdminBtn {
+	float: right
+}
+.mBtn{
+	color: white;
+	font-size: 21px;
+}
+.mAdminCenter{
+	margin-left: 35%;
+}
+
+
 
 
 /* 슬라이드테스트 */

@@ -14,6 +14,7 @@ public class MeetingFileVO {
     private String mSysImg;
     
     
+    
 	public int getFileIdx() {
 		return fileIdx;
 	}

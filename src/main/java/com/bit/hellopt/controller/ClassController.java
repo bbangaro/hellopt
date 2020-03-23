@@ -26,7 +26,7 @@ public class ClassController {
 	public String insertClass(LiveClass info) {
 		service.insertClass(info);
 		System.out.println("라이브 클래스 생성 성공!!");
-		return "redirect:/class/classlist";
+		return "redirect:/classlist";
 	}
 	
 	@RequestMapping("/classlist")
@@ -83,7 +83,7 @@ public class ClassController {
 		System.out.println("강의 신청 성공!!");
 		
 		//리턴할 곳 수정(강의 신청 완료하면 보여줄 페이지)
-		return "class/classList";
+		return "class/classlist";
 	}
 	
 	// *마이페이지에서 강의 신청 취소(delete or update)와 신청한 강의 보기(select) 가능하게 만들기
@@ -99,25 +99,18 @@ public class ClassController {
 		String className = service3.getClassName(classIdx);
 		System.out.println("강의 제목 가져오기 성공^^");
 		
+		model.addAttribute("classIdx", classIdx);
 		model.addAttribute("className", className);
 		return "class/broadcaster";
 	}
 
-/*	@RequestMapping("/viewer")
+	@RequestMapping("/viewer")
 	public String getClassName2(int classIdx, Model model) {
 		String className = service3.getClassName(classIdx);
 		System.out.println("강의 제목 가져오기 성공^^");
 		
+		model.addAttribute("classIdx", classIdx);
 		model.addAttribute("className", className);
 		return "class/viewer";
-	}*/
-	
-	@RequestMapping("/live_test")
-	public String getClassName2(int classIdx, Model model) {
-		String className = service3.getClassName(classIdx);
-		System.out.println("강의 제목 가져오기 성공^^");
-		
-		model.addAttribute("className", className);
-		return "class/live_test";
 	}
 }

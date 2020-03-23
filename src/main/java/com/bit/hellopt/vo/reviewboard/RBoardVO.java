@@ -3,17 +3,13 @@ package com.bit.hellopt.vo.reviewboard;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.vo.user.User;
 
 
 public class RBoardVO extends RPagingVO {
+
 	private int revIdx;
 	private String userId;
 	private String userName;
