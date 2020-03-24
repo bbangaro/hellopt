@@ -7,7 +7,6 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main/admin.css">
-<meta charset="UTF-8">
 <title>유저 관리</title>
 </head>
 <body>
