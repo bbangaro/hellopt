@@ -1,5 +1,7 @@
 package com.bit.hellopt.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
+import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 import com.google.gson.Gson;
 
@@ -71,7 +75,7 @@ public class UserController {
 	@GetMapping("/user/registrationform")
 	public String getRegistrationform(Model model) {
 		model.addAttribute("user", new User());
-		return "signupForm";
+		return "user/signupForm";
 	}
 	
 	/**
@@ -85,6 +89,44 @@ public class UserController {
 		Gson gson = new Gson();
 		User user = gson.fromJson(userId, User.class);
 		return userService.isUser(user.getUserId());
+	}
+	
+	@GetMapping("/auth/{userId}")
+	public String getUserDetails(@PathVariable("userId") String userId, Model model, Principal principal) {
+		if(!userId.equals(principal.getName())) {
+			return "redirect:/";
+		} else {
+			User user = userService.findUserById(userId);
+			user.setUserPw("");
+
+			ProfileVO profile = profileService.selectProfile(userId);
+			
+			if (profile != null) {
+				user.setUserProfile(profile.getStoredFileName());
+			}
+
+			model.addAttribute("user", user);
+			return "user/userDetails";
+		}
+	}
+	
+	@PostMapping("/auth/update")
+	public String adminUserDetailUpdate(@ModelAttribute User user,  @RequestParam MultipartFile file) {
+			userService.updateUser(user);
+			if(!file.isEmpty()) {
+				profileService.updateProfile(user, file);
+			}
+			
+		return "redirect:/admin/user";
+	}
+	
+	@GetMapping("auth/delete")
+	public String adminDeleteUser(@RequestParam String userId) {
+		User user = new User();
+		user.setUserId(userId);
+		//userService.deleteUser(user);
+		userService.disableUser(user);
+		return "redirect:/admin/user";
 	}
 	
 }

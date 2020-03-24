@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/resources/**").permitAll()
 				.antMatchers("/file/**").permitAll()
 				.antMatchers("/meetingWrite").authenticated() //로그인이 되어있어야..
+				.antMatchers("/auth/**").authenticated()
 				
 		    //.anyRequest().authenticated()
 			.and()

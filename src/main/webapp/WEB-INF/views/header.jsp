@@ -76,12 +76,15 @@
 						<li><a href="${pageContext.request.contextPath}/user/registrationform" class="artist_open">Join</a></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
+					<sec:authentication var="principal" property="principal" />
+					<li>
+						<a href="${pageContext.request.contextPath}/auth/${principal.username}" class="artist_open">My Page</a></li>
 						<li><a href="${pageContext.request.contextPath}/logout" class="artist_open">logout</a></li>
 						<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
 					  </sec:authorize>
 			            <sec:authorize access="hasRole('ADMIN')">
 			            <li><a href="${pageContext.request.contextPath}/admin/user" class="artist_open">Admin Page</a></li>
-			            </sec:authorize>
+			           </sec:authorize>
           	</ul>
             </div>
             <div class="dim_bg"></div>

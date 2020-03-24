@@ -29,6 +29,9 @@ form input {
 input[type="text"] {
 	width: 100%;
 }
+input[type="password"] {
+	width: 100%;
+}
 
 .content li {
 	border-bottom: 1px solid #7d7d7d;
