@@ -68,29 +68,25 @@
                             <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
                         </ul>
                     </li>
-                    <li class="artist_open"><a href="${pageContext.request.contextPath}/review">review</a></li>
-                    <li class="artist_open"><a href="${pageContext.request.contextPath}/faq1">FAQ</a></li>
-                </ul>
-                <ul class="user_case">
+                    <li><a href="${pageContext.request.contextPath}/review" class="artist_open">review</a></li>
+                    <li><a href="${pageContext.request.contextPath}/faq1" class="artist_open">FAQ</a></li>
+              
                     <sec:authorize access="!isAuthenticated()">
-						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+						<li><a href="${pageContext.request.contextPath}/login" class="artist_open">Login</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/registrationform" class="artist_open">Join</a></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
-						<li><a href="${pageContext.request.contextPath}/logout">logout</a></li>
+						<li><a href="${pageContext.request.contextPath}/logout" class="artist_open">logout</a></li>
 						<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
-						<sec:authentication property="principal" var="user" />
-						<span>안녕하세요. ${user.username}</span>
 					  </sec:authorize>
-                  
-			            <li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
 			            <sec:authorize access="hasRole('ADMIN')">
-			            <li><a href="${pageContext.request.contextPath}/admin/user">Admin Page</a></li>
+			            <li><a href="${pageContext.request.contextPath}/admin/user" class="artist_open">Admin Page</a></li>
 			            </sec:authorize>
-
-                </ul>           
+          	</ul>
             </div>
-        </div>
-        <div class="dim_bg"></div>
+            <div class="dim_bg"></div>
+            </div>
+        
     </aside>
     <!-- 네비게이션 끝 } -->
 

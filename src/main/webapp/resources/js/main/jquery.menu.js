@@ -118,6 +118,5 @@ $(function(){
 
 	$(".artist_open").on("click",function(){
 		$('.artist_depth02').toggleClass('on');
-		$('.user_case').toggleClass('on');
 	});
 });
