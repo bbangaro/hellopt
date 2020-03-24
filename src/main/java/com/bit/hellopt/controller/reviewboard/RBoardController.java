@@ -29,6 +29,7 @@ import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.service.user.UserProfileService;
 //import com.bit.hellopt.vo.reviewboard.Pagination;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
+import com.bit.hellopt.vo.reviewboard.RCommentVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.reviewboard.RPagingVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
@@ -56,7 +57,7 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review")
-	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo, 
+	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo,  
 			@AuthenticationPrincipal CustomUserDetail customUser, 
 			@RequestParam(defaultValue="1")Integer cPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
@@ -120,6 +121,7 @@ public class RBoardController {
 
 		model.addAttribute("rBoardList", userjoin);
 		model.addAttribute("pvo", p);
+
 		
 		return "/review/reviewBoard";
 	}
@@ -128,6 +130,7 @@ public class RBoardController {
 	public String insertRBoard(RBoardVO vo, MultipartHttpServletRequest multi,
 			@AuthenticationPrincipal CustomUserDetail customUser) 
 					throws IllegalStateException, IOException {
+		System.out.println("글 vo1 " +vo);
 		
 		String userId = customUser.getUsername();
 		String name = customUser.getName();

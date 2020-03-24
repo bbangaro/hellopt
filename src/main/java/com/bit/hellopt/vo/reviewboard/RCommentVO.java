@@ -10,21 +10,18 @@ public class RCommentVO {
 	private String userName;
 	private String revCmtComment;
 	private Date revCmtRegdate;
-	
+	private Date revCmtEditdate;
 	public int getRevCmtIdx() {
 		return revCmtIdx;
 	}
-	
+	public void setRevCmtIdx(int revCmtIdx) {
+		this.revCmtIdx = revCmtIdx;
+	}
 	public int getRevIdx() {
 		return revIdx;
 	}
-
 	public void setRevIdx(int revIdx) {
 		this.revIdx = revIdx;
-	}
-
-	public void setRevCmtIdx(int revCmtIdx) {
-		this.revCmtIdx = revCmtIdx;
 	}
 	public String getUserId() {
 		return userId;
@@ -50,12 +47,19 @@ public class RCommentVO {
 	public void setRevCmtRegdate(Date revCmtRegdate) {
 		this.revCmtRegdate = revCmtRegdate;
 	}
-	
+	public Date getRevCmtEditdate() {
+		return revCmtEditdate;
+	}
+	public void setRevCmtEditdate(Date revCmtEditdate) {
+		this.revCmtEditdate = revCmtEditdate;
+	}
 	@Override
 	public String toString() {
 		return "RCommentVO [revCmtIdx=" + revCmtIdx + ", revIdx=" + revIdx + ", userId=" + userId + ", userName="
-				+ userName + ", revCmtComment=" + revCmtComment + ", revCmtRegdate=" + revCmtRegdate + "]";
+				+ userName + ", revCmtComment=" + revCmtComment + ", revCmtRegdate=" + revCmtRegdate
+				+ ", revCmtEditdate=" + revCmtEditdate + "]";
 	}
-
+	
+	
 	
 }

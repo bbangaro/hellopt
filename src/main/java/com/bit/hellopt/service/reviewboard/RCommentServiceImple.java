@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit.hellopt.data.RBoardMapper2;
 import com.bit.hellopt.data.RCommentMapper;
 import com.bit.hellopt.vo.reviewboard.RCommentVO;
 
@@ -14,27 +15,34 @@ public class RCommentServiceImple implements RCommentService {
 	@Autowired
 	RCommentMapper cmtMapper;
 	
+	@Autowired
+	RBoardMapper2 mapper2;
+	
 	//댓글목록
 	@Override
-	public List<RCommentVO> list(int revIdx) {
-		return cmtMapper.list(revIdx);
+	public List<RCommentVO> cmtList(int revIdx) {
+		return cmtMapper.cmtList(revIdx);
 	}
 	//댓글작성
 	@Override
-	public void create(RCommentVO vo) {
-		cmtMapper.create(vo);
+	public void cmtCreate(RCommentVO vo) {
+		cmtMapper.cmtCreate(vo);
 	}
 	//댓글수정
 	@Override
-	public void update(RCommentVO vo) {
-		cmtMapper.update(vo);
+	public void cmtUpdate(RCommentVO vo) {
+		cmtMapper.cmtUpdate(vo);
 		
 	}
 	//댓글삭제
 	@Override
-	public void delete(int revCmtIdx) {
-		cmtMapper.delete(revCmtIdx);
+	public void cmtDelete(int revCmtIdx) {
+		cmtMapper.cmtDelete(revCmtIdx);
 		
+	}
+	@Override
+	public RCommentVO joinCmt() {
+		return mapper2.joinCmt();
 	}
 
 }
