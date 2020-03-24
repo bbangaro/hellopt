@@ -13,6 +13,7 @@
         <h1>
             <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
+         <button type="button" role="togglebutton" class="nav_button"><span></span></button>
 		<div class="userName">
 				<span id="result">알람</span>
 			<sec:authorize access="isAuthenticated()">
@@ -21,7 +22,7 @@
 				<span>${user.username}님 안녕하세요</span>
 				</sec:authorize>
 		</div>
-        <button type="button" role="togglebutton" class="nav_button"><span></span></button>
+  
     </header>
     <!-- 상단 끝 } -->
     <script>

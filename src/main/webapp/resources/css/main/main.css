@@ -125,7 +125,7 @@ transition: 0.3s;
 #hd {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 9999;
   height:100px;
   transition:all 0.3s ease-in-out;
@@ -143,11 +143,17 @@ transition: 0.3s;
   color: #b3b3b3;
 }
 #hd .nav_button {
+	/*
+  position: absolute;
+  right: 46px;
+  top: 47px;
+  */
   position: absolute;
   right: 46px;
   top: 47px;
   width: 30px;
   height: 30px;
+    
 }
 #hd .nav_button span {
   position: absolute;
