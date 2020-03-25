@@ -112,12 +112,12 @@ public class UserController {
 	
 	@PostMapping("/auth/update")
 	public String adminUserDetailUpdate(@ModelAttribute User user,  @RequestParam MultipartFile file) {
-			userService.updateUser(user);
+			userService.updateNormalUser(user);
 			if(!file.isEmpty()) {
 				profileService.updateProfile(user, file);
 			}
-			
-		return "redirect:/admin/user";
+			logger.info("일반 유저 정보 업데이트");
+		return "redirect:/";
 	}
 	
 	@GetMapping("auth/delete")
@@ -126,7 +126,7 @@ public class UserController {
 		user.setUserId(userId);
 		//userService.deleteUser(user);
 		userService.disableUser(user);
-		return "redirect:/admin/user";
+		return "redirect:/";
 	}
 	
 }
