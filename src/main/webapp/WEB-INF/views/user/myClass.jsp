@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>My Class</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/classlist.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/class/style.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/class/classlist.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/class/content.css">
 </head>
 <body>
 	<!-- 콘텐츠 시작 { -->
@@ -35,26 +39,53 @@
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
 										<div class="thum_hover">
-											<div>${liveClass.className } ${liveClass.classTime } ${liveClass.liveStatus }</div>
+											<div>${liveClass.className }${liveClass.classTime }
+												${liveClass.liveStatus }</div>
 										</div>
 										<div class="gall_con">
 											<div class="gall_img">
-												<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
+												<img
+													src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
 										</div>
-										<sec:authorize access="isAuthenticated()">
-											<sec:authentication property="principal" var="user" />
-											<c:if test="${liveClass.fkUserId == user.username }">
-												<button onclick="location.href='${pageContext.request.contextPath}/broadcaster?classIdx=${liveClass.classIdx }'" style="color: white; float:left;">방송시작</button>
-											</c:if>	
-										</sec:authorize>
-										<a href="${pageContext.request.contextPath}/classdetail?classIdx=${liveClass.classIdx }" style="color: white; float:right;">${liveClass.className }</a>
-									</div>
-									<c:forEach var="member" items="${classMember }">
+										<button
+											onclick="location.href='${pageContext.request.contextPath}/broadcaster?classIdx=${liveClass.classIdx }'"
+											style="color: white; float: left;">방송시작</button>
+
+										<a
+											href="${pageContext.request.contextPath}/classdetail?classIdx=${liveClass.classIdx }"
+											style="color: white; float: right;">${liveClass.className }</a>
+									</div> <c:forEach var="member" items="${classMember }">
 										<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
-											<button onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${liveClass.classIdx }'" style="color:white;">방송보기</button>
+											<button
+												onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${liveClass.classIdx }'"
+												style="color: white;">방송보기</button>
 										</c:if>
 									</c:forEach>
+								</li>
+							</c:forEach>
+							<c:forEach var="viwerLiveClass" items="${ viewerClassList }">
+								<li class="gall_li col-gn-3">
+									<div class="gall_box">
+										<div class="thum_hover">
+											<div>${viwerLiveClass.className }
+												${viwerLiveClass.classTime } ${viwerLiveClass.liveStatus }</div>
+										</div>
+										<div class="gall_con">
+											<div class="gall_img">
+												<img
+													src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
+											</div>
+										</div>
+										<a
+											href="${pageContext.request.contextPath}/classdetail?classIdx=${viwerLiveClass.classIdx }"
+											style="color: white; float: right;">${viwerLiveClass.className }</a>
+									</div>
+
+									<button
+										onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${viwerLiveClass.classIdx }'"
+										style="color: white;">방송보기</button>
+
 								</li>
 							</c:forEach>
 						</ul>

@@ -4,16 +4,11 @@ import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,10 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.service.liveclass.LiveClassService;
+import com.bit.hellopt.service.meeting.MeetingService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.live.LiveClass;
-import com.bit.hellopt.vo.user.CustomUserDetail;
 import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 import com.google.gson.Gson;
@@ -45,6 +40,8 @@ public class UserController {
 	UserProfileService profileService;
 	@Autowired
 	LiveClassService liveClassService;
+	@Autowired
+	MeetingService meetingService;
 	
 	public UserController(UserService service) {
 		this.userService = service;
@@ -144,7 +141,14 @@ public class UserController {
 	@GetMapping("/auth/myclass")
 	public String getMyClasses(Model model, Principal principal) {
 		List<LiveClass> classes = liveClassService.getClassesByUserId(principal.getName());
+		List<LiveClass> viewerClasses = liveClassService.getViewerClassesByUserId(principal.getName());
 		model.addAttribute("liveClassList", classes);
+		model.addAttribute("viewerClassList", viewerClasses);
 		return "user/myClass";
+	}
+	
+	@GetMapping("/auth/mymeeting")
+	public String getMyMeeting(Model model, Principal princiapl) {
+		return "user/myMeeting";
 	}
 }
