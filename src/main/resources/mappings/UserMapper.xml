@@ -52,7 +52,7 @@
 	<update id="updateUser">
 		UPDATE users_tb 
 		<set>
-			<if test="userPw != null">user_pw = #{userId},</if>
+			<if test="userPw != null">user_pw = #{userPw},</if>
 			<if test="userName != null">user_name = #{userName},</if>
 			<if test="userGender != null">user_gender = #{userGender},</if>
 			<if test="userAddress != null">user_address = #{userAddress},</if>

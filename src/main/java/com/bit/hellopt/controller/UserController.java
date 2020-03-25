@@ -1,12 +1,19 @@
 package com.bit.hellopt.controller;
 
 import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,8 +26,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit.hellopt.service.liveclass.LiveClassService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
+import com.bit.hellopt.vo.live.LiveClass;
+import com.bit.hellopt.vo.user.CustomUserDetail;
 import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 import com.google.gson.Gson;
@@ -33,6 +43,8 @@ public class UserController {
 	UserService userService;
 	@Autowired
 	UserProfileService profileService;
+	@Autowired
+	LiveClassService liveClassService;
 	
 	public UserController(UserService service) {
 		this.userService = service;
@@ -120,7 +132,7 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("auth/delete")
+	@GetMapping("/auth/delete")
 	public String adminDeleteUser(@RequestParam String userId) {
 		User user = new User();
 		user.setUserId(userId);
@@ -129,4 +141,10 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/auth/myclass")
+	public String getMyClasses(Model model, Principal principal) {
+		List<LiveClass> classes = liveClassService.getClassesByUserId(principal.getName());
+		model.addAttribute("liveClassList", classes);
+		return "user/myClass";
+	}
 }

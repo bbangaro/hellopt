@@ -23,12 +23,19 @@ public class LiveClassServiceImpl implements LiveClassService {
 	public List<LiveClass> getLiveClass() {
 		return liveClassMapper.getLiveClass();
 	}
+	
+	
+
+	@Override
+	public List<LiveClass> getClassesByUserId(String userId) {
+		return liveClassMapper.getLiveClassesByUserId(userId);
+	}
 
 	@Override
 	public LiveClass getClassDetail(int classIdx) {
 		return liveClassMapper.getClassDetail(classIdx);
 	}
-
+	
 	@Override
 	public void deleteClass(int classIdx) {
 		liveClassMapper.deleteClass(classIdx);

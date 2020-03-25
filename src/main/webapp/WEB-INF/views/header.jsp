@@ -78,7 +78,19 @@
 					<sec:authorize access="isAuthenticated()">
 					<sec:authentication var="principal" property="principal" />
 					<li>
-						<a href="${pageContext.request.contextPath}/auth/${principal.username}" class="artist_open">My Page</a></li>
+						<a href="#" class="artist_open">My Page</a>
+						<ul class="artist_depth02">
+							<li>
+								<a href="${pageContext.request.contextPath}/auth/${principal.username}" class="artist_open">My Profile</a>
+							<li>
+							<li>
+								<a href="${pageContext.request.contextPath}/auth/meeting" class="artist_open">My Meeting</a>
+							</li>
+							<li>
+								<a href="${pageContext.request.contextPath}/auth/myclass" class="artist_open">My Class</a>
+							</li>
+						</ul>
+					</li>
 						<li><a href="${pageContext.request.contextPath}/logout" class="artist_open">logout</a></li>
 						<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
 					  </sec:authorize>
