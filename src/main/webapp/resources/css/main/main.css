@@ -125,7 +125,7 @@ transition: 0.3s;
 #hd {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 9999;
   height:100px;
   transition:all 0.3s ease-in-out;
@@ -143,11 +143,17 @@ transition: 0.3s;
   color: #b3b3b3;
 }
 #hd .nav_button {
+	/*
+  position: absolute;
+  right: 46px;
+  top: 47px;
+  */
   position: absolute;
   right: 46px;
   top: 47px;
   width: 30px;
   height: 30px;
+    
 }
 #hd .nav_button span {
   position: absolute;
@@ -202,7 +208,9 @@ transition: 0.3s;
   position: absolute;
   left: 0%;
   width: 100%;
+  /*
   height: 50%;
+  */
   text-align: center;
   z-index: 998;
   -moz-transition: all 0.8s ease-in;
@@ -210,6 +218,7 @@ transition: 0.3s;
   -o-transition: all 0.8s ease-in;
   -ms-transition: all 0.8s ease-in;
   transition: all 0.8s ease-in;
+  padding-top:100px;
 }
 #navigation.open {
   top: 0;
@@ -263,9 +272,10 @@ transition: 0.3s;
   /* overflow: hidden; */
 }
 #navigation .nav_wrap li {
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 12px;
   position:relative;
+  float: left;
 }
 #navigation .nav_wrap a, #navigation .nav_wrap p {
   color: #d5d5d5;
@@ -276,7 +286,9 @@ transition: 0.3s;
     left: 0;
     top: 120px;*/
     width: 100%;
+    /*
     padding: 0 25px;
+    */
     font-size: 11px;
     margin-bottom: 50px;
 }
@@ -298,7 +310,7 @@ transition: 0.3s;
 	margin-top: 10px;
 	width: 400px;
     display: grid;
-    position: absolute;
+   /* position: absolute; */
    /* bottom: -160px; */
     font-size: 15px;
     left: 50%;
@@ -306,6 +318,7 @@ transition: 0.3s;
 	transition: 0.3s;
 	height:0;
 	overflow:hidden;
+	position: relative;
 }
 #navigation .nav_wrap ul.artist_depth02.on {
 	height:auto;

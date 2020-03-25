@@ -13,6 +13,7 @@
         <h1>
             <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
+         <button type="button" role="togglebutton" class="nav_button"><span></span></button>
 		<div class="userName">
 				<span id="result">알람</span>
 			<sec:authorize access="isAuthenticated()">
@@ -21,7 +22,7 @@
 				<span>${user.username}님 안녕하세요</span>
 				</sec:authorize>
 		</div>
-        <button type="button" role="togglebutton" class="nav_button"><span></span></button>
+  
     </header>
     <!-- 상단 끝 } -->
     <script>
@@ -67,29 +68,40 @@
                             <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
                         </ul>
                     </li>
-                    <li class="artist_open"><a href="${pageContext.request.contextPath}/review">review</a></li>
-                    <li class="artist_open"><a href="${pageContext.request.contextPath}/faq1">FAQ</a></li>
-                </ul>
-                <ul class="user_case">
+                    <li><a href="${pageContext.request.contextPath}/review" class="artist_open">review</a></li>
+                    <li><a href="${pageContext.request.contextPath}/faq1" class="artist_open">FAQ</a></li>
+              
                     <sec:authorize access="!isAuthenticated()">
-						<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+						<li><a href="${pageContext.request.contextPath}/login" class="artist_open">Login</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/registrationform" class="artist_open">Join</a></li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
-						<li><a href="${pageContext.request.contextPath}/logout">logout</a></li>
+					<sec:authentication var="principal" property="principal" />
+					<li>
+						<a href="#" class="artist_open">My Page</a>
+						<ul class="artist_depth02">
+							<li>
+								<a href="${pageContext.request.contextPath}/auth/${principal.username}" class="artist_open">My Profile</a>
+							<li>
+							<li>
+								<a href="${pageContext.request.contextPath}/auth/mymeeting" class="artist_open">My Meeting</a>
+							</li>
+							<li>
+								<a href="${pageContext.request.contextPath}/auth/myclass" class="artist_open">My Class</a>
+							</li>
+						</ul>
+					</li>
+						<li><a href="${pageContext.request.contextPath}/logout" class="artist_open">logout</a></li>
 						<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
-						<sec:authentication property="principal" var="user" />
-						<span>안녕하세요. ${user.username}</span>
 					  </sec:authorize>
-                  
-			            <li><a href="${pageContext.request.contextPath}/user/registrationform">Join</a></li>
 			            <sec:authorize access="hasRole('ADMIN')">
-			            <li><a href="${pageContext.request.contextPath}/admin/user">Admin Page</a></li>
-			            </sec:authorize>
-
-                </ul>           
+			            <li><a href="${pageContext.request.contextPath}/admin/user" class="artist_open">Admin Page</a></li>
+			           </sec:authorize>
+          	</ul>
             </div>
-        </div>
-        <div class="dim_bg"></div>
+            <div class="dim_bg"></div>
+            </div>
+        
     </aside>
     <!-- 네비게이션 끝 } -->
 

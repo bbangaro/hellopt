@@ -13,16 +13,23 @@
 <body>
 	<h2>회원 정보 관리</h2>
 	<form:form
-		action="${pageContext.request.contextPath}/admin/user/update"
+		action="${pageContext.request.contextPath}/auth/update"
 		method="POST" modelAttribute="user" enctype="multipart/form-data">
 		<ul>
 			<c:if test="${ not empty user.userProfile }">
-				<li><img src="${pageContext.request.contextPath}/s3/profile/${ user.userProfile }" alt="profile"></li>
+				<li><img
+					src="${pageContext.request.contextPath}/s3/profile/${ user.userProfile }"
+					alt="profile"></li>
 			</c:if>
-			
+
 			<li><form:label path="userId">아이디</form:label> <form:input
 					path="userId" readonly="true" /> <label class="error">아이디는
 					변경 불가능합니다.</label></li>
+			<li><form:label path="userPw">비밀번호</form:label> <form:input
+					path="userPw" type="password" placeholder="PASSWORD" /> <label
+				id="pw-info"></label> <input type="password" id="userPwConfirm"
+				placeholder="PASSWORD CONFIRM"> <label id="pw-cfm-info"></label>
+				<form:errors path="userPw" cssClass="error"></form:errors></li>
 			<li><form:label path="userName">이름</form:label> <form:input
 					path="userName" placeholder="NAME" /> <form:errors path="userName"
 					cssClass="error"></form:errors></li>
@@ -36,43 +43,6 @@
 					type="date" path="userBirth" value="${ user.userBirth }" /></li>
 			<li><form:label path="userJob">직업</form:label> <form:input
 					path="userJob" placeholder="JOB" /></li>
-			<li><form:label path="userRole">회원 등급</form:label> <select
-				name="userRole">
-					<c:choose>
-						<c:when test="${user.userRole eq 'ROLE_ADMIN'}">
-							<option value="ROLE_ADMIN" selected="selected">관리자</option>
-						</c:when>
-						<c:otherwise>
-							<c:choose>
-								<c:when test="${user.userRole eq 'ROLE_USER' }">
-									<option value="ROLE_USER" selected="selected">일반 회원</option>
-								</c:when>
-								<c:otherwise>
-									<option value="ROLE_USER">일반 회원</option>
-								</c:otherwise>
-							</c:choose>
-							<c:choose>
-								<c:when test="${user.userRole eq 'ROLE_TRAINER' }">
-									<option value="ROLE_TRAINER" selected="selected">트레이너</option>
-								</c:when>
-								<c:otherwise>
-									<option value="ROLE_TRAINER">트레이너</option>
-								</c:otherwise>
-							</c:choose>
-						</c:otherwise>
-					</c:choose>
-			</select></li>
-			<li>
-				<form:label path="userEnable">회원 상태</form:label>
-				<c:choose>
-					<c:when test="${user.userEnable == 1 }">
-					<span>정상</span>
-					</c:when>
-					<c:otherwise>
-					<span>회원 정지</span>
-					</c:otherwise>
-				</c:choose>
-			</li>
 			<li><form:label path="userRoot">알게된 경로</form:label> <select
 				name="userRoot">
 					<c:choose>
@@ -104,13 +74,13 @@
 					path="userHeight" type="number" min="0" max="300" /></li>
 			<li><form:label path="userWeight">몸무게</form:label> <form:input
 					path="userWeight" type="number" min="0" max="300" /></li>
-			<li><label for="file">프로필 사진</label> 
-				<input type="file" name="file" onchange="loadPreviewImg(this, 'preview-profile')" />
-				<img src="" id="preview-profile" alt=""></li>
+			<li><label for="file">프로필 사진</label> <input type="file"
+				name="file" onchange="loadPreviewImg(this, 'preview-profile')" /> <img
+				src="" id="preview-profile" alt=""></li>
 
 		</ul>
 		<input type="submit" value="회원 정보 수정">
-		<input type="button" onclick="deleteUser()" value="회원 삭제">
+		<input type="button" onclick="deleteUser()" value="회원 탈퇴">
 	</form:form>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -126,13 +96,14 @@
 	</script>
 	<script>
 		function deleteUser() {
-			let result = confirm("정말로 유저를 삭제하시겠습니까?");
+			let result = confirm("정말로 탈퇴하시겠습니까?");
 			if (result) {
 				location
-						.replace("${pageContext.request.contextPath}/admin/user/delete?userId=${user.userId}");
+						.replace("${pageContext.request.contextPath}/auth/delete?userId=${user.userId}");
 			}
 		}
 	</script>
-	<script src="${pageContext.request.contextPath}/resources/js/user/idcheck.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/user/idcheck.js"></script>
 </body>
 </html>
