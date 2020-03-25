@@ -4,23 +4,24 @@ import java.util.Date;
 
 public class RCommentVO {
 
-	private int revCmtIdx;	//댓글 번호
-	private int revIdx;		//게시글 번호
+	private Integer revCmtIdx;	//댓글 번호
+	private Integer revIdx;		//게시글 번호
 	private String userId;
 	private String userName;
 	private String revCmtComment;
-	private Date revCmtRegdate;
-	private Date revCmtEditdate;
+	private String revCmtRegdate;
+	private String revCmtEditdate;
+	
 	public int getRevCmtIdx() {
 		return revCmtIdx;
 	}
-	public void setRevCmtIdx(int revCmtIdx) {
+	public void setRevCmtIdx(Integer revCmtIdx) {
 		this.revCmtIdx = revCmtIdx;
 	}
 	public int getRevIdx() {
 		return revIdx;
 	}
-	public void setRevIdx(int revIdx) {
+	public void setRevIdx(Integer revIdx) {
 		this.revIdx = revIdx;
 	}
 	public String getUserId() {
@@ -41,16 +42,16 @@ public class RCommentVO {
 	public void setRevCmtComment(String revCmtComment) {
 		this.revCmtComment = revCmtComment;
 	}
-	public Date getRevCmtRegdate() {
+	public String getRevCmtRegdate() {
 		return revCmtRegdate;
 	}
-	public void setRevCmtRegdate(Date revCmtRegdate) {
+	public void setRevCmtRegdate(String revCmtRegdate) {
 		this.revCmtRegdate = revCmtRegdate;
 	}
-	public Date getRevCmtEditdate() {
+	public String getRevCmtEditdate() {
 		return revCmtEditdate;
 	}
-	public void setRevCmtEditdate(Date revCmtEditdate) {
+	public void setRevCmtEditdate(String revCmtEditdate) {
 		this.revCmtEditdate = revCmtEditdate;
 	}
 	@Override

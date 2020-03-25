@@ -99,11 +99,11 @@
 	</div>
 </div> --%>
 
-<form>
 	<sec:authorize access="isAuthenticated()">
 	<p><a href="${pageContext.request.contextPath}/review/insertform">후기쓰러가기</a></p>	
 	</sec:authorize>
 <c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
+<form>
 <table class="tbl_wrap">
 	<thead class="tbl_head01">
 		<tr>
@@ -173,37 +173,18 @@
 		<sec:authorize access="isAuthenticated()"> 
 		<tr>
 			<td>
-				<textarea rows="2" cols="80" class="replytext" name="revCmtComment" placeholder="댓글 달기..."></textarea>
+				<textarea rows="2" cols="80" class=revCmtComment name="revCmtComment" placeholder="댓글 달기..."></textarea>
 			</td>
 			<td>
 			<input type = "button" value="댓글등록" onclick = "createCmt(${rBoard.revIdx })">
-				<%-- <button type="button" class="btnReply" onclick="(${rBoard.revIdx })">등록</button> --%>
+				<!-- <button type="button" class="btnReply">댓글등록</button> -->
 			</td>	
 		</tr>
 	 	</sec:authorize> 
-		<c:forEach var="row" items="${replyList }">
-		 <tr>
-			<td class="listReply">
-			${row.userName}(<fmt:formatDate value="${row.regdate }" pattern="yyyy-MM-dd HH:mm:ss"/>)
-			<br>
-			${row.revCmtComment }
-			</td>	
-		</tr> 
-		</c:forEach>
 		</tbody>
 	</table>
-		
-		<div style = "margin-top:20px">
-			<button type="button" class="btn btn-sm btn-primary" id="btnUpdate">수정</button>
-			<button type="button" class="btn btn-sm btn-primary" id="btnDelete">삭제</button>
-			<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
-		</div>
-		<!-- reply List 시작 -->
-		<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top:10px">
-			<h6 class="border-bottom pb-2 mb-0"> reply list</h6>
-			<div id="replyList"></div>
-		</div>
-		<!-- reply List 끝 -->
+		<div class="listReply"></div>
+	</form>
 </c:forEach>
 	<!--페이징 -->
 	<br><br><br>
@@ -250,46 +231,29 @@
 		</ol>
 	</td>
  	<!--페이징끝 -->
-</form>
+
 </div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
-/* 	$(document).ready(function(){
-		//댓글쓰기 버튼 클릭 이벤트 (ajax로 처리)
-		$(".btnReply").click(function(revIdx){
-			console.log(this);
-			var replytext=$("#replytext").val();
-			var revIdx="${rBoard.revIdx}"
-			var param="replytext=" + replytext + "&revIdx=" + revIdx;
-			console.log(param);
-			$.ajax({
-				type: "post",
-				url: "${pageContext.request.contextPath}/reply/insert",
-				data: param,
-				success: function(){
-					alert("댓글이 등록되었습니다.");
-					listReply2();
-				}
-			})
-			
-		})
-	}) */
-	function createCmt(revIdx) {
+ 	
+listReply2();
+ 	 
+function createCmt(revIdx) {
 		console.log(revIdx)
-		var replytext=$(".replytext").val();
-		var param="replytext=" + replytext + "&revIdx=" + revIdx;
+		var revCmtComment=$(".revCmtComment").val();
+		var param="revCmtComment=" + revCmtComment + "&revIdx=" + revIdx;
 		console.log(param);
 		$.ajax({
-			type: "post",
+			type:"post",
 			url: "reply/insert",
 			data: param,
-			success: function(){
+			success: function(e){
 				alert("댓글이 등록되었습니다.");
-				listReply2();
 			}
-		})
+		});
 	}
-	
+	 
+	//게시글 수정 삭제 시작
 	function del(revIdx) {
 		var chk = confirm("정말 삭제 하시겠습니까?");
 		if (chk){
@@ -300,27 +264,43 @@
 			location.href = '${pageContext.request.contextPath}/review/updateform?revIdx='+revIdx;	
 			
 	}	
+	//게시글 수정삭제 끝
+	
+	//Controller방식
+	//**댓글 목록1
+	function listReply(revIdx){
+
+		$.ajax({
+			type:"get",
+			url: "$review/replylist?revIdx="+revIdx,
+			sucess: function(result){
+				$(".listReply").html(result);
+			}
+		})
+	}
+
 	//RestController방식(Json)
 	//**댓글 목록2(json)
-	function listReply2(){
+	function listReply2(revIdx){
 		$.ajax({
-			type: "post",
+			type: "get",
 			//contentType: "application/json", ==>생략가능 (RestController가 )
-			url: "review/reviewjson",
+			url: "review/replyjson?revIdx="+revIdx,
 			success:function(result){
 				console.log(result);
 				var output = "<table>";
 				for(var i in result){
 					output +="<tr>";
 					output +="<td>" + result[i].userName;
-					output +="(" + changeDate(result[i].regdate)+ ")<br>";
-					output += result[i].replytext + "</td>" ;
+					output +="(" + changeDate(result[i].revCmtRegdate)+")<br>";
+					output += result[i].revCmtComment + "</td>" ;
 					output +="<tr>";
 				}
-			output +="</table>";
-			$(".listReply").html(output);
+				output +="</table>";
+				$(".listReply").html(output);
 			}
-		})
+		});
+		
 	}
 //날짜 변환 함수 작성
 function changeDate(date){
@@ -331,7 +311,7 @@ function changeDate(date){
 	hour = date.getHours();
 	minute = date.getMinutes();
 	second = date.getSeconds();
-	strDate = year + "-" + month+"-" +day+" " +hour+":" + minute + ":" +second;
+	strDate = year+"-"+month+"-"+day+" "+hour+":"+minute+ ":"+second;
 	return strDate;
 }
 

@@ -41,8 +41,8 @@ public class RCommentServiceImple implements RCommentService {
 		
 	}
 	@Override
-	public RCommentVO joinCmt() {
-		return mapper2.joinCmt();
+	public List<RCommentVO> joinCmt(int revIdx) {
+		return mapper2.joinCmt(revIdx);
 	}
 
 }

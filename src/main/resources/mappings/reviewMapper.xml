@@ -51,11 +51,13 @@
 	<result property="revIdx" column="REV_IDX"/>
 </resultMap>
 
-	<select id="joinCmt" resultMap="rCmtMap">
+	<select id="joinCmt" resultMap="rCmtMap" parameterType="int">
 		SELECT RCT.REV_CMT_IDX, RCT.USER_ID, RCT.USER_NAME, RCT.REV_CMT_REGDATE,
-				RCT.REV_REGDATE, RCT.REV_CMT_EDITDATE, RCT.REV_IDX, UT.USER_ID, 
-				UT.USER_NAME, RBT.REV_IDX WHERE RBT.REV_IDX = RCT.REV_IDX
-				AND RCT.USER_ID = UT.USER_ID
+				RCT.REV_IDX,RCT.REV_CMT_EDITDATE,
+				UT.USER_ID, UT.USER_NAME 
+				FROM REVIEW_COMMENT_TB RCT, USERS_TB UT 
+				WHERE RCT.USER_ID = UT.USER_ID 
+				AND RCT.REV_IDX = #{revIdx} 
 	</select> 
 	<select id="join3" resultMap="rBoardMap" parameterType="int">
 		SELECT RBT.REV_IDX , RBT.USER_ID, RBT.REV_REGDATE, RBT.REV_STAR, RBT.REV_CATEGORY

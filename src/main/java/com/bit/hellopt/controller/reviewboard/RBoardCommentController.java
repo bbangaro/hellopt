@@ -49,32 +49,12 @@ public class RBoardCommentController {
 	public RBoardCommentController(RCommentService rCmtService) {
 		this.rCmtService = rCmtService;
 	}
-/*	@PostMapping("/getcmtlist")
-	public List<RCommentVO>cmtList(@RequestParam("revIdx")int revIdx) throws Exception{
-		
-		return rCmtService.cmtList(revIdx);
-	}
-	
-	//댓글쓰기
-	@PostMapping("/insertCmt")
-	public Map<String, Object> insertCmt(@RequestBody RCommentVO vo) throws Exception{
-		Map<String, Object> result = new HashMap<>();
-	
-		try {
-			rCmtService.cmtCreate(vo);
-			result.put("status", "OK");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("status", "False");
-		}
-		return result;
-	}*/
-	
 
 	//댓글 입력
-	@PostMapping("/reply/insert")
-	public void insert(@ModelAttribute  RCommentVO cvo, RBoardVO vo,Model model,  
+	
+	@RequestMapping("/reply/insert")
+	@ResponseBody
+	public void insert(@RequestParam(value="revIdx", required = false)int revIdx, @ModelAttribute RCommentVO cvo, RBoardVO vo,Model model,  
 			@AuthenticationPrincipal CustomUserDetail customUser) 
 					throws IllegalStateException, IOException{
 		
@@ -85,18 +65,28 @@ public class RBoardCommentController {
 		String name = customUser.getName();
 		cvo.setUserId(userId);
 		cvo.setUserName(name);
-		
-		System.out.println("댓글vo2:" +vo);
+
+		System.out.println("댓글vo2:" +cvo);
 		
 		rCmtService.cmtCreate(cvo);
 		
 	}
-
+	//댓글 목록 (@controller방식 : view 화면을 리턴)
+	@RequestMapping("/review/replylist")
+	public String list(@RequestParam int revIdx, Model model) {
+		System.out.println("뷰화면리턴");
+		List<RCommentVO> replyList = rCmtService.joinCmt(revIdx);
+		model.addAttribute("list", replyList);
+		return "/review/reviewCmtList";
+	}
+	
+	
 	//댓글 목록(@RestController Json 방식으로 처리 : 데이터를 리턴)
-	@RequestMapping("/review/reviewjson")
+	@RequestMapping("/review/replyjson")
 	@ResponseBody //리턴데이터를 json으로 변환(생략가능)
 	public List<RCommentVO> listJson(@RequestParam int revIdx){
-		List<RCommentVO> list = rCmtService.cmtList(revIdx);
+		System.out.println("댓글쓰기");
+		List<RCommentVO> list = rCmtService.joinCmt(revIdx);
 		return list;
 	}
 	

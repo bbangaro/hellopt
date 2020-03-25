@@ -16,8 +16,8 @@ public interface RCommentMapper {
 	public List<RCommentVO> cmtList(int revIdx);
 	
 	//댓글 작성
-	@Insert("INSERT INTO REVIEW_COMMENT_TB (REV_CMT_IDX, USER_ID, USER_NAME, REV_CMT_COMMENT)"
-			+ "VALUES(REV_COMMENT_TB_SEQ.nextval, #{userId}, #{userName}, #{revCmtComment})")
+	@Insert("INSERT INTO REVIEW_COMMENT_TB (REV_CMT_IDX, USER_ID, USER_NAME, REV_CMT_COMMENT, REV_IDX)"
+			+ "VALUES(REV_COMMENT_TB_SEQ.nextval, #{userId}, #{userName}, #{revCmtComment}, #{revIdx})")
 	public void cmtCreate(RCommentVO vo);
 	
 	//댓글 수정

@@ -15,5 +15,5 @@ public interface RBoardMapper2 {
 	public RBoardVO join3(int revIdx);
 	public List<RBoardVO> getProfilePic();
 	
-	public RCommentVO joinCmt();
+	public List<RCommentVO> joinCmt(int revIdx);
 }

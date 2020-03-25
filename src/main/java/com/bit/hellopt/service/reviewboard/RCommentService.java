@@ -19,5 +19,5 @@ public interface RCommentService {
 	public void cmtDelete(int revCmtIdx);
 	
 	//조인
-	public RCommentVO joinCmt();
+	List<RCommentVO> joinCmt(int revIdx);
 }

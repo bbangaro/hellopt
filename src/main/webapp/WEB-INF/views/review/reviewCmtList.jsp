@@ -50,7 +50,7 @@
 		<c:forEach var="row" items="${replyList }">
 		<tr>
 			<td id="listReply">
-			${row.userName}(<fmt:formatDate value="${row.regdate }" pattern="yyyy-MM-dd HH:mm:ss"/>)
+			${row.userName}(<fmt:formatDate value="${row.revCmtRegdate }" pattern="yyyy-MM-dd HH:mm:ss"/>)
 			<br>
 			${row.revCmtComment }
 			</td>	
