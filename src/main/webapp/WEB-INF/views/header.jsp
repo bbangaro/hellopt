@@ -84,7 +84,7 @@
 								<a href="${pageContext.request.contextPath}/auth/${principal.username}" class="artist_open">My Profile</a>
 							<li>
 							<li>
-								<a href="${pageContext.request.contextPath}/auth/meeting" class="artist_open">My Meeting</a>
+								<a href="${pageContext.request.contextPath}/auth/mymeeting" class="artist_open">My Meeting</a>
 							</li>
 							<li>
 								<a href="${pageContext.request.contextPath}/auth/myclass" class="artist_open">My Class</a>

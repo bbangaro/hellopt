@@ -26,6 +26,7 @@ import com.bit.hellopt.service.meeting.MeetingService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.live.LiveClass;
+import com.bit.hellopt.vo.meeting.MeetingVO;
 import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 import com.google.gson.Gson;
@@ -148,7 +149,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/auth/mymeeting")
-	public String getMyMeeting(Model model, Principal princiapl) {
+	public String getMyMeeting(Model model, Principal principal) {
+		//List<MeetingVO> meetingList = meetingService.getMeetingList(principal.getName());
+		//meetingList.addAll(meetingService.getParticipantMeetingList(principal.getName()));
+		
+		List<MeetingVO> meetingList = meetingService.getParticipantMeetingList(principal.getName());
+		model.addAttribute("meetingList", meetingList);
 		return "user/myMeeting";
 	}
 }
