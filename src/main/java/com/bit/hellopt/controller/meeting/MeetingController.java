@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +41,7 @@ public class MeetingController {
 	 */
 	@Autowired
 	MeetingService service;
+	
 	
 	@Autowired
 	S3Utils s3Utils;
@@ -233,6 +235,7 @@ public class MeetingController {
 				System.out.println("insertFiles 성공");
 			}
 		}
+		
 		
 		
 		return "redirect:/meeting";

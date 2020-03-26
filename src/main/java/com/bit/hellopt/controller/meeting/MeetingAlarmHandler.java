@@ -1,6 +1,5 @@
 package com.bit.hellopt.controller.meeting;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,25 +7,24 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.bit.hellopt.service.meeting.MeetingService;
-import com.bit.hellopt.vo.meeting.MeetingVO;
+import com.bit.hellopt.controller.MainController;
 
 //https://bloodfinger.tistory.com/40?category=366386
 @Component("meetingAlarmHandler")
 public class MeetingAlarmHandler extends TextWebSocketHandler {
 	
-	@Autowired
-	MeetingService service;
 	
+	//@Autowired
+	//MeetingService service;
+	
+	//private static int progressCnt;
+
 	//로그인 한 전체
 	List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	// 1대 1
@@ -63,11 +61,12 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 	//연결된 모든 사용자에게 보내야 하므로 for문으로 세션리스트에 있는 모든 세션들을 돌면서
 	// sendMessage()를 이용해 데이터를 주고 받는다.
 	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) {
 		sessions.add(session);
 		System.out.println("핸들러 페이지 아이디 소켓 정보 : " + session.getId());
 		System.out.println("핸들러 페이지 메시지 소켓 정보 : " + message.getPayload());
 		
+		//						getpayload는 js에서 보낸 메시지 읽는거
 		String msg = message.getPayload();
 		//String sendMsg = "";
 		
@@ -81,11 +80,23 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 		//	WebSocketSession wSession = users.get(key);
 		//}
 		//msg = service.progressCnt("대기");
+		System.out.println("넌 찍히냐");
+		//System.out.println(service == null ? "널" : "있음");
+		//int progressCnt = service.progressCnt();
 		
-		System.out.println("msg : " + msg);
+		//Aytowired는 만능이 아니다.. 잘 찾아보고 사용할 것
+		//지금은 service 메소드를 사용할 수 있는 클래스를 가져옴 (static으로 선언하면 바로 가져올 수 있음)
+		System.out.println("msg : " +MainController.mService.progressCnt() + "");
+		//MainController.service.progressCnt();
 		
+		  try {
+              session.sendMessage(new TextMessage(MainController.mService.progressCnt() + ""));
+          } catch( Exception ex ) {
+              synchronized( sessions ) {
+                  sessions.remove( session );
+              }
+          }
 		
-		session.sendMessage(new TextMessage(msg));
 		
 	}
 	

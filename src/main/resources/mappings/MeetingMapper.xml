@@ -61,7 +61,7 @@
 		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
 	</select>
 	
-	<select id="progressCnt" parameterType="String" resultType="MeetingVO">
+	<select id="progressCnt"  resultType="int">
 		SELECT COUNT(*) PROGRESS_ST
 	      FROM MEETING_TB
 		 WHERE PROGRESS_ST = '대기'

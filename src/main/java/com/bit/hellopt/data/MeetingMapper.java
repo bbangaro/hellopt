@@ -18,7 +18,7 @@ public interface MeetingMapper {
 	public List<CategoryCodeVO> getCategoryCodeVO();
 
 	public MeetingVO getMeetingOne(int meetingIdx);
-	public MeetingVO progressCnt(String progressSt);
+	public int progressCnt();
 	public MeetingVO resCount(int meetingIdx);
 	public MeetingVO resUser(Map<String, Object> hm);
 	public List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);

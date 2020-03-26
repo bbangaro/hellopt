@@ -18,7 +18,7 @@
         </h1>
 				<img class="alarmImg" src="${pageContext.request.contextPath}/resources/images/meeting/notification.png"/><input type="text" id="alarm" class="alarm" value=""/>
 		<div class="userName">
-				<input type="hidden" id="progressCnt" value="${progressCnt.progressSt }"/> 
+				<input type="hidden" id="progressCnt" value="${progressCnt }"/> 
 				<sec:authorize access="isAuthenticated()">
 				<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
 				<sec:authentication property="principal" var="user" />
