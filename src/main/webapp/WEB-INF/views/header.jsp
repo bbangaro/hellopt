@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
 	<script src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
@@ -13,11 +14,13 @@
         <h1>
             <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
+				<img class="alarmImg" src="${pageContext.request.contextPath}/resources/images/meeting/notification.png"/><input type="text" id="alarm" class="alarm" value=""/>
 		<div class="userName">
-				<span id="result">알람</span>
-			<sec:authorize access="isAuthenticated()">
+				<input type="hidden" id="progressCnt" value="${progressCnt.progressSt }"/> 
+				<sec:authorize access="isAuthenticated()">
 				<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
 				<sec:authentication property="principal" var="user" />
+				<input type="hidden" id="username" value="${user.username }"/>
 				<span>${user.username}님 안녕하세요</span>
 				</sec:authorize>
 		</div>
@@ -53,8 +56,8 @@
                     </li>
                     <li><a href="#" class="artist_open">Workout&Nutrition</a>
                     	 <ul class="artist_depth02">
-                            <li><a href="${pageContext.request.contextPath}/exerciseinfo">Exercise Info</a></li>
-                            <li><a href="${pageContext.request.contextPath}/exercisetipinfo">Exercise TipInfo</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exerciseinfolist">Exercise Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exerciseinfotiplist">Exercise TipInfo</a></li>
                        	    <li><a href="${pageContext.request.contextPath}/meal">Nutrition</a></li>
                        </ul>
                     </li>
