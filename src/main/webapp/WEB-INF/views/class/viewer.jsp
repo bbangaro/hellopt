@@ -46,7 +46,9 @@
 			        </div>
 			        
 			        <div id="chat-container">
+			        <!--  
 						<iframe id="chat" src="http://52.78.77.203:3000/" scrolling="no"></iframe>
+					-->
 			        </div>
 			    </section>
 			</article>
