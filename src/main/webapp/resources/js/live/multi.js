@@ -28,7 +28,7 @@ let userId;
 // 방에 입장한 유저의 socket.id와 userId
 let users;
 
-const socket = io.connect("http://localhost:3000/");
+const socket = io.connect();
 
 const startButton = document.getElementById("startButton");
 const callButton = document.getElementById("callButton");
