@@ -34,7 +34,7 @@
   transform: translateX(-50%);
   animation: linedraw 0.3s 0.5s ease-in alternate;
   animation-fill-mode: forwards;
-  margin-left:  0 1px;
+  margin-left:  0 1px
 }
 
 .sub-content{

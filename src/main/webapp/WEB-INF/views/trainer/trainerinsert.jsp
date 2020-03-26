@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/content.css">
-<title>스트리밍 강의 개설</title>
+<title>트레이너 정보 입력</title>
 
 </head>
 
