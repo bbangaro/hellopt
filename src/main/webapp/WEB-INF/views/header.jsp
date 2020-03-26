@@ -46,6 +46,7 @@
 	    	});
 	    });
 	</script>
+
 	<!-- 네비게이션 시작 { -->
 	<aside id="navigation" class="close">
 		<div class="navigation_inner">
@@ -62,10 +63,10 @@
 					<li><a href="#" class="artist_open">Workout&Nutrition</a>
 						<ul class="artist_depth02">
 							<li><a
-								href="${pageContext.request.contextPath}/exerciseinfo">Exercise
+								href="${pageContext.request.contextPath}/exerciseinfolist">Exercise
 									Info</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/exercisetipinfo">Exercise
+								href="${pageContext.request.contextPath}/exerciseinfotiplist">Exercise
 									TipInfo</a></li>
 							<li><a href="${pageContext.request.contextPath}/meal">Nutrition</a></li>
 						</ul></li>

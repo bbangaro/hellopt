@@ -3,6 +3,12 @@ body {
 	color: #fff;
 }
 
+#wrap {
+	width : 100%;
+	margin: 100px auto 0 auto;
+}
+
+
 * {
 	margin: 0px;
 	padding: 0px;
@@ -30,10 +36,6 @@ body {
 .bannertxt_big {
 	font-size: 33px;
 	font-weight: bold;
-}
-
-.exercise_inner {
-	margin: 20px 0px;
 }
 
 .exercise {
@@ -99,8 +101,8 @@ body {
 }
 
 .exerciseImg_img {
-	width: 283px;
-	height: 350px;
+	width: 210px;
+	height: 315px;
 }
 
 .nick {
@@ -110,28 +112,53 @@ body {
     font-size: 17px;
 }
 
+.exercisetitle {
+    border-top: 2px solid #fff;
+    border-bottom: 1px solid #424242;
+    padding: 20px 0px 20px 0px;
+    font-size: 2em;
+}
+
 .exercise_video {
 	margin: 20px 0px;
 }
 
 .exercise_video_txt {
-	border-bottom: 1px solid #424242;
 	padding-bottom: 8px;
 	font-size: 2em;
+	position: relative;
+	left: 230px;
 }
 
 .exercise_video_box {
-	width: 792px;
-	height: 628px;
+	width: 592px;
+	height: 450px;
 	margin: 20px auto;
 	border: 1px solid #424242;
 }
 
 .exercise_dd {
-	width: 792px;
+	width: 592px;
 	margin: 20px auto;
 	text-align: center;
 }
+
+.exerhow {
+	font-size: 2em;
+}
+
+.exercau {
+	font-size: 2em;
+}
+
+#exerhow {
+	font-size: 1.2em;
+}
+
+#exercau {
+	font-size: 1.2em;
+}
+
 
 /* youtube 박스 크기 */
 
