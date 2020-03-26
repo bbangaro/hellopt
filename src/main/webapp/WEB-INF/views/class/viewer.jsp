@@ -46,7 +46,7 @@
 			        </div>
 			        
 			        <div id="chat-container">
-						<iframe id="chat" src="http://localhost:3000" scrolling="no"></iframe>
+						<iframe id="chat" src="http://52.78.77.203:3000/" scrolling="no"></iframe>
 			        </div>
 			    </section>
 			</article>
@@ -62,7 +62,8 @@
 
 	<input type="hidden" value="${className }" id="className">
 
-	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/socket.io.js"></script>
+	<!-- <script src="/socket.io/socket.io.js"></script> -->
     <script>
     
 		var userId = $("#userid").val();

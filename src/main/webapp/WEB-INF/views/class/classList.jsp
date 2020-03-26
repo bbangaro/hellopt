@@ -22,6 +22,7 @@
 				</div>
 
 				<div class="sub-content">
+ 				<button onclick="location.href='multi'" style="color:white;">다대다 스트리밍 테스트</button>
 					<!--콘탠츠 내용 시작. 내용 불러오기-->
 					<div class="content-area clearfix">
 						<div class="sub-tit-wr">
@@ -48,9 +49,11 @@
 							<c:forEach var="liveClass" items="${liveClassList }">
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
-										<div class="thum_hover">
-											<div>${liveClass.className } ${liveClass.classTime } ${liveClass.liveStatus }</div>
-										</div>
+										<a href="classdetail?classIdx=${liveClass.classIdx }">
+											<div class="thum_hover">
+												<div style="color: #ef0000;">${liveClass.className }<br>${liveClass.classTime }<br>${liveClass.liveStatus }</div>
+											</div>
+										</a>	
 										<div class="gall_con">
 											<div class="gall_img">
 												<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
@@ -62,7 +65,6 @@
 												<button onclick="location.href='broadcaster?classIdx=${liveClass.classIdx }'" style="color: white; float:left;">방송시작</button>
 											</c:if>	
 										</sec:authorize>
-										<a href="classdetail?classIdx=${liveClass.classIdx }" style="color: white; float:right;">${liveClass.className }</a>
 									</div>
 									<c:forEach var="member" items="${classMember }">
 										<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
@@ -72,9 +74,14 @@
 								</li>
 							</c:forEach>
 						</ul>
-
+						
+						<!-- 페이징
+						- form 태그 안에 있어야..??
+						 -->
+						<input type="hidden" name="page" value="1">
+						
 						<!--더보기 버튼-->
-						<button type="button" class="view-more">
+						<button type="button" class="view-more" onclick="moreClass()">
 							view more <i class="xi-plus-thin"></i>
 						</button>
 					</div>
@@ -86,5 +93,71 @@
 		<!-- } 게시판 목록 끝 -->
 	</div>
 	<!-- } 하단 끝 -->
+<!-- 	<div id="listDisp">
+		<ul>
+			<li>데이터 가져와서 출력하기</li>
+		</ul>
+	</div> -->
+	<script>
+		function moreClass() {
+			$.ajax("moreClass", {
+				type : "get", 
+				dataType : "json",
+				success : function(data) {
+					alert("성공~~");
+					console.log(data);
+					//응답받은 데이터 형식 : [{}, {}, ... , {}]
+					var strData = JSON.stringify(data); //JSON -> String
+					console.log("-" + strData + "-");
+					
+					var jsData = JSON.parse(strData); //String -> JavaScript 객체화
+					console.log("-" + jsData + "-"); 
+					
+					
+					var dispHtml = "";
+					
+					dispHtml = "<ul>";
+					$.each(data, function(index, obj) {
+						dispHtml += "<li>";
+						
+						dispHtml += this["classIdx"] + ", ";					
+				
+						dispHtml += "</li>";
+					});
+					dispHtml += "</ul>";
+					$("#listDisp").html(dispHtml);
+					
+					page();
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("실패 : \n"
+							+ "jqXHR.readyState : " + jqXHR.readyState + "\n" 
+							+ "textStatus : " + textStatus 
+							+ "errorThrown : " + errorThrown);
+				}
+			});
+		}
+		
+		function page() {
+			var page = eval($("input[name=page]").val() + " + 1");
+			$.ajax({
+				type : "GET",
+				url : "moreClass",
+				data : "page=" + page,
+				cache : false,
+				success : function(data) {
+					$("#listDisp").append(data);
+					$("input[name=page]").val(page);
+				},
+				error : function() {
+					alert("실패!");
+				}
+			})
+		}
+		
+	</script>
+	
+	
+	
 </body>
 </html>

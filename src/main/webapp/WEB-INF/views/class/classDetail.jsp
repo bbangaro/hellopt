@@ -87,9 +87,15 @@
 						</div>
 
 						<button class="detail-btn"
-							onclick="location.href='regclass?fkClassIdx=${classDetail.classIdx}'">강의신청</button>
+							onclick="location.href='regclass?fkClassIdx=${classDetail.classIdx}'">강의 신청</button>
 						<button style="float: right" class="detail-btn"
-							onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의삭제</button>
+							onclick="location.href='deleteclass?classIdx=${classDetail.classIdx }'">강의 삭제</button>
+						<button style="float: right" class="detail-btn"
+							onclick="location.href='updateclass?classIdx=${classDetail.classIdx }'">강의 수정</button>
+						<%-- <button class="detail-btn"
+							onclick="location.href='dropclass?fkClassIdx=${ }'">강의 신청 취소</button>
+						<button class="detail-btn"
+							onclick="location.href='myclass?fkUserId=${ }'">강의 신청 내역 보기</button> --%>
 					</div>
 					<!--sub-content-->
 

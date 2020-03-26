@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,7 @@
 	video {
 		border: 1px solid white;
 		width: 49.5%;
+		height: 510px;
 	}
 	
 	#class-name {
@@ -32,8 +34,11 @@
 		width: 90%;
 		margin: auto;
 	}
-	
+	button {
+		color: white;
+	}
 </style>
+<script src="${pageContext.request.contextPath }/resources/js/live/adapter-latest.js"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -47,10 +52,15 @@
 			    <section class="experiment">
 			       	<div class="video-info">
 			        	<div id="videos-container">
-			        		<video playsinline autoplay="autoplay"></video>
-			        		<video playsinline autoplay="autoplay"></video>
-			        		<video playsinline autoplay="autoplay"></video>
-			        		<video playsinline autoplay="autoplay"></video>
+			        		<video id="localVideo" autoplay ></video>
+							<video id="remoteVideo1" class="remoteVideo" autoplay></video>
+							<video id="remoteVideo2" class="remoteVideo" autoplay></video>
+							<video id="remoteVideo3" class="remoteVideo" autoplay></video>
+							<!-- <video id="remoteVideo4" class="remoteVideo" autoplay></video> -->
+							
+							<button id="startButton">Start</button>
+							<button id="callButton">Call</button>
+							<!-- <button id="hangupButton">Hangup</button> -->
 			        	</div>
 			        	<div id="class-name"><p>ㅇㅇㅇ 강의입니다.</p></div>
 			        </div>
@@ -60,5 +70,14 @@
 		<!-- // sub-content -->
 	</div>
 	<!-- // wrapper -->
+	
+	<!-- 로그인한 userId 얻어오기 -->
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal" var="user" />
+		<input type="hidden" value="${user.username }" id="userid">
+	</sec:authorize>
+	
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/live/multi.js"></script>
 </body>
 </html>

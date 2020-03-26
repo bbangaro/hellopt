@@ -97,7 +97,7 @@ blockquote {margin:0; padding:0;}
 </style>
 
 
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="http://52.78.77.203:3000/socket.io/socket.io.js"></script>
 <!-- <script src="http://192.168.0.53:3000/socket.io/socket.io.js"></script> -->
 <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
 	
@@ -118,7 +118,7 @@ blockquote {margin:0; padding:0;}
 <script>
     //----------------------------------------------------------------------
     var socket = io.connect();
-    
+
     //메시지 이벤트받아서 출력
     socket.on('send_msg', function(data) {
     	console.log("data: " + data);
@@ -160,7 +160,7 @@ blockquote {margin:0; padding:0;}
     });
     
     //룸아이디로 룸에 조인
-    socket.emit('joinroom', {roomId: roomId});
+    socket.emit('joinroom', {roomId: roomId, userId: userId});
     
     //message 이벤트 등록
     window.addEventListener('message', receiveMessage, false);
@@ -175,11 +175,18 @@ blockquote {margin:0; padding:0;}
     	roomId = obj.roomId;
     	//유저아이디
     	userId = obj.userId;
-    	//메시지
-    	msg = obj.msg;
     	
-    	console.log("msg: " + msg);
+    	console.log("roomId: " + roomId);
+    	console.log("userId: " + userId);
+    	
     	//룸 아이디로 룸에 조인
-       	socket.emit('joinroom', {roomId: roomId});
+       	socket.emit('joinroom', {roomId: roomId, userId: userId});
     }
+    
+    
+    //입장 알림
+    socket.on('connect', function(userId) {
+    	console.log(userId + " 입장!");
+    }) 
+    
 </script>   

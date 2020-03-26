@@ -37,7 +37,7 @@ public class ClassController {
 		
 		info.setFkUserId(principal.getName());
 		
-		List<ClassMember> classMember = service2.getClassMem(info);
+		List<ClassMember> classMember = service2.getMyClass(info);
 		System.out.println("클래스 멤버 정보 가져오기 성공!!");
 		System.out.println("classMember : " + classMember);
 		model.addAttribute("classMember", classMember);
@@ -67,6 +67,20 @@ public class ClassController {
 		return "redirect:/classlist";
 	}
 	
+	@RequestMapping("/updateclass")
+	public String updateClass(int classIdx, Model model) {
+		LiveClass classDetail = service.getClassDetail(classIdx);
+		System.out.println("수정하기 위한 라이브 클래스 상세정보 가져오기 성공!!");
+		model.addAttribute("classDetail", classDetail);
+		return "class/classUpdate";
+	}
+	
+	@RequestMapping("/updateclassok")
+	public String classUpdate(LiveClass info) {
+		service.updateClass(info);
+		System.out.println("라이브 클래스 수정 성공!!");
+		return "redirect:/classdetail?classIdx=" + info.getClassIdx();
+	}
 	
 	//------------ 강의 신청 ---------------
 
@@ -87,7 +101,9 @@ public class ClassController {
 	}
 	
 	// *마이페이지에서 강의 신청 취소(delete or update)와 신청한 강의 보기(select) 가능하게 만들기
-
+	
+	
+	
 	
 	//------------- 강의 제목 가져오기 ---------------
 	
@@ -113,4 +129,5 @@ public class ClassController {
 		model.addAttribute("className", className);
 		return "class/viewer";
 	}
+	
 }

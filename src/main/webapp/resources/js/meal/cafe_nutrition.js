@@ -149,25 +149,28 @@ $(document).ready(function () {
            let sodiumtotal=parseFloat($('#sodiumtotal').val()) - parseFloat(mealSoium);
            $('#sodiumtotal').val(sodiumtotal);
        }
-       
-       console.log('칼로리 총량 : ', $('#kacltotal').val());
-       console.log('탄수화물 총량 : ', $('#carbtotal').val());
-       console.log('단백질 총량 : ', $('#proteintotal').val());
-       console.log('지방 총량 : ', $('#fattotal').val());
-       console.log()
              
     });
-    
-    //버튼클릭시 function
-    // console.log($('#sodiumtotal').val()););
-    // let kdjfdk= $('#sodiumtotal').val();
-    //kdjfdkdldkfd
     
     //모달창 띄워주기(일반적인 식사)
     $("#modal_opne_btn").click(function(){
     	console.log("버튼클릭시");
     	$("#modal").attr("style", "display:block");
     	
+    	let mytotalkacal= $('#calories').text();
+    	console.log("버튼클릭시 마이토탈칼로리"+ mytotalkacal);
+    	
+    	let totalkacal= $('#kacltotal').val();
+		//console.log("버튼클릭시 토탈칼로리"+ totalkacal);
+		let carbtotal= $('#carbtotal').val();
+		let proteintotal= $('#proteintotal').val();
+		let fattotal= $('#fattotal').val();
+		
+		//각각영양소별 필요섭취량 계산
+		var carb = mytotalkacal * 0.5 / 4;
+		var protein = mytotalkacal * 0.3 / 4;
+		var fat = mytotalkacal * 0.2 / 9;
+		
     	//구글차트
 	    google.charts.load('current', {
 	    	'packages': ['bar']
@@ -177,10 +180,10 @@ $(document).ready(function () {
 	    function drawChart() {
 	        var data = google.visualization.arrayToDataTable([
 	            ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
-	            ['총칼로리', 3000, 2400],
-	            ['탄수화물', 1000, 100],
-	            ['단백질', 1000, 100],
-	            ['지방', 1000, 400]
+	            ['총칼로리', parseFloat(totalkacal), parseFloat(mytotalkacal)],
+	            ['탄수화물', parseFloat(carbtotal), parseFloat(carb)],
+	            ['단백질', parseFloat(proteintotal), parseFloat(protein)],
+	            ['지방', parseFloat(fattotal), parseFloat(fat)]
 	            ]);
 	        var options = {
 	                chart: {
@@ -192,17 +195,24 @@ $(document).ready(function () {
 	        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
 	        chart.draw(data, google.charts.Bar.convertOptions(options));
 	        }
-        });
+     });
     
-    //모달창 닫기
-    $("#modal_close_btn").click(function(){
-    	$("#modal").attr("style", "display:none");
-    });
-
 	//모달창 띄워주기(다이어트 식단)
 	$("#modal_opne_btn1").click(function(){
 	console.log("버튼클릭시");
 	$("#modal").attr("style", "display:block");
+	
+	let totalkacal= $('#kacltotal').val();
+	console.log("버튼클릭시 토탈칼로리"+ totalkacal);
+	let carbtotal= $('#carbtotal').val();
+	let proteintotal= $('#proteintotal').val();
+	let fattotal= $('#fattotal').val();
+	
+	let mytotalkacal= $('#calories').text();
+	//각각영양소별 필요섭취량 계산
+	var carb1 = mytotalkacal * 0.3 / 4;
+	var protein1 = mytotalkacal * 0.4 / 4;
+	var fat1 = mytotalkacal * 0.3 / 9;
 	
 	//구글차트
     google.charts.load('current', {
@@ -213,10 +223,10 @@ $(document).ready(function () {
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
-            ['총칼로리', 3000, 2400],
-            ['탄수화물', 1000, 100],
-            ['단백질', 1000, 100],
-            ['지방', 1000, 400]
+            ['총칼로리', parseFloat(totalkacal), parseFloat(mytotalkacal)],
+            ['탄수화물', parseFloat(carbtotal), parseFloat(carb1)],
+            ['단백질', parseFloat(proteintotal), parseFloat(protein1)],
+            ['지방', parseFloat(fattotal), parseFloat(fat1)]
             ]);
         var options = {
                 chart: {
@@ -232,22 +242,34 @@ $(document).ready(function () {
 
 	//모달창 띄워주기(벌크업 식단)
 	$("#modal_opne_btn2").click(function(){
-	console.log("버튼클릭시");
-	$("#modal").attr("style", "display:block");
-	
-	//구글차트
-    google.charts.load('current', {
-    	'packages': ['bar']
+		console.log("버튼클릭시");
+		$("#modal").attr("style", "display:block");
+		
+		let totalkacal= $('#kacltotal').val();
+		console.log("버튼클릭시 토탈칼로리"+ totalkacal);
+		let carbtotal= $('#carbtotal').val();
+		let proteintotal= $('#proteintotal').val();
+		let fattotal= $('#fattotal').val();
+		
+		let mytotalkacal= $('#calories').text();
+		//각각영양소별 필요섭취량 계산
+		var carb2 = mytotalkacal * 0.4 / 4;
+		var protein2 = mytotalkacal * 0.4 / 4;
+		var fat2 = mytotalkacal * 0.2 / 9;
+		
+		//구글차트
+	    google.charts.load('current', {
+	    	'packages': ['bar']
     });
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
-            ['총칼로리', 3000, 2400],
-            ['탄수화물', 1000, 100],
-            ['단백질', 1000, 100],
-            ['지방', 1000, 400]
+        	['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
+            ['총칼로리', parseFloat(totalkacal), parseFloat(mytotalkacal)],
+            ['탄수화물', parseFloat(carbtotal), parseFloat(carb2)],
+            ['단백질', parseFloat(proteintotal), parseFloat(protein2)],
+            ['지방', parseFloat(fattotal), parseFloat(fat2)]
             ]);
         var options = {
                 chart: {
@@ -259,7 +281,12 @@ $(document).ready(function () {
         var chart = new google.charts.Bar(document.getElementById('barchart_material'));
         chart.draw(data, google.charts.Bar.convertOptions(options));
         }
-    }); 
+    });
+	
+	//모달창 닫기
+	    $("#modal_close_btn").click(function(){
+	    	$("#modal").attr("style", "display:none");
+	    });
     
 });
 

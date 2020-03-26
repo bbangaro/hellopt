@@ -8,16 +8,24 @@ $(function() {
 	
 	//정상 연결 됐을 때 
 	ws.onopen = function () {
-//		var result = document.getElementById('result');
-//		var alarm = '<img src="${pageContext.request.contextPath}/resources/images/meeting/localtag.png">';
+		var progressCnt = $("#progressCnt").val();
+		var username = $("#username").val();
 		
 		console.log("웹 소켓 접속 성공");
+		
+		if ("${user.username}" != ""){
+			ws.send(progressCnt);
+		}
 	};
 	
-	//서버에서 메시지가 왔을 때, 메시지 객체를 매개변수로 받는다
-	ws.onmessage = function (message) {
-		console.log(message.data);
-	};
+	$(document).ready(function() {
+		//서버에서 메시지가 왔을 때, 메시지 객체를 매개변수로 받는다
+		ws.onmessage = function (message) {
+			$('#alarm').val(message.data);
+			//$('#alarm').prop(value, message.data);
+			console.log(message.data);
+		};
+	});	
 	
 	//웹소켓이 닫혔을 때
 	ws.onclose = function () {
@@ -30,4 +38,3 @@ $(function() {
 	};
 	
 });
-

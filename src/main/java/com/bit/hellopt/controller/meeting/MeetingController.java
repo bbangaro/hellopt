@@ -22,9 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
+import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.service.meeting.MeetingService;
 import com.bit.hellopt.vo.meeting.CategoryCodeVO;
 import com.bit.hellopt.vo.meeting.LocalVO;
@@ -42,7 +41,8 @@ public class MeetingController {
 	@Autowired
 	MeetingService service;
 	
-	private MeetingAlarmHandler handler;
+	@Autowired
+	S3Utils s3Utils;
 	
 	@RequestMapping("/meeting")
 	public String meeting(Principal principal , Model model) {
@@ -190,7 +190,7 @@ public class MeetingController {
 	}
 
 	@PostMapping("/meetingWriteOk")
-	public String meetingWriteOk(Principal principal,WebSocketSession session, TextMessage message, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
+	public String meetingWriteOk(Principal principal, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
 		
 		service.insertMeeting(meetingVO);
 		meetingVO.setMeetingIdx(meetingVO.getMeetingIdx());
@@ -203,10 +203,12 @@ public class MeetingController {
 		
 		//다중파일 업로드 처리
 		String realFolder = "C:/hellopt_file/";
+		/* 폴더생성하는거
 		File dir = new File(realFolder);
 		if (!dir.isDirectory()) {
 			dir.mkdirs();
 		}
+		*/
 		//넘어온 파일을 리스트로 저장
 		List<MultipartFile> mf = mhsq.getFiles("uploadFile");
 		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
@@ -222,7 +224,8 @@ public class MeetingController {
 				//저잘 될 파일 경로
 				String filePath = realFolder + mSysImg;
 				//파일 저장
-				mf.get(i).transferTo(new File(filePath));
+				//mf.get(i).transferTo(new File(filePath));
+				s3Utils.uploadMultipart("meeting/", mSysImg, mf.get(i));
 				
 				System.out.println("업로드 파일:"+meetingVO.getMeetingIdx());
 				

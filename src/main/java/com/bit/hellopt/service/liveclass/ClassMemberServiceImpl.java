@@ -21,20 +21,20 @@ public class ClassMemberServiceImpl implements ClassMemberService {
 
 	//강의번호, 아이디로 조회
 	@Override
-	public List<ClassMember> getClassMember(ClassMember info) {
-		return classMemberMapper.getClassMember(info);
+	public List<ClassMember> getClassInfo(ClassMember info) {
+		return classMemberMapper.getClassInfo(info);
 	}
 
 	//아이디로 조회
 	@Override
-	public List<ClassMember> getClassMem(ClassMember info) {
-		return classMemberMapper.getClassMem(info);
+	public List<ClassMember> getMyClass(ClassMember info) {
+		return classMemberMapper.getMyClass(info);
 	}
 
 	//강의번호로 조회
 	@Override
-	public ClassMember getClassM(int classMemberIdx) {
-		return classMemberMapper.getClassM(classMemberIdx);
+	public ClassMember getOneClassInfo(int classMemberIdx) {
+		return classMemberMapper.getOneClassInfo(classMemberIdx);
 	}
 
 }
