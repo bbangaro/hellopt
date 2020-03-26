@@ -51,9 +51,7 @@ public class RBoardCommentController {
 	}
 
 	//댓글 입력
-	
 	@RequestMapping("/reply/insert")
-	@ResponseBody
 	public void insert(@RequestParam(value="revIdx", required = false)int revIdx, @ModelAttribute RCommentVO cvo, RBoardVO vo,Model model,  
 			@AuthenticationPrincipal CustomUserDetail customUser) 
 					throws IllegalStateException, IOException{

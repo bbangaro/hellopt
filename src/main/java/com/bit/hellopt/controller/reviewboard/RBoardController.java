@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.service.reviewboard.RBoardService;
+import com.bit.hellopt.service.reviewboard.RCommentService;
 import com.bit.hellopt.service.user.UserProfileService;
 //import com.bit.hellopt.vo.reviewboard.Pagination;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
@@ -45,6 +46,8 @@ public class RBoardController {
 	RBoardService rService;
 	@Autowired
 	UserProfileService profileService;
+	@Autowired
+	RCommentService rCmtService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -62,7 +65,7 @@ public class RBoardController {
 	
 	@RequestMapping("/review")
 	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo,  
-			@AuthenticationPrincipal CustomUserDetail customUser, 
+			@AuthenticationPrincipal CustomUserDetail customUser,
 			@RequestParam(defaultValue="1")Integer cPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 
@@ -125,7 +128,8 @@ public class RBoardController {
 
 		model.addAttribute("rBoardList", userjoin);
 		model.addAttribute("pvo", p);
-
+		List<RCommentVO> list = rCmtService.joinCmt(vo.getRevIdx());
+		model.addAttribute("list", list);
 		
 		return "/review/reviewBoard";
 	}

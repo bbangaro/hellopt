@@ -163,12 +163,12 @@
 				<!-- <button type="button" class="btnReply">댓글등록</button> -->
 			</td>	
 		</tr>
- 
 		</tbody>
 	</table>
-		<div class="listReply"></div>
+		<div id="listReply"></div>
 	</form>
 </c:forEach>
+
 	<!--페이징 -->
 	<br><br><br>
 	<td colspan="4">
@@ -229,9 +229,10 @@ function createCmt(revIdx) {
 			type:"post",
 			url: "reply/insert",
 			data: param,
-			success: function(e){
+			success: function(){
 				listReply2(revIdx);
 				alert("댓글이 등록되었습니다.");
+				$(".revCmtComment").val("");
 			}
 		});
 	}
@@ -270,7 +271,6 @@ function createCmt(revIdx) {
 			type: "get",
 			//contentType: "application/json", ==>생략가능 (RestController가 )
 			url: "review/replyjson?revIdx="+revIdx,
-			dataType:"json",
 			success:function(result){
 				console.log(result);
 				var output = "<table>";
@@ -283,22 +283,10 @@ function createCmt(revIdx) {
 				}
 				output +="</table>";
 				alert("리스트 리플라이 댓글2")
-				$(".listReply").html(output);
+				$("#listReply").html(output);
 			}
 		});
 	}
-/* //날짜 변환 함수 작성
-function changeDate(date){
-	date = new Date(parseInt(date));
-	year = date.getFullYear();
-	month = date.getMonth();
-	day = date.getDate();
-	hour = date.getHours();
-	minute = date.getMinutes();
-	second = date.getSeconds();
-	strDate = year+"-"+month+"-"+day+" "+hour+":"+minute+ ":"+second;
-	return strDate;
-} */
 
 </script>
 </body>
