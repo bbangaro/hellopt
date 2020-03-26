@@ -149,6 +149,14 @@
 		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
 	</delete>
 	
+	<select id="getMeetingList" resultType="MeetingVO">
+		select * from meeting_tb where fk_user_id = #{userId}
+	</select>
+	
+	<select id="getParticipantMeetingList" resultType="MeetingVO">
+		select m.* from meeting_tb m, meeting_apply_tb a where m.meeting_idx = a.fk_meeting_idx AND a.fk_user_id = #{userId}
+	</select>
+	
 	
 </mapper>
 

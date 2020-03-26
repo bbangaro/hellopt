@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.service.reviewboard.RBoardService;
 import com.bit.hellopt.service.user.UserProfileService;
 //import com.bit.hellopt.vo.reviewboard.Pagination;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
+import com.bit.hellopt.vo.reviewboard.RCommentVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.reviewboard.RPagingVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
@@ -46,6 +48,9 @@ public class RBoardController {
 	
 	@Autowired
 	ServletContext servletContext;
+	
+	@Autowired
+	S3Utils s3Utils;
 
 	/*@Autowired
 	S3Utils s3Utils;*/
@@ -56,7 +61,7 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review")
-	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo, 
+	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo,  
 			@AuthenticationPrincipal CustomUserDetail customUser, 
 			@RequestParam(defaultValue="1")Integer cPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
@@ -120,6 +125,7 @@ public class RBoardController {
 
 		model.addAttribute("rBoardList", userjoin);
 		model.addAttribute("pvo", p);
+
 		
 		return "/review/reviewBoard";
 	}
@@ -128,6 +134,7 @@ public class RBoardController {
 	public String insertRBoard(RBoardVO vo, MultipartHttpServletRequest multi,
 			@AuthenticationPrincipal CustomUserDetail customUser) 
 					throws IllegalStateException, IOException {
+		System.out.println("글 vo1 " +vo);
 		
 		String userId = customUser.getUsername();
 		String name = customUser.getName();
@@ -143,10 +150,10 @@ public class RBoardController {
 	
 		int revIdx = vo.getRevIdx();
 		System.out.println("revIdx: " + revIdx);
-		File dir = new File(path);
+		/*File dir = new File(path);
 		if(!dir.isDirectory()) {
 			dir.mkdirs();
-		}
+		}*/
 		
 		//넘어온 파일을 리스트로 저장
 		List<MultipartFile> fileList = multi.getFiles("file_0");
@@ -167,11 +174,12 @@ public class RBoardController {
 				System.out.println("저장된 파일 이름 : " + saveFileName);
 				long fileSize = fileList.get(i).getSize(); //파일사이즈
 				System.out.println("저장된 파일 사이즈 : " + fileSize);
-				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				//fileList.get(i).transferTo(new File(savePath)); //파일 저장
 				System.out.println("저장된 파일 경로" + savePath);
 				
 				System.out.println("revFileOname, saveFileName, fileSize: "+ revFileOname+ saveFileName + fileSize + revIdx);
 				
+				s3Utils.uploadMultipart("review/", saveFileName, fileList.get(i));
 				rService.uploadFile(revFileOname, saveFileName, fileSize, revIdx);
 				
 				System.out.println("글정보" + vo);
@@ -215,10 +223,10 @@ public class RBoardController {
 		
 		int revIdx = vo.getRevIdx();
 		System.out.println("revIdx: " + revIdx);
-		File dir = new File(path);
+		/*File dir = new File(path);
 		if(!dir.isDirectory()) {
 			dir.mkdirs();
-		}
+		}*/
 
 //넘어온 파일을 리스트로 저장
 		List<MultipartFile> fileList = multi.getFiles("file_0");
@@ -244,6 +252,7 @@ public class RBoardController {
 				
 				System.out.println("revFileOname, saveFileName, fileSize: "+ revFileOname+ saveFileName + fileSize + revIdx);
 				
+				s3Utils.uploadMultipart("review/", saveFileName, fileList.get(i));
 				rService.uploadFile(revFileOname, saveFileName, fileSize, revIdx);
 				
 				System.out.println("글정보" + vo);

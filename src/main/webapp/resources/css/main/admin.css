@@ -2,9 +2,9 @@
 
 .content {
 	box-sizing: border-box;
-	width: 800px;
+	width: 100%;
 	margin: 0 auto 150px;
-	padding-top: 10%;
+	padding-top: 100px;
 	text-align: center;
 }
 
@@ -28,7 +28,7 @@ a {
 .content>h2 {
 	font-size: 42px;
 	font-weight: 600;
-	margin-bottom: 42px;
+	margin-bottom: 30px;
 }
 
 .management-anchor {

@@ -50,6 +50,14 @@ public class UserServiceImpl implements UserService{
 	public void updateUser(User user) {
 		mapper.updateUser(user);
 	}
+	
+	
+
+	@Override
+	public void updateNormalUser(User user) {
+		user.setUserPw(passwordEncoder.encode(user.getUserPw()));
+		xmlMapper.updateUser(user);
+	}
 
 	@Override
 	public void deleteUser(User user) {

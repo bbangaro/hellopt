@@ -8,6 +8,7 @@ $(function(){
   $('.nav_button').click(function(){
     $(this).toggleClass('off');
     $('#hd').toggleClass('ease');
+    $('.artist_depth02').removeClass("on");
     $('.sub-x-btn-wr').toggleClass('ease');
     $('#navigation').toggleClass('close');
     $('#navigation').toggleClass('open');
