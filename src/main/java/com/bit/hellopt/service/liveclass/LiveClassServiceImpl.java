@@ -34,4 +34,9 @@ public class LiveClassServiceImpl implements LiveClassService {
 		liveClassMapper.deleteClass(classIdx);
 	}
 
+	@Override
+	public void updateClass(LiveClass liveClass) {
+		liveClassMapper.updateClass(liveClass);
+	}
+
 }

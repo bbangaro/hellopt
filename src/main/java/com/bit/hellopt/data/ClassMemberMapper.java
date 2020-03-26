@@ -14,13 +14,13 @@ public interface ClassMemberMapper {
 	
 	//강의번호와 아이디로 조회...필요 없으면 삭제하기
 	@Select("select * from class_member_tb where class_member_idx = (select class_member_idx from class_member_tb where fk_class_idx = #{fkClassIdx} and fk_user_id = #{fkUserId})")
-	public List<ClassMember> getClassMember(ClassMember info);
+	public List<ClassMember> getClassInfo(ClassMember info);
 
 	//아이디로 조회
 	@Select("SELECT * FROM CLASS_MEMBER_TB WHERE FK_USER_ID = #{fkUserId}")
-	public List<ClassMember> getClassMem(ClassMember info);
+	public List<ClassMember> getMyClass(ClassMember info);
 	
 	//강의번호로 조회
 	@Select("SELECT * FROM CLASS_MEMBER_TB WHERE CLASS_MEMBER_IDX = #{classMemberIdx}")
-	public ClassMember getClassM(int classMemberIdx);
+	public ClassMember getOneClassInfo(int classMemberIdx);
 }

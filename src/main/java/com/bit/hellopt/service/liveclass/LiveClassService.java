@@ -5,9 +5,11 @@ import java.util.List;
 import com.bit.hellopt.vo.live.LiveClass;
 
 public interface LiveClassService {
-	//1. 입력 - 파라미터명 수정하기!!
+	//1. 입력
 	void insertClass(LiveClass liveClass);
+	
 	//2. 수정
+	void updateClass(LiveClass liveClass);
 	
 	//3. 삭제
 	void deleteClass(int classIdx);
@@ -18,4 +20,5 @@ public interface LiveClassService {
 	
 	//4-2. 하나만 조회
 	LiveClass getClassDetail(int classIdx);
+	
 }	

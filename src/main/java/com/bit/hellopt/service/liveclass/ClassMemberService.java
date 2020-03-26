@@ -14,12 +14,12 @@ public interface ClassMemberService {
 	
 	//4. 조회
 	//강의 번호, 아이디로 조회
-	List<ClassMember> getClassMember(ClassMember info);
+	List<ClassMember> getClassInfo(ClassMember info);
 
 	//아이디로 조회
-	List<ClassMember> getClassMem(ClassMember info);
+	List<ClassMember> getMyClass(ClassMember info);
 	
 	//강의번호로 조회
-	ClassMember getClassM(int classMemberIdx);
+	ClassMember getOneClassInfo(int classMemberIdx);
 }
 	

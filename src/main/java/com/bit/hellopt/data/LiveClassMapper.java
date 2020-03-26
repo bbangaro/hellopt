@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.bit.hellopt.vo.live.LiveClass;
 
@@ -26,4 +27,9 @@ public interface LiveClassMapper {
 	@Delete("DELETE FROM CLASS_TB WHERE CLASS_IDX = #{classIdx}")
 	public void deleteClass(int classIdx);
 	
+	@Update("UPDATE CLASS_TB SET CLASS_TYPE = #{classType}, CLASS_NAME = #{className}, "
+			+ " TOTAL_MEMBERS = #{totalMembers}, PRICE = #{price}, CLASS_LENGTH = #{classLength}, "
+			+ " CLASS_START_DATE = #{classStartDate}, CLASS_TIME = #{classTime}, CLASS_DAY = #{classDay} "
+			+ " WHERE CLASS_IDX = #{classIdx} ")
+	public void updateClass(LiveClass liveClass);
 }
