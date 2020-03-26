@@ -77,7 +77,9 @@
 		<input type="hidden" value="${user.username }" id="userid">
 	</sec:authorize>
 	
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/socket.io.js"></script>	
+<!-- <script src="socket.io/socket.io.js"></script> -->	
+<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
 <script src="${pageContext.request.contextPath }/resources/js/live/multi.js"></script>
 </body>
 </html>
