@@ -78,8 +78,8 @@
 			});
 		}
     </script>
-	<%-- <script src="${pageContext.request.contextPath }/resources/js/socket.io.js"></script> --%>
-    <script src="/socket.io/socket.io.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/socket.io.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script>
 		var userId = $("#userid").val();
 		var roomId = ${classIdx };

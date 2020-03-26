@@ -11,7 +11,7 @@ const config = { // eslint-disable-line no-unused-vars
   }]
 };
 
-const socket = io.connect();
+const socket = io.connect("http://52.78.77.203:3000");
 const video = document.querySelector('video'); // eslint-disable-line no-unused-vars
 
 window.onunload = window.onbeforeunload = function() {
