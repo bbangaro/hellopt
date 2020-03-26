@@ -55,8 +55,8 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 	
 	@Override
-	public MeetingVO progressCnt(String progressCnt) {
-		return meetingMapper.progressCnt(progressCnt);
+	public MeetingVO progressCnt(String progressSt) {
+		return meetingMapper.progressCnt(progressSt);
 	}
 	
 	@Override
