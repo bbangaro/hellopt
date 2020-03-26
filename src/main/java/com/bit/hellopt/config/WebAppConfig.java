@@ -46,10 +46,9 @@ public class WebAppConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 
 		//registry.addViewController("/signupform").setViewName("signupForm");
-		registry.addViewController("/review/insertform").setViewName("/review/revInsertForm");
+		registry.addViewController("/review/insertform").setViewName("review/revInsertForm");
 		registry.addViewController("/openClassForm").setViewName("openClassForm");
 		registry.addViewController("/classDetail").setViewName("classDetail");
-		registry.addViewController("/review/insertform").setViewName("insertForm");
 		registry.addViewController("/openClassForm").setViewName("class/openClassForm");
 		registry.addViewController("/main").setViewName("main");
 		registry.addViewController("/login").setViewName("user/login");
