@@ -180,10 +180,10 @@ $(document).ready(function () {
 	    function drawChart() {
 	        var data = google.visualization.arrayToDataTable([
 	            ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
-	            ['총칼로리', totalkacal, mytotalkacal],
-	            ['탄수화물', carbtotal, carb],
-	            ['단백질', proteintotal, protein],
-	            ['지방', fattotal, fat]
+	            ['총칼로리', parseFloat(totalkacal), parseFloat(mytotalkacal)],
+	            ['탄수화물', parseFloat(carbtotal), parseFloat(carb)],
+	            ['단백질', parseFloat(proteintotal), parseFloat(protein)],
+	            ['지방', parseFloat(fattotal), parseFloat(fat)]
 	            ]);
 	        var options = {
 	                chart: {
@@ -197,11 +197,6 @@ $(document).ready(function () {
 	        }
      });
     
-    /*//모달창 닫기
-    $("#modal_close_btn").click(function(){
-    	$("#modal").attr("style", "display:none");
-    });*/
-
 	//모달창 띄워주기(다이어트 식단)
 	$("#modal_opne_btn1").click(function(){
 	console.log("버튼클릭시");
@@ -228,10 +223,10 @@ $(document).ready(function () {
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
-            ['총칼로리', totalkacal, mytotalkacal],
-            ['탄수화물', carbtotal, carb1],
-            ['단백질', proteintotal, protein1],
-            ['지방', fattotal, fat1]
+            ['총칼로리', parseFloat(totalkacal), parseFloat(mytotalkacal)],
+            ['탄수화물', parseFloat(carbtotal), parseFloat(carb1)],
+            ['단백질', parseFloat(proteintotal), parseFloat(protein1)],
+            ['지방', parseFloat(fattotal), parseFloat(fat1)]
             ]);
         var options = {
                 chart: {
@@ -270,11 +265,11 @@ $(document).ready(function () {
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
-            ['총칼로리', totalkacal, mytotalkacal],
-            ['탄수화물', carbtotal, carb2],
-            ['단백질', proteintotal, protein2],
-            ['지방', fattotal, fat2]
+        	['영양소', '내가 섭취한 양', '섭취해야 하는 양'],
+            ['총칼로리', parseFloat(totalkacal), parseFloat(mytotalkacal)],
+            ['탄수화물', parseFloat(carbtotal), parseFloat(carb2)],
+            ['단백질', parseFloat(proteintotal), parseFloat(protein2)],
+            ['지방', parseFloat(fattotal), parseFloat(fat2)]
             ]);
         var options = {
                 chart: {
