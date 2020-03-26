@@ -1,4 +1,4 @@
-package com.bit.hellopt.controller.exercise;
+ package com.bit.hellopt.controller.exercise;
 
 import java.io.File;
 import java.io.IOException;
@@ -250,7 +250,6 @@ public class ExerciseInformationController {
 				//
 				vo.setExercisePictures( vo.getExercisePictures()+ saveFileName+",");
 				System.out.println("exerciseInformationFileOname, saveFileName, fileSize: " + exerciseInformationFileOname + saveFileName + fileSize + exerciseIdx);
-				//제약조건을 달면, 162행에 있는 exerciseInformationService.uploadFile을 맨 밑으로 내려야 함.
 				exerciseInformationService.uploadFile(exerciseInformationFileOname, saveFileName, fileSize, exerciseIdx);
 				
 				System.out.println("글정보" + vo);

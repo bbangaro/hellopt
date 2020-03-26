@@ -53,8 +53,8 @@
                     </li>
                     <li><a href="#" class="artist_open">Workout&Nutrition</a>
                     	 <ul class="artist_depth02">
-                            <li><a href="${pageContext.request.contextPath}/exerciseinfo">Exercise Info</a></li>
-                            <li><a href="${pageContext.request.contextPath}/exercisetipinfo">Exercise TipInfo</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exerciseinfolist">Exercise Info</a></li>
+                            <li><a href="${pageContext.request.contextPath}/exerciseinfotiplist">Exercise TipInfo</a></li>
                        	    <li><a href="${pageContext.request.contextPath}/meal">Nutrition</a></li>
                        </ul>
                     </li>
