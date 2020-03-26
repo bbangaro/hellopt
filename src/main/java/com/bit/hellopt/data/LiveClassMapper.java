@@ -21,6 +21,12 @@ public interface LiveClassMapper {
 	@Select("SELECT * FROM CLASS_TB ORDER BY CLASS_IDX DESC")
 	public List<LiveClass> getLiveClass();
 	
+	@Select("SELECT * FROM CLASS_TB WHERE FK_USER_ID = #{userId} ORDER BY CLASS_IDX")
+	public List<LiveClass> getLiveClassesByUserId(String userId);
+	
+	@Select("select c.* from class_tb c, class_member_tb m where c.class_idx = m.fk_class_idx and m.fk_user_id = #{userId}")
+	public List<LiveClass> getViewerClassesByUserId(String userId);
+	
 	@Select("SELECT * FROM CLASS_TB WHERE CLASS_IDX = #{classIdx}")
 	public LiveClass getClassDetail(int classIdx);
 	

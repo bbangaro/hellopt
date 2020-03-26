@@ -74,5 +74,6 @@ public interface RBoardMapper1 {
 	@Select("SELECT COUNT(*) FROM REVIEW_BOARD_TB")
 	public int getTotalCount();
 
+	
 
 }

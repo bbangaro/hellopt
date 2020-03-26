@@ -56,6 +56,9 @@ public interface MeetingService {
 	// 모임 에약 취소(일반유저)
 	void resCancle(Map<String, Object> hm);
 	
+	public List<MeetingVO> getMeetingList(String userId);
+	public List<MeetingVO> getParticipantMeetingList(String userId);
+	
 	
 
 }

@@ -11,18 +11,11 @@
 </head>
 <body>
 	<div id="wrap">
-
-		<div class="exercisebox">
-			<div class="bannertxtbox">
-				<p class="bannertxt"><span class="bannertxt_big">대한민국 No.1 그룹운동 플랫폼 헬로피티</span><br>
+		<div class="bannertxtbox">
+			<p class="bannertxt"><span class="bannertxt_big">대한민국 No.1 그룹운동 플랫폼 헬로피티</span><br>
 			헬로피티에서 제공하는 운동방법을 통해 건강하고 아름다운 몸을 가꾸세요.</p>
-				</div>
-			</div>
-			</div>
-
-		<div class="exercisebox">
-		
-			<div class="exercise_inner">
+		</div>
+			<div class="exercisebox">
 				<div class="exerciseImg">
 					<c:choose>
 						<c:when test="${exerciseInformation.exerciseParts eq '가슴'}">
@@ -47,23 +40,28 @@
 				</div>
 				<div class="exerciseinfo">
 					<h2 class="exercisetitle">${exerciseInformation.exerciseName }<span class="nick">${exerciseInformation.exerciseEName }</span></h2>
-			<hr>
-			<form action="updateExerciseInformation" method="post">
-			<input type="hidden" name="exerciseIdx" value="${exerciseInformation.exerciseIdx }">
-			<div>
+					<div>
+					<br><br>
+						<h2 class="exerhow">운동방법</h2>
+						<br>
+						<h2 id="exerhow">${exerciseInformation.howtoExercise }</h2>
+            			<h2 id="exerhow">${exerciseInformation.howtoExercise2 }</h2>
+            		</div>
+            		<br>
+					<br>
+					<div>
+						<h2 class="exercau">주의사항</h2>
+						<br><h2 id="exercau">${exerciseInformation.caution }</h2>
+					</div>
 				<div class="exercise_video">
+				<br><br>
 					<h3 class="exercise_video_txt">운동 동영상</h3>
 					<div class="exercise_video_box">
-					<iframe width="792" height="450"
+					<iframe width="592" height="450"
 							src="https://www.youtube.com/embed/${exerciseInformation.exerciseVideo }" frameborder="0"
 							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 							allowfullscreen></iframe>
-					
 					</div>
-				
-        	</div>
-        	</div>
-        	
         	<br><br>
             
             <div class="exercise_dd">
@@ -72,25 +70,20 @@
             		<br><br>
             	</c:forEach>
             
-            	<h2>운동방법 : ${exerciseInformation.howtoExercise }</h2>
-            	<h2>${exerciseInformation.howtoExercise2 }</h2>
-                <hr>
-                <h2>주의사항 : ${exerciseInformation.caution }</h2>
-				<hr>
 				<h2>권장반복횟수 : ${exerciseInformation.repetition }회</h2>
 				<h2>권장세트횟수 : ${exerciseInformation.setCount }회</h2>
 				<h2>권장휴식시간 : ${exerciseInformation.restTime }초</h2>
 				
 				<hr>
-			</div>
-			</form>
 				</div>
-			</div>
 			<p class="cente">
 				<a href="deleteexerciseinfo?exerciseIdx=${exerciseInformation.exerciseIdx }">글 삭제</a>
 				<a href="updateexerciseinfo?exerciseIdx=${exerciseInformation.exerciseIdx }">글 수정</a>
 			</p>
 			<br><br>
+				</div>
+			</div>
 		</div>
+	</div>
 </body>
 </html>

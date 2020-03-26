@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main/login.css">
@@ -82,7 +80,6 @@
 		</ul>
 		<input type="button" onclick="formCheck()" value="회원가입">
 	</form:form>
-
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 		function getAddress() {
@@ -94,6 +91,6 @@
 		    }).open();
 		}
 	</script>
-	<script src="${pageContext.request.contextPath}/resources/static/js/idcheck.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/user/idcheck.js"></script>
 </body>
 </html>

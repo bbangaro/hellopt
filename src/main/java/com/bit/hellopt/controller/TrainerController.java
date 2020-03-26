@@ -45,7 +45,7 @@ public class TrainerController {
 		return "redirect:/traineradmin";
 	}
 	
-	@GetMapping("/trainerinsert")
+	@GetMapping("/admin/trainerinsert")
 	public String trainerinsert() {
 		return "trainer/trainerinsert";
 	}
@@ -108,7 +108,7 @@ public class TrainerController {
 	
 	
 	//관리자 페이지에서 트레이너 목록 수정,삭제 컨트롤 할 수 있는 화면
-	@RequestMapping("/traineradmin")
+	@RequestMapping("/admin/traineradmin")
 	public String getAdminTrainer(Model model) {
 		List<TrainerVO> trainerList = service.getTrainerList();
 		System.out.println("관리자 트레이너 리스트 정보 가져오기 성공!");

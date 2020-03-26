@@ -8,6 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,33 +83,20 @@
 	}
 </style>
 </head>
-
 <body>
 <div id = "container">
-<%-- <div id="outter">
-	<div style="float:right;">
-		<select id="cntPerPage" name="sel" onchange="selChange()">
-			<option value="5"
-				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기 </option>
-			<option value="10"
-				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기 </option>
-			<option value="15"
-				<c:if test="${paging.cntPerPage == 15 }">selected</c:if>>15줄 보기</option>
-		</select>
-	</div>
-</div> --%>
-
-<form>
 	<sec:authorize access="isAuthenticated()">
 	<p><a href="${pageContext.request.contextPath}/review/insertform">후기쓰러가기</a></p>	
 	</sec:authorize>
 <c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
+<form>
 <table class="tbl_wrap">
 	<thead class="tbl_head01">
 		<tr>
 		<sec:authorize access="isAuthenticated()">
 		<sec:authentication var="principal" property="principal" />
 		<c:if test="${rBoard.userId == principal.username}">
+			<td>${rBoard.revIdx }</td>
 			<td><input type = "button" value="글 수정" onclick = "modify(${rBoard.revIdx})"></td>
 			<td><input type = "button" value="글 삭제" onclick = "del(${rBoard.revIdx })"></td>
 		</c:if>
@@ -152,45 +140,34 @@
 			<p>내용 :${rBoard.revContent}</p>
 			<!--이미지 사진 업로드한부분 나오는곳  -->
 			<c:forEach var="file" items="${rBoard.filevo }">
-				<p><img width="500px" src="/hellopt/file/${file.revFileSname } "><p>
+				<p><img width="500px" src="/hellopt/s3/review/${file.revFileSname } "><p>
 			</c:forEach>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">날짜 :<fmt:formatDate value="${rBoard.revRegdate }" type="date"/></td>
 		</tr>
-
-	</tbody>
-	<tfoot>
 		<tr>
 		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
-			<c:if test="${rBoard.cmtCnt > 0 }">
 			<td>
-				<a href="#this" id="cmtCnt"> 댓글${rBoard.cmtCnt }개 모두 보기</a>
+				<input type = "button" value="댓글보기" onclick = "listReply2(${rBoard.revIdx })">
 			</td>
-			</c:if> 
-		</tr>
-		<sec:authorize access="isAuthenticated()">
+		</tr> 
+		<!-- 댓글 작성 폼 -->
 		<tr>
 			<td>
-				<textarea rows="2" cols="80" id="cmtComment" placeholder="댓글 달기..."></textarea>
+				<textarea rows="2" cols="80" class=revCmtComment name="revCmtComment" placeholder="댓글 달기..."></textarea>
 			</td>
 			<td>
-				<button type="button" id="btnReply">등록</button>
+			<input type = "button" value="댓글등록" onclick = "createCmt(${rBoard.revIdx })">
+				<!-- <button type="button" class="btnReply">댓글등록</button> -->
 			</td>	
 		</tr>
-		</sec:authorize>
-		<c:forEach var="row" items="${replyList }">
-		<tr>
-			<td id="listReply">
-			${row.userName}(<fmt:formatDate value="${row.regdate }" pattern="yyyy-MM-dd HH:mm:ss"/>)
-			<br>
-			${row.revCmtComment }
-			</td>	
-		</tr>
-		</c:forEach>
-	</tfoot>
-</table>	
+ 
+		</tbody>
+	</table>
+		<div class="listReply"></div>
+	</form>
 </c:forEach>
 	<!--페이징 -->
 	<br><br><br>
@@ -237,30 +214,29 @@
 		</ol>
 	</td>
  	<!--페이징끝 -->
-</form>
+
 </div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
-	$(document).ready(function(){
-		
-		//댓글쓰기 버튼 클릭 이벤트 (ajax로 처리)
-		$("#btnReply").click(function(){
-			var replytext=$("#replytext").val();
-			var revIdx="${RBoardVO.revIdx}"
-			var param="replytext=" + revCmtComment + "&revIdx=" + revIdx;
-			$.ajax({
-				type: "post",
-				url:"${path}/review/reply/insert",
-				data: param,
-				success: function(){
-					alert("댓글이 등록되었습니다.");
-					listReply2();
-				}
-			})
-			
-		})
-	})
 
+//댓글작성하기
+function createCmt(revIdx) {
+		console.log(revIdx)
+		var revCmtComment=$(".revCmtComment").val();
+		var param="revCmtComment=" + revCmtComment + "&revIdx=" + revIdx;
+		console.log(param);
+		$.ajax({
+			type:"post",
+			url: "reply/insert",
+			data: param,
+			success: function(e){
+				listReply2(revIdx);
+				alert("댓글이 등록되었습니다.");
+			}
+		});
+	}
+	 
+	//게시글 수정 삭제 시작
 	function del(revIdx) {
 		var chk = confirm("정말 삭제 하시겠습니까?");
 		if (chk){
@@ -271,44 +247,59 @@
 			location.href = '${pageContext.request.contextPath}/review/updateform?revIdx='+revIdx;	
 			
 	}	
+	//게시글 수정삭제 끝
 	
 	//Controller방식
 	//**댓글 목록1
-	function listReply(){
+	function listReply(revIdx){
 		$.ajax({
-			type: "get",
-			url: "${path}/review/reply?revIdx={rBoard.revIdx}",
-			success: function(result){
-				//response Text가 result에 저장됨.
-				$("#listReply").html(result);
+			type:"get",
+			url: "review/replylist?revIdx="+revIdx,
+			sucess: function(result){
+				alert("리스트 리플라이 댓글1")
+				$(".listReply").html(result);
+				
 			}
-		});
+		})
 	}
+
 	//RestController방식(Json)
 	//**댓글 목록2(json)
-	function listReply2(){
+	function listReply2(revIdx){
 		$.ajax({
 			type: "get",
 			//contentType: "application/json", ==>생략가능 (RestController가 )
-			url: "${path}/reviewjson?revIdx=${rBaord.revIdx}",
+			url: "review/replyjson?revIdx="+revIdx,
+			dataType:"json",
 			success:function(result){
 				console.log(result);
 				var output = "<table>";
 				for(var i in result){
 					output +="<tr>";
 					output +="<td>" + result[i].userName;
-					output +="(" + changeDate(result[i].regdate)+ ")<br>";
+					output +="(" + result[i].revCmtRegdate+")<br>";
 					output += result[i].revCmtComment + "</td>" ;
 					output +="<tr>";
 				}
-			output +="</table>";
-			$("#listReply").html(output);
+				output +="</table>";
+				alert("리스트 리플라이 댓글2")
+				$(".listReply").html(output);
 			}
-		})
+		});
 	}
+/* //날짜 변환 함수 작성
+function changeDate(date){
+	date = new Date(parseInt(date));
+	year = date.getFullYear();
+	month = date.getMonth();
+	day = date.getDate();
+	hour = date.getHours();
+	minute = date.getMinutes();
+	second = date.getSeconds();
+	strDate = year+"-"+month+"-"+day+" "+hour+":"+minute+ ":"+second;
+	return strDate;
+} */
 
-
-	
 </script>
 </body>
 </html>

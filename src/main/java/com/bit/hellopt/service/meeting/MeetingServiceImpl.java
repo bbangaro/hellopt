@@ -141,6 +141,15 @@ public class MeetingServiceImpl implements MeetingService {
 	public void resCancle(Map<String, Object> hm) {
 		meetingMapper.resCancle(hm);
 	}
+	@Override
+	public List<MeetingVO> getMeetingList(String userId) {
+		return meetingMapper.getMeetingList(userId);
+	}
+	@Override
+	public List<MeetingVO> getParticipantMeetingList(String userId) {
+		return meetingMapper.getParticipantMeetingList(userId);
+	}
+	
 	
 	
 
