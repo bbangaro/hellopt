@@ -6,7 +6,7 @@ $(function() {
 	// 서버의 웹소켓 객체 연결하기 
 	ws = new WebSocket("ws://localhost:8000/hellopt/alarm");
 	
-	//정상 연결 됐을 때 
+	//정상 연결 됐을 때 .....
 	ws.onopen = function () {
 //		var result = document.getElementById('result');
 //		var alarm = '<img src="${pageContext.request.contextPath}/resources/images/meeting/localtag.png">';
