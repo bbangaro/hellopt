@@ -11,45 +11,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <%-- <link rel ="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board/reviewBoard.css"> --%>
 <meta charset="UTF-8">
 <title>후기게시판</title>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
-
-<style>
- 	.content {
-	box-sizing: border-box;
-	width: 800px;
-	margin: 0 auto 150px;
-	padding-top: 10%;
-	text-align: center; 
-}
-	.btn{color: white;}
-	.profile{ width: 100px; 
-				height: auto;
-	}
-	td .star{
-		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-		  background-size: auto 100%;
-		  width: 20px;
-		  height: 20px;
-		  display: inline-block;
-		  text-indent: -9999px;
-		  cursor: pointer;
-		}
-	td .star.on{background-position:0 0;}
-</style>
 </head>
 <body>
-
-<div id = "container">
-<form>
 <table>
-		<c:forEach var="row" items="${replyList }">
+		<c:forEach var="row" items="${list }">
 		<tr>
-			<td id="listReply">
+			<td class="listReply">
 			${row.userName}(<fmt:formatDate value="${row.revCmtRegdate }" pattern="yyyy-MM-dd HH:mm:ss"/>)
 			<br>
 			${row.revCmtComment }
@@ -57,8 +29,6 @@
 		</tr>
 		</c:forEach>
 </table>
-</form>
-</div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 </body>
 </html>

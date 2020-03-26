@@ -46,13 +46,15 @@
 	<result property="revCmtIdx" column="REV_CMT_IDX"/>
 	<result property="userId" column="USER_ID"/>
 	<result property="userName" column="USER_NAME"/>
+	<result property="revCmtComment" column="REV_CMT_COMMENT"/>
 	<result property="revCmtRegdate" column="REV_CMT_REGDATE"/>
 	<result property="revCmtEditdate" column="REV_CMT_EDITDATE"/>
 	<result property="revIdx" column="REV_IDX"/>
 </resultMap>
 
 	<select id="joinCmt" resultMap="rCmtMap" parameterType="int">
-		SELECT RCT.REV_CMT_IDX, RCT.USER_ID, RCT.USER_NAME, RCT.REV_CMT_REGDATE,
+		SELECT RCT.REV_CMT_IDX, RCT.USER_ID, RCT.USER_NAME,
+				REV_CMT_COMMENT,RCT.REV_CMT_REGDATE,
 				RCT.REV_IDX,RCT.REV_CMT_EDITDATE,
 				UT.USER_ID, UT.USER_NAME 
 				FROM REVIEW_COMMENT_TB RCT, USERS_TB UT 

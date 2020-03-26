@@ -73,10 +73,12 @@ public class RBoardCommentController {
 	}
 	//댓글 목록 (@controller방식 : view 화면을 리턴)
 	@RequestMapping("/review/replylist")
+	@ResponseBody
 	public String list(@RequestParam int revIdx, Model model) {
 		System.out.println("뷰화면리턴");
-		List<RCommentVO> replyList = rCmtService.joinCmt(revIdx);
-		model.addAttribute("list", replyList);
+		List<RCommentVO> list = rCmtService.joinCmt(revIdx);
+		model.addAttribute("list", list);
+		System.out.println("된건가");
 		return "/review/reviewCmtList";
 	}
 	
