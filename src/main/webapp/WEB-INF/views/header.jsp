@@ -26,7 +26,7 @@
 				<span>${user.username}님 안녕하세요</span>
 			</sec:authorize>
 		</div>
-
+		<button type="button" role="togglebutton" class="nav_button"><span></span></button>
 	</header>
 	<!-- 상단 끝 } -->
 	<script>
