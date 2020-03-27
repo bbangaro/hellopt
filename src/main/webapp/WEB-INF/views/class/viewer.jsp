@@ -46,9 +46,9 @@
 			        </div>
 			        
 			        <div id="chat-container">
-			        <!--  
-						<iframe id="chat" src="http://52.78.77.203:3000/" scrolling="no"></iframe>
-					-->
+			        
+						<iframe id="chat" src="https://hellopt-signal.herokuapp.com/" scrolling="no"></iframe>
+					
 			        </div>
 			    </section>
 			</article>
