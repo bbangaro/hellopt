@@ -128,8 +128,8 @@ public class RBoardController {
 
 		model.addAttribute("rBoardList", userjoin);
 		model.addAttribute("pvo", p);
-		List<RCommentVO> list = rCmtService.joinCmt(vo.getRevIdx());
-		model.addAttribute("list", list);
+/*		List<RCommentVO> list = rCmtService.joinCmt(vo.getRevIdx());
+		model.addAttribute("list", list);*/
 		
 		return "/review/reviewBoard";
 	}

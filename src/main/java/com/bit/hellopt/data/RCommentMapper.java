@@ -26,6 +26,7 @@ public interface RCommentMapper {
 			+ "WHERE REV_CMT IDX=#{revCmtIdx}")
 	public void cmtUpdate(RCommentVO vo);
 	
+	//댓글 삭제
 	@Delete("DELETE FROM REVIEW_COMMENT_TB WHERE REV_CMT_IDX= #{revCmtIdx}")
 	public void cmtDelete(int revCmtIdx);
 }

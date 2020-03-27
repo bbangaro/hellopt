@@ -49,11 +49,6 @@
 	button {
 		background-color:white;
 	}
-	.jb-center{
-		display: block;
-		text-align: center;
-		background-color: yellow;
-	}
 	.paging { list-style: none; }
 	.paging li {
 		float: left;
@@ -63,9 +58,9 @@
 		text-decoration: none;
 		display: block;
 		padding: 3px 7px;
-		border: 1px solid #00B3DC;
+		border: 1px solid red;
 		font-weight: bold;
-		color: black;
+		color: white;
 	}
 	.paging .disable {
 		border: 1px solid silver;
@@ -73,13 +68,13 @@
 		color: silver;
 	}
 	.paging .now {
-		border: 1px solid #ff4aa5;
+		border: 1px solid red;
 		padding: 3px 7px;
-		background-color: #ff4aa5;
+		background-color: red;
 	}
 	.paging li a:hover {
-		background-color: #00B3DC;
-		color: white;
+		background-color: red;
+		color: black;
 	}
 </style>
 </head>
@@ -147,6 +142,12 @@
 		<tr>
 			<td colspan="2">날짜 :<fmt:formatDate value="${rBoard.revRegdate }" type="date"/></td>
 		</tr>
+		</tbody>
+		<tr>
+		</table>
+</form>		
+<form class="commentForm" name="commentFrom" method="post">		
+	<table>
 		<tr>
 		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
 			<td>
@@ -156,16 +157,16 @@
 		<!-- 댓글 작성 폼 -->
 		<tr>
 			<td>
-				<textarea rows="2" cols="80" class=revCmtComment name="revCmtComment" placeholder="댓글 달기..."></textarea>
+				<textarea rows="2" cols="80" class="revCmtComment${rBoard.revIdx }" name="revCmtComment" placeholder="댓글 달기..."></textarea>
 			</td>
 			<td>
-			<input type = "button" value="댓글등록" onclick = "createCmt(${rBoard.revIdx })">
+			<input type ="button" value="댓글등록" class="btn${rBoard.revIdx }" onclick = "createCmt(${rBoard.revIdx })">
 				<!-- <button type="button" class="btnReply">댓글등록</button> -->
 			</td>	
 		</tr>
-		</tbody>
+		
 	</table>
-		<div id="listReply"></div>
+		<div class="listReply${rBoard.revIdx }"></div>
 	</form>
 </c:forEach>
 
@@ -219,37 +220,64 @@
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
 
+//게시글 수정 삭제 시작
+function del(revIdx) {
+	var chk = confirm("정말 삭제 하시겠습니까?");
+	if (chk){
+		location.href = 'deleterboard?revIdx='+revIdx;	
+	}
+}	
+function modify(revIdx) {
+		location.href = '${pageContext.request.contextPath}/review/updateform?revIdx='+revIdx;	
+		
+}	
+//게시글 수정삭제 끝
+
 //댓글작성하기
 function createCmt(revIdx) {
-		console.log(revIdx)
-		var revCmtComment=$(".revCmtComment").val();
-		var param="revCmtComment=" + revCmtComment + "&revIdx=" + revIdx;
-		console.log(param);
-		$.ajax({
+      console.log(revIdx)
+      var revCmtComment=$(".revCmtComment" + revIdx).val();
+      console.log(revCmtComment);
+      var param="revCmtComment=" + revCmtComment + "&revIdx=" + revIdx;
+      console.log(param);
+      
+      $.ajax({
+         type:"post",
+         url: "reply/insert",
+         data: param,
+         success: function(){
+            listReply2(revIdx);
+            $(".revCmtComment" + revIdx).val("");
+            alert("댓글이 등록되었습니다.");
+         }
+      });
+   }
+   //댓글 수정하기
+   function modReple(revCmtIdx){
+	   result[i].revCmtComment
+   }
+   //댓글 삭제하기
+   function delReple(revCmtIdx){
+	   
+	   var revCmtComment=$(".revCmtComment${rBoard.revIdx}").val();
+	      console.log(revCmtComment);
+	   var param="revCmtComment=" + revCmtComment + "&revCmtIdx=" + revCmtIdx;
+	   $.ajax({
+		   
+		   url:"reply/delete?revCmtIdx="+revCmtIdx,
 			type:"post",
-			url: "reply/insert",
-			data: param,
-			success: function(){
-				listReply2(revIdx);
-				alert("댓글이 등록되었습니다.");
-				$(".revCmtComment").val("");
+			data:"param",
+			success:function(result){
+				console.log(result);
+				listReply2(result.revIdx);
 			}
-		});
-	}
-	 
-	//게시글 수정 삭제 시작
-	function del(revIdx) {
-		var chk = confirm("정말 삭제 하시겠습니까?");
-		if (chk){
-			location.href = 'deleterboard?revIdx='+revIdx;	
-		}
-	}	
-	function modify(revIdx) {
-			location.href = '${pageContext.request.contextPath}/review/updateform?revIdx='+revIdx;	
-			
-	}	
-	//게시글 수정삭제 끝
-	
+	   		,error:function(error){
+	   			console.log("에러:" + error);
+	   		}
+	   })
+   }
+   
+	/* 
 	//Controller방식
 	//**댓글 목록1
 	function listReply(revIdx){
@@ -258,14 +286,15 @@ function createCmt(revIdx) {
 			url: "review/replylist?revIdx="+revIdx,
 			sucess: function(result){
 				alert("리스트 리플라이 댓글1")
-				$(".listReply").html(result);
+				$(".listReply" + revIdx).html(result);
 				
 			}
 		})
-	}
+	} */
 
 	//RestController방식(Json)
 	//**댓글 목록2(json)
+	
 	function listReply2(revIdx){
 		$.ajax({
 			type: "get",
@@ -273,21 +302,32 @@ function createCmt(revIdx) {
 			url: "review/replyjson?revIdx="+revIdx,
 			success:function(result){
 				console.log(result);
-				var output = "<table>";
-				for(var i in result){
+				if(result.length > 0){
+					var output = "<table>";
+					for(var i in result){
+						output +="<tr>";
+						output +="<td>" + result[i].userName;
+						output +="(" + result[i].revCmtRegdate+")<br>";
+						output += result[i].revCmtComment +"<br>";
+						output +="<input type='button' value='댓글 수정' onclick='modReple(" + result[i].revCmtIdx + ")'>";
+						output +="<input type='button' value='댓글 삭제' onclick='delReple(" + result[i].revCmtIdx + ")'>";
+						output +="</td></tr>";
+					}
+					output +="</table>";
+				} else {
+					var output = "<table>";
 					output +="<tr>";
-					output +="<td>" + result[i].userName;
-					output +="(" + result[i].revCmtRegdate+")<br>";
-					output += result[i].revCmtComment + "</td>" ;
-					output +="<tr>";
+					output +="<td><h6>등록된 댓글이 없습니다.</h6></td>";
+					output +="</tr>";
+					output +="</table>";
 				}
-				output +="</table>";
-				alert("리스트 리플라이 댓글2")
-				$("#listReply").html(output);
+				
+				$(".listReply" + revIdx).html(output);
 			}
 		});
 	}
-
+	
+	
 </script>
 </body>
 </html>
