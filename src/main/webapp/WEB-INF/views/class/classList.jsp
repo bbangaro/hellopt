@@ -11,6 +11,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/classlist.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
+
+<style>
+
+</style>
 </head>
 <body>
 	<!-- 콘텐츠 시작 { -->
@@ -62,15 +66,15 @@
 										<sec:authorize access="isAuthenticated()">
 											<sec:authentication property="principal" var="user" />
 											<c:if test="${liveClass.fkUserId == user.username }">
-												<button onclick="location.href='broadcaster?classIdx=${liveClass.classIdx }'" style="color: white; float:left;">방송시작</button>
+												<button class="broadcast" onclick="location.href='broadcaster?classIdx=${liveClass.classIdx }'" style="float:left;">START</button>
 											</c:if>	
 										</sec:authorize>
+										<c:forEach var="member" items="${classMember }">
+											<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
+												<button class="broadcast" onclick="location.href='viewer?classIdx=${liveClass.classIdx }'" style="float:right;">VIEW</button>
+											</c:if>
+										</c:forEach>
 									</div>
-									<c:forEach var="member" items="${classMember }">
-										<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
-											<button onclick="location.href='viewer?classIdx=${liveClass.classIdx }'" style="color:white;">방송보기</button>
-										</c:if>
-									</c:forEach>
 								</li>
 							</c:forEach>
 						</ul>
