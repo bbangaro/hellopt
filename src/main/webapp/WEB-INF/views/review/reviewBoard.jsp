@@ -258,18 +258,18 @@ function createCmt(revIdx) {
    }
    //댓글 삭제하기
    function delReple(revCmtIdx){
+	   alert("댓삭" + revCmtIdx);
 	   
-	   var revCmtComment=$(".revCmtComment${rBoard.revIdx}").val();
-	      console.log(revCmtComment);
-	   var param="revCmtComment=" + revCmtComment + "&revCmtIdx=" + revCmtIdx;
 	   $.ajax({
 		   
 		   url:"reply/delete?revCmtIdx="+revCmtIdx,
 			type:"post",
-			data:"param",
+			data:{"revIdx" : $("${rBoard.revIdx }").val(),"revCmtIdx" : revCmtIdx},
 			success:function(result){
-				console.log(result);
-				listReply2(result.revIdx);
+				alert(result);
+				console.log("revIdx:"+revIdx)
+				listReply2(revIdx);
+				alert("삭제되었습니다.");
 			}
 	   		,error:function(error){
 	   			console.log("에러:" + error);
