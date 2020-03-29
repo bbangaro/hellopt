@@ -32,6 +32,7 @@ public class MainController {
 		this.mService = service;
 	}
 	
+	
 	@GetMapping("/")
 	public String home(Principal principal, Model model) {
 	// 로그인 성공했을 때 인증된 유저 객체를 받을 수 있음(유저 아이디/비번)

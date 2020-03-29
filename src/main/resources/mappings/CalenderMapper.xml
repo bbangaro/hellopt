@@ -5,7 +5,7 @@
 <mapper namespace="com.bit.hellopt.data.CalendarMapper">
 	
 	<select id="getMonth2" parameterType="String" resultType="com.bit.hellopt.vo.calendar.CalendarVO">
-		SELECT *
+		SELECT CALENDER_IDX, FK_USER_ID, SUBSTR(TO_DATE(YYMMDD, 'YYYYMMDD'), 7, 2) YYMMDD, CONTENT, FILE_PATH, C_ORI_VIDEO, C_SYS_VIDEO
 		  FROM CALENDER_TB
 		 WHERE (SUBSTR(TO_DATE(YYMMDD, 'YYYYMMDD'), 4, 2)) = #{month}
 	</select>

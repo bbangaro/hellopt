@@ -83,7 +83,6 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 					sessions.remove(session);
 				}
 			}
-			System.out.println("key값이 뭐지? : " + wSession.toString());
 			// }
 			// msg = service.progressCnt("대기");
 			// System.out.println(service == null ? "널" : "있음");

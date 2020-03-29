@@ -22,6 +22,11 @@ public class CalendarController {
 		return "calender/calender";
 	}
 	
+	@RequestMapping("/calenderWrite")
+	public String calenderWrite(Principal principal) {
+		return "calender/calenderWrite";
+	}
+	
 	@RequestMapping("/selectMonth")
 	@ResponseBody // @ResponseBody 객체의 몸체(body)에 데이터 전달 (크롬브라우저만 가능)
 	public List<CalendarVO> selectMonth(String month) {

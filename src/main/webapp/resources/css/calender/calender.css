@@ -130,7 +130,8 @@
     }
     
     .day.today {
-      color: rgba(156, 202, 235, 1);
+      color: #c0392b;
+      font-weight: bold;
     }
     
     .day-name {
@@ -387,3 +388,10 @@
     @keyframes fadeOutShink  {
       to { opacity: 0; padding: 0px; height: 0px; }
     }
+    
+.eventA{
+	color : #eee;
+	font-size: 16px;
+    line-height: 22px;
+    letter-spacing: .5px;
+}    
