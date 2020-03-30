@@ -23,6 +23,7 @@
 			</li>
 		</ul>
 		<input name="submit" type="submit" value="로그인" />
+		<span>Remember Me</span><input type="checkbox" name="remember-me" />
 	</form>
 </body>
 </html>

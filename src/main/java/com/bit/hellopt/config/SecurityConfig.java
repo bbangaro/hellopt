@@ -49,8 +49,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout()
 				.logoutSuccessUrl("/main")
-				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
+				//.invalidateHttpSession(true)
 				.permitAll()
+			.and()
+				.rememberMe().key("uniqueAndSecret").rememberMeParameter("remember-me")
 			.and()
 				.csrf().disable();
 	}
