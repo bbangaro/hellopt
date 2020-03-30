@@ -110,7 +110,7 @@
 						<sec:authentication property="principal" var="user" />
 						<input type="hidden" value="${user.username }" name="fkUserId">
 					</sec:authorize>
-			        <input type="submit" name="" value="Send" class="send-btn">
+			        <input type="submit" name="" value="Send" class="send-btn" id="update-class">
 			    </form>
 			  </div><!-- //basic-table -->
 		 	</div><!-- //sub-content -->
@@ -118,7 +118,10 @@
 	</div><!-- //con-wr-->
 </div><!-- //wrapper -->
 <!-- 하단 끝 -->
-
-
+<script>
+	$("#update-class").click(function() {
+		alert("수정이 완료되었습니다.");
+	});
+</script>
 </body>
 </html>

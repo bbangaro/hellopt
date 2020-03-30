@@ -11,10 +11,11 @@ public interface ClassMemberService {
 	//2. 수정
 	
 	//3. 삭제
+	void deleteClassMember(ClassMember info);
 	
 	//4. 조회
 	//강의 번호, 아이디로 조회
-	List<ClassMember> getClassInfo(ClassMember info);
+	int getRegInfo(ClassMember info);
 
 	//아이디로 조회
 	List<ClassMember> getMyClass(ClassMember info);
