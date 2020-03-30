@@ -16,14 +16,14 @@
 	<form name='f' action="login" method='POST'>
 		<ul>
 			<li>
-				<input type='text' name='username' value='' placeholder='ID' required />
+				<input type='text' name='username' value='' placeholder='ID' required minlength="5" maxlength="20" pattern="[0-9a-z-_]{5,20}"/>
 			</li>
 			<li>
-				<input type='password' name='password' placeholder='PASSWORD' required/>
+				<input type='password' name='password' placeholder='PASSWORD' required minlength="5" maxlength="20" pattern="[\w!@#$%^&*()-_]{5,20}" />
 			</li>
 		</ul>
 		<input name="submit" type="submit" value="로그인" />
-		<span>Remember Me</span><input type="checkbox" name="remember-me" />
+		<input type="checkbox" class="remember-me" name="remember-me" /><span>Remember Me</span>
 	</form>
 </body>
 </html>
