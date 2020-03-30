@@ -52,7 +52,7 @@ function requestAPI(response) {
         null: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+PGc+PGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMjU2LDBDMTUzLjc1NSwwLDcwLjU3Myw4My4xODIsNzAuNTczLDE4NS40MjZjMCwxMjYuODg4LDE2NS45MzksMzEzLjE2NywxNzMuMDA0LDMyMS4wMzUgICAgYzYuNjM2LDcuMzkxLDE4LjIyMiw3LjM3OCwyNC44NDYsMGM3LjA2NS03Ljg2OCwxNzMuMDA0LTE5NC4xNDcsMTczLjAwNC0zMjEuMDM1QzQ0MS40MjUsODMuMTgyLDM1OC4yNDQsMCwyNTYsMHogTTI1NiwyNzguNzE5ICAgIGMtNTEuNDQyLDAtOTMuMjkyLTQxLjg1MS05My4yOTItOTMuMjkzUzIwNC41NTksOTIuMTM0LDI1Niw5Mi4xMzRzOTMuMjkxLDQxLjg1MSw5My4yOTEsOTMuMjkzUzMwNy40NDEsMjc4LjcxOSwyNTYsMjc4LjcxOXoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiIHN0eWxlPSJmaWxsOiM4NDg0ODQiPjwvcGF0aD4KCTwvZz4KPC9nPjwvZz4gPC9zdmc+',
     }
 
-    // 마커를 표시할 위치와 title 객체 배열입니다 
+    // 마커를 표시할 위치와 title 객체 배열
     var response = JSON.parse(response); // JSON 객체로 변환
     var positions = [];
 
@@ -68,69 +68,69 @@ function requestAPI(response) {
     }
 
     for (var i = 0; i < positions.length; i++) {
-        // 마커 이미지의 이미지 주소입니다
-        // 재고에 따라 마커 이미지 색상이 변경됩니다.
+        // 마커 이미지의 이미지 주소
+        // 재고에 따라 마커 이미지 색상이 변경
         var imageSrc = positions[i].imginfo;
 
-        // 마커 이미지의 이미지 크기 입니다
+        // 마커 이미지의 이미지 크기
         var imageSize = new kakao.maps.Size(24, 35);
 
-        // 마커 이미지를 생성합니다    
+        // 마커 이미지를 생성 
         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-        // 마커를 생성합니다
+        // 마커를 생성
         var marker = new kakao.maps.Marker({
             map: map, // 마커를 표시할 지도
             position: positions[i].latlng, // 마커를 표시할 위치
-            title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+            title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시
             image: markerImage // 마커 이미지 
         });
 
-        // 마커에 표시할 인포윈도우를 생성합니다 
+        // 마커에 표시할 인포윈도우를 생성
         var infowindow = new kakao.maps.InfoWindow({
             content: positions[i].content // 인포윈도우에 표시할 내용
         });
 
-        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-        // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록
+        // 이벤트 리스너로는 클로저를 만들어 등록
+        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록
         kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
         kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
     }
 }
 
-// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+// 인포윈도우를 표시하는 클로저를 만드는 함수
 function makeOverListener(map, marker, infowindow) {
     return function () {
         infowindow.open(map, marker);
     };
 }
 
-// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+// 인포윈도우를 닫는 클로저를 만드는 함수
 function makeOutListener(infowindow) {
     return function () {
         infowindow.close();
     };
 }
 
-// 엔터가 눌렸을 때 실행되는 함수입니다
+// 엔터가 눌렸을 때 실행되는 함수
 function enterkey() {
     if (window.event.keyCode == 13) {
-        // 장소를 검색합니다
+        // 장소를 검색
         searchPlace();
     }
 }
 
-// 검색 버튼이 눌렸을 때 실행되는 함수입니다
+// 검색 버튼이 눌렸을 때 실행되는 함수
 function buttonPress() {
-    // 장소를 검색합니다
+    // 장소를 검색
     searchPlace();
 }
 
-// 장소 검색 객체를 생성합니다
+// 장소 검색 객체를 생성
 var ps = new kakao.maps.services.Places();
 
-// 검색을 요청하는 함수입니다
+// 검색을 요청하는 함수
 function searchPlace() {
     var keyword = document.getElementById('search').value;
 
@@ -141,14 +141,14 @@ function searchPlace() {
         return false;
     }
 
-    // 장소 검색 객체를 통해 장소 검색을 요청합니다
+    // 장소 검색 객체를 통해 장소 검색을 요청
     ps.keywordSearch(keyword, placeSearchCB);
 }
 
-// 장소 검색이 완료되었을 때 호출되는 콜백함수입니다
+// 장소 검색이 완료되었을 때 호출되는 콜백함수
 function placeSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-        // 정상적으로 검색이 완료 됐으면 검색 목록을 반환합니다
+        // 정상적으로 검색이 완료 됐으면 검색 목록을 반환
         PlacesData(data);
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert('검색 결과가 존재하지 않습니다.');
@@ -161,7 +161,7 @@ function placeSearchCB(data, status, pagination) {
     }
 }
 
-// 검색 결과 목록을 나타내는 함수입니다
+// 검색 결과 목록을 나타내는 함수
 function PlacesData(places) {
     var bounds = new kakao.maps.LatLngBounds();
     var placePosition = new kakao.maps.LatLng(places[0].y, places[0].x);
@@ -185,9 +185,9 @@ httpGetAsync(urlString, requestAPI);
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-// 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+// 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록
 kakao.maps.event.addListener(map, 'dragend', function () {
-    var latlng = map.getCenter(); // 지도의 중심좌표를 얻어옵니다 
+    var latlng = map.getCenter(); // 지도의 중심좌표
     lat = latlng.getLat();
     lng = latlng.getLng();
     urlString = "https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=" + lat + "&lng=" + lng + "&m=2000";

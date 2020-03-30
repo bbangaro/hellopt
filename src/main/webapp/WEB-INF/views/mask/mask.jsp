@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공공마스크 실시간 판매 현황</title>
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mask/mask1.css">
+    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mask/mask1.css"> --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mask/mask2.css">
     <script src="${pageContext.request.contextPath}/resources/js/mask/main.js"></script>
 </head>
