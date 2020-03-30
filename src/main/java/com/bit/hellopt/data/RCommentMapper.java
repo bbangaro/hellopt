@@ -21,9 +21,10 @@ public interface RCommentMapper {
 	public void cmtCreate(RCommentVO vo);
 	
 	//댓글 수정
-	@Update("UPDATE REVIEW_COMMENT_TB "
-			+ "SET REV_CMT_COMMENT = #{revCmtComment}"
-			+ "WHERE REV_CMT IDX=#{revCmtIdx}")
+	@Update("UPDATE REVIEW_COMMENT_TB SET\r\n" + 
+			"		REV_CMT_COMMENT = #{revCmtComment}\r\n" + 
+			"		REV_CMT_EDITDATE = now()\r\n" + 
+			"		WHERE REV_CMT_IDX = #{revCmtIdx}")
 	public void cmtUpdate(RCommentVO vo);
 	
 	//댓글 삭제

@@ -41,6 +41,7 @@ import com.bit.hellopt.vo.user.User;
 @RestController
 @SessionAttributes("rReply")
 public class RBoardCommentController {
+	
 	@Autowired
 	RCommentService rCmtService;
 	@Autowired
@@ -69,9 +70,21 @@ public class RBoardCommentController {
 		rCmtService.cmtCreate(cvo);
 		
 	}
+	//댓글 수정
+	@RequestMapping("/reply/update")
+	public void repleupdate(@RequestParam(value="revCmtIdx", required = false)int revCmtIdx,
+			@RequestBody RCommentVO cvo, RBoardVO vo,Model model,  
+			@AuthenticationPrincipal CustomUserDetail customUser) 
+					throws IllegalStateException, IOException{
+		System.out.println("댓수정");
+		System.out.println("cvo: "+ cvo);
+		rCmtService.cmtUpdate(cvo);
+		
+	}
 	//댓글 삭제
 	@RequestMapping("/reply/delete")
-	public void delete(@RequestParam(value="revCmtIdx", required = false)int revCmtIdx, @ModelAttribute RCommentVO cvo, RBoardVO vo,Model model,  
+	public void delete(@RequestParam(value="revCmtIdx", required = false)int revCmtIdx, 
+			@ModelAttribute RCommentVO cvo, RBoardVO vo,Model model,  
 			@AuthenticationPrincipal CustomUserDetail customUser) 
 					throws IllegalStateException, IOException{
 		System.out.println("cvo"+cvo);

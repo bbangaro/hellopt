@@ -230,9 +230,10 @@ function del(revIdx) {
 function modify(revIdx) {
 		location.href = '${pageContext.request.contextPath}/review/updateform?revIdx='+revIdx;	
 		
-}	
-//게시글 수정삭제 끝
+}
+</script>
 
+<script>
 //댓글작성하기
 function createCmt(revIdx) {
       console.log(revIdx)
@@ -252,32 +253,68 @@ function createCmt(revIdx) {
          }
       });
    }
-   //댓글 수정하기
-   function modReple(revCmtIdx){
-	   result[i].revCmtComment
-   }
-   //댓글 삭제하기
-   function delReple(revCmtIdx){
-	   alert("댓삭" + revCmtIdx);
+
+  	//댓글 수정하기
+  	//수정폼
+   function modReple(revCmtIdx,revCmtRegdate,revCmtComment,revIdx, userName){
+  		console.log()
+	   var 	output = "<table id='revCmtIdx"+revCmtIdx+"'>";
+			output +="<tr>";
+			output +="<td>" + userName;
+			output +="(" + revCmtRegdate+")<br>";
+			output +="<textarea name='editContent' id='editContent' rows='2' cols='80'>";
+			output += revCmtComment
+			output +="</textarea><br>";
+			output +="<input type='button' value='수정' onclick= updateReple(" +revCmtIdx +","+revIdx+ ",'" + userName + "')>";
+			output +="<input type='button' value='취소' onclick='listReply2("+revIdx+")'>";
+			output +="</td></tr>";
+			output +="</table>";
+			$(".listReply" + revIdx).html(output);
+			/* $('#revCmtIdx'+revCmtIdx).replaceWith(output);
+			$('#revCmtIdx'+revCmtIdx+'#editContent').focus(); */
+   } 
+  	//수정누르면 업뎃되는기능
+    function updateReple(revCmtIdx,revIdx,userName){
 	   
+	   var repleEditContent =$('#editContent').val();
+	   console.log(repleEditContent);
+	   var paramData = JSON.stringify({"content":repleEditContent, "revCmtIdx":revCmtIdx});
+	   console.log(paramData);
+		$.ajax({
+			url:"reply/update?revCmtIdx="+revCmtIdx,
+			type:"post",
+			data: paramData,
+			success:function(result){
+				console.log(result);
+				listReply2(revIdx);
+				alert("댓수정완료");
+			}
+			,error: function(error){
+				console.log("에러:" + error);
+			}
+		})
+   
+   } 
+
+   //댓글 삭제하기
+   function delReple(revCmtIdx, revIdx){
+	   alert("댓삭" + revCmtIdx, revIdx);
+			console.log("revIdx:" +revIdx);	   
 	   $.ajax({
 		   
 		   url:"reply/delete?revCmtIdx="+revCmtIdx,
 			type:"post",
 			data:{"revIdx" : $("${rBoard.revIdx }").val(),"revCmtIdx" : revCmtIdx},
 			success:function(result){
-				alert(result);
-				console.log("revIdx:"+revIdx)
 				listReply2(revIdx);
-				alert("삭제되었습니다.");
+				alert("삭제되었습니다."+revCmtIdx);
 			}
 	   		,error:function(error){
 	   			console.log("에러:" + error);
 	   		}
 	   })
    }
-   
-	/* 
+	
 	//Controller방식
 	//**댓글 목록1
 	function listReply(revIdx){
@@ -290,12 +327,10 @@ function createCmt(revIdx) {
 				
 			}
 		})
-	} */
+	}
 
-	//RestController방식(Json)
-	//**댓글 목록2(json)
-	
 	function listReply2(revIdx){
+		 
 		$.ajax({
 			type: "get",
 			//contentType: "application/json", ==>생략가능 (RestController가 )
@@ -309,8 +344,8 @@ function createCmt(revIdx) {
 						output +="<td>" + result[i].userName;
 						output +="(" + result[i].revCmtRegdate+")<br>";
 						output += result[i].revCmtComment +"<br>";
-						output +="<input type='button' value='댓글 수정' onclick='modReple(" + result[i].revCmtIdx + ")'>";
-						output +="<input type='button' value='댓글 삭제' onclick='delReple(" + result[i].revCmtIdx + ")'>";
+						output +="<input type='button' value='댓글 수정' onclick= modReple(" + result[i].revCmtIdx +","+ result[i].revCmtRegdate + ",'"+result[i].revCmtComment+"',"+ result[i].revIdx + ",'" + result[i].userName +"')>";
+						output +="<input type='button' value='댓글 삭제' onclick= delReple(" + result[i].revCmtIdx + ","+ result[i].revIdx + ")>";
 						output +="</td></tr>";
 					}
 					output +="</table>";
@@ -324,7 +359,7 @@ function createCmt(revIdx) {
 				
 				$(".listReply" + revIdx).html(output);
 			}
-		});
+		}); 
 	}
 	
 	
