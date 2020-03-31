@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.service.liveclass.LiveClassService;
 import com.bit.hellopt.service.meeting.MeetingService;
+import com.bit.hellopt.service.user.EmailService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.live.LiveClass;
@@ -43,6 +44,9 @@ public class UserController {
 	LiveClassService liveClassService;
 	@Autowired
 	MeetingService meetingService;
+	
+	@Autowired
+	EmailService emailService;
 	
 	public UserController(UserService service) {
 		this.userService = service;
@@ -155,5 +159,16 @@ public class UserController {
 		List<MeetingVO> meetingList = meetingService.getParticipantMeetingList(principal.getName());
 		model.addAttribute("meetingList", meetingList);
 		return "user/myMeeting";
+	}
+	
+	@GetMapping("/findpw")
+	public String renderFindPwForm() {
+		return "user/findPwForm";
+	}
+	
+	@PostMapping("/findpw")
+	public String sendEmail() {
+		emailService.sendSimpleMessage("to", "spring mail sender test", "Hello, world!");
+		return "redirect:/";
 	}
 }
