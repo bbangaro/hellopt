@@ -24,7 +24,6 @@ public class S3Utils {
 	public S3Utils() {
 		this.s3 = AmazonS3ClientBuilder.standard()
 				.withRegion(Regions.AP_NORTHEAST_2)
-				.withCredentials(new ProfileCredentialsProvider())
 				.build();
 	}
 	

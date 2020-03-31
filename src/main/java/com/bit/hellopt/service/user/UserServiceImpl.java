@@ -2,17 +2,18 @@ package com.bit.hellopt.service.user;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.data.UserMapper;
 import com.bit.hellopt.data.UserXMLMapper;
 import com.bit.hellopt.vo.user.User;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
@@ -22,9 +23,23 @@ public class UserServiceImpl implements UserService{
 		
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	UserProfileService profileService;
 
 	@Override
-	public void regiserUser(User user) {
+	public void registerUser(User user) {
+		user.setUserRole("ROLE_USER");
+		user.setUserPw(passwordEncoder.encode(user.getUserPw()));
+		mapper.insertUser(user);
+	}
+	
+	@Override
+	public void registerUser(User user, MultipartFile file) {
+		String profileFile = profileService.insertProfile(user, file);
+		
+		user.setUserProfile(profileFile);
+		
 		user.setUserRole("ROLE_USER");
 		user.setUserPw(passwordEncoder.encode(user.getUserPw()));
 		mapper.insertUser(user);
@@ -49,6 +64,14 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void updateUser(User user) {
 		mapper.updateUser(user);
+	}
+	
+	
+
+	@Override
+	public void updateNormalUser(User user) {
+		user.setUserPw(passwordEncoder.encode(user.getUserPw()));
+		xmlMapper.updateUser(user);
 	}
 
 	@Override

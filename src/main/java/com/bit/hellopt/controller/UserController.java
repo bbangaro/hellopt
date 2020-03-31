@@ -1,5 +1,9 @@
 package com.bit.hellopt.controller;
 
+import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -10,14 +14,20 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit.hellopt.service.liveclass.LiveClassService;
+import com.bit.hellopt.service.meeting.MeetingService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
+import com.bit.hellopt.vo.live.LiveClass;
+import com.bit.hellopt.vo.meeting.MeetingVO;
+import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 import com.google.gson.Gson;
 
@@ -29,6 +39,10 @@ public class UserController {
 	UserService userService;
 	@Autowired
 	UserProfileService profileService;
+	@Autowired
+	LiveClassService liveClassService;
+	@Autowired
+	MeetingService meetingService;
 	
 	public UserController(UserService service) {
 		this.userService = service;
@@ -49,15 +63,14 @@ public class UserController {
 			logger.info("signupform: user validation error");
 			return "signupForm";
 		} else {
-			String profileFile = null;
 			
 			if(!file.isEmpty()) {
-				profileFile = profileService.insertProfile(user, file);
+				userService.registerUser(user, file);
 				
+			} else {
+				userService.registerUser(user);
 			}
-			user.setUserProfile(profileFile);
 			logger.info("register user Birth:", user.getUserBirth());
-			userService.regiserUser(user);
 			
 		}
 		return "redirect:/";
@@ -71,7 +84,7 @@ public class UserController {
 	@GetMapping("/user/registrationform")
 	public String getRegistrationform(Model model) {
 		model.addAttribute("user", new User());
-		return "signupForm";
+		return "user/signupForm";
 	}
 	
 	/**
@@ -87,4 +100,60 @@ public class UserController {
 		return userService.isUser(user.getUserId());
 	}
 	
+	@GetMapping("/auth/{userId}")
+	public String getUserDetails(@PathVariable("userId") String userId, Model model, Principal principal) {
+		if(!userId.equals(principal.getName())) {
+			return "redirect:/";
+		} else {
+			User user = userService.findUserById(userId);
+			user.setUserPw("");
+
+			ProfileVO profile = profileService.selectProfile(userId);
+			
+			if (profile != null) {
+				user.setUserProfile(profile.getStoredFileName());
+			}
+
+			model.addAttribute("user", user);
+			return "user/userDetails";
+		}
+	}
+	
+	@PostMapping("/auth/update")
+	public String adminUserDetailUpdate(@ModelAttribute User user,  @RequestParam MultipartFile file) {
+			userService.updateNormalUser(user);
+			if(!file.isEmpty()) {
+				profileService.updateProfile(user, file);
+			}
+			logger.info("일반 유저 정보 업데이트");
+		return "redirect:/";
+	}
+	
+	@GetMapping("/auth/delete")
+	public String adminDeleteUser(@RequestParam String userId) {
+		User user = new User();
+		user.setUserId(userId);
+		//userService.deleteUser(user);
+		userService.disableUser(user);
+		return "redirect:/";
+	}
+	
+	@GetMapping("/auth/myclass")
+	public String getMyClasses(Model model, Principal principal) {
+		List<LiveClass> classes = liveClassService.getClassesByUserId(principal.getName());
+		List<LiveClass> viewerClasses = liveClassService.getViewerClassesByUserId(principal.getName());
+		model.addAttribute("liveClassList", classes);
+		model.addAttribute("viewerClassList", viewerClasses);
+		return "user/myClass";
+	}
+	
+	@GetMapping("/auth/mymeeting")
+	public String getMyMeeting(Model model, Principal principal) {
+		//List<MeetingVO> meetingList = meetingService.getMeetingList(principal.getName());
+		//meetingList.addAll(meetingService.getParticipantMeetingList(principal.getName()));
+		
+		List<MeetingVO> meetingList = meetingService.getParticipantMeetingList(principal.getName());
+		model.addAttribute("meetingList", meetingList);
+		return "user/myMeeting";
+	}
 }

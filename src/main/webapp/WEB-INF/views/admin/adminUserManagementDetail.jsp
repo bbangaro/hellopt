@@ -8,7 +8,6 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main/login.css">
-<meta charset="UTF-8">
 <title>유저 관리</title>
 </head>
 <body>
@@ -102,11 +101,12 @@
 					</c:choose>
 			</select></li>
 			<li><form:label path="userHeight">키</form:label> <form:input
-					path="userHeight" placeholder="170" /></li>
+					path="userHeight" type="number" min="0" max="300" /></li>
 			<li><form:label path="userWeight">몸무게</form:label> <form:input
-					path="userWeight" placeholder="80" /></li>
-			<li><label for="file">프로필 사진</label> <input type="file"
-				name="file" /></li>
+					path="userWeight" type="number" min="0" max="300" /></li>
+			<li><label for="file">프로필 사진</label> 
+				<input type="file" name="file" onchange="loadPreviewImg(this, 'preview-profile')" />
+				<img src="" id="preview-profile" alt=""></li>
 
 		</ul>
 		<input type="submit" value="회원 정보 수정">
@@ -133,5 +133,6 @@
 			}
 		}
 	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/user/idcheck.js"></script>
 </body>
 </html>

@@ -39,6 +39,9 @@ public interface MeetingMapper {
 	public void deleteMeeting(int meetingIdx);
 	public void resCancle(Map<String, Object> hm);
 	
+	public List<MeetingVO> getMeetingList(String userId);
+	public List<MeetingVO> getParticipantMeetingList(String userId);
+	
 }
 
 /*

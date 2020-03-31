@@ -11,7 +11,7 @@ const config = { // eslint-disable-line no-unused-vars
   }]
 };
 
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect("//hellopt-signal.herokuapp.com", {secure: true});
 const video = document.querySelector('video'); // eslint-disable-line no-unused-vars
 
 window.onunload = window.onbeforeunload = function() {

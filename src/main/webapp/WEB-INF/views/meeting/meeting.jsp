@@ -37,7 +37,7 @@
 			<c:forEach var="meeting" items="${meetingList}"> <!--  반복문의 시작 -->
 			 <c:if test="${meeting.progressSt == '진행중'}">
 			  <div class="service-details">
-			    <img src="${pageContext.request.contextPath}/downloadFile?mSysImg=${meeting.meetingFileVO[0].mSysImg }">
+			    <img src="${pageContext.request.contextPath}/s3/meeting/${meeting.meetingFileVO[0].mSysImg }">
 			    <div class="service-hover-text">
 			      <h3 class="msub">${meeting.mSubject}</h3>
 			      <h4 class="mlocal">${meeting.fkLocalNo }</h4>

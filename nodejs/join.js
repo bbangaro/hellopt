@@ -4,10 +4,10 @@ var cors = require('cors');
 var app = require('express')();
 
 //SSL 인증 옵션
-var options = {
+/*var options = {
 	key: fs.readFileSync('./private.key'),
 	cert: fs.readFileSync('./private.crt')
-};
+};*/
 
 //서버(https) 
 /*var server = require('https').createServer(options, app);*/
@@ -43,11 +43,12 @@ io.on('connection', function(socket) {
 	//roomId로 룸에 join
 	socket.on('joinroom', function(data) {
 		console.log("roomId: " + data.roomId);
+		console.log("userId: " + data.userId);
 		socket.join(data.roomId);
 		console.log(data.userId + " " + data.roomId + " 룸에 조인!!")
 		  
 		// 개별 룸에 이벤트 보내기
-		io.sockets.in(data.roomId).emit('connect');
+		io.sockets.in(data.roomId).emit('connect', data.userId);
 		console.log("개별 커넥트 이벤트 보내기 성공");
 	});
 	

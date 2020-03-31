@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.bit.hellopt.vo.live.LiveClass;
 
@@ -20,10 +21,21 @@ public interface LiveClassMapper {
 	@Select("SELECT * FROM CLASS_TB ORDER BY CLASS_IDX DESC")
 	public List<LiveClass> getLiveClass();
 	
+	@Select("SELECT * FROM CLASS_TB WHERE FK_USER_ID = #{userId} ORDER BY CLASS_IDX")
+	public List<LiveClass> getLiveClassesByUserId(String userId);
+	
+	@Select("select c.* from class_tb c, class_member_tb m where c.class_idx = m.fk_class_idx and m.fk_user_id = #{userId}")
+	public List<LiveClass> getViewerClassesByUserId(String userId);
+	
 	@Select("SELECT * FROM CLASS_TB WHERE CLASS_IDX = #{classIdx}")
 	public LiveClass getClassDetail(int classIdx);
 	
 	@Delete("DELETE FROM CLASS_TB WHERE CLASS_IDX = #{classIdx}")
 	public void deleteClass(int classIdx);
 	
+	@Update("UPDATE CLASS_TB SET CLASS_TYPE = #{classType}, CLASS_NAME = #{className}, "
+			+ " TOTAL_MEMBERS = #{totalMembers}, PRICE = #{price}, CLASS_LENGTH = #{classLength}, "
+			+ " CLASS_START_DATE = #{classStartDate}, CLASS_TIME = #{classTime}, CLASS_DAY = #{classDay} "
+			+ " WHERE CLASS_IDX = #{classIdx} ")
+	public void updateClass(LiveClass liveClass);
 }

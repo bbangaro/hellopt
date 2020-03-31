@@ -7,11 +7,9 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main/admin.css">
-<meta charset="UTF-8">
 <title>유저 관리</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/admin/meetingAdmin">모임신청 게시글 현황</a>
 <h2>회원 정보 관리</h2>
 	<table>
 		<thead>
@@ -49,6 +47,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="${ pageContext.request.contextPath }/admin/user?search=${param.search}&searchValue=${param.searchValue}&page=${param.page - (param.page % 10)}">이전</a>
 	<c:forEach begin="${param.page - (param.page % 10) + 1}" end="${lastPage}" varStatus="idx">
 		<c:choose>
 			<c:when test="${not empty param.search }">
@@ -58,8 +57,8 @@
 				<a href="${ pageContext.request.contextPath }/admin/user?page=${idx.count}">${idx.count}</a>
 			</c:otherwise>
 		</c:choose>
-		
 	</c:forEach>
+	<a href="${ pageContext.request.contextPath }/admin/user?search=${param.search}&searchValue=${param.searchValue}&page=${lastPage + 1}">다음</a>
 	<form action="${pageContext.request.contextPath}/admin/user" method="get">
 	<select name="search">
 		<option value="id">아이디</option>

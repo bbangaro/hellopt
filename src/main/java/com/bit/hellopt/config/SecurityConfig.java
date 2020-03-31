@@ -35,6 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/resources/**").permitAll()
 				.antMatchers("/file/**").permitAll()
 				.antMatchers("/meetingWrite").authenticated() //로그인이 되어있어야..
+				.antMatchers("/classlist").authenticated()
+				.antMatchers("/meal").authenticated() //로그인시에만 사용 가능
+				.antMatchers("/auth/**").authenticated()
 				
 		    //.anyRequest().authenticated()
 			.and()
@@ -46,8 +49,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout()
 				.logoutSuccessUrl("/main")
-				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
+				//.invalidateHttpSession(true)
 				.permitAll()
+			.and()
+				.rememberMe().key("uniqueAndSecret").rememberMeParameter("remember-me")
 			.and()
 				.csrf().disable();
 	}
