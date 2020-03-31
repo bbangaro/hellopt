@@ -1,50 +1,53 @@
 # HelloPT
-## To Do
-1. 로그인
-2. 운동 정보 게시판
-3. 모임 모집 게시판
-4. 후기 게시판(별점 기능)
-5. 트레이너 소개 게시판
-6. 트레이너 선발 신청 게시판
-7. 채팅 문의(챗봇)
-8. FAQ 게시판
-9. 마이페이지
-    - 회원 정보수 정
-    - 수업 관리
-    - 즐겨찾기
-10. 온라인 트레이닝 수업(스트리밍)
-11. 부위별 운동 가이드
-12. 트레이닝 수업 영상(썸네일)
-13. 트레이닝 수업 출석 기능
-14. 식단 짜주는 기능
----
-## Roles
-- Sun
-    1. 모임 모집 게시판
-    2. 트레이닝 수업 출석 기능
-- Eung
-    1. 운동 정보 게시판
-    2. 트레이너 소개 게시판
-    3. 트레이너 선발 신청 게시판
-    4. FAQ 게시판
-    5. 식단 짜주는 기능
-- Yeon
-    1. 채팅 문의(챗봇)
-    2. 트레이닝 수업 영상(썸네일)
-- Seong
-    1. 로그인
-    2. 부위별 운동 가이드
-- Hyeon
-    1. 온라인 트레이닝 수업(스트리밍)
-- Soo
-    1. 후기 게시판(별점 기능)
-    2. 마이페이지
----
+헬스장에서도 집에서도 운동하자!
 
-## Utils
-Git Fork : <https://git-fork.com/>
+[HelloPT](https://hellopt.info/hellopt)를 방문해보세요.
 
----
-## Best Practice
-- JSP
-    1. <https://www.oracle.com/technical-resources/articles/javase/servlets-jsp.html>
+## 기능
+1. 로그인 / 회원가입
+2. 트레이너 게시판
+3. 운동 정보 게시판
+4. 식단 계산기
+5. PT 스트리밍
+6. 리뷰 게시판
+7. FQA 게시판
+8. 오프라인 모임 게시판
+9. 일일 운동 체크
+
+### 로그인 / 회원가입
+로그인  : <https://hellopt.info/hellopt/login>  
+회원가입 : <https://hellopt.info/hellopt/user/registrationform>
+
+### 트레이너 게시판
+트레이너 정보 : <https://hellopt.info/hellopt/trainer>  
+트레이너 신청 : <https://hellopt.info/hellopt/audition>  
+트레이너 정보 수정 : <https://hellopt.info/hellopt/admin/traineradmin>  
+(관리자 계정 로그인 필요)
+
+### 운동 정보 게시판
+운동 정보 : <https://hellopt.info/hellopt/exerciseinfolist>
+
+### 식단 계산기
+식단 계산기(로그인 필요) : <https://hellopt.info/hellopt/meal>
+
+### 리뷰 게시판
+리뷰 게시판 : <https://hellopt.info/hellopt/review>
+
+### PT 스트리밍
+일대다 스트리밍(로그인 필요) : <https://hellopt.info/hellopt/classlist>  
+다대다 스트리밍 : <https://hellopt.info/hellopt/multi>
+
+### 리뷰 게시판
+리뷰 게시판 : <https://hellopt.info/hellopt/review>
+
+### FQA 게시판
+FAQ 게시판 : <https://hellopt.info/hellopt/faq1>
+
+### 오프라인 모임 게시판
+오프라인 모임 게시판 : <https://hellopt.info/hellopt/meeting>
+
+### 일일 운동 체크
+일일 운동 체크 : <https://hellopt.info/hellopt/calender>
+
+
+
