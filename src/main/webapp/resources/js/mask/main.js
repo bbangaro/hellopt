@@ -1,4 +1,5 @@
 // 연도 동적으로 추가하는 함수
+//onload는 window.onload로 받아야 함
 window.onload = function appendYear() {
     var date = new Date();
     var year = date.getFullYear();
