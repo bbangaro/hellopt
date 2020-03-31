@@ -63,15 +63,14 @@ public class UserController {
 			logger.info("signupform: user validation error");
 			return "signupForm";
 		} else {
-			String profileFile = null;
 			
 			if(!file.isEmpty()) {
-				profileFile = profileService.insertProfile(user, file);
+				userService.registerUser(user, file);
 				
+			} else {
+				userService.registerUser(user);
 			}
-			user.setUserProfile(profileFile);
 			logger.info("register user Birth:", user.getUserBirth());
-			userService.regiserUser(user);
 			
 		}
 		return "redirect:/";
