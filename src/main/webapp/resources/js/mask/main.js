@@ -1,9 +1,10 @@
 // 연도 동적으로 추가하는 함수
-function appendYear() {
+window.onload = function appendYear() {
     var date = new Date();
     var year = date.getFullYear();
-
+    console.log("!!!!!!!!"+year);
     for (var i = year; i >= 1900; i--) {
+    	console.log("for문안쪽");
         $('#check-year').append('<option value="' + i + '">' + i + '년생</option>');
     }
 }

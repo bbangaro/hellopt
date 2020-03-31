@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mask/mask2.css">
     <script src="${pageContext.request.contextPath}/resources/js/mask/main.js"></script>
 </head>
-<body onload="appendYear()">
+<body onload="appendYear();">
 <div class="all_view">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cf06b214747f08132bda9cf27da5cb9&libraries=services,clusterer,drawing"></script>
     <div class="check-bg" id="check-bg"></div>
