@@ -60,7 +60,8 @@ function requestAPI(response) {
         positions.push({
             title: response['stores'][i]['name'],
             latlng: new kakao.maps.LatLng(response['stores'][i]['lat'], response['stores'][i]['lng']),
-            content: response['stores'][i]['name'] + '<br>재고 : ' + stock[response['stores'][i]['remain_stat']] +
+            content: response['stores'][i]['name'] + 
+            	'<br>재고 : ' + stock[response['stores'][i]['remain_stat']] +
                 '<br>입고 시간 : ' + response['stores'][i]['stock_at'] +
                 '<br>업데이트 시간 : ' + response['stores'][i]['created_at'],
             imginfo: stockImg[response['stores'][i]['remain_stat']],

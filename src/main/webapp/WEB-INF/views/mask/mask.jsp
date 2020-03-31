@@ -5,18 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공공마스크 실시간 판매 현황</title>
-    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mask/mask1.css"> --%>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mask/mask1.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mask/mask2.css">
     <script src="${pageContext.request.contextPath}/resources/js/mask/main.js"></script>
 </head>
-<body onload="appendYear();">
+<body onload="appendYear()">
 <div class="all_view">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cf06b214747f08132bda9cf27da5cb9&libraries=services,clusterer,drawing"></script>
     <div class="check-bg" id="check-bg"></div>
     <div class="check" id="check">
         <div class="check-header">
-            <div class="header-msg">출생연도를 통해<br>마스크 구매 가능 여부를 확인하세요!</div>
+            <div class="header-msg">마스크 구매 가능 여부를 확인하세요!</div>
             <button class="cancel-btn" onclick="cancel()">
                 <img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ5MiA0OTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ5MiA0OTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgY2xhc3M9ImhvdmVyZWQtcGF0aHMiPjxnPjxnPgoJPGc+CgkJPHBhdGggZD0iTTMwMC4xODgsMjQ2TDQ4NC4xNCw2Mi4wNGM1LjA2LTUuMDY0LDcuODUyLTExLjgyLDcuODYtMTkuMDI0YzAtNy4yMDgtMi43OTItMTMuOTcyLTcuODYtMTkuMDI4TDQ2OC4wMiw3Ljg3MiAgICBjLTUuMDY4LTUuMDc2LTExLjgyNC03Ljg1Ni0xOS4wMzYtNy44NTZjLTcuMiwwLTEzLjk1NiwyLjc4LTE5LjAyNCw3Ljg1NkwyNDYuMDA4LDE5MS44Mkw2Mi4wNDgsNy44NzIgICAgYy01LjA2LTUuMDc2LTExLjgyLTcuODU2LTE5LjAyOC03Ljg1NmMtNy4yLDAtMTMuOTYsMi43OC0xOS4wMiw3Ljg1Nkw3Ljg3MiwyMy45ODhjLTEwLjQ5NiwxMC40OTYtMTAuNDk2LDI3LjU2OCwwLDM4LjA1MiAgICBMMTkxLjgyOCwyNDZMNy44NzIsNDI5Ljk1MmMtNS4wNjQsNS4wNzItNy44NTIsMTEuODI4LTcuODUyLDE5LjAzMmMwLDcuMjA0LDIuNzg4LDEzLjk2LDcuODUyLDE5LjAyOGwxNi4xMjQsMTYuMTE2ICAgIGM1LjA2LDUuMDcyLDExLjgyNCw3Ljg1NiwxOS4wMiw3Ljg1NmM3LjIwOCwwLDEzLjk2OC0yLjc4NCwxOS4wMjgtNy44NTZsMTgzLjk2LTE4My45NTJsMTgzLjk1MiwxODMuOTUyICAgIGM1LjA2OCw1LjA3MiwxMS44MjQsNy44NTYsMTkuMDI0LDcuODU2aDAuMDA4YzcuMjA0LDAsMTMuOTYtMi43ODQsMTkuMDI4LTcuODU2bDE2LjEyLTE2LjExNiAgICBjNS4wNi01LjA2NCw3Ljg1Mi0xMS44MjQsNy44NTItMTkuMDI4YzAtNy4yMDQtMi43OTItMTMuOTYtNy44NTItMTkuMDI4TDMwMC4xODgsMjQ2eiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgY2xhc3M9ImhvdmVyZWQtcGF0aCBhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6I0ZGRkZGRiIgZGF0YS1vbGRfY29sb3I9IiMwMDAwMDAiPjwvcGF0aD4KCTwvZz4KPC9nPjwvZz4gPC9zdmc+'>
             </button>
