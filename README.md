@@ -50,7 +50,7 @@
 [일일 운동 체크](https://hellopt.info/hellopt/calender)
 
 ## ERD
-[HelloPT ERD](/etc/Relational_1.png)
+![HelloPT ERD](/etc/Relational_1.png)
 
 
 
