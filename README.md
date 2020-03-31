@@ -86,11 +86,15 @@ httpRequest.open('POST', "/hellopt/user/idcheck")
 [일대다 스트리밍(로그인 필요)](https://hellopt.info/hellopt/classlist)  
 [다대다 스트리밍](https://hellopt.info/hellopt/multi)
 
-스트리밍은 WebRTC를 이용하여 구현했습니다.
+스트리밍은 [WebRTC](https://webrtc.org/)를 이용하여 구현했습니다.
 WebRTC는 peer-to-peer protocol을 기반으로 동작하기 때문에
 peer의 정보를 연결해주는 signaling server가 필요합니다. 
 
 signaling server는 Node.js와 express, socket.io를 사용하여 구현했습니다.
+
+[signaling server GitHub](https://github.com/DanHoBakMaCha/public_hellopt_live/blob/master/signal.js)
+
+signaling server : <https://hellopt-signal.herokuapp.com/>
 
 Socket.io를 사용하여 같은 room에 입장한 유저들끼리만 RTCPeerConnection을 주고받아서 P2P 연결을 할 수 있도록 구현했습니다.
 
@@ -98,7 +102,7 @@ WebRTC를 이용해서 스트리밍을 구현한 후 실제로 배포를 해보�
 
 getUserMedia() 함수를 사용하기 위해서는 https가 필요하다는 것을 알게되었고 AWS Route 53에서 도메인을 구입한 후 AWS Certificate Manager를 이용하여 Amazon에서 발급해주는 인증서를 통해 https 통신이 가능하도록 하여 문제를 해결했습니다.
 
-다대다 스트리밍 경우 P2P 연결로 인해 각각의 유저가 다른 모든 유저와 RTCPeerConnection을 가지고 있어야합니다. 다른 유저와 통신 요청을 할 때 이미 연결된 유저에게는 통신 요청을 하지 않도록 socket.id마다 RTCPeerConnction을 할당하여 이미 연결된 유저와 또 RTCPeerConnection을 생성하지 않도록 했습니다.
+다대다 스트리밍 경우 P2P 연결로 인해 각각의 유저가 다른 모든 유저와 RTCPeerConnection을 가지고 있어야합니다. 다른 유저와 통신 요청을 할 때 이미 연결된 유저에게는 통신 요청을 하지 않도록 socket.id마다 RTCPeerConnction을 할당하여 불필요하게 이미 연결된 유저와 또 RTCPeerConnection을 생성하지 않도록 했습니다.
 
 ### 리뷰 게시판
 [리뷰 게시판](https://hellopt.info/hellopt/review)
