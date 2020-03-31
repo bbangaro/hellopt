@@ -42,7 +42,6 @@ public class MeetingController {
 	@Autowired
 	MeetingService service;
 	
-	
 	@Autowired
 	S3Utils s3Utils;
 	
@@ -195,8 +194,10 @@ public class MeetingController {
 	public String meetingWriteOk(Principal principal, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
 		
 		service.insertMeeting(meetingVO);
+		
 		meetingVO.setMeetingIdx(meetingVO.getMeetingIdx());
 		meetingFileVO.setFkMeetingIdx(meetingVO.getMeetingIdx());
+		
 		service.insertMaxMeeting(meetingVO);
 		service.insertConsentYn(meetingVO);
 		

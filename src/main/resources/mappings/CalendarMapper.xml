@@ -4,11 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bit.hellopt.data.CalendarMapper">
 	
+	<!-- json으로 받은 월에 해당하는 calender 데이터 -->
 	<select id="getMonth2" parameterType="String" resultType="com.bit.hellopt.vo.calendar.CalendarVO">
-		SELECT CALENDER_IDX, FK_USER_ID, SUBSTR(TO_DATE(YYMMDD, 'YYYYMMDD'), 7, 2) YYMMDD, CONTENT, FILE_PATH, C_ORI_VIDEO, C_SYS_VIDEO
+		SELECT CALENDAR_IDX, FK_USER_ID, SUBSTR(TO_DATE(YYMMDD, 'YYYYMMDD'), 7, 2) YYMMDD, CONTENT, FILE_PATH, C_ORI_VIDEO, C_SYS_VIDEO
 		  FROM CALENDER_TB
 		 WHERE (SUBSTR(TO_DATE(YYMMDD, 'YYYYMMDD'), 4, 2)) = #{month}
 	</select>
+	
+	<!-- calender 원본 데이터 -->
+	<select id="getCalendar" parameterType="com.bit.hellopt.vo.calendar.CalendarVO" resultType="com.bit.hellopt.vo.calendar.CalendarVO">
+		SELECT *
+		  FROM CALENDER_TB
+	</select>
+	
+	<select id="getOneCalendar" parameterType="int" resultType="com.bit.hellopt.vo.calendar.CalendarVO">
+		SELECT *
+		  FROM CALENDER_TB
+		 WHERE CALENDAR_IDX = #{calendarIdx}
+	</select>
+	
+	<insert id="insertCalVideo" parameterType="HashMap">
+		INSERT INTO CALENDER_TB (CALENDAR_IDX, FK_USER_ID, YYMMDD, CONTENT, FILE_PATH, C_ORI_VIDEO, C_SYS_VIDEO) 
+		VALUES ( CALENDER_TB_SEQ.NEXTVAL , #{fkUserId}  , TO_CHAR(SYSDATE, 'yyyymmdd'), #{content}, #{filePath}, #{cOriVideo}, #{cSysVideo} )
+	</insert>
+	
 	
 	<!-- 
 	<select id="getMeetingVO" parameterType="MeetingVO" resultType="MeetingVO">

@@ -391,10 +391,14 @@ window.onload = function() {
       var div = createElement("div", "event");
       var square = createElement("div", "event-category " + ev.color);
       var span = createElement("span", "", "");
+      var calIdx = $('.idx');
+      var calidx2 = "${calendar.calendarIdx)" ;
       span.innerHTML = '<a class="eventA" href="#">'+ev.content+'</a>';
-
+      ///hellopt/meetingRead
       span.addEventListener("click", function() {
         alert(ptMonth + "월 " + ptDay + "일 글로 이동~@");
+        window.open("/hellopt/calendarOne?calendarIdx="+ev.calendarIdx+"", 'onealender', 'width=620 ,height=680, left=900, top=230 ')
+        opener.document.location.href='/hellopt/calender';
       });
 
       div.appendChild(square);

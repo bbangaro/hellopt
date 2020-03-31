@@ -14,11 +14,11 @@
 
 	<div class="hello_body">
 
-		<form action="calenderWriteOk" method="post"  enctype="multipart/form-data">
+		<form action="calUpdateOk" method="post">
 			<div class="calHd">
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="user" />
-				<div class="calName">작성자</div> <input type="text" class="calUser" id="" name="fkUserId" value="${user.username}" readonly>
+				<div class="calName">작성자</div> <input type="text" class="calUser" id="" name="" value="${user.username}" readonly>
 				</sec:authorize>
 			</div>
 
@@ -28,10 +28,10 @@
 
 			<div class="calHd3">
 				<div class="calName">내용</div>
-				<textarea cols="72" rows="10" class="calContent" id="mComment" name="content"	placeholder="내용을 입력해주세요. "></textarea>
+				<textarea cols="72" rows="10" class="calContent" id="mComment" name="mComment"	placeholder="내용을 입력해주세요. "></textarea>
 			</div>
 
-			<input type="submit" class="calInsert" id="calInsert" value="등록">
+			<input type="button" class="calInsert "value="등록">
 		</form>
 
 

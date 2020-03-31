@@ -5,7 +5,7 @@
 
 <head>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/calender/calenderWrite.css">
+	href="${pageContext.request.contextPath}/resources/css/calender/calenderOne.css">
 
 </head>
 
@@ -14,24 +14,25 @@
 
 	<div class="hello_body">
 
-		<form action="calenderWriteOk" method="post"  enctype="multipart/form-data">
+		<form action="calWriteOk" method="post">
 			<div class="calHd">
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="user" />
-				<div class="calName">작성자</div> <input type="text" class="calUser" id="" name="fkUserId" value="${user.username}" readonly>
+				<div class="calName">작성자</div> <input type="text" class="calUser" id="" name="" value="${user.username}" readonly>
 				</sec:authorize>
 			</div>
 
 			<div class="calHd2">
-				<div class="calName">동영상</div> <input type="file" class="fileUpload" id="uploadFile" name="uploadFile">
+				<div class="calName">동영상</div>
+				<video class="fileUpload" id="video" controls height="280"  src="${pageContext.request.contextPath}/s3/calendar/${oneCalendar.cSysVideo}" width="500" controls="controls"></video>
 			</div>
 
 			<div class="calHd3">
 				<div class="calName">내용</div>
-				<textarea cols="72" rows="10" class="calContent" id="mComment" name="content"	placeholder="내용을 입력해주세요. "></textarea>
+				<textarea cols="71" rows="10" class="calContent" id="mComment" name="mComment"	readonly>${oneCalendar.content}</textarea>
 			</div>
 
-			<input type="submit" class="calInsert" id="calInsert" value="등록">
+			<input type="button" id="calInsert" class="calInsert "value="닫기">
 		</form>
 
 
