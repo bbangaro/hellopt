@@ -72,13 +72,23 @@ public class RBoardCommentController {
 	}
 	//댓글 수정
 	@RequestMapping("/reply/update")
-	public void repleupdate(@RequestParam(value="revCmtIdx", required = false)int revCmtIdx,
-			@RequestBody RCommentVO cvo, RBoardVO vo,Model model,  
-			@AuthenticationPrincipal CustomUserDetail customUser) 
+	@ResponseBody
+	public Map<String, Object>updateReply(@RequestBody RCommentVO paramData)
 					throws IllegalStateException, IOException{
 		System.out.println("댓수정");
-		System.out.println("cvo: "+ cvo);
-		rCmtService.cmtUpdate(cvo);
+		System.out.println("cvo: "+ paramData);
+		Map<String, Object> result = new HashMap<>();
+		System.out.println("result: "+ result);
+		
+		try {
+			rCmtService.cmtUpdate(paramData);
+			result.put("status","OK");
+		} catch(Exception e) {
+			e.printStackTrace();
+			result.put("status", "False");
+		}
+		
+		return result;
 		
 	}
 	//댓글 삭제

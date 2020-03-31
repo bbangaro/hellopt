@@ -261,8 +261,8 @@ function createCmt(revIdx) {
 	   var 	output = "<table id='revCmtIdx"+revCmtIdx+"'>";
 			output +="<tr>";
 			output +="<td>" + userName;
-			output +="(" + revCmtRegdate+")<br>";
-			output +="<textarea name='editContent' id='editContent' rows='2' cols='80'>";
+			output +="(" + changeDate(revCmtRegdate) +")<br>";
+			output +="<textarea name='revCmtComment' id='revCmtComment' rows='2' cols='80'>";
 			output += revCmtComment
 			output +="</textarea><br>";
 			output +="<input type='button' value='수정' onclick= updateReple(" +revCmtIdx +","+revIdx+ ",'" + userName + "')>";
@@ -270,18 +270,20 @@ function createCmt(revIdx) {
 			output +="</td></tr>";
 			output +="</table>";
 			$(".listReply" + revIdx).html(output);
+			$('#revCmtIdx'+revCmtIdx+'#revCmtComment').focus();
 			/* $('#revCmtIdx'+revCmtIdx).replaceWith(output);
 			$('#revCmtIdx'+revCmtIdx+'#editContent').focus(); */
    } 
   	//수정누르면 업뎃되는기능
     function updateReple(revCmtIdx,revIdx,userName){
 	   
-	   var repleEditContent =$('#editContent').val();
+	   var repleEditContent =$('#revCmtComment').val();
 	   console.log(repleEditContent);
-	   var paramData = JSON.stringify({"content":repleEditContent, "revCmtIdx":revCmtIdx});
+	   var paramData = JSON.stringify({"revCmtComment":repleEditContent, "revCmtIdx":revCmtIdx});
 	   console.log(paramData);
 		$.ajax({
 			url:"reply/update?revCmtIdx="+revCmtIdx,
+			contentType: 'application/json',
 			type:"post",
 			data: paramData,
 			success:function(result){
@@ -314,20 +316,6 @@ function createCmt(revIdx) {
 	   		}
 	   })
    }
-	
-	//Controller방식
-	//**댓글 목록1
-	function listReply(revIdx){
-		$.ajax({
-			type:"get",
-			url: "review/replylist?revIdx="+revIdx,
-			sucess: function(result){
-				alert("리스트 리플라이 댓글1")
-				$(".listReply" + revIdx).html(result);
-				
-			}
-		})
-	}
 
 	function listReply2(revIdx){
 		 
@@ -342,7 +330,7 @@ function createCmt(revIdx) {
 					for(var i in result){
 						output +="<tr>";
 						output +="<td>" + result[i].userName;
-						output +="(" + result[i].revCmtRegdate+")<br>";
+						output +="(" +changeDate(result[i].revCmtRegdate)+")<br>";
 						output += result[i].revCmtComment +"<br>";
 						output +="<input type='button' value='댓글 수정' onclick= modReple(" + result[i].revCmtIdx +","+ result[i].revCmtRegdate + ",'"+result[i].revCmtComment+"',"+ result[i].revIdx + ",'" + result[i].userName +"')>";
 						output +="<input type='button' value='댓글 삭제' onclick= delReple(" + result[i].revCmtIdx + ","+ result[i].revIdx + ")>";
@@ -361,8 +349,19 @@ function createCmt(revIdx) {
 			}
 		}); 
 	}
-	
-	
+</script>
+<script type="text/javascript">
+	function changeDate(String){
+		date = new Date(parseInt(String));
+		year = date.getFullYear();
+		month = date.getMonth();
+		day = date.getDate();
+		hour = date.getHours();
+		minute = date.getMinutes();
+		second = date.getSeconds();
+		strDate = year+"-"+month+"-"+day+" "+hour+":"+minute+ ":"+second;
+		return strDate;
+	}
 </script>
 </body>
 </html>
