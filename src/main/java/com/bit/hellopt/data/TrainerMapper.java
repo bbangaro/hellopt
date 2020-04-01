@@ -12,9 +12,9 @@ import com.bit.hellopt.vo.trainer.TrainerVO;
 public interface TrainerMapper {
 	
 	@Insert("INSERT INTO INTRODUCE_TRAINER_TB (TRAINER_IDX, "
-			+ "TRAINER_NAME, TRAINER_NICKNAME, TRAINER_CAREER, TRAINER_TALK, TRAINER_MEDIA, FK_USER_ID) "
+			+ "TRAINER_NAME, TRAINER_NICKNAME, TRAINER_CAREER, TRAINER_TALK, TRAINER_MEDIA, FK_USER_ID, TRAINER_PROFILE) "
 			+ "VALUES (INTRODUCE_TRAINER_TB_SEQ.NEXTVAL, "
-			+ "#{trainerName}, #{trainerNickname}, #{trainerCareer}, #{trainerTalk}, #{trainerMedia}, 'test2')")
+			+ "#{trainerName}, #{trainerNickname}, #{trainerCareer}, #{trainerTalk}, #{trainerMedia}, 'test2', #{trainerProfile})")
 	public void insertTrainer(com.bit.hellopt.vo.trainer.TrainerVO trainerVO);
 
 	@Select("SELECT * FROM INTRODUCE_TRAINER_TB")
