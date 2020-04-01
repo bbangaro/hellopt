@@ -28,6 +28,7 @@ public class ChatbotServiceImpl implements ChatbotService {
 	public void insertChatbotVO(ChatbotVO vo) {
 		mapper.insertChatbotVO(vo);
 	}
+
 	
 	
 	

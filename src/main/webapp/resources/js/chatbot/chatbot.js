@@ -10,12 +10,12 @@ function _Ajax(url,type,param,successBack){
 	var jsonData = "";
 
  	 $.ajax({
-         url:"chatbot",
+         url: "chatbot",
          type:"post",
          async: false ,
          data: param,
          dataType:'json',
-         timeout: 15000,
+         timeout: 5000,
          contentType : 'application/json; charset=UTF-8',
          error: function (request, status, error) {      
         	 alert("처리중오류발생");

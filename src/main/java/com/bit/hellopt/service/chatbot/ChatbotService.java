@@ -9,10 +9,11 @@ public interface ChatbotService {
 
 	public List<Map<String, Object>> ChatList(Map<String, Object> map);
 
-	public static ChatbotVO getChatbot(ChatbotVO vo) {
-		// TODO Auto-generated method stub
+	void insertChatbotVO(ChatbotVO vo);
+
+	public static List<ChatbotVO> getChatbotList() {
+		
 		return null;
 	}
-	void insertChatbotVO(ChatbotVO vo);
 	
 }

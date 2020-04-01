@@ -5,7 +5,7 @@
 <mapper namespace="com.bit.hellopt.data.ChatbotMapper">
 
 	<!-- 채팅글 상세보기 -->
-	<select id="chatList" parameterType="Map" resultType="Map">
+	<select id="chatList" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
 			SELECT CHATTING_IDX,
 				   CHATTING_CONTENT,
