@@ -70,7 +70,6 @@
 					<li><a href="#" class="artist_open">Training</a>
 						<ul class="artist_depth02">
 							<li><a href="${pageContext.request.contextPath}/classlist">streaming</a></li>
-							<li><a href="${pageContext.request.contextPath}/multi">다대다 streaming</a></li>
 							<li><a href="${pageContext.request.contextPath}/meeting">Offline
 									Meeting</a></li>
 							<li><a href="${pageContext.request.contextPath}/calender">event</a></li>
