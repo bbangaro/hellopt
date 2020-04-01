@@ -1,5 +1,6 @@
 package com.bit.hellopt.service.calender;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bit.hellopt.vo.calendar.CalendarVO;
@@ -8,6 +9,14 @@ public interface CalendarService {
 	
 	//월 뽑기
 	List<CalendarVO> getMonth2(String month);
+	
+	//게시글 전체 조회
+	List<CalendarVO> getCalendar();
+	
+	//유저 게시들 조회
+	public CalendarVO getOneCalendar(int calendarIdx);
+	
+	public void insertCalVideo(HashMap<String, Object> hm);
 	/*
 	// 미팅 테이블 전체 조회
 	List<MeetingVO> getMeetingVO();

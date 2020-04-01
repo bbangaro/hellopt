@@ -1,5 +1,18 @@
 @charset "utf-8";
 
+/* 방송 시작/방송 보기 버튼 */
+ .broadcast {
+    padding: 0 7px;
+    margin: 0 auto;
+    margin-top: 8px;
+    background: #b4000f;
+    font-family: 'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
+    font-size: 10px;
+    -webkit-appearance: none;
+    border-radius: 0;
+    color: white;
+ }
+
 /* 목록 버튼 */
 #bo_gall a.btn_b01 {}
 #bo_gall a.btn_b01:focus, #bo_gall a.btn_b01:hover {}

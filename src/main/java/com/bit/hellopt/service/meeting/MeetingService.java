@@ -23,7 +23,7 @@ public interface MeetingService {
 		
 	// 게시글 상세 조회
 	MeetingVO getMeetingOne(int meetingIdx);
-	MeetingVO progressCnt(String progressSt);
+	int progressCnt();
 	MeetingVO resCount(int meetingIdx);
 	MeetingVO resUser(Map<String, Object> hm);
 	List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);

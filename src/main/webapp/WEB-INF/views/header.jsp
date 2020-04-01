@@ -18,7 +18,7 @@
         </h1>
 				<img class="alarmImg" src="${pageContext.request.contextPath}/resources/images/meeting/notification.png"/><input type="text" id="alarm" class="alarm" value=""/>
 		<div class="userName">
-				<input type="hidden" id="progressCnt" value="${progressCnt.progressSt }"/> 
+				<input type="hidden" id="progressCnt" value="${progressCnt }"/> 
 				<sec:authorize access="isAuthenticated()">
 				<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
 				<sec:authentication property="principal" var="user" />
@@ -26,7 +26,7 @@
 				<span>${user.username}님 안녕하세요</span>
 			</sec:authorize>
 		</div>
-	 <button type="button" role="togglebutton" class="nav_button"><span></span></button>
+		<button type="button" role="togglebutton" class="nav_button"><span></span></button>
 	</header>
 	<!-- 상단 끝 } -->
 	<script>
@@ -94,6 +94,8 @@
 								<li><a
 									href="${pageContext.request.contextPath}/admin/trainerinsert">Register
 										Trainer</a></li>
+								<li><a href="${pageContext.request.contextPath}/manageclass">Manage
+										Class</a></li>		
 							</ul></li>
 
 					</sec:authorize>

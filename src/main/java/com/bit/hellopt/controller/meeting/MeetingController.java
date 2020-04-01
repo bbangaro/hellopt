@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -193,8 +194,10 @@ public class MeetingController {
 	public String meetingWriteOk(Principal principal, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
 		
 		service.insertMeeting(meetingVO);
+		
 		meetingVO.setMeetingIdx(meetingVO.getMeetingIdx());
 		meetingFileVO.setFkMeetingIdx(meetingVO.getMeetingIdx());
+		
 		service.insertMaxMeeting(meetingVO);
 		service.insertConsentYn(meetingVO);
 		
@@ -233,6 +236,7 @@ public class MeetingController {
 				System.out.println("insertFiles 성공");
 			}
 		}
+		
 		
 		
 		return "redirect:/meeting";

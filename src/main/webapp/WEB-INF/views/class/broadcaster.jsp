@@ -17,6 +17,8 @@
 	<!-- 캠, 마이크 있는지 확인하는 라이브러리 -->
 	<script src="${pageContext.request.contextPath }/resources/js/live/DetectRTC.js"></script>
 	
+	<script src="${pageContext.request.contextPath }/resources/js/socket.io.js"></script>
+	
 	<style>
 	    video {
 	        vertical-align: top;
@@ -47,9 +49,7 @@
 			        </div>
 			        <!-- //video-info -->
 			        <div id="chat-container">
-						<
-						<iframe id="chat" src="https://hellopt-signal.herokuapp.com/" scrolling="no"></iframe>
-						 
+						<iframe id="chat" src="//hellopt-signal.herokuapp.com/" scrolling="no"></iframe>
 			        </div>
 			        <!-- //chat-container -->
 			    </section>
@@ -80,7 +80,7 @@
 			});
 		}
     </script>
-	<script src="${pageContext.request.contextPath }/resources/js/socket.io.js"></script>
+	
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script>
 		var userId = $("#userid").val();

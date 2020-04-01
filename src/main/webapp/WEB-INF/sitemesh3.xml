@@ -4,6 +4,7 @@
  <mapping path="/*" decorator="/WEB-INF/views/decorator.jsp" />
 
 <!-- 사이트메쉬 예외 처리 -->
- <!-- <mapping path="*/경로" exclude="true"/> -->
+<mapping path="/calenderWrite" exclude="true"/>
+<mapping path="/calendarOne" exclude="true"/>
 
 </sitemesh>

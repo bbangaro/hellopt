@@ -202,5 +202,13 @@ function getAddress() {
 		//languge : "kr"  
 	});
 	
-	
+		
+	function webSocket(){
+		
+		
+		ws.send("이힣");
+			
+		alert("소켓소환!");
+	}
+
 	

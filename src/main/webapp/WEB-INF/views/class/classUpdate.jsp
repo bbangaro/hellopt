@@ -38,8 +38,8 @@
 			          </li>
 			          <li>
 			            <label for="classType" class="sound_only">수업 유형</label>
-			            <select class="class-select" name="classType">
-			            	<option hidden>수업 유형</option>
+			            <select class="class-select" name="classType" required>
+			            	<option value="" hidden>수업 유형</option>
 			            	<option value="일대다">일대다</option>
 			            	<option value="다대다">다대다</option>
 			            </select>
@@ -62,8 +62,8 @@
 					  </li>
 			          <li>
 			            <label for="classDay" class="sound_only">수업 요일</label>
-			            <select class="class-select" name="classDay">
-			            	<option hidden>수업 요일</option>
+			            <select class="class-select" name="classDay" required>
+			            	<option value="" hidden>수업 요일</option>
 			            	<option value="월/수/금">월/수/금</option>
 			            	<option value="화/목">화/목</option>
 			            	<option value="토/일">토/일</option>
@@ -72,8 +72,8 @@
 			          </li>
 			          <li>
 			            <label for="classTime" class="sound_only">수업 시간</label>
-			            <select class="class-select" name="classTime">
-			            	<option hidden>수업 시간</option>
+			            <select class="class-select" name="classTime" required>
+			            	<option value="" hidden>수업 시간</option>
 			            	<option value="9:00 ~ 9:50">9:00 ~ 9:50</option>
 			            	<option value="10:00 ~ 10:50">10:00 ~ 10:50</option>
 			            	<option value="11:00 ~ 11:50">11:00 ~ 11:50</option>
@@ -94,8 +94,8 @@
 			          </li>
 			          <li>
 			            <label for="totalMembers" class="sound_only">수업 인원</label>
-			       		<select class="class-select" name="totalMembers">
-			       			<option hidden>수업 인원</option>
+			       		<select class="class-select" name="totalMembers" required>
+			       			<option value="" hidden>수업 인원</option>
 			       			<option value="4">4</option>
 			       			<option value="100">100</option>
 			       		</select>
@@ -110,7 +110,7 @@
 						<sec:authentication property="principal" var="user" />
 						<input type="hidden" value="${user.username }" name="fkUserId">
 					</sec:authorize>
-			        <input type="submit" name="" value="Send" class="send-btn">
+			        <input type="submit" name="" value="Send" class="send-btn" id="update-class">
 			    </form>
 			  </div><!-- //basic-table -->
 		 	</div><!-- //sub-content -->
@@ -118,7 +118,5 @@
 	</div><!-- //con-wr-->
 </div><!-- //wrapper -->
 <!-- 하단 끝 -->
-
-
 </body>
 </html>
