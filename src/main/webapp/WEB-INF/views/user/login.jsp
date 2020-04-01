@@ -24,6 +24,7 @@
 		</ul>
 		<input name="submit" type="submit" value="로그인" />
 		<input type="checkbox" class="remember-me" name="remember-me" /><span>Remember Me</span>
+		<a href="${pageContext.request.contextPath}/findpw" target="_blank">비밀번호찾기</a>
 	</form>
 </body>
 </html>
