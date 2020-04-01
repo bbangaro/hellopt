@@ -2,12 +2,16 @@ package com.bit.hellopt.service.user;
 
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit.hellopt.controller.UserController;
 import com.bit.hellopt.data.UserMapper;
 import com.bit.hellopt.data.UserXMLMapper;
 import com.bit.hellopt.vo.user.User;
@@ -15,6 +19,8 @@ import com.bit.hellopt.vo.user.User;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	UserMapper mapper;
@@ -26,6 +32,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserProfileService profileService;
+	
+	@Autowired
+	EmailService emailService;
 
 	@Override
 	public void registerUser(User user) {
@@ -96,5 +105,16 @@ public class UserServiceImpl implements UserService{
 	public void disableUser(User user) {
 		mapper.disableUSer(user);
 	}
+
+	@Override
+	public void generateTempPw(User user, String email) {
+		String tempPw = RandomStringUtils.random(12, true, true);
+		user.setUserPw(passwordEncoder.encode(tempPw));
+		xmlMapper.updateUser(user);
+		emailService.sendSimpleMessage(email, "HelloPT 임시 비밀번호 발급", "<p>임시비밀 번호 : " + tempPw + "</p><a href='https://hellopt.info/hellopt'>");
+		logger.info(user.getUserId(), " : 임시 비밀번호 발급 - " , tempPw);
+	}
+	
+	
 	
 }

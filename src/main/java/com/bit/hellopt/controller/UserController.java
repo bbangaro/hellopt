@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,6 @@ public class UserController {
 	LiveClassService liveClassService;
 	@Autowired
 	MeetingService meetingService;
-	
-	@Autowired
-	EmailService emailService;
 	
 	public UserController(UserService service) {
 		this.userService = service;
@@ -167,8 +165,10 @@ public class UserController {
 	}
 	
 	@PostMapping("/findpw")
-	public String sendEmail() {
-		emailService.sendSimpleMessage("to", "spring mail sender test", "Hello, world!");
+	public String sendEmail(@RequestParam String username) {
+		User user = userService.findUserById(username);
+		userService.generateTempPw(user, user.getUserEmail());
+		
 		return "redirect:/";
 	}
 }

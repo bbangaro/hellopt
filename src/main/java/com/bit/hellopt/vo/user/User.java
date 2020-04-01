@@ -1,5 +1,6 @@
 package com.bit.hellopt.vo.user;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -12,6 +13,7 @@ public class User {
 	@NotBlank
 	private String userName;
 	private String userRole;
+	@Email
 	private String userEmail;
 	private String userGender;
 	@Size(max = 100)

@@ -17,7 +17,7 @@
 	<result property="userHeight" column="user_height"/>
 	<result property="userWeight" column="user_weight"/>
 	<result property="userProfile" column="stored_file_name"/>
-	
+	<result property="userEmail" column="user_email"/>
 </resultMap>
 	<select id="selectUser" parameterType="String" resultMap="userMap">
 		SELECT *
@@ -61,7 +61,8 @@
 			<if test="userRoot != null"> user_root = #{userRoot},</if>
 			<if test="userHeight != null"> user_height = #{userHeight},</if>
 			<if test="userWeight != null"> user_weight = #{userWeight},</if>
-			<if test="userProfile"> user_profile = #{userProfile}</if>
+			<if test="userProfile != null"> user_profile = #{userProfile},</if>
+			<if test="userEmail != null"> user_email = #{userEmail}</if>
 		</set>
 		WHERE user_id = #{userId}
 	</update>
