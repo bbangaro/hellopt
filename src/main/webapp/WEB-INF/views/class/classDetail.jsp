@@ -118,6 +118,14 @@
 	</div>
 	<!-- } 하단 끝 -->
 <script>
+	var regClass = document.getElementById("reg-class");
+
+	if (${cnt} >= ${total}) {
+		alert("강의 신청 인원이 초과된 강의입니다!");
+		regClass.style.backgroundColor = "gray";
+		regClass.disabled = true;
+	} 
+	
 	$("#reg-class").click(function() {
 		var regOk = confirm("${classDetail.className} 강의를 신청하시겠습니까?");
 		if (regOk) {

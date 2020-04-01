@@ -42,5 +42,11 @@ public class ClassMemberServiceImpl implements ClassMemberService {
 	public void deleteClassMember(ClassMember info) {
 		classMemberMapper.deleteClassMember(info);
 	}
+	
+	//강의 신청자 수 조회
+	@Override
+	public int getMemberCnt(int classIdx) {
+		return classMemberMapper.getMemberCnt(classIdx);
+	}
 
 }

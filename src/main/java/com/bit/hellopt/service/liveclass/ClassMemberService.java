@@ -22,5 +22,8 @@ public interface ClassMemberService {
 	
 	//강의번호로 조회
 	ClassMember getOneClassInfo(int classMemberIdx);
+	
+	//강의 신청자 수 조회
+	int getMemberCnt(int classIdx);
 }
 	

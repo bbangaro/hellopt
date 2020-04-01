@@ -30,4 +30,7 @@ public interface ClassMemberMapper {
 	//강의 신청 취소
 	@Delete("DELETE FROM CLASS_MEMBER_TB WHERE FK_CLASS_IDX = #{fkClassIdx} AND FK_USER_ID = #{fkUserId}")
 	public void deleteClassMember(ClassMember info);
+	
+	@Select("SELECT COUNT(*) FROM CLASS_MEMBER_TB WHERE FK_CLASS_IDX = #{classIdx}")
+	public int getMemberCnt(int classIdx);
 }

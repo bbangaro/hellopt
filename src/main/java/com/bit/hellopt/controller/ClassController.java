@@ -72,6 +72,15 @@ public class ClassController {
 		int result = service2.getRegInfo(info);
 		model.addAttribute("result", result);
 		
+		int total = classDetail.getTotalMembers();
+		model.addAttribute("total", total);
+		
+		int cnt = service2.getMemberCnt(classIdx);
+		model.addAttribute("cnt", cnt);
+
+		System.out.println("cnt : " + cnt);
+		System.out.println("total : " + total);
+		
 		return "class/classDetail";
 	}
 	
