@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/board/faqservice.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cf06b214747f08132bda9cf27da5cb9"></script>
-<title>Insert title here</title>
+<title>상담실안내</title>
 </head>
 <body>
 
