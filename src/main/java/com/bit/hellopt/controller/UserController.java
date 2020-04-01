@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.service.liveclass.LiveClassService;
 import com.bit.hellopt.service.meeting.MeetingService;
+import com.bit.hellopt.service.user.EmailService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.live.LiveClass;
@@ -63,15 +65,14 @@ public class UserController {
 			logger.info("signupform: user validation error");
 			return "signupForm";
 		} else {
-			String profileFile = null;
 			
 			if(!file.isEmpty()) {
-				profileFile = profileService.insertProfile(user, file);
+				userService.registerUser(user, file);
 				
+			} else {
+				userService.registerUser(user);
 			}
-			user.setUserProfile(profileFile);
 			logger.info("register user Birth:", user.getUserBirth());
-			userService.regiserUser(user);
 			
 		}
 		return "redirect:/";
@@ -156,5 +157,18 @@ public class UserController {
 		List<MeetingVO> meetingList = meetingService.getParticipantMeetingList(principal.getName());
 		model.addAttribute("meetingList", meetingList);
 		return "user/myMeeting";
+	}
+	
+	@GetMapping("/findpw")
+	public String renderFindPwForm() {
+		return "user/findPwForm";
+	}
+	
+	@PostMapping("/findpw")
+	public String sendEmail(@RequestParam String username) {
+		User user = userService.findUserById(username);
+		userService.generateTempPw(user, user.getUserEmail());
+		
+		return "redirect:/";
 	}
 }
