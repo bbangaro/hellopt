@@ -14,7 +14,7 @@
 
 	<div class="hello_body">
 
-		<form action="calWriteOk" method="post">
+		<form action="" method="post">
 			<div class="calHd">
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="user" />
@@ -36,9 +36,6 @@
 		</form>
 
 
-
-		<script
-			src="${pageContext.request.contextPath}/resources/js/calender/calenderWrite.js"></script>
 
 	</div>
 

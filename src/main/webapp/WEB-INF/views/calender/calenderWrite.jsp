@@ -4,9 +4,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>	
 
 <head>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/calender/calenderWrite.css">
-
+	<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/resources/css/calender/calenderWrite.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 
@@ -14,7 +13,7 @@
 
 	<div class="hello_body">
 
-		<form action="calenderWriteOk" method="post"  enctype="multipart/form-data">
+		<form action="calenderWriteOk" method="post" id="formId" name="calInsert"  enctype="multipart/form-data">
 			<div class="calHd">
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="user" />
@@ -30,16 +29,14 @@
 				<div class="calName">내용</div>
 				<textarea cols="72" rows="10" class="calContent" id="mComment" name="content"	placeholder="내용을 입력해주세요. "></textarea>
 			</div>
-
-			<input type="submit" class="calInsert" id="calInsert" value="등록">
+			<input type="button" class="calInsert" value="등록" />
+			<!-- 
+			<input type="submit" class="calInsert" value="등록" >
+			 -->
 		</form>
-
-
-
-		<script
-			src="${pageContext.request.contextPath}/resources/js/calender/calenderWrite.js"></script>
 
 	</div>
 
-
+	<script	src="${pageContext.request.contextPath}/resources/js/calender/calenderWrite.js"></script>
+		
 </body>
