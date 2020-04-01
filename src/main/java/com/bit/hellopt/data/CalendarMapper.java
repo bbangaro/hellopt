@@ -15,6 +15,10 @@ public interface CalendarMapper {
 
 	public void insertCalVideo(HashMap<String, Object> hm);
 	
+	public void updateCalVideo(HashMap<String, Object> hm);
+	
+	public void deleteCalVideo(int calendarIdx);
+	
 	/*
 	public List<MeetingVO> getMeetingVO();
 	

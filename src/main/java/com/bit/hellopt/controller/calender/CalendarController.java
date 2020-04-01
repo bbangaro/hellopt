@@ -40,11 +40,22 @@ public class CalendarController {
 		return "calender/calender";
 	}
 	
+	@RequestMapping("/calendarOne")
+	public String calenderRead(Principal principal, Model model, CalendarVO calendarVO, int calendarIdx) {
+		
+		CalendarVO oneCalendar = service.getOneCalendar(calendarIdx);
+		
+		model.addAttribute("oneCalendar", oneCalendar);
+		return "calender/calendarOne";
+	}
+	
+	
 	@RequestMapping("/calenderWrite")
 	public String calenderWrite(Principal principal) {
 		
 		return "calender/calenderWrite";
 	}
+	
 	
 	@PostMapping("/calenderWriteOk")
 	public String calenderWriteOk(Principal principal, String fkUserId, String content, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
@@ -93,14 +104,63 @@ public class CalendarController {
 		return "calender/calender";
 	}
 	
-	@RequestMapping("/calendarOne")
-	public String calenderRead(Principal principal, Model model, CalendarVO calendarVO,int calendarIdx) {
+	
+	@RequestMapping("/calendarUpdate")
+	public String calenderUpdate(Principal principal,Model model, CalendarVO calendarVO,int calendarIdx) {
 		
 		CalendarVO oneCalendar = service.getOneCalendar(calendarIdx);
 		
 		
 		model.addAttribute("oneCalendar", oneCalendar);
-		return "calender/calendarOne";
+		return "calender/calenderUpdate";
+	}
+	
+	@PostMapping("/calendarUpdateOk")
+	public String calenderUpdateOk(Principal principal,Model model, int calendarIdx, String content, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
+		
+		
+		String realFolder = "C:/hellopt_file/";
+		
+		List<MultipartFile> mf = mhsq.getFiles("uploadFile");
+		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+		} else {
+			for (int i = 0; i < mf.size(); i++) {
+				//파일 중복명 처리
+				String genId = UUID.randomUUID().toString();
+				// 본래 파일명
+				String cOriVideo = mf.get(i).getOriginalFilename();
+				//저장되는 파일 이름
+				String cSysVideo = genId + "." + FilenameUtils.getExtension(cOriVideo);
+				System.out.println("확장자 뽑기 : "+ FilenameUtils.getExtension(cOriVideo));
+				//저잘 될 파일 경로
+				String filePath = realFolder + cSysVideo;
+				//파일 저장
+				//mf.get(i).transferTo(new File(filePath));
+				s3Utils.uploadMultipart("calendar/", cSysVideo, mf.get(i));
+				
+				System.out.println("캘린더 멀티파트 탐");
+				
+				HashMap<String, Object> hm = new HashMap<>();
+				hm.put("calendarIdx", calendarIdx);
+				hm.put("content", content);
+				hm.put("cOriVideo", cOriVideo);
+				hm.put("cSysVideo", cSysVideo);
+				hm.put("filePath", filePath);
+				service.updateCalVideo(hm);
+				
+				System.out.println("캘린더 수정 : " +   content + "/" + cOriVideo + "/" + cSysVideo + "/" + filePath);
+			}
+		}
+		
+		return "calender/calender";
+	}
+	
+	@RequestMapping("/calendarDelete")
+	public String calendarDelete(int calendarIdx) {
+		
+		service.deleteCalVideo(calendarIdx);
+		
+		return "calender/calender";
 	}
 	
 	@RequestMapping("/selectMonth")

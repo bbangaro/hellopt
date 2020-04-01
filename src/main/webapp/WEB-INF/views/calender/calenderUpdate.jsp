@@ -4,8 +4,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>	
 
 <head>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/calender/calenderWrite.css">
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/resources/css/calender/calendarUpdate.css">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	
 
 </head>
 
@@ -14,7 +16,7 @@
 
 	<div class="hello_body">
 
-		<form action="calUpdateOk" method="post">
+		<form action="calendarUpdateOk" method="post" id="formId" name="calInsert"  enctype="multipart/form-data" >
 			<div class="calHd">
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="user" />
@@ -23,23 +25,23 @@
 			</div>
 
 			<div class="calHd2">
-				<div class="calName">동영상</div> <input type="file" class="fileUpload" id="uploadFile" name="uploadFile">
+				<div class="calName">동영상</div>
+				<input type="file" class="fileUpload" id="uploadFile" name="uploadFile" >
+				
+				<video class="fileUpload" id="video" controls height="280"  src="${pageContext.request.contextPath}/s3/calendar/${oneCalendar.cSysVideo}" width="525" controls="controls"></video>
+				<p class="fileName">첨부파일 : ${oneCalendar.cSysVideo}</p>
 			</div>
 
 			<div class="calHd3">
 				<div class="calName">내용</div>
-				<textarea cols="72" rows="10" class="calContent" id="mComment" name="mComment"	placeholder="내용을 입력해주세요. "></textarea>
+				<textarea cols="71" rows="10" class="calContent" id="mComment" name="content" >${oneCalendar.content}</textarea>
 			</div>
-
-			<input type="button" class="calInsert "value="등록">
+			
+			<input type="hidden" name="calendarIdx" value="${oneCalendar.calendarIdx}">
+			<input type="button" id="calInsert" class="calInsert "value="수정">
 		</form>
-
-
-
-		<script
-			src="${pageContext.request.contextPath}/resources/js/calender/calenderWrite.js"></script>
 
 	</div>
 
-
+	<script	src="${pageContext.request.contextPath}/resources/js/calender/calenderUpdate.js"></script>
 </body>

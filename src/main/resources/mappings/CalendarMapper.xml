@@ -28,6 +28,15 @@
 		VALUES ( CALENDER_TB_SEQ.NEXTVAL , #{fkUserId}  , TO_CHAR(SYSDATE, 'yyyymmdd'), #{content}, #{filePath}, #{cOriVideo}, #{cSysVideo} )
 	</insert>
 	
+	<update id="updateCalVideo" parameterType="HashMap">
+		UPDATE CALENDER_TB SET
+        CONTENT = #{content}, C_ORI_VIDEO = #{cOriVideo}, C_SYS_VIDEO =  #{cSysVideo} , FILE_PATH = #{filePath}
+        WHERE  CALENDAR_IDX = #{calendarIdx}
+	</update>
+	
+	<delete id="deleteCalVideo" parameterType="int">
+		DELETE FROM CALENDER_TB WHERE CALENDAR_IDX = #{calendarIdx} 
+	</delete>
 	
 	<!-- 
 	<select id="getMeetingVO" parameterType="MeetingVO" resultType="MeetingVO">
