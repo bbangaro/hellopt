@@ -26,7 +26,6 @@
 				</div>
 
 				<div class="sub-content">
- 				<button onclick="location.href='multi'" style="color:white;">다대다 스트리밍 테스트</button>
 					<!--콘탠츠 내용 시작. 내용 불러오기-->
 					<div class="content-area clearfix">
 						<div class="sub-tit-wr">
@@ -46,48 +45,69 @@
 					<!-- 게시판 목록 시작 , 썸네일 이미지 -->
 					<div id="bo_gall" style="width: 100%">
 						<div class="thum-tit-wr">
-							<h3 class="thum-tit">All CLASS</h3>
+							<h3 class="thum-tit">All CLASSES
+							<select id="classType" style="float: right;">
+								<option value="전체">전체</option>
+								<option value="일대다">일대다</option>
+								<option value="다대다">다대다</option>
+							</select>
+							</h3>
 						</div>
 
 						<ul id="gall_ul" class="gall_row">
-							<c:forEach var="liveClass" items="${liveClassList }">
+							<c:forEach var="liveclass" items="${liveClassList }">
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
-										<a href="classdetail?classIdx=${liveClass.classIdx }">
+										<a href="classdetail?classIdx=${liveclass.classIdx }">
 											<div class="thum_hover">
-												<div style="color: #ef0000;">${liveClass.className }<br>${liveClass.classTime }<br>${liveClass.liveStatus }</div>
+												<div style="color: #ef0000;">${liveclass.className }<br>${liveclass.classTime }<br>${liveclass.liveStatus }</div>
 											</div>
-										</a>	
+										</a>
 										<div class="gall_con">
 											<div class="gall_img">
 												<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
 										</div>
-										<sec:authorize access="isAuthenticated()">
+										<c:choose>
+										<c:when test="${liveclass.classType eq '일대다' }">
+											<sec:authorize access="isAuthenticated()">
+												<sec:authentication property="principal" var="user" />
+												<c:if test="${liveclass.fkUserId eq user.username }">
+													<button class="broadcast" onclick="location.href='broadcaster?classIdx=${liveclass.classIdx }'" style="float:left;">START</button>
+												</c:if>	
+											</sec:authorize>
+											<c:forEach var="member" items="${classMember }">
+												<c:if test="${member.fkClassIdx eq liveclass.classIdx }">
+													<button class="broadcast" onclick="location.href='viewer?classIdx=${liveclass.classIdx }'" style="float:right;">VIEW</button>
+												</c:if>
+											</c:forEach>
+										</c:when>	
+										<c:otherwise>
+											<sec:authorize access="isAuthenticated()">
 											<sec:authentication property="principal" var="user" />
-											<c:if test="${liveClass.fkUserId == user.username }">
-												<button class="broadcast" onclick="location.href='broadcaster?classIdx=${liveClass.classIdx }'" style="float:left;">START</button>
-											</c:if>	
-										</sec:authorize>
-										<c:forEach var="member" items="${classMember }">
-											<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
-												<button class="broadcast" onclick="location.href='viewer?classIdx=${liveClass.classIdx }'" style="float:right;">VIEW</button>
+											<c:if test="${liveclass.fkUserId eq user.username }">
+												<button class="broadcast" onclick="location.href='multi?classIdx=${liveclass.classIdx }'" style="float:left;">MULTI</button>
 											</c:if>
-										</c:forEach>
+											<c:forEach var="member" items="${classMember }">
+												<c:if test="${member.fkClassIdx eq liveclass.classIdx}">
+													<button class="broadcast" onclick="location.href='multi?classIdx=${liveclass.classIdx }'" style="float:right;">MULTI</button>
+												</c:if>
+											</c:forEach>
+											</sec:authorize>	
+										</c:otherwise>
+										</c:choose>
 									</div>
 								</li>
 							</c:forEach>
 						</ul>
 						
-						<!-- 페이징
-						- form 태그 안에 있어야..??
-						 -->
-						<input type="hidden" name="page" value="1">
+						<!-- 더보기 클릭시 end값 계산 위해 사용 -->
+						<input type="hidden" id="p" name="curPage" value="1">
 						
 						<!--더보기 버튼-->
-						<button type="button" class="view-more" onclick="moreClass()">
+<!-- 						<button type="button" class="view-more">
 							view more <i class="xi-plus-thin"></i>
-						</button>
+						</button> -->
 					</div>
 				</div>
 				<!--con-inner-->
@@ -97,71 +117,66 @@
 		<!-- } 게시판 목록 끝 -->
 	</div>
 	<!-- } 하단 끝 -->
-<!-- 	<div id="listDisp">
-		<ul>
-			<li>데이터 가져와서 출력하기</li>
-		</ul>
-	</div> -->
-	<script>
-		function moreClass() {
-			$.ajax("moreClass", {
-				type : "get", 
+	
+<script>
+	$(document).ready(function(){
+		$("#classType").change(function() {
+			location.href="classlist?classType="+$("#classType").val();
+		});
+		$("select option[value='${classType}']").attr("selected", true);
+		console.log("${classType}");
+		
+	});
+
+	//더보기 ajax
+	var curPage = $("input[name=curPage]").val();
+	console.log("curPage : " + curPage);
+		$(".view-more").click(function() {
+			 curPage++;
+			 $.ajax({
+				type : "GET", 
+				url : "moreclass?end=" + curPage * 3,
 				dataType : "json",
 				success : function(data) {
-					alert("성공~~");
-					console.log(data);
-					//응답받은 데이터 형식 : [{}, {}, ... , {}]
-					var strData = JSON.stringify(data); //JSON -> String
-					console.log("-" + strData + "-");
-					
-					var jsData = JSON.parse(strData); //String -> JavaScript 객체화
-					console.log("-" + jsData + "-"); 
-					
-					
+					alert("성공");
 					var dispHtml = "";
-					
-					dispHtml = "<ul>";
-					$.each(data, function(index, obj) {
-						dispHtml += "<li>";
+					var classIdx = "";
+					var className = "";
+					var classTime = "";
+					var liveStatus = "";
+					 $.each(data, function(index, obj) {
+						classIdx = this["classIdx"];
+						className = this["className"];
+						classTime = this["classTime"];
+						liveStatus = this["liveStatus"];
 						
-						dispHtml += this["classIdx"] + ", ";					
-				
-						dispHtml += "</li>";
+						dispHtml += '<li class="gall_li col-gn-3">';
+						dispHtml += '<div class="gall_box">';
+						dispHtml += '<a href="classdetail?classIdx=' + classIdx + '">';
+						dispHtml += '<div class="thum_hover">';
+						dispHtml += '<div style="color: #ef0000;">' + className + '<br>' + classTime + '<br>' + liveStatus + '</div>'
+						dispHtml += '</div>';
+						dispHtml += '</a>';
+						dispHtml += '<div class="gall_con">';
+						dispHtml += '<div class="gall_img">';
+						dispHtml += '<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">'
+						dispHtml += '</div>';
+						dispHtml += '</div>'
+						dispHtml += '</div>'
+						dispHtml += '</div>'
+						dispHtml += '</li>';
 					});
-					dispHtml += "</ul>";
-					$("#listDisp").html(dispHtml);
 					
-					page();
+					$("#gall_ul").html(dispHtml);  
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					alert("실패 : \n"
 							+ "jqXHR.readyState : " + jqXHR.readyState + "\n" 
-							+ "textStatus : " + textStatus 
+							+ "textStatus : " + textStatus + "\n"
 							+ "errorThrown : " + errorThrown);
 				}
-			});
-		}
-		
-		function page() {
-			var page = eval($("input[name=page]").val() + " + 1");
-			$.ajax({
-				type : "GET",
-				url : "moreClass",
-				data : "page=" + page,
-				cache : false,
-				success : function(data) {
-					$("#listDisp").append(data);
-					$("input[name=page]").val(page);
-				},
-				error : function() {
-					alert("실패!");
-				}
-			})
-		}
-		
-	</script>
-	
-	
-	
+			}); 
+		});
+</script>
 </body>
 </html>

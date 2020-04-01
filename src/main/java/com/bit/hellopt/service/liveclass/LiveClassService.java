@@ -16,7 +16,7 @@ public interface LiveClassService {
 	
 	//4. 조회
 	//4-1. 전체 조회
-	List<LiveClass> getLiveClass();
+	List<LiveClass> getLiveClass(String classType);
 	
 	//4-2. 하나만 조회
 	LiveClass getClassDetail(int classIdx);

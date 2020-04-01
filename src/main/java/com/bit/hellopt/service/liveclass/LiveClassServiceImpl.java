@@ -20,8 +20,8 @@ public class LiveClassServiceImpl implements LiveClassService {
 	}
 
 	@Override
-	public List<LiveClass> getLiveClass() {
-		return liveClassMapper.getLiveClass();
+	public List<LiveClass> getLiveClass(String classType) {
+		return liveClassMapper.getLiveClass(classType);
 	}
 	
 	

@@ -18,8 +18,7 @@ public interface LiveClassMapper {
 			+ "#{classStartDate}, #{classTime}, #{classDay}, '방송예정', 0)")
 	public void insertClass(com.bit.hellopt.vo.live.LiveClass liveClass);
 	
-	@Select("SELECT * FROM CLASS_TB ORDER BY CLASS_IDX DESC")
-	public List<LiveClass> getLiveClass();
+	public List<LiveClass> getLiveClass(String classType);
 	
 	@Select("SELECT * FROM CLASS_TB WHERE FK_USER_ID = #{userId} ORDER BY CLASS_IDX")
 	public List<LiveClass> getLiveClassesByUserId(String userId);

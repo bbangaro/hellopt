@@ -1,25 +1,21 @@
 package com.bit.hellopt.controller;
 
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.hellopt.service.liveclass.ClassMemberService;
 import com.bit.hellopt.service.liveclass.LiveClassService;
 import com.bit.hellopt.service.liveclass.LiveService;
 import com.bit.hellopt.vo.live.ClassMember;
 import com.bit.hellopt.vo.live.LiveClass;
-import com.fasterxml.jackson.annotation.JsonView;
 
 @Controller
 public class ClassController {
@@ -36,8 +32,10 @@ public class ClassController {
 	}
 	
 	@RequestMapping("/classlist")
-	public String getLiveClass(Model model, ClassMember info, Principal principal) {
-		List<LiveClass> liveClassList = service.getLiveClass();
+	public String getLiveClass(Model model, ClassMember info, Principal principal, String classType) {
+		model.addAttribute("classType", classType);
+
+		List<LiveClass> liveClassList = service.getLiveClass(classType);
 		System.out.println("라이브 클래스 정보 가져오기 성공!!");
 		model.addAttribute("liveClassList", liveClassList);
 		
@@ -54,6 +52,10 @@ public class ClassController {
 		}
 		//ClassMember member = service2.getClassM(classMemberIdx);
 		//model.addAttribute("member", member);
+		
+		
+		System.out.println("classType: " + classType);
+		System.out.println("..." + liveClassList);
 		
 		return "class/classList";
 	}
@@ -151,11 +153,74 @@ public class ClassController {
 		return "class/viewer";
 	}
 	
+	@RequestMapping("/multi")
+	public String getClassName3(int classIdx, Model model) {
+		String className = service3.getClassName(classIdx);
+		System.out.println("강의 제목 가져오기 성공^^");
+		
+		model.addAttribute("classIdx", classIdx);
+		model.addAttribute("className", className);
+		return "class/multi";
+	}
+	
+	//페이징
+	@RequestMapping("/pagingclasslist")
+	public String getClassList(Model model, ClassMember info, Principal principal,
+			@RequestParam(name = "end", defaultValue = "3") int end) {
+		
+		System.out.println("end : " + end);
+		
+		List<LiveClass> classList = service3.PagingClassList(end);
+		
+		model.addAttribute("classList", classList);
+		
+		info.setFkUserId(principal.getName());
+		
+		List<ClassMember> classMember = service2.getMyClass(info);
+		System.out.println("클래스 멤버 정보 가져오기 성공!!");
+		System.out.println("classMember : " + classMember);
+		model.addAttribute("classMember", classMember);
+		
+		for(int i=0; i<classMember.size(); i++) {
+			int classMemberIdx = classMember.get(i).getClassMemberIdx();
+			System.out.println(classMemberIdx);
+		}
+		
+		return "class/classList";
+	}
+	
+	//ajax(더보기)
+	@RequestMapping("/moreclass1")
+	@ResponseBody
+	public List<ClassMember> getMoreClass(ClassMember info, Principal principal, 
+			@RequestParam(name = "end", defaultValue = "3") int end) {
+		System.out.println("------ " + service3.PagingClassList(end));
+		
+		info.setFkUserId(principal.getName());
+		
+		List<ClassMember> classMember = service2.getMyClass(info);
+		System.out.println("클래스 멤버 정보 가져오기 성공!!");
+		System.out.println("classMember : " + classMember);
+		
+		for(int i=0; i<classMember.size(); i++) {
+			int classMemberIdx = classMember.get(i).getClassMemberIdx();
+			System.out.println(classMemberIdx);
+		}
+		return classMember;
+	}
+	
+	@RequestMapping("/moreclass")
+	@ResponseBody
+	public List<LiveClass> getMore(@RequestParam(name = "end", defaultValue = "3") int end) {
+		System.out.println("------ " + service3.PagingClassList(end));
+		return service3.PagingClassList(end);
+	}
+	
 	//------------------ 관리자 페이지 -------------------
 	
 	@RequestMapping("/manageclass")
-	public String getLiveClass(Model model) {
-		List<LiveClass> liveClassList = service.getLiveClass();
+	public String getLiveClass(Model model, String classType) {
+		List<LiveClass> liveClassList = service.getLiveClass(classType);
 		System.out.println("라이브 클래스 정보 가져오기 성공!!");
 		model.addAttribute("liveClassList", liveClassList);
 		return "class/manageClass";
