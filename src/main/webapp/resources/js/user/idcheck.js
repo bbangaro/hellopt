@@ -7,7 +7,7 @@ function idCheck() {
     	alert("올바르지 않은 아이디 형식입니다.");
     	return;
     } else {
-    	httpRequest.open('POST', "/hellopt/user/idcheck")
+    	httpRequest.open('POST', "/user/idcheck")
         httpRequest.responseType = 'json';
         httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         httpRequest.send(JSON.stringify({"userId" : userId}));

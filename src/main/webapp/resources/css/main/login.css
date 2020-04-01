@@ -78,3 +78,7 @@ input[type='button'],  input[type='submit']{
 	width: auto;
 	margin-bottom: 10px;
 }
+.remember-me {
+	display: inline;
+	margin-right: 10px;
+}

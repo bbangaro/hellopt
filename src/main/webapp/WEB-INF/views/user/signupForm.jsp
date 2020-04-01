@@ -17,23 +17,28 @@
 		<ul>
 			<li>
 				<form:label path="userId">아이디</form:label> 
-				<form:input path="userId" placeholder="ID" />
+				<form:input path="userId" placeholder="ID" required="" minlength="5" maxlength="20" pattern="[0-9a-z-_]{5,20}"/>
 				<label id="id-info"></label>
-				<form:errors path="userId" cssClass="error"></form:errors>
+				<form:errors path="userId" cssClass="error" ></form:errors>
 				<input type="button" onclick="idCheck()" value="아이디 중복 확인">
 				<label id="idCheckResult"></label></li>
 			<li>
 				<form:label path="userPw">비밀번호</form:label> 
-				<form:input path="userPw" type="password" placeholder="PASSWORD"/> 
+				<form:input path="userPw" type="password" placeholder="PASSWORD" required="" minlength="5" maxlength="20" pattern="[\w!@#$%^&*()-_]{5,20}" /> 
 				<label id="pw-info"></label>
-				<input type="password" id="userPwConfirm" placeholder="PASSWORD CONFIRM" >
+				<input type="password" id="userPwConfirm" placeholder="PASSWORD CONFIRM" minlength="5" maxlength="20" pattern="[\w!@#$%^&*()-_]{5,20}" >
 				<label id="pw-cfm-info"></label>
 				<form:errors path="userPw" cssClass="error"></form:errors>
 			</li>
 			<li>
 				<form:label path="userName">이름</form:label> 
-				<form:input path="userName" placeholder="NAME"/> 
+				<form:input path="userName" placeholder="NAME" required="" /> 
 				<form:errors path="userName" cssClass="error"></form:errors>
+			</li>
+			<li>
+				<form:label path="userEmail">이메일</form:label>
+				<form:input path="userEmail" placeholder="Email" required="" type="email" />
+				<form:errors path="userEmail" cssClass="error"></form:errors>>
 			</li>
 			<li>
 				<form:label path="userGender">성별</form:label> <br />

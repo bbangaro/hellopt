@@ -26,6 +26,11 @@
 			<li><form:label path="userName">이름</form:label> <form:input
 					path="userName" placeholder="NAME" /> <form:errors path="userName"
 					cssClass="error"></form:errors></li>
+			<li>
+				<form:label path="userEmail">이메일</form:label>
+				<form:input path="userEmail" placeholder="Email" required="" type="email" />
+				<form:errors path="userEmail" cssClass="error"></form:errors>>
+			</li>
 			<li><form:label path="userGender">성별</form:label> <br /> <form:radiobutton
 					path="userGender" value="M" /><span>남자</span><br /> <form:radiobutton
 					path="userGender" value="F" /><span>여자</span><br /></li>
