@@ -137,8 +137,11 @@ public class ExerciseInformationController {
 		
 		List<ExerciseInformationVO> exerciseInformationList = exerciseInformationService.getExerciseInformationSearch(formMap);
 		
+
 		for(ExerciseInformationVO evo : exerciseInformationList) {
-			evo.setExercisePictures(evo.getExercisePictures().split(",")[0]);
+		
+				evo.setExercisePictures(evo.getExercisePictures().split(",")[0]);
+			
 		}
 		
 		System.out.println("exerciseInformationList: " + exerciseInformationList.toString());
@@ -183,7 +186,6 @@ public class ExerciseInformationController {
 		for(ExerciseInformationFileVO v : exerciseFileList) {
 			System.out.println(v);
 		}
-		model.addAttribute("파일 리스트목록 사용할이름", exerciseFileList);
 		*/
 		//model.addAttribute(exerciseInformation); //exerciseInformationVO
 		model.addAttribute("exerciseInformation", exerciseInformation); //데이터 저장
@@ -229,7 +231,7 @@ public class ExerciseInformationController {
 		vo.setExercisePictures("");
 		List<MultipartFile> fileList = mtfRequest.getFiles("exerciseFile");
 		if(fileList.size() == 1 && fileList.get(0).getOriginalFilename().equals("")) {
-			
+		
 		} else {//for (MultipartFile filePart : fileList)
 			for (int i = 0; i < fileList.size(); i++) {
 				//원본파일명
@@ -258,7 +260,7 @@ public class ExerciseInformationController {
 		}
 		if(vo.getExercisePictures().length()>0) {
 			vo.setExercisePictures(vo.getExercisePictures().substring(0, vo.getExercisePictures().length()-1 ) );
-		} exerciseInformationService.insertExerciseInformation(vo);
+		}
 		
 		return "redirect:/exerciseinfolist";
 	}

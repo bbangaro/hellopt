@@ -65,8 +65,13 @@
         	<br><br>
             
             <div class="exercise_dd">
-            	<c:forEach var="file" items="${pageContext.request.contextPath}/s3/exercise/${exerciseInformation.exercisePictures }">
-            		<img src="${file }" width="250" height="250">
+            	<c:forEach varStatus="i" var="file" items="${pageContext.request.contextPath}/s3/exercise/${exerciseInformation.exercisePictures }">
+            		<c:if test="${i.index == 0 }">
+            			<img src="${file }" width="250" height="250">
+            		</c:if>
+            		<c:if test="${i.index == 1 }">
+            			<img src="${pageContext.request.contextPath}/s3/exercise/${file }" width="250" height="250">
+            		</c:if>
             		<br><br>
             	</c:forEach>
             

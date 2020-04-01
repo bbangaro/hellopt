@@ -14,7 +14,9 @@
 		<typeAlias alias="exerciseInformationTip" type="com.bit.hellopt.vo.exercisetip.ExerciseInformationTipVO" />
 		<typeAlias alias="ExerciseMapper" type="com.bit.hellopt.data.exercise.ExerciseMapper" />
 		<typeAlias alias="ExerciseTipMapper" type="com.bit.hellopt.data.exercisetip.ExerciseTipMapper" />
-		
+		<typeAlias alias="ChatbotVO" type="com.bit.hellopt.vo.chatbot.ChatbotVO" />
+		<typeAlias alias="ChatbotMapper" type="com.bit.hellopt.data.ChatbotMapper" />
+				
 		<!-- 모임개설 관련 -->
 		<typeAlias alias="CategoryCodeVO" type="com.bit.hellopt.vo.meeting.CategoryCodeVO" />
 		<typeAlias alias="LocalVO" type="com.bit.hellopt.vo.meeting.LocalVO" />

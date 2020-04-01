@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/content.css">
 
 <title>운동정보등록</title>
 	
@@ -41,6 +41,7 @@
 							<option value="가슴">가슴</option>
 							<option value="등">등</option>
 							<option value="어깨">어깨</option>
+							
 							<option value="팔">팔</option>
 							<option value="복근">복근</option>
 							<option value="하체">하체</option>

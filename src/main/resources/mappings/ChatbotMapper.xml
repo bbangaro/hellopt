@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bit.hellopt.data.ChatbotMapper">
+
+	<!-- 채팅글 상세보기 -->
+	<select id="chatList" parameterType="Map" resultType="Map">
+		<![CDATA[
+			SELECT CHATTING_IDX,
+				   CHATTING_CONTENT,
+				   NXT_IDX,
+				   NXT_CONTENT
+			FROM CHT_TBL
+			WHERE 1=1
+		]]>
+		<if test="chatting_Idx != null and chatting_idx != ''">
+			AND CHATTING_IDX = #{chatting_Idx}
+		</if>	
+	</select>
+
+	<insert id="insertChatbotVO" parameterType="chatbotVO">
+		INSERT INTO CHT_TBL (CHATTING_IDX, CHATTING_CONTENT, NXT_IDX, NXT_CONTENT)
+		VALUES ((SELECT NVL(MAX(CHATTING_IDX), 0) + 1 FROM CHT_TBL),
+				#{chattingContent}, #{nxtIdx}, #{nxtContent})
+	</insert>
+
+
+</mapper>

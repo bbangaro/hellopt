@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+.chatMain{list-style: none;}
+.chatMain .cont{ line-height: 38px;}
+.chatMain .qt{margin: 15px; max-width: 400px;  background: #e0eeff;  border-radius: 7px; padding: 12px; }
+.chatMain .as{margin: 15px; max-width: 400px;  background: #ffdddd;  border-radius: 7px; padding: 12px; margin-left: 70%; }
