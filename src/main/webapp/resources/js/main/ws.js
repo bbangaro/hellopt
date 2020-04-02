@@ -32,7 +32,7 @@ $(function() {
 	
 	//웹소켓에 에러가 발생했을 때
 	ws.onerror = function (evt) {
-		$("#result").oppend(evt.data + "<br>");
+		$("#result").append(evt.data + "<br>");
 	};
 	
 });

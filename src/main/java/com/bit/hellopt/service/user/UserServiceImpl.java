@@ -114,6 +114,12 @@ public class UserServiceImpl implements UserService{
 		emailService.sendSimpleMessage(email, "HelloPT 임시 비밀번호 발급", "<p>임시비밀 번호 : " + tempPw + "</p><a href='https://hellopt.info/hellopt'>");
 		logger.info(user.getUserId(), " : 임시 비밀번호 발급 - " , tempPw);
 	}
+
+	@Override
+	public void updateRole(User user, String role) {
+		user.setUserRole(role);
+		xmlMapper.updateRole(user);
+	}
 	
 	
 	
