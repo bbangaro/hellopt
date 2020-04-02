@@ -18,7 +18,7 @@
         <%-- <input name="trainerIdx" type="hidden" value=${trainerinfo.trainerIdx }> --%>
         <div class="trainerbox">
             <div class="trainerImg">
-                <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
+                <img src="${pageContext.request.contextPath}/resources/images/trainer/${trainerinfo.trainerProfile }" alt="트레이너" class="trainerImg_img">
             </div>
             <div class="trainerinfo">
                 <h2 class="trainertitle">${trainerinfo.trainerName }<span class="nick">${trainerinfo.trainerNickname }</span></h2>

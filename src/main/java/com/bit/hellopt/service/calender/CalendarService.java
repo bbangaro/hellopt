@@ -15,8 +15,12 @@ public interface CalendarService {
 	
 	//유저 게시들 조회
 	public CalendarVO getOneCalendar(int calendarIdx);
-	
+	//달력게시판 영상 등록
 	public void insertCalVideo(HashMap<String, Object> hm);
+	//달력게시판 영상 업데이트
+	public void updateCalVideo(HashMap<String, Object> hm);
+	//달력게시판 영상 삭제
+	public void deleteCalVideo(int calendarIdx);
 	/*
 	// 미팅 테이블 전체 조회
 	List<MeetingVO> getMeetingVO();

@@ -211,3 +211,7 @@ body {
 	color: #dc3545;
 	text-decoration: none; 
 }
+/*트레이너정보 관리자 페이지 헤더 맞추기*/
+.trainerbox_banner_admin{
+	width: 100%;
+}

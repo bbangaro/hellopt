@@ -25,7 +25,6 @@
 	
 	border-bottom: 1px solid white;
 	padding-top: 5px;
-	padding-bottom: 10px;
 }
 
 .calHd3 {
@@ -55,13 +54,17 @@
 .fileUpload {
 	border: 0px;
     margin-bottom: 4px;
-    margin-left: 22px;
     margin-top: 10px;
     color: white;
     border-radius: 3rem;
     cursor: pointer;
-    display: inherit;
     font-family: 'Jeju Gothic', serif;
+}
+
+.fileName {
+	color: white;
+    margin-left: 15px;
+    font-size: 12px;
 }
 
 .calContent {

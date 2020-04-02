@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>칼로리총량</title>
+<title>나의 영양 섭취 정보</title>
 <script src="${pageContext.request.contextPath}/resources/js/meal/cafe_nutrition.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/meal/meal.css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

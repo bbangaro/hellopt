@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/faq.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/board/faqservice.js"></script>
-<title>Insert title here</title>
+<title>자주하는질문</title>
 </head>
 <body>
 

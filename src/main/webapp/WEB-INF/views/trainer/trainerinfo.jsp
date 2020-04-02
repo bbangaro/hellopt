@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,7 +14,7 @@
 
         <div class="trainerbox">
             <div class="trainerImg">
-                <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
+                <img src="${pageContext.request.contextPath}/resources/images/trainer/${trainerinfo.trainerProfile }" alt="트레이너" class="trainerImg_img">
             </div>
             <div class="trainerinfo">
                 <h2 class="trainertitle">${trainerinfo.trainerName }<span class="nick">${trainerinfo.trainerNickname }</span></h2>
@@ -37,9 +38,9 @@
                 <div class="trainer_reply">
                     <div class="trainer_reply_box">
                         <h3 class="reply_left">To. 트레이너 선생님께</h3>
-                        <button class="reply_right">감사 인사말 작성하기</button>
+                        <%-- <button class="reply_right" type="button" onclick="location.href='revInsertForm?trainerIdx=${trainer.trainerIdx }' ">감사 인사말 작성하기</button> --%>
                     </div>
-                    <div class="replybox">
+<!--                     <div class="replybox">
                         <div class="replybox_inner">
                             <div class="userbox">
                                 <p>문정아</p>
@@ -68,7 +69,28 @@
                                 <p class="reply_date">2020년02월22일</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://hellopt.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
                 </div>
             </div>
         </div>

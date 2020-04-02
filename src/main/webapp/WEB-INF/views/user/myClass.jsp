@@ -38,61 +38,83 @@
 							<c:forEach var="liveClass" items="${liveClassList }">
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
-										<div class="thum_hover">
-											<div>${liveClass.className }${liveClass.classTime }
-												${liveClass.liveStatus }</div>
-										</div>
+										<a
+											href="${pageContext.request.contextPath}/classdetail?classIdx=${liveClass.classIdx }">
+											<div class="thum_hover">
+												<div style="color: #ef0000;">${liveClass.className }<br>${liveClass.classTime }<br>${liveClass.liveStatus }</div>
+											</div>
+										</a>
 										<div class="gall_con">
 											<div class="gall_img">
 												<img
 													src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
 										</div>
-										<button
-											onclick="location.href='${pageContext.request.contextPath}/broadcaster?classIdx=${liveClass.classIdx }'"
-											style="color: white; float: left;">방송시작</button>
-
-										<a
-											href="${pageContext.request.contextPath}/classdetail?classIdx=${liveClass.classIdx }"
-											style="color: white; float: right;">${liveClass.className }</a>
-									</div> <c:forEach var="member" items="${classMember }">
-										<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
-											<button
-												onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${liveClass.classIdx }'"
-												style="color: white;">방송보기</button>
-										</c:if>
-									</c:forEach>
+										<c:choose>
+											<c:when test="${liveClass.classType eq '일대다' }">
+												<button class="broadcast"
+													onclick="location.href='${pageContext.request.contextPath}/broadcaster?classIdx=${liveClass.classIdx }'"
+													style="float: left;">START</button>
+												<c:forEach var="member" items="${classMember }">
+													<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
+														<button class="broadcast"
+															onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${liveClass.classIdx }'"
+															style="float: right;">VIEW</button>
+													</c:if>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<button class="broadcast"
+													onclick="location.href='${pageContext.request.contextPath}/multi?classIdx=${liveClass.classIdx }'"
+													style="float: left;">MULTI</button>
+												<c:forEach var="member" items="${classMember }">
+													<c:if test="${member.fkClassIdx eq liveClass.classIdx}">
+														<button class="broadcast"
+															onclick="location.href='${pageContext.request.contextPath}/multi?classIdx=${liveClass.classIdx }'"
+															style="float: right;">MULTI</button>
+													</c:if>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</div>
 								</li>
 							</c:forEach>
 							<c:forEach var="viwerLiveClass" items="${ viewerClassList }">
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
-										<div class="thum_hover">
-											<div>${viwerLiveClass.className }
-												${viwerLiveClass.classTime } ${viwerLiveClass.liveStatus }</div>
-										</div>
+										<a
+											href="${pageContext.request.contextPath}/classdetail?classIdx=${viwerLiveClass.classIdx }">
+											<div class="thum_hover">
+												<div style="color: #ef0000;">${viwerLiveClass.className }<br>${viwerLiveClass.classTime }<br>${viwerLiveClass.liveStatus }</div>
+											</div>
+										</a>
 										<div class="gall_con">
 											<div class="gall_img">
 												<img
 													src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
 										</div>
-										<a
-											href="${pageContext.request.contextPath}/classdetail?classIdx=${viwerLiveClass.classIdx }"
-											style="color: white; float: right;">${viwerLiveClass.className }</a>
+										<c:choose>
+											<c:when test="${liveclass.classType eq '일대다' }">
+												<button class="broadcast"
+													onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${viwerLiveClass.classIdx }'"
+													style="float: right;">VIEW</button>
+											</c:when>
+											<c:otherwise>
+												<button class="broadcast"
+													onclick="location.href='${pageContext.request.contextPath}/multi?classIdx=${viwerLiveClass.classIdx }'"
+													style="float: right;">MULTI</button>
+											</c:otherwise>
+										</c:choose>
 									</div>
-
-									<button
-										onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${viwerLiveClass.classIdx }'"
-										style="color: white;">방송보기</button>
-
 								</li>
 							</c:forEach>
 						</ul>
 
-						<!--더보기 버튼-->
-						<button type="button" class="view-more">
-							view more <i class="xi-plus-thin"></i>
+						<!--강의 개설 버튼-->
+						<button type="button" class="open-class"
+							onclick="location.href='${pageContext.request.contextPath}/openClassForm'">
+							New Class <i class="xi-plus-thin"></i>
 						</button>
 					</div>
 				</div>

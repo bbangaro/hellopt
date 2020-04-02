@@ -4,9 +4,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>	
 
 <head>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/calender/calenderOne.css">
-
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/calender/calenderOne.css">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 
@@ -20,6 +20,10 @@
 				<sec:authentication property="principal" var="user" />
 				<div class="calName">작성자</div> <input type="text" class="calUser" id="" name="" value="${user.username}" readonly>
 				</sec:authorize>
+			<div class="icon">
+				<a href="${pageContext.request.contextPath}/calendarUpdate?calendarIdx=${oneCalendar.calendarIdx }"><i class='fas fa-pen' style='font-size:18px;color:white'></i></a>
+				<a class="delCal" href="#" onclick="delCal()" ><i class='far fa-trash-alt edit' style='font-size:18px;color:white'></i></a>
+			</div>	
 			</div>
 
 			<div class="calHd2">
@@ -31,13 +35,13 @@
 				<div class="calName">내용</div>
 				<textarea cols="71" rows="10" class="calContent" id="mComment" name="mComment"	readonly>${oneCalendar.content}</textarea>
 			</div>
-
-			<input type="button" id="calInsert" class="calInsert "value="닫기">
+			<input type="hidden" id="delIdx" value="${oneCalendar.calendarIdx}">
+			<input type="button" id="calInsert" class="calInsert" value="닫기" onclick="window.close()">
 		</form>
 
 
 
 	</div>
 
-
+	<script	src="${pageContext.request.contextPath}/resources/js/calender/calenderOne.js"></script>
 </body>

@@ -39,6 +39,18 @@ public class CalendarServiceImpl implements CalendarService {
 		calendarMapper.insertCalVideo(hm);
 	}
 
+	@Override
+	public void updateCalVideo(HashMap<String, Object> hm) {
+		calendarMapper.updateCalVideo(hm);
+		
+	}
+
+	@Override
+	public void deleteCalVideo(int calendarIdx) {
+		calendarMapper.deleteCalVideo(calendarIdx);
+		
+	}
+
 
 	
 	
