@@ -13,4 +13,5 @@ public interface UserXMLMapper {
 	public int countUsers(@Param("search")String search, 
 			@Param("searchValue")String searchValue);
 	public void updateUser(User user);
+	public void updateRole(User user);
 }

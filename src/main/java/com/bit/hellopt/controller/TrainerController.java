@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit.hellopt.service.trainer.TrainerService;
+import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.trainer.TrainerVO;
 
 @Controller
@@ -17,6 +19,8 @@ public class TrainerController {
 	
 	@Autowired
 	TrainerService service;
+	@Autowired
+	UserService userService;
 
 	//트레이너 목록 가져오기
 	@RequestMapping("/trainer")
@@ -80,6 +84,17 @@ public class TrainerController {
 		service.updateTrainer(trainerVO);
 		System.out.println("트레이너정보수정성공!");
 		return "redirect:/admin/traineradmin";
+	}
+	
+	@GetMapping("admin/trainerCandidate") 
+	public String renderTrainderCandidate(Model model, 
+			@RequestParam(name = "page", defaultValue = "1") int page, 
+			@RequestParam(name = "search", defaultValue = "all")String search,
+			@RequestParam(name = "searchValue", defaultValue = "")String searchValue) {
+		model.addAttribute("userList", userService.pagingUserList(search, searchValue, page));
+		model.addAttribute("lastPage", userService.getLastPage(search, searchValue, page));
+		
+		return "trainer/userList";
 	}
 	
 /*	@GetMapping("/trainerupdatepage")
