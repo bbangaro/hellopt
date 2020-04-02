@@ -91,7 +91,7 @@
 										Trainer</a>
 								<li>
 								<li><a
-									href="${pageContext.request.contextPath}/admin/trainerinsert">Register
+									href="${pageContext.request.contextPath}/admin/trainerCandidate">Register
 										Trainer</a></li>
 								<li><a href="${pageContext.request.contextPath}/manageclass">Manage
 										Class</a></li>		
