@@ -38,51 +38,82 @@
 							<c:forEach var="liveClass" items="${liveClassList }">
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
-									<a href="${pageContext.request.contextPath}/classdetail?classIdx=${liveClass.classIdx }">
-										<div class="thum_hover">
-											<div style="color: #ef0000;">${liveClass.className }<br>${liveClass.classTime }<br>${liveClass.liveStatus }</div>
-										</div>
-									</a>	
+										<a
+											href="${pageContext.request.contextPath}/classdetail?classIdx=${liveClass.classIdx }">
+											<div class="thum_hover">
+												<div style="color: #ef0000;">${liveClass.className }<br>${liveClass.classTime }<br>${liveClass.liveStatus }</div>
+											</div>
+										</a>
 										<div class="gall_con">
 											<div class="gall_img">
 												<img
 													src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
 										</div>
-										<button class="broadcast"
-											onclick="location.href='${pageContext.request.contextPath}/broadcaster?classIdx=${liveClass.classIdx }'"
-											style="float: left;">START</button>
-									 <c:forEach var="member" items="${classMember }">
-										<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
-											<button class="broadcast"
-												onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${liveClass.classIdx }'" style="float:right;">VIEW</button>
-										</c:if>
-									</c:forEach>
+										<c:choose>
+											<c:when test="${liveClass.classType eq '일대다' }">
+												<button class="broadcast"
+													onclick="location.href='${pageContext.request.contextPath}/broadcaster?classIdx=${liveClass.classIdx }'"
+													style="float: left;">START</button>
+												<c:forEach var="member" items="${classMember }">
+													<c:if test="${member.fkClassIdx eq liveClass.classIdx }">
+														<button class="broadcast"
+															onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${liveClass.classIdx }'"
+															style="float: right;">VIEW</button>
+													</c:if>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<button class="broadcast"
+													onclick="location.href='${pageContext.request.contextPath}/multi?classIdx=${liveClass.classIdx }'"
+													style="float: left;">MULTI</button>
+												<c:forEach var="member" items="${classMember }">
+													<c:if test="${member.fkClassIdx eq liveClass.classIdx}">
+														<button class="broadcast"
+															onclick="location.href='${pageContext.request.contextPath}/multi?classIdx=${liveClass.classIdx }'"
+															style="float: right;">MULTI</button>
+													</c:if>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</li>
 							</c:forEach>
 							<c:forEach var="viwerLiveClass" items="${ viewerClassList }">
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
-										<a href="${pageContext.request.contextPath}/classdetail?classIdx=${viwerLiveClass.classIdx }">
+										<a
+											href="${pageContext.request.contextPath}/classdetail?classIdx=${viwerLiveClass.classIdx }">
 											<div class="thum_hover">
 												<div style="color: #ef0000;">${viwerLiveClass.className }<br>${viwerLiveClass.classTime }<br>${viwerLiveClass.liveStatus }</div>
 											</div>
 										</a>
 										<div class="gall_con">
 											<div class="gall_img">
-												<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
+												<img
+													src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
 										</div>
-									<button class="broadcast"
-										onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${viwerLiveClass.classIdx }'" style="float:right;">VIEW</button>
+										<c:choose>
+											<c:when test="${liveclass.classType eq '일대다' }">
+												<button class="broadcast"
+													onclick="location.href='${pageContext.request.contextPath}/viewer?classIdx=${viwerLiveClass.classIdx }'"
+													style="float: right;">VIEW</button>
+											</c:when>
+											<c:otherwise>
+												<button class="broadcast"
+													onclick="location.href='${pageContext.request.contextPath}/multi?classIdx=${viwerLiveClass.classIdx }'"
+													style="float: right;">MULTI</button>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</li>
 							</c:forEach>
 						</ul>
 
 						<!--강의 개설 버튼-->
-						<button type="button" class="open-class" onclick="location.href='${pageContext.request.contextPath}/openClassForm'">
+						<button type="button" class="open-class"
+							onclick="location.href='${pageContext.request.contextPath}/openClassForm'">
 							New Class <i class="xi-plus-thin"></i>
 						</button>
 					</div>
