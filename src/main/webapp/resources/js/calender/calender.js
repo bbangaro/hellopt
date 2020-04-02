@@ -125,7 +125,7 @@ window.onload = function() {
     console.log(this.current.format("MM") + "월"); // ex. 02. 03 ..
     
     
- // json 시작 --------------------------------------------------------------------   
+ // json 위치 상단으로 변경 (스크립트 실행 시 데이터를 먼저 가져와야 함)-------------------------------------------------   
  /*
     $.ajax({
     	url : "selectMonth", 
@@ -282,7 +282,7 @@ window.onload = function() {
           memo.push(ev);
         }
         // 오늘 날짜에 리스트 없을 경우 글쓰기 기능 추가
-        if (today.format("DD") == ev.day) {
+        if (today.format("DD") == ev.yymmdd ) {
           //console.log("오늘 날짜 : " + today.format("DD"));
           //console.log("이벤트 날짜 : " + ev.day);
           //console.log("오늘 운동 기록 있음");
@@ -320,10 +320,12 @@ window.onload = function() {
     var currentOpened = document.querySelector(".details");
     console.log("클릭한날짜", this.current.format("MM") + "월", dayNumber + "일");
     ptMonth = this.current.format("MM");
-    ptDay = dayNumber;
-
+    ptDay = day.format("DD");
+    
+    // 달력날짜중에서 오늘 날짜랑 같은 곳
     if(ptDay == today.format("DD") && !todayEvent) {
       var con = confirm("오늘의 운동을 기록하시겠습니까?");
+      console.log("데이터 찾는 중 : ")
       if (con == true){
     	  window.open("/hellopt/calenderWrite", 'calender', 'width=625 ,height=380, left=900, top=230 '); 
       } else if (con == false) {
