@@ -8,7 +8,7 @@
 2. [트레이너 게시판](#트레이너-게시판)
 3. [운동 정보 게시판](#운동-정보-게시판)
 4. [식단 계산기](#식단-계산기)
-5. [PT 스트리밍](#PT-스트리밍)
+5. [PT 온라인 수업](#PT-온라인-수업)
 6. [리뷰 게시판](#리뷰-게시판)
 7. [FAQ 게시판](#FAQ-게시판)
 8. [오프라인 모임 게시판](#오프라인-모임-게시판)
@@ -82,15 +82,19 @@ httpRequest.open('POST', "/hellopt/user/idcheck")
 ### 리뷰 게시판
 [리뷰 게시판](https://hellopt.info/hellopt/review)
 
-### PT 스트리밍
-[일대다 스트리밍(로그인 필요)](https://hellopt.info/hellopt/classlist)  
-[다대다 스트리밍](https://hellopt.info/hellopt/multi)
+### PT 온라인 수업
+[일대다 온라인 수업(로그인 필요)](https://hellopt.info/hellopt/classlist)  
+[다대다 온라인 수업(로그인 필요)](https://hellopt.info/hellopt/multi)
 
-스트리밍은 [WebRTC](https://webrtc.org/)를 이용하여 구현했습니다.
+온라인 수업은 웹을 통한 실시간 통신으로 이루어지며 [WebRTC](https://webrtc.org/)를 이용하여 구현했습니다.
+
+트레이너가 수강생에게 실시간으로 비디오와 오디오를 전송할 수 있습니다.
 WebRTC는 peer-to-peer protocol을 기반으로 동작하기 때문에
 peer의 정보를 연결해주는 signaling server가 필요합니다. 
 
 signaling server는 Node.js와 express, socket.io를 사용하여 구현했습니다.
+
+signaling server를 통해 사용자간의 [SDP](https://tools.ietf.org/html/rfc2327)를 주고 받아서 RTCPeerConnection을 설정합니다.
 
 [signaling server GitHub](https://github.com/DanHoBakMaCha/public_hellopt_live/blob/master/signal.js)
 
@@ -118,6 +122,10 @@ getUserMedia() 함수를 사용하기 위해서는 https가 필요하다는 것�
 
 ## 2. ERD
 ![HelloPT ERD](/etc/Relational_1.png)
+
+HelloPT는 운동과 관련된 사이트이기 때문에 유저의 정보가 제일 많이 사용됩니다. 따라서 유저에 관한 정보를 중심으로 데이터베이스를 설계했습니다.
+
+
 
 
 
