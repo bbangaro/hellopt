@@ -22,7 +22,7 @@
 				</sec:authorize>
 			<div class="icon">
 				<a href="${pageContext.request.contextPath}/calendarUpdate?calendarIdx=${oneCalendar.calendarIdx }"><i class='fas fa-pen' style='font-size:18px;color:white'></i></a>
-				<a class="delCal" href="${pageContext.request.contextPath}/calendarDelete?calendarIdx=${oneCalendar.calendarIdx }" onclick="delCal()" ><i class='far fa-trash-alt edit' style='font-size:18px;color:white'></i></a>
+				<a class="delCal" href="#" onclick="delCal()" ><i class='far fa-trash-alt edit' style='font-size:18px;color:white'></i></a>
 			</div>	
 			</div>
 
