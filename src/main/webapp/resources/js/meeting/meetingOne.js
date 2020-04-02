@@ -3,7 +3,7 @@
 	  $(document).ready(function () {
 	    return $(".send-send-btn2").click(function () {
 	 
-	    	location.href="/hellopt/meeting";
+	    	location.href="/meeting";
 	      
 	    });
 	  });
@@ -45,15 +45,15 @@ var swiper = new Swiper('.swiper-container', {
  var idx = document.getElementById('meeting-idx').value; 
 
 $('.send-btn2').click(function () {
-	location.href="/hellopt/meeting";
+	location.href="/meeting";
 });
 
 $('.send-u').click(function () {
-	location.href="/hellopt/meetingUpdate?meetingIdx="+idx;
+	location.href="/meetingUpdate?meetingIdx="+idx;
 });
 
 $('.send-d').click(function () {
-	location.href="/hellopt/meetingDelete?meetingIdx="+idx;
+	location.href="/meetingDelete?meetingIdx="+idx;
 });
 
 /* 지도 api 설정하기 */

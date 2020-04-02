@@ -28,6 +28,7 @@
 			          <li>
 			            <label for="className" class="sound_only">트레이너 이름</label>
 			            <input type="text" name="trainerName" id="className" required value="" placeholder="트레이너이름">
+			            <input type="text" name="fkUserId" hidden="" value="${param.userId}">
 			          </li>
 			          <li>
 			            <label for="tel" class="sound_only">닉네임</label>
