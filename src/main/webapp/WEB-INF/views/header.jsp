@@ -3,9 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
-   <script   src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
-   <script   src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
-   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+	<script	src="${pageContext.request.contextPath}/resources/js/main/jquery.menu.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
 </head>
 
 
@@ -15,50 +17,50 @@
         <h1>
             <a href="${pageContext.request.contextPath}/main"><span class="text_split">HelloPT Training</span></a>
         </h1>
-      <div class="userHead">
-         <input type="hidden" id="progressCnt" value="${progressCnt }"/> 
-         <sec:authorize access="isAuthenticated()">
-         <!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
-         <sec:authentication property="principal" var="user" />
-            
-            <div class="userImg">
-               <i class='fas fa-bell alarmImg' style='font-size:32px; color:#ffd400'></i>
-               <div class="userImg2">
-                  <input type="text" class="alarmText"  id="alarm" value=""/>
-               </div>
-               <div class="userText">
-               </div>
-               <div class="userName">
-                  <span class="name">${user.username}님</span>
-               </div>
-            </div>   
-            
-            <input type="hidden" id="username" value="${user.username }"/>
-         </sec:authorize>
-      </div>
-      <button type="button" role="togglebutton" class="nav_button"><span></span></button>
-   </header>
-   <!-- 상단 끝 } -->
-   <script>
-       $("#hd").each(function(){
-          var header = $(this);
-          var headerOffset = header.offset().top;
-        
-          $(window).scroll(function(){
-             var wScroll = $(window).scrollTop();
-             if( wScroll > headerOffset){
-               header.css('background','rgba(0,0,0,0.7)');
-             } else {
-                header.css('background','none');
-             }
-          });
-       });
-   </script>
-   <!-- 네비게이션 시작 { -->
-   <aside id="navigation" class="close">
-      <div class="navigation_inner">
-         <div class="nav_wrap">
-            <ul class="category">
+		<div class="userHead">
+			<input type="hidden" id="progressCnt" value="${progressCnt }"/> 
+			<sec:authorize access="isAuthenticated()">
+			<!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
+			<sec:authentication property="principal" var="user" />
+				
+				<div class="userImg">
+					<i class='fas fa-bell alarmImg' style='font-size:32px; color:#ffd400'></i>
+					<div class="userImg2">
+						<input type="text" class="alarmText"  id="alarm" value=""/>
+					</div>
+					<div class="userText">
+					</div>
+					<div class="userName">
+						<span class="name">${user.username}님</span>
+					</div>
+				</div>	
+				
+				<input type="hidden" id="username" value="${user.username }"/>
+			</sec:authorize>
+		</div>
+		<button type="button" role="togglebutton" class="nav_button"><span></span></button>
+	</header>
+	<!-- 상단 끝 } -->
+	<script>
+	    $("#hd").each(function(){
+	    	var header = $(this);
+	    	var headerOffset = header.offset().top;
+	     
+	    	$(window).scroll(function(){
+	    		var wScroll = $(window).scrollTop();
+	    		if( wScroll > headerOffset){
+	    		  header.css('background','rgba(0,0,0,0.7)');
+	    		} else {
+	    			header.css('background','none');
+	    		}
+	    	});
+	    });
+	</script>
+	<!-- 네비게이션 시작 { -->
+	<aside id="navigation" class="close">
+		<div class="navigation_inner">
+			<div class="nav_wrap">
+				<ul class="category">
 
                <li><a href="#" class="artist_open">Trainer</a>
                   <ul class="artist_depth02">

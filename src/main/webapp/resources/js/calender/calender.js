@@ -283,9 +283,6 @@ window.onload = function() {
         }
         // 오늘 날짜에 리스트 없을 경우 글쓰기 기능 추가
         if (today.format("DD") == ev.yymmdd ) {
-          //console.log("오늘 날짜 : " + today.format("DD"));
-          //console.log("이벤트 날짜 : " + ev.day);
-          //console.log("오늘 운동 기록 있음");
           todayEvent = true;
         }
         return memo;
@@ -297,7 +294,7 @@ window.onload = function() {
       });
     }
   };
-
+  
   Calendar.prototype.getDayClass = function(day) {
     classes = ["day"];
     if (day.month() !== this.current.month()) {
@@ -322,7 +319,7 @@ window.onload = function() {
     ptMonth = this.current.format("MM");
     ptDay = day.format("DD");
     
-    // 달력날짜중에서 오늘 날짜랑 같은 곳
+    // 달력날짜중에서 오늘 날짜랑 같은 곳 && 이벤트 없는 곳
     if(ptDay == today.format("DD") && !todayEvent) {
       var con = confirm("오늘의 운동을 기록하시겠습니까?");
       console.log("데이터 찾는 중 : ")
