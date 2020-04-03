@@ -173,17 +173,20 @@ public class ClassController {
 	}
 	
 	//페이징
-	@RequestMapping("/pagingclasslist")
-	public String getClassList(Model model, ClassMember info, Principal principal,
+	@RequestMapping("/moreclass")
+	@ResponseBody
+	public List<LiveClass> getClassList(Model model, ClassMember info, Principal principal,
 			@RequestParam(name = "end", defaultValue = "3") int end) {
 		
 		System.out.println("end : " + end);
 		
-		List<LiveClass> classList = service3.PagingClassList(end);
+		List<LiveClass> liveList = service3.PagingClassList(end);
 		
-		model.addAttribute("classList", classList);
+		model.addAttribute("liveList", liveList);
 		
 		info.setFkUserId(principal.getName());
+		
+		System.out.println("liveList : " + liveList);
 		
 		List<ClassMember> classMember = service2.getMyClass(info);
 		System.out.println("클래스 멤버 정보 가져오기 성공!!");
@@ -195,34 +198,7 @@ public class ClassController {
 			System.out.println(classMemberIdx);
 		}
 		
-		return "class/classList";
-	}
-	
-	//ajax(더보기)
-	@RequestMapping("/moreclass1")
-	@ResponseBody
-	public List<ClassMember> getMoreClass(ClassMember info, Principal principal, 
-			@RequestParam(name = "end", defaultValue = "3") int end) {
-		System.out.println("------ " + service3.PagingClassList(end));
-		
-		info.setFkUserId(principal.getName());
-		
-		List<ClassMember> classMember = service2.getMyClass(info);
-		System.out.println("클래스 멤버 정보 가져오기 성공!!");
-		System.out.println("classMember : " + classMember);
-		
-		for(int i=0; i<classMember.size(); i++) {
-			int classMemberIdx = classMember.get(i).getClassMemberIdx();
-			System.out.println(classMemberIdx);
-		}
-		return classMember;
-	}
-	
-	@RequestMapping("/moreclass")
-	@ResponseBody
-	public List<LiveClass> getMore(@RequestParam(name = "end", defaultValue = "3") int end) {
-		System.out.println("------ " + service3.PagingClassList(end));
-		return service3.PagingClassList(end);
+		return liveList;
 	}
 	
 	//------------------ 관리자 페이지 -------------------

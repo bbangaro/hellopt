@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/classlist.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
-
+<script src="${pageContext.request.contextPath }/resources/js/live/icon.js"></script>
 <style>
 
 </style>
@@ -55,7 +55,7 @@
 						</div>
 
 						<ul id="gall_ul" class="gall_row">
-							<c:forEach var="liveclass" items="${liveClassList }">
+							<c:forEach var="liveclass" items="${liveClassList }" begin="0" end="2">
 								<li class="gall_li col-gn-3">
 									<div class="gall_box">
 										<a href="classdetail?classIdx=${liveclass.classIdx }">
@@ -105,9 +105,15 @@
 						<input type="hidden" id="p" name="curPage" value="1">
 						
 						<!--더보기 버튼-->
-<!-- 						<button type="button" class="view-more">
-							view more <i class="xi-plus-thin"></i>
-						</button> -->
+ 						<button type="button" class="view-more">
+							view more <i class="fas fa-plus"></i>
+						</button> 
+						
+						<!-- 로그인한 userId 얻어오기 -->
+						<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="principal" var="user" />
+							<input type="hidden" value="${user.username }" id="userId">
+						</sec:authorize>
 					</div>
 				</div>
 				<!--con-inner-->
@@ -117,57 +123,128 @@
 		<!-- } 게시판 목록 끝 -->
 	</div>
 	<!-- } 하단 끝 -->
-	
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$("#classType").change(function() {
 			location.href="classlist?classType="+$("#classType").val();
 		});
 		$("select option[value='${classType}']").attr("selected", true);
 		console.log("${classType}");
-		
 	});
-
+	
 	//더보기 ajax
 	var curPage = $("input[name=curPage]").val();
 	console.log("curPage : " + curPage);
 		$(".view-more").click(function() {
-			 curPage++;
+			curPage++;
+			 
+			var list = new Array();
+			<c:forEach var="member" items="${classMember }">;
+				var json = new Object();
+				json.fkClassIdx = "${member.fkClassIdx}";
+				list.push(json);
+			</c:forEach>
+			 
 			 $.ajax({
 				type : "GET", 
 				url : "moreclass?end=" + curPage * 3,
 				dataType : "json",
 				success : function(data) {
-					alert("성공");
-					var dispHtml = "";
-					var classIdx = "";
-					var className = "";
-					var classTime = "";
-					var liveStatus = "";
-					 $.each(data, function(index, obj) {
-						classIdx = this["classIdx"];
-						className = this["className"];
-						classTime = this["classTime"];
-						liveStatus = this["liveStatus"];
-						
-						dispHtml += '<li class="gall_li col-gn-3">';
-						dispHtml += '<div class="gall_box">';
-						dispHtml += '<a href="classdetail?classIdx=' + classIdx + '">';
-						dispHtml += '<div class="thum_hover">';
-						dispHtml += '<div style="color: #ef0000;">' + className + '<br>' + classTime + '<br>' + liveStatus + '</div>'
-						dispHtml += '</div>';
-						dispHtml += '</a>';
-						dispHtml += '<div class="gall_con">';
-						dispHtml += '<div class="gall_img">';
-						dispHtml += '<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">'
-						dispHtml += '</div>';
-						dispHtml += '</div>'
-						dispHtml += '</div>'
-						dispHtml += '</div>'
-						dispHtml += '</li>';
-					});
+					/* alert("성공"); */					
+					var userId = $("#userId").val();
 					
-					$("#gall_ul").html(dispHtml);  
+					let ul = document.getElementById("gall_ul");
+					
+					for(let idx in data) {
+						
+						let gall_li = document.createElement('li');
+						gall_li.className = "gall_li col-gn-3";
+
+						let gall_box = document.createElement('div');
+						gall_box.className = "gall_box";
+						gall_li.appendChild(gall_box);
+						
+						let a = document.createElement('a');
+						a.href = "classdetail?classIdx=" + data[idx].classIdx;
+						gall_box.appendChild(a);
+						
+						let thum_hover = document.createElement('div');
+						thum_hover.className = "thum_hover";
+						a.appendChild(thum_hover);
+						
+						let div = document.createElement('div');
+						div.style.color = "#ef0000";
+						div.innerText = data[idx].className + '\n' + data[idx].classTime + '\n' + data[idx].liveStatus;
+						thum_hover.appendChild(div);
+						
+						let gall_con = document.createElement('div');
+						gall_con.className = "gall_con";
+						gall_box.append(gall_con);
+						
+						let gall_img = document.createElement('div');
+						gall_img.className = "gall_img";
+						gall_con.appendChild(gall_img);
+						
+						if (data[idx].classType == '일대다') {
+							if (data[idx].fkUserId == userId) {
+								let startBtn = document.createElement('button');
+								startBtn.className = "broadcast";
+								startBtn.addEventListener('click', function() {
+									location.href="broadcaster?classIdx=" + data[idx].classIdx;
+								});
+								startBtn.style.cssFloat = "left";
+								startBtn.innerText = "START";
+								gall_box.append(startBtn);
+							}
+							
+							let classIdx = data[idx].classIdx;
+							for (let idx in list) {
+								if (list[idx].fkClassIdx == classIdx) {
+									let viewBtn = document.createElement('button');
+									viewBtn.className = "broadcast";
+									viewBtn.addEventListener('click', function() {
+										location.href="viewer?classIdx=" + classIdx;
+									});
+									viewBtn.style.cssFloat = "right";
+									viewBtn.innerText = "VIEW";
+									gall_box.append(viewBtn);
+								}
+							}
+							
+						} else {
+							if (data[idx].fkUserId == userId) {
+								let multiBtn = document.createElement('button');
+								multiBtn.className = "broadcast";
+								multiBtn.addEventListener('click', function() {
+									location.href="multi?classIdx=" + data[idx].classIdx;
+								});
+								multiBtn.style.cssFloat = "left";
+								multiBtn.innerText = "MULTI";
+								gall_box.append(multiBtn);
+							}
+							
+							
+							let classIdx = data[idx].classIdx;
+							for (let idx in list) {
+								if (list[idx].fkClassIdx == classIdx) {
+									let multiBtn = document.createElement('button');
+									multiBtn.className = "broadcast";
+									multiBtn.addEventListener('click', function() {
+										location.href="multi?classIdx=" + classIdx;
+									});
+									multiBtn.style.cssFloat = "right";
+									multiBtn.innerText = "MULTI";
+									gall_box.append(multiBtn);
+								}
+							}
+						}
+						
+						let img = document.createElement('img');
+						img.src = "${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg";
+						gall_img.appendChild(img);
+						
+						ul.appendChild(gall_li);
+					}
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					alert("실패 : \n"
