@@ -55,10 +55,9 @@
 .fileUpload {
 	border: 0px;
     margin-bottom: 4px;
-    margin-left: 22px;
+    margin-left: -5px;
     margin-top: 10px;
     color: white;
-    border-radius: 3rem;
     cursor: pointer;
     display: inherit;
     font-family: 'Jeju Gothic', serif;
@@ -74,7 +73,7 @@
 .icon {
 	display: inline;
     float: right;
-    margin-right: 39px;
+    margin-right: 18px;
 }
 
 .edit {

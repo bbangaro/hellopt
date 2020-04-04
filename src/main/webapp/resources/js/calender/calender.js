@@ -6,9 +6,11 @@
 	$.ajax({
 		url : "selectMonth",
 		data : {
-			month : mon
+			month : mon,
+			fkUserId : userName
 		},
 		type : "post",
+		dataType : 'json',
 		success : function(data) {
 			//alert("성공");
 			console.log(data);
@@ -324,7 +326,7 @@ window.onload = function() {
       var con = confirm("오늘의 운동을 기록하시겠습니까?");
       console.log("데이터 찾는 중 : ")
       if (con == true){
-    	  window.open("/hellopt/calenderWrite", 'calender', 'width=625 ,height=380, left=900, top=230 '); 
+    	  window.open("/hellopt/calenderWrite", 'calender', 'width=590 ,height=380, left=900, top=230 '); 
       } else if (con == false) {
     	  return false;
       }
@@ -396,7 +398,7 @@ window.onload = function() {
       ///hellopt/meetingRead
       span.addEventListener("click", function() {
         alert(ptMonth + "월 " + ptDay + "일 글로 이동~@");
-        window.open("/hellopt/calendarOne?calendarIdx="+ev.calendarIdx+"", 'onealender', 'width=620 ,height=680, left=900, top=230 ')
+        window.open("/hellopt/calendarOne?calendarIdx="+ev.calendarIdx+"", 'onealender', 'width=590 ,height=680, left=900, top=230 ')
         opener.document.location.href='/hellopt/calender';
       });
 

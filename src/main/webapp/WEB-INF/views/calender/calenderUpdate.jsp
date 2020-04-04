@@ -28,13 +28,13 @@
 				<div class="calName">동영상</div>
 				<input type="file" class="fileUpload" id="uploadFile" name="uploadFile" >
 				
-				<video class="fileUpload" id="video" controls height="280"  src="${pageContext.request.contextPath}/s3/calendar/${oneCalendar.cSysVideo}" width="525" controls="controls"></video>
+				<video class="fileUpload" id="video" controls height="280"  src="${pageContext.request.contextPath}/s3/calendar/${oneCalendar.cSysVideo}" width="505" controls="controls"></video>
 				<p class="fileName">첨부파일 : ${oneCalendar.cSysVideo}</p>
 			</div>
 
 			<div class="calHd3">
 				<div class="calName">내용</div>
-				<textarea cols="71" rows="10" class="calContent" id="mComment" name="content" >${oneCalendar.content}</textarea>
+				<textarea cols="66" rows="10" class="calContent" id="mComment" name="content" >${oneCalendar.content}</textarea>
 			</div>
 			
 			<input type="hidden" name="calendarIdx" value="${oneCalendar.calendarIdx}">
