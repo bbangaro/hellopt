@@ -23,6 +23,7 @@
 		</thead>
 		<tbody>
 			<c:forEach var="user" items="${ userList }" varStatus="idx">
+				
 				<tr>
 					<c:choose>
 						<c:when test="${not empty param.page}">
@@ -44,6 +45,7 @@
 					</td>
 					<td> <a class="management-anchor" href="${ pageContext.request.contextPath }/admin/trainerinsert?userId=${user.userId}">트레이너등록</a></td>
 				</tr>
+				
 			</c:forEach>
 		</tbody>
 	</table>
