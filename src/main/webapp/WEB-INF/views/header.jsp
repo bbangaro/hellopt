@@ -22,10 +22,12 @@
 			<sec:authentication property="principal" var="user" />
 				
 				<div class="userImg">
+					<c:if test="${user.auth eq 'ROLE_ADMIN'}">   
 					<i class='fas fa-bell alarmImg' style='font-size:32px; color:#ffd400'></i>
 					<div class="userImg2">
-						<input type="text" class="alarmText"  id="alarm" value=""/>
+						<input type="text" class="alarmText"  id="alarm" value="" readonly/>
 					</div>
+					</c:if>
 					<div class="userText">
 					</div>
 					<div class="userName">
@@ -33,7 +35,7 @@
 					</div>
 				</div>	
 				
-				<input type="hidden" id="username" value="${user.username }"/>
+				<input type="hidden" id="username" value="${user.auth }"/>
 			</sec:authorize>
 		</div>
 		<button type="button" role="togglebutton" class="nav_button"><span></span></button>
