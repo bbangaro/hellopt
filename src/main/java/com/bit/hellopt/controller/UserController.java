@@ -63,7 +63,7 @@ public class UserController {
 		
 		if(bindingResult.hasErrors()) {
 			logger.info("signupform: user validation error");
-			return "signupForm";
+			return "user/signupForm";
 		} else {
 			
 			if(!file.isEmpty()) {
