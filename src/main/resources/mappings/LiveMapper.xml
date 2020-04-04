@@ -15,6 +15,6 @@
 		              ORDER BY CLASS_IDX DESC
 		             ) C
 			)
-		WHERE ROWNUM BETWEEN 1 AND #{end}
+		WHERE R BETWEEN #{end}-2 AND #{end}
 	</select>
 </mapper>

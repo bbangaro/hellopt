@@ -14,7 +14,7 @@ public interface TrainerMapper {
 	@Insert("INSERT INTO INTRODUCE_TRAINER_TB (TRAINER_IDX, "
 			+ "TRAINER_NAME, TRAINER_NICKNAME, TRAINER_CAREER, TRAINER_TALK, TRAINER_MEDIA, FK_USER_ID, TRAINER_PROFILE) "
 			+ "VALUES (INTRODUCE_TRAINER_TB_SEQ.NEXTVAL, "
-			+ "#{trainerName}, #{trainerNickname}, #{trainerCareer}, #{trainerTalk}, #{trainerMedia}, #{fkUserId})")
+			+ "#{trainerName}, #{trainerNickname}, #{trainerCareer}, #{trainerTalk}, #{trainerMedia}, #{fkUserId}, #{trainerProfile})")
 	public void insertTrainer(com.bit.hellopt.vo.trainer.TrainerVO trainerVO);
 
 	@Select("SELECT * FROM INTRODUCE_TRAINER_TB")
