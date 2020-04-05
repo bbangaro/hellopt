@@ -3,35 +3,41 @@
 	
 	var strData;
 	
-	$.ajax({
-		url : "selectMonth",
-		data : {
-			month : mon,
-			fkUserId : userName
-		},
-		type : "post",
-		dataType : 'json',
-		success : function(data) {
-			//alert("성공");
-			console.log(data);
+	makeCalendar(mon, userName);
+	
+	 
+	
+	function makeCalendar(mon, userName) {
+		$.ajax({
+			url : "selectMonth",
+			data : {
+				month : mon,
+				fkUserId : userName
+			},
+			type : "post",
+			dataType : 'json',
+			success : function(data) {
+				//alert("성공");
+				console.log(data);
 
-			// 참고사항------------------------------
+				// 참고사항------------------------------
 
-			// 응답받은 데이터 형식 : [{}, {}, ... , {}] - 배열
-			//strData = JSON.stringify(data); // JSON -> string
-			strData = data;
-			console.log("컨트롤러에서 받은 json데이터" + strData +" ");
+				// 응답받은 데이터 형식 : [{}, {}, ... , {}] - 배열
+				//strData = JSON.stringify(data); // JSON -> string
+				strData = data;
+				console.log("컨트롤러에서 받은 json데이터" + strData +" ");
+					
+				 monthData();
+				 
+				 $("#cal").html('<img id="cal" class="calPop" src="/hellopt/resources/images/calendar/이벤트pop2.jpg">');
 
-			
-			 monthData();
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("통신에러");
+			}
 
-		},
-		error : function(jqXHR, textStatus, errorThrown) {
-			alert("통신에러");
-		}
-
-	}); 
-
+		}); 
+	}
 	
 window.onload = function() {
 	 
@@ -67,10 +73,8 @@ window.onload = function() {
   
   //달력 만드는 부분 ( 달력, 이벤트 ) 
   function Calendar(selector, events) {
-	  console.log("달력 이벤트  : "+events);
     this.el = document.querySelector(selector); 
     this.events = events;
-    console.log("달력 이벤트2  : "+events);
     this.current = moment().date(1);
     this.draw();
     var current = document.querySelector(".today"); // 오늘날짜
@@ -117,8 +121,8 @@ window.onload = function() {
 
       // 달력 타이틀 태그 생성
       this.header.appendChild(this.title);
-      this.header.appendChild(right);
-      this.header.appendChild(left);
+      //this.header.appendChild(right);
+      //this.header.appendChild(left);
       this.el.appendChild(this.header);
     }
     this.title.innerHTML = this.current.format("YYYY년 MM월");
@@ -326,7 +330,7 @@ window.onload = function() {
       var con = confirm("오늘의 운동을 기록하시겠습니까?");
       
       if (con == true){
-    	  window.open("/hellopt/calenderWrite", 'calender', 'width=590 ,height=380, left=900, top=230 '); 
+    	  window.open("/hellopt/calenderWrite", 'calender', 'width=590 ,height=380, left=600, top=230 '); 
       } else if (con == false) {
     	  return false;
       }
@@ -397,8 +401,8 @@ window.onload = function() {
       span.innerHTML = '<a class="eventA" href="#">'+ev.content+'</a>';
       ///hellopt/meetingRead
       span.addEventListener("click", function() {
-        alert(ptMonth + "월 " + ptDay + "일 글로 이동~@");
-        window.open("/hellopt/calendarOne?calendarIdx="+ev.calendarIdx+"", 'onealender', 'width=590 ,height=680, left=900, top=230 ')
+        //alert(ptMonth + "월 " + ptDay + "일 글로 이동~@");
+        window.open("/hellopt/calendarOne?calendarIdx="+ev.calendarIdx+"", 'onealender', 'width=590 ,height=680, left=600, top=230 ')
         opener.document.location.href='/hellopt/calender';
       });
 
@@ -458,12 +462,50 @@ window.onload = function() {
   Calendar.prototype.nextMonth = function() {
     this.current.add("months", 1);
     this.next = true;
+    
+//	$.ajax({
+//		url : "selectMonth",
+//		data : {
+//			month : this.current.format("MM"),
+//			fkUserId : userName
+//		},
+//		type : "post",
+//		dataType : 'json',
+//		success : function(data) {
+//			strData = data;
+//			
+//			var calendar = new Calendar("#eventCalendar", strData);
+//		},
+//		error : function(jqXHR, textStatus, errorThrown) {
+//			//alert("통신에러");
+//		}
+//	});
+	
     this.draw();
   };
 
   Calendar.prototype.prevMonth = function() {
     this.current.subtract("months", 1);
     this.next = false;
+    
+//	$.ajax({
+//		url : "selectMonth",
+//		data : {
+//			month : this.current.format("MM"),
+//			fkUserId : userName
+//		},
+//		type : "post",
+//		dataType : 'json',
+//		success : function(data) {
+//			strData = data;
+//			
+//			var calendar = new Calendar("#eventCalendar", strData);
+//		},
+//		error : function(jqXHR, textStatus, errorThrown) {
+//			//alert("통신에러");
+//		}
+//	}); 
+	
     this.draw();
   };
 

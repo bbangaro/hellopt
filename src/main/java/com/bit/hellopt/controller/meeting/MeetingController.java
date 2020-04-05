@@ -78,6 +78,20 @@ public class MeetingController {
 		return getSearch;
 	}
 	
+	@RequestMapping("/meetingListAjax")
+	@ResponseBody
+	public List<MeetingVO> getSearch() {
+		
+		List<MeetingVO> meetingList = service.getMeetingVO();
+		System.out.println("getMeetingList 성공");
+		
+		for (MeetingVO vo : meetingList) {
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
+		return meetingList;
+	}
+	
 	@RequestMapping("/admin/meetingAdmin")
 	public String meetingAdmin(Principal principal , Model model) {
 		//              저장 할 이름

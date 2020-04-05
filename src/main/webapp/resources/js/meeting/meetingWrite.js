@@ -208,7 +208,6 @@ function getAddress() {
 		
 		ws.send("이힣");
 			
-		alert("소켓소환!");
 	}
 
 	

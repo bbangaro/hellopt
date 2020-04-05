@@ -20,6 +20,10 @@
 	<div class="hello_body">
 	
 	    <div class="center">
+	    <!-- 
+	     <img id="cal" class="calPop" src="${pageContext.request.contextPath}/resources/images/calendar/이벤트pop2.jpg">
+	     -->
+	    <div id="cal"></div>
 	    <!-- 달력이 생성될 위치 -->
 		<div id="eventCalendar"></div>
 	    </div>
