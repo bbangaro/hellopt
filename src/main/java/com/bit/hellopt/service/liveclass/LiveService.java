@@ -12,5 +12,8 @@ public interface LiveService {
 	public int countClasses();
 	
 	//강의 리스트 페이징
-	public List<LiveClass> PagingClassList(int end);
+	public List<LiveClass> pagingClassList(int end);
+	
+	//추천 강의 랜덤 선택
+	public LiveClass randomClass();
 }

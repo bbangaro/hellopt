@@ -25,7 +25,12 @@ public class LiveServiceImpl implements LiveService {
 	}
 
 	@Override
-	public List<LiveClass> PagingClassList(int end) {
-		return liveMapper.PagingClassList(end);
+	public List<LiveClass> pagingClassList(int end) {
+		return liveMapper.pagingClassList(end);
+	}
+
+	@Override
+	public LiveClass randomClass() {
+		return liveMapper.randomClass();
 	}
 }

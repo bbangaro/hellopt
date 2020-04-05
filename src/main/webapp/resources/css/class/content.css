@@ -645,7 +645,6 @@ a.file {
   margin-top: 15px;
 }
 .con-wr #bo_gall{
-  margin: 144px 0 0;
   position: relative;
 }
 .con-wr #bo_gall #gall_ul{
@@ -779,7 +778,7 @@ a.btn_b01:hover, .btn_b01:hover{
   font-size: 15px;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 30%;
   transform: translate(-50%,-50%);
   font-weight: bold;
 }

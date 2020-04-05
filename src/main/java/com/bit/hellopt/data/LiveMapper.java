@@ -13,5 +13,7 @@ public interface LiveMapper {
 	
 	public int countClasses();
 	
-	public List<LiveClass> PagingClassList(@Param("end") int end);
+	public List<LiveClass> pagingClassList(@Param("end") int end);
+	
+	public LiveClass randomClass();
 }

@@ -53,6 +53,9 @@ public class ClassController {
 		//ClassMember member = service2.getClassM(classMemberIdx);
 		//model.addAttribute("member", member);
 		
+		LiveClass liveClass = service3.randomClass();
+		model.addAttribute("liveClass", liveClass);
+		System.out.println("liveClass: " + liveClass);
 		
 		System.out.println("classType: " + classType);
 		System.out.println("..." + liveClassList);
@@ -180,7 +183,7 @@ public class ClassController {
 		
 		System.out.println("end : " + end);
 		
-		List<LiveClass> liveList = service3.PagingClassList(end);
+		List<LiveClass> liveList = service3.pagingClassList(end);
 		
 		model.addAttribute("liveList", liveList);
 		

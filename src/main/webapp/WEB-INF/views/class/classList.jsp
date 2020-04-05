@@ -23,27 +23,36 @@
 			<div class="con-inner sub-sub">
 				<div class="tit-wr tit-wr-ani">
 					<h2>스트리밍 강의 리스트</h2>
-				</div>
+				</div><!-- //tit-wr -->
 
 				<div class="sub-content">
 					<!--콘탠츠 내용 시작. 내용 불러오기-->
 					<div class="content-area clearfix">
 						<div class="sub-tit-wr">
 							<h3 id="subject_">RECOMMENDED</h3>
-						</div>
-						<div class="videowrapper">
-							<p id="view_img">
-								<iframe width="560" height="315"
-									src="https://www.youtube.com/embed/azxahQi6vFo" frameborder="0"
-									allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-									allowfullscreen></iframe>
-							</p>
-						</div>
-					</div>
-					<!--content-area-->
-
+						</div><!-- //sub-tit-wr -->
 					<!-- 게시판 목록 시작 , 썸네일 이미지 -->
 					<div id="bo_gall" style="width: 100%">
+						<div class="gall_box rec_class">
+							<a href="classdetail?classIdx=${liveClass.classIdx }">
+								<div class="thum_hover">
+									<div style="color: #ef0000;font-size: 2em;">${liveClass.classLength } 주간<br>${liveClass.classDay }<br>${liveClass.liveStatus }</div>
+								</div>
+							</a>
+							<div class="gall_con">
+								<div class="gall_img">
+									<img id="rec_class_img" src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
+								</div>
+								<div id="rec_class_info">
+									<p id="rec_class_info1">
+										<span>${liveClass.classType }</span>
+									</p>
+									<p id="rec_class_info2">${liveClass.className }</p>
+									<p id="rec_class_info3">${liveClass.classTime }</p>
+								</div>
+							</div>
+						</div>
+					
 						<div class="thum-tit-wr">
 							<h3 class="thum-tit">All CLASSES
 							<select id="classType" style="float: right;">
@@ -60,12 +69,19 @@
 									<div class="gall_box">
 										<a href="classdetail?classIdx=${liveclass.classIdx }">
 											<div class="thum_hover">
-												<div style="color: #ef0000;">${liveclass.className }<br>${liveclass.classTime }<br>${liveclass.liveStatus }</div>
+												<div style="color: #ef0000;">${liveclass.classLength } 주간<br>${liveclass.classDay }<br>${liveclass.liveStatus }</div>
 											</div>
 										</a>
 										<div class="gall_con">
 											<div class="gall_img">
 												<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
+											</div>
+											<div class="class_info">
+												<p class="class_info1">
+													<span>${liveclass.classType }</span>
+												</p>
+												<p class="class_info2">${liveclass.className }</p>
+												<p class="class_info3">${liveclass.classTime }</p>
 											</div>
 										</div>
 										<c:choose>
@@ -115,12 +131,15 @@
 							<input type="hidden" value="${user.username }" id="userId">
 						</sec:authorize>
 					</div>
+					<!-- //bo_gall -->
+					</div>
+					<!-- //content-area-->
 				</div>
-				<!--con-inner-->
+				<!-- //sub-content -->
 			</div>
-			<!--con-wr-->
+			<!--con-inner-->
 		</div>
-		<!-- } 게시판 목록 끝 -->
+		<!--con-wr-->
 	</div>
 	<!-- } 하단 끝 -->
 <script>
@@ -174,7 +193,7 @@
 						
 						let div = document.createElement('div');
 						div.style.color = "#ef0000";
-						div.innerText = data[idx].className + '\n' + data[idx].classTime + '\n' + data[idx].liveStatus;
+						div.innerText = data[idx].classDay + '\n' + data[idx].classLength + '주간\n' + data[idx].liveStatus;
 						thum_hover.appendChild(div);
 						
 						let gall_con = document.createElement('div');
@@ -184,6 +203,27 @@
 						let gall_img = document.createElement('div');
 						gall_img.className = "gall_img";
 						gall_con.appendChild(gall_img);
+						
+						let class_info = document.createElement('div');
+						class_info.className = "class_info";
+						gall_con.append(class_info);
+						
+						let class_info1 = document.createElement('p');
+						class_info1.className = "class_info1";
+						let span = document.createElement('span');
+						span.innerText = data[idx].classType;
+						class_info1.appendChild(span);
+						class_info.appendChild(class_info1);
+						
+						let class_info2 = document.createElement('p');
+						class_info2.className = "class_info2";
+						class_info2.innerText = data[idx].className;
+						class_info.append(class_info2);
+
+						let class_info3 = document.createElement('p');
+						class_info3.className = "class_info3";
+						class_info3.innerText = data[idx].classTime;
+						class_info.append(class_info3);
 						
 						if (data[idx].classType == '일대다') {
 							if (data[idx].fkUserId == userId) {
