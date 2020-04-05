@@ -1052,7 +1052,7 @@ h2 {
 	
 	font-size: 28px;
 	text-align: center;
-	padding-bottom: 24px;
+	padding-bottom: 41px;
 }
 
 .adminTd {
@@ -1136,5 +1136,24 @@ h2 {
    background: #b4000f !important;
 }
 
+.problue {
+	font-size: 15px;
+    color: #1290ff;
+}
 
+.prored {
+	font-size: 15px;
+    color: #b4000f;
+}
+
+.progray {
+	font-size: 15px;
+    color: #A9A9A9;
+}
+.mlocal {
+	border-bottom: 2px solid #000;
+}
+.mday{
+	border-top: 2px solid #000;
+}
 

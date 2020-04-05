@@ -3,6 +3,7 @@ var ws = null;
 //페이지가 로딩된 후 소켓객체 생성
 $(function() {
 	// 서버의 웹소켓 객체 연결하기 
+	// 우리 조 서버올릴 때 wss로 변경 해야함 
 	ws = new WebSocket("ws://localhost:8000/hellopt/alarm");
 	
 	//정상 연결 됐을 때 

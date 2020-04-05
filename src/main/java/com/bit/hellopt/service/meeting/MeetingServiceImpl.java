@@ -25,6 +25,12 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<MeetingVO> getMeetingVO() {
 		return meetingMapper.getMeetingVO();
 	}
+	// 미팅TB 검색
+	@Override
+	public List<MeetingVO> getSearch(String searchKeyword) {
+		return meetingMapper.getSearch(searchKeyword);
+	}
+	
 	// 미팅 상세 리스트 cnt로 가져오기
 	@Override
 	public List<MeetingVO> getMeetingCnt() {

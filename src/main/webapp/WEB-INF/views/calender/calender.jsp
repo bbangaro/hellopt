@@ -18,6 +18,7 @@
 	
 
 	<div class="hello_body">
+	
 	    <div class="center">
 	    <!-- 달력이 생성될 위치 -->
 		<div id="eventCalendar"></div>

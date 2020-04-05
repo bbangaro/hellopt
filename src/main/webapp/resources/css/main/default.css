@@ -492,12 +492,11 @@ box-sizing: content-box;
 }	
 .userText{
     display: inline-block;
-    margin-left: -24px;
 }
 .userName{
     display: inline-block;
     margin-right: 50px;
-    margin-left: 27px;
+    margin-top: 9px;
 }
 .alarmImg{	
 	

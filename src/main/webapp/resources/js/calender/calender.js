@@ -322,9 +322,9 @@ window.onload = function() {
     ptDay = day.format("DD");
     
     // 달력날짜중에서 오늘 날짜랑 같은 곳 && 이벤트 없는 곳
-    if(ptDay == today.format("DD") && !todayEvent) {
+    if(ptDay == today.format("DD") && !todayEvent && userName.length >= 1  ) {
       var con = confirm("오늘의 운동을 기록하시겠습니까?");
-      console.log("데이터 찾는 중 : ")
+      
       if (con == true){
     	  window.open("/hellopt/calenderWrite", 'calender', 'width=590 ,height=380, left=900, top=230 '); 
       } else if (con == false) {

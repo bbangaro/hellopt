@@ -1,27 +1,9 @@
-(function () {
 
-	  $(document).ready(function () {
-	    return $(".send-send-btn2").click(function () {
-	 
-	    	location.href="/meeting";
-	      
-	    });
-	  });
-
-	}).call(this);
-
-/* 너무 깔끔한 슬라이드 보류
-var swiper = new Swiper('.swiper-container', {
-      zoom: true,
-      pagination: {
-        el: '.swiper-pagination',
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-*/
+/*
+ * 너무 깔끔한 슬라이드 보류 var swiper = new Swiper('.swiper-container', { zoom: true,
+ * pagination: { el: '.swiper-pagination', }, navigation: { nextEl:
+ * '.swiper-button-next', prevEl: '.swiper-button-prev', }, });
+ */
 
 //3d 슬라이드 다시 적용하기
 var swiper = new Swiper('.swiper-container', {
@@ -45,7 +27,7 @@ var swiper = new Swiper('.swiper-container', {
  var idx = document.getElementById('meeting-idx').value; 
 
 $('.send-btn2').click(function () {
-	location.href="/meeting";
+	location.href="/hellopt/meeting";
 });
 
 $('.send-u').click(function () {
