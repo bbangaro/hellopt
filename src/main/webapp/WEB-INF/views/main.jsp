@@ -29,7 +29,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide01.png" alt="KOZ">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/main6.jpg" title="">
+                  <img src="${pageContext.request.contextPath}/resources/images/main/mainfirst.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>History</h4>
@@ -42,14 +42,14 @@
 
         <div class="swiper-slide swiper-slide-active" style="margin-right: 140px;">
           <div class="slider_content">
-            <a href="#">
+            <a href="meal">
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide02.png" alt="지코">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer1.jpg" title="">
+                  <img style="width: 80%; height: 500px" src="${pageContext.request.contextPath}/resources/images/main/nutrition1.jpg" title="">
                 </div>
                 <div class="content_text">
-                  <h4>Trainer 응준</h4>
+                  <h4>Nutrition</h4>
                   <span>more view</span>
                 </div>
               </div>
@@ -59,14 +59,14 @@
 
         <div class="swiper-slide swiper-slide-next" style="margin-right: 140px;">
           <div class="slider_content">
-            <a href="#">
+            <a href="meeting">
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/dvwn_main.png" alt="다운">-->
-                  <img style="width: 80%;" src="${pageContext.request.contextPath}/resources/images/main/trainer3.jpg" title="">
+                  <img style="width: 80%;" src="${pageContext.request.contextPath}/resources/images/main/meeting.jpg" title="">
                 </div>
                 <div class="content_text">
-                  <h4>Trainer 연문</h4>
+                  <h4>Offline Meeting</h4>
                   <span>more view</span>
                 </div>
               </div>
@@ -76,14 +76,14 @@
 
         <div class="swiper-slide" style="margin-right: 140px;">
           <div class="slider_content">
-            <a href="#">
+            <a href="classlist">
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide03.png" alt="SHOW ME WHAT YOU GOT">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer4.jpg" title="">
+                  <img style="width: 80%;" src="${pageContext.request.contextPath}/resources/images/main/livestream.jpg" title="">
                 </div>
                 <div class="content_text">
-                  <h4>Trainer 관이</h4>
+                  <h4>LiveStreaming</h4>
                   <span>more view</span>
                 </div>
               </div>
