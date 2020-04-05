@@ -29,7 +29,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide01.png" alt="KOZ">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/sportsHistory.jpg" title="">
+                  <img src="${pageContext.request.contextPath}/resources/images/main/main6.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>History</h4>
@@ -63,7 +63,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/dvwn_main.png" alt="다운">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer3.jpg" title="">
+                  <img style="width: 80%;" src="${pageContext.request.contextPath}/resources/images/main/trainer3.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>Trainer 연문</h4>

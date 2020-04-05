@@ -83,17 +83,29 @@
                   </ul></li>
                <li><a href="#" class="artist_open">Training</a>
                   <ul class="artist_depth02">
-                     <li><a href="${pageContext.request.contextPath}/classlist">streaming</a></li>
+                     <li><a href="${pageContext.request.contextPath}/classlist">Streaming</a></li>
                      <li><a href="${pageContext.request.contextPath}/meeting">Offline
                            Meeting</a></li>
-                     <li><a href="${pageContext.request.contextPath}/calender">event</a></li>
+                     <li><a href="${pageContext.request.contextPath}/calender">Event</a></li>
                   </ul></li>
-               <li><a href="${pageContext.request.contextPath}/review"
-                  class="artist_open">Review</a></li>
-               <li><a href="${pageContext.request.contextPath}/faq1"
-                  class="artist_open">FAQ</a></li>
+               <li><a href="#" class="artist_open">Review</a>
+               	<ul class="artist_depth02">
+               		<li><a href="${pageContext.request.contextPath}/review"
+                  class="artist_open">Review</a>
+                  </li>
+                 </ul> 
+                </li>
+               <li><a href="#" class="artist_open">FAQ</a>
+               	<ul class="artist_depth02">
+               		<li><a href="${pageContext.request.contextPath}/faq1"
+                  class="artist_open">FAQ</a>
+                  </li>
+                 </ul> 
+                </li>
+            </ul>
+            <ul class="user_case">
                <sec:authorize access="hasRole('ADMIN')">
-                  <li><a href="#" class="artist_open">Admin Page</a>
+                  <li><a href="#" class="artist_open">ADMIN PAGE</a>
                      <ul class="artist_depth02">
                         <li><a href="${pageContext.request.contextPath}/admin/user">Manage
                               User</a></li>
@@ -112,16 +124,9 @@
                      </ul></li>
 
                </sec:authorize>
-               <sec:authorize access="!isAuthenticated()">
-                  <li><a href="${pageContext.request.contextPath}/login"
-                     class="artist_open">Login</a></li>
-                  <li><a
-                     href="${pageContext.request.contextPath}/user/registrationform"
-                     class="artist_open">Join</a></li>
-               </sec:authorize>
                <sec:authorize access="isAuthenticated()">
                   <sec:authentication var="principal" property="principal" />
-                  <li><a href="#" class="artist_open">My Page</a>
+                  <li><a href="#" class="artist_open">MY PAGE</a>
                      <ul class="artist_depth02">
                         <li><a
                            href="${pageContext.request.contextPath}/auth/${principal.username}">My
@@ -135,16 +140,26 @@
                               Class</a></li>
                      </ul></li>
                   <li><a href="${pageContext.request.contextPath}/logout"
-                     class="artist_open">Logout</a></li>
+                     class="artist_open">LOGOUT</a>
+                     <ul class="artist_depth02">
+                     	<li><a></a></li>
+                     	<li><a></a></li>
+                     	<li><a></a></li>
+                     </ul>
+                  </li>
                   <!--  사용가능한 필드는 com.bit.hellopt.vo.CustomUserDetail에 있는 멤버 변수, 메서드 -->
                </sec:authorize>
-
-
+             	<sec:authorize access="!isAuthenticated()">
+                  <li><a href="${pageContext.request.contextPath}/login"
+                     class="artist_open">LOGIN</a></li>
+                  <li><a
+                     href="${pageContext.request.contextPath}/user/registrationform"
+                     class="artist_open">JOIN</a></li>
+               	</sec:authorize>
             </ul>
          </div>
          <div class="dim_bg"></div>
       </div>
-
    </aside>
    <!-- 네비게이션 끝 } -->
 
