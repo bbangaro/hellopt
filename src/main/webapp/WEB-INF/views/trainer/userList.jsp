@@ -10,6 +10,10 @@
 <title>트레이너 등록</title>
 </head>
 <body>
+<div class="container">
+		<div class="row">
+			<div class="col-xs-3 col-md-2"></div>
+			<div class="col-xs-12 col-md-8">
 <h2>트레이너 등록</h2>
 	<table>
 		<thead>
@@ -43,7 +47,7 @@
 							<c:when test="${ user.userRole eq 'ROLE_ADMIN' }">관리자</c:when>
 						</c:choose>
 					</td>
-					<td> <a class="management-anchor" href="${ pageContext.request.contextPath }/admin/trainerinsert?userId=${user.userId}">트레이너등록</a></td>
+					<td> <a class="management-anchor" href="${ pageContext.request.contextPath }/admin/trainerinsert?userId=${user.userId}">등록</a></td>
 				</tr>
 				
 			</c:forEach>
@@ -69,6 +73,9 @@
 	<input type="text" name="searchValue">
 	<input type="submit" value="검색">
 	</form>
-	
+	</div>
+			<div class="col-xs-3 col-md-2"></div>
+		</div>
+		</div>
 </body>
 </html>
