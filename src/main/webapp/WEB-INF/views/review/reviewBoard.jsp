@@ -28,9 +28,6 @@
 	text-align: center; 
 }
 	.btn{color: white;}
-	.profile{ width: 100px; 
-				height: auto;
-	}
 	td .star{
 		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 		  background-size: auto 100%;
@@ -40,7 +37,7 @@
 		  text-indent: -9999px;
 		  cursor: pointer;
 		}
-	td .star.on{background-position:0 0;}
+	div .star.on{background-position:0 0;}
 	
 	a {
 		text-decoration: none;
@@ -86,34 +83,41 @@
 <c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
 <form>
 <table class="tbl_wrap">
-	<thead class="tbl_head01">
-		<tr>
-		<sec:authorize access="isAuthenticated()">
-		<sec:authentication var="principal" property="principal" />
-		<c:if test="${rBoard.userId == principal.username}">
-			<td>${rBoard.revIdx }</td>
-			<td><input type = "button" value="글 수정" onclick = "modify(${rBoard.revIdx})"></td>
-			<td><input type = "button" value="글 삭제" onclick = "del(${rBoard.revIdx })"></td>
-		</c:if>
-		</sec:authorize>
-		</tr>
+	<thead class="tbl_head">
 		<tr>
 			<c:if test="${rBoard.userFileName == null }">
-			<td rowspan="3"><img class='profile' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png"></td>
+			<td height="50" width="35px" rowspan="35px" rowspan="2">
+				<img class='profile' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png">
+			</td>
 			</c:if>
 			<c:if test="${rBoard.userFileName != null }">
-			<td rowspan="3"><img class='profile' src="/hellopt/file/${rBoard.userFileName}"></td>
+			<td height="50" width="35px" class="picture" rowspan="2">
+				<img class='profile' src="/hellopt/file/${rBoard.userFileName}">
+			</td>
 			</c:if>
-			<td>글쓴이 : ${rBoard.userName }</td>  
-		</tr>
-		<tr>
-			<td>수업이름</td>
-		</tr>
-		<tr>
-		<!--별점기능 -->
-		<td class="starRev"> 
-<%-- 	if문 써서	<c:forEach var="i" begin="1" end="5" step="1" >
-				<c:if test="${i  > rBoard.revStar }">
+			<td>
+				<span>글쓴이 : ${rBoard.userName }</span>
+				<!-- 글수정삭제 메뉴 -->
+				<sec:authorize access="isAuthenticated()">
+				<sec:authentication var="principal" property="principal" />
+				<c:if test="${rBoard.userId == principal.username}">
+					<button type="button" data-toggle="collapse" data-target="#togle" class="menu">
+						<svg height="30" width="30" viewBox="0 0 60 60">
+		    			 <circle clip-rule="evenodd" cx="8" cy="24" r="4.5" style="fill:#b4000f;" /> 
+		    			 <circle clip-rule="evenodd" cx="24" cy="24" r="4.5" style="fill:#b4000f;" /> 
+		    			 <circle  cx="40" cy="24" r="4.5" style="fill:#b4000f;" /> 
+						</svg>
+					</button>
+					<div id="togle" class="collapse">	
+						<input type = "button" value="글 수정" onclick = "modify(${rBoard.revIdx})">
+						<input type = "button" value="글 삭제" onclick = "del(${rBoard.revIdx })">
+					</div>
+				</c:if>
+				</sec:authorize>
+				<!-- 글수정삭제 메뉴 끝 -->
+			<div class="starRev"> 
+				<%-- 	if문 써서	<c:forEach var="i" begin="1" end="5" step="1" >
+			<c:if test="${i  > rBoard.revStar }">
 					<span class="star"></span>
 				</c:if>	
 				<c:if test="${i  <= rBoard.revStar }">
@@ -126,52 +130,61 @@
 			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
 				<span class="star">${i}</span>
 			</c:forEach>   
-			</td>
+			</div>
+			</td>  
 		</tr>
+		<!--별점기능 -->
 	</thead>
+	
 	<tbody>
 		<tr>
 			<td colspan="2">
-			<p>내용 :${rBoard.revContent}</p>
 			<!--이미지 사진 업로드한부분 나오는곳  -->
 			<c:forEach var="file" items="${rBoard.filevo }">
-				<p><img width="500px" src="/hellopt/s3/review/${file.revFileSname } "><p>
+				<a id="prev" href="#">prev</a>
+					<img class="content_img" width="500px" src="/hellopt/s3/review/${file.revFileSname } ">
+				<a id="next" href="#">next</a>
 			</c:forEach>
+			<div id="content">내용 :${rBoard.revContent}</div>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">날짜 :<fmt:formatDate value="${rBoard.revRegdate }" type="date"/></td>
 		</tr>
-		</tbody>
-		<tr>
-		</table>
+	</tbody>
+	</table>
 </form>		
 <form class="commentForm" name="commentFrom" method="post">		
-	<table>
+	<table class = "rply_wrap">
 		<tr>
-		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
-			<td>
-				<input type = "button" value="댓글보기" onclick = "listReply2(${rBoard.revIdx })">
+			<td colspan="2">
+				<a href="#demo" data-toggle="collapse" value="댓글보기"  class = "more_rpl" onclick = "listReply2(${rBoard.revIdx })">댓글보기</a>
 			</td>
 		</tr> 
 		<!-- 댓글 작성 폼 -->
-		<tr>
-			<td>
+		<tr class="rpl_area">
+			<td class="rpl_write_area">
 				<textarea rows="2" cols="80" class="revCmtComment${rBoard.revIdx }" name="revCmtComment" placeholder="댓글 달기..."></textarea>
 			</td>
 			<td>
-			<input type ="button" value="댓글등록" class="btn${rBoard.revIdx }" onclick = "createCmt(${rBoard.revIdx })">
+		<sec:authorize access="isAuthenticated()">
+			<input type ="button" value="댓글등록" class = "rplbtn" class="btn${rBoard.revIdx }" onclick = "createCmt(${rBoard.revIdx })">
+		</sec:authorize>
+		<sec:authorize access="isAnonymous()">
+			<input type ="button" value="댓글등록" class = "rplbtn" class="btn${rBoard.revIdx }" onclick = "createCmt2(${rBoard.revIdx })">
+		</sec:authorize>
 				<!-- <button type="button" class="btnReply">댓글등록</button> -->
 			</td>	
 		</tr>
-		
+		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
 	</table>
 		<div class="listReply${rBoard.revIdx }"></div>
 	</form>
 </c:forEach>
-
-	<!--페이징 -->
 	<br><br><br>
+	<table>
+	<!--페이징 -->
+	<tr>
 	<td colspan="4">
 		<ol class="paging">
 			<c:choose>
@@ -214,12 +227,12 @@
 			</c:choose>
 		</ol>
 	</td>
+	</tr>
+</table>
  	<!--페이징끝 -->
-
 </div>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
-
 //게시글 수정 삭제 시작
 function del(revIdx) {
 	var chk = confirm("정말 삭제 하시겠습니까?");
@@ -237,7 +250,7 @@ function modify(revIdx) {
 //댓글작성하기
 function createCmt(revIdx) {
       console.log(revIdx)
-      var revCmtComment=$(".revCmtComment" + revIdx).val();
+      var revCmtComment= $(".revCmtComment" + revIdx).val();
       console.log(revCmtComment);
       var param="revCmtComment=" + revCmtComment + "&revIdx=" + revIdx;
       console.log(param);
@@ -253,11 +266,17 @@ function createCmt(revIdx) {
          }
       });
    }
+function createCmt2(revIdx) {
+	var chk = confirm("로그인 사용자만 댓글을 남길 수 있습니다. 로그인 페이지로 이동합니다.");
+	if(chk){
+		location.href = '${pageContext.request.contextPath}/login';	
+	}
+
+   }
 
   	//댓글 수정하기
   	//수정폼
    function modReple(revCmtIdx,revCmtRegdate,revCmtComment,revIdx, userName){
-  		console.log()
 	   var 	output = "<table id='revCmtIdx"+revCmtIdx+"'>";
 			output +="<tr>";
 			output +="<td>" + userName;
@@ -326,7 +345,7 @@ function createCmt(revIdx) {
 			success:function(result){
 				console.log(result);
 				if(result.length > 0){
-					var output = "<table>";
+					var output = "<table id='demo'class='collapse'>";
 					for(var i in result){
 						output +="<tr>";
 						output +="<td>" + result[i].userName;
@@ -338,7 +357,7 @@ function createCmt(revIdx) {
 					}
 					output +="</table>";
 				} else {
-					var output = "<table>";
+					var output = "<table id='demo'class='collapse'>";
 					output +="<tr>";
 					output +="<td><h6>등록된 댓글이 없습니다.</h6></td>";
 					output +="</tr>";

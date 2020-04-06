@@ -10,40 +10,6 @@
 
 <style>
 
- 		input[type=file] {
-            display: none;
-        }
-
-        .my_button {
-            display: inline-block;
-            width: 200px;
-            text-align: center;
-            padding: 10px;
-            background-color: pink;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        #fileDiv {
-
-            border: 2px solid #A8A8A8;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-
-        }
-        #fileDiv img {
-            max-width: 150px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        .imgs_wrap img {
-            max-width: 150px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
 	td .star{
 		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 		  background-size: auto 100%;

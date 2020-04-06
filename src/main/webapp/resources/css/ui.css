@@ -22,3 +22,186 @@ a:link, a:visited {text-decoration: none; color: #656565;}
 .btn {border-radius:3px;padding:5px 11px;color:#fff !important; display:inline-block;
 	 background-color:#6b9ab8; border:1px solid #56819d;vertical-align:middle}
 
+
+td{
+	text-align: left;
+}
+#togle{
+	float:right;
+	text-align: right;
+	border: 1px solid #b4000f;
+	width:45px;
+	height:41px;
+	
+	
+}
+#togle input[type=button]{
+	width:44px;
+	outline:0;
+	border:0;
+	background-color: #b4000f;
+	color:white;
+}
+.menu{
+	display:inline-block;
+	-webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: right;
+    background: 0 0;
+    border: 0;
+    cursor: pointer;
+
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 1px;
+    float: right;
+}
+button {
+	
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: center;
+    cursor: default;
+    font: 400 13.3333px Arial;
+        }
+
+.profile{
+	border-radius: 50% !important;
+	width: 65px;
+	height: 65px;
+    margin: 10px;
+}
+
+.tbl_wrap{
+	margin-top:50px;
+	width:600px;
+	box-align: center;
+    align-items: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 16px;
+	height:800px;
+	align: center;
+	padding:10px 11px;color:#fff !important;
+	border: 1px solid #b4000f;
+}
+#content{
+	height:400px;
+}
+.content_img{
+	background-color: #efefef;
+    background-color: rgba(var(--bb2,239,239,239),1);
+    display: block;
+    width: 100%;
+    height:600px;
+}
+textarea{
+    background: 0 0;
+    border: 0;
+    color: white;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    font-size: inherit;
+    height: 18px;
+    max-height: 80px;
+    outline: 0;
+    padding: 0;
+    resize: none;
+}
+.tbl_wrap2{
+	weight:500px;
+	align: center;
+	padding:10px 11px;color:#fff !important;
+	border: 1px solid #b4000f;
+}
+.tbl_head{
+	height:200px;
+	border: 1px solid #b4000f;
+	border-radius: 5px;
+}
+
+ 		input[type=file] {
+            display: none;
+        }
+
+        .my_button {
+            display: inline-block;
+            width: 200px;
+            text-align: center;
+            padding: 10px;
+            background-color: pink;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        #fileDiv {
+
+            border: 2px solid #A8A8A8;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+        }
+        #fileDiv img {
+            max-width: 150px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .imgs_wrap img {
+            max-width: 150px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    input[type='button'].more_rpl{
+	border:0 solid #ff0080;
+	background-color:transparent ;
+	outline:0;    /*---테두리 정의---*/
+	font-family: 'Nocturne Serif', 'Noto Sans KR', 'Malgun Gothic', dotum,
+		sans-serif;
+	font-size: 12px;     /*--폰트 정의---*/
+	font-weight:bold;   /*--폰트 굵기---*/
+	color:#b4000b;    /*--폰트 색깔---*/
+	width:130;height:30;  /*--버튼 크기---*/
+}
+    input[type='button'].rplbtn{
+	border:0 solid #ff0080;
+	background-color:transparent ;
+	outlint:0;    /*---테두리 정의---*/
+	font-family: 'Nocturne Serif', 'Noto Sans KR', 'Malgun Gothic', dotum,
+		sans-serif;
+	font-size: 12px;   /*--폰트 정의---*/
+	font-weight:bold;   /*--폰트 굵기---*/
+	color:#b4000b;    /*--폰트 색깔---*/
+	width:130;height:30;  /*--버튼 크기---*/
+}
+.more_rpl{
+	
+}
+.rply_wrap{
+	width:600px;
+	box-align: center;
+    align-items: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 16px;
+	align: center;
+	padding:10px 11px;color:#fff !important;
+	border: 1px solid #b4000f;
+}
