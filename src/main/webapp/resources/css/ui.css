@@ -26,22 +26,7 @@ a:link, a:visited {text-decoration: none; color: #656565;}
 td{
 	text-align: left;
 }
-#togle{
-	float:right;
-	text-align: right;
-	border: 1px solid #b4000f;
-	width:45px;
-	height:41px;
-	
-	
-}
-#togle input[type=button]{
-	width:44px;
-	outline:0;
-	border:0;
-	background-color: #b4000f;
-	color:white;
-}
+
 .menu{
 	display:inline-block;
 	-webkit-box-align: center;
@@ -51,7 +36,6 @@ td{
     background: 0 0;
     border: 0;
     cursor: pointer;
-
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
@@ -59,6 +43,21 @@ td{
     padding: 1px;
     float: right;
 }
+#togle{
+	float:right;
+	text-align: right;
+	width:45px;
+	height:41px;
+		
+}
+#togle input[type=button]{
+	width:44px;
+	outline:0;
+	border:0;
+	background-color: #b4000f;
+	color:white;
+}
+
 button {
 	
     -webkit-writing-mode: horizontal-tb !important;
@@ -138,17 +137,16 @@ textarea{
  		input[type=file] {
             display: none;
         }
-
-        .my_button {
-            display: inline-block;
-            width: 200px;
-            text-align: center;
-            padding: 10px;
-            background-color: pink;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+.ajaxbtn{
+	padding:2px;
+	margin:3px;
+	width:30px;
+	outline:0;
+	border:0;
+	background-color: #b4000f;
+	color:white;
+	
+}
 
         #fileDiv {
 

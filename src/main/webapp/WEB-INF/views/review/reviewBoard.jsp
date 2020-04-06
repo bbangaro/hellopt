@@ -337,7 +337,6 @@ function createCmt2(revIdx) {
    }
 
 	function listReply2(revIdx){
-		 
 		$.ajax({
 			type: "get",
 			//contentType: "application/json", ==>생략가능 (RestController가 )
@@ -345,14 +344,19 @@ function createCmt2(revIdx) {
 			success:function(result){
 				console.log(result);
 				if(result.length > 0){
-					var output = "<table id='demo'class='collapse'>";
+					var output = "<table>";
 					for(var i in result){
 						output +="<tr>";
 						output +="<td>" + result[i].userName;
 						output +="(" +changeDate(result[i].revCmtRegdate)+")<br>";
 						output += result[i].revCmtComment +"<br>";
-						output +="<input type='button' value='댓글 수정' onclick= modReple(" + result[i].revCmtIdx +","+ result[i].revCmtRegdate + ",'"+result[i].revCmtComment+"',"+ result[i].revIdx + ",'" + result[i].userName +"')>";
-						output +="<input type='button' value='댓글 삭제' onclick= delReple(" + result[i].revCmtIdx + ","+ result[i].revIdx + ")>";
+						output +="<sec:authorize access='isAuthenticated()'>";
+						output +="<sec:authentication var='principal' property='principal' />";
+						output +="<c:if test="${result[i].userId == principal.username}">";
+						output +="<input type='button' value='수정' class='ajaxbtn' onclick= modReple(" + result[i].revCmtIdx +","+ result[i].revCmtRegdate + ",'"+result[i].revCmtComment+"',"+ result[i].revIdx + ",'" + result[i].userName +"')>";
+						output +="<input type='button' value='삭제' class='ajaxbtn' onclick= delReple(" + result[i].revCmtIdx + ","+ result[i].revIdx + ")>";
+						output +="</c:if>";
+						output +="</sec:authorize>";
 						output +="</td></tr>";
 					}
 					output +="</table>";

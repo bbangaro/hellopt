@@ -126,7 +126,9 @@ public class RBoardController {
 			vo1.setFilevo(rService.getFileList(vo1.getRevIdx()));
 		}
 		System.out.println("현재페이지 글목록(list): " + userjoin.toString());
-
+		
+		
+		
 		model.addAttribute("rBoardList", userjoin);
 		model.addAttribute("pvo", p);
 /*		List<RCommentVO> list = rCmtService.joinCmt(vo.getRevIdx());
