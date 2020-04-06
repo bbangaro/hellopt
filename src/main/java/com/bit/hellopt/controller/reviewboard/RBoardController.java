@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -196,15 +197,17 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review/updateform")
-	public String updateBoardForm(Model model,@RequestParam("revIdx")int revIdx) {
+	public String updateBoardForm(Model model,RFileVO fvo,@RequestParam("revIdx")int revIdx) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		
+		RFileVO f = new RFileVO();
 		RBoardVO userjoin = rService.Join3(revIdx);
 		
 		List<RFileVO> filevo = rService.getFileList(revIdx);
 		//이미지 업로드한거 보여주기
 		userjoin.setFilevo(filevo );
 
+		model.addAttribute("img", f);
 		model.addAttribute("rBoard", userjoin);
 		model.addAttribute("fileList", filevo);
 		System.out.println("수정페이지 글정보(list): " + userjoin.toString());
@@ -212,14 +215,14 @@ public class RBoardController {
 		return "review/revUpdateForm";
 	}
 	@PostMapping("/updaterboard")
-	public String updateRBoard(@ModelAttribute("rBoard")RBoardVO vo, Model model,
+	public String updateRBoard(@ModelAttribute("rBoard")RBoardVO vo, RFileVO fvo, Model model,
 			MultipartHttpServletRequest multi,
 			@AuthenticationPrincipal CustomUserDetail customUser ) 
 					throws IllegalStateException, IOException{
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 
 		System.out.println("vo:" + vo.toString());
-		
+		model.addAttribute("img", fvo);
 
 		rService.updateBoard(vo);
 
@@ -251,7 +254,7 @@ public class RBoardController {
 				System.out.println("저장된 파일 이름 : " + saveFileName);
 				long fileSize = fileList.get(i).getSize(); //파일사이즈
 				System.out.println("저장된 파일 사이즈 : " + fileSize);
-				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				//fileList.get(i).transferTo(new File(savePath)); //파일 저장
 				System.out.println("저장된 파일 경로" + savePath);
 				
 				System.out.println("revFileOname, saveFileName, fileSize: "+ revFileOname+ saveFileName + fileSize + revIdx);
@@ -312,23 +315,15 @@ public class RBoardController {
 		}
 		return "redirect:/review";
 	}
-	@RequestMapping("/imgDel")
+	
+	@PostMapping("/review/imgDel")
 	@ResponseBody
-	public void imguploadDel(MultipartHttpServletRequest multi,String revFileSname) {
-		System.out.println("데이터");
-		System.out.println(revFileSname);
+	public int uploadFileDel(@RequestParam(value="revFileIdx", required = false)int revFileIdx,
+			@ModelAttribute RFileVO fvo, RBoardVO vo, Model model) {
+		System.out.println("컨트롤러이미지삭제:"+revFileIdx);
+		rService.uploadFileDel(revFileIdx);
 		
-		String path = "C:/hellopt_file/";
-		String savePath = path + revFileSname; //저장될 파일 경로
-		System.out.println(savePath);
-		
-		File file = new File(savePath);
-		if(file.exists()==true) {
-			file.delete();
-		}
-
-		
-		
+		return 1;
 	}
 	
 	

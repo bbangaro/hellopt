@@ -25,9 +25,7 @@
             border-radius: 5px;
         }
 
-
-
-        .imgs_wrap {
+        #fileDiv {
 
             border: 2px solid #A8A8A8;
             margin-top: 30px;
@@ -35,6 +33,11 @@
             padding-top: 10px;
             padding-bottom: 10px;
 
+        }
+        #fileDiv img {
+            max-width: 150px;
+            margin-left: 10px;
+            margin-right: 10px;
         }
         .imgs_wrap img {
             max-width: 150px;
@@ -83,8 +86,14 @@
 			
 			var reader = new FileReader();
 			reader.onload = function(e){
-				var html = 
-					"<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id = \"img_id" +index+"\"><img src=\"" + e.target.result + "\" data-file='" + f.name + "' class='selProductFile' title='Click to remove'></a>";
+				var html ="<span class ='img_id_"+index+"'>";
+					html +="<img src="+ e.target.result+" >";
+					html +="<input type='button' value='삭제' onclick='deleteImageAction("+index+")'>";
+					html +="</span>";
+				//var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id = \"img_id" +index+"\">";
+					//html +="<img src=\"" + e.target.result + "\" data-file='" + f.name + "' class = \"img_id" +index+"\"  title='Click to remove'>";
+					//html +="</a>";
+					
 				$(".imgs_wrap").append(html);
 				index++;
 				
@@ -93,17 +102,35 @@
 		});
 	}
 	
-	//다중 파일 미리보기에서 특정 이미지만 삭제하기
+	//다중 파일 업로드 할때 특정 이미지만 삭제하기
 	function deleteImageAction(index){
-		alert("이미지삭제");
-		console.log("index : " + index);
+		alert("미리보기삭제" + index);
+		console.log("sel_files : " + sel_files);
 		sel_files.splice(index, 1);
 		
-		var img_id = "#img_id_" + index;
-		$(img_id).remove();
+		var imgid = ".img_id_" + index;
+		console.log("imgid:" + imgid);
 		
-		console.log("sel_files:"+sel_files);
+		$(imgid).remove();
+		console.log("sel_files : " + sel_files);
 	}
+	//수정할 때 기존에 올려져 있던 이미지 삭제부분
+	function imgDel(revFileIdx){
+		alert("이미지삭제" + revFileIdx);
+		console.log(revFileIdx);
+			   $.ajax({
+				   url:"imgDel?revFileIdx="+revFileIdx,
+					type:"post",
+					data: {"revFileIdx" : revFileIdx},
+					success:function(){
+						$('#uploadedimg'+revFileIdx).remove();
+						alert("삭제되었습니다."+revFileIdx);
+					}
+			  		,error:function(error){
+			   			console.log("에러:" + error);
+			   		}
+			   })
+		   }
 </script>	
 </head>
 <body>
@@ -128,7 +155,6 @@
 		</colgroup>
 		<tbody>
 		<tr>
-			
 			<td>별점</td>
 			<td class="starRev">
 			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
@@ -149,25 +175,25 @@
 	
 	<!--  이미지 미리보기 -->
 	<div>	
-		<h2><b>이미지 미리보기</b></h2>
+		
 		<div class = "input_wrap">
 			<a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
 			<input type="file"  multiple="multiple" id="input_imgs"  name="file_0" >
 		</div>
 	</div>	
-	
 	<div id = "fileDiv">
+	<h2><b>이미지 미리보기</b></h2>
+	<br><br>
 			<c:forEach var="file" items="${rBoard.filevo }">
-				<div class="imgs_wrap">
-					<img id="uploadedimg" src = "/hellopt/s3/review/${file.revFileSname }" >${file.revFileOname } 
-						<img id="img" >
-				</div>
+					<span id="uploadedimg${file.revFileIdx }">
+					<img  src = "/hellopt/s3/review/${file.revFileSname }" >
+					<input type="button" value="삭제" onclick="imgDel(${file.revFileIdx})">
+					</span>
 			</c:forEach>
+				<span class="imgs_wrap">
+					<img class = "img">
+				</span>
 	</div>
-
-
-	
-	
 	<a href="#this" id="list" class="btn">목록으로</a>
 	<a href="#this" id="modify" class="btn">수정완료</a>
 </form>	
@@ -176,43 +202,31 @@
 
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script type="text/javascript">
- 	
+$(document).ready(function(){
+		$("#list").on("click", function(e){
+			e.preventDefault();
+			fn_openBoardList(); 
+		})
+		$("#modify").on("click", function(e){
+			e.preventDefault();
+			fn_modifyBoard();
+		})
+		
+	});
  	function fn_openBoardList(){
  		var comSubmit = new ComSubmit();
- 		console.log("<c:url value='/reviewBoard'/>");
- 		comSubmit.setUrl("<c:url value='/reviewBoard'/>");
+ 		console.log("<c:url value='/review'/>");
+ 		comSubmit.setUrl("<c:url value='/review'/>");
  		comSubmit.submit();
  	}
- 	
+
  	function fn_modifyBoard(){
  		var comSubmit = new ComSubmit("frm");
  		comSubmit.setUrl("<c:url value='/updaterboard'/>");
  		comSubmit.submit();
  	}
-</script>
-<!-- <script>	
-	//다중 파일 post 전송
-	function submitAction(){
-		var data = new FormData();
-		
-		for(var i = 0, len=sel_files.length; i < len; i++){
-			var name = "image_" + i;
-			data.append(name, sel_files[i]);
-		}
-		data.append("image_count", sel_files.length);	
-		
-		
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "./study01_af.php");
-			xhr.onload = function(e){
-				if(this.status == 200){
-					console.log("Result:" + e.currentTarget.responseText);
-				}
-			}
-			xhr.send(data);
-		}
-</script> -->
 
+</script>
 <script>
  	//별점 스크립트부분
 	$('.starRev span').click(function(){

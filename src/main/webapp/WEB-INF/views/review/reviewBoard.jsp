@@ -306,7 +306,7 @@ function createCmt(revIdx) {
 		   
 		   url:"reply/delete?revCmtIdx="+revCmtIdx,
 			type:"post",
-			data:{"revIdx" : $("${rBoard.revIdx }").val(),"revCmtIdx" : revCmtIdx},
+			data:{"revIdx" : revIdx,"revCmtIdx" : revCmtIdx},
 			success:function(result){
 				listReply2(revIdx);
 				alert("삭제되었습니다."+revCmtIdx);

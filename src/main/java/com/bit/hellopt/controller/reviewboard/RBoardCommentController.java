@@ -99,7 +99,7 @@ public class RBoardCommentController {
 					throws IllegalStateException, IOException{
 		System.out.println("cvo"+cvo);
 		System.out.println("댓삭");
-		rCmtService.cmtDelete(revCmtIdx);;
+		rCmtService.cmtDelete(revCmtIdx);
 		
 	}
 	//댓글 목록 (@controller방식 : view 화면을 리턴)

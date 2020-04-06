@@ -19,7 +19,7 @@ public interface RBoardService {
 	
 	//	파일처리부분
 	void uploadFile(String revFileOname, String saveFileName, long fileSize, int revIdx);
-	void imguploadDel(String revFileSname);
+	void uploadFileDel(int revFileIdx);
 	List<RBoardVO> getRBoardList();
 
 	List<RFileVO> getFileList(int revIdx);
