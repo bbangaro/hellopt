@@ -23,8 +23,8 @@
 					<div class="tit-wr tit-wr-ani">
 						<h2>강의 상세정보</h2>
 					</div>
+					<!-- //tit-wr -->
 					<div class="sub-content">
-
 						<div class="content-area clearfix">
 							<!-- 썸네일 -->
 							<div class="live_img_area">
@@ -35,7 +35,7 @@
 							</div>
 							<!--//썸네일-->
 						</div>
-
+						<!-- //sub-content -->
 						<div class="basic-table">
 							<table>
 								<colgroup>
@@ -79,13 +79,13 @@
 								</tr>
 							</table>
 						</div>
-
+						<!-- //basic-table -->
 						<div class="basic-caption">
 							<p>※ 강의 신청 인원이 초과된 강의는 신청할 수 없습니다.</p>
 							<p>※ 이미 신청이 완료된 강의는 다시 신청할 수 없으며, 신청 취소만 가능합니다.</p>
 							<p>※ 강의 신청과 관련된 문의사항은 hellopt@email.com으로 연락 바랍니다.</p>
 						</div>
-						
+						<!-- //basic-caption -->
 						
 						<sec:authorize access="isAuthenticated()">
 						<sec:authentication property="principal" var="user" />

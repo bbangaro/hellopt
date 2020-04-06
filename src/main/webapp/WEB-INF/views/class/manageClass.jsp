@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>강의 상세정보</title>
+<title>강의 관리</title>
 <meta charset="utf-8">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
@@ -57,6 +57,7 @@
 								</c:forEach>	
 							</table>
 						</div>
+						<!-- //basic-table -->
 					</div>
 					<!--sub-content-->
 					<!--top버튼-->

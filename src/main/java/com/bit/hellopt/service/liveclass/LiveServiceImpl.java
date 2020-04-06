@@ -14,21 +14,19 @@ public class LiveServiceImpl implements LiveService {
 	@Autowired
 	LiveMapper liveMapper;
 	
+	//강의 제목 조회
 	@Override
 	public String getClassName(int classIdx) {
 		return liveMapper.getClassName(classIdx);
 	}
 
+	//더보기
 	@Override
-	public int countClasses() {
-		return liveMapper.countClasses();
+	public List<LiveClass> moreClassList(int end) {
+		return liveMapper.moreClassList(end);
 	}
 
-	@Override
-	public List<LiveClass> pagingClassList(int end) {
-		return liveMapper.pagingClassList(end);
-	}
-
+	//랜덤 강의 조회
 	@Override
 	public LiveClass randomClass() {
 		return liveMapper.randomClass();

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>WebRTC Video Broadcasting</title>
+<title>일대다 스트리밍</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/live.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/reset.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/style.css">

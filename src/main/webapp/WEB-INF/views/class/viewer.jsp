@@ -5,7 +5,7 @@
 
 <html>
 <head>
-
+<title>일대다 스트리밍(유저)</title>
 <meta charset="UTF-8">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -30,7 +30,6 @@
 </script>
 </head>
 <body>
-	
 	<div id="wrapper">
 		<div class="tit-wr tit-wr-ani">
 			<h2>라이브 스트리밍</h2>
@@ -44,12 +43,14 @@
 			        	<div id="videos-container">
 			        		<video playsinline autoplay="autoplay"></video>
 			        	</div>
+			        	<!-- //videos-container -->
 			        	<div id="class-name"><p>${className } 강의입니다.</p></div>
 			        </div>
-			        
+			        <!-- //video-info -->
 			        <div id="chat-container">
 						<iframe id="chat" src="//hellopt-signal.herokuapp.com/" scrolling="no"></iframe>
 			        </div>
+			        <!-- //chat-container -->
 			    </section>
 			</article>
 		</div>
@@ -64,10 +65,8 @@
 
 	<input type="hidden" value="${className }" id="className">
 
-	
 	<!-- <script src="/socket.io/socket.io.js"></script> -->
     <script>
-    
 		var userId = $("#userid").val();
 		var roomId = ${classIdx };
 		

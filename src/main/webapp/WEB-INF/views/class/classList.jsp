@@ -23,14 +23,16 @@
 			<div class="con-inner sub-sub">
 				<div class="tit-wr tit-wr-ani">
 					<h2>스트리밍 강의 리스트</h2>
-				</div><!-- //tit-wr -->
+				</div>
+				<!-- //tit-wr -->
 
 				<div class="sub-content">
 					<!--콘탠츠 내용 시작. 내용 불러오기-->
 					<div class="content-area clearfix">
 						<div class="sub-tit-wr">
 							<h3 id="subject_">RECOMMENDED</h3>
-						</div><!-- //sub-tit-wr -->
+						</div>
+						<!-- //sub-tit-wr -->
 					<!-- 게시판 목록 시작 , 썸네일 이미지 -->
 					<div id="bo_gall" style="width: 100%">
 						<div class="gall_box rec_class">
@@ -38,11 +40,13 @@
 								<div class="thum_hover">
 									<div style="color: #ef0000;font-size: 2em;">${liveClass.classLength } 주간<br>${liveClass.classDay }<br>${liveClass.liveStatus }</div>
 								</div>
+								<!-- //thum_hover -->
 							</a>
 							<div class="gall_con">
 								<div class="gall_img">
 									<img id="rec_class_img" src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 								</div>
+								<!-- //gall_img -->
 								<div id="rec_class_info">
 									<p id="rec_class_info1">
 										<span>${liveClass.classType }</span>
@@ -50,8 +54,11 @@
 									<p id="rec_class_info2">${liveClass.className }</p>
 									<p id="rec_class_info3">${liveClass.classTime }</p>
 								</div>
+								<!-- //rec_class_info -->
 							</div>
+							<!-- //gall_con -->
 						</div>
+						<!-- //gall_box -->
 					
 						<div class="thum-tit-wr">
 							<h3 class="thum-tit">All CLASSES
@@ -62,7 +69,8 @@
 							</select>
 							</h3>
 						</div>
-
+						<!-- //thum-tit-wr -->
+	
 						<ul id="gall_ul" class="gall_row">
 							<c:forEach var="liveclass" items="${liveClassList }" begin="0" end="2">
 								<li class="gall_li col-gn-3">
@@ -71,11 +79,13 @@
 											<div class="thum_hover">
 												<div style="color: #ef0000;">${liveclass.classLength } 주간<br>${liveclass.classDay }<br>${liveclass.liveStatus }</div>
 											</div>
+											<!-- //class_info -->
 										</a>
 										<div class="gall_con">
 											<div class="gall_img">
 												<img src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
 											</div>
+											<!-- //gall_img -->
 											<div class="class_info">
 												<p class="class_info1">
 													<span>${liveclass.classType }</span>
@@ -83,7 +93,9 @@
 												<p class="class_info2">${liveclass.className }</p>
 												<p class="class_info3">${liveclass.classTime }</p>
 											</div>
+											<!-- //class_info -->
 										</div>
+										<!-- //gall_con -->
 										<c:choose>
 										<c:when test="${liveclass.classType eq '일대다' }">
 											<sec:authorize access="isAuthenticated()">
@@ -113,6 +125,7 @@
 										</c:otherwise>
 										</c:choose>
 									</div>
+									<!-- //gall_box -->
 								</li>
 							</c:forEach>
 						</ul>

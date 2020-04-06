@@ -8,11 +8,8 @@ public interface LiveService {
 	//강의 제목 불러오기
 	public String getClassName(int classIdx);
 	
-	//강의 개수 구하기
-	public int countClasses();
-	
 	//강의 리스트 페이징
-	public List<LiveClass> pagingClassList(int end);
+	public List<LiveClass> moreClassList(int end);
 	
 	//추천 강의 랜덤 선택
 	public LiveClass randomClass();

@@ -14,6 +14,7 @@ public class ClassMemberServiceImpl implements ClassMemberService {
 	@Autowired
 	ClassMemberMapper classMemberMapper;
 	
+	//강의 신청
 	@Override
 	public void insertClassMember(ClassMember info) {
 		classMemberMapper.insertClassMember(info);
