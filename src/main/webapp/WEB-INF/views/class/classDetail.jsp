@@ -28,10 +28,11 @@
 						<div class="content-area clearfix">
 							<!-- 썸네일 -->
 							<div class="live_img_area">
-								<iframe width="560" height="315"
+								<!-- <iframe width="560" height="315"
 									src="https://www.youtube.com/embed/azxahQi6vFo" frameborder="0"
 									allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-									allowfullscreen></iframe>
+									allowfullscreen></iframe> -->
+								<img src="${pageContext.request.contextPath}/resources/images/class/classimg.jpg">
 							</div>
 							<!--//썸네일-->
 						</div>

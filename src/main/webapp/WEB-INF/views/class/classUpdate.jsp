@@ -39,7 +39,7 @@
 			          </li>
 			          <li>
 			            <label for="classType" class="sound_only">수업 유형</label>
-			            <select class="class-select" name="classType" required>
+			            <select class="class-select" name="classType" id="classType" required>
 			            	<option value="" hidden>수업 유형</option>
 			            	<option value="일대다">일대다</option>
 			            	<option value="다대다">다대다</option>
@@ -125,5 +125,17 @@
 </div>
 <!-- //wrapper -->
 <!-- 하단 끝 -->
+<script>
+	$("#classType").change(function() {
+		if ($("#classType").val() == '일대다') {
+			/* alert("일대다"); */
+			$("select option[value='100']").attr("selected", true);
+		} 
+		if ($("#classType").val() == '다대다') {
+			/* alert("다대다"); */
+			$("select option[value='4']").attr("selected", true);
+		};
+	});
+</script>
 </body>
 </html>

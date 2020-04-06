@@ -48,7 +48,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide02.png" alt="지코">-->
-                  <img style="width: 80%; height: 500px" src="${pageContext.request.contextPath}/resources/images/main/nutrition1.jpg" title="">
+                  <img style="width: 100%;" src="${pageContext.request.contextPath}/resources/images/main/nutrition3.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>Nutrition</h4>
@@ -82,7 +82,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide03.png" alt="SHOW ME WHAT YOU GOT">-->
-                  <img style="width: 80%;" src="${pageContext.request.contextPath}/resources/images/main/livestream.jpg" title="">
+                  <img style="width: 60%;" src="${pageContext.request.contextPath}/resources/images/main/streaming.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>LiveStreaming</h4>

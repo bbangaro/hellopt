@@ -128,11 +128,11 @@
 <script>
 	$("#classType").change(function() {
 		if ($("#classType").val() == '일대다') {
-			alert("일대다");
+			/* alert("일대다"); */
 			$("select option[value='100']").attr("selected", true);
 		} 
 		if ($("#classType").val() == '다대다') {
-			alert("다대다");
+			/* alert("다대다"); */
 			$("select option[value='4']").attr("selected", true);
 		};
 	});
