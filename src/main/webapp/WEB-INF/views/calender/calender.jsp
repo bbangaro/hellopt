@@ -25,6 +25,7 @@
 	     -->
 	    <div id="cal"></div>
 	    <!-- 달력이 생성될 위치 -->
+	    <h2>나에게 꼭 맞는 모임을 찾아 참여하세요</h2>
 		<div id="eventCalendar"></div>
 	    </div>
 	

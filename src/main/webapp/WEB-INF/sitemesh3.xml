@@ -7,4 +7,5 @@
 <mapping path="/calenderWrite" exclude="true"/>
 <mapping path="/calendarOne" exclude="true"/>
 <mapping path="/calendarUpdate" exclude="true"/>
+<mapping path="/pop" exclude="true"/>
 </sitemesh>

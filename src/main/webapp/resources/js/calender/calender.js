@@ -29,7 +29,7 @@
 					
 				 monthData();
 				 
-				 $("#cal").html('<img id="cal" class="calPop" src="/hellopt/resources/images/calendar/이벤트pop2.jpg">');
+				 //$("#cal").html('<img id="cal" class="calPop" src="/hellopt/resources/images/calendar/이벤트pop2.jpg">');
 
 			},
 			error : function(jqXHR, textStatus, errorThrown) {

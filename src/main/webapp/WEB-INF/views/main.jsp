@@ -107,5 +107,44 @@
     <script src="${pageContext.request.contextPath}/resources/js/main/mainslider.js"></script>
   
   </div>
+  <script type="text/javascript">
+
+		window.onload = function() {
+			
+			function notice_getCookie( name ){
+			
+			var nameOfCookie = name + "=";
+			var x = 0;
+			//쿠키의 길이가 0보다 작거나 같으면
+			while ( x <= document.cookie.length )
+			{
+			//쿠키 길이	
+			var y = (x+nameOfCookie.length);
+				//   쿠키 이름과 길이  == 쿠키 이름 0 같으면
+				if ( document.cookie.substring( x, y ) == nameOfCookie ) {
+				//              여기는 뭔소리죠	
+				if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
+				//            쿠키 길이
+				endOfCookie = document.cookie.length;
+				// 뭔소리야 ^^
+				return unescape( document.cookie.substring( y, endOfCookie ) );
+				}
+				x = document.cookie.indexOf( " ", x ) + 1;
+				if ( x == 0 )
+				break;
+				}
+				return "";
+				}
+										//쿠키 이름 정하기  / 완료됐을 때 이름 정하기
+				if ( notice_getCookie( "eventPopup" ) != "done" )
+				{
+				// 팝업창 오픈!
+				noticeWindow= window.open("/hellopt/pop", "", "width=700, height=830");
+				noticeWindow.opener = self;
+				}
+		}
+		
+
+	</script>
 
 </body>
