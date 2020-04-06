@@ -29,7 +29,9 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide01.png" alt="KOZ">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/mainfirst.jpg" title="">
+                  <%-- <img src="${pageContext.request.contextPath}/resources/images/main/mainfirst.jpg" title=""> --%>
+                  <video style="visibility: visible; width: 1500px;" autoplay="autoplay" muted="muted" loop poster=""> <source src="${pageContext.request.contextPath}/resources/images/main/main.mp4" type="video/mp4"></video>
+                  
                 </div>
                 <div class="content_text">
                   <h4>History</h4>
@@ -63,7 +65,7 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/dvwn_main.png" alt="다운">-->
-                  <img style="width: 80%;" src="${pageContext.request.contextPath}/resources/images/main/meeting.jpg" title="">
+                  <img style="width: 70%; height: 600px" src="${pageContext.request.contextPath}/resources/images/main/meeting2.jpg" title="">
                 </div>
                 <div class="content_text">
                   <h4>Offline Meeting</h4>
