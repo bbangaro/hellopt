@@ -45,7 +45,7 @@ var getSearch = document.getElementById('getSearch');
 						containerBody += '<div class="service-details">' ;
 						containerBody += '<img src="/hellopt/s3/meeting/'+getSearch.meetingFileVO[0].mSysImg+'">';
 						containerBody += '<div class="service-hover-text">';
-						containerBody += '<h3 class="msub">'+getSearch.mSubject+'</h3>';
+						containerBody += '<h3 class="msub textLine2">'+getSearch.mSubject+'</h3>';
 						//날짜 수정하기
 						containerBody += '<p class=mday>'+(mtoday-today)+'일 남음 </p>';
 						//여기 까지
@@ -109,7 +109,7 @@ var getSearch = document.getElementById('getSearch');
 						containerBody += '<div class="service-details">' ;
 						containerBody += '<img src="/hellopt/s3/meeting/'+getSearch.meetingFileVO[0].mSysImg+'">';
 						containerBody += '<div class="service-hover-text">';
-						containerBody += '<h3 class="msub">'+getSearch.mSubject+'</h3>';
+						containerBody += '<h3 class="msub textLine2">'+getSearch.mSubject+'</h3>';
 						//날짜 수정하기
 						containerBody += '<p class=mday>'+(mtoday-today)+'일 남음 </p>';
 						//여기 까지

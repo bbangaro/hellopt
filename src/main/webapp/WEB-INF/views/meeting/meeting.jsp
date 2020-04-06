@@ -38,7 +38,7 @@
 			  <div class="service-details">
 			    <img src="${pageContext.request.contextPath}/s3/meeting/${meeting.meetingFileVO[0].mSysImg }">
 			    <div class="service-hover-text">
-			      <h3 class="msub">${meeting.mSubject}</h3>
+			      <h3 class="msub textLine2">${meeting.mSubject}</h3>
 			      
 					<!-- 이건 현재 날짜 뽑는거 -->
 			      <c:set var="now" value="<%=new java.util.Date()%>" />
