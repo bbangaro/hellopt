@@ -21,6 +21,18 @@ $(".calInsert").click(function(){
 	
 	 // Create an FormData object 
 	var data = new FormData(form);
+	
+	if($("#uploadFile").val().length==0) {
+		alert("영상을 업로드하세요.");
+		$("#uploadFile").focus();
+		return false;
+	};
+	
+	if($("#mComment").val().length==0) {
+		alert("내용을 입력하세요.");
+		$("#mComment").focus();
+		return false;
+	};
 
 	 $.ajax({
          type: "POST",
@@ -41,3 +53,5 @@ $(".calInsert").click(function(){
      });
 	 
 });
+
+

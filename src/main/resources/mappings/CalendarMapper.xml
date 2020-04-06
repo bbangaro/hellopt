@@ -5,10 +5,11 @@
 <mapper namespace="com.bit.hellopt.data.CalendarMapper">
 	
 	<!-- json으로 받은 월에 해당하는 calender 데이터 -->
-	<select id="getMonth2" parameterType="String" resultType="com.bit.hellopt.vo.calendar.CalendarVO">
-		SELECT CALENDAR_IDX, FK_USER_ID, SUBSTR(TO_DATE(YYMMDD, 'YYYYMMDD'), 7, 2) YYMMDD, CONTENT, FILE_PATH, C_ORI_VIDEO, C_SYS_VIDEO
-		  FROM CALENDER_TB
+ 	<select id="getMonthList" parameterType="Map" resultType="CalendarVO">
+		SELECT CALENDAR_IDX, FK_USER_ID, SUBSTR(TO_DATE(YYMMDD, 'YYYYMMDD'), 7, 2) YYMMDD, CONTENT, FILE_PATH, C_ORI_VIDEO, C_SYS_VIDEO  
+		  FROM CALENDER_TB  
 		 WHERE (SUBSTR(TO_DATE(YYMMDD, 'YYYYMMDD'), 4, 2)) = #{month}
+		  AND FK_USER_ID = #{fkUserId}
 	</select>
 	
 	<!-- calender 원본 데이터 -->

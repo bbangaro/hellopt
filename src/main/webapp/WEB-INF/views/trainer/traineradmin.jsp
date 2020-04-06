@@ -22,7 +22,8 @@
             <c:forEach var="trainer" items="${trainerList }">
                 <div class="trainer trainerAdmin">
                     <a href="${pageContext.request.contextPath}/admin/trainerupdate?trainerIdx=${trainer.trainerIdx }">
-                       <img src="${pageContext.request.contextPath}/resources/images/trainer/${trainer.trainerProfile }" alt="트레이너" class="trainerImg_img">
+                        <img src="${pageContext.request.contextPath}/resources/images/trainer/${trainer.trainerProfile }" alt="트레이너" class="trainerImg_img">
+
                         <div class="trainer_caption">
                             <p class="captiontitle">
                             	${trainer.trainerNickname } ${trainer.trainerName }

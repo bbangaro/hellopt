@@ -77,4 +77,13 @@ public class CustomUserDetail implements UserDetails{
 	}
 	
 	
+	// 테스트 중( 서나)
+	
+	public String getAuth() {
+		return this.auth;
+	}
+
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 }

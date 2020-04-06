@@ -2,13 +2,14 @@ package com.bit.hellopt.service.calender;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.bit.hellopt.vo.calendar.CalendarVO;
 
 public interface CalendarService {
 	
 	//월 뽑기
-	List<CalendarVO> getMonth2(String month);
+	List<CalendarVO> getMonthList(Map<String, String> hm);
 	
 	//게시글 전체 조회
 	List<CalendarVO> getCalendar();

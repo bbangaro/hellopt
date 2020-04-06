@@ -11,6 +11,7 @@ import com.bit.hellopt.vo.meeting.MeetingVO;
 
 public interface MeetingMapper {
 	public List<MeetingVO> getMeetingVO();
+	public List<MeetingVO> getSearch(String searchKeyword);
 	public List<MeetingVO> getMeetingCnt();
 	
 	public List<LocalVO> getLocalVO();

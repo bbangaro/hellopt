@@ -25,12 +25,13 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 	// 로그인 한 전체
 	List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	// 1대 1
-	// Map<String, WebSocketSession> userSessionsMap = new HashMap<String,
-	// WebSocketSession>();
+	//Map<String, WebSocketSession> userSessionsMap = new HashMap<String, WebSocketSession>();
 	// 접속한 사용자에 대한 정보를 담을 map
 	private Map<String, WebSocketSession> users = new HashMap<>();
 	// 로그
 	private static Logger logger = LoggerFactory.getLogger(MeetingAlarmHandler.class);
+	
+	Principal principal;
 	
 	// ※클라이언트 연결 된 후
 	// WebSocketSession을 매개 변수로 받고 클라이언트가 연결된 후
@@ -39,8 +40,11 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.add(session);
+		
 		System.out.println("핸들러 페이지 소켓연결 : " + session.getId());
+		
 		users.put(session.getId(), session);
+		
 		System.out.println("연결 됐을 때 유저 : " +session.getId());
 	}
 
@@ -53,7 +57,9 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 		System.out.println("핸들러 페이지 소켓연결 끝 : " + session.getId());
 
 		Map<String, Object> attrs = session.getAttributes();
+		
 		MeetingVO m = (MeetingVO) attrs.get("username");
+		
 		users.remove(m.getUserName());
 	}
 
@@ -66,13 +72,14 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 		sessions.add(session);
 		System.out.println("핸들러 페이지 아이디 소켓 정보 : " + session.getId());
 		System.out.println("핸들러 페이지 메시지 소켓 정보 : " + message.getPayload());
-
+		
 		// getpayload는 js에서 보낸 메시지 읽는거
-		String msg = message.getPayload();
+		String userRole = message.getPayload();
 		//String sendMsg = "";
 		//String[] arr = msg.split(":");
 		//sendMsg = arr[0] + " : " + arr[1] ;
-
+		users.put(session.getId()+userRole, session);
+		
 		Set<String> keys = users.keySet();
 		for (String key : keys) {
 			WebSocketSession wSession = users.get(key);

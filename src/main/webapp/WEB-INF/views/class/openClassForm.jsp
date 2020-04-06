@@ -26,7 +26,8 @@
 		<div class="con-inner sub-sub">
 		    <div class="tit-wr tit-wr-ani">
 		      <h2>스트리밍 강의 개설</h2>
-		    </div><!-- //tit-wr -->
+		    </div>
+		    <!-- //tit-wr -->
 		
 			<div class="sub-content">
 			  <div class="basic-table">
@@ -58,7 +59,8 @@
 							<button class="btn btn-danger rounded-0" type="button">
 								<i class="fas fa-calendar-alt"></i>
 							</button>
-						</div><!-- //input-group -->
+						</div>
+						<!-- //input-group -->
 					  </li>
 			          <li>
 			            <label for="classDay" class="sound_only">수업 요일</label>
@@ -112,11 +114,16 @@
 					</sec:authorize>
 			        <input type="submit" name="" value="Send" class="send-btn">
 			    </form>
-			  </div><!-- //basic-table -->
-		 	</div><!-- //sub-content -->
-		</div><!-- //con-inner-->
-	</div><!-- //con-wr-->
-</div><!-- //wrapper -->
+			  </div>
+			  <!-- //basic-table -->
+		 	</div>
+		 	<!-- //sub-content -->
+		</div>
+		<!-- //con-inner-->
+	</div>
+	<!-- //con-wr-->
+</div>
+<!-- //wrapper -->
 <!-- 하단 끝 -->
 <script>
 	$("#classType").change(function() {

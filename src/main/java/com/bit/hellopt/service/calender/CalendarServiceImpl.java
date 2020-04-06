@@ -2,6 +2,7 @@ package com.bit.hellopt.service.calender;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	// 월뽑기
 	@Override
-	public List<CalendarVO> getMonth2(String month) {
-		return calendarMapper.getMonth2(month);
+	public List<CalendarVO> getMonthList(Map<String, String> hm) {
+		return calendarMapper.getMonthList(hm);
 	}
 	
 	@Override

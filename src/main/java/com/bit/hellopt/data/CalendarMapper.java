@@ -2,12 +2,13 @@ package com.bit.hellopt.data;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.bit.hellopt.vo.calendar.CalendarVO;
 
 public interface CalendarMapper {
 	
-	public List<CalendarVO> getMonth2(String month);
+	public List<CalendarVO> getMonthList(Map<String, String> hm);
 	
 	public List<CalendarVO> getCalendar();
 	

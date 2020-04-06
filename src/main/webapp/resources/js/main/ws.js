@@ -3,19 +3,21 @@ var ws = null;
 //페이지가 로딩된 후 소켓객체 생성
 $(function() {
 	// 서버의 웹소켓 객체 연결하기 
+	// 우리 조 서버올릴 때 wss로 변경 해야함 
 	ws = new WebSocket("ws://localhost:8000/hellopt/alarm");
 	
 	//정상 연결 됐을 때 
 	ws.onopen = function () {
 		//var progressCnt = $("#progressCnt").val();
-		//var username = $("#username").val();
+		var userRole = $("#username").val();
 		
 		console.log("웹 소켓 접속 성공");
+		console.log("role : " + userRole);
 		/*
 		if ("${user.username}" != ""){
 		}
 		*/
-		ws.send("이힣");
+		ws.send(userRole);
 	};
 	
 	//서버에서 메시지가 왔을 때, 메시지 객체를 매개변수로 받는다

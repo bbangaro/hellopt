@@ -41,13 +41,20 @@
 										<a
 											href="${pageContext.request.contextPath}/classdetail?classIdx=${liveClass.classIdx }">
 											<div class="thum_hover">
-												<div style="color: #ef0000;">${liveClass.className }<br>${liveClass.classTime }<br>${liveClass.liveStatus }</div>
+												<div style="color: #ef0000;">${liveClass.classLength } 주간<br>${liveClass.classDay }<br>${liveClass.liveStatus }</div>
 											</div>
 										</a>
 										<div class="gall_con">
 											<div class="gall_img">
 												<img
 													src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
+											</div>
+											<div class="class_info">
+												<p class="class_info1">
+													<span>${liveClass.classType }</span>
+												</p>
+												<p class="class_info2">${liveClass.className }</p>
+												<p class="class_info3">${liveClass.classTime }</p>
 											</div>
 										</div>
 										<c:choose>
@@ -85,13 +92,20 @@
 										<a
 											href="${pageContext.request.contextPath}/classdetail?classIdx=${viwerLiveClass.classIdx }">
 											<div class="thum_hover">
-												<div style="color: #ef0000;">${viwerLiveClass.className }<br>${viwerLiveClass.classTime }<br>${viwerLiveClass.liveStatus }</div>
+												<div style="color: #ef0000;">${viwerLiveClass.classLength } 주간<br>${viwerLiveClass.classDay }<br>${viwerLiveClass.liveStatus }</div>
 											</div>
 										</a>
 										<div class="gall_con">
 											<div class="gall_img">
 												<img
 													src="${pageContext.request.contextPath }/resources/images/class/thumbnail.jpg">
+											</div>
+											<div id="rec_class_info">
+												<p id="rec_class_info1">
+													<span>${liveClass.classType }</span>
+												</p>
+												<p id="rec_class_info2">${liveClass.className }</p>
+												<p id="rec_class_info3">${liveClass.classTime }</p>
 											</div>
 										</div>
 										<c:choose>

@@ -11,26 +11,32 @@
 
 
 <body>
+		<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal" var="user" />
+		<input type="hidden" id="userName" value="${user.username} ">	
+		</sec:authorize>
+	
 
 	<div class="hello_body">
-	    
+	
 	    <div class="center">
+	    <!-- 
+	     <img id="cal" class="calPop" src="${pageContext.request.contextPath}/resources/images/calendar/이벤트pop2.jpg">
+	     -->
+	    <div id="cal"></div>
 	    <!-- 달력이 생성될 위치 -->
 		<div id="eventCalendar"></div>
-		
-		<!-- 
-		<c:forEach var="calendar" items="${calendarList}">
-			<input type="text" class="idx${calendar.calendarIdx}" value="${calendar.calendarIdx}" />
-		</c:forEach>
-		 -->
-	
-	
-		<script src="${pageContext.request.contextPath}/resources/js/calender/moment.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/calender/calender.js"></script>
-
 	    </div>
 	
 	</div>
 	
 
+		
+	    <script>
+	    var userName = '${user.username}';
+	    console.log("ㅜㅜ:" + userName);
+	    </script>
+	    
+		<script src="${pageContext.request.contextPath}/resources/js/calender/moment.min.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/calender/calender.js"></script>
 </body>

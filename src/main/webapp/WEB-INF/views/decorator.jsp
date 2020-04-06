@@ -62,13 +62,11 @@
 	<!-- <body></body> 태그 내용이 들어올 자리 -->
 	<div class="content">
 		<sitemesh:write property="body" />
-		<c:import url="/WEB-INF/views/footer.jsp" />
 	</div>
 
-	<!--  
 	<div class="footer">
+		<c:import url="/WEB-INF/views/footer.jsp" />
 	</div>
-	-->
 
 </body>
 

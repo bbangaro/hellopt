@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -57,6 +58,38 @@ public class MeetingController {
 		
 		model.addAttribute("meetingList", meetingList);
 		return "meeting/meeting";
+	}
+	
+	@RequestMapping("/searchKeyword")
+	@ResponseBody
+	public List<MeetingVO> getSearch(Model model, String searchKeyword) {
+		System.out.println("searchKeyword : " + searchKeyword);
+		
+		List<MeetingVO> getSearch = service.getSearch(searchKeyword);
+		
+		
+		for (MeetingVO vo : getSearch) {
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
+		System.out.println("getSearch : " + getSearch);
+		model.addAttribute("getSearch",getSearch);
+		
+		return getSearch;
+	}
+	
+	@RequestMapping("/meetingListAjax")
+	@ResponseBody
+	public List<MeetingVO> getSearch() {
+		
+		List<MeetingVO> meetingList = service.getMeetingVO();
+		System.out.println("getMeetingList 성공");
+		
+		for (MeetingVO vo : meetingList) {
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
+		return meetingList;
 	}
 	
 	@RequestMapping("/admin/meetingAdmin")

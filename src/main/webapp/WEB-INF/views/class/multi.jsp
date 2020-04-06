@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>다대다</title>
+<title>다대다 스트리밍</title>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/multi.css">
@@ -53,6 +53,7 @@
 							<div class="btn-call__ico">
 						  		<i class="fas fa-video"></i>
 							</div>
+							<!-- //btn-call__ico -->
 						</a>
 			        	<div id="class-name"><p>${className } 강의입니다. 연결을 위해 <i class="fas fa-video"></i> 버튼을 클릭해주세요.</p></div>
 			        	<div id="videos-container">
@@ -61,7 +62,9 @@
 							<video id="remoteVideo2" class="remoteVideo" autoplay></video>
 							<video id="remoteVideo3" class="remoteVideo" autoplay></video>
 			        	</div>
+			        	<!-- //videos-container -->
 			        </div>
+			        <!-- //video-info -->
 			    </section>
 			</article>
 		</div>

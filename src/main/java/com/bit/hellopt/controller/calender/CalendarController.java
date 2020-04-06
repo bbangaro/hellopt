@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
@@ -165,11 +166,14 @@ public class CalendarController {
 	
 	@RequestMapping("/selectMonth")
 	@ResponseBody // @ResponseBody 객체의 몸체(body)에 데이터 전달 (크롬브라우저만 가능)
-	public List<CalendarVO> selectMonth(String month) {
+	public List<CalendarVO> selectMonth(String month, String fkUserId) {
 		
-		List<CalendarVO> calenderList = service.getMonth2(month);
+		Map<String, String> hm = new HashMap<>();
 		
-		System.out.println(month);
+		hm.put("month", month);
+		hm.put("fkUserId", fkUserId);
+		
+		List<CalendarVO> calenderList = service.getMonthList(hm);
 		
 		return calenderList;
 	}

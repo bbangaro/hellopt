@@ -1,15 +1,84 @@
 @charset "utf-8";
 
+/* 추천 강의 */
+.rec_class {
+	width: 80%;
+    margin: auto!important;
+}
+
+#rec_class_info {
+	position: relative;
+    margin: 0 0 150px 0;
+    padding: 30px;
+    width: 100%;
+    line-height: 1;
+    background: #f5f5f5;
+    border: 0;
+}
+
+#rec_class_info1 {
+	margin-bottom: 20px;	
+	font-size: 2em;
+}
+
+#rec_class_info2 {
+	margin-bottom: 25px;
+    font-size: 50px;
+    letter-spacing: -1px;
+    line-height: 34px;
+    font-family: nanumEB, '맑은 고딕','Malgun Gothic','Helvetica','Apple SD Gothic Neo',AppleGothic,'돋움',Dotum,'굴림',Gulim,Helvetica,sans-serif;
+}
+
+#rec_class_info3 {
+	font-size: 30px;
+    font-weight: normal;
+    color: #777;
+}
+
+#rec_class_img {
+	width: 100%
+}
+
+.rec_class_wrapper {
+	display: inline-block;
+    vertical-align: top;
+    border: 0;
+    /* width: 80% */
+}
+
+/* 강의 정보 */
+.class_info {
+	padding: 15px;
+    width: 100%;
+    line-height: 1;
+    background: #f5f5f5;
+    color: black;
+}
+
+.class_info1 {
+	margin-bottom: 10px;	
+}
+
+.class_info2 {
+	margin-bottom: 10px;
+    font-size: 20px;
+    letter-spacing: -1px;
+    line-height: 34px;
+    font-family: nanumEB, '맑은 고딕','Malgun Gothic','Helvetica','Apple SD Gothic Neo',AppleGothic,'돋움',Dotum,'굴림',Gulim,Helvetica,sans-serif;
+}
+
+.class_info3 {
+	font-size: 15px;
+    font-weight: normal;
+    color: #777;
+}
+
 /* 방송 시작/방송 보기 버튼 */
  .broadcast {
-    padding: 0 7px;
-    margin: 0 auto;
+	padding: 2px 10px;
     margin-top: 8px;
     background: #b4000f;
-    font-family: 'Nocturne Serif','Noto Sans KR','Malgun Gothic', dotum, sans-serif;
-    font-size: 10px;
-    -webkit-appearance: none;
-    border-radius: 0;
+    font-size: 12px;
     color: white;
  }
 
@@ -37,7 +106,7 @@
 }
 #bo_gall .gall_li .gall_chk{position:absolute;top:0;left:0;padding:5px;}
 
-.gall_row .col-gn-0,.gall_row .col-gn-1,.gall_row .col-gn-2,.gall_row .col-gn-3,.gall_row .col-gn-4,.gall_row .col-gn-5,.gall_row .col-gn-6,.gall_row .col-gn-7,.gall_row .col-gn-8,.gall_row .col-gn-9,.gall_row .col-gn-10{position:relative;min-height:1px;padding-left:10px;*padding-left:0;padding-right:10px;*padding-right:0;float:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin-left:0;}
+.gall_row .col-gn-0,.gall_row .col-gn-1,.gall_row .col-gn-2,.gall_row .col-gn-3,.gall_row .col-gn-4,.gall_row .col-gn-5,.gall_row .col-gn-6,.gall_row .col-gn-7,.gall_row .col-gn-8,.gall_row .col-gn-9,.gall_row .col-gn-10{position:relative;min-height:1px;padding-left:10px;*padding-left:0;padding-right:10px;*padding-right:0;float:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin-left:0;margin-bottom: 20px;}
 .gall_row .col-gn-0,.latest_row .col-gn-1{width:100%}
 .gall_row .col-gn-2{width:50%}
 .gall_row .col-gn-3{width:33.33333333%}
