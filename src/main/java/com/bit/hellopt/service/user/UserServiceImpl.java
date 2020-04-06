@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService{
 		String tempPw = RandomStringUtils.random(12, true, true);
 		user.setUserPw(passwordEncoder.encode(tempPw));
 		xmlMapper.updateUser(user);
-		emailService.sendSimpleMessage(email, "HelloPT 임시 비밀번호 발급", "<p>임시비밀 번호 : " + tempPw + "</p><a href='https://hellopt.info/hellopt'>");
+		emailService.sendSimpleMessage(email, "HelloPT 임시 비밀번호 발급", "<p>임시비밀 번호 : " + tempPw + "</p><a href='https://hellopt.info/hellopt'>HelloPT로 이동</a>");
 		logger.info(user.getUserId(), " : 임시 비밀번호 발급 - " , tempPw);
 	}
 

@@ -25,7 +25,7 @@ public class EmailServiceImpl implements EmailService {
 		try {
 			MimeMessage message = emailSender.createMimeMessage();
 			
-			message.setSubject(subject);
+			message.setSubject(subject, "UTF-8");
 			MimeMessageHelper helper;
 			helper = new MimeMessageHelper(message, true, "UTF-8");
 			helper.setFrom("scvgo23@gmail.com");

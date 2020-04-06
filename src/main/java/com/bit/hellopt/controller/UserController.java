@@ -63,7 +63,7 @@ public class UserController {
 		
 		if(bindingResult.hasErrors()) {
 			logger.info("signupform: user validation error");
-			return "signupForm";
+			return "user/signupForm";
 		} else {
 			
 			if(!file.isEmpty()) {
@@ -155,6 +155,11 @@ public class UserController {
 		//meetingList.addAll(meetingService.getParticipantMeetingList(principal.getName()));
 		
 		List<MeetingVO> meetingList = meetingService.getParticipantMeetingList(principal.getName());
+		
+		for (MeetingVO vo : meetingList) {
+			vo.setMeetingFileVO(meetingService.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
 		model.addAttribute("meetingList", meetingList);
 		return "user/myMeeting";
 	}
