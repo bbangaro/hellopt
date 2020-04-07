@@ -15,7 +15,7 @@
 
     <div id="wrap">
         <div class="banner">
-            <img class="bnimg" src="${pageContext.request.contextPath}/resources/images/audition/a01.png" alt="에프터 서비스 배너 이미지">
+            <img class="bnimg" src="${pageContext.request.contextPath}/resources/images/audition/a01.jpg" alt="에프터 서비스 배너 이미지">
         </div>
         <div class="contents">
             <div class="textbox">
