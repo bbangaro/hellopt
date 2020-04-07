@@ -31,8 +31,8 @@
   float: right;
 }
 .datepicker-dropdown {
-  top: 972px !important;
-  left: 393px !important;
+  top: 993px !important;
+  left: 451px !important;
   padding: 12px;
 }
 .datepicker-dropdown:before {
@@ -73,14 +73,20 @@
   top: -6px;
 }
 .datepicker-dropdown.datepicker-orient-top:before {
+  /*
   bottom: -7px;
   border-bottom: 0;
   border-top: 7px solid rgba(0, 0, 0, 0.15);
+  */
+  top: -7px;
 }
 .datepicker-dropdown.datepicker-orient-top:after {
+  /*
   bottom: -6px;
   border-bottom: 0;
   border-top: 6px solid #fff;
+  */
+  top: -7px;
 }
 .datepicker table {
   margin: 0;

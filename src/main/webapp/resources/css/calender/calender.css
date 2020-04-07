@@ -27,7 +27,7 @@
       margin: 0 auto;
       height: 570px;
       overflow: hidden;
-      margin-top: 100px;
+      margin-top: 116px;
       margin-bottom: 200px;
     }
     
@@ -430,7 +430,7 @@
 }
 
 .hello_body h2 {
-  font-size: 42px;
+  font-size: 40px;
   font-weight: 600;
   text-shadow: 5px 5px 10px rgba(0,0,0,0.6);
 }
@@ -440,9 +440,16 @@
 
 /*라인 애니메이션 조정하는 곳*/
 .hello_body h2:after{
-  top: 189px;
+  top: 203px;
 }
 
 .hello_body h2 {
-  margin-top: 130px;
+  margin-top: 155px;
+}
+.hello_body p {
+	all: unset;
+    margin-left: 361px;
+    margin-top: 93px;
+    position: absolute;
+    font-size: 14px;
 }
