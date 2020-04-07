@@ -1,84 +1,10 @@
 @charset "UTF-8";
 
 a:link, a:visited {text-decoration: none; color: #656565;}
-
-.board_list {width:100%;border-top:2px solid #252525;border-bottom:1px solid #ccc}
-.board_list thead th:first-child{background-image:none} 
-.board_list thead th {border-bottom:1px solid #ccc;padding:12px 0 13px 0;color:#3b3a3a;vertical-align:middle}
-.board_list tbody td {border-top:1px solid #ccc;padding:10px 0;text-align:center;vertical-align:middle} 
-.board_list tbody tr:first-child td {border:none} 
-.board_list tbody td.title {text-align:left; padding-left:20px} 
-.board_list tbody td a {display:inline-block}
-
-.board_view {width:50%;border-top:2px solid #252525;border-bottom:1px solid #ccc} 
-.board_view tbody th {text-align:left;background:#f7f7f7;color:#3b3a3a} 
-.board_view tbody th.list_tit {font-size:13px;color:#000;letter-spacing:0.1px} 
-.board_view tbody .no_line_b th, .board_view tbody .no_line_b td {border-bottom:none}
-
-.board_view tbody th, .board_view tbody td {padding:15px 0 16px 16px;border-bottom:1px solid #ccc} 
-.board_view tbody td.view_text {border-top:1px solid #ccc; border-bottom:1px solid #ccc;padding:45px 18px 45px 18px} 
-.board_view tbody th.th_file {padding:0 0 0 15px; vertical-align:middle} 
-.wdp_90 {width:90%} 
 .btn {border-radius:3px;padding:5px 11px;color:#fff !important; display:inline-block;
 	 background-color:#6b9ab8; border:1px solid #56819d;vertical-align:middle}
 
 
-td{
-	text-align: left;
-}
-
-.menu{
-	display:inline-block;
-	-webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: right;
-    background: 0 0;
-    border: 0;
-    cursor: pointer;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    padding: 1px;
-    float: right;
-}
-#togle{
-	float:right;
-	text-align: right;
-	width:45px;
-	height:41px;
-		
-}
-#togle input[type=button]{
-	width:44px;
-	outline:0;
-	border:0;
-	background-color: #b4000f;
-	color:white;
-}
-
-button {
-	
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    color: buttontext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    text-align: center;
-    cursor: default;
-    font: 400 13.3333px Arial;
-        }
-
-.profile{
-	border-radius: 50% !important;
-	width: 65px;
-	height: 65px;
-    margin: 10px;
-}
 
 .tbl_wrap{
 	margin-top:50px;
@@ -96,13 +22,7 @@ button {
 #content{
 	height:400px;
 }
-.content_img{
-	background-color: #efefef;
-    background-color: rgba(var(--bb2,239,239,239),1);
-    display: block;
-    width: 100%;
-    height:600px;
-}
+
 textarea{
     background: 0 0;
     border: 0;
@@ -137,16 +57,7 @@ textarea{
  		input[type=file] {
             display: none;
         }
-.ajaxbtn{
-	padding:2px;
-	margin:3px;
-	width:30px;
-	outline:0;
-	border:0;
-	background-color: #b4000f;
-	color:white;
-	
-}
+
 
         #fileDiv {
 
@@ -167,39 +78,6 @@ textarea{
             margin-left: 10px;
             margin-right: 10px;
         }
-    input[type='button'].more_rpl{
-	border:0 solid #ff0080;
-	background-color:transparent ;
-	outline:0;    /*---테두리 정의---*/
-	font-family: 'Nocturne Serif', 'Noto Sans KR', 'Malgun Gothic', dotum,
-		sans-serif;
-	font-size: 12px;     /*--폰트 정의---*/
-	font-weight:bold;   /*--폰트 굵기---*/
-	color:#b4000b;    /*--폰트 색깔---*/
-	width:130;height:30;  /*--버튼 크기---*/
-}
-    input[type='button'].rplbtn{
-	border:0 solid #ff0080;
-	background-color:transparent ;
-	outlint:0;    /*---테두리 정의---*/
-	font-family: 'Nocturne Serif', 'Noto Sans KR', 'Malgun Gothic', dotum,
-		sans-serif;
-	font-size: 12px;   /*--폰트 정의---*/
-	font-weight:bold;   /*--폰트 굵기---*/
-	color:#b4000b;    /*--폰트 색깔---*/
-	width:130;height:30;  /*--버튼 크기---*/
-}
-.more_rpl{
-	
-}
-.rply_wrap{
-	width:600px;
-	box-align: center;
-    align-items: center;
-    align-items: center;
-    flex-direction: row;
-    padding: 16px;
-	align: center;
-	padding:10px 11px;color:#fff !important;
-	border: 1px solid #b4000f;
-}
+
+
+
