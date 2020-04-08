@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-a:link, a:visited {text-decoration: none; color: #656565;}
+
 .btn {border-radius:3px;padding:5px 11px;color:#fff !important; display:inline-block;
 	 background-color:#6b9ab8; border:1px solid #56819d;vertical-align:middle}
 
@@ -23,25 +23,7 @@ a:link, a:visited {text-decoration: none; color: #656565;}
 	height:400px;
 }
 
-textarea{
-    background: 0 0;
-    border: 0;
-    color: white;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    font-size: inherit;
-    height: 18px;
-    max-height: 80px;
-    outline: 0;
-    padding: 0;
-    resize: none;
-}
+
 .tbl_wrap2{
 	weight:500px;
 	align: center;

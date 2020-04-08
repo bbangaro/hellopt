@@ -53,6 +53,7 @@
 				<div class="profilediv">
 				<img class='profileimg' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png">
 				</div>
+				<div class ="h1">${rBoard.userName }</div>
 			</div>
 			</c:if>
 			<c:if test="${rBoard.userFileName != null }">
@@ -60,7 +61,7 @@
 				<div  class="profilediv">
 				<img class='profileimg' src="/hellopt/file/${rBoard.userFileName}">
 				</div>
-			<h1>${rBoard.userName }</h1>
+			<div class ="h1">${rBoard.userName }</div>
 			</div>
 			</c:if>
 			<!-- 글수정삭제 메뉴 -->

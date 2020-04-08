@@ -4,13 +4,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>후기작성</title>
+<title>후기수정</title>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel ="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/review/reviewWrite.css">
+
 <style>
 
-	.star{
+        input[type=file] {
+            display: none;
+        }
+
+        .my_button {
+            display: inline-block;
+            width: 200px;
+            text-align: center;
+            padding: 10px;
+            background-color: pink;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        #fileDiv {
+
+            border: 2px solid #A8A8A8;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+        }
+        #fileDiv img {
+            max-width: 150px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .imgs_wrap img {
+            max-width: 150px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+	td .star{
 		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 		  background-size: auto 100%;
 		  width: 30px;
@@ -19,7 +53,7 @@
 		  text-indent: -9999px;
 		  cursor: pointer;
 		}
-	div.star.on{background-position:0 0;}
+	td .star.on{background-position:0 0;}
 </style>
 <script>
 //--다중 파일 선택시 미리보기
@@ -97,89 +131,103 @@
 			   		}
 			   })
 		   }
-</script>
+</script>	
 </head>
 <body>
 	<br><br><br><br>
-	<div class ="container">
 <form id="frm" method="post" 
 		enctype="multipart/form-data">
-	<div id="wrap">
-		<div id = "product_layout_1">
-			<div class = "top">
-				<div class="writeform">
-				<div class = "product_info">
-					<div class ="redbar"></div>
-					<span id="title">별점</span>
-					<div class="starRev">
-						<span class="star on">1</span>
-						<span class="star">2</span>
-						<span class="star">3</span>
-						<span class="star">4</span>
-						<span class="star" id="star">5</span>
-						<input id="revStar1" type="hidden" name="revStar" value="">
-					</div> 
-				</div>
-				<div class="textarea">
-				<div class="titlegroup">
-					<div class ="redbar"></div>
-					<span id="title2">내용</span>
-				</div>
-				<textarea name="revContent" rows="20" cols="100" title="내용" placeholder="후기를 작성해주세요..."></textarea>
-				</div>
-				</div>
-				<div class = "imgbox">	
-				<a href="javascript:" onclick="fileUploadAction();"  class="btn">파일 업로드</a>
-				<input type="file"  multiple="multiple" id="input_imgs"  name="file_0" >
-				<div id = "fileDiv">
-					<h2><b>이미지 미리보기</b></h2>
-					<div class="imgcontent">
-							<span class="imgs_wrap">
-								<img class = "img">
-							</span>
-					</div>		
-				</div>
-			</div><!-- class ="imgbox"끝 -->	
-			</div><!--class="top"끝  -->
-		</div>	
+	
+<select>
+	<c:forEach var = "class" items="${classMap }">
+	<option>수강한 클래스 선택</option>
+	</c:forEach>
+</select>
+<select>
+	<c:forEach var = "trainer" items="${trainerMap }">
+	<option>트레이너 선생님 선택</option>
+	</c:forEach>
+</select> 
+	<table class="board_view">
+		<colgroup>
+			<col width="15%">
+			<col width="*">
+		</colgroup>
+		<tbody>
+		<tr>
+			<td>별점</td>
+			<td class="starRev">
+			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
+				<span class="star on">${i }</span>
+			</c:forEach> 
+			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
+				<span class="star">${i }</span>
+			</c:forEach>  
+				<input id="revStar1" type="hidden" name="revStar" value="">
+			<td> 
+		</tr>
+		<tr>
+			<td scope = "row">내용</td>
+			<td><textarea name="revContent" rows="20" cols="100" title="내용">${rBoard.revContent }</textarea><td>
+		</tr>
+		</tbody>	
+	</table>
+	
+	<!--  이미지 미리보기 -->
+	<div>	
+		
+		<div class = "input_wrap">
+			<a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
+			<input type="file"  multiple="multiple" id="input_imgs"  name="file_0" >
+		</div>
+	</div>	
+	<div id = "fileDiv">
+	<h2><b>이미지 미리보기</b></h2>
+	<br><br>
+			<c:forEach var="file" items="${rBoard.filevo }">
+					<span id="uploadedimg${file.revFileIdx }">
+					<img  src = "/hellopt/s3/review/${file.revFileSname }" >
+					<input type="button" value="삭제" onclick="imgDel(${file.revFileIdx})">
+					</span>
+			</c:forEach>
+				<span class="imgs_wrap">
+					<img class = "img">
+				</span>
 	</div>
-<!--  이미지 미리보기 -->
-
-	<div class = "btnclass">
 	<a href="#this" id="list" class="btn">목록으로</a>
-	<a href="#this" id="write" class="btn">작성완료</a>
-	</div>
-</form>
-</div>	
+	<a href="#this" id="modify" class="btn">수정완료</a>
+</form>	
+
+
+
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
-
 <script type="text/javascript">
-	var g_count = 1; 
- 	$(document).ready(function(){
- 		$("#list").on("click", function(e){
- 			e.preventDefault();
- 			fn_openBoardList(); 
- 		})
- 		$("#write").on("click", function(e){
- 			e.preventDefault();
- 			fn_writeBoard();
- 		})
-
- 	});
- 	
+$(document).ready(function(){
+		$("#list").on("click", function(e){
+			e.preventDefault();
+			fn_openBoardList(); 
+		})
+		$("#modify").on("click", function(e){
+			e.preventDefault();
+			fn_modifyBoard();
+		})
+		
+	});
  	function fn_openBoardList(){
  		var comSubmit = new ComSubmit();
- 		console.log("<c:url value='/reviewBoard'/>");
+ 		console.log("<c:url value='/review'/>");
  		comSubmit.setUrl("<c:url value='/review'/>");
  		comSubmit.submit();
  	}
- 	
- 	function fn_writeBoard(){
+
+ 	function fn_modifyBoard(){
  		var comSubmit = new ComSubmit("frm");
- 		comSubmit.setUrl("<c:url value='/insertrboard'/>");
+ 		comSubmit.setUrl("<c:url value='/updaterboard'/>");
  		comSubmit.submit();
  	}
 
+</script>
+<script>
  	//별점 스크립트부분
 	$('.starRev span').click(function(){
 		$(this).parent().children('span').removeClass('on');
