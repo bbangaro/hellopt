@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,7 +140,7 @@
 					<div class="imgcontent">
 						<c:forEach var="file" items="${rBoard.filevo }">
 								<span id="uploadedimg${file.revFileIdx }">
-								<img  src = "/hellopt/s3/review/${file.revFileSname }" >
+								<img  src = "${pageContext.request.contextPath}/s3/review/${file.revFileSname }" >
 								<input type="button" class="delbtn" value="삭제" onclick="imgDel(${file.revFileIdx})">
 								</span>
 						</c:forEach>
