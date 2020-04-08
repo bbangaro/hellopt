@@ -96,7 +96,7 @@
 				<div class="product_description">
 					<p>${rBoard.revContent}</p>
 					<span id="quantity"><fmt:formatDate value="${rBoard.revRegdate }" type="date"/></span>
-					<div id ="listReply" class="listReply${rBoard.revIdx }"></div>
+					<div  id ="listReply" class="listReply${rBoard.revIdx }"></div>
 				</div>
 				
 				<div class="related_info">
@@ -244,15 +244,16 @@ function createCmt2(revIdx) {
   	//댓글 수정하기
   	//수정폼
    function modReple(revCmtIdx,revCmtRegdate,revCmtComment,revIdx, userName){
-	   var 	output = "<table id='revCmtIdx"+revCmtIdx+"'>";
+  		
+  		var output = "<table id='revCmtIdx"+revCmtIdx+"'>";
 			output +="<tr>";
 			output +="<td>" + userName;
 			output +="(" + changeDate(revCmtRegdate) +")<br>";
 			output +="<textarea name='revCmtComment' id='revCmtComment' rows='2' cols='80'>";
 			output += revCmtComment
 			output +="</textarea><br>";
-			output +="<input type='button' value='수정' onclick= updateReple(" +revCmtIdx +","+revIdx+ ",'" + userName + "')>";
-			output +="<input type='button' value='취소' onclick='listReply2("+revIdx+")'>";
+			output +="<input type='button' value='수정' class='ajaxbtn' onclick= \"updateReple(" +revCmtIdx +","+revIdx+ ",'" + userName + "')\">";
+			output +="<input type='button' value='취소' class='ajaxbtn' onclick=\"listReply2("+revIdx+")\">";
 			output +="</td></tr>";
 			output +="</table>";
 			$(".listReply" + revIdx).html(output);
@@ -275,7 +276,7 @@ function createCmt2(revIdx) {
 			success:function(result){
 				console.log(result);
 				listReply2(revIdx);
-				alert("댓수정완료");
+				alert("수정완료");
 			}
 			,error: function(error){
 				console.log("에러:" + error);
@@ -286,7 +287,6 @@ function createCmt2(revIdx) {
 
    //댓글 삭제하기
    function delReple(revCmtIdx, revIdx){
-	   alert("댓삭" + revCmtIdx, revIdx);
 			console.log("revIdx:" +revIdx);	   
 	   $.ajax({
 		   
@@ -314,11 +314,11 @@ function createCmt2(revIdx) {
 					var output = "<table>";
 					for(var i in result){
 						output +="<tr>";
-						output +="<td>" + result[i].userName;
+						output +="<td class='rplbox'>" + result[i].userName;
 						output +="(" +changeDate(result[i].revCmtRegdate)+")<br>";
 						output += result[i].revCmtComment +"<br>";
-						output +="<input type='button' value='수정' class='ajaxbtn' onclick= modReple(" + result[i].revCmtIdx +","+ result[i].revCmtRegdate + ",'"+result[i].revCmtComment+"',"+ result[i].revIdx + ",'" + result[i].userName +"')>";
-						output +="<input type='button' value='삭제' class='ajaxbtn' onclick= delReple(" + result[i].revCmtIdx + ","+ result[i].revIdx + ")>";
+						output +="<input type='button' value='수정' class='ajaxbtn' onclick= \"modReple(" + result[i].revCmtIdx +", "+ result[i].revCmtRegdate + ",'"+result[i].revCmtComment+"',"+ result[i].revIdx + ",'" + result[i].userName +"')\">";
+						output +="<input type='button' value='삭제' class='ajaxbtn' onclick= \"delReple(" + result[i].revCmtIdx + ","+ result[i].revIdx + ")\">";
 						output +="</td></tr>";
 					}
 					output +="</table>";

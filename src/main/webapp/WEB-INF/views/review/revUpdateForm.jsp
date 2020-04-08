@@ -74,7 +74,6 @@
 	
 	//다중 파일 업로드 할때 특정 이미지만 삭제하기
 	function deleteImageAction(index){
-		alert("미리보기삭제" + index);
 		console.log("sel_files : " + sel_files);
 		sel_files.splice(index, 1);
 		
@@ -86,7 +85,6 @@
 	}
 	//수정할 때 기존에 올려져 있던 이미지 삭제부분
 	function imgDel(revFileIdx){
-		alert("이미지삭제" + revFileIdx);
 		console.log(revFileIdx);
 			   $.ajax({
 				   url:"imgDel?revFileIdx="+revFileIdx,
@@ -94,7 +92,6 @@
 					data: {"revFileIdx" : revFileIdx},
 					success:function(){
 						$('#uploadedimg'+revFileIdx).remove();
-						alert("삭제되었습니다."+revFileIdx);
 					}
 			  		,error:function(error){
 			   			console.log("에러:" + error);
