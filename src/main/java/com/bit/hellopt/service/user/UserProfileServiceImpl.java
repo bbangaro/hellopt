@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.data.ProfileMapper;
+import com.bit.hellopt.data.UserXMLMapper;
 import com.bit.hellopt.vo.user.ProfileVO;
 import com.bit.hellopt.vo.user.User;
 
@@ -27,6 +28,9 @@ public class UserProfileServiceImpl implements UserProfileService {
 	
 	@Autowired
 	S3Utils s3Utils;
+	
+	@Autowired
+	UserXMLMapper userMapper;
 
 	@Override
 	public String insertProfile(User user, MultipartFile multipartFile) {
@@ -97,10 +101,16 @@ public class UserProfileServiceImpl implements UserProfileService {
 		if(storedProfile != null) {
 			s3Utils.deleteFile("profile/" + storedProfile.getStoredFileName());
 			s3Utils.uploadFile("profile/" + storedName, file);
+			
 			mapper.updateProfile(profile);
+			user.setUserProfile(storedName);
+			userMapper.updateUser(user);
 		} else {
 			s3Utils.uploadFile("profile/" + storedName, file);
 			mapper.insertProfile(profile);
+			
+			user.setUserProfile(storedName);
+			userMapper.updateUser(user);
 		}
 	
 		

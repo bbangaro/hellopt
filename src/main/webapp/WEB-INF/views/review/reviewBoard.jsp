@@ -37,7 +37,7 @@
 					<div class = "swiper-wrapper">
 					<c:forEach var="file" items="${rBoard.filevo }">
 						<div class = "swiper-slide">
-							<img class="content_img" src="/hellopt/s3/review/${file.revFileSname } ">
+							<img class="content_img" src="${pageContext.request.contextPath}/s3/review/${file.revFileSname } ">
 						</div>
 					</c:forEach>
 					</div>
@@ -51,7 +51,7 @@
 			<c:if test="${rBoard.userFileName == null }">
 			<div class="profile">
 				<div class="profilediv">
-				<img class='profileimg' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png">
+				<img class='profileimg' src="${pageContext.request.contextPath}/s3/review/708641a0ecc24332a908d974d41d07b5.png">
 				</div>
 				<div class ="h1">${rBoard.userName }</div>
 			</div>
@@ -59,7 +59,7 @@
 			<c:if test="${rBoard.userFileName != null }">
 			<div class="profile">
 				<div  class="profilediv">
-				<img class='profileimg' src="/hellopt/file/${rBoard.userFileName}">
+				<img class='profileimg' src="${pageContext.request.contextPath}/s3/profile/${rBoard.userFileName}">
 				</div>
 			<div class ="h1">${rBoard.userName }</div>
 			</div>

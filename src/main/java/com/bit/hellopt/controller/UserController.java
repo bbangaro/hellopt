@@ -123,6 +123,9 @@ public class UserController {
 	
 	@PostMapping("/auth/update")
 	public String adminUserDetailUpdate(@ModelAttribute User user,  @RequestParam MultipartFile file) {
+			if(user.getUserPw().equals("")) {
+				user.setUserPw(null);
+			}
 			userService.updateNormalUser(user);
 			if(!file.isEmpty()) {
 				profileService.updateProfile(user, file);

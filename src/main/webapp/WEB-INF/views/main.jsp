@@ -139,7 +139,7 @@
 				if ( notice_getCookie( "eventPopup" ) != "done" )
 				{
 				// 팝업창 오픈!
-				noticeWindow= window.open("/hellopt/pop", "", "width=700, height=830");
+				noticeWindow= window.open("/pop", "", "width=700, height=830");
 				noticeWindow.opener = self;
 				}
 		}

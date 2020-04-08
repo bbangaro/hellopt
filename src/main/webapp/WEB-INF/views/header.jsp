@@ -97,7 +97,7 @@
                         <li><a href="${pageContext.request.contextPath}/admin/user">Manage User</a></li>
                         <li><a href="${pageContext.request.contextPath}/admin/meetingAdmin">Manage Meeting</a></li>
                         <li><a href="${pageContext.request.contextPath}/admin/traineradmin">Manage Trainer</a><li>
-                        <li><a href="${pageContext.request.contextPath}/admin/trainerinsert">Register Trainer</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/trainerCandidate">Register Trainer</a></li>
                         <li><a href="${pageContext.request.contextPath}/manageclass">Manage Class</a></li>      
                      </ul>
                   </li>
