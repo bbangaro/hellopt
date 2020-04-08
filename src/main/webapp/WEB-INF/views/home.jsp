@@ -27,7 +27,6 @@
 	<a href="${pageContext.request.contextPath}/review">리뷰게시판</a>
 	<a href="${pageContext.request.contextPath}/Exercise-InfoList">운동목록</a>
 	<br><br>
-	<a href="${pageContext.request.contextPath}/Exercise-InfoTipList">운동팁목록</a>
 	<p>Click <a href="/hellopt/hello">here</a> to see a greeting.</p>
 	<p>Register <a href="/hellopt/user/registrationform">here</a></p>
 </body>

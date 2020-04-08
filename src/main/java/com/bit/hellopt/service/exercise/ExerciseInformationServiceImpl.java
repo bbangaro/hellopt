@@ -25,7 +25,6 @@ public class ExerciseInformationServiceImpl implements ExerciseInformationServic
 	}
 	@Override
 	public void insertExerciseInformation(ExerciseInformationVO vo) {
-		System.out.println("----------------------------------------------");
 		System.out.println(vo.getExercisePictures());
 		mapper.insertExerciseInformation(vo);
 	}

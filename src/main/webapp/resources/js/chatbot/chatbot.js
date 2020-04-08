@@ -29,3 +29,4 @@ function _Ajax(url,type,param,successBack){
      });
 	 
 }
+

@@ -11,9 +11,7 @@
 		<typeAlias type="com.bit.hellopt.vo.reviewboard.RBoardVO" alias="rBoard"/>
 		<typeAlias type="com.bit.hellopt.vo.user.User" alias="User"/>
 		<typeAlias alias="exerciseInformation" type="com.bit.hellopt.vo.exercise.ExerciseInformationVO" />
-		<typeAlias alias="exerciseInformationTip" type="com.bit.hellopt.vo.exercisetip.ExerciseInformationTipVO" />
 		<typeAlias alias="ExerciseMapper" type="com.bit.hellopt.data.exercise.ExerciseMapper" />
-		<typeAlias alias="ExerciseTipMapper" type="com.bit.hellopt.data.exercisetip.ExerciseTipMapper" />
 		<typeAlias alias="ChatbotVO" type="com.bit.hellopt.vo.chatbot.ChatbotVO" />
 		<typeAlias alias="ChatbotMapper" type="com.bit.hellopt.data.ChatbotMapper" />
 				

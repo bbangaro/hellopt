@@ -11,9 +11,5 @@ public interface ChatbotService {
 
 	void insertChatbotVO(ChatbotVO vo);
 
-	public static List<ChatbotVO> getChatbotList() {
-		
-		return null;
-	}
 	
 }

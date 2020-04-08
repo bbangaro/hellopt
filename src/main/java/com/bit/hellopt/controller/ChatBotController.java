@@ -1,14 +1,18 @@
 package com.bit.hellopt.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -22,34 +26,19 @@ public class ChatBotController {
 	@Autowired
 	ChatbotService chatbotService;
 	
-	//--------채팅 내역 넣기 ---------------
-	@PostMapping("/insertchat")
-	@ResponseBody
-	public void insertChatbotVO(ChatbotVO vo) {
-		chatbotService.insertChatbotVO(vo);
-	}
-
-	public ChatBotController(ChatbotService chatbotService) {
-		this.chatbotService = chatbotService;
-	}
-	
-	@RequestMapping("/chatbot")
-	public String getChatList(Model model) {
-		List<ChatbotVO> ChatList = ChatbotService.getChatbotList();
-		System.out.println("getChatbotList : ");
-		model.addAttribute("ChatList", ChatList);
+	@RequestMapping("/chatbot.ajax")
+	public String getChatList(Model model,
+			@RequestParam(name = "chatting_Idx", defaultValue = "1") int chatting_Idx
+			)throws Exception{
 		
-		System.out.println("챗봇 URL실행시 vo에 담긴값 출력 ");
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("chatting_Idx", chatting_Idx);
 		
-		map.put("chatting_content", "대충 세상이 망한뒤");
-		map.put("nxt_content", "김성모작가 만화");
-		map.put("chatting_idx", 1);
-		map.put("nxt_idx", 2);
-		return "chatbot";
-	}
-	
-	
-	
+		List<Map<String, Object>> ChatList = chatbotService.ChatList(map);
+		
+		model.addAttribute("ChatList",ChatList);
+		
+		return "jsonView";
+	}	
 	
 }

@@ -262,6 +262,7 @@ public class ExerciseInformationController {
 			vo.setExercisePictures(vo.getExercisePictures().substring(0, vo.getExercisePictures().length()-1 ) );
 		}
 		
+		exerciseInformationService.insertExerciseInformation(vo);
 		return "redirect:/exerciseinfolist";
 	}
 	

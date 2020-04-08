@@ -41,7 +41,6 @@
 							<option value="가슴">가슴</option>
 							<option value="등">등</option>
 							<option value="어깨">어깨</option>
-							
 							<option value="팔">팔</option>
 							<option value="복근">복근</option>
 							<option value="하체">하체</option>

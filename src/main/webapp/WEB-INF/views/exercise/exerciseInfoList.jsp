@@ -48,9 +48,9 @@
  					<img src="${pageContext.request.contextPath}/s3/exercise/${exerciseInformation.exercisePictures}" alt="운동사진" class="exerciseImg_img">
 					
 					<div class="exercise_caption">
-						<p class="captiontitle">${exerciseInformation.exerciseName }
-								<br>			${exerciseInformation.exerciseEName }</p>
-						<pre class="captiontxt">${exerciseInformation.exerciseParts }</pre>
+						<p class="captiontitle2">[${exerciseInformation.exerciseParts }운동]</p>
+						<p class="captiontitle">${exerciseInformation.exerciseName }</p>
+						<p class="captiontxt">${exerciseInformation.exerciseEName }</p>	
 					</div>
 					
 				</a>
@@ -66,7 +66,7 @@
 		<div class="border-none">
 		<p>
 			<span>
-				<select name="searchCondition">
+				<select name="searchCondition" class="search">
 				<c:forEach var="option" items="${conditionMap }">
 				   <!-- if test searchCondition eq option.value eslecd 
 				     뭐시기가 이꼬르이면 검색조건이 계속해서 창에 남아있게, 아니면 뭐다 조건문 만들것 -->
@@ -115,7 +115,8 @@
 		</table>
 	</div>
 	<br>
-	<p class="cente"><a href="insertexerciseinformationform">운동정보글등록</a></p>
+	<!-- 글 등록하기 -->
+		<p class="cente"><a href="insertexerciseinformationform">운동정보글등록</a></p>
 
 	<br><br>
     </div>

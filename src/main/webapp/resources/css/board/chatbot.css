@@ -1,18 +1,145 @@
-@CHARSET "UTF-8";
-.chatMain{list-style: none;}
-.chatMain .cont{ line-height: 38px;}
-.chatMain .qt{margin: 15px; max-width: 400px;  background: #e0eeff;  border-radius: 7px; padding: 12px; }
-.chatMain .as{margin: 15px; max-width: 400px;  background: #ffdddd;  border-radius: 7px; padding: 12px; margin-left: 70%; }
+/* footer내 chatbot css */
 
-.exercisebox_banner {
+.talkMain {
 	width: 100%;
-	height: 170px;
+    color: #212529;
+    overflow: auto;
+    height: 100%;
+    background-color: #212529;
 }
-.bannertxtbox {
-	width: 1104px;
-	margin: 0px auto;
+/*
+.talkMain::-webkit-scrollbar {
+	width: 6px;
+	overflow: auto;
 }
 
-.bannertxt {
-	padding: 65px 40px 40px 40px;
+.talkMain::-webkit-scrollbar-thumb {
+	background-color: #b4000f;
+}
+
+.talkMain::-webkit-scrollbar-thumb:hover {
+	opacity:0.8;
+} 
+
+.talkMain::-webkit-scrollbar-track {
+	background-color: gray;
+}
+*/
+.qtMain:first-child {
+    min-width: 40%;
+    max-width: 70%;
+    text-align: left;
+    margin-left: 10px;
+    min-height: 45px;
+    border-radius: 8px;
+    margin-top: 16px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    color: white;
+}
+
+
+.qtMain {
+	min-width: 40%;
+	max-width: 70%;
+	text-align: left;
+	margin-left: 10px;
+	min-height: 45px;
+	background-color: dimgray;
+	border-radius: 8px;
+	margin-top: 16px;
+	margin-bottom: 18px;
+	padding-top: 4px;
+    padding-bottom: 3px;
+    color: white;
+}
+
+
+
+.asMain {
+	margin-left: 31%;
+    background: gold;
+    min-height: 35px;
+    border-radius: 8px;
+    margin-top: 8px;
+    margin-right: 7px;
+    padding-top: 7px;
+    padding-bottom: 3px;
+    font-size: 12px;
+}
+
+.asMain:hover {
+	opacity:0.8;
+	transform:scale(1.05);             /*  default */
+	-webkit-transform:scale(1.05);     /*  크롬 */
+	-moz-transform:scale(1.05);       /* FireFox */
+	-o-transform:scale(1.05);           /* Opera */
+	overflow: hidden;
+}
+
+.talkMain .cont{
+	line-height: 20px;
+	padding-left: 7px;
+}
+
+#chatalk {
+    border-radius: 12px;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 10;
+    width: 320px;
+    height: 550px;
+    background: black;
+    border: 1px solid black;
+    display: none;
+}
+
+#chatinit_Close {
+	width: 100%;
+	height: 30px;
+	position: relative;
+	text-align: left;
+	cursor: pointer;
+}
+
+#chatinit {
+	width: 25px;
+	height: 25px;
+	color: white;
+	cursor: pointer;
+	text-align: right;
+}
+
+#chatalkClose {
+	display: inline;
+	color: black;
+	bottom: 0;
+	width: 25px;
+	height: 25px;
+	position: relative;
+	right: 0;
+	z-index: 10;
+	cursor: pointer;
+	text-align: right;
+}
+
+#chatalkIcon {
+	bottom: 150px;
+	width: 70px;
+	height: 70px;
+	position: fixed;
+	right: 50px;
+	z-index: 10;
+	cursor: pointer;
+}
+
+.ymtext {
+	color: white;
+	potition: relative;
+	font-weight: bold;
+	font-size: 1.2em;
+	text-align: left;
+	display: inline-block;
+	margin-top: 2px;
 }
