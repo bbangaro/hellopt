@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -307,11 +306,25 @@ public class MeetingController {
 	}
 	
 	@PostMapping("/meetingUpdateOk")
-	public String meetingUpdateOk(Principal principal, MeetingVO meetingVO) {
+	public void meetingUpdateOk(Principal principal, MeetingVO meetingVO, int meetingIdx, HttpServletResponse response) throws Exception {
+		String sessionId = principal.getName();
+		int idx = service.getMeetingOne(meetingIdx).getMeetingIdx();
+		String loginId = service.getMeetingOne(meetingIdx).getFkUserId();
+		
+		if ( sessionId.equals(loginId) ) {
+		
 		service.updateMeetingOk(meetingVO);
 		service.updateMaxMeeting(meetingVO);
 		System.out.println("getmeetingUpdateOk 성공");
-		return "redirect:/meeting";
+		}  else {
+		    response.setContentType("text/html; charset=UTF-8");
+		    response.getWriter().println("<script>alert(' 삭제 권한이 없습니다 '); </script>");
+			response.sendRedirect("meetingOne?meetingIdx="+idx);
+			
+			//return "redirect:/meetingOne?meetingIdx="+idx;
+		}
+		
+		//return "redirect:/meeting";
 	}
 	
 	@RequestMapping("/meetingDelete")
@@ -333,7 +346,6 @@ public class MeetingController {
 			
 		    response.setContentType("text/html; charset=UTF-8");
 		    response.getWriter().println("<script>alert(' 삭제 권한이 없습니다 '); </script>");
-		    
 			response.sendRedirect("meetingOne?meetingIdx="+idx);
 			
 			//return "redirect:/meetingOne?meetingIdx="+idx;
