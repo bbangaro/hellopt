@@ -99,10 +99,11 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 
 	@Override
-	public void imguploadDel(String revFileSname) {
-		mapper.imguploadDel(revFileSname);
-		
+	public void uploadFileDel(int revFileIdx) {
+		mapper.uploadFileDel(revFileIdx);
 	}
+
+	
 
 
 

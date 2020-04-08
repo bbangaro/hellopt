@@ -41,6 +41,7 @@ import com.bit.hellopt.vo.user.User;
 @RestController
 @SessionAttributes("rReply")
 public class RBoardCommentController {
+	
 	@Autowired
 	RCommentService rCmtService;
 	@Autowired
@@ -51,9 +52,7 @@ public class RBoardCommentController {
 	}
 
 	//댓글 입력
-	
 	@RequestMapping("/reply/insert")
-	@ResponseBody
 	public void insert(@RequestParam(value="revIdx", required = false)int revIdx, @ModelAttribute RCommentVO cvo, RBoardVO vo,Model model,  
 			@AuthenticationPrincipal CustomUserDetail customUser) 
 					throws IllegalStateException, IOException{
@@ -69,6 +68,38 @@ public class RBoardCommentController {
 		System.out.println("댓글vo2:" +cvo);
 		
 		rCmtService.cmtCreate(cvo);
+		
+	}
+	//댓글 수정
+	@RequestMapping("/reply/update")
+	@ResponseBody
+	public Map<String, Object>updateReply(@RequestBody RCommentVO paramData)
+					throws IllegalStateException, IOException{
+		System.out.println("댓수정");
+		System.out.println("cvo: "+ paramData);
+		Map<String, Object> result = new HashMap<>();
+		System.out.println("result: "+ result);
+		
+		try {
+			rCmtService.cmtUpdate(paramData);
+			result.put("status","OK");
+		} catch(Exception e) {
+			e.printStackTrace();
+			result.put("status", "False");
+		}
+		
+		return result;
+		
+	}
+	//댓글 삭제
+	@RequestMapping("/reply/delete")
+	public void delete(@RequestParam(value="revCmtIdx", required = false)int revCmtIdx, 
+			@ModelAttribute RCommentVO cvo, RBoardVO vo,Model model,  
+			@AuthenticationPrincipal CustomUserDetail customUser) 
+					throws IllegalStateException, IOException{
+		System.out.println("cvo"+cvo);
+		System.out.println("댓삭");
+		rCmtService.cmtDelete(revCmtIdx);
 		
 	}
 	//댓글 목록 (@controller방식 : view 화면을 리턴)

@@ -4,138 +4,192 @@
 <%@page import="com.bit.hellopt.vo.reviewboard.RBoardVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
+
+<%-- <link rel ="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board/reviewBoard.css"> --%>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">	
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link rel ="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/review/reviewBoard.css">
 <title>후기게시판</title>
-<%@ include file="/WEB-INF/include/include-header.jsp"%>
+<%@ include file="/WEB-INF/include/include-header.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+<style>
+ 	.content {
+	box-sizing: border-box;
+	width: 800px;
+	margin: 0 auto 150px;
+	padding-top: 10%;
+	text-align: center; 
+}
+	.btn{color: white;}
+	td .star{
+		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+		  background-size: auto 100%;
+		  width: 20px;
+		  height: 20px;
+		  display: inline-block;
+		  text-indent: -9999px;
+		  cursor: pointer;
+		}
+	div .star.on{background-position:0 0;}
+	
+	a {
+		text-decoration: none;
+		color: white;
+	}
+	button {
+		background-color:white;
+	}
+	.paging { list-style: none; }
+	.paging li {
+		float: left;
+		margin-right: 8px;
+	}
+	.paging li a {
+		text-decoration: none;
+		display: block;
+		padding: 3px 7px;
+		border: 1px solid red;
+		font-weight: bold;
+		color: white;
+	}
+	.paging .disable {
+		border: 1px solid silver;
+		padding: 3px 7px;
+		color: silver;
+	}
+	.paging .now {
+		border: 1px solid red;
+		padding: 3px 7px;
+		background-color: red;
+	}
+	.paging li a:hover {
+		background-color: red;
+		color: black;
+	}
+</style>
 </head>
 <body>
-<div class="container">
+<div id = "container">
 	<sec:authorize access="isAuthenticated()">
 	<p><a href="${pageContext.request.contextPath}/review/insertform">후기쓰러가기</a></p>	
 	</sec:authorize>
 <c:forEach var="rBoard" items="${rBoardList }" varStatus="status"> 
-	<div id="wrap">
-		<div id="product_layout_1">
-			<div  class="top">
-				<div class="swiper-container">
-					<div class = "swiper-wrapper">
-					<c:forEach var="file" items="${rBoard.filevo }">
-						<div class = "swiper-slide">
-							<img class="content_img" src="/hellopt/s3/review/${file.revFileSname } ">
-						</div>
-					</c:forEach>
-					</div>
-					<!-- 네비게이션 버튼 -->
-					<div class="swiper-button-next"></div>
-					<div class="swiper-button-prev"></div>
-					<!-- 페이징 -->
-					<div class="swiper-pagination"></div>
-				</div><!--  class="swiper-container swiper1" 끝 -->
-			<div class="product_info">
+<form>
+<table class="tbl_wrap">
+	<thead class="tbl_head">
+		<tr>
 			<c:if test="${rBoard.userFileName == null }">
-			<div class="profile">
+			<td class="profiletd">
 				<div class="profilediv">
-				<img class='profileimg' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png">
+				<img class='profile' src="/hellopt/file/708641a0ecc24332a908d974d41d07b5.png">
 				</div>
-				<div class ="h1">${rBoard.userName }</div>
-			</div>
+			</td>
 			</c:if>
 			<c:if test="${rBoard.userFileName != null }">
-			<div class="profile">
+			<td class="profiletd">
 				<div  class="profilediv">
-				<img class='profileimg' src="/hellopt/file/${rBoard.userFileName}">
+				<img class='profile' src="/hellopt/file/${rBoard.userFileName}">
 				</div>
-			<div class ="h1">${rBoard.userName }</div>
+			</td>
+			</c:if>
+			<td>
+				<span>글쓴이 : ${rBoard.userName }</span>
+				<!-- 글수정삭제 메뉴 -->
+				<sec:authorize access="isAuthenticated()">
+				<sec:authentication var="principal" property="principal" />
+				<c:if test="${rBoard.userId == principal.username}">
+					<button type="button" data-toggle="collapse" data-target="#togle" class="menu">
+						<svg height="30" width="30" viewBox="0 0 60 60">
+		    			 <circle clip-rule="evenodd" cx="8" cy="24" r="4.5" style="fill:#b4000f;" /> 
+		    			 <circle clip-rule="evenodd" cx="24" cy="24" r="4.5" style="fill:#b4000f;" /> 
+		    			 <circle  cx="40" cy="24" r="4.5" style="fill:#b4000f;" /> 
+						</svg>
+					</button>
+					<div id="togle" class="collapse">	
+						<input type = "button" value="글 수정" onclick = "modify(${rBoard.revIdx})">
+						<input type = "button" value="글 삭제" onclick = "del(${rBoard.revIdx })">
+					</div>
+				</c:if>
+				</sec:authorize>
+				<!-- 글수정삭제 메뉴 끝 -->
+			<div class="starRev"> 
+				<%-- 	if문 써서	<c:forEach var="i" begin="1" end="5" step="1" >
+			<c:if test="${i  > rBoard.revStar }">
+					<span class="star"></span>
+				</c:if>	
+				<c:if test="${i  <= rBoard.revStar }">
+					<span class="star on"></span>
+				</c:if>	
+			</c:forEach> --%>
+			<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
+				<span class="star on">${i}</span>
+			</c:forEach> 
+			<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
+				<span class="star">${i}</span>
+			</c:forEach>   
 			</div>
-			</c:if>
-			<!-- 글수정삭제 메뉴 -->
-			<sec:authorize access="isAuthenticated()">
-			<sec:authentication var="principal" property="principal" />
-			<c:if test="${rBoard.userId == principal.username}">
-				<button type="button" data-toggle="collapse" data-target="#togle_${rBoard.revIdx}" class="menu">
-					<svg height="30" width="30" viewBox="0 0 60 60">
-	    			 <circle  cx="40" cy="8" r="4.5" style="fill:#b4000f;" /> 
-	    			 <circle  cx="40" cy="24" r="4.5" style="fill:#b4000f;" /> 
-	    			 <circle  cx="40" cy="40" r="4.5" style="fill:#b4000f;" /> 
-					</svg>
-				</button>
-				<div id ="togle">
-				<div  class="collapse" id="togle_${rBoard.revIdx}">	
-					<input type = "button" value="글 수정" onclick = "modify(${rBoard.revIdx})">
-					<input type = "button" value="글 삭제" onclick = "del(${rBoard.revIdx })">
-				</div>
-				</div>
-			</c:if>
-			</sec:authorize>
-			<!-- 글수정삭제 메뉴 끝 -->
-				<div class="rating">
-					<div class="starRev"> 
-					<c:forEach var="i" begin="1" end="${rBoard.revStar }" step="1">
-						<span class="star on">${i}</span>
-					</c:forEach> 
-					<c:forEach var="i" begin="1" end="${5-(rBoard.revStar) }" step="1">
-						<span class="star">${i}</span>
-					</c:forEach>   
+			</td>  
+		</tr>
+		<!--별점기능 -->
+	</thead>
+	
+	<tbody>
+		<tr>
+			<td colspan="2">
+			<!--이미지 사진 업로드한부분 나오는곳  -->
+			<c:forEach var="file" items="${rBoard.filevo }">
+				<a id="prev" href="#">prev</a>
+					<div class="content_img_div">
+						<img class="content_img" src="/hellopt/s3/review/${file.revFileSname } ">
 					</div>
-				</div>
-				<div class="product_description">
-					<p>${rBoard.revContent}</p>
-					<span id="quantity"><fmt:formatDate value="${rBoard.revRegdate }" type="date"/></span>
-					<div id ="listReply" class="listReply${rBoard.revIdx }"></div>
-				</div>
-				
-				<div class="related_info">
-				<div>
-					<div>
-						<input type="button" value="댓글보기"  class = "more_rpl" onclick = "listReply2(${rBoard.revIdx })">
-					</div>
-				</div> 
-				</div>
-	<form class="commentForm" name="commentFrom" method="post">		
-	<div class = "product_layout_1">
+				<a id="next" href="#">next</a>
+			</c:forEach>
+			<div id="content">내용 :${rBoard.revContent}</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">날짜 :<fmt:formatDate value="${rBoard.revRegdate }" type="date"/></td>
+		</tr>
+	</tbody>
+	</table>
+</form>		
+<form class="commentForm" name="commentFrom" method="post">		
+	<table class = "rply_wrap">
+		<tr>
+			<td colspan="2">
+				<a href="#demo" data-toggle="collapse" value="댓글보기"  class = "more_rpl" onclick = "listReply2(${rBoard.revIdx })">댓글보기</a>
+			</td>
+		</tr> 
 		<!-- 댓글 작성 폼 -->
-		<div class="rpl_area">
-			<div class="rpl_write_area">
-			<textarea id="reple" class="revCmtComment${rBoard.revIdx }" name="revCmtComment" placeholder="댓글 달기..."></textarea>
-			<span class = "rplbtn">
-			<sec:authorize access="isAuthenticated()">
-				<input type ="button" value="댓글등록" class = "rplbtn" class="btn${rBoard.revIdx }" onclick = "createCmt(${rBoard.revIdx })">
-			</sec:authorize>
-			<sec:authorize access="isAnonymous()">
-				<input type ="button" value="댓글등록" class = "rplbtn" class="btn${rBoard.revIdx }" onclick = "createCmt2(${rBoard.revIdx })">
-			</sec:authorize>
-					<!-- <button type="button" class="btnReply">댓글등록</button> -->
-			</span>	
-			</div>
-		</div>
+		<tr class="rpl_area">
+			<td class="rpl_write_area">
+				<textarea rows="2" cols="80" class="revCmtComment${rBoard.revIdx }" name="revCmtComment" placeholder="댓글 달기..."></textarea>
+			</td>
+			<td>
+		<sec:authorize access="isAuthenticated()">
+			<input type ="button" value="댓글등록" class = "rplbtn" class="btn${rBoard.revIdx }" onclick = "createCmt(${rBoard.revIdx })">
+		</sec:authorize>
+		<sec:authorize access="isAnonymous()">
+			<input type ="button" value="댓글등록" class = "rplbtn" class="btn${rBoard.revIdx }" onclick = "createCmt2(${rBoard.revIdx })">
+		</sec:authorize>
+				<!-- <button type="button" class="btnReply">댓글등록</button> -->
+			</td>	
+		</tr>
 		<!-- 댓글이 있으면 댓글몇개 달렸다고 출력하기 -->
-	</div>
+	</table>
+		<div class="listReply${rBoard.revIdx }"></div>
 	</form>
-			</div><!-- 글내용칸 -->
-			</div>
-		</div>
-	</div>
-</c:forEach>				
-</div>	
-<div class="pagingtable">
-	<!--페이징 -->
+</c:forEach>
+	<br><br><br>
 	<table>
+	<!--페이징 -->
 	<tr>
 	<td colspan="4">
 		<ol class="paging">
@@ -181,25 +235,9 @@
 	</td>
 	</tr>
 </table>
-</div>
-<script>
-var mySwiper = new Swiper('.swiper-container', {
-	// 슬라이드를 버튼으로 움직일 수 있습니다.
-		loop:true,
-	  navigation: {
-	    nextEl: '.swiper-button-next',
-	    prevEl: '.swiper-button-prev',
-	  },
-	    
-	// 현재 페이지를 나타내는 점이 생깁니다. 클릭하면 이동합니다.
-	  pagination: {
-	    el: '.swiper-pagination',
-	    type: 'bullets',
-	  },
-	    
-	});
-</script>
-
+ 	<!--페이징끝 -->
+</div>	
+<%@ include file="/WEB-INF/include/include-body.jsp" %>	
 <script>
 //게시글 수정 삭제 시작
 function del(revIdx) {
@@ -318,13 +356,18 @@ function createCmt2(revIdx) {
 						output +="<td>" + result[i].userName;
 						output +="(" +changeDate(result[i].revCmtRegdate)+")<br>";
 						output += result[i].revCmtComment +"<br>";
+						output +="<sec:authorize access='isAuthenticated()'>";
+						output +="<sec:authentication var='principal' property='principal' />";
+						output +="<c:if test="${result[i].userId == principal.username}">";
 						output +="<input type='button' value='수정' class='ajaxbtn' onclick= modReple(" + result[i].revCmtIdx +","+ result[i].revCmtRegdate + ",'"+result[i].revCmtComment+"',"+ result[i].revIdx + ",'" + result[i].userName +"')>";
 						output +="<input type='button' value='삭제' class='ajaxbtn' onclick= delReple(" + result[i].revCmtIdx + ","+ result[i].revIdx + ")>";
+						output +="</c:if>";
+						output +="</sec:authorize>";
 						output +="</td></tr>";
 					}
 					output +="</table>";
 				} else {
-					var output ="<table id='demo'>";
+					var output = "<table id='demo'class='collapse'>";
 					output +="<tr>";
 					output +="<td><h6>등록된 댓글이 없습니다.</h6></td>";
 					output +="</tr>";
