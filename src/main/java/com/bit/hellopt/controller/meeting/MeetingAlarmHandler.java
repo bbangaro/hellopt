@@ -45,7 +45,6 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 		
 		users.put(session.getId(), session);
 		
-		System.out.println("연결 됐을 때 유저 : " +session.getId());
 	}
 
 	// ※클라이언트와 연결이 끊어진 경우
@@ -53,7 +52,7 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		sessions.remove(session);
-		logger.info("{} 끝", session.getId());
+		
 		System.out.println("핸들러 페이지 소켓연결 끝 : " + session.getId());
 
 		Map<String, Object> attrs = session.getAttributes();
@@ -97,7 +96,6 @@ public class MeetingAlarmHandler extends TextWebSocketHandler {
 
 			// Aytowired는 만능이 아니다.. 잘 찾아보고 사용할 것
 			// 지금은 service 메소드를 사용할 수 있는 클래스를 가져옴 (static으로 선언하면 바로 가져올 수 있음)
-			System.out.println("msg : " + MainController.mService.progressCnt() + "");
 			// MainController.service.progressCnt();
 
 		}

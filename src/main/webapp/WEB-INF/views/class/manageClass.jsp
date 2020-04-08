@@ -7,15 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>강의 관리</title>
 <meta charset="utf-8">
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/classdetail.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
-<style>
-	th,td {
-		text-align: center;
-	}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/manage.css">
 </head>
 <body>
 	<!-- 콘텐츠 시작 { -->
@@ -45,12 +39,12 @@
 								<c:forEach var="classList" items="${liveClassList }" varStatus="idx">
 									<tr>
 										<td>${classList.classIdx }</td>
-										<td>${classList.className }</td>
+										<td id="class-name"><a href="classdetail?classIdx=${classList.classIdx }">${classList.className }</a></td>
 										<td>${classList.fkUserId }</td>
 										<td>${classList.classType }</td>
 										<td>
-											<button style="float: right" class="detail-btn" id="del-class" onclick="del_class(${classList.classIdx })">강의 삭제</button>
-											<button class="detail-btn"
+											<button style="float: right" class="manage-btn" id="del-class" onclick="del_class(${classList.classIdx })">강의 삭제</button>
+											<button class="manage-btn"
 												onclick="location.href='updateclass?classIdx=${classList.classIdx }'">강의 수정</button>
 										</td>
 									</tr>

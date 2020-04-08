@@ -25,8 +25,13 @@
 	margin-bottom: 25px;
     font-size: 50px;
     letter-spacing: -1px;
-    line-height: 34px;
+    /* line-height: 34px; */
     font-family: nanumEB, '맑은 고딕','Malgun Gothic','Helvetica','Apple SD Gothic Neo',AppleGothic,'돋움',Dotum,'굴림',Gulim,Helvetica,sans-serif;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 600px;
 }
 
 #rec_class_info3 {
@@ -65,6 +70,11 @@
     letter-spacing: -1px;
     line-height: 34px;
     font-family: nanumEB, '맑은 고딕','Malgun Gothic','Helvetica','Apple SD Gothic Neo',AppleGothic,'돋움',Dotum,'굴림',Gulim,Helvetica,sans-serif;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 225px;
 }
 
 .class_info3 {

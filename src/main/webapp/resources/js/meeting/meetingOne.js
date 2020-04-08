@@ -31,11 +31,11 @@ $('.send-btn2').click(function () {
 });
 
 $('.send-u').click(function () {
-	location.href="/meetingUpdate?meetingIdx="+idx;
+	location.href="/hellopt/meetingUpdate?meetingIdx="+idx;
 });
 
 $('.send-d').click(function () {
-	location.href="/meetingDelete?meetingIdx="+idx;
+	location.href="/hellopt/meetingDelete?meetingIdx="+idx;
 });
 
 /* 지도 api 설정하기 */

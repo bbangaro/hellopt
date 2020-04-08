@@ -25,6 +25,9 @@
 	     -->
 	    <div id="cal"></div>
 	    <!-- 달력이 생성될 위치 -->
+	    <h2>매일매일 홈트레이닝!</h2>
+	    <p>한달동안 한번도 안빠지고 운동하면 당첨확률 up! up!</p>
+		
 		<div id="eventCalendar"></div>
 	    </div>
 	

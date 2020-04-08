@@ -7,7 +7,7 @@
 		SELECT COUNT(*) FROM CLASS_TB
 	</select>
 	
-	<select id="pagingClassList" parameterType="int" resultType="com.bit.hellopt.vo.live.LiveClass">
+	<select id="moreClassList" parameterType="int" resultType="com.bit.hellopt.vo.live.LiveClass">
 		SELECT *
 		FROM (SELECT ROWNUM R, C.*
 		        FROM (SELECT *
