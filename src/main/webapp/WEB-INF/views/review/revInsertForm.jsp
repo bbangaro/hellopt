@@ -7,10 +7,10 @@
 <title>후기작성</title>
 <%@ include file="/WEB-INF/include/include-header.jsp" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+    <link rel ="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/review/reviewWrite.css">
 <style>
 
-	td .star{
+	.star{
 		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 		  background-size: auto 100%;
 		  width: 30px;
@@ -19,7 +19,7 @@
 		  text-indent: -9999px;
 		  cursor: pointer;
 		}
-	td .star.on{background-position:0 0;}
+	div.star.on{background-position:0 0;}
 </style>
 <script>
 //--다중 파일 선택시 미리보기
@@ -103,7 +103,7 @@
 	<br><br><br><br>
 <form id="frm" method="post" 
 		enctype="multipart/form-data">
-	
+<%-- 	
 <select>
 	<c:forEach var = "class" items="${classMap }">
 	<option>수강한 클래스 선택</option>
@@ -113,54 +113,49 @@
 	<c:forEach var = "trainer" items="${trainerMap }">
 	<option>트레이너 선생님 선택</option>
 	</c:forEach>
-</select> 
-	<table class="board_view">
-		<colgroup>
-			<col width="15%">
-			<col width="*">
-		</colgroup>
-		<tbody>
-		<tr>
-			
-			<td>별점</td>
-			<td class="starRev">
-				<span class="star on">1</span>
-				<span class="star">2</span>
-				<span class="star">3</span>
-				<span class="star">4</span>
-				<span class="star" id="star">5</span>
-				<input id="revStar1" type="hidden" name="revStar" value="">
-			<td> 
-		</tr>
-		<tr>
-			<td scope = "row">내용</td>
-			<td><textarea name="revContent" rows="20" cols="100" title="내용"></textarea><td>
-		</tr>
-		</tbody>	
-	</table>
-<!--  이미지 미리보기 -->
-	<div>	
-		
-		<div class = "input_wrap">
-			<a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
-			<input type="file"  multiple="multiple" id="input_imgs"  name="file_0" >
-		</div>
-	</div>	
-	<div id = "fileDiv">
-	<h2><b>이미지 미리보기</b></h2>
-	<br><br>
-			<c:forEach var="file" items="${rBoard.filevo }">
-					<span id="uploadedimg${file.revFileIdx }">
-					<img  src = "/hellopt/s3/review/${file.revFileSname }" >
-					<input type="button" value="삭제" onclick="imgDel(${file.revFileIdx})">
-					</span>
-			</c:forEach>
-				<span class="imgs_wrap">
-					<img class = "img">
-				</span>
+</select>  --%>
+	<div id="wrap">
+		<div id = "product_layout_1">
+			<div class = "product_info">
+				<div class ="redbar"></div>
+				<span id="title">별점</span>
+				<div class="starRev">
+					<span class="star on">1</span>
+					<span class="star">2</span>
+					<span class="star">3</span>
+					<span class="star">4</span>
+					<span class="star" id="star">5</span>
+					<input id="revStar1" type="hidden" name="revStar" value="">
+				</div> 
+			</div>
+			<div>
+			<textarea name="revContent" rows="20" cols="100" title="내용" placeholder="후기를 작성해주세요..."></textarea>
+			</div>
+			<div class = "product_info">	
+				<a href="javascript:" onclick="fileUploadAction();"  class="btn">파일 업로드</a>
+				<input type="file"  multiple="multiple" id="input_imgs"  name="file_0" >
+				<div id = "fileDiv">
+				<h2><b>이미지 미리보기</b></h2>
+				<br><br>
+					<c:forEach var="file" items="${rBoard.filevo }">
+							<span id="uploadedimg${file.revFileIdx }">
+							<img  src = "/hellopt/s3/review/${file.revFileSname }" >
+							<input type="button" value="삭제" onclick="imgDel(${file.revFileIdx})">
+							</span>
+					</c:forEach>
+						<span class="imgs_wrap">
+							<img class = "img">
+						</span>
+				</div>
+			</div>	
+		</div>	
 	</div>
+<!--  이미지 미리보기 -->
+
+	<div class = "btnclass">
 	<a href="#this" id="list" class="btn">목록으로</a>
 	<a href="#this" id="write" class="btn">작성완료</a>
+	</div>
 </form>	
 <%@ include file="/WEB-INF/include/include-body.jsp" %>	
 

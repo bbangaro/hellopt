@@ -63,7 +63,6 @@
 			<h1>${rBoard.userName }</h1>
 			</div>
 			</c:if>
-				
 			<!-- 글수정삭제 메뉴 -->
 			<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="principal" property="principal" />
@@ -101,14 +100,14 @@
 				</div>
 				
 				<div class="related_info">
-		<div>
-			<div>
-				<input type="button" value="댓글보기"  class = "more_rpl" onclick = "listReply2(${rBoard.revIdx })">
-			</div>
-		</div> 
+				<div>
+					<div>
+						<input type="button" value="댓글보기"  class = "more_rpl" onclick = "listReply2(${rBoard.revIdx })">
+					</div>
+				</div> 
 				</div>
 	<form class="commentForm" name="commentFrom" method="post">		
-	<div class = "rply_wrap">
+	<div class = "product_layout_1">
 		<!-- 댓글 작성 폼 -->
 		<div class="rpl_area">
 			<div class="rpl_write_area">
