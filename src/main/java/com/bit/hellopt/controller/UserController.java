@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.hellopt.service.liveclass.LiveClassService;
 import com.bit.hellopt.service.meeting.MeetingService;
+import com.bit.hellopt.service.user.EmailService;
 import com.bit.hellopt.service.user.UserProfileService;
 import com.bit.hellopt.service.user.UserService;
 import com.bit.hellopt.vo.live.LiveClass;
@@ -61,7 +63,7 @@ public class UserController {
 		
 		if(bindingResult.hasErrors()) {
 			logger.info("signupform: user validation error");
-			return "signupForm";
+			return "user/signupForm";
 		} else {
 			
 			if(!file.isEmpty()) {
@@ -121,6 +123,9 @@ public class UserController {
 	
 	@PostMapping("/auth/update")
 	public String adminUserDetailUpdate(@ModelAttribute User user,  @RequestParam MultipartFile file) {
+			if(user.getUserPw().equals("")) {
+				user.setUserPw(null);
+			}
 			userService.updateNormalUser(user);
 			if(!file.isEmpty()) {
 				profileService.updateProfile(user, file);
@@ -153,7 +158,25 @@ public class UserController {
 		//meetingList.addAll(meetingService.getParticipantMeetingList(principal.getName()));
 		
 		List<MeetingVO> meetingList = meetingService.getParticipantMeetingList(principal.getName());
+		
+		for (MeetingVO vo : meetingList) {
+			vo.setMeetingFileVO(meetingService.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
 		model.addAttribute("meetingList", meetingList);
 		return "user/myMeeting";
+	}
+	
+	@GetMapping("/findpw")
+	public String renderFindPwForm() {
+		return "user/findPwForm";
+	}
+	
+	@PostMapping("/findpw")
+	public String sendEmail(@RequestParam String username) {
+		User user = userService.findUserById(username);
+		userService.generateTempPw(user, user.getUserEmail());
+		
+		return "redirect:/";
 	}
 }

@@ -13,7 +13,7 @@
 	<p>Term</p>
 	<p>Privacy policy</p>
 	<p class="footer_info">BIT CAMP</p>
-	<p class="copyright">ALL RIGHTS RESERVED. Â© 2019 HelloPT</p>
+	<p class="copyright">ALL RIGHTS RESERVED. © 2020 HelloPT</p>
 	
 	<script src="${pageContext.request.contextPath}/resources/js/main/ws.js"></script>
 </div>

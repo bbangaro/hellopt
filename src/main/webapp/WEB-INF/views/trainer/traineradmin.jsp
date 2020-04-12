@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>트레이너 리스트</title>
+<title>트레이너정보 관리자페이지</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/trainerinfo.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
@@ -14,15 +14,16 @@
         <header id="">
 
         </header>
-        <div class="trainerbox_banner">
+        <div class="trainerbox_banner_admin">
         </div>
         <div class="trainerbox">
 
             <div class="trainer_inner">
             <c:forEach var="trainer" items="${trainerList }">
                 <div class="trainer trainerAdmin">
-                    <a href="${pageContext.request.contextPath}/trainerupdate?trainerIdx=${trainer.trainerIdx }">
-                        <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
+                    <a href="${pageContext.request.contextPath}/admin/trainerupdate?trainerIdx=${trainer.trainerIdx }">
+                        <img src="${pageContext.request.contextPath}/resources/images/trainer/${trainer.trainerProfile }" alt="트레이너" class="trainerImg_img">
+
                         <div class="trainer_caption">
                             <p class="captiontitle">
                             	${trainer.trainerNickname } ${trainer.trainerName }

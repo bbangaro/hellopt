@@ -7,10 +7,14 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/main/login.css">
+	href="${pageContext.request.contextPath}/resources/css/main/signup.css">
 <title>유저 관리</title>
 </head>
 <body>
+<div class="container">
+<div class="row">
+			<div class="col-xs-3 col-md-2"></div>
+			<div class="col-xs-12 col-md-8">
 	<h2>회원 정보 관리</h2>
 	<form:form
 		action="${pageContext.request.contextPath}/auth/update"
@@ -33,6 +37,11 @@
 			<li><form:label path="userName">이름</form:label> <form:input
 					path="userName" placeholder="NAME" /> <form:errors path="userName"
 					cssClass="error"></form:errors></li>
+			<li>
+				<form:label path="userEmail">이메일</form:label>
+				<form:input path="userEmail" placeholder="Email" required="" type="email" />
+				<form:errors path="userEmail" cssClass="error"></form:errors>
+			</li>
 			<li><form:label path="userGender">성별</form:label> <br /> <form:radiobutton
 					path="userGender" value="M" /><span>남자</span><br /> <form:radiobutton
 					path="userGender" value="F" /><span>여자</span><br /></li>
@@ -82,6 +91,10 @@
 		<input type="submit" value="회원 정보 수정">
 		<input type="button" onclick="deleteUser()" value="회원 탈퇴">
 	</form:form>
+	</div>
+			<div class="col-xs-3 col-md-2"></div>
+		</div>
+	</div>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>

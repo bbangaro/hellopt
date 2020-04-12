@@ -9,16 +9,15 @@ public class RCommentVO {
 	private String userId;
 	private String userName;
 	private String revCmtComment;
-	private String revCmtRegdate;
-	private String revCmtEditdate;
-	
-	public int getRevCmtIdx() {
+	private Date revCmtRegdate;
+	private Date revCmtEditdate;
+	public Integer getRevCmtIdx() {
 		return revCmtIdx;
 	}
 	public void setRevCmtIdx(Integer revCmtIdx) {
 		this.revCmtIdx = revCmtIdx;
 	}
-	public int getRevIdx() {
+	public Integer getRevIdx() {
 		return revIdx;
 	}
 	public void setRevIdx(Integer revIdx) {
@@ -42,16 +41,16 @@ public class RCommentVO {
 	public void setRevCmtComment(String revCmtComment) {
 		this.revCmtComment = revCmtComment;
 	}
-	public String getRevCmtRegdate() {
+	public Date getRevCmtRegdate() {
 		return revCmtRegdate;
 	}
-	public void setRevCmtRegdate(String revCmtRegdate) {
+	public void setRevCmtRegdate(Date revCmtRegdate) {
 		this.revCmtRegdate = revCmtRegdate;
 	}
-	public String getRevCmtEditdate() {
+	public Date getRevCmtEditdate() {
 		return revCmtEditdate;
 	}
-	public void setRevCmtEditdate(String revCmtEditdate) {
+	public void setRevCmtEditdate(Date revCmtEditdate) {
 		this.revCmtEditdate = revCmtEditdate;
 	}
 	@Override
@@ -60,6 +59,7 @@ public class RCommentVO {
 				+ userName + ", revCmtComment=" + revCmtComment + ", revCmtRegdate=" + revCmtRegdate
 				+ ", revCmtEditdate=" + revCmtEditdate + "]";
 	}
+	
 	
 	
 	

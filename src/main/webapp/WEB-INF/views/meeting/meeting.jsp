@@ -6,8 +6,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/meeting/meeting.css">
-	<script src="${pageContext.request.contextPath}/resources/js/meeting/meeting.js"></script>
-</head>
+</head>	
 
 
 <body>
@@ -25,7 +24,7 @@
 					<p class="meeting-main">오프라인 모임!</p>
 	
 					<div class="search-container">
-						<input type="text" placeholder="Search...">
+						<input type="text" id="getSearch" name="searchKeyword" value="" placeholder="Search..." />
 						<div class="meeting-search"></div>
 					</div>
 	
@@ -39,8 +38,7 @@
 			  <div class="service-details">
 			    <img src="${pageContext.request.contextPath}/s3/meeting/${meeting.meetingFileVO[0].mSysImg }">
 			    <div class="service-hover-text">
-			      <h3 class="msub">${meeting.mSubject}</h3>
-			      <h4 class="mlocal">${meeting.fkLocalNo }</h4>
+			      <h3 class="msub textLine2">${meeting.mSubject}</h3>
 			      
 					<!-- 이건 현재 날짜 뽑는거 -->
 			      <c:set var="now" value="<%=new java.util.Date()%>" />
@@ -77,7 +75,9 @@
 				      <a class="mpro">${meeting.progressSt}</a>
 				      
 				      <p class="msub"><a href="${pageContext.request.contextPath}/meetingOne?meetingIdx=${meeting.meetingIdx }">${meeting.mSubject}</a></p>
-				      <a class="mprice">회비 ${meeting.mPrice }원</a>
+				      <a class="mprice">회비 <fmt:formatNumber value="${meeting.mPrice }" pattern="#,###"/>원</a>
+				     
+
 			      </div>
 			    </div>
 			  </div>
@@ -93,5 +93,8 @@
 </div>
 	
 	<!-- js에서 태그들을 찾고 있어서 여기다가 위치 시켜야 함 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/calender/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/meeting/meeting.js"></script>
 
 </body>

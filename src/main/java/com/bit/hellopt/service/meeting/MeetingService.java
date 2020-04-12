@@ -12,6 +12,8 @@ public interface MeetingService {
 	
 	// 미팅 테이블 전체 조회
 	List<MeetingVO> getMeetingVO();
+	// 미팅 테이블 서치
+	List<MeetingVO> getSearch(String searchKeyword);
 	// 게시글 상세 조회 내에서 조회수 많은 게시글 목록
 	List<MeetingVO> getMeetingCnt();
 	
@@ -23,7 +25,7 @@ public interface MeetingService {
 		
 	// 게시글 상세 조회
 	MeetingVO getMeetingOne(int meetingIdx);
-	MeetingVO progressCnt(String progressSt);
+	int progressCnt();
 	MeetingVO resCount(int meetingIdx);
 	MeetingVO resUser(Map<String, Object> hm);
 	List<MeetingFileVO> getMeetingOneFiles(int meetingIdx);

@@ -32,13 +32,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/main").permitAll()
 				.antMatchers("/user/**").permitAll()
 				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/deleteexerciseinfo").hasRole("ADMIN")
+				.antMatchers("/updteeexerciseinfo").hasRole("ADMIN")
 				.antMatchers("/resources/**").permitAll()
 				.antMatchers("/file/**").permitAll()
-				.antMatchers("/meetingWrite").authenticated() //로그인이 되어있어야..
+				.antMatchers("/meetingOne").authenticated() //모임 상세보기 로그인시에만 사용 가능(선하)
+				.antMatchers("/meetingWrite").authenticated() //모임 글쓰기 로그인시에만 사용 가능(선하)
 				.antMatchers("/classlist").authenticated()
 				.antMatchers("/meal").authenticated() //로그인시에만 사용 가능
 				.antMatchers("/auth/**").authenticated()
-				
+				.antMatchers("/calender").authenticated() //캘린더 로그인시에만 사용 가능(선하)
+				.antMatchers("/calender").authenticated()
+				.antMatchers("/multi").authenticated()
 		    //.anyRequest().authenticated()
 			.and()
 				.formLogin()

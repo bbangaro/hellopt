@@ -145,7 +145,7 @@
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="user" />
 					<c:if test="${user.username != null }">
-					<input type="submit" id="submit" value="개설 신청하기" class="send-btn2">
+					<input type="submit" id="submit" value="개설 신청하기" class="send-btn2" onclick="webSocket()">
 					</c:if>
 				</sec:authorize>
 				

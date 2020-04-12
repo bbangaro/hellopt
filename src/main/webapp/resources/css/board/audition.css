@@ -22,6 +22,10 @@ a:hover {
 .bnimg{
     width: 100%;
 }
+.banner {
+	width: 1140px;
+    margin: 0 auto;
+}
 .contents{
     text-align: center;
 }

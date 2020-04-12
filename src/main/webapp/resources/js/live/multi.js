@@ -30,17 +30,15 @@ let users;
 
 const socket = io.connect("//hellopt-signal.herokuapp.com", {secure: true});
 
-const startButton = document.getElementById("startButton");
+/*const startButton = document.getElementById("startButton");*/
 const callButton = document.getElementById("callButton");
-/*const hangupButton = document.getElementById("hangupButton");*/
 
-startButton.addEventListener("click", startAction);
+//startButton.addEventListener("click", startAction);
 callButton.addEventListener("click", callAction);
-/*hangupButton.addEventListener("click", hangupAction);*/
 
 // 사용자의 카메라, 마이크 미디어 얻기
 function startAction() {
-  startButton.disabled = true;
+  /*startButton.disabled = true;*/
   callButton.disabled = false;
   navigator.mediaDevices
     .getUserMedia(localMediaConstraints)
@@ -132,7 +130,6 @@ function handleConnection(event) {
     to: roomId,
     from: socket.id
   });
-  console.log("======확인용 roomdId: " + roomId);
   console.log("sent candidate to signaling server");
 }
 
@@ -144,7 +141,7 @@ function handleConnectionChange(event) {
   }
 }
 
-// 무작위 고유 방ID 생성
+// 무작위 고유 방ID 생성 -> classIdx로 대체
 function setRoomToken() {
   const hashValue = (Math.random() * new Date().getTime())
     .toString(32)
@@ -187,9 +184,9 @@ function getOtherSockets() {
 }
 
 function initialize() {
-  roomId = 65;
+  //roomId = 65;
   userId = $("#userid").val();
-  //roomId = ${classIdx};
+  roomId = $("#roomId").val();
 
   callButton.disabled = true;
   socketProcess();
@@ -299,5 +296,4 @@ function socketProcess() {
 }
 
 initialize();
-//startAction();
-//callAction();
+startAction();

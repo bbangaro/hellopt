@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -56,6 +57,38 @@ public class MeetingController {
 		
 		model.addAttribute("meetingList", meetingList);
 		return "meeting/meeting";
+	}
+	
+	@RequestMapping("/searchKeyword")
+	@ResponseBody
+	public List<MeetingVO> getSearch(Model model, String searchKeyword) {
+		System.out.println("searchKeyword : " + searchKeyword);
+		
+		List<MeetingVO> getSearch = service.getSearch(searchKeyword);
+		
+		
+		for (MeetingVO vo : getSearch) {
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
+		System.out.println("getSearch : " + getSearch);
+		model.addAttribute("getSearch",getSearch);
+		
+		return getSearch;
+	}
+	
+	@RequestMapping("/meetingListAjax")
+	@ResponseBody
+	public List<MeetingVO> getSearch() {
+		
+		List<MeetingVO> meetingList = service.getMeetingVO();
+		System.out.println("getMeetingList 성공");
+		
+		for (MeetingVO vo : meetingList) {
+			vo.setMeetingFileVO(service.getMeetingOneFiles(vo.getMeetingIdx()));
+		}
+		
+		return meetingList;
 	}
 	
 	@RequestMapping("/admin/meetingAdmin")
@@ -193,8 +226,10 @@ public class MeetingController {
 	public String meetingWriteOk(Principal principal, MeetingVO meetingVO, MeetingFileVO meetingFileVO, MultipartHttpServletRequest mhsq) throws Exception, IllegalStateException, IOException {
 		
 		service.insertMeeting(meetingVO);
+		
 		meetingVO.setMeetingIdx(meetingVO.getMeetingIdx());
 		meetingFileVO.setFkMeetingIdx(meetingVO.getMeetingIdx());
+		
 		service.insertMaxMeeting(meetingVO);
 		service.insertConsentYn(meetingVO);
 		
@@ -235,6 +270,7 @@ public class MeetingController {
 		}
 		
 		
+		
 		return "redirect:/meeting";
 	}
 	
@@ -270,11 +306,25 @@ public class MeetingController {
 	}
 	
 	@PostMapping("/meetingUpdateOk")
-	public String meetingUpdateOk(Principal principal, MeetingVO meetingVO) {
+	public void meetingUpdateOk(Principal principal, MeetingVO meetingVO, int meetingIdx, HttpServletResponse response) throws Exception {
+		String sessionId = principal.getName();
+		int idx = service.getMeetingOne(meetingIdx).getMeetingIdx();
+		String loginId = service.getMeetingOne(meetingIdx).getFkUserId();
+		
+		if ( sessionId.equals(loginId) ) {
+		
 		service.updateMeetingOk(meetingVO);
 		service.updateMaxMeeting(meetingVO);
 		System.out.println("getmeetingUpdateOk 성공");
-		return "redirect:/meeting";
+		}  else {
+		    response.setContentType("text/html; charset=UTF-8");
+		    response.getWriter().println("<script>alert(' 삭제 권한이 없습니다 '); </script>");
+			response.sendRedirect("meetingOne?meetingIdx="+idx);
+			
+			//return "redirect:/meetingOne?meetingIdx="+idx;
+		}
+		
+		//return "redirect:/meeting";
 	}
 	
 	@RequestMapping("/meetingDelete")
@@ -296,7 +346,6 @@ public class MeetingController {
 			
 		    response.setContentType("text/html; charset=UTF-8");
 		    response.getWriter().println("<script>alert(' 삭제 권한이 없습니다 '); </script>");
-		    
 			response.sendRedirect("meetingOne?meetingIdx="+idx);
 			
 			//return "redirect:/meetingOne?meetingIdx="+idx;

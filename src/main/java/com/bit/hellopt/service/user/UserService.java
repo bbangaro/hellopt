@@ -28,4 +28,6 @@ public interface UserService {
 	public void disableUser(User user);
 	public List<User> pagingUserList(String search, String searchValue, int page);
 	public int getLastPage(String search, String searchValue, int page);
+	public void generateTempPw(User user, String email);
+	public void updateRole(User user, String role);
 }

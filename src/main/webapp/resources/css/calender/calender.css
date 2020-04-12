@@ -27,7 +27,7 @@
       margin: 0 auto;
       height: 570px;
       overflow: hidden;
-      margin-top: 200px;
+      margin-top: 116px;
       margin-bottom: 200px;
     }
     
@@ -130,7 +130,8 @@
     }
     
     .day.today {
-      color: rgba(156, 202, 235, 1);
+      color: #c0392b;
+      font-weight: bold;
     }
     
     .day-name {
@@ -387,3 +388,68 @@
     @keyframes fadeOutShink  {
       to { opacity: 0; padding: 0px; height: 0px; }
     }
+    
+.eventA{
+	color : #eee;
+	font-size: 16px;
+    line-height: 22px;
+    letter-spacing: .5px;
+}    
+
+/* 캘린더 상단 */
+.hello_body h2 {
+  font-size: 42px;
+  font-weight: 600;
+}
+
+/*애니메이션 들어간 타이틀*/
+.hello_body h2 {
+  animation: fadeIn 1s ease alternate;
+  animation-fill-mode: forwards;
+  text-align: center;
+}
+
+.lang-wr-ani {
+  opacity: 0;
+  animation: appear 1s ease alternate;
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+.hello_body h2:after{
+  position: absolute;
+  width: 1px;
+  height: 0px;
+  content: '';
+  background: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: linedraw 0.3s 0.5s ease-in alternate;
+  animation-fill-mode: forwards;
+  margin-left:  0 1px
+}
+
+.hello_body h2 {
+  font-size: 40px;
+  font-weight: 600;
+  text-shadow: 5px 5px 10px rgba(0,0,0,0.6);
+}
+
+
+/*language 들어있어서 ani영역 레이아웃 조정*/
+
+/*라인 애니메이션 조정하는 곳*/
+.hello_body h2:after{
+  top: 203px;
+}
+
+.hello_body h2 {
+  margin-top: 155px;
+}
+.hello_body p {
+	all: unset;
+    margin-left: 361px;
+    margin-top: 93px;
+    position: absolute;
+    font-size: 14px;
+}

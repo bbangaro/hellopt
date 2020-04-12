@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>칼로리총량</title>
+<title>나의 영양 섭취 정보</title>
 <script src="${pageContext.request.contextPath}/resources/js/meal/cafe_nutrition.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/meal/meal.css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -130,18 +130,18 @@
                     </div>
                 <div class="pageing_box">
                         <c:if test="${page.prev}">
-                     <a href="meal?currpage=${page.startBlock-1}&search=${search}&searchtxt=${searchtxt}"><c:out value="이전"/></a>
+                     <a href="meal?currpage=${page.startBlock-1}&search=${search}&searchtxt=${searchtxt}&tempmode=1"><c:out value="이전"/></a>
                   </c:if>
                   <c:forEach var="index" begin="${page.startBlock}" end="${page.endBlock}">
                      <c:if test="${index==page.currPage}">
                         <c:out value="${index}"/>
                      </c:if>
                      <c:if test="${index!=page.currPage}">
-                        <a href="meal?currpage=${index}&search=${search}&searchtxt=${searchtxt}">${index}</a>
+                        <a href="meal?currpage=${index}&search=${search}&searchtxt=${searchtxt}&tempmode=1">${index}</a>
                      </c:if>
                   </c:forEach>
                   <c:if test="${page.next}">
-                     <a href="meal?currpage=${page.endBlock+1}&search=${search}&searchtxt=${searchtxt}"><c:out value="다음"/></a>
+                     <a href="meal?currpage=${page.endBlock+1}&search=${search}&searchtxt=${searchtxt}&tempmode=1"><c:out value="다음"/></a>
                   </c:if>
                   </div>
                </div>

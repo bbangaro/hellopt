@@ -18,7 +18,7 @@
         <%-- <input name="trainerIdx" type="hidden" value=${trainerinfo.trainerIdx }> --%>
         <div class="trainerbox">
             <div class="trainerImg">
-                <img src="${pageContext.request.contextPath}/resources/images/trainer/trainer1.jpg" alt="트레이너" class="trainerImg_img">
+                <img src="${pageContext.request.contextPath}/resources/images/trainer/${trainerinfo.trainerProfile }" alt="트레이너" class="trainerImg_img">
             </div>
             <div class="trainerinfo">
                 <h2 class="trainertitle">${trainerinfo.trainerName }<span class="nick">${trainerinfo.trainerNickname }</span></h2>
@@ -41,8 +41,8 @@
                 </div>
                 <div class="trainer_btnbox">
 	        	<!-- <input type="submit" value="수정페이지" name="" class="trainer_adminbtn"> -->
-	        	<a class="trainer_adminbtn" href="trainerupdatepage?trainerIdx=${trainerinfo.trainerIdx }">수정</a>
-	            <span><a class="trainer_adminbtn" href="${pageContext.request.contextPath}/deletetrainer?trainerIdx=${trainerinfo.trainerIdx }">삭제</a></span>
+	        	<a class="trainer_adminbtn" href="${pageContext.request.contextPath}/admin/trainerupdatepage?trainerIdx=${trainerinfo.trainerIdx }">수정</a>
+	            <span><a class="trainer_adminbtn" href="${pageContext.request.contextPath}/admin/deletetrainer?trainerIdx=${trainerinfo.trainerIdx }">삭제</a></span>
                 </div>
             </div>
 
