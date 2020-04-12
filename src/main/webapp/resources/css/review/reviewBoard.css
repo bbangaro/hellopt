@@ -534,6 +534,9 @@ input[type='button'].rplbtn{
 #listReply{
 	margin-top:30px;
 }
+.rplbox{
+	padding-bottom:8px;
+}
 input[type='button'].ajaxbtn{
 	padding:2px;
 	margin:3px;
