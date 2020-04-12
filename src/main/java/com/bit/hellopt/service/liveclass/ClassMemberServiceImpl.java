@@ -14,6 +14,7 @@ public class ClassMemberServiceImpl implements ClassMemberService {
 	@Autowired
 	ClassMemberMapper classMemberMapper;
 	
+	//강의 신청
 	@Override
 	public void insertClassMember(ClassMember info) {
 		classMemberMapper.insertClassMember(info);
@@ -21,20 +22,32 @@ public class ClassMemberServiceImpl implements ClassMemberService {
 
 	//강의번호, 아이디로 조회
 	@Override
-	public List<ClassMember> getClassMember(ClassMember info) {
-		return classMemberMapper.getClassMember(info);
+	public int getRegInfo(ClassMember info) {
+		return classMemberMapper.getRegInfo(info);
 	}
 
 	//아이디로 조회
 	@Override
-	public List<ClassMember> getClassMem(ClassMember info) {
-		return classMemberMapper.getClassMem(info);
+	public List<ClassMember> getMyClass(ClassMember info) {
+		return classMemberMapper.getMyClass(info);
 	}
 
 	//강의번호로 조회
 	@Override
-	public ClassMember getClassM(int classMemberIdx) {
-		return classMemberMapper.getClassM(classMemberIdx);
+	public ClassMember getOneClassInfo(int classMemberIdx) {
+		return classMemberMapper.getOneClassInfo(classMemberIdx);
+	}
+	
+	//강의 신청 취소
+	@Override
+	public void deleteClassMember(ClassMember info) {
+		classMemberMapper.deleteClassMember(info);
+	}
+	
+	//강의 신청자 수 조회
+	@Override
+	public int getMemberCnt(int classIdx) {
+		return classMemberMapper.getMemberCnt(classIdx);
 	}
 
 }

@@ -29,7 +29,9 @@
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide01.png" alt="KOZ">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/sportsHistory.jpg" title="">
+                  <%-- <img src="${pageContext.request.contextPath}/resources/images/main/mainfirst.jpg" title=""> --%>
+                  <video style="visibility: visible; width: 1500px;" autoplay="autoplay" muted="muted" loop poster=""> <source src="${pageContext.request.contextPath}/resources/images/main/main.mp4" type="video/mp4"></video>
+                  
                 </div>
                 <div class="content_text">
                   <h4>History</h4>
@@ -42,14 +44,14 @@
 
         <div class="swiper-slide swiper-slide-active" style="margin-right: 140px;">
           <div class="slider_content">
-            <a href="#">
+            <a href="meal">
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide02.png" alt="지코">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer1.jpg" title="">
+                  <img style="width: 100%;" src="${pageContext.request.contextPath}/resources/images/main/nutrition3.jpg" title="">
                 </div>
                 <div class="content_text">
-                  <h4>Trainer 응준</h4>
+                  <h4>Nutrition</h4>
                   <span>more view</span>
                 </div>
               </div>
@@ -59,14 +61,14 @@
 
         <div class="swiper-slide swiper-slide-next" style="margin-right: 140px;">
           <div class="slider_content">
-            <a href="#">
+            <a href="meeting">
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/dvwn_main.png" alt="다운">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer3.jpg" title="">
+                  <img style="width: 70%; height: 600px" src="${pageContext.request.contextPath}/resources/images/main/meeting2.jpg" title="">
                 </div>
                 <div class="content_text">
-                  <h4>Trainer 연문</h4>
+                  <h4>Offline Meeting</h4>
                   <span>more view</span>
                 </div>
               </div>
@@ -76,14 +78,14 @@
 
         <div class="swiper-slide" style="margin-right: 140px;">
           <div class="slider_content">
-            <a href="#">
+            <a href="classlist">
               <div class="content_wrap">
                 <div class="content_bg">
                   <!--<img src="/img/slide03.png" alt="SHOW ME WHAT YOU GOT">-->
-                  <img src="${pageContext.request.contextPath}/resources/images/main/trainer4.jpg" title="">
+                  <img style="width: 60%;" src="${pageContext.request.contextPath}/resources/images/main/streaming.jpg" title="">
                 </div>
                 <div class="content_text">
-                  <h4>Trainer 관이</h4>
+                  <h4>LiveStreaming</h4>
                   <span>more view</span>
                 </div>
               </div>
@@ -105,5 +107,44 @@
     <script src="${pageContext.request.contextPath}/resources/js/main/mainslider.js"></script>
   
   </div>
+  <script type="text/javascript">
+
+		window.onload = function() {
+			
+			function notice_getCookie( name ){
+			
+			var nameOfCookie = name + "=";
+			var x = 0;
+			//쿠키의 길이가 0보다 작거나 같으면
+			while ( x <= document.cookie.length )
+			{
+			//쿠키 길이	
+			var y = (x+nameOfCookie.length);
+				//   쿠키 이름과 길이  == 쿠키 이름 0 같으면
+				if ( document.cookie.substring( x, y ) == nameOfCookie ) {
+				//              여기는 뭔소리죠	
+				if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
+				//            쿠키 길이
+				endOfCookie = document.cookie.length;
+				// 뭔소리야 ^^
+				return unescape( document.cookie.substring( y, endOfCookie ) );
+				}
+				x = document.cookie.indexOf( " ", x ) + 1;
+				if ( x == 0 )
+				break;
+				}
+				return "";
+				}
+										//쿠키 이름 정하기  / 완료됐을 때 이름 정하기
+				if ( notice_getCookie( "eventPopup" ) != "done" )
+				{
+				// 팝업창 오픈!
+				noticeWindow= window.open("/pop", "", "width=700, height=830");
+				noticeWindow.opener = self;
+				}
+		}
+		
+
+	</script>
 
 </body>

@@ -2,33 +2,34 @@
 
 .content {
 	box-sizing: border-box;
-	width: 800px;
 	margin: 0 auto 150px;
-	padding-top: 10%;
+	padding-top: 100px;
 	text-align: center;
+}
+
+
+.container h2 {
+	font-size: 42px;
+	font-weight: 600;
+	margin-bottom: 42px;
 }
 
 table {
 	width: 100%;
-	font-size : 1rem;;
-}
-
-tr {
-	border-bottom: 1px solid white;
-}
-
-th, td {
-	padding: 10px;
+	font-size : 1rem;
 }
 
 a {
 	color: white;
 }
 
-.content>h2 {
-	font-size: 42px;
-	font-weight: 600;
-	margin-bottom: 42px;
+th, td {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+tr {
+	border-bottom: 1px solid #7d7d7d;
 }
 
 .management-anchor {

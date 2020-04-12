@@ -1,7 +1,7 @@
 package com.bit.hellopt.vo.trainer;
 
 public class TrainerVO {
-	private String trainerName, trainerNickname, trainerCareer, trainerTalk, trainerMedia, fkUserId;
+	private String trainerName, trainerNickname, trainerCareer, trainerTalk, trainerMedia, fkUserId, trainerProfile;
 	private int trainerIdx;
 	
 	public TrainerVO() {}
@@ -30,11 +30,11 @@ public class TrainerVO {
 		this.trainerCareer = trainerCareer;
 	}
 
-	public String gettrainerTalk() {
+	public String getTrainerTalk() {
 		return trainerTalk;
 	}
 
-	public void settrainerTalk(String trainerTalk) {
+	public void setTrainerTalk(String trainerTalk) {
 		this.trainerTalk = trainerTalk;
 	}
 
@@ -54,6 +54,14 @@ public class TrainerVO {
 		this.fkUserId = fkUserId;
 	}
 
+	public String getTrainerProfile() {
+		return trainerProfile;
+	}
+
+	public void setTrainerProfile(String trainerProfile) {
+		this.trainerProfile = trainerProfile;
+	}
+
 	public int getTrainerIdx() {
 		return trainerIdx;
 	}
@@ -66,6 +74,8 @@ public class TrainerVO {
 	public String toString() {
 		return "TrainerVO [trainerName=" + trainerName + ", trainerNickname=" + trainerNickname + ", trainerCareer="
 				+ trainerCareer + ", trainerTalk=" + trainerTalk + ", trainerMedia=" + trainerMedia + ", fkUserId="
-				+ fkUserId + ", trainerIdx=" + trainerIdx + "]";
+				+ fkUserId + ", trainerProfile=" + trainerProfile + ", trainerIdx=" + trainerIdx + "]";
 	}
+
+	
 }

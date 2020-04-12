@@ -5,7 +5,7 @@
 
 <html>
 <head>
-
+<title>일대다 스트리밍(유저)</title>
 <meta charset="UTF-8">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -15,6 +15,8 @@
 
 <!-- 다양한 플랫폼에서 WebRTC 구현 간의 다양한 차이점을 없애주는 라이브러리 -->
 <script src="${pageContext.request.contextPath }/resources/js/live/adapter-latest.js"></script>
+
+<script src="${pageContext.request.contextPath }/resources/js/socket.io.js"></script>
 
 <style>
 	video {
@@ -28,7 +30,6 @@
 </script>
 </head>
 <body>
-	
 	<div id="wrapper">
 		<div class="tit-wr tit-wr-ani">
 			<h2>라이브 스트리밍</h2>
@@ -42,12 +43,14 @@
 			        	<div id="videos-container">
 			        		<video playsinline autoplay="autoplay"></video>
 			        	</div>
+			        	<!-- //videos-container -->
 			        	<div id="class-name"><p>${className } 강의입니다.</p></div>
 			        </div>
-			        
+			        <!-- //video-info -->
 			        <div id="chat-container">
-						<iframe id="chat" src="http://localhost:3000" scrolling="no"></iframe>
+						<iframe id="chat" src="//hellopt-signal.herokuapp.com/" scrolling="no"></iframe>
 			        </div>
+			        <!-- //chat-container -->
 			    </section>
 			</article>
 		</div>
@@ -62,9 +65,8 @@
 
 	<input type="hidden" value="${className }" id="className">
 
-	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+	<!-- <script src="/socket.io/socket.io.js"></script> -->
     <script>
-    
 		var userId = $("#userid").val();
 		var roomId = ${classIdx };
 		

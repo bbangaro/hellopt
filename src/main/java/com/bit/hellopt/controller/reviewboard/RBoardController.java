@@ -21,14 +21,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bit.hellopt.commons.utils.S3Utils;
 import com.bit.hellopt.service.reviewboard.RBoardService;
+import com.bit.hellopt.service.reviewboard.RCommentService;
 import com.bit.hellopt.service.user.UserProfileService;
 //import com.bit.hellopt.vo.reviewboard.Pagination;
 import com.bit.hellopt.vo.reviewboard.RBoardVO;
+import com.bit.hellopt.vo.reviewboard.RCommentVO;
 import com.bit.hellopt.vo.reviewboard.RFileVO;
 import com.bit.hellopt.vo.reviewboard.RPagingVO;
 import com.bit.hellopt.vo.user.CustomUserDetail;
@@ -43,9 +47,14 @@ public class RBoardController {
 	RBoardService rService;
 	@Autowired
 	UserProfileService profileService;
+	@Autowired
+	RCommentService rCmtService;
 	
 	@Autowired
 	ServletContext servletContext;
+	
+	@Autowired
+	S3Utils s3Utils;
 
 	/*@Autowired
 	S3Utils s3Utils;*/
@@ -56,8 +65,8 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review")
-	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo, 
-			@AuthenticationPrincipal CustomUserDetail customUser, 
+	public String getRBoardList(RBoardVO vo,RPagingVO rvo, Model model, User uvo,  
+			@AuthenticationPrincipal CustomUserDetail customUser,
 			@RequestParam(defaultValue="1")Integer cPage) {
 		System.out.println(">>글 전체 목록 조회 처리 -getRBoardList()");
 
@@ -117,9 +126,13 @@ public class RBoardController {
 			vo1.setFilevo(rService.getFileList(vo1.getRevIdx()));
 		}
 		System.out.println("현재페이지 글목록(list): " + userjoin.toString());
-
+		
+		
+		
 		model.addAttribute("rBoardList", userjoin);
 		model.addAttribute("pvo", p);
+/*		List<RCommentVO> list = rCmtService.joinCmt(vo.getRevIdx());
+		model.addAttribute("list", list);*/
 		
 		return "/review/reviewBoard";
 	}
@@ -128,6 +141,7 @@ public class RBoardController {
 	public String insertRBoard(RBoardVO vo, MultipartHttpServletRequest multi,
 			@AuthenticationPrincipal CustomUserDetail customUser) 
 					throws IllegalStateException, IOException {
+		System.out.println("글 vo1 " +vo);
 		
 		String userId = customUser.getUsername();
 		String name = customUser.getName();
@@ -143,10 +157,10 @@ public class RBoardController {
 	
 		int revIdx = vo.getRevIdx();
 		System.out.println("revIdx: " + revIdx);
-		File dir = new File(path);
+		/*File dir = new File(path);
 		if(!dir.isDirectory()) {
 			dir.mkdirs();
-		}
+		}*/
 		
 		//넘어온 파일을 리스트로 저장
 		List<MultipartFile> fileList = multi.getFiles("file_0");
@@ -167,11 +181,12 @@ public class RBoardController {
 				System.out.println("저장된 파일 이름 : " + saveFileName);
 				long fileSize = fileList.get(i).getSize(); //파일사이즈
 				System.out.println("저장된 파일 사이즈 : " + fileSize);
-				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				//fileList.get(i).transferTo(new File(savePath)); //파일 저장
 				System.out.println("저장된 파일 경로" + savePath);
 				
 				System.out.println("revFileOname, saveFileName, fileSize: "+ revFileOname+ saveFileName + fileSize + revIdx);
 				
+				s3Utils.uploadMultipart("review/", saveFileName, fileList.get(i));
 				rService.uploadFile(revFileOname, saveFileName, fileSize, revIdx);
 				
 				System.out.println("글정보" + vo);
@@ -184,15 +199,17 @@ public class RBoardController {
 	
 	
 	@RequestMapping("/review/updateform")
-	public String updateBoardForm(Model model,@RequestParam("revIdx")int revIdx) {
+	public String updateBoardForm(Model model,RFileVO fvo,@RequestParam("revIdx")int revIdx) {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		
+		RFileVO f = new RFileVO();
 		RBoardVO userjoin = rService.Join3(revIdx);
 		
 		List<RFileVO> filevo = rService.getFileList(revIdx);
 		//이미지 업로드한거 보여주기
 		userjoin.setFilevo(filevo );
 
+		model.addAttribute("img", f);
 		model.addAttribute("rBoard", userjoin);
 		model.addAttribute("fileList", filevo);
 		System.out.println("수정페이지 글정보(list): " + userjoin.toString());
@@ -200,14 +217,14 @@ public class RBoardController {
 		return "review/revUpdateForm";
 	}
 	@PostMapping("/updaterboard")
-	public String updateRBoard(@ModelAttribute("rBoard")RBoardVO vo, Model model,
+	public String updateRBoard(@ModelAttribute("rBoard")RBoardVO vo, RFileVO fvo, Model model,
 			MultipartHttpServletRequest multi,
 			@AuthenticationPrincipal CustomUserDetail customUser ) 
 					throws IllegalStateException, IOException{
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 
 		System.out.println("vo:" + vo.toString());
-		
+		model.addAttribute("img", fvo);
 
 		rService.updateBoard(vo);
 
@@ -215,10 +232,10 @@ public class RBoardController {
 		
 		int revIdx = vo.getRevIdx();
 		System.out.println("revIdx: " + revIdx);
-		File dir = new File(path);
+		/*File dir = new File(path);
 		if(!dir.isDirectory()) {
 			dir.mkdirs();
-		}
+		}*/
 
 //넘어온 파일을 리스트로 저장
 		List<MultipartFile> fileList = multi.getFiles("file_0");
@@ -239,11 +256,12 @@ public class RBoardController {
 				System.out.println("저장된 파일 이름 : " + saveFileName);
 				long fileSize = fileList.get(i).getSize(); //파일사이즈
 				System.out.println("저장된 파일 사이즈 : " + fileSize);
-				fileList.get(i).transferTo(new File(savePath)); //파일 저장
+				//fileList.get(i).transferTo(new File(savePath)); //파일 저장
 				System.out.println("저장된 파일 경로" + savePath);
 				
 				System.out.println("revFileOname, saveFileName, fileSize: "+ revFileOname+ saveFileName + fileSize + revIdx);
 				
+				s3Utils.uploadMultipart("review/", saveFileName, fileList.get(i));
 				rService.uploadFile(revFileOname, saveFileName, fileSize, revIdx);
 				
 				System.out.println("글정보" + vo);
@@ -299,23 +317,15 @@ public class RBoardController {
 		}
 		return "redirect:/review";
 	}
-	@RequestMapping("/imgDel")
+	
+	@PostMapping("/review/imgDel")
 	@ResponseBody
-	public void imguploadDel(MultipartHttpServletRequest multi,String revFileSname) {
-		System.out.println("데이터");
-		System.out.println(revFileSname);
+	public int uploadFileDel(@RequestParam(value="revFileIdx", required = false)int revFileIdx,
+			@ModelAttribute RFileVO fvo, RBoardVO vo, Model model) {
+		System.out.println("컨트롤러이미지삭제:"+revFileIdx);
+		rService.uploadFileDel(revFileIdx);
 		
-		String path = "C:/hellopt_file/";
-		String savePath = path + revFileSname; //저장될 파일 경로
-		System.out.println(savePath);
-		
-		File file = new File(savePath);
-		if(file.exists()==true) {
-			file.delete();
-		}
-
-		
-		
+		return 1;
 	}
 	
 	

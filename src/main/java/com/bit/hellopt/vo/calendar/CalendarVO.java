@@ -4,7 +4,7 @@ public class CalendarVO {
 	
 
     // 캘린더 번호 
-    private int calenderIdx;
+    private int calendarIdx;
     // 유저아이디 
     private String fkUserId;
     // 년월일 
@@ -26,11 +26,11 @@ public class CalendarVO {
     public void setYymmdd(String yymmdd) {
     	this.yymmdd = yymmdd;
     }
-	public int getCalenderIdx() {
-		return calenderIdx;
+	public int getCalendarIdx() {
+		return calendarIdx;
 	}
-	public void setCalenderIdx(int calenderIdx) {
-		this.calenderIdx = calenderIdx;
+	public void setCalendarIdx(int calendarIdx) {
+		this.calendarIdx = calendarIdx;
 	}
 	public String getFkUserId() {
 		return fkUserId;
@@ -66,7 +66,7 @@ public class CalendarVO {
 	
 	@Override
 	public String toString() {
-		return "CalendarVO [calenderIdx=" + calenderIdx + ", fkUserId=" + fkUserId + ", yymmdd=" + yymmdd + ", content="
+		return "CalendarVO [calendarIdx=" + calendarIdx + ", fkUserId=" + fkUserId + ", yymmdd=" + yymmdd + ", content="
 				+ content + ", filePath=" + filePath + ", cOriVideo=" + cOriVideo + ", cSysVideo=" + cSysVideo + "]";
 	}
     

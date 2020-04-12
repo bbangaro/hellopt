@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>헬로피티트레이너지원</title>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/board/audition.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/board/slick.js"></script>
@@ -15,7 +15,7 @@
 
     <div id="wrap">
         <div class="banner">
-            <img class="bnimg" src="${pageContext.request.contextPath}/resources/images/audition/Audition.jpg" alt="에프터 서비스 배너 이미지">
+            <img class="bnimg" src="${pageContext.request.contextPath}/resources/images/audition/a01.jpg" alt="에프터 서비스 배너 이미지">
         </div>
         <div class="contents">
             <div class="textbox">
@@ -92,7 +92,7 @@
                     <div class="view01_inner1">
                         <h2 class="viewh2_white">주요업무<br>소개</h2>
                         <p class="viewtext_white">헬로피티<br>오프라인 수업에서는</p>
-                        <img class="view_img" src="${pageContext.request.contextPath}/resources/images/audition/01.jpg" alt="이미지">
+                        <img class="view_img" src="${pageContext.request.contextPath}/resources/images/audition/a02.jpg" alt="이미지">
                     </div>
                     <div class="view01_inner2">
                         <div class="inner2_box">

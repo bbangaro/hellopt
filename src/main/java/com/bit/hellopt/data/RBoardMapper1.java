@@ -64,9 +64,11 @@ public interface RBoardMapper1 {
 			+ " #{revFileOname}, #{revFileSname}, #{revFileSize}, (null))")
 	public void reUploadFile(HashMap<String, Object> hm);
 	
-	@Delete("DELETE FROM REVIEW_FILE_TB WHERE REV_IDX = #{revIdx}")
-	public void uploadFileDel(RBoardVO vo);
+	//파일 삭제
+	@Delete("DELETE FROM REVIEW_FILE_TB WHERE REV_FILE_IDX = #{revFileIdx}")
+	public void uploadFileDel(int revFileIdx);
 	
+	//파일 삭제
 	@Delete("DELETE FROM REVIEW_FILE_TB WHERE REV_File_Sname = #{revFileSname}")
 	public void imguploadDel(String revFileSname);
 	
@@ -74,5 +76,6 @@ public interface RBoardMapper1 {
 	@Select("SELECT COUNT(*) FROM REVIEW_BOARD_TB")
 	public int getTotalCount();
 
+	
 
 }

@@ -17,7 +17,8 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(new MeetingAlarmHandler(), "/alarm")
+																//https로 설정되어 있는것도 받겠다............
+		registry.addHandler(new MeetingAlarmHandler(), "/alarm").setAllowedOrigins("https://hellopt.info")
 				.addInterceptors(new HttpSessionHandshakeInterceptor());
 	}
 	

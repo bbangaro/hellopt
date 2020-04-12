@@ -17,7 +17,7 @@
 	<result property="userHeight" column="user_height"/>
 	<result property="userWeight" column="user_weight"/>
 	<result property="userProfile" column="stored_file_name"/>
-	
+	<result property="userEmail" column="user_email"/>
 </resultMap>
 	<select id="selectUser" parameterType="String" resultMap="userMap">
 		SELECT *
@@ -49,5 +49,24 @@
 			</if>
 		</where>
 	</select>
-	
+	<update id="updateUser">
+		UPDATE users_tb 
+		<set>
+			<if test="userPw != null">user_pw = #{userPw},</if>
+			<if test="userName != null">user_name = #{userName},</if>
+			<if test="userGender != null">user_gender = #{userGender},</if>
+			<if test="userAddress != null">user_address = #{userAddress},</if>
+			<if test="userJob != null">user_job = #{userJob},</if>
+			<if test="userBirth != null">user_birth = TO_DATE(#{userBirth}, 'YYYY-MM-DD'),</if>
+			<if test="userRoot != null"> user_root = #{userRoot},</if>
+			<if test="userHeight != null"> user_height = #{userHeight},</if>
+			<if test="userWeight != null"> user_weight = #{userWeight},</if>
+			<if test="userProfile != null"> user_profile = #{userProfile},</if>
+			<if test="userEmail != null"> user_email = #{userEmail}</if>
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+	<update id="updateRole">
+		UPDATE users_tb SET user_role = #{userRole} WHERE user_id = #{userId}
+	</update>
 </mapper>

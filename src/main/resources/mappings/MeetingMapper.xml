@@ -11,6 +11,22 @@
 	   	 WHERE M.FK_M_CATEGORY_NO = C.M_CATEGORY_NO  
 		   AND M.FK_LOCAL_NO = L.LOCAL_NO
 		   AND TO_DATE(M_DATE, 'YY/MM/DD') >= SYSDATE-1
+		 ORDER BY MEETING_IDX DESC
+	</select>
+	
+	<select id="getSearch" parameterType="String" resultType="MeetingVO">
+		SELECT MEETING_IDX, FK_USER_ID, M_COMMENT, C.M_CATEGORY, L.LOCAL, M_DATE, M_SUBJECT, M_MEMO, DETAILS, 
+               INCLUDE, M_LOCATION, M_LOCATION_C, M_PRICE, PROGRESS_ST, M_CNT, INS_DT 
+          FROM MEETING_TB M, M_CATEGORY_CODE_TB C, LOCAL_CODE_TB L  
+	   	 WHERE C.M_CATEGORY_NO = M.FK_M_CATEGORY_NO  
+		   AND L.LOCAL_NO = M.FK_LOCAL_NO      
+		   AND TO_DATE(M_DATE, 'YY/MM/DD') >= SYSDATE-1
+	       AND (lower(M_SUBJECT) like lower('%' || #{searchKeyword} || '%')
+	        OR lower(FK_USER_ID) like lower('%' || #{searchKeyword} || '%')
+	        OR lower(C.M_CATEGORY) like lower('%' || #{searchKeyword} || '%') 
+	        OR lower(L.LOCAL) like lower('%' || #{searchKeyword} || '%')  
+	        OR lower(DETAILS) like lower('%' || #{searchKeyword} || '%')  )
+	     ORDER BY MEETING_IDX DESC
 	</select>
 	
 	<select id="getMeetingCnt" parameterType="MeetingVO" resultType="MeetingVO">
@@ -61,10 +77,10 @@
 		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
 	</select>
 	
-	<select id="progressCnt" parameterType="String" resultType="MeetingVO">
+	<select id="progressCnt"  resultType="int">
 		SELECT COUNT(*) PROGRESS_ST
 	      FROM MEETING_TB
-		 WHERE PROGRESS_ST = '대기'
+		 WHERE PROGRESS_ST = '대기중'
 	</select>
 	
 	<select id="getMeetingOneFiles" parameterType="int" resultType="com.bit.hellopt.vo.meeting.MeetingFileVO">
@@ -85,7 +101,7 @@
 		       INCLUDE, M_LOCATION, M_LOCATION_C, M_PRICE, PROGRESS_ST, M_CNT, INS_DT) 
 	    VALUES (#{meetingIdx}, #{fkUserId}, #{mComment}, #{fkMCategoryNo}, #{fkLocalNo},  
 			   #{mDate}, #{mSubject}, #{mMemo}, #{details}, #{include} , #{mLocation}, #{mLocationC}, #{mPrice}, 
-			   '대기', 0, SYSDATE )
+			   '대기중', 0, SYSDATE )
 	</insert>
 	<!-- 어쩔 수 없이 FK 테이블에 +1 해서  ...  -->
 	<insert id="insertMaxMeeting" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
@@ -135,7 +151,7 @@
 	
 	<update id="updateProgressN" parameterType="com.bit.hellopt.vo.meeting.MeetingVO">
 		UPDATE MEETING_TB 
-		   SET PROGRESS_ST = '대기'  
+		   SET PROGRESS_ST = '거절됨'  
 	     WHERE MEETING_IDX = #{meetingIdx}
 	</update>
 	
@@ -148,6 +164,14 @@
 		  FROM MEETING_APPLY_TB 
 		 WHERE FK_MEETING_IDX = #{meetingIdx} AND FK_USER_ID = #{fkUserId}
 	</delete>
+	
+	<select id="getMeetingList" resultType="MeetingVO">
+		select * from meeting_tb where fk_user_id = #{userId}
+	</select>
+	
+	<select id="getParticipantMeetingList" resultType="MeetingVO">
+		select m.* from meeting_tb m, meeting_apply_tb a where m.meeting_idx = a.fk_meeting_idx AND a.fk_user_id = #{userId}
+	</select>
 	
 	
 </mapper>

@@ -25,6 +25,12 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<MeetingVO> getMeetingVO() {
 		return meetingMapper.getMeetingVO();
 	}
+	// 미팅TB 검색
+	@Override
+	public List<MeetingVO> getSearch(String searchKeyword) {
+		return meetingMapper.getSearch(searchKeyword);
+	}
+	
 	// 미팅 상세 리스트 cnt로 가져오기
 	@Override
 	public List<MeetingVO> getMeetingCnt() {
@@ -55,8 +61,8 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 	
 	@Override
-	public MeetingVO progressCnt(String progressCnt) {
-		return meetingMapper.progressCnt(progressCnt);
+	public int progressCnt() {
+		return meetingMapper.progressCnt();
 	}
 	
 	@Override
@@ -141,6 +147,15 @@ public class MeetingServiceImpl implements MeetingService {
 	public void resCancle(Map<String, Object> hm) {
 		meetingMapper.resCancle(hm);
 	}
+	@Override
+	public List<MeetingVO> getMeetingList(String userId) {
+		return meetingMapper.getMeetingList(userId);
+	}
+	@Override
+	public List<MeetingVO> getParticipantMeetingList(String userId) {
+		return meetingMapper.getParticipantMeetingList(userId);
+	}
+	
 	
 	
 

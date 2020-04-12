@@ -7,8 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/class/content.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/content.css">
 <title>트레이너 업데이트 페이지</title>
 
 </head>

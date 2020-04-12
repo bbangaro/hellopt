@@ -7,11 +7,14 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/main/login.css">
-<meta charset="UTF-8">
+	href="${pageContext.request.contextPath}/resources/css/main/signup.css">
 <title>유저 관리</title>
 </head>
 <body>
+<div class="container">
+<div class="row">
+			<div class="col-xs-3 col-md-2"></div>
+			<div class="col-xs-12 col-md-8">
 	<h2>회원 정보 관리</h2>
 	<form:form
 		action="${pageContext.request.contextPath}/admin/user/update"
@@ -27,6 +30,11 @@
 			<li><form:label path="userName">이름</form:label> <form:input
 					path="userName" placeholder="NAME" /> <form:errors path="userName"
 					cssClass="error"></form:errors></li>
+			<li>
+				<form:label path="userEmail">이메일</form:label>
+				<form:input path="userEmail" placeholder="Email" required="" type="email" />
+				<form:errors path="userEmail" cssClass="error"></form:errors>
+			</li>
 			<li><form:label path="userGender">성별</form:label> <br /> <form:radiobutton
 					path="userGender" value="M" /><span>남자</span><br /> <form:radiobutton
 					path="userGender" value="F" /><span>여자</span><br /></li>
@@ -102,16 +110,21 @@
 					</c:choose>
 			</select></li>
 			<li><form:label path="userHeight">키</form:label> <form:input
-					path="userHeight" placeholder="170" /></li>
+					path="userHeight" type="number" min="0" max="300" /></li>
 			<li><form:label path="userWeight">몸무게</form:label> <form:input
-					path="userWeight" placeholder="80" /></li>
-			<li><label for="file">프로필 사진</label> <input type="file"
-				name="file" /></li>
+					path="userWeight" type="number" min="0" max="300" /></li>
+			<li><label for="file">프로필 사진</label> 
+				<input type="file" name="file" onchange="loadPreviewImg(this, 'preview-profile')" />
+				<img src="" id="preview-profile" alt=""></li>
 
 		</ul>
 		<input type="submit" value="회원 정보 수정">
 		<input type="button" onclick="deleteUser()" value="회원 삭제">
 	</form:form>
+	</div>
+			<div class="col-xs-3 col-md-2"></div>
+		</div>
+	</div>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
@@ -133,5 +146,6 @@
 			}
 		}
 	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/user/idcheck.js"></script>
 </body>
 </html>

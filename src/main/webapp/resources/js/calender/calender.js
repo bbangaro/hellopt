@@ -1,4 +1,47 @@
- window.onload = function() {
+	var mon = moment().date(1).format("MM");
+	console.log("월 : " + moment().date(1).format("MM"));
+	
+	var strData;
+	
+	makeCalendar(mon, userName);
+	
+	 
+	
+	function makeCalendar(mon, userName) {
+		$.ajax({
+			url : "selectMonth",
+			data : {
+				month : mon,
+				fkUserId : userName
+			},
+			type : "post",
+			dataType : 'json',
+			success : function(data) {
+				//alert("성공");
+				console.log(data);
+
+				// 참고사항------------------------------
+
+				// 응답받은 데이터 형식 : [{}, {}, ... , {}] - 배열
+				//strData = JSON.stringify(data); // JSON -> string
+				strData = data;
+				console.log("컨트롤러에서 받은 json데이터" + strData +" ");
+					
+				 monthData();
+				 
+				 //$("#cal").html('<img id="cal" class="calPop" src="/hellopt/resources/images/calendar/이벤트pop2.jpg">');
+
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("통신에러");
+			}
+
+		}); 
+	}
+	
+window.onload = function() {
+	 
+	 
   var today = moment(); // 현재 시간 구하기
 
   // 한글로 표시할 경우 (영어로 하려면 아래 lang부분 삭제)
@@ -27,6 +70,8 @@
   var ptDay; // 현재 클릭된 날짜
   var todayEvent = false; // 오늘날짜의 이벤트가 있는지 확인할 플래그
 
+  
+  //달력 만드는 부분 ( 달력, 이벤트 ) 
   function Calendar(selector, events) {
     this.el = document.querySelector(selector); 
     this.events = events;
@@ -76,8 +121,8 @@
 
       // 달력 타이틀 태그 생성
       this.header.appendChild(this.title);
-      this.header.appendChild(right);
-      this.header.appendChild(left);
+      //this.header.appendChild(right);
+      //this.header.appendChild(left);
       this.el.appendChild(this.header);
     }
     this.title.innerHTML = this.current.format("YYYY년 MM월");
@@ -86,7 +131,8 @@
     console.log(this.current.format("MM") + "월"); // ex. 02. 03 ..
     
     
- // json 시작 --------------------------------------------------------------------   
+ // json 위치 상단으로 변경 (스크립트 실행 시 데이터를 먼저 가져와야 함)-------------------------------------------------   
+ /*
     $.ajax({
     	url : "selectMonth", 
     	data : { month : this.current.format("MM") },
@@ -113,7 +159,7 @@
     	
     	
     }); 
-    
+*/    
 //json 끝 -----------------------------------------------------------------------------------------------
  
   };
@@ -129,8 +175,8 @@
     // DB에 등록된 날짜에 맞춰 달력에 추가
     this.events.forEach(function(ev) {
     	
-      console.log("이벤트 리스트 : " + ev.day);
-      ev.date = self.current.clone().date(ev.day);
+      console.log("이벤트 리스트 : " + ev.yymmdd);
+      ev.date = self.current.clone().date(ev.yymmdd);
     });
 
     if (this.month) {
@@ -236,34 +282,33 @@
   Calendar.prototype.drawEvents = function(day, element) {
     if (day.month() === this.current.month()) {
       var todaysEvents = this.events.reduce(function(memo, ev) {
-        if (ev.date.isSame(day, "day")) {
-          console.log("기록된 날짜 : " + ev.day);
-          console.log(day.format("DD") + "일 이벤트 : " + JSON.stringify(memo));
+        if (ev.date.isSame(day, "yymmdd")) {
+          //console.log("기록된 날짜 : " + ev.day);
+          //console.log(day.format("DD") + "일 이벤트 : " + JSON.stringify(memo));
           memo.push(ev);
         }
         // 오늘 날짜에 리스트 없을 경우 글쓰기 기능 추가
-        if (today.format("DD") == ev.day) {
-          console.log("오늘 날짜 : " + today.format("DD"));
-          console.log("이벤트 날짜 : " + ev.day);
-          console.log("오늘 운동 기록 있음");
+        if (today.format("DD") == ev.yymmdd ) {
           todayEvent = true;
         }
         return memo;
       }, []);
 
       todaysEvents.forEach(function(ev) {
-        var evSpan = createElement("span", ev.color);
+        var evSpan = createElement("span", "yellow");
         element.appendChild(evSpan);
       });
     }
   };
-
+  
   Calendar.prototype.getDayClass = function(day) {
     classes = ["day"];
     if (day.month() !== this.current.month()) {
       classes.push("other");
+      //오늘날짜 = 
     } else if (today.isSame(day, "day")) {
       classes.push("today");
+      console.log(day);
     }
     return classes.join(" ");
   };
@@ -278,10 +323,17 @@
     var currentOpened = document.querySelector(".details");
     console.log("클릭한날짜", this.current.format("MM") + "월", dayNumber + "일");
     ptMonth = this.current.format("MM");
-    ptDay = dayNumber;
-
-    if(ptDay == today.format("DD") && !todayEvent) {
-      alert("오늘의 운동을 기록하시겠습니까?");
+    ptDay = day.format("DD");
+    
+    // 달력날짜중에서 오늘 날짜랑 같은 곳 && 이벤트 없는 곳
+    if(ptDay == today.format("DD") && !todayEvent && userName.length >= 1  ) {
+      var con = confirm("오늘의 운동을 기록하시겠습니까?");
+      
+      if (con == true){
+    	  window.open("/hellopt/calenderWrite", 'calender', 'width=590 ,height=380, left=600, top=230 '); 
+      } else if (con == false) {
+    	  return false;
+      }
     }
 
     //Check to see if there is an open detais box on the current row
@@ -323,10 +375,10 @@
     var todaysEvents = this.events.reduce(function(memo, ev) {
       if (ev.date.isSame(day, "day")) {
         memo.push(ev);
+        console.log("달력 이벤트 5 : "+ev);
       }
       return memo;
     }, []);
-
     this.renderEvents(todaysEvents, details);
 
     arrow.style.left = el.offsetLeft - el.parentNode.offsetLeft + 27 + "px";
@@ -343,10 +395,15 @@
     events.forEach(function(ev) {
       var div = createElement("div", "event");
       var square = createElement("div", "event-category " + ev.color);
-      var span = createElement("span", "", ev.content);
-
+      var span = createElement("span", "", "");
+      var calIdx = $('.idx');
+      var calidx2 = "${calendar.calendarIdx)" ;
+      span.innerHTML = '<a class="eventA" href="#">'+ev.content+'</a>';
+      ///hellopt/meetingRead
       span.addEventListener("click", function() {
-        alert(ptMonth + "월 " + ptDay + "일 글로 이동~@");
+        //alert(ptMonth + "월 " + ptDay + "일 글로 이동~@");
+        window.open("/hellopt/calendarOne?calendarIdx="+ev.calendarIdx+"", 'onealender', 'width=590 ,height=680, left=600, top=230 ')
+        opener.document.location.href='/hellopt/calender';
       });
 
       div.appendChild(square);
@@ -359,7 +416,7 @@
       var span = createElement("span", "", "운동 기록 없음");
       div.appendChild(span);
       wrapper.appendChild(div);
-    }
+    } 
 
     if (currentWrapper) {
       currentWrapper.className = "events out";
@@ -405,12 +462,50 @@
   Calendar.prototype.nextMonth = function() {
     this.current.add("months", 1);
     this.next = true;
+    
+//	$.ajax({
+//		url : "selectMonth",
+//		data : {
+//			month : this.current.format("MM"),
+//			fkUserId : userName
+//		},
+//		type : "post",
+//		dataType : 'json',
+//		success : function(data) {
+//			strData = data;
+//			
+//			var calendar = new Calendar("#eventCalendar", strData);
+//		},
+//		error : function(jqXHR, textStatus, errorThrown) {
+//			//alert("통신에러");
+//		}
+//	});
+	
     this.draw();
   };
 
   Calendar.prototype.prevMonth = function() {
     this.current.subtract("months", 1);
     this.next = false;
+    
+//	$.ajax({
+//		url : "selectMonth",
+//		data : {
+//			month : this.current.format("MM"),
+//			fkUserId : userName
+//		},
+//		type : "post",
+//		dataType : 'json',
+//		success : function(data) {
+//			strData = data;
+//			
+//			var calendar = new Calendar("#eventCalendar", strData);
+//		},
+//		error : function(jqXHR, textStatus, errorThrown) {
+//			//alert("통신에러");
+//		}
+//	}); 
+	
     this.draw();
   };
 
@@ -427,56 +522,29 @@
     return ele;
   }
   
-  monthData();
+  
+  
+  //monthData();
+  
   
  };
  
 
 // 월별 등록된 리스트 -> DB에서 월 조회후 데이터 담기게!
 var monthData = function () {
+
+	/*
+	var strData = [
+
+	{
+		content : "요가",
+		day : "29",
+		color : "red"
+	} ];
+	*/
+
+  function addDate(ev) {}
 	
-	
-  var strData = [
-    {
-      content: "팔운동",
-      day: "02",
-      color: "yellow"
-    },
-    {
-    	content: "등운동",
-      day: "07",
-      color: "yellow"
-    },
-    {
-    	content: "복근운동",
-      day: "09",
-      color: "red"
-    },
-    {
-    	content: "다리운동",
-      day: "10",
-      color: "orange"
-    },
-    {
-    	content: "자전거",
-      day: "21",
-      color: "blue"
-    },
-    {
-    	content: "줄넘기",
-      day: "25",
-      color: "orange"
-    },
-
-    {
-    	content: "요가",
-      day: "29",
-      color: "red"
-    }
-  ];
-
- // function addDate(ev) {}
-
   // <div id='calendar'>에 리스트 추가
  var calendar = new Calendar("#eventCalendar", strData);
 };

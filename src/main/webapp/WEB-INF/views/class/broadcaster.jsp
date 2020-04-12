@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>WebRTC Video Broadcasting</title>
+<title>일대다 스트리밍</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/live.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/reset.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/class/style.css">
@@ -16,6 +16,8 @@
 	
 	<!-- 캠, 마이크 있는지 확인하는 라이브러리 -->
 	<script src="${pageContext.request.contextPath }/resources/js/live/DetectRTC.js"></script>
+	
+	<script src="${pageContext.request.contextPath }/resources/js/socket.io.js"></script>
 	
 	<style>
 	    video {
@@ -47,7 +49,7 @@
 			        </div>
 			        <!-- //video-info -->
 			        <div id="chat-container">
-						<iframe id="chat" src="http://localhost:3000" scrolling="no"></iframe>
+						<iframe id="chat" src="//hellopt-signal.herokuapp.com/" scrolling="no"></iframe>
 			        </div>
 			        <!-- //chat-container -->
 			    </section>
@@ -78,7 +80,8 @@
 			});
 		}
     </script>
-	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+	
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script>
 		var userId = $("#userid").val();
 		var roomId = ${classIdx };

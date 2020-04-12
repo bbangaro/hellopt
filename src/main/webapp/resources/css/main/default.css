@@ -481,3 +481,48 @@ box-sizing: content-box;
 
 /* Mobile화면으로 */
 #device_change {display:block;margin:0.3em;padding:0.5em 0;border:1px solid #eee;border-radius:2em;background:#fff;color:#000;font-size:2em;text-decoration:none;text-align:center}
+
+
+/* 알림 아이콘 */	
+.userHead{
+   float: right;
+}
+.userImg{
+    margin-top: 10px;
+}	
+.userText{
+    display: inline-block;
+}
+.userName{
+    display: inline-block;
+    margin-right: 50px;
+    margin-top: 9px;
+}
+.alarmImg{	
+	
+}	
+.alarmText{	
+	all: unset; 
+    position: absolute;
+
+    width: 19px;
+    height: 19px;
+    border: 0px solid red;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+
+    font-size: 13px;
+    text-align: center;
+}	
+.name {
+	color: white;
+    font-size: 18px;	
+}
+
+.userImg2 {
+	display: inline-block;
+    position: absolute;
+    margin-left: -20px;
+}
+

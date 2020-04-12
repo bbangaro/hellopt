@@ -2,9 +2,9 @@
 
 .content {
 	box-sizing: border-box;
-	width: 800px;
+	width: 100%;
 	margin: 0 auto 150px;
-	padding-top: 10%;
+	padding-top: 100px;
 	text-align: center;
 }
 
@@ -27,6 +27,9 @@ form input {
 }
 
 input[type="text"] {
+	width: 100%;
+}
+input[type="password"] {
 	width: 100%;
 }
 
@@ -74,4 +77,12 @@ input[type='button'],  input[type='submit']{
 	height: 100px;
 	width: auto;
 	margin-bottom: 10px;
+}
+.remember-me {
+	display: inline;
+	margin-right: 10px;
+}
+
+a {
+	color: white;
 }
