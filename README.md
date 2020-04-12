@@ -1,9 +1,32 @@
 # HelloPT
-헬스장에서도 집에서도 운동하자!
+## 소개
+언제 어디서 운동하고 싶은 사람들을 위한 온-오프라인 운동 플랫폼 HelloPT입니다.
 
-[HelloPT](https://hellopt.info/hellopt)를 방문해보세요.
+https://hellopt.info
 
-## 1. 기능
+---
+## 사용 기술
+- Front-end
+    - HTML5
+    - CSS3
+    - Javascript
+    - AJAX
+    - Bootstrap
+    - JQuery
+- Back-end
+    - Spring framework
+    - Oracle database
+    - MyBatis
+    - JSP
+    - Node.js
+    - express
+    - sitemesh
+    - AWS (EC2, RDS, S3, Route53)
+- Open sorce API
+    - socket.io
+    - [WebRTC](https://webrtc.org/)
+---
+## 기능
 1. [로그인/회원가입](#로그인/회원가입)
 2. [트레이너 게시판](#트레이너-게시판)
 3. [운동 정보 게시판](#운동-정보-게시판)
@@ -15,7 +38,7 @@
 9. [일일 운동 체크](#일일-운동-체크)
 
 ### 로그인/회원가입
-[로그인](https://hellopt.info/hellopt/login)  
+[로그인](https://hellopt.info/login)  
 Spring Security를 이용하여 로그인을 구현했습니다.
 
 데모용 아이디
@@ -36,7 +59,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 	}
 ```
 
-[회원가입](https://hellopt.info/hellopt/user/registrationform)
+[회원가입](https://hellopt.info/user/registrationform)
 
 회원가입 시 사용자가 입력한 데이터가 올바르게 입력됐는지 확인합니다.
 
@@ -68,23 +91,23 @@ httpRequest.open('POST', "/hellopt/user/idcheck")
 ```
 
 ### 트레이너 게시판
-[트레이너 정보](https://hellopt.info/hellopt/trainer)  
-[트레이너 신청](https://hellopt.info/hellopt/audition)  
-[트레이너 정보 수정](https://hellopt.info/hellopt/admin/traineradmin)  
+[트레이너 정보](https://hellopt.info/trainer)  
+[트레이너 신청](https://hellopt.info/audition)  
+[트레이너 정보 수정](https://hellopt.info/admin/traineradmin)  
 (관리자 계정 로그인 필요)
 
 ### 운동 정보 게시판
-[운동 정보](https://hellopt.info/hellopt/exerciseinfolist)
+[운동 정보](https://hellopt.info/exerciseinfolist)
 
 ### 식단 계산기
-[식단 계산기(로그인 필요)](https://hellopt.info/hellopt/meal)
+[식단 계산기(로그인 필요)](https://hellopt.info/meal)
 
 ### 리뷰 게시판
-[리뷰 게시판](https://hellopt.info/hellopt/review)
+[리뷰 게시판](https://hellopt.info/review)
 
 ### PT 온라인 수업
-[일대다 온라인 수업(로그인 필요)](https://hellopt.info/hellopt/classlist)  
-[다대다 온라인 수업(로그인 필요)](https://hellopt.info/hellopt/multi)
+[일대다 온라인 수업(로그인 필요)](https://hellopt.info/classlist)  
+[다대다 온라인 수업(로그인 필요)](https://hellopt.info/multi)
 
 온라인 수업은 웹을 통한 실시간 통신으로 이루어지며 [WebRTC](https://webrtc.org/)를 이용하여 구현했습니다.
 
@@ -109,18 +132,19 @@ getUserMedia() 함수를 사용하기 위해서는 https가 필요하다는 것�
 다대다 스트리밍 경우 P2P 연결로 인해 각각의 유저가 다른 모든 유저와 RTCPeerConnection을 가지고 있어야합니다. 다른 유저와 통신 요청을 할 때 이미 연결된 유저에게는 통신 요청을 하지 않도록 socket.id마다 RTCPeerConnction을 할당하여 불필요하게 이미 연결된 유저와 또 RTCPeerConnection을 생성하지 않도록 했습니다.
 
 ### 리뷰 게시판
-[리뷰 게시판](https://hellopt.info/hellopt/review)
+[리뷰 게시판](https://hellopt.info/review)
 
 ### FAQ 게시판
-[FAQ 게시판](https://hellopt.info/hellopt/faq1)
+[FAQ 게시판](https://hellopt.info/faq1)
 
 ### 오프라인 모임 게시판
-[오프라인 모임 게시판](https://hellopt.info/hellopt/meeting)
+[오프라인 모임 게시판](https://hellopt.info/meeting)
 
 ### 일일 운동 체크
-[일일 운동 체크](https://hellopt.info/hellopt/calender)
+[일일 운동 체크](https://hellopt.info/calender)
 
-## 2. ERD
+---
+## ERD
 ![HelloPT ERD](/etc/Relational_1.png)
 
 HelloPT는 운동과 관련된 사이트이기 때문에 유저의 정보가 제일 많이 사용됩니다. 따라서 유저에 관한 정보를 중심으로 데이터베이스를 설계했습니다.
