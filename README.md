@@ -29,7 +29,7 @@ https://hellopt.info
 1. [로그인-회원가입](#로그인-회원가입)
 2. [트레이너 게시판](#트레이너-게시판)
 3. [운동 정보 게시판](#운동-정보-게시판)
-4. [식단 계산기](#식단-계산기)
+4. [영양 계산기](#영양-계산기)
 5. [PT 온라인 수업](#PT-온라인-수업)
 6. [리뷰 게시판](#리뷰-게시판)
 7. [FAQ 게시판](#FAQ-게시판)
@@ -39,8 +39,7 @@ https://hellopt.info
 ### 로그인-회원가입
 [로그인](https://hellopt.info/login)
 
-Spring security authentication를 이용하여 로그인을 구현했습니다.
-
+Spring security authentication를 이용하여 로그인을 구현했습니다.  
 로그인 기능 확인 시 다음의 아이디를 사용해주세요.
 
     
@@ -50,48 +49,77 @@ Spring security authentication를 이용하여 로그인을 구현했습니다.
 
 [회원가입](https://hellopt.info/user/registrationform)
 
-client측에서는 내장 from validation을 사용해 데이터 유효성을 검사합니다.
+HelloPT에 회원으로 등록하기 위해 정보를 입력받는 페이지입니다.
 
- server측에는 java bean validation을 사용해 데이터 유효성을 검사합니다.
+유저가 입력한 정보를 client측에서는 내장 from validation을 사용해 데이터 유효성을 검사합니다. server측에는 java bean validation을 사용해 데이터 유효성을 검사합니다.
+
 ### 트레이너 게시판
 [트레이너 정보](https://hellopt.info/trainer)
 
+헬로피티에 등록된 트레이너의 정보를 보여주는 페이지입니다. 각각의 트레이너를 선택하면 상세 정보를 볼 수 있습니다.
 
 [트레이너 신청](https://hellopt.info/audition)  
+
+트레이너 지원에 필요한 안내사항과 설명을 통해 트레이너를 지원할 수 있는 페이지입니다.  
+트레이너 지원 시 Google 설문지를 이용하여 관리자 계정으로 이력서가 전송됩니다.
 
 ### 운동 정보 게시판
 [운동 정보](https://hellopt.info/exerciseinfolist)
 
-### 식단 계산기
-[식단 계산기](https://hellopt.info/meal)
+운동에 대한 설명 및 동영상을 통해 운동법을 배울 수 있는 페이지입니다.
+
+### 영양 계산기
+[영양 계산기](https://hellopt.info/meal)
+
+신체 정보를 입력한 후 음식을 선택하면 식사를 평가 할 수 있습니다.  
+평가는 총 3가지로 일반식사, 다이어트식사, 벌크업 즉 살찌우는 식사로 평가를 나눴습니다. 각 평가마다 다른 계산식이 적용되어 구글차트를 사용 시각적으로 보기 쉽게 구현하였습니다.
 
 ### 리뷰 게시판
 [리뷰 게시판](https://hellopt.info/review)
 
+후기를 남길 수 있는 게시판입니다. 로그인 시 작성자만 수정, 삭제가 가능합니다.  
+다중 파일 업로드를 이용해 여러 개의 이미지를 업로드 할 수 있습니다. 이미지 파일만 업로드 할 수 있습니다.  
+댓글은 AJAX를 이용하여 구현했기 때문에 페이지 이동 없이 CRUD 동작을 수행할 수 있습니다.
+
 ### PT 온라인 수업
-[PT 온라인 수업](https://hellopt.info/classlist)  
+[PT 온라인 수업](https://hellopt.info/classlist)
 
-온라인 수업은 웹을 통한 실시간 통신으로 이루어지며 [WebRTC](https://webrtc.org/)를 이용하여 구현했습니다.
+화상 통화를 이용하여 온라인으로 PT 수업을 할 수 있는 기능입니다.  
+화상 통화는 [WebRTC](https://webrtc.org/)를 이용하여 구현했습니다.
 
-트레이너가 수강생에게 실시간으로 비디오와 오디오를 전송할 수 있습니다.
-WebRTC는 peer-to-peer protocol을 기반으로 동작하기 때문에
-peer의 정보를 연결해주는 signaling server가 필요합니다. 
-signaling server는 Node.js와 express, socket.io를 사용하여 구현했습니다.
+#### 일대다 PT 온라인 수업
 
-[signaling server GitHub](https://github.com/DanHoBakMaCha/public_hellopt_live/blob/master/signal.js)
+트레이너가 방송하기로 방송을 시작하면 수강생이 방송보기로 방송을 보면서 채팅(로그인 시 가능)을 할 수 있습니다.
 
-signaling server를 통해 사용자간의 [SDP](https://tools.ietf.org/html/rfc2327)를 주고 받아서 RTCPeerConnection을 설정합니다.
+[일대다 PT 수업 - 방송하기](https://hellopt.info/broadcaster?classIdx=182)
 
-[일대다 온라인 수업 트레이너 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/broadcaster.js)
+[일대다 PT 수업 - 방송보기](https://hellopt.info/viewer?classIdx=182)
 
-[일대다 온라인 수업 수강생 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/viewer.js)
+[일대다 PT 수업 - 방송하기 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/broadcaster.js)
 
+[일대다 PT 수업 - 방송보기 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/viewer.js)
 
-[다대다 온라인 수업 클라이언트측 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/multi.js)
+#### 다대다 PT 온라인 수업
+
+각자가 방송을 시작해서 다중 화상 통화 방식으로 서로 운동하는 모습을 볼 수 있습니다.
+
+[다대다 PT 수업](https://hellopt.info/multi?classIdx=146)
+
+※로그인 후 HTTPS 연결로 접속해주세요.
 
 [다대다 온라인 수업 데모 영상](https://youtu.be/Rb0j7aHKvl8)
 
-Socket.io를 사용하여 같은 room에 입장한 유저들끼리만 RTCPeerConnection을 주고받아서 P2P 연결을 할 수 있도록 구현했습니다.
+[다대다 온라인 수업 클라이언트측 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/multi.js)
+
+
+#### 시그널링 서버
+
+[signaling server GitHub](https://github.com/DanHoBakMaCha/public_hellopt_live/blob/master/signal.js)
+
+WebRTC는 P2P 기반의 통신이기 때문에 사용자간의 연결 정보를 연결해주는 시그널링 서버가 필요합니다.  
+signaling server를 통해 사용자간의 [SDP](https://tools.ietf.org/html/rfc2327)를 주고 받아서 RTCPeerConnection을 설정합니다.
+
+#### 어려웠던 점
 
 WebRTC를 이용해서 스트리밍을 구현한 후 실제로 배포를 해보니 로컬호스트 환경과는 다르게 사용자의 카메라, 오디오 미디어를 얻게 해주는 getUserMedia() 함수가 secure context에서만 동작한다는 사실을 알게 되었습니다.
 
@@ -101,6 +129,8 @@ getUserMedia() 함수를 사용하기 위해서는 https가 필요하다는 것�
 
 ### FAQ 게시판
 [FAQ 게시판](https://hellopt.info/faq1)
+
+HelloPT에 궁금하실 수 있는 몇가지 질문에 대답해드리는 게시판입니다.
 
 ### 오프라인 모임 게시판
 [오프라인 모임 게시판](https://hellopt.info/meeting)
