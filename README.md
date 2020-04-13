@@ -87,9 +87,6 @@ signaling server를 통해 사용자간의 [SDP](https://tools.ietf.org/html/rfc
 [일대다 온라인 수업 수강생 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/viewer.js)
 
 [다대다 온라인 수업 클라이언트측 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/multi.js)
-<video controls="controls">
-    <source src="etc/multi-demo.mp4" type="video/mp4">
-</video>
 
 Socket.io를 사용하여 같은 room에 입장한 유저들끼리만 RTCPeerConnection을 주고받아서 P2P 연결을 할 수 있도록 구현했습니다.
 
