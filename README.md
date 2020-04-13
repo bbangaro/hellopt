@@ -77,15 +77,19 @@ client측에서는 내장 from validation을 사용해 데이터 유효성을 �
 WebRTC는 peer-to-peer protocol을 기반으로 동작하기 때문에
 peer의 정보를 연결해주는 signaling server가 필요합니다. 
 signaling server는 Node.js와 express, socket.io를 사용하여 구현했습니다.
-signaling server를 통해 사용자간의 [SDP](https://tools.ietf.org/html/rfc2327)를 주고 받아서 RTCPeerConnection을 설정합니다.
 
 [signaling server GitHub](https://github.com/DanHoBakMaCha/public_hellopt_live/blob/master/signal.js)
+
+signaling server를 통해 사용자간의 [SDP](https://tools.ietf.org/html/rfc2327)를 주고 받아서 RTCPeerConnection을 설정합니다.
 
 [일대다 온라인 수업 트레이너 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/broadcaster.js)
 
 [일대다 온라인 수업 수강생 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/viewer.js)
 
+
 [다대다 온라인 수업 클라이언트측 source code](https://github.com/bbangaro/hellopt/blob/master/src/main/webapp/resources/js/live/multi.js)
+
+[다대다 온라인 수업 데모 영상](https://youtu.be/Rb0j7aHKvl8)
 
 Socket.io를 사용하여 같은 room에 입장한 유저들끼리만 RTCPeerConnection을 주고받아서 P2P 연결을 할 수 있도록 구현했습니다.
 
