@@ -39,19 +39,20 @@ https://hellopt.info
 ### 로그인-회원가입
 [로그인](https://hellopt.info/login)
 
-    Spring security authentication를 이용하여 로그인을 구현했습니다.
+Spring security authentication를 이용하여 로그인을 구현했습니다.
 
-    로그인 기능 확인 시 다음의 아이디를 사용해주세요.
+로그인 기능 확인 시 다음의 아이디를 사용해주세요.
 
-    ```
+    
     ID: githubtest
     password: githubtest
-    ```
+    
 
 [회원가입](https://hellopt.info/user/registrationform)
 
-    client측에서는 내장 from validation을 사용해 데이터 유효성을 검사합니다.
-    server측에는 java bean validation을 사용해 데이터 유효성을 검사합니다.
+client측에서는 내장 from validation을 사용해 데이터 유효성을 검사합니다.
+
+ server측에는 java bean validation을 사용해 데이터 유효성을 검사합니다.
 ### 트레이너 게시판
 [트레이너 정보](https://hellopt.info/trainer)
 
@@ -75,9 +76,7 @@ https://hellopt.info
 트레이너가 수강생에게 실시간으로 비디오와 오디오를 전송할 수 있습니다.
 WebRTC는 peer-to-peer protocol을 기반으로 동작하기 때문에
 peer의 정보를 연결해주는 signaling server가 필요합니다. 
-
 signaling server는 Node.js와 express, socket.io를 사용하여 구현했습니다.
-
 signaling server를 통해 사용자간의 [SDP](https://tools.ietf.org/html/rfc2327)를 주고 받아서 RTCPeerConnection을 설정합니다.
 
 [signaling server GitHub](https://github.com/DanHoBakMaCha/public_hellopt_live/blob/master/signal.js)
