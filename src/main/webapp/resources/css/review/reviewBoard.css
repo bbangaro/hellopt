@@ -11,7 +11,7 @@ body{
 td{
 	font-size:1.2em
 }
-a:link, a:visited {
+.container a:link, a:visited {
     text-decoration: none;
     float: right;
     color: #4d68d6;
